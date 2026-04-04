@@ -191,11 +191,25 @@ a { color: inherit; text-decoration: none; }
   background: rgba(255,255,255,0.55);
   backdrop-filter: blur(12px) saturate(1.3);
   -webkit-backdrop-filter: blur(12px) saturate(1.3);
+  position: relative;
+}
+.nav-menu .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 6px;
+  left: 20px;
+  right: 20px;
+  height: 1.5px;
+  background: var(--black);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .nav-menu .nav-link:hover {
-  color: #4A6B0A;
-  background: rgba(209,244,102,0.15);
-  box-shadow: inset 0 0 0 1.5px var(--accent);
+  color: var(--black);
+}
+.nav-menu .nav-link:hover::after {
+  transform: scaleX(1);
 }
 
 /* ═══════════════════════════════════
@@ -398,6 +412,7 @@ a { color: inherit; text-decoration: none; }
    ═══════════════════════════════════ */
 .projects-section {
   padding: 64px 0 56px;
+  background: var(--black);
 }
 .proj-grid {
   position: relative;
@@ -519,6 +534,21 @@ a { color: inherit; text-decoration: none; }
   color: var(--gray-4);
   white-space: nowrap;
 }
+
+/* Projects dark overrides */
+.projects-section .marquee-text { color: var(--white); }
+.projects-section .proj-item { border-color: rgba(255,255,255,0.1); color: var(--white); }
+.projects-section .proj-item:first-of-type { border-color: rgba(255,255,255,0.1); }
+.projects-section .proj-item::before,
+.projects-section .proj-item::after,
+.projects-section .proj-item .proj-corner-bl,
+.projects-section .proj-item .proj-corner-br { color: rgba(255,255,255,0.2); }
+.projects-section .proj-item:hover { background: rgba(255,255,255,0.05); }
+.projects-section .proj-num { color: rgba(255,255,255,0.35); }
+.projects-section .proj-name { color: var(--white); }
+.projects-section .proj-desc { color: var(--gray-4); }
+.projects-section .proj-tag { color: rgba(255,255,255,0.35); }
+.projects-section .proj-img { background: rgba(255,255,255,0.05); }
 
 /* ═══════════════════════════════════
    TRAJECTORY — Clean table
