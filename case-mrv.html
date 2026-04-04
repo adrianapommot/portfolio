@@ -32,8 +32,10 @@
 .nav-menu .nav-cta{color:var(--white);background:var(--black);display:inline-flex;align-items:center;gap:8px}
 .nav-menu .nav-cta:hover{color:var(--accent)}
 .nav-menu .nav-cta svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.nav-menu .nav-link{color:var(--gray-2);background:rgba(255,255,255,0.55);backdrop-filter:blur(12px) saturate(1.3);-webkit-backdrop-filter:blur(12px) saturate(1.3)}
-.nav-menu .nav-link:hover{color:#4A6B0A;background:rgba(209,244,102,0.15);box-shadow:inset 0 0 0 1.5px var(--accent)}
+.nav-menu .nav-link{color:var(--gray-2);background:rgba(255,255,255,0.55);backdrop-filter:blur(12px) saturate(1.3);-webkit-backdrop-filter:blur(12px) saturate(1.3);position:relative}
+.nav-menu .nav-link::after{content:'';position:absolute;bottom:6px;left:20px;right:20px;height:1.5px;background:var(--black);transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.25,.46,.45,.94)}
+.nav-menu .nav-link:hover{color:var(--black)}
+.nav-menu .nav-link:hover::after{transform:scaleX(1)}
 
 /* ═══ HEADER ═══ */
 .case-header{padding-top:120px}
@@ -138,6 +140,38 @@
 .case-stat-label{font-family:var(--font-display);font-size:14px;font-weight:500;color:var(--white);margin-bottom:8px}
 .case-stat-desc{font-family:var(--font-body);font-size:12px;color:rgba(255,255,255,.45);line-height:1.55;margin-top:auto}
 .case-stat-category{display:inline-block;font-family:var(--font-body);font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08)}
+
+/* ═══ SHOWCASE: PHONE FLOW ═══ */
+.case-showcase{background:var(--black);padding:64px 0;margin:0}
+.case-showcase .container{max-width:var(--max-w);margin:0 auto;padding:0 var(--px)}
+.case-showcase-label{font-family:var(--font-body);font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);text-align:center;margin-bottom:40px}
+.case-flow{display:flex;align-items:flex-end;justify-content:center;gap:0}
+.case-flow-step{display:flex;flex-direction:column;align-items:center;flex:0 0 auto}
+.case-flow-arrow{font-family:var(--font-body);font-size:14px;color:var(--accent);opacity:.35;align-self:center;padding:0 clamp(4px,1vw,14px);margin-bottom:56px}
+.case-phone{width:clamp(80px,11vw,120px);background:#1A1A19;border-radius:clamp(10px,1.5vw,16px);border:1.5px solid rgba(255,255,255,.15);overflow:hidden;position:relative}
+.case-phone::before{content:'';position:absolute;top:clamp(4px,.6vw,6px);left:50%;transform:translateX(-50%);width:clamp(16px,2.2vw,24px);height:clamp(3px,.4vw,4px);background:rgba(255,255,255,.12);border-radius:4px;z-index:2}
+.case-phone img{width:100%;height:auto;display:block;position:relative;z-index:1}
+.case-flow-step.is-hero .case-phone{width:clamp(96px,13vw,140px);border-color:var(--accent);border-width:2px}
+.case-flow-step.is-hero .case-phone::before{background:var(--accent);opacity:.4}
+.case-flow-info{text-align:center;margin-top:16px;width:clamp(80px,11vw,120px)}
+.case-flow-step.is-hero .case-flow-info{width:clamp(96px,13vw,140px)}
+.case-flow-pct{font-family:var(--font-display);font-size:clamp(14px,1.8vw,20px);font-weight:500;color:var(--white);line-height:1;margin-bottom:4px}
+.case-flow-name{font-family:var(--font-body);font-size:clamp(8px,1vw,10px);color:rgba(255,255,255,.4);line-height:1.3;letter-spacing:.02em}
+.case-showcase-footer{font-family:var(--font-body);font-size:11px;color:rgba(255,255,255,.3);text-align:center;margin-top:40px;letter-spacing:.02em}
+
+@media(max-width:1024px){
+  .case-flow{flex-wrap:wrap;gap:24px 0;justify-content:center}
+  .case-flow-arrow{padding:0 clamp(2px,.5vw,8px);font-size:12px}
+}
+@media(max-width:640px){
+  .case-showcase{padding:48px 0}
+  .case-flow{gap:16px 0}
+  .case-phone{width:clamp(56px,18vw,72px)}
+  .case-flow-step.is-hero .case-phone{width:clamp(64px,22vw,88px)}
+  .case-flow-info{width:clamp(56px,18vw,72px)}
+  .case-flow-step.is-hero .case-flow-info{width:clamp(64px,22vw,88px)}
+  .case-flow-arrow{margin-bottom:40px}
+}
 
 /* ═══ IMAGE LAYOUTS ═══ */
 .case-inline-img{width:100%;border-radius:4px;overflow:hidden;margin:40px 0;background:var(--gray-6)}
@@ -425,23 +459,48 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 <div class="case-pull-caption rv d1">05 / A Solução</div>
 </div></div>
 
-<div class="case-img-section"><div class="container">
-<div class="case-inline-strip rv">
-<img src="img/mrv/mobile-jornada-46.webp" alt="Fluxo 46%">
-<img src="img/mrv/mobile-jornada-50.webp" alt="Fluxo 50%">
-<img src="img/mrv/mobile-jornada-70.webp" alt="Fluxo 70%">
-<img src="img/mrv/mobile-jornada-70-atraso.webp" alt="Fluxo 70% Atraso">
-<img src="img/mrv/mobile-jornada-100.webp" alt="Fluxo 100%">
+<section class="case-showcase">
+<div class="container">
+<div class="case-showcase-label rv">Jornada do cliente: 5 estados da interface</div>
+<div class="case-flow">
+  <div class="case-flow-step rv">
+    <div class="case-phone"><img src="img/mrv/mobile-jornada-46.webp" alt="Fluxo 46%"></div>
+    <div class="case-flow-info"><div class="case-flow-pct">46%</div><div class="case-flow-name">Sem pendências</div></div>
+  </div>
+  <div class="case-flow-arrow rv d1">→</div>
+  <div class="case-flow-step rv d1">
+    <div class="case-phone"><img src="img/mrv/mobile-jornada-50.webp" alt="Fluxo 50%"></div>
+    <div class="case-flow-info"><div class="case-flow-pct">50%</div><div class="case-flow-name">Parcelas crescendo</div></div>
+  </div>
+  <div class="case-flow-arrow rv d2">→</div>
+  <div class="case-flow-step rv d2">
+    <div class="case-phone"><img src="img/mrv/mobile-jornada-70.webp" alt="Fluxo 70%"></div>
+    <div class="case-flow-info"><div class="case-flow-pct">70%</div><div class="case-flow-name">Juros acumulados</div></div>
+  </div>
+  <div class="case-flow-arrow rv d3">→</div>
+  <div class="case-flow-step is-hero rv d3">
+    <div class="case-phone"><img src="img/mrv/mobile-jornada-70-atraso.webp" alt="Fluxo 70% Atraso"></div>
+    <div class="case-flow-info"><div class="case-flow-pct">70%+</div><div class="case-flow-name">Gatilho ativo</div></div>
+  </div>
+  <div class="case-flow-arrow rv d4">→</div>
+  <div class="case-flow-step rv d4">
+    <div class="case-phone"><img src="img/mrv/mobile-jornada-100.webp" alt="Fluxo 100%"></div>
+    <div class="case-flow-info"><div class="case-flow-pct">100%</div><div class="case-flow-name">Quitação</div></div>
+  </div>
 </div>
-<div class="case-inline-caption rv d1">Sem pendências (46%) → parcelas em dia (50%) → juros acumulados (70%) → gatilho de renegociação (70%) → quitação (100%)</div>
-<div class="case-states-grid rv d2">
+<div class="case-showcase-footer rv d4">A interface muda de tom conforme a situação financeira evolui</div>
+</div>
+</section>
+
+<div class="container" style="padding-top:64px">
+<div class="case-states-grid rv">
   <div class="case-state-card"><div class="case-state-bar"><div class="case-state-fill" style="width:46%"></div></div><div class="case-state-pct">46%</div><div class="case-state-name">Sem pendências</div><div class="case-state-desc">Cliente em dia. Dashboard positivo<br>com progresso do financiamento<br>em destaque.</div></div>
   <div class="case-state-card"><div class="case-state-bar"><div class="case-state-fill" style="width:50%"></div></div><div class="case-state-pct">50%</div><div class="case-state-name">Parcelas crescendo</div><div class="case-state-desc">Alertas gentis antes do vencimento.<br>Tom de suporte,<br>não de cobrança.</div></div>
   <div class="case-state-card"><div class="case-state-bar"><div class="case-state-fill" style="width:70%"></div></div><div class="case-state-pct">70%</div><div class="case-state-name">Juros acumulados</div><div class="case-state-desc">Transparência total sem punição.<br>Proposta de acordo visível<br>com clareza de valores.</div></div>
   <div class="case-state-card"><div class="case-state-bar"><div class="case-state-fill" style="width:70%"></div></div><div class="case-state-pct">70%+</div><div class="case-state-name">Gatilho ativo</div><div class="case-state-desc">Interface com 3 cenários de acordo.<br>O cliente escolhe,<br>não negocia às cegas.</div></div>
   <div class="case-state-card"><div class="case-state-bar"><div class="case-state-fill" style="width:100%"></div></div><div class="case-state-pct">100%</div><div class="case-state-name">Quitação</div><div class="case-state-desc">Momento emocional. Celebração<br>com microinteração específica<br>e extrato de conquista.</div></div>
 </div>
-</div></div>
+</div>
 
 <!-- Bleed: overview -->
 <div class="container"><div class="case-bleed rv"><img src="img/mrv/overview-grid.webp" alt="MRV Visão geral"></div></div>
