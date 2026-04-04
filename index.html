@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Adriana Pommot — Product Design & Inteligência Visual</title>
+<title>Adriana Pommot · Design Digital & Inteligência Visual</title>
 <!-- General Sans — Fontshare (Indian Type Foundry) -->
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap" rel="stylesheet">
 <!-- Roboto Mono — Google Fonts (body text, Erikk style) -->
@@ -17,12 +17,12 @@
 :root {
   --black: #111111;
   --white: #ffffff;
-  --gray-1: #333333;
-  --gray-2: #555555;
-  --gray-3: #888888;
-  --gray-4: #bbbbbb;
-  --gray-5: #e5e5e5;
-  --gray-6: #f5f5f5;
+  --gray-1: #37342F;
+  --gray-2: #585550;
+  --gray-3: #8A857D;
+  --gray-4: #B8B2A8;
+  --gray-5: #EBE7E1;
+  --gray-6: #F5F1EB;
   --accent: #D1F466;
   --font-display: 'General Sans', sans-serif;
   --font-body: 'Roboto Mono', monospace;
@@ -122,11 +122,12 @@ a { color: inherit; text-decoration: none; }
   }
 }
 .nav-toggle:hover {
-  background: rgba(255,255,255,0.85);
-  box-shadow:
-    0 0 0 1.5px var(--accent),
-    0 0 20px rgba(209,244,102,0.2);
+  background: var(--black);
+  box-shadow: none;
   animation: none;
+}
+.nav-toggle:hover svg {
+  stroke: var(--accent);
 }
 .nav-toggle svg {
   width: 22px; height: 22px;
@@ -212,7 +213,8 @@ a { color: inherit; text-decoration: none; }
   line-height: 1.0;
   letter-spacing: -0.02em;
   text-transform: uppercase;
-  padding: 48px 0 40px;
+  padding: 48px 0 16px;
+  margin-left: -0.04em;
 }
 
 .hero-bar {
@@ -220,12 +222,11 @@ a { color: inherit; text-decoration: none; }
   justify-content: space-between;
   align-items: center;
   padding: 20px 0;
-  border-top: 1px solid var(--gray-5);
   margin-bottom: 64px;
 }
 .hero-bar-label {
   font-family: var(--font-display);
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -238,7 +239,7 @@ a { color: inherit; text-decoration: none; }
   grid-template-columns: 1fr 1fr;
   gap: 64px;
   align-items: stretch;
-  padding-bottom: 80px;
+  padding-bottom: 56px;
 }
 .hero-h2 {
   font-family: var(--font-display);
@@ -247,7 +248,8 @@ a { color: inherit; text-decoration: none; }
   line-height: 1.1;
   letter-spacing: -0.01em;
   text-transform: uppercase;
-  margin-bottom: 32px;
+  margin-bottom: 48px;
+  margin-left: -0.03em;
 }
 .hero-body {
   font-family: var(--font-body);
@@ -299,9 +301,8 @@ a { color: inherit; text-decoration: none; }
 .marquee {
   overflow: hidden;
   white-space: nowrap;
-  margin-bottom: 100px;
-  padding-bottom: 12px;
-  padding-top: 4px;
+  padding: 12px 0;
+  margin-bottom: 48px;
   -webkit-mask-image: linear-gradient(90deg, transparent, black 4%, black 96%, transparent);
   mask-image: linear-gradient(90deg, transparent, black 4%, black 96%, transparent);
 }
@@ -310,9 +311,6 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   animation: marquee 35s linear infinite;
   will-change: transform;
-}
-.marquee:hover .marquee-track {
-  animation-play-state: paused;
 }
 .marquee-text {
   font-family: var(--font-display);
@@ -343,8 +341,7 @@ a { color: inherit; text-decoration: none; }
    SERVICES
    ═══════════════════════════════════ */
 .services-section {
-  padding: 100px 0 80px;
-  border-top: 1px solid var(--gray-5);
+  padding: 64px 0 56px;
 }
 .section-title {
   font-family: var(--font-display);
@@ -353,7 +350,7 @@ a { color: inherit; text-decoration: none; }
   line-height: 1;
   letter-spacing: -0.01em;
   text-transform: uppercase;
-  margin-bottom: 80px;
+  margin-bottom: 48px;
 }
 .svc-row {
   display: grid;
@@ -400,8 +397,7 @@ a { color: inherit; text-decoration: none; }
    Corner marks + 4-col: number | title | image | desc+tags
    ═══════════════════════════════════ */
 .projects-section {
-  padding: 100px 0 160px;
-  border-top: 1px solid var(--gray-5);
+  padding: 64px 0 56px;
 }
 .proj-grid {
   position: relative;
@@ -477,7 +473,7 @@ a { color: inherit; text-decoration: none; }
 .proj-name {
   font-family: var(--font-display);
   font-size: clamp(24px, 2.8vw, 36px);
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.15;
   letter-spacing: -0.02em;
   text-transform: uppercase;
@@ -507,8 +503,6 @@ a { color: inherit; text-decoration: none; }
   font-weight: 400;
   color: var(--gray-3);
   line-height: 1.7;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
 }
 .proj-tags {
   display: flex;
@@ -530,8 +524,7 @@ a { color: inherit; text-decoration: none; }
    TRAJECTORY — Clean table
    ═══════════════════════════════════ */
 .trajectory-section {
-  padding: 100px 0 160px;
-  border-top: 1px solid var(--gray-5);
+  padding: 64px 0 56px;
 }
 .traj-row {
   display: grid;
@@ -566,33 +559,20 @@ a { color: inherit; text-decoration: none; }
    SOBRE MIM — Unified section
    ═══════════════════════════════════ */
 .about-section {
-  padding: 100px 0 160px;
-  border-top: 1px solid var(--gray-5);
+  padding: 64px 0 56px;
 }
 .about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: start;
+  max-width: 640px;
 }
-.about-statement {
-  font-family: var(--font-display);
-  font-size: clamp(22px, 2.8vw, 34px);
-  font-weight: 400;
-  line-height: 1.3;
-  color: var(--gray-2);
-}
-.about-statement strong { color: var(--black); font-weight: 500; }
-.about-body {
+.about-text {
   font-family: var(--font-body);
   font-size: 15px;
   font-weight: 400;
-  color: var(--gray-3);
-  line-height: 1.7;
-  margin-bottom: 24px;
+  color: var(--gray-2);
+  line-height: 1.8;
+  margin-bottom: 40px;
 }
-.about-body strong { color: var(--black); font-weight: 500; }
-.about-ctas { display: flex; gap: 16px; margin-top: 40px; }
+.about-ctas { display: flex; gap: 16px; }
 .btn-dark {
   display: inline-flex; align-items: center;
   padding: 11px 26px;
@@ -697,18 +677,56 @@ footer {
 }
 
 /* ═══════════════════════════════════
+   SKILLS TICKER — Dark strip, Skold-style
+   ═══════════════════════════════════ */
+.skills-ticker {
+  overflow: hidden;
+  white-space: nowrap;
+  background: #F5F1EB;
+  width: 100%;
+  padding: 6px 0;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+}
+.skills-ticker-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  animation: ticker 60s linear infinite;
+  will-change: transform;
+  width: max-content;
+}
+.skills-ticker-item {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #A89484;
+  flex-shrink: 0;
+  padding: 0 6px;
+  line-height: 1;
+}
+.skills-ticker-dot {
+  flex-shrink: 0;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--black);
+  margin: 0 10px;
+  opacity: 1;
+}
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ═══════════════════════════════════
    ANIMATIONS
    ═══════════════════════════════════ */
-.rv {
-  opacity: 0; transform: translateY(30px);
-  transition: opacity 0.7s cubic-bezier(0.25,0.46,0.45,0.94),
-              transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
-}
-.rv.v { opacity: 1; transform: translateY(0); }
-.d1 { transition-delay: 0.1s; }
-.d2 { transition-delay: 0.2s; }
-.d3 { transition-delay: 0.3s; }
-.d4 { transition-delay: 0.4s; }
+.rv{animation:fadeUp .6s ease both}.d1{animation-delay:.12s}.d2{animation-delay:.22s}.d3{animation-delay:.34s}.d4{animation-delay:.46s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 .d5 { transition-delay: 0.5s; }
 
 /* ═══════════════════════════════════
@@ -730,7 +748,7 @@ footer {
   :root { --px: 24px; }
   .nav-name { font-size: 12px; padding: 7px 16px; }
   .hero { padding-top: 100px; }
-  .hero-title { padding: 32px 0 28px; }
+  .hero-title { padding: 32px 0 12px; }
   .hero-bar { margin-bottom: 40px; }
   .svc-row { grid-template-columns: 1fr; gap: 12px; }
   .svc-num { padding-top: 0; }
@@ -738,9 +756,9 @@ footer {
   .proj-num { font-size: 13px; }
   .proj-meta { display: none; }
   .services-section, .projects-section, .trajectory-section,
-  .about-section { padding: 64px 0 96px; }
-  .section-title { margin-bottom: 48px; }
-  .marquee { margin-bottom: 56px; }
+  .about-section { padding: 48px 0 40px; }
+  .section-title { margin-bottom: 36px; }
+  .marquee { margin-bottom: 36px; padding: 10px 0; }
   .cta-section { padding: 96px 0; }
   .footer-grid { grid-template-columns: 1fr; gap: 32px; }
   .traj-row { grid-template-columns: 1fr; gap: 4px; }
@@ -772,21 +790,76 @@ footer {
 <!-- HERO -->
 <section class="hero">
   <div class="container">
-    <h1 class="hero-title rv">Product Design &<br>Inteligência Visual</h1>
+    <h1 class="hero-title rv">Design Digital <span style="color:#E5DED5">&</span><br>Inteligência Visual</h1>
+  </div>
 
+  <div class="skills-ticker rv d1">
+    <div class="skills-ticker-track">
+      <span class="skills-ticker-item">UI Design</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Design Systems</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Identidade Visual</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Ilustração</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Motion</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Branding de Interface</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Figma</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Prototipação</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">UI Design</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Design Systems</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Identidade Visual</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Ilustração</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Motion</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Branding de Interface</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Figma</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Prototipação</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">UI Design</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Design Systems</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Identidade Visual</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Ilustração</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Motion</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Branding de Interface</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Figma</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Prototipação</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">UI Design</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Design Systems</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Identidade Visual</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Ilustração</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Motion</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Branding de Interface</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Figma</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Prototipação</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">UI Design</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Design Systems</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Identidade Visual</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Ilustração</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Motion</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Branding de Interface</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Figma</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Prototipação</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">UI Design</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Design Systems</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Identidade Visual</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Ilustração</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Motion</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Branding de Interface</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Figma</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-item">Prototipação</span><span class="skills-ticker-dot"></span>
+    </div>
+  </div>
+
+  <div class="container">
     <div class="hero-bar rv d1">
-      <span class="hero-bar-label">Product Designer Sênior</span>
-      <span class="hero-bar-label">São Paulo, BR</span>
+      <span class="hero-bar-label">Designer Multidisciplinar</span>
+      <span class="hero-bar-label">Remoto · São Paulo, BR</span>
     </div>
 
     <div class="hero-content">
       <div class="hero-content-left">
-        <h2 class="hero-h2 rv d2">Sistemas Visuais<br>Para Produtos<br>Que Exigem Precisão</h2>
-        <p class="hero-body rv d3">Interfaces de alto impacto, design systems escaláveis e direção visual para produtos digitais complexos. 17 anos traduzindo lógica&nbsp;de&nbsp;negócio em experiências impecáveis.</p>
+        <h2 class="hero-h2 rv d2">Penso em Sistema,<br>Entrego no Detalhe.</h2>
+        <p class="hero-body rv d3">Interfaces de alta fidelidade, design systems que funcionam na prática e identidade visual de produto. Cuidado obsessivo com cada decisão visual, do token ao pixel final.</p>
         <div class="hero-services rv d4">
-          <div class="hero-svc-item"><span class="hero-svc-num">01</span><span class="hero-svc-name">Produto Digital</span></div>
+          <div class="hero-svc-item"><span class="hero-svc-num">01</span><span class="hero-svc-name">UI & Produto</span></div>
           <div class="hero-svc-item"><span class="hero-svc-num">02</span><span class="hero-svc-name">Design Systems</span></div>
-          <div class="hero-svc-item"><span class="hero-svc-num">03</span><span class="hero-svc-name">Direção de Arte</span></div>
+          <div class="hero-svc-item"><span class="hero-svc-num">03</span><span class="hero-svc-name">Identidade Visual</span></div>
           <div class="hero-svc-item"><span class="hero-svc-num">04</span><span class="hero-svc-name">Ilustração & Motion</span></div>
         </div>
       </div>
@@ -807,23 +880,23 @@ footer {
   <div class="container">
     <div class="svc-row rv">
       <span class="svc-num">01</span>
-      <div class="svc-name">Produto & Interface</div>
-      <div class="svc-desc">Design de produto end-to-end, interfaces de alta fidelidade, prototipação e design systems escaláveis.</div>
+      <div class="svc-name">UI & Produto</div>
+      <div class="svc-desc">Interfaces de alta fidelidade, fluxos completos, prototipação e handoff preciso. Do wireframe ao pixel final.</div>
     </div>
     <div class="svc-row rv d1">
       <span class="svc-num">02</span>
-      <div class="svc-name">Direção Visual</div>
-      <div class="svc-desc">Direção de arte, construção de identidade visual e linguagem&nbsp;de&nbsp;marca para produtos digitais.</div>
+      <div class="svc-name">Identidade Visual</div>
+      <div class="svc-desc">Construção da linguagem visual de produto: cor, tipo, grid e elementos que fazem uma interface ter personalidade.</div>
     </div>
     <div class="svc-row rv d2">
       <span class="svc-num">03</span>
       <div class="svc-name">Design Systems</div>
-      <div class="svc-desc">Tokens visuais, bibliotecas de componentes, documentação técnica e governança de design em escala.</div>
+      <div class="svc-desc">Tokens, componentes, documentação e bibliotecas reutilizáveis. Sistemas que eu crio e alimento na prática.</div>
     </div>
     <div class="svc-row rv d3">
       <span class="svc-num">04</span>
-      <div class="svc-name">Expressão Autoral</div>
-      <div class="svc-desc">Ilustração ornamental, tipografia experimental e motion, onde a&nbsp;técnica encontra a&nbsp;expressão&nbsp;pessoal.</div>
+      <div class="svc-name">Ilustração & Motion</div>
+      <div class="svc-desc">Arte ornamental, tipografia experimental e animação. Onde a técnica encontra a expressão pessoal.</div>
     </div>
   </div>
 </section>
@@ -845,40 +918,40 @@ footer {
       </div>
       <div class="proj-img"><img src="https://framerusercontent.com/images/tJmuIg4YsOc9pGcsP4sUgCj5gw.jpg?width=1200&height=670" alt="MRV"></div>
       <div class="proj-meta">
-        <p class="proj-desc">Microinteração para renegociação<br>no autoatendimento da squad<br>financeira.</p>
+        <p class="proj-desc">UI e microinterações para<br>renegociação financeira no<br>autoatendimento do cliente.</p>
         <div class="proj-tags">
-          <span class="proj-tag">#ProductDesign</span>
-          <span class="proj-tag">#Fintech</span>
+          <span class="proj-tag">#ui</span>
+          <span class="proj-tag">#fintech</span>
         </div>
       </div>
     </a>
 
-    <a href="#" class="proj-item rv">
+    <a href="case-delta.html" class="proj-item rv">
       <span class="proj-num">/02</span>
       <div class="proj-info">
         <h3 class="proj-name">Delta<br>Design System</h3>
       </div>
       <div class="proj-img"><img src="https://framerusercontent.com/images/ibHIROqyHkxvVtTioI5nYgGNqSQ.png?width=1200&height=750" alt="Delta Design System"></div>
       <div class="proj-meta">
-        <p class="proj-desc">Tokens, bibliotecas e governança<br>visual na Escale. Liderança técnica<br>do sistema que serviu múltiplos<br>produtos.</p>
+        <p class="proj-desc">Tokens, componentes e bibliotecas<br>que criei e mantive para múltiplos<br>produtos na Escale.</p>
         <div class="proj-tags">
-          <span class="proj-tag">#DesignSystem</span>
-          <span class="proj-tag">#Ops</span>
+          <span class="proj-tag">#designsystem</span>
+          <span class="proj-tag">#tokens</span>
         </div>
       </div>
     </a>
 
-    <a href="#" class="proj-item rv">
+    <a href="case-dasa.html" class="proj-item rv">
       <span class="proj-num">/03</span>
       <div class="proj-info">
         <h3 class="proj-name">Dasa.ai</h3>
       </div>
       <div class="proj-img"><img src="https://framerusercontent.com/images/m3xaefjWYKUFkgzSIcs7ueySXY.png?width=1200&height=870" alt="Dasa.ai"></div>
       <div class="proj-meta">
-        <p class="proj-desc">Produtos digitais para uso médico,<br>inovação e construção da nova<br>identidade visual.</p>
+        <p class="proj-desc">UI para produtos médicos e<br>construção da identidade visual<br>da nova marca Dasa.</p>
         <div class="proj-tags">
-          <span class="proj-tag">#ProductDesign</span>
-          <span class="proj-tag">#Healthtech</span>
+          <span class="proj-tag">#ui</span>
+          <span class="proj-tag">#healthtech</span>
         </div>
       </div>
     </a>
@@ -890,10 +963,10 @@ footer {
       </div>
       <div class="proj-img" style="background:#1A1A19"><img src="https://framerusercontent.com/images/oNnTXiDeqJw2jQH79SzKRViGlw.png?width=1200&height=1160" alt="Ford" style="object-fit:contain;padding:24px"></div>
       <div class="proj-meta">
-        <p class="proj-desc">Experiência imersiva para showroom<br>automotivo. Immersion Room com<br>design system visual completo.</p>
+        <p class="proj-desc">Design visual completo para<br>Immersion Room automotivo.<br>Cenários, ícones e motion.</p>
         <div class="proj-tags">
-          <span class="proj-tag">#ImmersionRoom</span>
-          <span class="proj-tag">#Automotive</span>
+          <span class="proj-tag">#immersive</span>
+          <span class="proj-tag">#automotive</span>
         </div>
       </div>
       <span class="proj-corner-bl">+</span>
@@ -915,9 +988,9 @@ footer {
     <div class="traj-row rv"><span class="traj-year">2021–23</span><span class="traj-role">Design Ops, Delta Design System</span><span class="traj-company">Escale</span></div>
     <div class="traj-row rv"><span class="traj-year">2020–21</span><span class="traj-role">Product Designer Sênior</span><span class="traj-company">Dasa</span></div>
     <div class="traj-row rv"><span class="traj-year">2020–21</span><span class="traj-role">Design Lead</span><span class="traj-company">D3 / Dasa</span></div>
-    <div class="traj-row rv"><span class="traj-year">2019–20</span><span class="traj-role">Design Lead</span><span class="traj-company">Accenture</span></div>
+    <div class="traj-row rv"><span class="traj-year">2019–20</span><span class="traj-role">Design Lead</span><span class="traj-company">Accenture / Ford</span></div>
     <div class="traj-row rv"><span class="traj-year">2017–19</span><span class="traj-role">UI Designer Sênior</span><span class="traj-company">MRV</span></div>
-    <div class="traj-row rv"><span class="traj-year">2014–17</span><span class="traj-role">Designer / Art Director</span><span class="traj-company">Agências</span></div>
+    <div class="traj-row rv"><span class="traj-year">2008–17</span><span class="traj-role">Designer & Ilustradora</span><span class="traj-company">Agências & Freelance</span></div>
   </div>
 </section>
 
@@ -930,13 +1003,11 @@ footer {
   </div>
   <div class="container">
     <div class="about-grid">
-      <p class="about-statement rv d1"><strong>Designer multidisciplinar</strong> com 17 anos de experiência em <strong>produto digital, direção de arte</strong> e <strong>sistemas de design.</strong> Atuo onde lógica de negócio e sensibilidade visual se encontram.</p>
-      <div>
-        <p class="about-body rv d2">Estruturo sistemas, traduzo metas de negócio em interfaces e aplico um olhar treinado pela arte para transformar fluxos complexos em experiências impecáveis. Do rigor técnico da interface à expressão da ilustração e do motion, minha fundação criativa é o que torna a qualidade visual inseparável da precisão técnica.</p>
-        <div class="about-ctas rv d3">
-          <a href="cv-adriana-pommot.pdf" download class="btn-dark">Download CV</a>
-          <a href="https://linkedin.com/in/adriana-pommot" target="_blank" class="btn-outline">LinkedIn</a>
-        </div>
+      <p class="about-text rv d1">Sou designer e ilustradora. Trabalho com interface, identidade visual e criação de sistemas de design há mais de 16 anos. Passei por MRV, Dasa, Ford, Escale e agências. Saí de cargos de gestão porque prefiro criar.</p>
+      <p class="about-text rv d2">Meu melhor cenário: receber um briefing, resolver o problema visual e entregar com qualidade. Funciono bem com autonomia, trabalho remoto e ciclos objetivos. Em paralelo, desenvolvo arte ornamental para tatuagem no projeto @ultraviolenta.ink.</p>
+      <div class="about-ctas rv d3">
+        <a href="cv-adriana-pommot.pdf" download class="btn-dark">Download CV</a>
+        <a href="https://linkedin.com/in/adriana-pommot" target="_blank" class="btn-outline">LinkedIn</a>
       </div>
     </div>
   </div>
@@ -946,7 +1017,7 @@ footer {
 <section class="cta-section" id="contact">
   <div class="container">
     <h2 class="cta-title rv"><a href="/cdn-cgi/l/email-protection#08696c7a6169666978676565677c486f65696164266b6765">Vamos<br>Conversar?</a></h2>
-    <p class="cta-subtitle rv d1">Product Design & Inteligência Visual</p>
+    <p class="cta-subtitle rv d1">Disponível para projetos remotos</p>
     <a href="/cdn-cgi/l/email-protection#d5b4b1a7bcb4bbb4a5bab8b8baa195b2b8b4bcb9fbb6bab8" class="cta-btn rv d2">Entrar em Contato →</a>
   </div>
 </section>
@@ -969,7 +1040,7 @@ footer {
       </div>
       <div>
         <div class="footer-col-title">Projetos</div>
-        <div class="footer-col-links"><a href="case-mrv.html">MRV</a><a href="#">Delta DS</a><a href="#">Dasa.ai</a><a href="#">Ford</a></div>
+        <div class="footer-col-links"><a href="case-mrv.html">MRV</a><a href="case-delta.html">Delta DS</a><a href="case-dasa.html">Dasa.ai</a><a href="#">Ford</a></div>
       </div>
       <div>
         <div class="footer-col-title">Contato</div>
@@ -978,7 +1049,7 @@ footer {
     </div>
     <div class="footer-bottom">
       <span class="footer-copy">© 2026 Adriana Pommot</span>
-      <span class="footer-copy">Product Design & Inteligência Visual</span>
+      <span class="footer-copy">Design Digital & Inteligência Visual</span>
     </div>
   </div>
 </footer>
@@ -990,21 +1061,6 @@ document.querySelectorAll('.nav-menu a').forEach(a => {
     document.getElementById('navFloat').classList.remove('open');
   });
 });
-
-document.documentElement.classList.add('js');
-
-/* ── General reveal observer ── */
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('v');
-      obs.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.12 });
-
-/* Observe everything EXCEPT trajectory rows */
-document.querySelectorAll('.rv:not(.traj-row)').forEach(el => obs.observe(el));
 
 /* ── Trajectory: stagger reveal from section ── */
 const trajSection = document.querySelector('.trajectory-section');
