@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adriana Pommot — Product Design & Inteligência Visual</title>
+<!-- General Sans — Fontshare (Indian Type Foundry) -->
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap" rel="stylesheet">
+<!-- Roboto Mono — Google Fonts (body text, Erikk style) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════
+   TOKENS
+   ═══════════════════════════════════ */
+:root {
+  --black: #111111;
+  --white: #ffffff;
+  --gray-1: #333333;
+  --gray-2: #555555;
+  --gray-3: #888888;
+  --gray-4: #bbbbbb;
+  --gray-5: #e5e5e5;
+  --gray-6: #f5f5f5;
+  --accent: #D1F466;
+  --font-display: 'General Sans', sans-serif;
+  --font-body: 'Roboto Mono', monospace;
+  --max-w: 1440px;
+  --px: 40px;
+}
+
+/* ═══════════════════════════════════
+   RESET & BASE
+   ═══════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  color: var(--black);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+::selection { background: var(--accent); color: var(--black); }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+
+/* ═══════════════════════════════════
+   CONTAINER
+   ═══════════════════════════════════ */
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--px);
+}
+
+/* ═══════════════════════════════════
+   NAV — Name pill left + circle menu right
+   ═══════════════════════════════════ */
+.nav-name {
+  position: fixed;
+  top: 20px;
+  left: max(calc(var(--px) - 20px), calc((100vw - var(--max-w)) / 2 + var(--px) - 20px));
+  z-index: 100;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(12px) saturate(1.3);
+  -webkit-backdrop-filter: blur(12px) saturate(1.3);
+  padding: 8px 20px;
+  border-radius: 999px;
+}
+.nav-float {
+  position: fixed;
+  top: 20px;
+  right: max(var(--px), calc((100vw - var(--max-w)) / 2 + var(--px)));
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+.nav-toggle {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(12px) saturate(1.3);
+  -webkit-backdrop-filter: blur(12px) saturate(1.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, box-shadow 0.3s;
+  position: relative;
+  box-shadow:
+    0 0 0 1px rgba(209,244,102,0.2),
+    0 0 12px rgba(209,244,102,0.08);
+  animation: iridescent 4s ease-in-out infinite;
+}
+@keyframes iridescent {
+  0%, 100% {
+    box-shadow:
+      0 0 0 1px rgba(209,244,102,0.2),
+      0 0 12px rgba(209,244,102,0.08);
+  }
+  33% {
+    box-shadow:
+      0 0 0 1px rgba(180,230,140,0.25),
+      0 0 16px rgba(180,230,140,0.1);
+  }
+  66% {
+    box-shadow:
+      0 0 0 1px rgba(220,250,120,0.3),
+      0 0 14px rgba(220,250,120,0.12);
+  }
+}
+.nav-toggle:hover {
+  background: rgba(255,255,255,0.85);
+  box-shadow:
+    0 0 0 1.5px var(--accent),
+    0 0 20px rgba(209,244,102,0.2);
+  animation: none;
+}
+.nav-toggle svg {
+  width: 22px; height: 22px;
+  stroke: var(--black);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  fill: none;
+}
+.nav-toggle .icon-x { display: none; }
+.nav-float.open .nav-toggle .icon-menu { display: none; }
+.nav-float.open .nav-toggle .icon-x { display: block; }
+.nav-float.open .nav-toggle {
+  background: var(--black);
+  animation: none;
+  box-shadow: none;
+}
+.nav-float.open .nav-toggle svg {
+  stroke: var(--white);
+}
+.nav-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.nav-float.open .nav-menu {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.nav-menu a {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: color 0.25s, box-shadow 0.25s, background 0.25s;
+}
+.nav-menu .nav-cta {
+  color: var(--white);
+  background: var(--black);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-menu .nav-cta:hover { color: var(--accent); }
+.nav-menu .nav-cta svg {
+  width: 13px; height: 13px;
+  fill: none; stroke: currentColor; stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.nav-menu .nav-link {
+  color: var(--gray-2);
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(12px) saturate(1.3);
+  -webkit-backdrop-filter: blur(12px) saturate(1.3);
+}
+.nav-menu .nav-link:hover {
+  color: #4A6B0A;
+  background: rgba(209,244,102,0.15);
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+
+/* ═══════════════════════════════════
+   HERO — Monumental typography
+   Structure: big title → tagline bar → content grid
+   ═══════════════════════════════════ */
+.hero {
+  padding-top: 120px;
+  padding-bottom: 0;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(56px, 8vw, 112px);
+  font-weight: 400;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  padding: 48px 0 40px;
+}
+
+.hero-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-top: 1px solid var(--gray-5);
+  margin-bottom: 64px;
+}
+.hero-bar-label {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--black);
+}
+
+/* Content grid: subtitle + services left, image right */
+.hero-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: stretch;
+  padding-bottom: 80px;
+}
+.hero-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.5vw, 48px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+}
+.hero-body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--gray-3);
+  margin-bottom: 48px;
+  max-width: 480px;
+}
+.hero-services {
+  display: flex;
+  flex-direction: column;
+}
+.hero-svc-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 0;
+  border-top: 1px solid var(--gray-5);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.hero-svc-item:last-child { border-bottom: 1px solid var(--gray-5); }
+.hero-svc-num {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--gray-4);
+  min-width: 24px;
+}
+.hero-svc-name { color: var(--black); }
+.hero-img {
+  width: 100%;
+  overflow: hidden;
+  background: var(--gray-6);
+  border-radius: 4px;
+}
+.hero-img img, .hero-img video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+/* ═══════════════════════════════════
+   MARQUEE — Infinite scroll titles
+   ═══════════════════════════════════ */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  margin-bottom: 100px;
+  padding-bottom: 12px;
+  padding-top: 4px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 4%, black 96%, transparent);
+  mask-image: linear-gradient(90deg, transparent, black 4%, black 96%, transparent);
+}
+.marquee-track {
+  display: inline-flex;
+  align-items: center;
+  animation: marquee 35s linear infinite;
+  will-change: transform;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+.marquee-text {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 7vw, 96px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+.marquee-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 clamp(24px, 3vw, 48px);
+  flex-shrink: 0;
+}
+.marquee-dot svg {
+  width: clamp(18px, 2.2vw, 28px);
+  height: clamp(18px, 2.2vw, 28px);
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+
+/* ═══════════════════════════════════
+   SERVICES
+   ═══════════════════════════════════ */
+.services-section {
+  padding: 100px 0 80px;
+  border-top: 1px solid var(--gray-5);
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 7vw, 96px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin-bottom: 80px;
+}
+.svc-row {
+  display: grid;
+  grid-template-columns: 60px 1fr 1.4fr;
+  gap: 32px;
+  align-items: start;
+  padding: 36px 0;
+  border-bottom: 1px solid var(--gray-5);
+  transition: background 0.3s;
+}
+.svc-row:first-child {
+  border-top: 1px solid var(--gray-5);
+}
+.svc-row:hover {
+  background: var(--gray-6);
+  margin: 0 -16px;
+  padding: 36px 16px;
+}
+.svc-num {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--gray-4);
+  padding-top: 6px;
+}
+.svc-name {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.2vw, 28px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.svc-desc {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--gray-3);
+  line-height: 1.6;
+  text-wrap: balance;
+}
+
+/* ═══════════════════════════════════
+   PROJETOS — Effica-style editorial grid
+   Corner marks + 4-col: number | title | image | desc+tags
+   ═══════════════════════════════════ */
+.projects-section {
+  padding: 100px 0 160px;
+  border-top: 1px solid var(--gray-5);
+}
+.proj-grid {
+  position: relative;
+}
+.proj-item {
+  display: grid;
+  grid-template-columns: 80px 1fr 1.2fr 1fr;
+  gap: 48px;
+  align-items: start;
+  padding: 56px 0;
+  border-bottom: 1px solid var(--gray-5);
+  position: relative;
+  transition: background 0.4s;
+}
+.proj-item:first-of-type { border-top: 1px solid var(--gray-5); }
+
+/* Corner marks — Effica editorial grid */
+.proj-item::before,
+.proj-item::after {
+  content: '+';
+  position: absolute;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--gray-4);
+  line-height: 1;
+  pointer-events: none;
+}
+.proj-item::before {
+  top: -6px;
+  left: -20px;
+}
+.proj-item::after {
+  top: -6px;
+  right: -20px;
+}
+.proj-item:last-of-type .proj-corner-bl,
+.proj-item:last-of-type .proj-corner-br {
+  position: absolute;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--gray-4);
+  line-height: 1;
+  pointer-events: none;
+  bottom: -6px;
+}
+.proj-item:last-of-type .proj-corner-bl { left: -20px; }
+.proj-item:last-of-type .proj-corner-br { right: -20px; }
+
+.proj-item:hover {
+  background: var(--gray-6);
+  margin: 0 -24px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.proj-num {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--gray-4);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  padding-top: 8px;
+}
+.proj-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 4px;
+}
+.proj-name {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 2.8vw, 36px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+.proj-img {
+  width: 100%;
+  aspect-ratio: 3/2;
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--gray-6);
+}
+.proj-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.proj-item:hover .proj-img img { transform: scale(1.03); }
+.proj-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-top: 4px;
+}
+.proj-desc {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--gray-3);
+  line-height: 1.7;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.proj-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.proj-tag {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gray-4);
+  white-space: nowrap;
+}
+
+/* ═══════════════════════════════════
+   TRAJECTORY — Clean table
+   ═══════════════════════════════════ */
+.trajectory-section {
+  padding: 100px 0 160px;
+  border-top: 1px solid var(--gray-5);
+}
+.traj-row {
+  display: grid;
+  grid-template-columns: 100px 1fr 1fr;
+  gap: 24px;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--gray-5);
+  transition: background 0.2s;
+}
+.traj-row:hover { background: var(--gray-6); margin: 0 -16px; padding: 18px 16px; }
+.traj-year {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--gray-4);
+}
+.traj-role {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 500;
+}
+.traj-company {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--gray-3);
+  text-align: right;
+}
+
+/* ═══════════════════════════════════
+   SOBRE MIM — Unified section
+   ═══════════════════════════════════ */
+.about-section {
+  padding: 100px 0 160px;
+  border-top: 1px solid var(--gray-5);
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.about-statement {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.8vw, 34px);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--gray-2);
+}
+.about-statement strong { color: var(--black); font-weight: 500; }
+.about-body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--gray-3);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+.about-body strong { color: var(--black); font-weight: 500; }
+.about-ctas { display: flex; gap: 16px; margin-top: 40px; }
+.btn-dark {
+  display: inline-flex; align-items: center;
+  padding: 11px 26px;
+  font-family: var(--font-display);
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--white); background: var(--black);
+  border-radius: 999px; border: none; cursor: pointer;
+  transition: background 0.3s;
+}
+.btn-dark:hover { background: var(--gray-1); }
+.btn-outline {
+  display: inline-flex; align-items: center;
+  padding: 11px 26px;
+  font-family: var(--font-display);
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--black); background: transparent;
+  border: 1px solid var(--gray-5); border-radius: 999px;
+  cursor: pointer; transition: all 0.3s;
+}
+.btn-outline:hover { border-color: var(--black); }
+
+/* ═══════════════════════════════════
+   CTA — Dark section
+   ═══════════════════════════════════ */
+.cta-section {
+  background: var(--black); color: var(--white);
+  padding: 160px 0; text-align: center;
+}
+.cta-title {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 9vw, 140px);
+  font-weight: 400; line-height: 0.95;
+  letter-spacing: -0.01em; text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.cta-title a { color: var(--white); transition: color 0.3s; }
+.cta-title a:hover { color: var(--accent); }
+.cta-subtitle {
+  font-family: var(--font-body);
+  font-size: 15px; font-weight: 400;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase; margin-bottom: 48px;
+}
+.cta-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 30px;
+  font-family: var(--font-display);
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--black); background: var(--white);
+  border-radius: 999px; transition: opacity 0.3s;
+}
+.cta-btn:hover { opacity: 0.85; }
+
+/* ═══════════════════════════════════
+   FOOTER — Dark
+   ═══════════════════════════════════ */
+footer {
+  background: var(--black); color: var(--white);
+  padding: 64px 0 32px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 48px; margin-bottom: 64px;
+}
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 15px; font-weight: 600;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.footer-social { display: flex; flex-direction: column; gap: 10px; }
+.footer-social a {
+  font-family: var(--font-body); font-size: 13px;
+  color: rgba(255,255,255,0.4); transition: color 0.3s;
+}
+.footer-social a:hover { color: var(--white); }
+.footer-col-title {
+  font-family: var(--font-display);
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.25); margin-bottom: 20px;
+}
+.footer-col-links { display: flex; flex-direction: column; gap: 10px; }
+.footer-col-links a {
+  font-family: var(--font-body); font-size: 13px;
+  color: rgba(255,255,255,0.4); transition: color 0.3s;
+}
+.footer-col-links a:hover { color: var(--white); }
+.footer-bottom {
+  display: flex; justify-content: space-between;
+  align-items: center; padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.footer-copy {
+  font-family: var(--font-body); font-size: 12px;
+  color: rgba(255,255,255,0.25);
+}
+
+/* ═══════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════ */
+.rv {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.25,0.46,0.45,0.94),
+              transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.rv.v { opacity: 1; transform: translateY(0); }
+.d1 { transition-delay: 0.1s; }
+.d2 { transition-delay: 0.2s; }
+.d3 { transition-delay: 0.3s; }
+.d4 { transition-delay: 0.4s; }
+.d5 { transition-delay: 0.5s; }
+
+/* ═══════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════ */
+@media (max-width: 1024px) {
+  .hero-content { grid-template-columns: 1fr; gap: 48px; }
+  .hero-img { aspect-ratio: 16/9; }
+  .svc-row { grid-template-columns: 40px 1fr 1fr; gap: 24px; }
+  .proj-item { grid-template-columns: 60px 1fr 1.2fr; gap: 24px; padding: 40px 0; }
+  .proj-meta { display: none; }
+  .proj-item::before, .proj-item::after { display: none; }
+  .proj-item:hover { margin: 0; padding-left: 0; padding-right: 0; }
+  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .traj-row { grid-template-columns: 80px 1fr auto; }
+}
+@media (max-width: 640px) {
+  :root { --px: 24px; }
+  .nav-name { font-size: 12px; padding: 7px 16px; }
+  .hero { padding-top: 100px; }
+  .hero-title { padding: 32px 0 28px; }
+  .hero-bar { margin-bottom: 40px; }
+  .svc-row { grid-template-columns: 1fr; gap: 12px; }
+  .svc-num { padding-top: 0; }
+  .proj-item { grid-template-columns: 1fr; gap: 20px; padding: 32px 0; }
+  .proj-num { font-size: 13px; }
+  .proj-meta { display: none; }
+  .services-section, .projects-section, .trajectory-section,
+  .about-section { padding: 64px 0 96px; }
+  .section-title { margin-bottom: 48px; }
+  .marquee { margin-bottom: 56px; }
+  .cta-section { padding: 96px 0; }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .traj-row { grid-template-columns: 1fr; gap: 4px; }
+  .traj-company { text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<a href="#" class="nav-name">Adriana Pommot</a>
+<div class="nav-float" id="navFloat">
+  <button class="nav-toggle" onclick="document.getElementById('navFloat').classList.toggle('open')" aria-label="Menu">
+    <svg class="icon-menu" viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    <svg class="icon-x" viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+  </button>
+  <div class="nav-menu">
+    <a href="cv-adriana-pommot.pdf" download class="nav-cta">
+      Download CV
+      <svg viewBox="0 0 16 16"><path d="M8 3v8M4 8l4 4 4-4"/><path d="M3 13h10"/></svg>
+    </a>
+    <a href="#work" class="nav-link">Projetos</a>
+    <a href="#services" class="nav-link">Serviços</a>
+    <a href="#about" class="nav-link">Sobre Mim</a>
+    <a href="#contact" class="nav-link">Contato</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <h1 class="hero-title rv">Product Design &<br>Inteligência Visual</h1>
+
+    <div class="hero-bar rv d1">
+      <span class="hero-bar-label">Product Designer Sênior</span>
+      <span class="hero-bar-label">São Paulo, BR</span>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-content-left">
+        <h2 class="hero-h2 rv d2">Sistemas Visuais<br>Para Produtos<br>Que Exigem Precisão</h2>
+        <p class="hero-body rv d3">Interfaces de alto impacto, design systems escaláveis e direção visual para produtos digitais complexos. 17 anos traduzindo lógica&nbsp;de&nbsp;negócio em experiências impecáveis.</p>
+        <div class="hero-services rv d4">
+          <div class="hero-svc-item"><span class="hero-svc-num">01</span><span class="hero-svc-name">Produto Digital</span></div>
+          <div class="hero-svc-item"><span class="hero-svc-num">02</span><span class="hero-svc-name">Design Systems</span></div>
+          <div class="hero-svc-item"><span class="hero-svc-num">03</span><span class="hero-svc-name">Direção de Arte</span></div>
+          <div class="hero-svc-item"><span class="hero-svc-num">04</span><span class="hero-svc-name">Ilustração & Motion</span></div>
+        </div>
+      </div>
+      <div class="hero-img rv d2">
+        <video src="img/telas-animadas.mp4" autoplay loop muted playsinline></video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div class="marquee rv">
+    <div class="marquee-track">
+      <span class="marquee-text">O Que Eu Faço</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">O Que Eu Faço</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">O Que Eu Faço</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">O Que Eu Faço</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">O Que Eu Faço</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">O Que Eu Faço</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span>
+    </div>
+  </div>
+  <div class="container">
+    <div class="svc-row rv">
+      <span class="svc-num">01</span>
+      <div class="svc-name">Produto & Interface</div>
+      <div class="svc-desc">Design de produto end-to-end, interfaces de alta fidelidade, prototipação e design systems escaláveis.</div>
+    </div>
+    <div class="svc-row rv d1">
+      <span class="svc-num">02</span>
+      <div class="svc-name">Direção Visual</div>
+      <div class="svc-desc">Direção de arte, construção de identidade visual e linguagem&nbsp;de&nbsp;marca para produtos digitais.</div>
+    </div>
+    <div class="svc-row rv d2">
+      <span class="svc-num">03</span>
+      <div class="svc-name">Design Systems</div>
+      <div class="svc-desc">Tokens visuais, bibliotecas de componentes, documentação técnica e governança de design em escala.</div>
+    </div>
+    <div class="svc-row rv d3">
+      <span class="svc-num">04</span>
+      <div class="svc-name">Expressão Autoral</div>
+      <div class="svc-desc">Ilustração ornamental, tipografia experimental e motion, onde a&nbsp;técnica encontra a&nbsp;expressão&nbsp;pessoal.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects-section" id="work">
+  <div class="marquee rv">
+    <div class="marquee-track">
+      <span class="marquee-text">Projetos Selecionados</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Projetos Selecionados</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Projetos Selecionados</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Projetos Selecionados</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Projetos Selecionados</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Projetos Selecionados</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span>
+    </div>
+  </div>
+  <div class="container">
+    <div class="proj-grid">
+
+    <a href="case-mrv.html" class="proj-item rv">
+      <span class="proj-num">/01</span>
+      <div class="proj-info">
+        <h3 class="proj-name">MRV</h3>
+      </div>
+      <div class="proj-img"><img src="https://framerusercontent.com/images/tJmuIg4YsOc9pGcsP4sUgCj5gw.jpg?width=1200&height=670" alt="MRV"></div>
+      <div class="proj-meta">
+        <p class="proj-desc">Microinteração para renegociação<br>no autoatendimento da squad<br>financeira.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">#ProductDesign</span>
+          <span class="proj-tag">#Fintech</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="#" class="proj-item rv">
+      <span class="proj-num">/02</span>
+      <div class="proj-info">
+        <h3 class="proj-name">Delta<br>Design System</h3>
+      </div>
+      <div class="proj-img"><img src="https://framerusercontent.com/images/ibHIROqyHkxvVtTioI5nYgGNqSQ.png?width=1200&height=750" alt="Delta Design System"></div>
+      <div class="proj-meta">
+        <p class="proj-desc">Tokens, bibliotecas e governança<br>visual na Escale. Liderança técnica<br>do sistema que serviu múltiplos<br>produtos.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">#DesignSystem</span>
+          <span class="proj-tag">#Ops</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="#" class="proj-item rv">
+      <span class="proj-num">/03</span>
+      <div class="proj-info">
+        <h3 class="proj-name">Dasa.ai</h3>
+      </div>
+      <div class="proj-img"><img src="https://framerusercontent.com/images/m3xaefjWYKUFkgzSIcs7ueySXY.png?width=1200&height=870" alt="Dasa.ai"></div>
+      <div class="proj-meta">
+        <p class="proj-desc">Produtos digitais para uso médico,<br>inovação e construção da nova<br>identidade visual.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">#ProductDesign</span>
+          <span class="proj-tag">#Healthtech</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="#" class="proj-item rv">
+      <span class="proj-num">/04</span>
+      <div class="proj-info">
+        <h3 class="proj-name">Ford B460<br>KX738</h3>
+      </div>
+      <div class="proj-img" style="background:#1A1A19"><img src="https://framerusercontent.com/images/oNnTXiDeqJw2jQH79SzKRViGlw.png?width=1200&height=1160" alt="Ford" style="object-fit:contain;padding:24px"></div>
+      <div class="proj-meta">
+        <p class="proj-desc">Experiência imersiva para showroom<br>automotivo. Immersion Room com<br>design system visual completo.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">#ImmersionRoom</span>
+          <span class="proj-tag">#Automotive</span>
+        </div>
+      </div>
+      <span class="proj-corner-bl">+</span>
+      <span class="proj-corner-br">+</span>
+    </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- TRAJECTORY -->
+<section class="trajectory-section" id="trajectory">
+  <div class="marquee rv">
+    <div class="marquee-track">
+      <span class="marquee-text">Trajetória</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Trajetória</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Trajetória</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Trajetória</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Trajetória</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Trajetória</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span>
+    </div>
+  </div>
+  <div class="container">
+    <div class="traj-row rv"><span class="traj-year">2021–23</span><span class="traj-role">Design Ops, Delta Design System</span><span class="traj-company">Escale</span></div>
+    <div class="traj-row rv"><span class="traj-year">2020–21</span><span class="traj-role">Product Designer Sênior</span><span class="traj-company">Dasa</span></div>
+    <div class="traj-row rv"><span class="traj-year">2020–21</span><span class="traj-role">Design Lead</span><span class="traj-company">D3 / Dasa</span></div>
+    <div class="traj-row rv"><span class="traj-year">2019–20</span><span class="traj-role">Design Lead</span><span class="traj-company">Accenture</span></div>
+    <div class="traj-row rv"><span class="traj-year">2017–19</span><span class="traj-role">UI Designer Sênior</span><span class="traj-company">MRV</span></div>
+    <div class="traj-row rv"><span class="traj-year">2014–17</span><span class="traj-role">Designer / Art Director</span><span class="traj-company">Agências</span></div>
+  </div>
+</section>
+
+<!-- SOBRE MIM -->
+<section class="about-section" id="about">
+  <div class="marquee rv">
+    <div class="marquee-track">
+      <span class="marquee-text">Sobre Mim</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Sobre Mim</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Sobre Mim</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Sobre Mim</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Sobre Mim</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Sobre Mim</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span>
+    </div>
+  </div>
+  <div class="container">
+    <div class="about-grid">
+      <p class="about-statement rv d1"><strong>Designer multidisciplinar</strong> com 17 anos de experiência em <strong>produto digital, direção de arte</strong> e <strong>sistemas de design.</strong> Atuo onde lógica de negócio e sensibilidade visual se encontram.</p>
+      <div>
+        <p class="about-body rv d2">Estruturo sistemas, traduzo metas de negócio em interfaces e aplico um olhar treinado pela arte para transformar fluxos complexos em experiências impecáveis. Do rigor técnico da interface à expressão da ilustração e do motion, minha fundação criativa é o que torna a qualidade visual inseparável da precisão técnica.</p>
+        <div class="about-ctas rv d3">
+          <a href="cv-adriana-pommot.pdf" download class="btn-dark">Download CV</a>
+          <a href="https://linkedin.com/in/adriana-pommot" target="_blank" class="btn-outline">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="container">
+    <h2 class="cta-title rv"><a href="/cdn-cgi/l/email-protection#08696c7a6169666978676565677c486f65696164266b6765">Vamos<br>Conversar?</a></h2>
+    <p class="cta-subtitle rv d1">Product Design & Inteligência Visual</p>
+    <a href="/cdn-cgi/l/email-protection#d5b4b1a7bcb4bbb4a5bab8b8baa195b2b8b4bcb9fbb6bab8" class="cta-btn rv d2">Entrar em Contato →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Adriana Pommot</div>
+        <div class="footer-social">
+          <a href="https://linkedin.com/in/adriana-pommot" target="_blank">LinkedIn</a>
+          <a href="https://instagram.com/ultraviolenta.ink" target="_blank">Instagram</a>
+          <a href="/cdn-cgi/l/email-protection#6c0d081e050d020d1c03010103182c0b010d0500420f0301">Email</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Páginas</div>
+        <div class="footer-col-links"><a href="#work">Projetos</a><a href="#services">Serviços</a><a href="#about">Sobre Mim</a><a href="#contact">Contato</a></div>
+      </div>
+      <div>
+        <div class="footer-col-title">Projetos</div>
+        <div class="footer-col-links"><a href="case-mrv.html">MRV</a><a href="#">Delta DS</a><a href="#">Dasa.ai</a><a href="#">Ford</a></div>
+      </div>
+      <div>
+        <div class="footer-col-title">Contato</div>
+        <div class="footer-col-links"><a href="/cdn-cgi/l/email-protection#355451475c545b54455a58585a41755258545c591b565a58"><span class="__cf_email__" data-cfemail="7d1c190f141c131c0d12101012093d1a101c1411531e1210">[email&#160;protected]</span></a><a href="#">São Paulo, BR</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Adriana Pommot</span>
+      <span class="footer-copy">Product Design & Inteligência Visual</span>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ── Nav: close on link click ── */
+document.querySelectorAll('.nav-menu a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.getElementById('navFloat').classList.remove('open');
+  });
+});
+
+document.documentElement.classList.add('js');
+
+/* ── General reveal observer ── */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('v');
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+/* Observe everything EXCEPT trajectory rows */
+document.querySelectorAll('.rv:not(.traj-row)').forEach(el => obs.observe(el));
+
+/* ── Trajectory: stagger reveal from section ── */
+const trajSection = document.querySelector('.trajectory-section');
+if (trajSection) {
+  const trajObs = new IntersectionOb

@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delta Design System — Adriana Pommot</title>
+    <link rel="preconnect" href="https://api.fontshare.com">
+    <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           CSS RESET & VARIABLES
+        ======================================== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --black: #111;
+            --white: #fff;
+            --gray-1: #333;
+            --gray-2: #555;
+            --gray-3: #888;
+            --gray-4: #bbb;
+            --gray-5: #e5e5e5;
+            --gray-6: #f5f5f5;
+            --accent: #D1F466;
+            --delta-brand: #FF8C82;
+            --delta-gold: #F5C518;
+            --font-display: 'General Sans', sans-serif;
+            --font-body: 'Roboto Mono', monospace;
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            font-weight: 400;
+            color: var(--black);
+            background: var(--white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+        img { max-width: 100%; height: auto; display: block; }
+        a { text-decoration: none; color: inherit; }
+
+        /* ========================================
+           NAVIGATION (same pattern as home/MRV)
+        ======================================== */
+        .nav-name{position:fixed;top:20px;left:max(calc(var(--px) - 20px),calc((100vw - var(--max-w))/2 + var(--px) - 20px));z-index:100;font-family:var(--font-display);font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--black);background:rgba(255,255,255,0.55);backdrop-filter:blur(12px) saturate(1.3);-webkit-backdrop-filter:blur(12px) saturate(1.3);padding:8px 20px;border-radius:999px}
+.nav-float{position:fixed;top:20px;right:max(var(--px),calc((100vw - var(--max-w))/2 + var(--px)));z-index:100;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.nav-toggle{width:52px;height:52px;border-radius:50%;border:none;cursor:pointer;background:rgba(255,255,255,0.6);backdrop-filter:blur(12px) saturate(1.3);-webkit-backdrop-filter:blur(12px) saturate(1.3);display:flex;align-items:center;justify-content:center;transition:background .3s,box-shadow .3s;position:relative;box-shadow:0 0 0 1px rgba(209,244,102,0.2),0 0 12px rgba(209,244,102,0.08);animation:iridescent 4s ease-in-out infinite}
+@keyframes iridescent{0%,100%{box-shadow:0 0 0 1px rgba(209,244,102,0.2),0 0 12px rgba(209,244,102,0.08)}33%{box-shadow:0 0 0 1px rgba(180,230,140,0.25),0 0 16px rgba(180,230,140,0.1)}66%{box-shadow:0 0 0 1px rgba(220,250,120,0.3),0 0 14px rgba(220,250,120,0.12)}}
+.nav-toggle:hover{background:rgba(255,255,255,0.85);box-shadow:0 0 0 1.5px var(--accent),0 0 20px rgba(209,244,102,0.2);animation:none}
+.nav-toggle svg{width:22px;height:22px;stroke:var(--black);stroke-width:1.8;stroke-linecap:round;fill:none}
+.nav-toggle .icon-x{display:none}
+.nav-float.open .nav-toggle .icon-menu{display:none}
+.nav-float.open .nav-toggle .icon-x{display:block}
+.nav-float.open .nav-toggle{background:var(--black);animation:none;box-shadow:none}
+.nav-float.open .nav-toggle svg{stroke:var(--white)}
+.nav-menu{display:flex;flex-direction:column;align-items:flex-end;gap:6px;opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .3s,transform .3s}
+.nav-float.open .nav-menu{opacity:1;transform:translateY(0);pointer-events:auto}
+.nav-menu a{font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;padding:8px 20px;border-radius:999px;white-space:nowrap;transition:color .25s,box-shadow .25s,background .25s}
+.nav-menu .nav-cta{color:var(--white);background:var(--black);display:inline-flex;align-items:center;gap:8px}
+.nav-menu .nav-cta:hover{color:var(--accent)}
+.nav-menu .nav-cta svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.nav-menu .nav-link{color:var(--gray-2);background:rgba(255,255,255,0.55);backdrop-filter:blur(12px) saturate(1.3);-webkit-backdrop-filter:blur(12px) saturate(1.3)}
+.nav-menu .nav-link:hover{color:#4A6B0A;background:rgba(209,244,102,0.15);box-shadow:inset 0 0 0 1.5px var(--accent)}
+        
+        /* ========================================
+           HERO — DARK (Delta brand identity)
+        ======================================== */
+        .hero {
+            background: var(--black);
+            color: var(--white);
+            padding: 180px 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+        }
+        .hero-eyebrow {
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--gray-3);
+            margin-bottom: 32px;
+        }
+        .hero-title {
+            font-family: var(--font-display);
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: -0.04em;
+            margin-bottom: 48px;
+            white-space: nowrap;
+            line-height: 1;
+            /* JS will compute exact font-size to fill width */
+            font-size: 10vw; /* fallback */
+        }
+        .hero-title .accent {
+            color: var(--delta-gold);
+        }
+        .hero-meta {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            padding: 48px 0;
+            border-top: 1px solid rgba(255,255,255,0.12);
+        }
+        .hero-meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .hero-meta-label {
+            font-family: var(--font-body);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gray-3);
+        }
+        .hero-meta-value {
+            font-family: var(--font-display);
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--white);
+        }
+        .hero-image {
+            width: calc(100% + 80px);
+            margin: 0 -40px;
+            margin-top: 64px;
+        }
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ========================================
+           CASE SECTIONS — GENERAL
+        ======================================== */
+        .section {
+            padding: 160px 40px;
+            border-top: 1px solid var(--gray-5);
+        }
+        .section-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+        }
+        .section-number {
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--gray-3);
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-family: var(--font-display);
+            font-weight: 400;
+            font-size: clamp(36px, 5vw, 64px);
+            line-height: 1.05;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            margin-bottom: 48px;
+            max-width: 900px;
+        }
+        .section-body {
+            font-family: var(--font-body);
+            font-size: 15px;
+            line-height: 1.75;
+            color: var(--gray-2);
+            max-width: 720px;
+        }
+        .section-body p + p { margin-top: 24px; }
+        .section-body strong {
+            color: var(--black);
+            font-weight: 500;
+        }
+
+        /* ========================================
+           CHALLENGE CARDS — Seção 02
+        ======================================== */
+        .challenge-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2px;
+            margin-top: 80px;
+            background: var(--gray-5);
+        }
+        .challenge-card {
+            background: var(--white);
+            padding: 48px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .challenge-number {
+            font-family: var(--font-display);
+            font-size: 48px;
+            font-weight: 400;
+            color: var(--gray-5);
+            line-height: 1;
+        }
+        .challenge-title {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+        .challenge-desc {
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--gray-2);
+            line-height: 1.65;
+        }
+
+        /* ========================================
+           FULL-BLEED IMAGE BREAK
+        ======================================== */
+        .bleed {
+            width: 100%;
+            overflow: hidden;
+        }
+        .bleed img, .bleed video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .bleed.dark { background: var(--black); }
+        .bleed.padded {
+            padding: 80px 40px;
+        }
+        .bleed.padded img {
+            max-width: 1320px;
+            margin: 0 auto;
+            border-radius: 8px;
+        }
+
+        /* ========================================
+           SPLIT LAYOUT — text + image side by side
+        ======================================== */
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            margin-top: 80px;
+        }
+        .split.reverse { direction: rtl; }
+        .split.reverse > * { direction: ltr; }
+        .split-text {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .split-label {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--accent);
+        }
+        .split-title {
+            font-family: var(--font-display);
+            font-size: 28px;
+            font-weight: 500;
+            line-height: 1.2;
+        }
+        .split-body {
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--gray-2);
+        }
+        .split-image {
+            overflow: hidden;
+            border-radius: 4px;
+        }
+        .split-image img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .split-image:hover img { transform: scale(1.02); }
+
+        /* ========================================
+           PRINCIPLES — Seção 03
+        ======================================== */
+        .principles {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            margin-top: 80px;
+            background: var(--gray-5);
+        }
+        .principle-card {
+            background: var(--white);
+            padding: 56px 40px;
+            position: relative;
+        }
+        .principle-card::before {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 3px;
+            background: var(--delta-gold);
+            margin-bottom: 32px;
+        }
+        .principle-name {
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            margin-bottom: 20px;
+        }
+        .principle-desc {
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--gray-2);
+        }
+
+        /* ========================================
+           IMAGE PAIRS (side by side)
+        ======================================== */
+        .image-pair {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 64px;
+        }
+        .image-pair img {
+            border-radius: 4px;
+            width: 100%;
+        }
+        .image-pair.no-gap { gap: 2px; }
+
+        /* ========================================
+           RESULT CARDS — Seção 06
+        ======================================== */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            margin-top: 80px;
+            background: var(--black);
+        }
+        .result-card {
+            background: var(--black);
+            color: var(--white);
+            padding: 56px 36px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .result-number {
+            font-family: var(--font-display);
+            font-size: clamp(40px, 4vw, 64px);
+            font-weight: 400;
+            line-height: 1;
+            color: var(--delta-gold);
+        }
+        .result-label {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--white);
+        }
+        .result-desc {
+            font-family: var(--font-body);
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--gray-3);
+        }
+
+        /* ========================================
+           IMAGE STRIP (horizontal scroll hint)
+        ======================================== */
+        .image-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-top: 64px;
+        }
+        .image-strip img {
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        /* ========================================
+           GOVERNANCE FLOW
+        ======================================== */
+        .gov-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px;
+            margin-top: 80px;
+        }
+        .gov-item {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .gov-icon {
+            width: 48px;
+            height: 48px;
+            border: 2px solid var(--black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .gov-title {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+        .gov-desc {
+            font-family: var(--font-body);
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--gray-2);
+        }
+
+        /* ========================================
+           CTA SECTION
+        ======================================== */
+        .cta-section {
+            background: var(--black);
+            color: var(--white);
+            padding: 160px 40px;
+            text-align: center;
+        }
+        .cta-section .section-title {
+            margin: 0 auto 32px;
+            color: var(--white);
+        }
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-display);
+            font-size: 16px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--black);
+            background: var(--white);
+            padding: 18px 48px;
+            border-radius: 999px;
+            transition: all 0.3s;
+        }
+        .cta-btn:hover {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        /* ========================================
+           FOOTER
+        ======================================== */
+        .footer {
+            background: var(--black);
+            color: var(--gray-3);
+            padding: 48px 40px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .footer-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-copy {
+            font-family: var(--font-body);
+            font-size: 13px;
+        }
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+        .footer-links a {
+            font-family: var(--font-body);
+            font-size: 13px;
+            color: var(--gray-3);
+            transition: color 0.3s;
+        }
+        .footer-links a:hover { color: var(--white); }
+
+        /* ========================================
+           NEXT PROJECT
+        ======================================== */
+        .next-project {
+            padding: 120px 40px;
+            border-top: 1px solid var(--gray-5);
+            text-align: center;
+        }
+        .next-project-label {
+            font-family: var(--font-body);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--gray-3);
+            margin-bottom: 24px;
+        }
+        .next-project-title {
+            font-family: var(--font-display);
+            font-weight: 400;
+            font-size: clamp(36px, 5vw, 72px);
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            transition: color 0.3s;
+        }
+        .next-project a:hover .next-project-title { color: var(--accent); }
+        .next-project-arrow {
+            font-family: var(--font-display);
+            font-size: 24px;
+            margin-top: 24px;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+        .next-project a:hover .next-project-arrow { transform: translateX(8px); }
+
+        /* ========================================
+           SCROLL REVEAL ANIMATIONS
+        ======================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* stagger children in grids */
+        .challenge-card, .principle-card, .result-card, .gov-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .challenge-card.visible, .principle-card.visible, .result-card.visible, .gov-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========================================
+           RESPONSIVE — TABLET
+        ======================================== */
+        @media (max-width: 1024px) {
+            .hero { padding: 140px 32px 0; }
+            .section { padding: 120px 32px; }
+            .hero-meta { grid-template-columns: repeat(2, 1fr); }
+            .challenge-grid { grid-template-columns: 1fr; }
+            .principles { grid-template-columns: 1fr; }
+            .split { grid-template-columns: 1fr; gap: 48px; }
+            .split.reverse { direction: ltr; }
+            .results-grid { grid-template-columns: repeat(2, 1fr); }
+            .gov-grid { grid-template-columns: 1fr; }
+            .image-strip { grid-template-columns: repeat(2, 1fr); }
+            .image-pair { grid-template-columns: 1fr; }
+            .nav-links a:not(.nav-cv) { display: none; }
+        }
+
+        /* ========================================
+           RESPONSIVE — MOBILE
+        ======================================== */
+        @media (max-width: 640px) {
+            .hero { padding: 120px 20px 0; }
+            .section { padding: 80px 20px; }
+            .hero-meta { grid-template-columns: 1fr 1fr; gap: 24px; }
+            .hero-image { width: calc(100% + 40px); margin: 0 -20px; margin-top: 48px; }
+            .results-grid { grid-template-columns: 1fr; }
+            .image-strip { grid-template-columns: 1fr 1fr; }
+            .nav-inner { padding: 0 20px; }
+            .cta-section { padding: 100px 20px; }
+            .bleed.padded { padding: 48px 20px; }
+            .footer-inner { flex-direction: column; gap: 24px; text-align: center; }
+        }
+    
+/* ═══ CTA + FOOTER (padrão home) ═══ */
+.cta-section{background:var(--black);color:var(--white);padding:160px 0;text-align:center}
+.cta-title{font-family:var(--font-display);font-size:clamp(44px,9vw,140px);font-weight:400;line-height:.95;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:24px}
+.cta-title a{color:var(--white);transition:color .3s}
+.cta-title a:hover{color:var(--accent)}
+.cta-subtitle{font-family:var(--font-body);font-size:15px;font-weight:400;color:rgba(255,255,255,.4);text-transform:uppercase;margin-bottom:48px}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 30px;font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--black);background:var(--white);border-radius:999px;transition:opacity .3s}
+.cta-btn:hover{opacity:.85}
+footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top:1px solid rgba(255,255,255,.08)}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px}
+.footer-logo{font-family:var(--font-display);font-size:15px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:20px}
+.footer-social{display:flex;flex-direction:column;gap:10px}
+.footer-social a{font-family:var(--font-body);font-size:13px;color:rgba(255,255,255,.4);transition:color .3s}
+.footer-social a:hover{color:var(--white)}
+.footer-col-title{font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:20px}
+.footer-col-links{display:flex;flex-direction:column;gap:10px}
+.footer-col-links a{font-family:var(--font-body);font-size:13px;color:rgba(255,255,255,.4);transition:color .3s}
+.footer-col-links a:hover{color:var(--white)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:32px;border-top:1px solid rgba(255,255,255,.08)}
+.footer-copy{font-family:var(--font-body);font-size:12px;color:rgba(255,255,255,.25)}
+/* ═══ ANIMATIONS (progressive enhancement) ═══ */
+.rv{opacity:1;transform:none}
+.js .rv{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.25,.46,.45,.94)}
+.js .rv.v{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+</style>
+</head>
+<body>
+
+    <!-- ============ NAVIGATION ============ -->
+    <!-- NAV -->
+<a href="index.html" class="nav-name">Adriana Pommot</a>
+<div class="nav-float" id="navFloat">
+  <button class="nav-toggle" onclick="document.getElementById('navFloat').classList.toggle('open')" aria-label="Menu">
+    <svg class="icon-menu" viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    <svg class="icon-x" viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+  </button>
+  <div class="nav-menu">
+    <a href="cv-adriana-pommot.pdf" download class="nav-cta">
+      Download CV
+      <svg viewBox="0 0 16 16"><path d="M8 3v8M4 8l4 4 4-4"/><path d="M3 13h10"/></svg>
+    </a>
+    <a href="index.html#work" class="nav-link">Projetos</a>
+    <a href="index.html#services" class="nav-link">Serviços</a>
+    <a href="index.html#about" class="nav-link">Sobre Mim</a>
+    <a href="#contact" class="nav-link">Contato</a>
+  </div>
+</div>
+
+    <!-- ============ HERO — DARK ============ -->
+    <section class="hero">
+        <div class="hero-inner">
+            <p class="hero-eyebrow reveal">Case Study — 2021 – 2023</p>
+            <h1 class="hero-title reveal reveal-delay-1">Delta Design <span class="accent">System</span></h1>
+            <div class="hero-meta reveal reveal-delay-2">
+                <div class="hero-meta-item">
+                    <span class="hero-meta-label">Função</span>
+                    <span class="hero-meta-value">Design System Lead</span>
+                </div>
+                <div class="hero-meta-item">
+                    <span class="hero-meta-label">Empresa</span>
+                    <span class="hero-meta-value">Escale</span>
+                </div>
+                <div class="hero-meta-item">
+                    <span class="hero-meta-label">Segmentos</span>
+                    <span class="hero-meta-value">Saúde, Telecom, Finanças</span>
+                </div>
+                <div class="hero-meta-item">
+                    <span class="hero-meta-label">Escopo</span>
+                    <span class="hero-meta-value">Design System, Tokens, Governance</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ BLEED — HERO IMAGE ============ -->
+    <!-- TODO ADRIANA: Exporta a imagem hero do Delta do Framer (aquele mockup com laptop + telas no fundo cinza).
+         Salva como img/delta/hero-delta.webp (quality 85). Descomenta o bloco abaixo. -->
+    <!--
+    <div class="bleed">
+        <img src="img/delta/hero-delta.webp" alt="Delta Design System — visão geral com mockups de componentes">
+    </div>
+    -->
+
+    <!-- ============ SEÇÃO 01 — CONTEXTO DO PRODUTO ============ -->
+    <section class="section">
+        <div class="section-inner">
+            <p class="section-number reveal">01 — Contexto do Produto</p>
+            <h2 class="section-title reveal reveal-delay-1">A Escale crescia rápido.<br>Seus produtos, nem tanto.</h2>
+            <div class="section-body reveal reveal-delay-2">
+                <p>A Escale operava mais de <strong>20 produtos digitais simultâneos</strong> em segmentos de saúde, telecom e finanças, cada um com marcas próprias e necessidades visuais distintas. O modelo de negócio girava em torno de <strong>landing pages de captação de leads</strong> — dezenas delas no ar ao mesmo tempo, criadas por squads diferentes, sem linguagem visual compartilhada.</p>
+                <p>A criação do Delta Design System surgiu como resposta estratégica: unificar a fundação visual de todos os produtos, garantir escalabilidade para novas marcas e eliminar o retrabalho que consumia o time de design.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ SEÇÃO 02 — O PROBLEMA ============ -->
+    <section class="section">
+        <div class="section-inner">
+            <p class="section-number reveal">02 — O Problema</p>
+            <h2 class="section-title reveal reveal-delay-1">Cada projeto começava do zero</h2>
+            <div class="challenge-grid">
+                <div class="challenge-card">
+                    <span class="challenge-number">01</span>
+                    <h3 class="challenge-title">Fragmentação Visual</h3>
+                    <p class="challenge-desc">Cada produto seguia padrões próprios, sem componentes compartilhados. O resultado era uma colcha de retalhos entre as interfaces.</p>
+                </div>
+                <div class="challenge-card">
+                    <span class="challenge-number">02</span>
+                    <h3 class="challenge-title">Retrabalho Crônico</h3>
+                    <p class="challenge-desc">Designers recriavam soluções já resolvidas a cada nova landing page. Sem biblioteca, cada botão era desenhado do zero.</p>
+                </div>
+                <div class="challenge-card">
+                    <span class="challenge-number">03</span>
+                    <h3 class="challenge-title">Handoff sem Contrato</h3>
+                    <p class="challenge-desc">Ambiguidade entre design e código gerava idas e vindas desnecessárias. Desenvolvedores interpretavam layouts à sua maneira.</p>
+                </div>
+                <div class="challenge-card">
+                    <span class="challenge-number">04</span>
+                    <h3 class="challenge-title">Escala sem Fundação</h3>
+                    <p class="challenge-desc">Novos produtos herdavam inconsistências em vez de padrões. A dívida visual crescia mais rápido que a empresa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ SEÇÃO 03 — A ESTRATÉGIA ============ -->
+    <section class="section">
+        <div class="section-inner">
+            <p class="section-number reveal">03 — A Estratégia</p>
+            <h2 class="section-title reveal reveal-delay-1">Token-First:<br>a fundação antes do componente</h2>
+            <div class="section-body reveal reveal-delay-2">
+                <p>A abordagem começou pela fundação, não pelos componentes. Antes de desenhar qualquer botão, a equipe definiu a <strong>arquitetura de Design Tokens</strong> — cores, tipografia, espaçamento, sombras, bordas — como variáveis semânticas.</p>
+                <p>A decisão-chave: qualquer marca da Escale podia trocar sua "skin" inteira apenas substituindo os tokens. Isso fez do Delta um <strong>sistema multi-marca desde o dia zero</strong>.</p>
+            </div>
+
+            <!-- Token images — TODO ADRIANA: exporta as 4 páginas de tokens do portfólio antigo como WebP.
+                 Nomes: tokens-colors.webp, tokens-typography.webp, tokens-spacing.webp, tokens-borders.webp
+                 Coloca em img/delta/ e descomenta os blocos abaixo. -->
+            <!--
+            <div class="image-pair reveal">
+                <img src="img/delta/tokens-colors.webp" alt="Design tokens — paleta de cores da marca e suporte">
+                <img src="img/delta/tokens-typography.webp" alt="Design tokens — escala tipográfica e estilos de texto">
+            </div>
+            <div class="image-pair reveal">
+                <img src="img/delta/tokens-spacing.webp" alt="Design tokens — sistema de espaçamento">
+                <img src="img/delta/tokens-borders.webp" alt="Design tokens — bordas, sombras e raios">
+            </div>
+            -->
+
+            <!-- Componente Zero -->
+            <div class="split reverse" style="margin-top: 120px;">
+                <div class="split-text reveal">
+                    <span class="split-label">O "Componente Zero"</span>
+                    <h3 class="split-title">O primeiro componente validou todo o modelo</h3>
+                    <p class="split-body">O primeiro componente foi construído em parceria com a engenharia para validar o modelo completo: construção, documentação, handoff e integração com código. Ele se tornou o blueprint de todos os componentes futuros — provando que o sistema funcionava antes de escalar.</p>
+                </div>
+                <div class="split-image reveal reveal-delay-1">
+                    <!-- TODO ADRIANA: exporta Template_handoff.png como img/delta/componente-zero.webp -->
+                    <!-- <img src="img/delta/componente-zero.webp" alt="Template de handoff do primeiro componente"> -->
+                    <img src="img/delta/guia-uso.webp" alt="Delta Guia de Uso — fluxograma de criação de componentes" style="border-radius: 4px;">
+                </div>
+            </div>
+
+            <!-- Princípios -->
+            <div style="margin-top: 120px;">
+                <p class="section-number reveal">Princípios</p>
+                <h2 class="section-title reveal reveal-delay-1" style="font-size: clamp(28px, 4vw, 48px);">Três palavras guiaram<br>cada decisão</h2>
+            </div>
+            <div class="principles">
+                <div class="principle-card">
+                    <h3 class="principle-name">Econômico</h3>
+                    <p class="principle-desc">Biblioteca enxuta, sem redundância. Aperfeiçoar o existente antes de criar o novo. Remoção do desnecessário — não acumulação.</p>
+                </div>
+                <div class="principle-card">
+                    <h3 class="principle-name">Versátil</h3>
+                    <p class="principle-desc">Componentes flexíveis que atendessem múltiplas marcas com pouca personalização. Ponte de diálogo entre times e contextos diferentes.</p>
+                </div>
+                <div class="principle-card">
+                    <h3 class="principle-name">Objetivo</h3>
+                    <p class="principle-desc">Documentação transparente, sem ambiguidade. Orientação pelo exemplo, não pelo manual. Cada componente precisava ser auto-explicativo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ BLEED — Princípios visual ============ -->
+    <div class="bleed padded" style="background: var(--black);">
+        <img src="img/delta/principios-visual.webp" alt="Valores do Delta Design System — Econômico, Versátil, Objetivo" class="reveal" style="max-width: 1320px; margin: 0 auto;">
+    </div>
+
+    <!-- ============ SEÇÃO 04 — O SISTEMA ============ -->
+    <section class="section">
+        <div class="section-inner">
+            <p class="section-number reveal">04 — O Sistema</p>
+            <h2 class="section-title reveal reveal-delay-1">De átomos a templates<br>prontos para produção</h2>
+            <div class="section-body reveal reveal-delay-2">
+                <p>A construção seguiu a lógica de <strong>atomic design</strong>: tokens base deram origem a átomos (botões, inputs, ícones), que se combinaram em moléculas (cards, barras de navegação), organismos (seções completas) e, finalmente, <strong>templates reutilizáveis de páginas inteiras</strong> — prontos para qualquer marca da Escale.</p>
+            </div>
+
+            <!-- Storybook + Library -->
+            <div class="split" style="margin-top: 100px;">
+                <div class="split-text reveal">
+                    <span class="split-label">Biblioteca de Componentes</span>
+                    <h3 class="split-title">Documentação viva no Storybook</h3>
+                    <p class="split-body">Cada componente documentado com exemplos vivos, estados, variações e instruções de uso para desenvolvedores. A biblioteca funcionava como fonte única de verdade entre design e engenharia.</p>
+                </div>
+                <div class="split-image reveal reveal-delay-1">
+                    <!-- TODO ADRIANA: tira um print do Storybook (https://escaletech.github.io/delta/) 
+                         e salva como img/delta/storybook.webp -->
+                    <div style="background: var(--gray-6); padding: 48px; border-radius: 4px; text-align: center; min-height: 300px; display: flex; align-items: center; justify-content: center;">
+                        <p style="font-family: var(--font-body); font-size: 13px; color: var(--gray-3); text-transform: uppercase; letter-spacing: 0.08em;">Screenshot do Storybook<br><span style="font-size: 11px; text-transform: none; letter-spacing: 0;">img/delta/storybook.webp</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="split reverse" style="margin-top: 100px;">
+                <div class="split-text reveal">
+                    <span class="split-label">Template de Handoff</span>
+                    <h3 class="split-title">Zero ambiguidade entre design e código</h3>
+                    <p class="split-body">Cada componente entregue com anatomia completa: propriedades visuais, tokens aplicados, estados de interação e status. Desenvolvedores não precisavam mais interpretar — apenas implementar.</p>
+                </div>
+                <div class="split-image reveal reveal-delay-1">
+                    <!-- TODO ADRIANA: exporta Template_handoff.png como img/delta/template-handoff.webp -->
+                    <div style="background: var(--gray-6); padding: 48px; border-radius: 4px; text-align: center; min-height: 300px; display: flex; align-items: center; justify-content: center;">
+                        <p style="font-family: var(--font-body); font-size: 13px; color: var(--gray-3); text-transform: uppercase; letter-spacing: 0.08em;">Template de Handoff<br><span style="font-size: 11px; text-transform: none; letter-spacing: 0;">img/delta/template-handoff.webp</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="split" style="margin-top: 100px;">
+                <div class="split-text reveal">
+                    <span class="split-label">Guia de Uso</span>
+                    <h3 class="split-title">O manual de como o sistema evolui</h3>
+                    <p class="split-body">Documentação interna com fluxograma de decisão para criação de novos componentes, checklist de qualidade, padrões de nomenclatura e roadmap de evolução. Qualquer designer sabia exatamente como contribuir.</p>
+                </div>
+                <div class="split-image reveal reveal-delay-1">
+                    <img src="img/delta/guia-uso.webp" alt="Delta Guia de Uso — fluxograma de criação de componentes, checklist e padrões de nomenclatura" style="border-radius: 4px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ BLEED — Visão geral do sistema ============ -->
+    <div class="bleed dark" style="padding: 80px 40px;">
+        <!-- TODO ADRIANA: exporta overview do Delta (staging, grid de componentes, ou mockups).
+             Salva como img/delta/overview-sistema.webp e descomenta o img abaixo. -->
+        <!-- <img src="img/delta/overview-sistema.webp" alt="Visão geral do Delta Design System" style="max-width: 1320px; margin: 0 auto; border-radius: 8px;"> -->
+        <div style="max-width: 1320px; margin: 0 auto; text-align: center; padding: 80px 0;">
+            <p style="font-family: var(--font-body); font-size: 13px; color: var(--gray-3); text-transform: uppercase; letter-spacing: 0.08em;">Visão Geral do Sistema<br><span style="font-size: 11px; text-transform: none; letter-spacing: 0;">img/delta/overview-sistema.webp</span></p>
+        </div>
+    </div>
+
+    <!-- ============ SEÇÃO 05 — A GOVERNANÇA VIVA ============ -->
+    <section class="section">
+        <div class="section-inner">
+            <p class="section-number reveal">05 — A Governança Viva</p>
+            <h2 class="section-title reveal reveal-delay-1">Um sistema que se<br>auto-regula</h2>
+            <div class="section-body reveal reveal-delay-2">
+                <p>O Delta não era apenas uma biblioteca estática. Era um organismo com regras de evolução — projetado para crescer sem perder coerência.</p>
+            </div>
+
+            <div class="gov-grid">
+                <div class="gov-item">
+                    <div class="gov-icon">A</div>
+                    <h3 class="gov-title">Algoritmo de Decisão</h3>
+                    <p class="gov-desc">Fluxo claro que determinava quando criar um componente novo, quando adaptar um existente e quando recusar uma demanda. Proteger o sistema de inchaço era tão importante quanto construí-lo.</p>
+                </div>
+                <div class="gov-item">
+                    <div class="gov-icon">C</div>
+                    <h3 class="gov-title">Fluxo de Contribuição</h3>
+                    <p class="gov-desc">Qualquer designer podia propor componentes, seguindo processo estruturado de validação, construção e entrega documentada antes da entrada oficial na biblioteca.</p>
+                </div>
+                <div class="gov-item">
+                    <div class="gov-icon">G</div>
+                    <h3 class="gov-title">Guilda de Design</h3>
+                    <p class="gov-desc">Espaço recorrente de mentoria, alinhamento técnico e evolução coletiva. Discussões sobre padrões, revisão de contribuições e decisões estratégicas sobre o futuro do sistema.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ BLEED — Governança visual ============ -->
+    <div class="bleed padded">
+        <!-- TODO ADRIANA: exporta os 4 cards de governança (Guilda, Missões, Composição, Construindo)
+             do portfólio antigo. Salva como img/delta/governanca-visual.webp -->
+        <!-- <img src="img/delta/governanca-visual.webp" alt="Governança visual do Delta" class="reveal"> -->
+    </div>
+
+    <!-- ============ SEÇÃO 06 — RESULTADOS ============ -->
+    <section class="section" style="padding-bottom: 0;">
+        <div class="section-inner">
+            <p class="section-number reveal">06 — Resultados</p>
+            <h2 class="section-title reveal reveal-delay-1">Design como alavanca<br>de negócio</h2>
+        </div>
+        <div class="results-grid reveal" style="max-width: 1320px; margin: 80px auto 0;">
+            <div class="result-card">
+                <span class="result-number">~47%</span>
+                <span class="result-label">Mais rápido</span>
+                <p class="result-desc">Redução no tempo de criação de novas interfaces com componentes reutilizáveis</p>
+            </div>
+            <div class="result-card">
+                <span class="result-number">20+</span>
+                <span class="result-label">Produtos</span>
+                <p class="result-desc">Atendidos pelo sistema em produção simultânea em três segmentos</p>
+            </div>
+            <div class="result-card">
+                <span class="result-number">A→T</span>
+                <span class="result-label">Cobertura total</span>
+                <p class="result-desc">De átomos base até templates de página reutilizáveis prontos para produção</p>
+            </div>
+            <div class="result-card">
+                <span class="result-number">Multi</span>
+                <span class="result-label">Marca</span>
+                <p class="result-desc">Troca de identidade visual via tokens, sem redesenho de componentes</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ SEÇÃO 07 — IMPACTO & LEGADO ============ -->
+    <section class="section">
+        <div class="section-inner">
+            <p class="section-number reveal">07 — Impacto & Legado</p>
+            <h2 class="section-title reveal reveal-delay-1">O Delta mudou como<br>o time pensa design</h2>
+            <div class="section-body reveal reveal-delay-2">
+                <p>Onde antes cada projeto partia do zero, o time passou a construir sobre uma fundação validada e documentada. O Delta se tornou a <strong>referência interna de governança visual</strong> da Escale.</p>
+                <p>Mais do que uma biblioteca, ele mudou a cultura: elevou a maturidade técnica dos designers, aproximou design e engenharia, e fez o design system ser visto como <strong>ferramenta estratégica de negócio</strong> — não overhead burocrático.</p>
+                <p>Os três princípios — <strong>Econômico, Versátil, Objetivo</strong> — se tornaram vocabulário compartilhado, garantindo autonomia nas decisões visuais com clareza e consistência.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ NEXT PROJECT ============ -->
+    <div class="next-project">
+        <p class="next-project-label reveal">Próximo Projeto</p>
+        <a href="case-dasa.html">
+            <h2 class="next-project-title reveal reveal-delay-1">Dasa.ai</h2>
+            <span class="next-project-arrow reveal reveal-delay-2">→</span>
+        </a>
+    </div>
+
+    <!-- ============ CTA ============ -->
+    <section class="cta-section" id="contact"><div class="container">
+<h2 class="cta-title rv"><a href="mailto:adriana@pommot.com">Vamos<br>Conversar?</a></h2>
+<p class="cta-subtitle rv d1">Product Design & Inteligência Visual</p>
+<a href="mailto:adriana@pommot.com" class="cta-btn rv d2">Entrar em Contato →</a>
+</div></section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer><div class="container">
+<div class="footer-grid">
+<div><div class="footer-logo">Adriana Pommot</div><div class="footer-social"><a href="https://linkedin.com/in/adriana-pommot" target="_blank">LinkedIn</a><a href="https://instagram.com/ultraviolenta.ink" target="_blank">Instagram</a><a href="mailto:adriana@pommot.com">Email</a></div></div>
+<div><div class="footer-col-title">Páginas</div><div class="footer-col-links"><a href="index.html#work">Projetos</a><a href="index.html#services">Serviços</a><a href="index.html#about">Sobre Mim</a><a href="#contact">Contato</a></div></div>
+<div><div class="footer-col-title">Projetos</div><div class="footer-col-links"><a href="case-mrv.html">MRV</a><a href="case-delta.html">Delta DS</a><a href="case-dasa.html">Dasa.ai</a></div></div>
+<div><div class="footer-col-title">Contato</div><div class="footer-col-links"><a href="mailto:adriana@pommot.com">adriana@pommot.com</a><a href="#">São Paulo, BR</a></div></div>
+</div>
+<div class="footer-bottom"><span class="footer-copy">© 2026 Adriana Pommot</span><span class="footer-copy">Product Design & Inteligência Visual</span></div>
+</div></footer>
+
+    <!-- ============ SCROLL REVEAL SCRIPT ============ -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // ===== FIT TITLE TO CONTAINER WIDTH =====
+        function fitTitle() {
+            const title = document.querySelector('.hero-title');
+            const container = document.querySelector('.hero-inner');
+            if (!title || !container) return;
+
+            const containerWidth = container.offsetWidth;
+            let fontSize = 10;
+            title.style.fontSize = fontSize + 'px';
+
+            // Binary search for the right font-size
+            let lo = 10, hi = 400;
+            while (hi - lo > 0.5) {
+                let mid = (lo + hi) / 2;
+                title.style.fontSize = mid + 'px';
+                if (title.scrollWidth > containerWidth) {
+                    hi = mid;
+                } else {
+                    lo = mid;
+                }
+            }
+            title.style.fontSize = lo + 'px';
+        }
+
+        window.addEventListener('load', fitTitle);
+        window.addEventListener('resize', fitTitle);
+
+        // ===== SCROLL REVEAL =====
+        document.addEventListener('DOMContentLoaded', () => {
+            document.documentElement.classList.add('js');
+
+const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -60px 0px'
+            });
+
+            // Observe all reveal elements
+            document.querySelectorAll('.reveal, .challenge-card, .principle-card, .result-card, .gov-item').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Stagger grid children
+            document.querySelectorAll('.challenge-grid, .principles, .results-grid, .gov-grid').forEach(grid => {
+                const gridObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const children = entry.target.children;
+                            Array.from(children).forEach((child, i) => {
+                                setTimeout(() => child.classList.add('visible'), i * 100);
+                            });
+             

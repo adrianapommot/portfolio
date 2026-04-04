@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dasa.ai · Adriana Pommot</title>
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════
+   TOKENS (same as index/case-mrv)
+   ═══════════════════════════════════ */
+:root{--black:#111;--white:#fff;--gray-1:#333;--gray-2:#555;--gray-3:#888;--gray-4:#bbb;--gray-5:#e5e5e5;--gray-6:#f5f5f5;--accent:#D1F466;--font-display:'General Sans',sans-serif;--font-body:'Roboto Mono',monospace;--max-w:1440px;--px:40px}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:var(--font-body);color:var(--black);background:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden}::selection{background:var(--accent);color:var(--black)}img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
+.container{max-width:var(--max-w);margin:0 auto;padding:0 var(--px)}
+
+/* ═══════════════════════════════════
+   NAV — Name pill left + circle menu right
+   ═══════════════════════════════════ */
+.nav-name{position:fixed;top:20px;left:max(calc(var(--px) - 20px),calc((100vw - var(--max-w))/2 + var(--px) - 20px));z-index:100;font-family:var(--font-display);font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--black);background:rgba(255,255,255,0.55);backdrop-filter:blur(12px) saturate(1.3);-webkit-backdrop-filter:blur(12px) saturate(1.3);padding:8px 20px;border-radius:999px}
+.nav-float{position:fixed;top:20px;right:max(var(--px),calc((100vw - var(--max-w))/2 + var(--px)));z-index:100;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.nav-toggle{width:52px;height:52px;border-radius:50%;border:none;cursor:pointer;background:rgba(255,255,255,0.6);backdrop-filter:blur(12px) saturate(1.3);-webkit-backdrop-filter:blur(12px) saturate(1.3);display:flex;align-items:center;justify-content:center;transition:background .3s,box-shadow .3s;position:relative;box-shadow:0 0 0 1px rgba(209,244,102,0.2),0 0 12px rgba(209,244,102,0.08);animation:iridescent 4s ease-in-out infinite}
+@keyframes iridescent{0%,100%{box-shadow:0 0 0 1px rgba(209,244,102,0.2),0 0 12px rgba(209,244,102,0.08)}33%{box-shadow:0 0 0 1px rgba(180,230,140,0.25),0 0 16px rgba(180,230,140,0.1)}66%{box-shadow:0 0 0 1px rgba(220,250,120,0.3),0 0 14px rgba(220,250,120,0.12)}}
+.nav-toggle:hover{background:rgba(255,255,255,0.85);box-shadow:0 0 0 1.5px var(--accent),0 0 20px rgba(209,244,102,0.2);animation:none}
+.nav-toggle svg{width:22px;height:22px;stroke:var(--black);stroke-width:1.8;stroke-linecap:round;fill:none}
+.nav-toggle .icon-x{display:none}
+.nav-float.open .nav-toggle .icon-menu{display:none}
+.nav-float.open .nav-toggle .icon-x{display:block}
+.nav-float.open .nav-toggle{background:var(--black);animation:none;box-shadow:none}
+.nav-float.open .nav-toggle svg{stroke:var(--white)}
+.nav-menu{display:flex;flex-direction:column;align-items:flex-end;gap:6px;opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .3s,transform .3s}
+.nav-float.open .nav-menu{opacity:1;transform:translateY(0);pointer-events:auto}
+.nav-menu a{font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;padding:8px 20px;border-radius:999px;white-space:nowrap;transition:color .25s,box-shadow .25s,background .25s}
+.nav-menu .nav-cta{color:var(--white);background:var(--black);display:inline-flex;align-items:center;gap:8px}
+.nav-menu .nav-cta:hover{color:var(--accent)}
+.nav-menu .nav-cta svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.nav-menu .nav-link{color:var(--gray-2);background:rgba(255,255,255,0.55);backdrop-filter:blur(12px) saturate(1.3);-webkit-backdrop-filter:blur(12px) saturate(1.3)}
+.nav-menu .nav-link:hover{color:#4A6B0A;background:rgba(209,244,102,0.15);box-shadow:inset 0 0 0 1.5px var(--accent)}
+
+/* ═══════════════════════════════════
+   CASE HEADER — Fylla-inspired
+   Title left + meta right
+   ═══════════════════════════════════ */
+.case-header{padding-top:120px}
+.case-back{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--black);margin-bottom:48px;transition:opacity .3s}.case-back:hover{opacity:.5}.case-back svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.case-title{font-family:var(--font-display);font-size:clamp(44px,7vw,96px);font-weight:400;line-height:1;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:24px}
+.case-focus{font-family:var(--font-body);font-size:16px;font-weight:400;line-height:1.6;color:var(--gray-3);max-width:640px;margin-bottom:48px}
+.case-meta{display:flex;flex-wrap:wrap;gap:48px;padding:20px 0;border-top:1px solid var(--gray-5);border-bottom:1px solid var(--gray-5)}
+.case-meta-item{display:flex;flex-direction:column;gap:6px}
+.case-meta-label{font-family:var(--font-display);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-4)}
+.case-meta-value{font-family:var(--font-display);font-size:14px;font-weight:500;letter-spacing:.02em;color:var(--black)}
+
+/* ═══════════════════════════════════
+   HERO IMAGE — Full bleed
+   ═══════════════════════════════════ */
+.case-hero-img{width:100%;aspect-ratio:16/9;overflow:hidden;background:var(--gray-6);margin-top:64px}
+.case-hero-img img{width:100%;height:100%;object-fit:cover}
+
+/* ═══════════════════════════════════
+   ASYMMETRIC SECTION — Fylla style
+   Icon + text left, image right (and reversed)
+   ═══════════════════════════════════ */
+.asym-section{padding:120px 0;border-top:1px solid var(--gray-5)}
+.asym-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:start}
+.asym-grid.reverse{grid-template-columns:1.4fr 1fr}
+.asym-grid.reverse .asym-text{order:2}
+.asym-grid.reverse .asym-visual{order:1}
+
+.asym-text{}
+.asym-icon{width:48px;height:48px;margin-bottom:24px}
+.asym-icon svg{width:48px;height:48px;fill:none;stroke:var(--black);stroke-width:1}
+.asym-label{font-family:var(--font-display);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-4);margin-bottom:12px}
+.asym-heading{font-family:var(--font-display);font-size:clamp(22px,2.5vw,32px);font-weight:500;line-height:1.2;margin-bottom:20px}
+.asym-body{font-family:var(--font-body);font-size:15px;font-weight:400;color:var(--gray-3);line-height:1.7}
+.asym-body strong{color:var(--black);font-weight:500}
+.asym-body p{margin-bottom:20px}
+.asym-body p:last-child{margin-bottom:0}
+
+.asym-visual{width:100%;overflow:hidden;border-radius:4px;background:var(--gray-6);padding-top:0;margin-top:98px}
+.asym-visual img{width:100%;height:auto;display:block}
+
+/* ═══════════════════════════════════
+   NARRATIVE STRIP — Challenge / Solution / Result
+   Fylla-style vertical with icons
+   ═══════════════════════════════════ */
+.narrative-section{padding:120px 0;border-top:1px solid var(--gray-5)}
+.narrative-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:80px;align-items:start}
+.narrative-items{display:flex;flex-direction:column;gap:48px}
+.narrative-item{}
+.narrative-item-icon{width:40px;height:40px;margin-bottom:16px}
+.narrative-item-icon svg{width:40px;height:40px;fill:none;stroke:var(--black);stroke-width:1}
+.narrative-item-title{font-family:var(--font-display);font-size:16px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:10px}
+.narrative-item-desc{font-family:var(--font-body);font-size:14px;font-weight:400;color:var(--gray-3);line-height:1.6}
+.narrative-image{width:100%;overflow:hidden;border-radius:4px;background:var(--gray-6);align-self:start}
+.narrative-image img{width:100%;height:auto;display:block}
+
+/* ═══════════════════════════════════
+   FULL IMAGE SECTIONS
+   ═══════════════════════════════════ */
+.full-image-section{padding:0}
+.full-image{width:100%;overflow:hidden;background:var(--gray-6)}
+.full-image img{width:100%;height:auto;display:block}
+
+.case-bleed{margin:0;overflow:hidden;border-radius:0}
+.case-bleed img{width:100%;height:auto;display:block}
+
+/* ═══════════════════════════════════
+   DELIVERABLES GRID
+   ═══════════════════════════════════ */
+.deliverables-section{padding:120px 0;border-top:1px solid var(--gray-5)}
+.deliverables-header{margin-bottom:64px}
+.deliverables-title{font-family:var(--font-display);font-size:clamp(32px,4vw,56px);font-weight:400;line-height:1.1;letter-spacing:-.01em;text-transform:uppercase}
+.deliverables-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.deliverable-card{padding:40px 36px;border-top:1px solid var(--gray-5);border-right:1px solid var(--gray-5);transition:background .3s}
+.deliverable-card:nth-child(2n){border-right:none}
+.deliverable-card:hover{background:var(--gray-6)}
+.deliverable-icon{width:36px;height:36px;margin-bottom:20px}
+.deliverable-icon svg{width:36px;height:36px;fill:none;stroke:var(--black);stroke-width:1}
+.deliverable-name{font-family:var(--font-display);font-size:18px;font-weight:500;margin-bottom:12px;line-height:1.2}
+.deliverable-desc{font-family:var(--font-body);font-size:13px;font-weight:400;color:var(--gray-3);line-height:1.6}
+
+/* ═══════════════════════════════════
+   IMPACT — Two column statement
+   ═══════════════════════════════════ */
+.impact-section{padding:120px 0;border-top:1px solid var(--gray-5)}
+.impact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.impact-quote{font-family:var(--font-display);font-size:clamp(22px,2.8vw,34px);font-weight:400;line-height:1.3;color:var(--gray-2)}
+.impact-quote strong{color:var(--black);font-weight:500}
+.impact-body{font-family:var(--font-body);font-size:15px;font-weight:400;color:var(--gray-3);line-height:1.7}
+.impact-body p{margin-bottom:20px}
+.impact-body p:last-child{margin-bottom:0}
+.impact-body strong{color:var(--black);font-weight:500}
+
+/* ═══════════════════════════════════
+   PLACEHOLDER (for images not yet inserted)
+   ═══════════════════════════════════ */
+.img-placeholder{width:100%;aspect-ratio:16/9;background:var(--gray-6);display:flex;align-items:center;justify-content:center;font-family:var(--font-body);font-size:13px;color:var(--gray-4);letter-spacing:.02em;border-radius:4px}
+
+/* ═══════════════════════════════════
+   MORE WORK / CTA / FOOTER (identical)
+   ═══════════════════════════════════ */
+.more-work{padding:160px 0;border-top:1px solid var(--gray-5)}.more-work-title{font-family:var(--font-display);font-size:clamp(44px,7vw,96px);font-weight:400;line-height:1;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:64px}.more-work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}.more-work-card{display:block;transition:opacity .3s}.more-work-card:hover{opacity:.8}.more-work-card-img{width:100%;aspect-ratio:3/2;overflow:hidden;background:var(--gray-6);border-radius:4px;margin-bottom:20px}.more-work-card-img img{width:100%;height:100%;object-fit:cover}.more-work-card-tag{display:inline-block;font-family:var(--font-display);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-3);padding:4px 12px;border:1px solid var(--gray-5);border-radius:999px;margin-bottom:12px}.more-work-card-name{font-family:var(--font-display);font-size:20px;font-weight:500;line-height:1.2}
+.cta-section{background:var(--black);color:var(--white);padding:160px 0;text-align:center}.cta-title{font-family:var(--font-display);font-size:clamp(44px,9vw,140px);font-weight:400;line-height:.95;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:24px}.cta-title a{color:var(--white);transition:color .3s}.cta-title a:hover{color:var(--accent)}.cta-subtitle{font-family:var(--font-body);font-size:15px;font-weight:400;color:rgba(255,255,255,.4);text-transform:uppercase;margin-bottom:48px}.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 30px;font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--black);background:var(--white);border-radius:999px;transition:opacity .3s}.cta-btn:hover{opacity:.85}
+footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top:1px solid rgba(255,255,255,.08)}.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px}.footer-logo{font-family:var(--font-display);font-size:15px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:20px}.footer-social{display:flex;flex-direction:column;gap:10px}.footer-social a{font-family:var(--font-body);font-size:13px;color:rgba(255,255,255,.4);transition:color .3s}.footer-social a:hover{color:var(--white)}.footer-col-title{font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:20px}.footer-col-links{display:flex;flex-direction:column;gap:10px}.footer-col-links a{font-family:var(--font-body);font-size:13px;color:rgba(255,255,255,.4);transition:color .3s}.footer-col-links a:hover{color:var(--white)}.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:32px;border-top:1px solid rgba(255,255,255,.08)}.footer-copy{font-family:var(--font-body);font-size:12px;color:rgba(255,255,255,.25)}
+
+/* ═══════════════════════════════════
+   ANIMATIONS (identical)
+   ═══════════════════════════════════ */
+.rv{opacity:1;transform:none}
+.js .rv{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.25,.46,.45,.94),transform .7s cubic-bezier(.25,.46,.45,.94)}
+.js .rv.v{opacity:1;transform:translateY(0)}.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* ═══════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════ */
+@media(max-width:1024px){
+  .asym-grid,.asym-grid.reverse{grid-template-columns:1fr;gap:40px}
+  .asym-grid .asym-visual{margin-top:0}
+  .asym-grid.reverse .asym-text{order:1}
+  .asym-grid.reverse .asym-visual{order:2}
+  .narrative-grid{grid-template-columns:1fr;gap:48px}
+  .deliverables-grid{grid-template-columns:1fr 1fr}
+  .impact-grid{grid-template-columns:1fr;gap:48px}
+  .more-work-grid{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  :root{--px:24px}
+  .nav-name{font-size:12px;padding:7px 16px}
+  .case-header{padding-top:100px}
+  .case-meta{gap:24px}
+  .case-meta-item{min-width:calc(50% - 12px)}
+  .asym-section,.narrative-section,.deliverables-section,.impact-section{padding:80px 0}
+  .deliverables-grid{grid-template-columns:1fr}
+  .deliverable-card{border-right:none}
+  .more-work-grid{grid-template-columns:1fr}
+  .more-work,.cta-section{padding:96px 0}
+  .footer-grid{grid-template-columns:1fr;gap:32px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<a href="index.html" class="nav-name">Adriana Pommot</a>
+<div class="nav-float" id="navFloat">
+  <button class="nav-toggle" onclick="document.getElementById('navFloat').classList.toggle('open')" aria-label="Menu">
+    <svg class="icon-menu" viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    <svg class="icon-x" viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+  </button>
+  <div class="nav-menu">
+    <a href="cv-adriana-pommot.pdf" download class="nav-cta">
+      Download CV
+      <svg viewBox="0 0 16 16"><path d="M8 3v8M4 8l4 4 4-4"/><path d="M3 13h10"/></svg>
+    </a>
+    <a href="index.html#work" class="nav-link">Projetos</a>
+    <a href="index.html#services" class="nav-link">Serviços</a>
+    <a href="index.html#about" class="nav-link">Sobre Mim</a>
+    <a href="#contact" class="nav-link">Contato</a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     HEADER — Title + Meta (Fylla layout)
+     ═══════════════════════════════════ -->
+<section class="case-header"><div class="container">
+  <a href="index.html#work" class="case-back rv"><svg viewBox="0 0 16 16"><path d="M13 8H3M7 4l-4 4 4 4"/></svg> Todos os Projetos</a>
+  <h1 class="case-title rv d1">Dasa.ai · Identidade<br>Visual & Interface Clínica</h1>
+  <p class="case-focus rv d2">Construção da identidade visual de produto, design de interfaces médicas e branding aplicado ao ecossistema digital interno da Dasa.</p>
+  <div class="case-meta rv d3">
+    <div class="case-meta-item"><span class="case-meta-label">Função</span><span class="case-meta-value">Product Designer Sênior</span></div>
+    <div class="case-meta-item"><span class="case-meta-label">Empresa</span><span class="case-meta-value">Dasa</span></div>
+    <div class="case-meta-item"><span class="case-meta-label">Período</span><span class="case-meta-value">2020</span></div>
+    <div class="case-meta-item"><span class="case-meta-label">Foco</span><span class="case-meta-value">UI Design, Identidade Visual, Branding de Interface</span></div>
+  </div>
+  <div class="case-hero-img rv d4">
+    <img src="https://framerusercontent.com/images/m3xaefjWYKUFkgzSIcs7ueySXY.png" alt="Dasa.ai Welcome to Dasa.ai">
+  </div>
+</div></section>
+
+<!-- ═══════════════════════════════════
+     NARRATIVE — Challenge / Solution / Result
+     Left: icon+text stack, Right: image
+     ═══════════════════════════════════ -->
+<div class="container"><div class="narrative-section">
+  <div class="narrative-grid rv">
+    <div class="narrative-items">
+
+      <div class="narrative-item">
+        <div class="narrative-item-icon">
+          <!-- Icon: Complexity / Layers -->
+          <svg viewBox="0 0 40 40">
+            <rect x="4" y="4" width="32" height="32" rx="2"/>
+            <line x1="4" y1="16" x2="36" y2="16"/>
+            <line x1="4" y1="28" x2="36" y2="28"/>
+            <line x1="16" y1="4" x2="16" y2="16"/>
+            <line x1="24" y1="16" x2="24" y2="28"/>
+          </svg>
+        </div>
+        <div class="narrative-item-title">Desafio</div>
+        <div class="narrative-item-desc">Os produtos clínicos internos não tinham linguagem visual coesa. Interfaces densas, vocabulário médico complexo e nenhuma identidade de marca. Cada tela parecia pertencer a um produto diferente.</div>
+      </div>
+
+      <div class="narrative-item">
+        <div class="narrative-item-icon">
+          <!-- Icon: Precision / Crosshair -->
+          <svg viewBox="0 0 40 40">
+            <circle cx="20" cy="20" r="14"/>
+            <circle cx="20" cy="20" r="6"/>
+            <line x1="20" y1="2" x2="20" y2="10"/>
+            <line x1="20" y1="30" x2="20" y2="38"/>
+            <line x1="2" y1="20" x2="10" y2="20"/>
+            <line x1="30" y1="20" x2="38" y2="20"/>
+          </svg>
+        </div>
+        <div class="narrative-item-title">Solução</div>
+        <div class="narrative-item-desc">Redesenho completo das interfaces com uma identidade visual pensada para produto. Prototipação em alta fidelidade, construção de um sistema de ícones e tradução da nova marca Dasa para o digital.</div>
+      </div>
+
+      <div class="narrative-item">
+        <div class="narrative-item-icon">
+          <!-- Icon: Impact / Radiate -->
+          <svg viewBox="0 0 40 40">
+            <circle cx="20" cy="20" r="8"/>
+            <line x1="20" y1="4" x2="20" y2="8"/>
+            <line x1="20" y1="32" x2="20" y2="36"/>
+            <line x1="4" y1="20" x2="8" y2="20"/>
+            <line x1="32" y1="20" x2="36" y2="20"/>
+            <line x1="8.7" y1="8.7" x2="11.5" y2="11.5"/>
+            <line x1="28.5" y1="28.5" x2="31.3" y2="31.3"/>
+            <line x1="8.7" y1="31.3" x2="11.5" y2="28.5"/>
+            <line x1="28.5" y1="11.5" x2="31.3" y2="8.7"/>
+          </svg>
+        </div>
+        <div class="narrative-item-title">Resultado</div>
+        <div class="narrative-item-desc">Interfaces que refletem o raciocínio médico com precisão, identidade visual consistente entre produtos e uma fundação iconográfica que se tornou referência interna.</div>
+      </div>
+
+    </div>
+    <div class="narrative-image">
+      <!-- Imagem: telas do produto, mockup principal -->
+      <div class="img-placeholder" style="aspect-ratio:4/3">Inserir: mockup de telas Dasa.ai, Laudo Estruturado ou produto principal</div>
+    </div>
+  </div>
+</div></div>
+
+<!-- ═══════════════════════════════════
+     ASYM SECTION — Contexto
+     Text left + Image right
+     ═══════════════════════════════════ -->
+<div class="container"><div class="asym-section">
+  <div class="asym-grid rv">
+    <div class="asym-text">
+      <div class="asym-icon">
+        <!-- Icon: Eye / Vision -->
+        <svg viewBox="0 0 48 48">
+          <path d="M4 24c0 0 8-14 20-14s20 14 20 14-8 14-20 14S4 24 4 24z"/>
+          <circle cx="24" cy="24" r="7"/>
+          <circle cx="24" cy="24" r="2.5"/>
+        </svg>
+      </div>
+      <div class="asym-label">Contexto</div>
+      <h2 class="asym-heading">Traduzir complexidade clínica em interfaces que médicos confiam</h2>
+      <div class="asym-body">
+        <p>A Dasa passava por uma <strong>transformação visual e tecnológica</strong>. Dentro da squad de inovação, fui responsável pelo design de ferramentas clínicas internas voltadas ao uso direto por médicos, como o Laudo Estruturado.</p>
+        <p>Eram produtos de <strong>alta complexidade</strong>. Fluxos densos, vocabulário técnico, decisões clínicas com impacto real. O desafio ia além da funcionalidade: esses produtos precisavam de uma identidade visual que simplesmente não existia.</p>
+      </div>
+    </div>
+    <div class="asym-visual">
+      <!-- Imagem: contexto / telas antes ou overview -->
+      <div class="img-placeholder">Inserir: visão geral das telas ou contexto visual do produto</div>
+    </div>
+  </div>
+</div></div>
+
+<!-- ═══════════════════════════════════
+     ASYM SECTION (REVERSED) — Atuação
+     Image left + Text right
+     ═══════════════════════════════════ -->
+<div class="container"><div class="asym-section">
+  <div class="asym-grid reverse rv">
+    <div class="asym-text">
+      <div class="asym-icon">
+        <!-- Icon: Hand / Craft -->
+        <svg viewBox="0 0 48 48">
+          <path d="M14 36V22l-4-4a4 4 0 010-5.66l.83-.83A4 4 0 0116.5 14L18 16V8a3 3 0 016 0v8"/>
+          <path d="M24 14a3 3 0 016 0v6"/>
+          <path d="M30 18a3 3 0 016 0v10c0 6.63-5.37 12-12 12h-2c-6.63 0-12-5.37-12-12"/>
+        </svg>
+      </div>
+      <div class="asym-label">Atuação</div>
+      <h2 class="asym-heading">Interface, prototipação e construção de identidade visual para produto</h2>
+      <div class="asym-body">
+        <p>Atuei na <strong>criação de interfaces, prototipação de alta fidelidade e construção da linguagem visual</strong> dos produtos digitais. Desenhei fluxos completos, do wireframe ao protótipo interativo, garantindo que cada tela refletisse tanto a lógica clínica quanto a nova identidade da marca.</p>
+        <p>Participei da <strong>construção da identidade visual digital</strong>: criação de ícones, definição de paletas aplicadas ao produto e contribuição direta para o branding das interfaces. Cada decisão de cor, tipografia e espaçamento precisava funcionar dentro de um contexto clínico real.</p>
+      </div>
+    </div>
+    <div class="asym-visual">
+      <!-- Imagem: detalhe de craft / componentes / protótipos -->
+      <div class="img-placeholder">Inserir: detalhe de protótipos, componentes ou telas em alta fidelidade</div>
+    </div>
+  </div>
+</div></div>
+
+<!-- ═══════════════════════════════════
+     FULL BLEED IMAGE
+     ═══════════════════════════════════ -->
+<div class="container rv">
+  <div class="full-image" style="margin:80px 0;border-radius:4px;overflow:hidden">
+    <!-- Imagem: bleed grande — mockups multi-dispositivo do portfolio atual -->
+    <div class="img-placeholder" style="aspect-ratio:21/9">Inserir: mockups finais multi-dispositivo, composição do portfolio atual</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     ENTREGAS — Grid with icons
+     ═══════════════════════════════════ -->
+<div class="container"><div class="deliverables-section">
+  <div class="deliverables-header rv">
+    <h2 class="deliverables-title">O Que<br>Entreguei</h2>
+  </div>
+  <div class="deliverables-grid">
+
+    <div class="deliverable-card rv">
+      <div class="deliverable-icon">
+        <!-- Icon: Layout / Screen -->
+        <svg viewBox="0 0 36 36">
+          <rect x="2" y="4" width="32" height="22" rx="2"/>
+          <line x1="12" y1="26" x2="12" y2="32"/>
+          <line x1="24" y1="26" x2="24" y2="32"/>
+          <line x1="8" y1="32" x2="28" y2="32"/>
+          <line x1="2" y1="12" x2="34" y2="12"/>
+          <line x1="14" y1="12" x2="14" y2="26"/>
+        </svg>
+      </div>
+      <div class="deliverable-name">Laudo Estruturado</div>
+      <div class="deliverable-desc">Design completo do produto, desde os fluxos até os componentes de interface. Foco em clareza clínica e usabilidade para o dia a dia dos médicos.</div>
+    </div>
+
+    <div class="deliverable-card rv d1">
+      <div class="deliverable-icon">
+        <!-- Icon: Grid / Icons -->
+        <svg viewBox="0 0 36 36">
+          <rect x="3" y="3" width="12" height="12" rx="2"/>
+          <rect x="21" y="3" width="12" height="12" rx="2"/>
+          <rect x="3" y="21" width="12" height="12" rx="2"/>
+          <rect x="21" y="21" width="12" height="12" rx="2"/>
+        </svg>
+      </div>
+      <div class="deliverable-name">Sistema de Ícones</div>
+      <div class="deliverable-desc">Iconografia customizada para os produtos internos, consistente com a nova identidade e pensada para contexto de uso clínico.</div>
+    </div>
+
+    <div class="deliverable-card rv d2">
+      <div class="deliverable-icon">
+        <!-- Icon: Palette / Color -->
+        <svg viewBox="0 0 36 36">
+          <circle cx="18" cy="18" r="15"/>
+          <circle cx="18" cy="10" r="3"/>
+          <circle cx="11" cy="22" r="3"/>
+          <circle cx="25" cy="22" r="3"/>
+        </svg>
+      </div>
+      <div class="deliverable-name">Identidade em Produto</div>
+      <div class="deliverable-desc">Tradução da nova paleta, tipografia e linguagem visual da Dasa para os produtos digitais internos. A marca existia no institucional, mas não nos produtos.</div>
+    </div>
+
+    <div class="deliverable-card rv d3">
+      <div class="deliverable-icon">
+        <!-- Icon: Prototype / Layers -->
+        <svg viewBox="0 0 36 36">
+          <polygon points="18,3 33,12 33,24 18,33 3,24 3,12"/>
+          <line x1="18" y1="3" x2="18" y2="33"/>
+          <line x1="3" y1="12" x2="33" y2="12"/>
+          <line x1="3" y1="24" x2="33" y2="24"/>
+        </svg>
+      </div>
+      <div class="deliverable-name">Protótipos & Handoff</div>
+      <div class="deliverable-desc">Protótipos interativos de alta fidelidade para validação médica e especificações detalhadas de UI para desenvolvimento.</div>
+    </div>
+
+  </div>
+</div></div>
+
+<!-- ═══════════════════════════════════
+     IMPACTO — Editorial two-column
+     ═══════════════════════════════════ -->
+<div class="container"><div class="impact-section">
+  <div class="impact-grid rv">
+    <div class="impact-quote">
+      <strong>Craft visual não é decoração.</strong> Em ambientes onde erro não é opção, é a principal ferramenta de comunicação.
+    </div>
+    <div class="impact-body">
+      <p>O redesign do Laudo Estruturado trouxe uma interface que <strong>reflete o raciocínio médico com mais precisão</strong>. Isso reduziu retrabalho e aumentou a adesão dos profissionais de saúde no uso da ferramenta.</p>
+      <p>A aplicação consistente da nova identidade visual <strong>fortaleceu a presença da marca</strong> nos produtos digitais, criando coesão onde antes havia fragmentação. O sistema de ícones que criei se tornou referência para outros produtos internos.</p>
+      <p>Esse projeto me mostrou o valor de saber operar em <strong>ambientes de alta complexidade técnica</strong>, onde cada decisão de interface tem consequência real no fluxo de trabalho de quem usa.</p>
+    </div>
+  </div>
+</div></div>
+
+<!-- MORE WORK -->
+<section class="more-work"><div class="container">
+<h2 class="more-work-title rv">Mais Projetos</h2>
+<div class="more-work-grid">
+<a href="case-mrv.html" class="more-work-card rv"><div class="more-work-card-img"><img src="https://framerusercontent.com/images/tJmuIg4YsOc9pGcsP4sUgCj5gw.jpg" alt="MRV"></div><div class="more-work-card-tag">product design</div><div class="more-work-card-name">MRV</div></a>
+<a href="case-delta.html" class="more-work-card rv d1"><div class="more-work-card-img"><img src="https://framerusercontent.com/images/ibHIROqyHkxvVtTioI5nYgGNqSQ.png" alt="Delta DS"></div><div class="more-work-card-tag">design system</div><div class="more-work-card-name">Delta Design System</div></a>
+<a href="case-ford.html" class="more-work-card rv d2"><div class="more-work-card-img" style="background:#1A1A19"><img src="https://framerusercontent.com/images/oNnTXiDeqJw2jQH79SzKRViGlw.png" alt="Ford" style="object-fit:contain;padding:16px"></div><div class="more-work-card-tag">immersion room</div><div class="more-work-card-name">Ford B460 / KX738</div></a>
+</div>
+</div></section>
+
+<section class="cta-section" id="contact"><div class="container">
+<h2 class="cta-title rv"><a href="/cdn-cgi/l/email-protection#046560766d656a65746b69696b70446369656d682a676b69">Vamos<br>Conversar?</a></h2>
+<p class="cta-subtitle rv d1">Product Design & Inteligência Visual</p>
+<a href="/cdn-cgi/l/email-protection#6e0f0a1c070f000f1e010303011a2e09030f0702400d0103" class="cta-btn rv d2">Entrar em Contato →</a>
+</div></section>
+
+<footer><div class="container">
+<div class="footer-grid">
+<div><div class="footer-logo">Adriana Pommot</div><div class="footer-social"><a href="https://linkedin.com/in/adriana-pommot" target="_blank">LinkedIn</a><a href="https://instagram.com/ultraviolenta.ink" target="_blank">Instagram</a><a href="/cdn-cgi/l/email-protection#2041445249414e41504f4d4d4f5460474d41494c0e434f4d">Email</a></div></div>
+<div><div class="footer-col-title">Páginas</div><div class="footer-col-links"><a href="index.html#work">Projetos</a><a href="index.html#services">Serviços</a><a href="index.html#about">Sobre Mim</a><a href="#contact">Contato</a></div></div>
+<div><div class="footer-col-title">Projetos</div><div class="footer-col-links"><a href="case-mrv.html">MRV</a><a href="case-delta.html">Delta DS</a><a href="case-dasa.html">Dasa.ai</a><a href="case-ford.html">Ford</a></div></div>
+<div><div class="footer-col-title">Contato</div><div class="footer-col-links"><a href="/cdn-cgi/l/email-protection#90f1f4e2f9f1fef1e0fffdfdffe4d0f7fdf1f9fcbef3fffd"><span class="__cf_email__" data-cfemail="91f0f5e3f8f0fff0e1fefcfcfee5d1f6fcf0f8fdbff2fefc">[email&#160;protected]</span></a><a href="#">São Paulo, BR</a></div></div>
+</div>
+<div class="footer-bottom"><span class="footer-copy">© 2026 Adriana Pommot</span><span class="footer-copy">Product Design & Inteligência Visual</span></div>
+</div></footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+document.documentElement.classList.add('js');
+
+document.querySelectorAll('.nav-menu a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.getElementById('navFloat').classList.remove('open');
+  });
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('v'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.rv').forEach(el => observer.observe(el));
+</script>
