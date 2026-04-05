@@ -9,16 +9,20 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-/* ═══ TOKENS ═══ */
 :root{--black:#111111;--white:#ffffff;--gray-1:#37342F;--gray-2:#585550;--gray-3:#8A857D;--gray-4:#B8B2A8;--gray-5:#EBE7E1;--gray-6:#F5F1EB;--accent:#D1F466;--font-display:'General Sans',sans-serif;--font-body:'Roboto Mono',monospace;--max-w:1440px;--px:40px}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:var(--font-body);color:var(--black);background:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden}::selection{background:var(--accent);color:var(--black)}img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);color:var(--black);background:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--accent);color:var(--black)}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
 .container{max-width:var(--max-w);margin:0 auto;padding:0 var(--px)}
 
-/* ═══ NAV ═══ */
+/* NAV */
 .nav-name{position:fixed;top:20px;left:max(calc(var(--px) - 20px),calc((100vw - var(--max-w))/2 + var(--px) - 20px));z-index:100;font-family:var(--font-display);font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--black);background:rgba(255,255,255,0.55);backdrop-filter:blur(12px) saturate(1.3);-webkit-backdrop-filter:blur(12px) saturate(1.3);padding:8px 20px;border-radius:999px}
 .nav-float{position:fixed;top:20px;right:max(var(--px),calc((100vw - var(--max-w))/2 + var(--px)));z-index:100;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
 .nav-toggle{width:54px;height:54px;border-radius:12px;border:none;cursor:pointer;background:rgba(255,255,255,0.72);backdrop-filter:blur(12px) saturate(1.3);-webkit-backdrop-filter:blur(12px) saturate(1.3);display:flex;align-items:center;justify-content:center;transition:background .3s;position:relative;box-shadow:0 1px 3px rgba(0,0,0,.08)}
-.nav-toggle::before{display:none}.nav-toggle::after{display:none}
+.nav-toggle::before,.nav-toggle::after{display:none}
 .nav-toggle:hover{background:rgba(255,255,255,.95)}
 .nav-toggle svg{width:22px;height:22px;stroke:var(--black);stroke-width:1.8;stroke-linecap:round;fill:none}
 .nav-toggle .icon-x{display:none}
@@ -28,7 +32,7 @@
 .nav-float.open .nav-toggle svg{stroke:var(--white)}
 .nav-menu{display:flex;flex-direction:column;align-items:flex-end;gap:6px;opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .3s,transform .3s}
 .nav-float.open .nav-menu{opacity:1;transform:translateY(0);pointer-events:auto}
-.nav-menu a{font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;padding:8px 20px;border-radius:999px;white-space:nowrap;transition:color .25s,box-shadow .25s,background .25s}
+.nav-menu a{font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;padding:8px 20px;border-radius:999px;white-space:nowrap;transition:color .25s,background .25s}
 .nav-menu .nav-cta{color:var(--white);background:var(--black);display:inline-flex;align-items:center;gap:8px}
 .nav-menu .nav-cta:hover{color:var(--accent)}
 .nav-menu .nav-cta svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -37,183 +41,166 @@
 .nav-menu .nav-link:hover{color:var(--black)}
 .nav-menu .nav-link:hover::after{transform:scaleX(1)}
 
-/* ═══ HEADER ═══ */
+/* CASE HEADER */
 .case-header{padding-top:120px}
 .case-back{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--black);margin-bottom:48px;transition:opacity .3s}
 .case-back:hover{opacity:.5}
 .case-back svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.case-title{font-family:var(--font-display);font-size:clamp(44px,7vw,96px);font-weight:400;line-height:1;letter-spacing:-.02em;text-transform:uppercase;margin-bottom:24px}
-.case-focus{font-family:var(--font-body);font-size:15px;font-weight:400;line-height:1.7;color:var(--gray-3);max-width:600px;margin-bottom:48px}
+.case-title{font-family:var(--font-display);font-size:clamp(44px,7vw,96px);font-weight:400;line-height:1;letter-spacing:-.02em;text-transform:uppercase;margin-bottom:24px;margin-left:-.04em}
+.case-focus{font-family:var(--font-display);font-size:15px;font-weight:400;line-height:1.7;color:var(--gray-3);max-width:668px;margin-bottom:48px;letter-spacing:.02em}
 .case-focus strong{color:var(--black);font-weight:500}
-.case-meta{display:flex;flex-wrap:wrap;gap:48px;padding:20px 0;border-top:1px solid var(--gray-5);border-bottom:1px solid var(--gray-5)}
-.case-meta-item{display:flex;flex-direction:column;gap:6px}
-.case-meta-label{font-family:var(--font-display);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-4)}
-.case-meta-value{font-family:var(--font-display);font-size:14px;font-weight:500;letter-spacing:.02em;color:var(--black)}
+.case-meta{display:flex;flex-wrap:wrap;gap:32px;padding:20px 0;border-top:1px solid var(--gray-5);border-bottom:1px solid var(--gray-5)}
+.case-meta-item{display:flex;flex-direction:column;gap:8px}
+.case-meta-label{font-family:var(--font-display);font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-4)}
+.case-meta-value{font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.06em;color:var(--gray-1)}
 .case-hero-img{width:100%;aspect-ratio:16/9;overflow:hidden;background:var(--gray-6);margin-top:64px}
 .case-hero-img img{width:100%;height:100%;object-fit:cover}
 
-/* ═══ EDITORIAL ═══ */
-.case-statement{padding:100px 0 80px;border-top:1px solid var(--gray-5)}
-.case-statement-text{font-family:var(--font-display);font-size:clamp(26px,4vw,52px);font-weight:400;line-height:1.12;letter-spacing:-.02em;text-transform:uppercase;max-width:640px;color:var(--gray-4)}
-.case-statement-text strong{color:var(--black);font-weight:400}
-.case-statement-text .faded{color:var(--gray-5)}
-.case-pull{padding:80px 0;border-top:1px solid var(--gray-5)}
-.case-pull-text{font-family:var(--font-display);font-size:clamp(20px,2.8vw,36px);font-weight:400;line-height:1.18;letter-spacing:-.01em;max-width:800px}
-.case-pull-text strong{font-weight:400}
-.case-pull-text .faded{color:var(--gray-4)}
-.case-pull-caption{display:inline-block;background:var(--accent);color:var(--black);font-family:var(--font-body);font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.1em;margin-top:32px;padding:1px 8px 2px}
-.case-offset{padding:80px 0;border-top:1px solid var(--gray-5)}
-.case-offset-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
-.case-offset-label{font-family:var(--font-display);font-size:20px;font-weight:500;line-height:1.2}
-.case-offset-num{font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--black);background:var(--accent);display:inline-block;padding:1px 5px 2px;margin-bottom:14px}
-.case-offset-body p{font-family:var(--font-body);font-size:15px;font-weight:400;color:var(--gray-3);line-height:1.7;margin-bottom:24px}
-.case-offset-body p:last-child{margin-bottom:0}
-.case-offset-body p strong{color:var(--black);font-weight:500}
+/* EDITORIAL SECTION — single column, text below title */
+.ed{padding:80px 0;border-top:1px solid var(--gray-5)}
+.ed-grid{display:flex;flex-direction:column;gap:20px;max-width:668px}
+.ed-num{font-family:var(--font-body);font-size:14px;font-weight:400;line-height:1.75;color:var(--gray-4);margin-bottom:4px}
+.ed-title{font-family:var(--font-display);font-size:18px;font-weight:500;line-height:1.5;letter-spacing:.04em;text-transform:uppercase;color:var(--gray-1);display:inline;padding:2px 6px;background-color:#EEFEBC;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.ed-body{font-family:var(--font-display);font-size:15px;font-weight:400;color:var(--gray-3);line-height:1.7;letter-spacing:.02em}
+.ed-body strong{color:var(--black);font-weight:500}
+.ed-body + .ed-body{margin-top:16px}
+.ed-subtitle{font-family:var(--font-display);font-size:14px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--gray-1);margin-top:40px;margin-bottom:20px}
 
-/* ═══ METRIC CARDS (context) ═══ */
-.case-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--gray-5);margin-top:40px}
-.case-metric{background:var(--white);padding:28px 24px 32px}
-.case-metric-icon{width:32px;height:32px;margin-bottom:16px;display:block}
-.case-metric-num{font-family:var(--font-display);font-size:28px;font-weight:400;letter-spacing:-.02em;color:var(--black);line-height:1;margin-bottom:8px}
-.case-metric-label{font-family:var(--font-body);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-4);margin-bottom:4px}
-.case-metric-desc{font-family:var(--font-body);font-size:12px;color:var(--gray-3);line-height:1.55}
+/* CONTEXT METRICS — horizontal cards with icons */
+.ctx-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.ctx-metric{border:1px solid var(--gray-5);border-radius:8px;padding:20px}
+.ctx-metric-icon{width:32px;height:32px;margin-bottom:12px;color:var(--gray-4)}
+.ctx-metric-icon svg{width:100%;height:100%;stroke:currentColor;stroke-width:1.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ctx-metric-num{font-family:var(--font-display);font-size:28px;font-weight:400;letter-spacing:-.02em;line-height:1;margin-bottom:6px}
+.ctx-metric-label{font-family:var(--font-display);font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--gray-4);margin-bottom:4px}
+.ctx-metric-desc{font-family:var(--font-display);font-size:12px;color:var(--gray-3);line-height:1.5}
 
-/* ═══ PROBLEM CARDS ═══ */
-.case-problems{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--gray-5);margin-top:48px}
-.case-problem{background:var(--white);padding:40px 32px 44px}
-.case-problem-icon{width:44px;height:44px;margin-bottom:20px;display:block}
-.case-problem-title{font-family:var(--font-display);font-size:16px;font-weight:600;text-transform:uppercase;letter-spacing:.02em;margin-bottom:10px}
-.case-problem-desc{font-family:var(--font-body);font-size:13px;color:var(--gray-3);line-height:1.65}
-.case-problem-stat{display:inline-flex;align-items:center;gap:6px;margin-top:16px;padding:4px 12px;background:var(--gray-6);border-radius:999px}
-.case-problem-stat-num{font-family:var(--font-display);font-size:14px;font-weight:600;color:var(--black)}
-.case-problem-stat-label{font-family:var(--font-body);font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-3)}
+/* CHALLENGE CARDS — horizontal strip */
+.challenges{margin-top:24px;display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.challenge{border:1px solid var(--gray-5);border-radius:8px;padding:20px}
+.challenge-icon{width:32px;height:32px;margin-bottom:12px;color:var(--gray-4)}
+.challenge-icon svg{width:100%;height:100%;stroke:currentColor;stroke-width:1.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.challenge-name{font-family:var(--font-display);font-size:13px;font-weight:500;line-height:1.4;letter-spacing:.02em;margin-bottom:6px;color:var(--black)}
+.challenge-desc{font-family:var(--font-display);font-size:11px;font-weight:400;color:var(--gray-3);line-height:1.55;letter-spacing:.01em}
 
-/* ═══ TIMELINE ═══ */
-.case-timeline{padding:80px 0;border-top:1px solid var(--gray-5)}
-.case-timeline-header{margin-bottom:56px}
-.case-timeline-heading{font-family:var(--font-display);font-size:clamp(18px,2vw,26px);font-weight:400;line-height:1.2;letter-spacing:-.01em;margin-top:16px;color:var(--black)}
-.case-timeline-track{display:flex;align-items:flex-start;position:relative;padding-top:24px}
-.case-timeline-line{position:absolute;top:44px;left:20px;right:20px;height:1px;background:var(--gray-5)}
-.case-timeline-line-fill{height:1px;background:var(--black);width:100%}
-.case-timeline-step{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;z-index:1}
-.case-timeline-dot{width:20px;height:20px;border-radius:50%;background:var(--white);border:1.5px solid var(--black);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
-.case-timeline-dot-inner{width:8px;height:8px;border-radius:50%;background:var(--accent)}
-.case-timeline-icon{width:32px;height:32px;margin-bottom:12px;display:block}
-.case-timeline-num{font-family:var(--font-body);font-size:10px;color:var(--gray-4);letter-spacing:.06em;margin-bottom:6px}
-.case-timeline-title{font-family:var(--font-display);font-size:13px;font-weight:500;line-height:1.3;margin-bottom:6px}
-.case-timeline-desc{font-family:var(--font-body);font-size:11px;color:var(--gray-3);line-height:1.5;max-width:160px;margin:0 auto}
+/* KEY RESULTS LIST */
+.kr-list{margin-top:20px}
+.kr-item{font-family:var(--font-display);font-size:14px;font-weight:400;color:var(--gray-3);line-height:1.6;padding:8px 0;padding-left:16px;position:relative}
+.kr-item::before{content:'';position:absolute;left:0;top:16px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
 
-/* ═══ STRATEGY PILLARS ═══ */
-.case-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;margin-top:48px}
-.case-pillar{background:var(--white);padding:32px 32px 40px 0}
-.case-pillar:first-child{padding-left:0}
-.case-pillar:last-child{padding-right:0}
-.case-pillar-icon{width:52px;height:52px;display:block;flex-shrink:0;margin-bottom:28px}
-.case-pillar-num{font-family:var(--font-body);font-size:12px;font-weight:500;color:var(--gray-3)}
-.case-pillar-title{font-family:var(--font-display);font-size:18px;font-weight:500;line-height:1.25;margin-bottom:12px}
-.case-pillar-desc{font-family:var(--font-body);font-size:13px;font-weight:400;color:var(--gray-3);line-height:1.6}
+/* PRIORITIES LIST */
+.prio-list{margin-top:20px}
+.prio-item{font-family:var(--font-display);font-size:14px;font-weight:400;color:var(--gray-3);line-height:1.6;padding:8px 0;padding-left:16px;position:relative}
+.prio-item::before{content:'';position:absolute;left:0;top:15px;width:8px;height:1.5px;background:var(--gray-4)}
 
-/* ═══ INSIGHT NUMBERS ═══ */
-.case-insight-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--gray-5)}
-.case-insight{background:var(--white);padding:24px 20px 28px}
-.case-insight-tag{font-family:var(--font-body);font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-4);margin-bottom:10px}
-.case-insight-num{font-family:var(--font-display);font-size:28px;font-weight:400;letter-spacing:-.02em;color:var(--black);line-height:1;margin-bottom:8px}
-.case-insight-desc{font-family:var(--font-body);font-size:12px;color:var(--gray-3);line-height:1.6}
+/* FULL-WIDTH IMAGE */
+.fw-img{margin:0;overflow:hidden;border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.06)}
+.fw-img img{width:100%;height:auto;display:block}
+.fw-img-caption{font-family:var(--font-body);font-size:12px;color:var(--gray-4);margin-top:12px;letter-spacing:.02em}
 
-/* ═══ JOURNEY STATES ═══ */
-.case-states-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--gray-5);margin:40px 0}
-.case-state-card{background:var(--white);padding:24px 20px 28px}
-.case-state-bar{height:2px;background:var(--gray-5);margin-bottom:18px}
-.case-state-fill{height:2px;background:var(--black)}
-.case-state-pct{font-family:var(--font-display);font-size:22px;font-weight:400;letter-spacing:-.02em;color:var(--black);line-height:1;margin-bottom:8px}
-.case-state-name{font-family:var(--font-display);font-size:13px;font-weight:500;line-height:1.3;margin-bottom:8px;color:var(--black)}
-.case-state-desc{font-family:var(--font-body);font-size:11px;color:var(--gray-3);line-height:1.65}
+/* DARK BLEED SECTION */
+.dark-bleed{background:var(--black);padding:80px 0;margin:0}
+.dark-bleed img{width:100%;height:auto;display:block;border-radius:8px}
 
-/* ═══ STAT HIGHLIGHT CARDS ═══ */
-.case-results{padding:100px 0;border-top:1px solid var(--gray-5)}
-.case-results-statement{font-family:var(--font-display);font-size:clamp(32px,5vw,64px);font-weight:400;line-height:1.08;letter-spacing:-.02em;text-transform:uppercase;margin-bottom:64px;max-width:800px}
-.case-results-statement .faded{color:var(--gray-4)}
-.case-stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--gray-5)}
-.case-stat{background:var(--black);padding:40px 28px 44px;display:flex;flex-direction:column}
-.case-stat-icon{width:28px;height:28px;margin-bottom:20px;display:block}
-.case-stat-num{font-family:var(--font-display);font-size:clamp(32px,3.5vw,52px);font-weight:400;letter-spacing:-.03em;color:var(--accent);line-height:1;margin-bottom:12px}
-.case-stat-label{font-family:var(--font-display);font-size:14px;font-weight:500;color:var(--white);margin-bottom:8px}
-.case-stat-desc{font-family:var(--font-body);font-size:12px;color:rgba(255,255,255,.45);line-height:1.55;margin-top:auto}
-.case-stat-category{display:inline-block;font-family:var(--font-body);font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08)}
+/* PHONE MOCKUP FRAMES */
+.phone-section{background:var(--black);padding:100px 0}
+.phone-section-title{font-family:var(--font-display);font-size:20px;font-weight:500;color:var(--white);margin-bottom:8px}
+.phone-section-desc{font-family:var(--font-display);font-size:15px;color:rgba(255,255,255,.45);line-height:1.7;max-width:560px;margin-bottom:64px}
+.phone-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;align-items:start}
+.phone-step{display:flex;flex-direction:column;align-items:center}
+.phone-arrow{display:none}
+.phone-frame{width:100%;background:#1A1A19;border-radius:16px;border:1.5px solid rgba(255,255,255,.08);overflow:hidden;position:relative;aspect-ratio:9/19.5;box-shadow:0 8px 32px rgba(0,0,0,.4),0 2px 8px rgba(0,0,0,.2)}
+.phone-frame::before{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:28%;height:4px;background:rgba(255,255,255,.06);border-radius:4px;z-index:2}
+.phone-frame img{width:100%;height:100%;object-fit:cover;object-position:top;position:relative;z-index:1;transition:object-position 3s ease-in-out}
+.phone-frame:hover img{object-position:bottom}
+.phone-step.is-hero .phone-frame{border-color:var(--accent);border-width:2px;box-shadow:0 8px 32px rgba(0,0,0,.4),0 0 24px rgba(209,244,102,.12)}
+.phone-step.is-hero .phone-frame::before{background:var(--accent);opacity:.25}
+.phone-caption{text-align:center;margin-top:20px;width:100%}
+.phone-step.is-hero .phone-caption{width:100%}
+.phone-pct{font-family:var(--font-display);font-size:20px;font-weight:500;color:var(--white);line-height:1;margin-bottom:6px}
+.phone-name{font-family:var(--font-display);font-size:12px;font-weight:500;color:rgba(255,255,255,.5);line-height:1.3;margin-bottom:4px}
+.phone-desc{font-family:var(--font-display);font-size:11px;color:rgba(255,255,255,.25);line-height:1.45}
 
-/* ═══ SHOWCASE: PHONE FLOW ═══ */
-.case-showcase{background:var(--black);padding:64px 0;margin:0}
-.case-showcase .container{max-width:var(--max-w);margin:0 auto;padding:0 var(--px)}
-.case-showcase-label{font-family:var(--font-body);font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);text-align:center;margin-bottom:40px}
-.case-flow{display:flex;align-items:flex-end;justify-content:center;gap:0}
-.case-flow-step{display:flex;flex-direction:column;align-items:center;flex:0 0 auto}
-.case-flow-arrow{font-family:var(--font-body);font-size:14px;color:var(--accent);opacity:.35;align-self:center;padding:0 clamp(4px,1vw,14px);margin-bottom:56px}
-.case-phone{width:clamp(80px,11vw,120px);background:#1A1A19;border-radius:clamp(10px,1.5vw,16px);border:1.5px solid rgba(255,255,255,.15);overflow:hidden;position:relative}
-.case-phone::before{content:'';position:absolute;top:clamp(4px,.6vw,6px);left:50%;transform:translateX(-50%);width:clamp(16px,2.2vw,24px);height:clamp(3px,.4vw,4px);background:rgba(255,255,255,.12);border-radius:4px;z-index:2}
-.case-phone img{width:100%;height:auto;display:block;position:relative;z-index:1}
-.case-flow-step.is-hero .case-phone{width:clamp(96px,13vw,140px);border-color:var(--accent);border-width:2px}
-.case-flow-step.is-hero .case-phone::before{background:var(--accent);opacity:.4}
-.case-flow-info{text-align:center;margin-top:16px;width:clamp(80px,11vw,120px)}
-.case-flow-step.is-hero .case-flow-info{width:clamp(96px,13vw,140px)}
-.case-flow-pct{font-family:var(--font-display);font-size:clamp(14px,1.8vw,20px);font-weight:500;color:var(--white);line-height:1;margin-bottom:4px}
-.case-flow-name{font-family:var(--font-body);font-size:clamp(8px,1vw,10px);color:rgba(255,255,255,.4);line-height:1.3;letter-spacing:.02em}
-.case-showcase-footer{font-family:var(--font-body);font-size:11px;color:rgba(255,255,255,.3);text-align:center;margin-top:40px;letter-spacing:.02em}
+/* BROWSER MOCKUP FRAMES */
+.browser-frame{border:1px solid var(--gray-5);border-radius:12px;overflow:hidden;background:var(--white);box-shadow:0 4px 24px rgba(0,0,0,.06),0 1px 4px rgba(0,0,0,.04)}
+.browser-bar{background:var(--gray-6);padding:12px 16px;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--gray-5)}
+.browser-dot{width:8px;height:8px;border-radius:50%}
+.browser-dot:nth-child(1){background:#FF5F57}
+.browser-dot:nth-child(2){background:#FEBC2E}
+.browser-dot:nth-child(3){background:#28C840}
+.browser-frame img{width:100%;display:block}
+.browser-pair{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:40px 0}
+.browser-caption{font-family:var(--font-body);font-size:12px;color:var(--gray-4);margin-top:12px;letter-spacing:.02em}
 
-@media(max-width:1024px){
-  .case-flow{flex-wrap:wrap;gap:24px 0;justify-content:center}
-  .case-flow-arrow{padding:0 clamp(2px,.5vw,8px);font-size:12px}
-}
-@media(max-width:640px){
-  .case-showcase{padding:48px 0}
-  .case-flow{gap:16px 0}
-  .case-phone{width:clamp(56px,18vw,72px)}
-  .case-flow-step.is-hero .case-phone{width:clamp(64px,22vw,88px)}
-  .case-flow-info{width:clamp(56px,18vw,72px)}
-  .case-flow-step.is-hero .case-flow-info{width:clamp(64px,22vw,88px)}
-  .case-flow-arrow{margin-bottom:40px}
-}
+/* IMAGE PAIR */
+.img-pair{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:40px 0}
+.img-pair img{width:100%;border-radius:8px;border:1px solid var(--gray-5);box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.img-pair-caption{font-family:var(--font-body);font-size:12px;color:var(--gray-4);margin-top:12px;letter-spacing:.02em;grid-column:1/-1}
 
-/* ═══ IMAGE LAYOUTS ═══ */
-.case-inline-img{width:100%;border-radius:4px;overflow:hidden;margin:40px 0;background:var(--gray-6)}
-.case-inline-img img{width:100%;height:auto;display:block}
-.case-inline-img.dark-bg{background:#1A1A19}
-.case-inline-caption{font-family:var(--font-body);font-size:12px;color:var(--gray-4);margin-top:12px;margin-bottom:0;letter-spacing:.02em}
-.case-inline-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:40px 0}
-.case-inline-strip img{width:100%;border-radius:8px;border:1px solid var(--gray-5)}
-.case-inline-pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:40px 0}
-.case-inline-pair img{width:100%;border-radius:4px;border:1px solid var(--gray-5)}
-.case-bleed{margin:0;overflow:hidden;border-radius:4px}
-.case-bleed img{width:100%;height:auto;display:block}
-.case-bleed.dark-bg{background:#1A1A19}
-.case-img-section{padding:80px 0}
+/* RESULTS */
+.results{padding:100px 0;border-top:1px solid var(--gray-5)}
+.results .ed-grid{margin-bottom:48px}
+.results-title{font-family:var(--font-body);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-4);margin-bottom:48px}
+.results-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:48px}
+.result-num{font-family:var(--font-display);font-size:clamp(28px,4vw,48px);font-weight:400;letter-spacing:-.02em;line-height:1;margin-bottom:10px}
+.result-label{font-family:var(--font-body);font-size:12px;color:var(--gray-3);line-height:1.5}
+.results-perf{margin-top:64px;padding-top:40px;border-top:1px solid var(--gray-5);display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.perf-item{font-family:var(--font-display);font-size:14px;color:var(--gray-3);line-height:1.7}
+.perf-item strong{color:var(--black);font-weight:500}
 
-/* ═══ MORE WORK ═══ */
-.more-work{padding:160px 0;border-top:1px solid var(--gray-5)}.more-work-title{font-family:var(--font-display);font-size:clamp(44px,7vw,96px);font-weight:400;line-height:1;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:64px}.more-work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}.more-work-card{display:block;transition:opacity .3s}.more-work-card:hover{opacity:.8}.more-work-card-img{width:100%;aspect-ratio:3/2;overflow:hidden;background:var(--gray-6);border-radius:4px;margin-bottom:20px}.more-work-card-img img{width:100%;height:100%;object-fit:cover}.more-work-card-tag{display:inline-block;font-family:var(--font-body);font-size:12px;font-weight:400;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-4);margin-bottom:12px}.more-work-card-name{font-family:var(--font-display);font-size:20px;font-weight:500;line-height:1.2}
+/* SPRINT CARDS */
+.sprints{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:32px}
+.sprint{border:1px solid var(--gray-5);border-radius:8px;padding:24px}
+.sprint-label{font-family:var(--font-display);font-size:14px;font-weight:600;margin-bottom:10px}
+.sprint-desc{font-family:var(--font-display);font-size:13px;color:var(--gray-3);line-height:1.6}
 
-/* ═══ CTA + FOOTER ═══ */
-.cta-section{background:var(--black);color:var(--white);padding:160px 0;text-align:center}.cta-title{font-family:var(--font-display);font-size:clamp(44px,9vw,140px);font-weight:400;line-height:.95;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:24px}.cta-title a{color:var(--white);transition:color .3s}.cta-title a:hover{color:var(--accent)}.cta-subtitle{font-family:var(--font-body);font-size:15px;font-weight:400;color:rgba(255,255,255,.4);text-transform:uppercase;margin-bottom:48px}.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 30px;font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--black);background:var(--white);border-radius:999px;transition:opacity .3s}.cta-btn:hover{opacity:.85}
-footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top:1px solid rgba(255,255,255,.08)}.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px}.footer-logo{font-family:var(--font-display);font-size:15px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:20px}.footer-social{display:flex;flex-direction:column;gap:10px}.footer-social a{font-family:var(--font-body);font-size:13px;color:rgba(255,255,255,.4);transition:color .3s}.footer-social a:hover{color:var(--white)}.footer-col-title{font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:20px}.footer-col-links{display:flex;flex-direction:column;gap:10px}.footer-col-links a{font-family:var(--font-body);font-size:13px;color:rgba(255,255,255,.4);transition:color .3s}.footer-col-links a:hover{color:var(--white)}.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:32px;border-top:1px solid rgba(255,255,255,.08)}.footer-copy{font-family:var(--font-body);font-size:12px;color:rgba(255,255,255,.25)}
+/* MORE WORK */
+.more-work{padding:160px 0;border-top:1px solid var(--gray-5)}
+.more-work-title{font-family:var(--font-display);font-size:clamp(44px,7vw,96px);font-weight:400;line-height:1;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:64px}
+.more-work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.more-work-card{display:block;transition:opacity .3s}
+.more-work-card:hover{opacity:.8}
+.more-work-card-img{width:100%;aspect-ratio:3/2;overflow:hidden;background:var(--gray-6);border-radius:4px;margin-bottom:20px}
+.more-work-card-img img{width:100%;height:100%;object-fit:cover}
+.more-work-card-tag{display:inline-block;font-family:var(--font-body);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-4);margin-bottom:12px}
+.more-work-card-name{font-family:var(--font-display);font-size:20px;font-weight:500;line-height:1.2}
 
-/* ═══ REVEAL ═══ */
+/* CTA + FOOTER */
+.cta-section{background:var(--black);color:var(--white);padding:160px 0;text-align:center}
+.cta-title{font-family:var(--font-display);font-size:clamp(44px,9vw,140px);font-weight:400;line-height:.95;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:24px}
+.cta-title a{color:var(--white);transition:color .3s}
+.cta-title a:hover{color:var(--accent)}
+.cta-subtitle{font-family:var(--font-body);font-size:15px;color:rgba(255,255,255,.4);text-transform:uppercase;margin-bottom:48px}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 30px;font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--black);background:var(--white);border-radius:999px;transition:opacity .3s}
+.cta-btn:hover{opacity:.85}
+footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top:1px solid rgba(255,255,255,.08)}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px}
+.footer-logo{font-family:var(--font-display);font-size:15px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:20px}
+.footer-social{display:flex;flex-direction:column;gap:10px}
+.footer-social a{font-family:var(--font-body);font-size:13px;color:rgba(255,255,255,.4);transition:color .3s}
+.footer-social a:hover{color:var(--white)}
+.footer-col-title{font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:20px}
+.footer-col-links{display:flex;flex-direction:column;gap:10px}
+.footer-col-links a{font-family:var(--font-body);font-size:13px;color:rgba(255,255,255,.4);transition:color .3s}
+.footer-col-links a:hover{color:var(--white)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:32px;border-top:1px solid rgba(255,255,255,.08)}
+.footer-copy{font-family:var(--font-body);font-size:12px;color:rgba(255,255,255,.25)}
+
+/* REVEAL */
 .rv{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
 .rv.visible{opacity:1;transform:none}
 .d1{transition-delay:.12s}.d2{transition-delay:.22s}.d3{transition-delay:.34s}.d4{transition-delay:.46s}
 
-/* ═══ RESPONSIVE ═══ */
+/* RESPONSIVE */
 @media(max-width:1024px){
-  .case-offset-grid{grid-template-columns:1fr;gap:32px}
-  .case-pillars{grid-template-columns:1fr;gap:0;background:transparent}
-  .case-pillar{padding:24px 0;border-bottom:1px solid var(--gray-5)}
-  .case-pillar:first-child{border-top:1px solid var(--gray-5)}
-  .case-metrics{grid-template-columns:repeat(2,1fr)}
-  .case-problems{grid-template-columns:1fr}
-  .case-timeline-track{flex-wrap:wrap;gap:32px;justify-content:center}
-  .case-timeline-line{display:none}
-  .case-timeline-step{flex:0 0 calc(33% - 24px)}
-  .case-states-grid{grid-template-columns:repeat(3,1fr)}
-  .case-stats-grid{grid-template-columns:repeat(2,1fr)}
-  .case-insight-row{grid-template-columns:repeat(3,1fr)}
-  .case-inline-strip{grid-template-columns:repeat(3,1fr)}
+  .challenges{grid-template-columns:repeat(3,1fr)}
+  .ctx-metrics{grid-template-columns:repeat(3,1fr)}
+  .results-grid{grid-template-columns:repeat(2,1fr);gap:32px}
+  .results-perf{grid-template-columns:1fr}
+  .sprints{grid-template-columns:1fr}
+  .phone-flow{grid-template-columns:repeat(3,1fr)}
+  .browser-pair{grid-template-columns:1fr}
+  .img-pair{grid-template-columns:1fr 1fr}
   .more-work-grid{grid-template-columns:1fr 1fr}
   .footer-grid{grid-template-columns:1fr 1fr}
 }
@@ -223,18 +210,16 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
   .case-header{padding-top:100px}
   .case-meta{gap:24px}
   .case-meta-item{min-width:calc(50% - 12px)}
-  .case-statement{padding:64px 0 48px}
-  .case-pull{padding:48px 0}
-  .case-metrics{grid-template-columns:1fr 1fr}
-  .case-problems{grid-template-columns:1fr}
-  .case-timeline{padding:48px 0}
-  .case-timeline-step{flex:0 0 calc(50% - 16px)}
-  .case-states-grid{grid-template-columns:1fr}
-  .case-stats-grid{grid-template-columns:1fr}
-  .case-results{padding:64px 0}
-  .case-insight-row{grid-template-columns:1fr}
-  .case-inline-strip{grid-template-columns:repeat(2,1fr)}
-  .case-inline-pair{grid-template-columns:1fr}
+  .challenges{grid-template-columns:1fr 1fr}
+  .ctx-metrics{grid-template-columns:1fr}
+  .ed{padding:48px 0}
+  .results{padding:64px 0}
+  .results-grid{grid-template-columns:1fr 1fr}
+  .phone-section{padding:48px 0}
+  .phone-flow{grid-template-columns:repeat(2,1fr);gap:16px}
+  .phone-desc{display:none}
+  .img-pair{grid-template-columns:1fr}
+  .browser-pair{grid-template-columns:1fr}
   .more-work-grid{grid-template-columns:1fr}
   .more-work,.cta-section{padding:96px 0}
   .footer-grid{grid-template-columns:1fr;gap:32px}
@@ -262,334 +247,353 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 <!-- HEADER -->
 <section class="case-header"><div class="container">
 <a href="index.html#work" class="case-back rv"><svg viewBox="0 0 16 16"><path d="M13 8H3M7 4l-4 4 4 4"/></svg> Todos os Projetos</a>
-<h1 class="case-title rv d1">MRV</h1>
-<p class="case-focus rv d2">Redesenhei o autoatendimento financeiro<br>da maior construtora da América Latina.<br><strong>27% de conversão no piloto.</strong></p>
+<h1 class="case-title rv d1">MRV<br>Ecossistema<br>Financeiro</h1>
+<p class="case-focus rv d2">Redesenhei o autoatendimento financeiro da maior construtora da América Latina, transformando um fluxo de renegociação com alta taxa de abandono em um canal digital com <strong>27% de engajamento e 14% de conversão autônoma no piloto.</strong></p>
 <div class="case-meta rv d3">
 <div class="case-meta-item"><span class="case-meta-label">Função</span><span class="case-meta-value">Product Designer Sênior</span></div>
 <div class="case-meta-item"><span class="case-meta-label">Empresa</span><span class="case-meta-value">MRV Engenharia</span></div>
 <div class="case-meta-item"><span class="case-meta-label">Período</span><span class="case-meta-value">2017 – 2019</span></div>
 <div class="case-meta-item"><span class="case-meta-label">Foco</span><span class="case-meta-value">Product Design, Microinteração, Design System</span></div>
 </div>
-<div class="case-hero-img rv d4"><img src="https://framerusercontent.com/images/tJmuIg4YsOc9pGcsP4sUgCj5gw.jpg" alt="MRV, Ecossistema Financeiro"></div>
+<div class="case-hero-img rv d4"><img src="https://framerusercontent.com/images/tJmuIg4YsOc9pGcsP4sUgCj5gw.jpg" alt="MRV Ecossistema Financeiro"></div>
 </div></section>
 
-<!-- 01 CONTEXTO -->
-<div class="case-statement"><div class="container">
-<h2 class="case-statement-text rv">Um fluxo de renegociação<br>que <strong>ninguém completava.</strong><br>Um call center que<br><strong>não parava de crescer</strong><span class="faded">.</span></h2>
-</div></div>
 
-<div class="case-offset"><div class="container">
-<div class="case-offset-grid rv">
-<div>
-  <span class="case-offset-num">01</span>
-  <div class="case-offset-label">Contexto</div>
-</div>
-<div class="case-offset-body">
-  <p>A squad financeira da MRV gerenciava o coração do produto:<br>
-  <strong>renegociação de dívidas, gestão de parcelas<br>
-  e status de obra</strong> para 2,5 milhões de clientes<br>
-  com financiamentos de até 35 anos.</p>
-  <p>Fui a única designer embedded num time de 7 pessoas.<br>
-  Não havia trilha de design estabelecida.<br>
-  Minha missão: <strong>criar do zero a experiência<br>
-  financeira do maior app de construtora do Brasil</strong>.</p>
-</div>
-</div>
-</div></div>
+<!-- ══════════════════════════════════════════
+     1. CONTEXTO DO PRODUTO
+     ══════════════════════════════════════════ -->
 
+<section class="ed"><div class="container">
+<div class="ed-grid rv">
+  <div>
+    <div class="ed-num">01</div>
+    <h2 class="ed-title">Contexto do produto</h2>
+  </div>
+  <div>
+    <p class="ed-body">Produto digital de pós-compra da MRV, responsável por cobranças, pagamentos e renegociação de dívidas. Atendia mais de <strong>2,5 milhões de clientes</strong> com financiamentos de até 35 anos, gerando impacto direto em custo operacional e satisfação.</p>
+  </div>
+</div>
+<div class="ctx-metrics rv d1">
+  <div class="ctx-metric">
+    <div class="ctx-metric-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+    <div class="ctx-metric-num">2,5M</div>
+    <div class="ctx-metric-label">Clientes ativos</div>
+    <div class="ctx-metric-desc">No app MRV, com financiamentos de longo prazo</div>
+  </div>
+  <div class="ctx-metric">
+    <div class="ctx-metric-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+    <div class="ctx-metric-num">35</div>
+    <div class="ctx-metric-label">Anos de contrato</div>
+    <div class="ctx-metric-desc">Financiamentos longos com complexidade jurídica</div>
+  </div>
+  <div class="ctx-metric">
+    <div class="ctx-metric-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+    <div class="ctx-metric-num">3</div>
+    <div class="ctx-metric-label">Domínios de produto</div>
+    <div class="ctx-metric-desc">Renegociação, parcelas e status de obra</div>
+  </div>
+</div>
+</div></section>
+
+
+<!-- ══════════════════════════════════════════
+     2. O PROBLEMA
+     ══════════════════════════════════════════ -->
+
+<section class="ed"><div class="container">
+<div class="ed-grid rv">
+  <div>
+    <div class="ed-num">02</div>
+    <h2 class="ed-title">O problema</h2>
+  </div>
+  <div>
+    <p class="ed-body">A renegociação digital existia mas tinha conversão baixa. Os clientes iniciavam o processo no app mas não completavam o acordo. O resultado era <strong>migração para o call center</strong>, inflando custos operacionais e gerando insatisfação.</p>
+    <p class="ed-body">A proposta aparecia no fluxo mas não comunicava segurança. Faltava transparência no progresso, a linguagem era técnica e intimidadora, e a interface tratava todos os clientes da mesma forma, independente do seu estado financeiro.</p>
+  </div>
+</div>
+<div class="ed-subtitle rv d1" style="margin-top:48px">Principais desafios</div>
+<div class="challenges rv d2">
+      <div class="challenge">
+        <div class="challenge-icon"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>
+        <h4 class="challenge-name">Abandono no momento decisivo</h4>
+        <p class="challenge-desc">O cliente chegava à proposta mas desistia. Sem indicadores de progresso, a incerteza sobre aprovação gerava desistência. 12 pontos críticos de abandono mapeados no fluxo.</p>
+      </div>
+      <div class="challenge">
+        <div class="challenge-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h4 class="challenge-name">Confiança fragilizada pela experiência</h4>
+        <p class="challenge-desc">A interface não transmitia segurança para uma decisão financeira de longo prazo. Faltavam sinais visuais de que o processo estava funcionando corretamente.</p>
+      </div>
+      <div class="challenge">
+        <div class="challenge-icon"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+        <h4 class="challenge-name">Custo operacional crescente</h4>
+        <p class="challenge-desc">Cada erro no autoatendimento gerava uma ligação ao call center. Duração média de 8 minutos por chamada, com volume crescente mês a mês.</p>
+      </div>
+      <div class="challenge">
+        <div class="challenge-icon"><svg viewBox="0 0 24 24"><line x1="1" y1="1" x2="23" y2="23"/><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/><path d="M10.71 5.05A16 16 0 0 1 22.56 9"/><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg></div>
+        <h4 class="challenge-name">Ruído visual como barreira</h4>
+        <p class="challenge-desc">Jargão financeiro dominava a interface. Mais de 40 termos técnicos como "encargo moratório" bloqueavam a ação do cliente e geravam insegurança.</p>
+      </div>
+      <div class="challenge">
+        <div class="challenge-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg></div>
+        <h4 class="challenge-name">Destravar a ação sem aumentar a carga cognitiva</h4>
+        <p class="challenge-desc">O desafio central era simplificar a tomada de decisão sem remover informação financeira obrigatória. Menos não podia significar menos seguro.</p>
+      </div>
+    </div>
+</div></section>
+
+
+<!-- ══════════════════════════════════════════
+     3. OBJETIVO E ESTRATÉGIA
+     ══════════════════════════════════════════ -->
+
+<section class="ed"><div class="container">
+<div class="ed-grid rv">
+  <div>
+    <div class="ed-num">03</div>
+    <h2 class="ed-title">Objetivo</h2>
+  </div>
+  <div>
+    <p class="ed-body"><strong>Aumentar renegociações no autoatendimento sem introduzir novas etapas ou dependência de atendimento humano.</strong></p>
+    <p class="ed-body">Período do piloto: 2 sprints. Metodologia de growth com ciclos curtos de desenvolvimento orientados a experimentação e melhoria de resultados.</p>
+
+    <div class="ed-subtitle">Key Results</div>
+    <div class="kr-list">
+      <div class="kr-item">Aumentar em 10 a 30% a visualização de propostas</div>
+      <div class="kr-item">Aumentar em 5 a 8% a escolha efetiva de propostas</div>
+      <div class="kr-item">Manter performance sem impacto, entre 5 e 8%</div>
+      <div class="kr-item">Reduzir contatos no call center entre 5 e 12%</div>
+    </div>
+  </div>
+</div>
+
+<div class="ed-grid rv d1" style="margin-top:64px">
+  <div>
+    <h2 class="ed-title">Estratégia de design</h2>
+  </div>
+  <div>
+    <p class="ed-body">A acessibilidade cognitiva orientou cada decisão. Combinei microinterações com copywriting de baixa carga cognitiva e hierarquia visual que cria sinais claros de oportunidade e progresso dentro do fluxo financeiro.</p>
+    <p class="ed-body">Reescrevi mais de 40 termos técnicos em linguagem acessível e validada em testes. Mapeei e documentei 47 estados de componente com cor, animação e copy contextual. Desenhei 5 dashboards adaptativos, cada um orientado pelo estado financeiro do cliente.</p>
+
+    <div class="ed-subtitle">A solução priorizou</div>
+    <div class="prio-list">
+      <div class="prio-item">Redução de complexidade para destravar o primeiro passo</div>
+      <div class="prio-item">Visibilidade automatizada de propostas dentro do ecossistema</div>
+      <div class="prio-item">Hierarquia visual que comunica escala e consequências</div>
+      <div class="prio-item">Manutenção da estrutura existente no fluxo</div>
+    </div>
+  </div>
+</div>
+</div></section>
+
+<!-- Visão geral do ecossistema -->
+<div class="container" style="padding-bottom:80px">
+  <div class="fw-img rv"><img src="img/mrv/overview-grid.webp" alt="Visão geral do ecossistema financeiro MRV"></div>
+  <p class="fw-img-caption rv d1">Visão geral: os diferentes estados e telas do ecossistema financeiro redesenhado.</p>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     4. A SOLUÇÃO
+     ══════════════════════════════════════════ -->
+
+<!-- Hero visual: mockups em perspectiva -->
+<div class="dark-bleed rv">
+  <div class="container">
+    <img src="img/mrv/hero-mockups.webp" alt="Mockups do app MRV em perspectiva" style="border-radius:4px">
+  </div>
+</div>
+
+<!-- Microinterações: phone flow -->
+<section class="phone-section">
 <div class="container">
-<div class="case-metrics rv">
-  <div class="case-metric">
-    <svg class="case-metric-icon" viewBox="0 0 32 32" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="10" r="5"/><path d="M6 28c0-5.5 4.5-10 10-10s10 4.5 10 10"/><circle cx="26" cy="8" r="3" stroke-width="1" opacity=".4"/><circle cx="6" cy="8" r="3" stroke-width="1" opacity=".4"/></svg>
-    <div class="case-metric-num">2,5M</div>
-    <div class="case-metric-label">Clientes ativos</div>
-    <div class="case-metric-desc">No app MRV, com<br>financiamentos de longo prazo</div>
-  </div>
-  <div class="case-metric">
-    <svg class="case-metric-icon" viewBox="0 0 32 32" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="24" height="20" rx="2"/><line x1="4" y1="12" x2="28" y2="12"/><circle cx="10" cy="19" r="2.5"/><line x1="16" y1="18" x2="24" y2="18"/><line x1="16" y1="22" x2="22" y2="22"/></svg>
-    <div class="case-metric-num">1</div>
-    <div class="case-metric-label">Designer na squad</div>
-    <div class="case-metric-desc">Embedded com 4 devs,<br>1 PO e 1 Scrum Master</div>
-  </div>
-  <div class="case-metric">
-    <svg class="case-metric-icon" viewBox="0 0 32 32" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 28V8l12-4 12 4v20"/><line x1="16" y1="4" x2="16" y2="28"/><line x1="4" y1="14" x2="28" y2="14"/><rect x="7" y="17" width="5" height="5" rx="0.5" opacity=".4"/><rect x="20" y="17" width="5" height="5" rx="0.5" opacity=".4"/></svg>
-    <div class="case-metric-num">35</div>
-    <div class="case-metric-label">Anos de contrato</div>
-    <div class="case-metric-desc">Financiamentos longos<br>com complexidade jurídica</div>
-  </div>
-  <div class="case-metric">
-    <svg class="case-metric-icon" viewBox="0 0 32 32" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="16" rx="1.5"/><rect x="14" y="12" width="12" height="16" rx="1.5"/><line x1="10" y1="8" x2="14" y2="8" stroke-width="1" opacity=".4"/><line x1="10" y1="11" x2="14" y2="11" stroke-width="1" opacity=".4"/><line x1="18" y1="16" x2="22" y2="16" stroke-width="1" opacity=".4"/><line x1="18" y1="19" x2="22" y2="19" stroke-width="1" opacity=".4"/></svg>
-    <div class="case-metric-num">3</div>
-    <div class="case-metric-label">Domínios de produto</div>
-    <div class="case-metric-desc">Renegociação, parcelas<br>e status de obra</div>
-  </div>
-</div>
-</div>
+  <div class="ed-num rv" style="color:var(--accent)">04</div>
+  <h2 class="phone-section-title rv">A solução</h2>
+  <p class="phone-section-desc rv d1">A interface muda de tom conforme a situação financeira do cliente evolui. Cinco estados progressivos, dos 46% aos 100% da jornada. Cada estado com hierarquia visual, copy e microinterações específicas.</p>
 
-<!-- 02 O PROBLEMA -->
-<div class="case-pull"><div class="container">
-<div class="case-pull-text rv">O resultado: <strong>abandono massivo</strong><br>antes da conclusão do acordo.<br>Cada falha digital virava uma<br><strong>ligação para o call center</strong><span class="faded">.</span></div>
-</div></div>
-
-<div class="container" style="padding-top:48px;padding-bottom:80px">
-<div class="rv"><span class="case-pull-caption">02 / O Problema</span></div>
-<div class="case-problems rv d1">
-  <div class="case-problem">
-    <svg class="case-problem-icon" viewBox="0 0 44 44" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 8 L8 8 L8 36 L22 36"/><line x1="22" y1="22" x2="40" y2="22"/><polyline points="34,16 40,22 34,28"/></svg>
-    <div class="case-problem-title">Abandono na<br>renegociação</div>
-    <div class="case-problem-desc">Sem indicadores de progresso,<br>o cliente não sabia se o acordo<br>seria aprovado. A dúvida<br>virava desistência.</div>
-    <div class="case-problem-stat"><span class="case-problem-stat-num">12</span><span class="case-problem-stat-label">pontos de abandono mapeados</span></div>
+  <div class="phone-flow rv d2">
+    <div class="phone-step">
+      <div class="phone-frame"><img src="img/mrv/mobile-jornada-46.webp" alt="Estado 46%"></div>
+      <div class="phone-caption">
+        <div class="phone-pct">46%</div>
+        <div class="phone-name">Sem pendências</div>
+        <div class="phone-desc">Dashboard positivo, progresso em destaque</div>
+      </div>
+    </div>
+    <div class="phone-arrow">→</div>
+    <div class="phone-step">
+      <div class="phone-frame"><img src="img/mrv/mobile-jornada-50.webp" alt="Estado 50%"></div>
+      <div class="phone-caption">
+        <div class="phone-pct">50%</div>
+        <div class="phone-name">Parcelas crescendo</div>
+        <div class="phone-desc">Alertas gentis, tom de suporte</div>
+      </div>
+    </div>
+    <div class="phone-arrow">→</div>
+    <div class="phone-step">
+      <div class="phone-frame"><img src="img/mrv/mobile-jornada-70.webp" alt="Estado 70%"></div>
+      <div class="phone-caption">
+        <div class="phone-pct">70%</div>
+        <div class="phone-name">Juros acumulados</div>
+        <div class="phone-desc">Transparência, proposta visível</div>
+      </div>
+    </div>
+    <div class="phone-arrow">→</div>
+    <div class="phone-step is-hero">
+      <div class="phone-frame"><img src="img/mrv/mobile-jornada-70-atraso.webp" alt="Estado 70%+"></div>
+      <div class="phone-caption">
+        <div class="phone-pct">70%+</div>
+        <div class="phone-name">Gatilho ativo</div>
+        <div class="phone-desc">3 cenários de acordo, cliente escolhe</div>
+      </div>
+    </div>
+    <div class="phone-arrow">→</div>
+    <div class="phone-step">
+      <div class="phone-frame"><img src="img/mrv/mobile-jornada-100.webp" alt="Estado 100%"></div>
+      <div class="phone-caption">
+        <div class="phone-pct">100%</div>
+        <div class="phone-name">Quitação</div>
+        <div class="phone-desc">Celebração, extrato de conquista</div>
+      </div>
+    </div>
   </div>
-  <div class="case-problem">
-    <svg class="case-problem-icon" viewBox="0 0 44 44" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="36" x2="8" y2="8"/><line x1="8" y1="36" x2="40" y2="36"/><polyline points="14,32 22,24 30,16 38,8"/><circle cx="14" cy="32" r="2"/><circle cx="22" cy="24" r="2"/><circle cx="30" cy="16" r="2"/><circle cx="38" cy="8" r="2"/></svg>
-    <div class="case-problem-title">Custo operacional<br>crescente</div>
-    <div class="case-problem-desc">Cada erro no autoatendimento<br>gerava uma ligação ao call center.<br>O volume crescia junto<br>com o uso do app.</div>
-    <div class="case-problem-stat"><span class="case-problem-stat-num">8 min</span><span class="case-problem-stat-label">duração média por ligação</span></div>
-  </div>
-  <div class="case-problem">
-    <svg class="case-problem-icon" viewBox="0 0 44 44" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22 C12 12 32 12 38 22 C32 32 12 32 6 22 Z"/><circle cx="22" cy="22" r="5.5"/><line x1="8" y1="38" x2="38" y2="6" stroke-width="1.8"/></svg>
-    <div class="case-problem-title">Ruído visual<br>como barreira</div>
-    <div class="case-problem-desc">Jargão financeiro dominava<br>a interface. Termos como<br>"encargo moratório" bloqueavam<br>a ação do cliente.</div>
-    <div class="case-problem-stat"><span class="case-problem-stat-num">40+</span><span class="case-problem-stat-label">termos técnicos na tela</span></div>
-  </div>
-  <div class="case-problem">
-    <svg class="case-problem-icon" viewBox="0 0 44 44" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="18" width="16" height="10" rx="5"/><path d="M28 18 L36 18 C39 18 41 20.5 41 23 C41 25.5 39 28 36 28 L28 28"/><line x1="22" y1="15" x2="26" y2="20"/><line x1="22" y1="31" x2="26" y2="26"/></svg>
-    <div class="case-problem-title">Desconexão<br>emocional</div>
-    <div class="case-problem-desc">A interface não diferenciava<br>clientes em dia de inadimplentes.<br>Tom frio e punitivo para todos,<br>sem empatia, sem caminho.</div>
-    <div class="case-problem-stat"><span class="case-problem-stat-num">0</span><span class="case-problem-stat-label">estados adaptativos na jornada</span></div>
-  </div>
-</div>
-</div>
-
-<!-- 03 PROCESSO -->
-<div class="case-timeline"><div class="container">
-<div class="case-timeline-header rv">
-  <span class="case-pull-caption">03 / O Processo</span>
-  <h3 class="case-timeline-heading">Da escuta ao sistema.<br>18 meses, 5 etapas.</h3>
-</div>
-<div class="case-timeline-track rv d1">
-  <div class="case-timeline-line"><div class="case-timeline-line-fill"></div></div>
-  <div class="case-timeline-step">
-    <div class="case-timeline-dot"><div class="case-timeline-dot-inner"></div></div>
-    <svg class="case-timeline-icon" viewBox="0 0 32 32" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6 L6 22 L10 22 L10 28 L16 22 L28 22 L28 6 Z"/><line x1="11" y1="12" x2="23" y2="12"/><line x1="11" y1="16" x2="19" y2="16"/></svg>
-    <div class="case-timeline-num">01/</div>
-    <div class="case-timeline-title">Escuta ativa</div>
-    <div class="case-timeline-desc">12 entrevistas + 30 chamadas<br>de call center escutadas</div>
-  </div>
-  <div class="case-timeline-step">
-    <div class="case-timeline-dot"><div class="case-timeline-dot-inner"></div></div>
-    <svg class="case-timeline-icon" viewBox="0 0 32 32" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="14" r="9"/><line x1="20" y1="20" x2="28" y2="28"/><line x1="10" y1="14" x2="18" y2="14"/><line x1="14" y1="10" x2="14" y2="18"/></svg>
-    <div class="case-timeline-num">02/</div>
-    <div class="case-timeline-title">Diagnóstico</div>
-    <div class="case-timeline-desc">12 pontos críticos<br>de abandono identificados</div>
-  </div>
-  <div class="case-timeline-step">
-    <div class="case-timeline-dot"><div class="case-timeline-dot-inner"></div></div>
-    <svg class="case-timeline-icon" viewBox="0 0 32 32" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="16" r="8"/><circle cx="20" cy="16" r="8"/></svg>
-    <div class="case-timeline-num">03/</div>
-    <div class="case-timeline-title">Co-criação</div>
-    <div class="case-timeline-desc">3 workshops com devs,<br>PO e operações financeiras</div>
-  </div>
-  <div class="case-timeline-step">
-    <div class="case-timeline-dot"><div class="case-timeline-dot-inner"></div></div>
-    <svg class="case-timeline-icon" viewBox="0 0 32 32" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="4" width="16" height="24" rx="1.5"/><line x1="8" y1="8" x2="24" y2="8"/><line x1="8" y1="24" x2="24" y2="24"/><rect x="11" y="12" width="10" height="6" stroke-dasharray="2 2"/></svg>
-    <div class="case-timeline-num">04/</div>
-    <div class="case-timeline-title">Prototipagem</div>
-    <div class="case-timeline-desc">5 ciclos iterativos,<br>8 usuários por rodada</div>
-  </div>
-  <div class="case-timeline-step">
-    <div class="case-timeline-dot"><div class="case-timeline-dot-inner"></div></div>
-    <svg class="case-timeline-icon" viewBox="0 0 32 32" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="11"/><polyline points="10,16 14,21 22,11"/></svg>
-    <div class="case-timeline-num">05/</div>
-    <div class="case-timeline-title">Sistema entregue</div>
-    <div class="case-timeline-desc">47 estados documentados<br>+ guidelines de conteúdo</div>
-  </div>
-</div>
-</div></div>
-
-<!-- STATEMENT: estratégia -->
-<div class="case-statement"><div class="container">
-<h2 class="case-statement-text rv">Design como ferramenta<br>de negócio, não<br>decoração<span class="faded">.</span></h2>
-</div></div>
-
-<!-- 04 ESTRATÉGIA -->
-<div class="container" style="padding-bottom:100px">
-<div class="case-pillars rv">
-<div class="case-pillar">
-  <svg class="case-pillar-icon" viewBox="0 0 56 56" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 10 L48 10 L36 30 L36 48 L20 48 L20 30 Z"/><line x1="14" y1="17" x2="42" y2="17"/><line x1="17" y1="22" x2="39" y2="22"/></svg>
-  <div class="case-pillar-num">01/</div>
-  <div class="case-pillar-title">Simplificar<br>a linguagem</div>
-  <div class="case-pillar-desc">Reescrevi 100% do copywriting<br>da jornada financeira.<br>"Encargo moratório" virou "juros por atraso".<br>A linguagem passou a guiar, não intimidar.</div>
-</div>
-<div class="case-pillar">
-  <svg class="case-pillar-icon" viewBox="0 0 56 56" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="28" cy="28" r="5"/><circle cx="28" cy="28" r="13" stroke-dasharray="3.5 2.5"/><circle cx="28" cy="28" r="21" stroke-dasharray="4 3"/></svg>
-  <div class="case-pillar-num">02/</div>
-  <div class="case-pillar-title">Microinterações que<br>comunicam progresso</div>
-  <div class="case-pillar-desc">Mapeei e desenhei 47 estados de interface.<br>Cada etapa da renegociação com<br>feedback visual específico: cor,<br>animação e copy contextual.</div>
-</div>
-<div class="case-pillar">
-  <svg class="case-pillar-icon" viewBox="0 0 56 56" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="18" y="6" width="20" height="12" rx="1"/><line x1="28" y1="18" x2="28" y2="26"/><line x1="14" y1="26" x2="42" y2="26"/><line x1="14" y1="26" x2="14" y2="34"/><rect x="4" y="34" width="20" height="12" rx="1"/><line x1="42" y1="26" x2="42" y2="34"/><rect x="32" y="34" width="20" height="12" rx="1"/></svg>
-  <div class="case-pillar-num">03/</div>
-  <div class="case-pillar-title">Arquitetura visual<br>com hierarquia clara</div>
-  <div class="case-pillar-desc">5 dashboards adaptativos, cada um<br>orientado pelo estado financeiro do cliente.<br>O app lê o momento e exibe<br>exatamente o que precisa aparecer.</div>
-</div>
-</div>
-<div class="case-insight-row rv d1">
-  <div class="case-insight">
-    <div class="case-insight-tag">Copywriting</div>
-    <div class="case-insight-num">40+</div>
-    <div class="case-insight-desc">termos financeiros reescritos<br>em linguagem acessível<br>e validados em testes</div>
-  </div>
-  <div class="case-insight">
-    <div class="case-insight-tag">Microinterações</div>
-    <div class="case-insight-num">47</div>
-    <div class="case-insight-desc">estados de componente documentados<br>com animação, cor<br>e copy específicos</div>
-  </div>
-  <div class="case-insight">
-    <div class="case-insight-tag">Jornada adaptativa</div>
-    <div class="case-insight-num">5</div>
-    <div class="case-insight-desc">dashboards distintos, o estado<br>financeiro do cliente<br>determina a experiência</div>
-  </div>
-</div>
-</div>
-
-<!-- 05 A SOLUÇÃO -->
-<div class="case-pull"><div class="container">
-<div class="case-pull-text rv">Cinco estados progressivos.<br>Dos 46% aos 100% da jornada.<br>A interface <strong>detecta inadimplência<br>e oferece uma saída</strong><span class="faded">.</span></div>
-<div class="case-pull-caption rv d1">05 / A Solução</div>
-</div></div>
-
-<section class="case-showcase">
-<div class="container">
-<div class="case-showcase-label rv">Jornada do cliente: 5 estados da interface</div>
-<div class="case-flow">
-  <div class="case-flow-step rv">
-    <div class="case-phone"><img src="img/mrv/mobile-jornada-46.webp" alt="Fluxo 46%"></div>
-    <div class="case-flow-info"><div class="case-flow-pct">46%</div><div class="case-flow-name">Sem pendências</div></div>
-  </div>
-  <div class="case-flow-arrow rv d1">→</div>
-  <div class="case-flow-step rv d1">
-    <div class="case-phone"><img src="img/mrv/mobile-jornada-50.webp" alt="Fluxo 50%"></div>
-    <div class="case-flow-info"><div class="case-flow-pct">50%</div><div class="case-flow-name">Parcelas crescendo</div></div>
-  </div>
-  <div class="case-flow-arrow rv d2">→</div>
-  <div class="case-flow-step rv d2">
-    <div class="case-phone"><img src="img/mrv/mobile-jornada-70.webp" alt="Fluxo 70%"></div>
-    <div class="case-flow-info"><div class="case-flow-pct">70%</div><div class="case-flow-name">Juros acumulados</div></div>
-  </div>
-  <div class="case-flow-arrow rv d3">→</div>
-  <div class="case-flow-step is-hero rv d3">
-    <div class="case-phone"><img src="img/mrv/mobile-jornada-70-atraso.webp" alt="Fluxo 70% Atraso"></div>
-    <div class="case-flow-info"><div class="case-flow-pct">70%+</div><div class="case-flow-name">Gatilho ativo</div></div>
-  </div>
-  <div class="case-flow-arrow rv d4">→</div>
-  <div class="case-flow-step rv d4">
-    <div class="case-phone"><img src="img/mrv/mobile-jornada-100.webp" alt="Fluxo 100%"></div>
-    <div class="case-flow-info"><div class="case-flow-pct">100%</div><div class="case-flow-name">Quitação</div></div>
-  </div>
-</div>
-<div class="case-showcase-footer rv d4">A interface muda de tom conforme a situação financeira evolui</div>
 </div>
 </section>
 
-<div class="container" style="padding-top:64px">
-<div class="case-states-grid rv">
-  <div class="case-state-card"><div class="case-state-bar"><div class="case-state-fill" style="width:46%"></div></div><div class="case-state-pct">46%</div><div class="case-state-name">Sem pendências</div><div class="case-state-desc">Cliente em dia. Dashboard positivo<br>com progresso do financiamento<br>em destaque.</div></div>
-  <div class="case-state-card"><div class="case-state-bar"><div class="case-state-fill" style="width:50%"></div></div><div class="case-state-pct">50%</div><div class="case-state-name">Parcelas crescendo</div><div class="case-state-desc">Alertas gentis antes do vencimento.<br>Tom de suporte,<br>não de cobrança.</div></div>
-  <div class="case-state-card"><div class="case-state-bar"><div class="case-state-fill" style="width:70%"></div></div><div class="case-state-pct">70%</div><div class="case-state-name">Juros acumulados</div><div class="case-state-desc">Transparência total sem punição.<br>Proposta de acordo visível<br>com clareza de valores.</div></div>
-  <div class="case-state-card"><div class="case-state-bar"><div class="case-state-fill" style="width:70%"></div></div><div class="case-state-pct">70%+</div><div class="case-state-name">Gatilho ativo</div><div class="case-state-desc">Interface com 3 cenários de acordo.<br>O cliente escolhe,<br>não negocia às cegas.</div></div>
-  <div class="case-state-card"><div class="case-state-bar"><div class="case-state-fill" style="width:100%"></div></div><div class="case-state-pct">100%</div><div class="case-state-name">Quitação</div><div class="case-state-desc">Momento emocional. Celebração<br>com microinteração específica<br>e extrato de conquista.</div></div>
-</div>
-</div>
-
-<!-- Bleed: overview -->
-<div class="container"><div class="case-bleed rv"><img src="img/mrv/overview-grid.webp" alt="MRV Visão geral"></div></div>
-
-<!-- Desktop -->
-<div class="case-offset"><div class="container">
-<div class="case-offset-grid rv">
-<div><span class="case-offset-num"></span><div class="case-offset-label">Desktop</div></div>
-<div class="case-offset-body">
-  <p>A mesma lógica no desktop.<br><strong>Fluxo de renegociação redesenhado do zero</strong>,<br>cada etapa repensada como uma conversa.<br>Feedback visual constante elimina<br>a incerteza que causava abandono.</p>
-</div>
-</div>
-</div></div>
-
-<div class="container"><div class="case-inline-img dark-bg rv"><img src="img/mrv/hero-mockups.webp" alt="Mockups renegociação"></div></div>
-
-<div class="case-offset"><div class="container">
-<div class="case-offset-grid rv">
-<div><span class="case-offset-num"></span><div class="case-offset-label">Extrato financeiro</div></div>
-<div class="case-offset-body">
-  <p>Filtros por categoria (MRV, Cartório, Banco),<br>estados claros para boletos pagos e pendentes,<br>e <strong>ações diretas que eliminam ambiguidade</strong>.</p>
-</div>
-</div>
-</div></div>
-
-<div class="container">
-<div class="case-inline-pair rv"><img src="img/mrv/desktop-extrato-pagos.webp" alt="Extrato Pagos"><img src="img/mrv/desktop-extrato-cartorio.webp" alt="Extrato Cartório"></div>
-<div class="case-inline-pair rv d1"><img src="img/mrv/desktop-extrato-boletos.webp" alt="Extrato Boletos"><img src="img/mrv/desktop-extrato-banco.webp" alt="Extrato Banco"></div>
-</div>
-
-<!-- Bleed: mockup pair -->
-<div class="case-img-section"><div class="container"><div class="case-bleed rv"><img src="img/mrv/mockup-pair.webp" alt="Mockup iPhones" style="object-fit:contain"></div></div></div>
-
-<!-- 06 FUNDAÇÃO VISUAL -->
-<div class="case-offset"><div class="container">
-<div class="case-offset-grid rv">
-<div><span class="case-offset-num">06</span><div class="case-offset-label">Fundação Visual</div></div>
-<div class="case-offset-body">
-  <p>Cada padrão documentado como<br><strong>design tokens e componentes escaláveis</strong>:<br>paleta semântica, escala tipográfica,<br>sistema de espaçamento, shadow e opacidade.</p>
-</div>
-</div>
-</div></div>
-
-<div class="container">
-<div class="case-inline-pair rv"><img src="img/mrv/tokens-brand-colors.webp" alt="Brand Colors"><img src="img/mrv/tokens-support.webp" alt="Support Colors"></div>
-<div class="case-inline-pair rv d1"><img src="img/mrv/tokens-typography.webp" alt="Typography"><img src="img/mrv/tokens-spacing.webp" alt="Spacing"></div>
-<div class="case-inline-caption rv d2">Tokens: cores de marca, suporte, tipografia e espaçamento.</div>
-</div>
-
-<!-- 07 RESULTADOS — stat highlight cards -->
-<div class="case-results"><div class="container">
-<div class="case-results-statement rv">580 clientes.<br>Um piloto que<br>mudou a operação<span class="faded">.</span></div>
-<div class="case-stats-grid rv d1">
-  <div class="case-stat">
-    <svg class="case-stat-icon" viewBox="0 0 28 28" fill="none" stroke="#D1F466" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="9" r="5"/><path d="M4 26c0-5.5 4.5-10 10-10s10 4.5 10 10"/></svg>
-    <div class="case-stat-num">27%</div>
-    <div class="case-stat-label">Engajamento ativo</div>
-    <div class="case-stat-desc">Clientes que interagiram<br>com a renegociação digital<br>no primeiro ciclo do piloto</div>
-    <div class="case-stat-category">/Abertura</div>
+<!-- Fluxo desktop -->
+<section class="ed"><div class="container">
+<div class="ed-grid rv">
+  <div>
+    <h2 class="ed-title">Fluxo desktop</h2>
   </div>
-  <div class="case-stat">
-    <svg class="case-stat-icon" viewBox="0 0 28 28" fill="none" stroke="#D1F466" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="14" r="10"/><polyline points="9,14 12.5,18 19,10"/></svg>
-    <div class="case-stat-num">14%</div>
-    <div class="case-stat-label">Conversão autônoma</div>
-    <div class="case-stat-desc">Acordos fechados sem<br>intervenção humana,<br>100% via autoatendimento</div>
-    <div class="case-stat-category">/Conversão</div>
-  </div>
-  <div class="case-stat">
-    <svg class="case-stat-icon" viewBox="0 0 28 28" fill="none" stroke="#D1F466" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="22" height="18" rx="2"/><line x1="3" y1="11" x2="25" y2="11"/><line x1="8" y1="16" x2="14" y2="16"/><line x1="8" y1="19" x2="12" y2="19"/></svg>
-    <div class="case-stat-num">R$ 1,47k</div>
-    <div class="case-stat-label">Valor médio recuperado</div>
-    <div class="case-stat-desc">Por acordo fechado,<br>valor direto recuperado<br>via canal digital</div>
-    <div class="case-stat-category">/Receita</div>
-  </div>
-  <div class="case-stat">
-    <svg class="case-stat-icon" viewBox="0 0 28 28" fill="none" stroke="#D1F466" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v20M8 8l6-4 6 4M8 20l6 4 6-4"/><line x1="4" y1="14" x2="24" y2="14"/></svg>
-    <div class="case-stat-num">↓</div>
-    <div class="case-stat-label">Redução no call center</div>
-    <div class="case-stat-desc">Autoatendimento substituiu<br>contato humano para<br>renegociações de rotina</div>
-    <div class="case-stat-category">/Custo</div>
+  <div>
+    <p class="ed-body">O extrato financeiro foi redesenhado com filtros por categoria (MRV, Cartório, Banco), estados claros para boletos pagos e pendentes, e <strong>ações diretas que eliminam ambiguidade</strong>. O percurso foi construído para que o cliente escolha, devolva a confiança e feche o acordo com autonomia.</p>
   </div>
 </div>
-</div></div>
+<div class="browser-pair rv d1">
+  <div class="browser-frame">
+    <div class="browser-bar"><span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span></div>
+    <img src="img/mrv/desktop-extrato-pagos.webp" alt="Extrato: boletos pagos">
+  </div>
+  <div class="browser-frame">
+    <div class="browser-bar"><span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span></div>
+    <img src="img/mrv/desktop-extrato-cartorio.webp" alt="Extrato: cartório">
+  </div>
+</div>
+<p class="browser-caption rv d2">Extrato financeiro: filtros por categoria com estados visuais claros para pagos e pendentes.</p>
 
-<!-- 08 IMPACTO -->
-<div class="case-pull" style="border-bottom:1px solid var(--gray-5)"><div class="container">
-<div class="case-pull-text rv">O piloto virou operação.<br>O design virou <strong>ferramenta<br>estratégica de conversão</strong>.<br>Os componentes se tornaram<br>referência interna<span class="faded">.</span></div>
-<div class="case-pull-caption rv d1">08 / Impacto</div>
-</div></div>
+<div class="browser-pair rv d3">
+  <div class="browser-frame">
+    <div class="browser-bar"><span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span></div>
+    <img src="img/mrv/desktop-extrato-boletos.webp" alt="Extrato: boletos pendentes">
+  </div>
+  <div class="browser-frame">
+    <div class="browser-bar"><span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span></div>
+    <img src="img/mrv/desktop-extrato-banco.webp" alt="Extrato: banco">
+  </div>
+</div>
+<p class="browser-caption rv d4">Boletos pendentes e detalhamento bancário com ações diretas visíveis.</p>
+</div></section>
+
+<!-- Beauty shot: mockup pair -->
+<div class="dark-bleed rv" style="padding:60px 0">
+  <div class="container">
+    <img src="img/mrv/mockup-pair.webp" alt="MRV app em contexto" style="border-radius:4px">
+  </div>
+</div>
+
+<!-- Fundação Visual -->
+<section class="ed"><div class="container">
+<div class="ed-grid rv">
+  <div>
+    <h2 class="ed-title">Fundação visual</h2>
+  </div>
+  <div>
+    <p class="ed-body">Cada padrão documentado como <strong>design tokens e componentes escaláveis</strong>: paleta semântica, escala tipográfica, sistema de espaçamento, shadow e opacidade. A base visual garantiu consistência entre os três domínios do produto.</p>
+  </div>
+</div>
+<div class="img-pair rv d1">
+  <img src="img/mrv/tokens-brand-colors.webp" alt="Brand Colors">
+  <img src="img/mrv/tokens-support.webp" alt="Support Colors">
+  <span class="img-pair-caption">Cores de marca e suporte.</span>
+</div>
+<div class="img-pair rv d2">
+  <img src="img/mrv/tokens-typography.webp" alt="Typography">
+  <img src="img/mrv/tokens-spacing.webp" alt="Spacing">
+  <span class="img-pair-caption">Tipografia e espaçamento.</span>
+</div>
+</div></section>
+
+
+<!-- ══════════════════════════════════════════
+     5. RESULTADOS DO PILOTO
+     ══════════════════════════════════════════ -->
+
+<section class="results"><div class="container">
+<div class="ed-grid rv">
+  <div>
+    <div class="ed-num">05</div>
+    <h2 class="ed-title">Resultados do piloto</h2>
+  </div>
+</div>
+<div class="results-grid rv d1">
+  <div>
+    <div class="result-num">R$ 147 mil</div>
+    <div class="result-label">Economia operacional estimada</div>
+  </div>
+  <div>
+    <div class="result-num">580</div>
+    <div class="result-label">Clientes acionados no piloto</div>
+  </div>
+  <div>
+    <div class="result-num">155 (27%)</div>
+    <div class="result-label">Acessaram a página de propostas</div>
+  </div>
+  <div>
+    <div class="result-num">21 (14%)</div>
+    <div class="result-label">Acordos celebrados via autoatendimento</div>
+  </div>
+</div>
+
+<div class="results-perf rv d2">
+  <div class="perf-item"><strong>Tempo de resposta médio:</strong> de 17,2s para 6,99s após otimização. Feedback sobre lentidão caiu de 14% para 9% dos comentários.</div>
+  <div class="perf-item"><strong>Virada de experiência:</strong> 100% dos clientes ativos migrados para a nova experiência de acompanhamento de obra. 187.756 clientes no total.</div>
+</div>
+
+<div class="ed-grid rv d3" style="margin-top:64px;margin-bottom:32px">
+  <div>
+    <h2 class="ed-title">Desdobramento pós-piloto</h2>
+  </div>
+</div>
+<div class="sprints rv d4">
+  <div class="sprint">
+    <div class="sprint-label">Sprint 1</div>
+    <div class="sprint-desc">Ajustes de comunicação no fluxo e regras de elegibilidade para reduzir insegurança. Integração com régua de comunicação e propostas de acordos.</div>
+  </div>
+  <div class="sprint">
+    <div class="sprint-label">Sprint 2</div>
+    <div class="sprint-desc">Expansão do componente para outros pontos do portal. Padronização da solução para reuso entre squads. Campanha especial e educação financeira.</div>
+  </div>
+</div>
+</div></section>
+
+
+<!-- ══════════════════════════════════════════
+     6. APRENDIZADOS
+     ══════════════════════════════════════════ -->
+
+<section class="ed" style="border-bottom:1px solid var(--gray-5)"><div class="container">
+<div class="ed-grid rv">
+  <div>
+    <div class="ed-num">06</div>
+    <h2 class="ed-title">Aprendizados</h2>
+  </div>
+  <div>
+    <p class="ed-body">Em fluxos financeiros sensíveis, <strong>a ausência de sinalização é tão prejudicial quanto o excesso de informação.</strong> O cliente precisa de sinais claros de que está no caminho certo, especialmente quando o próximo passo envolve dinheiro.</p>
+    <p class="ed-body">Microinterações aplicadas com critério aumentam a acessibilidade sem comprometer a hierarquia ou o desempenho do sistema. O crescimento sustentável veio de ciclos curtos orientados a experimentação, não de grandes reformulações.</p>
+  </div>
+</div>
+</div></section>
+
 
 <!-- MORE WORK -->
 <section class="more-work"><div class="container">
@@ -602,17 +606,17 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 </div></section>
 
 <section class="cta-section" id="contact"><div class="container">
-<h2 class="cta-title rv"><a href="mailto:adriana@pommot.com">Vamos<br>Conversar?</a></h2>
+<h2 class="cta-title rv"><a href="mailto:adrianapommot@gmail.com">Vamos<br>Conversar?</a></h2>
 <p class="cta-subtitle rv d1">Product Design & Inteligência Visual</p>
-<a href="mailto:adriana@pommot.com" class="cta-btn rv d2">Entrar em Contato →</a>
+<a href="mailto:adrianapommot@gmail.com" class="cta-btn rv d2">Entrar em Contato →</a>
 </div></section>
 
 <footer><div class="container">
 <div class="footer-grid">
-<div><div class="footer-logo">Adriana Pommot</div><div class="footer-social"><a href="https://linkedin.com/in/adriana-pommot" target="_blank">LinkedIn</a><a href="https://instagram.com/ultraviolenta.ink" target="_blank">Instagram</a><a href="mailto:adriana@pommot.com">Email</a></div></div>
+<div><div class="footer-logo">Adriana Pommot</div><div class="footer-social"><a href="https://linkedin.com/in/adriana-pommot" target="_blank">LinkedIn</a><a href="https://instagram.com/ultraviolenta.ink" target="_blank">Instagram</a><a href="mailto:adrianapommot@gmail.com">Email</a></div></div>
 <div><div class="footer-col-title">Páginas</div><div class="footer-col-links"><a href="index.html#work">Projetos</a><a href="index.html#services">Serviços</a><a href="index.html#about">Sobre Mim</a><a href="#contact">Contato</a></div></div>
 <div><div class="footer-col-title">Projetos</div><div class="footer-col-links"><a href="case-mrv.html">MRV</a><a href="case-delta.html">Delta DS</a><a href="case-dasa.html">Dasa.ai</a><a href="case-ford.html">Ford</a></div></div>
-<div><div class="footer-col-title">Contato</div><div class="footer-col-links"><a href="mailto:adriana@pommot.com">adriana@pommot.com</a><a href="#">São Paulo, BR</a></div></div>
+<div><div class="footer-col-title">Contato</div><div class="footer-col-links"><a href="mailto:adrianapommot@gmail.com">adrianapommot@gmail.com</a><a href="#">São Paulo, BR</a></div></div>
 </div>
 <div class="footer-bottom"><span class="footer-copy">© 2026 Adriana Pommot</span><span class="footer-copy">Product Design & Inteligência Visual</span></div>
 </div></footer>
@@ -621,15 +625,13 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 document.querySelectorAll('.nav-menu a').forEach(a=>{
   a.addEventListener('click',()=>{
     const f=document.getElementById('navFloat');
-    if(f) f.classList.remove('open');
+    if(f)f.classList.remove('open');
   });
 });
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}
-  });
-},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+const ro=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}});
+},{threshold:0.1});
+document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
 </script>
 </body>
 </html>
