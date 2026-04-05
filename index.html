@@ -87,47 +87,25 @@ a { color: inherit; text-decoration: none; }
   gap: 8px;
 }
 .nav-toggle {
-  width: 52px; height: 52px;
-  border-radius: 50%;
+  width: 54px; height: 54px;
+  border-radius: 12px;
   border: none;
   cursor: pointer;
-  background: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.72);
   backdrop-filter: blur(12px) saturate(1.3);
   -webkit-backdrop-filter: blur(12px) saturate(1.3);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.3s, box-shadow 0.3s;
+  transition: background 0.3s;
   position: relative;
-  box-shadow:
-    0 0 0 1px rgba(209,244,102,0.2),
-    0 0 12px rgba(209,244,102,0.08);
-  animation: iridescent 4s ease-in-out infinite;
-}
-@keyframes iridescent {
-  0%, 100% {
-    box-shadow:
-      0 0 0 1px rgba(209,244,102,0.2),
-      0 0 12px rgba(209,244,102,0.08);
-  }
-  33% {
-    box-shadow:
-      0 0 0 1px rgba(180,230,140,0.25),
-      0 0 16px rgba(180,230,140,0.1);
-  }
-  66% {
-    box-shadow:
-      0 0 0 1px rgba(220,250,120,0.3),
-      0 0 14px rgba(220,250,120,0.12);
-  }
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 .nav-toggle:hover {
-  background: var(--black);
-  box-shadow: none;
-  animation: none;
+  background: #FAF5F0;
 }
 .nav-toggle:hover svg {
-  stroke: var(--accent);
+  stroke: var(--black);
 }
 .nav-toggle svg {
   width: 22px; height: 22px;
@@ -141,11 +119,7 @@ a { color: inherit; text-decoration: none; }
 .nav-float.open .nav-toggle .icon-x { display: block; }
 .nav-float.open .nav-toggle {
   background: var(--black);
-  animation: none;
   box-shadow: none;
-}
-.nav-float.open .nav-toggle svg {
-  stroke: var(--white);
 }
 .nav-menu {
   display: flex;
@@ -742,7 +716,7 @@ footer {
   flex-shrink: 0;
   width: 3px;
   height: 3px;
-  border-radius: 50%;
+  border-radius: 12px;
   background: var(--black);
   margin: 0 10px;
   opacity: 1;
