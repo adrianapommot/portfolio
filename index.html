@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Adriana Pommot — Designer Sênior com 16+ anos em UI, Design Systems e Identidade Visual. MRV, Dasa, Ford, Escale.">
+<meta property="og:title" content="Adriana Pommot · Design Digital & Inteligência Visual">
+<meta property="og:description" content="Designer Sênior com 16+ anos em UI, Design Systems e Identidade Visual. Portfolio com cases MRV, Dasa, Ford e Escale.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://adrianapommot.github.io/portfolio/">
+<meta property="og:image" content="https://framerusercontent.com/images/tJmuIg4YsOc9pGcsP4sUgCj5gw.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <title>Adriana Pommot · Design Digital & Inteligência Visual</title>
 <!-- General Sans — Fontshare (Indian Type Foundry) -->
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap" rel="stylesheet">
@@ -89,7 +96,7 @@ a { color: inherit; text-decoration: none; }
 .nav-toggle {
   width: 54px; height: 54px;
   border-radius: 50%;
-  border: none;
+  border: 1px solid var(--gray-5);
   cursor: pointer;
   background: rgba(255,255,255,0.72);
   backdrop-filter: blur(12px) saturate(1.3);
@@ -97,12 +104,13 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.3s;
+  transition: background 0.3s, border-color 0.3s;
   position: relative;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  box-shadow: none;
 }
 .nav-toggle:hover {
-  background: #FAF5F0;
+  background: var(--accent);
+  border-color: var(--accent);
 }
 .nav-toggle:hover svg {
   stroke: var(--black);
@@ -110,8 +118,8 @@ a { color: inherit; text-decoration: none; }
 .nav-toggle svg {
   width: 22px; height: 22px;
   stroke: var(--black);
-  stroke-width: 1.8;
-  stroke-linecap: round;
+  stroke-width: 1;
+  stroke-linecap: square;
   fill: none;
 }
 .nav-toggle .icon-x { display: none; }
@@ -187,31 +195,34 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ═══════════════════════════════════
-   STACKING CARDS — layered depth via shadows
+   SECTIONS — sticky stack on projects
    ═══════════════════════════════════ */
 .hero,
-.services-section,
-.projects-section,
-.trajectory-section,
-.about-section,
-.cta-section {
+.services-section {
   position: relative;
+  background: var(--white);
 }
-.hero            { z-index: 1; background: var(--white); }
-.services-section { z-index: 2; background: #FAF8F5; box-shadow: 0 -8px 32px rgba(0,0,0,0.06); }
-.projects-section { z-index: 3; box-shadow: 0 -8px 32px rgba(0,0,0,0.10); }
-.trajectory-section { z-index: 4; background: var(--white); box-shadow: 0 -8px 32px rgba(0,0,0,0.06); }
-.about-section   { z-index: 5; background: #FAF8F5; box-shadow: 0 -8px 32px rgba(0,0,0,0.06); }
-.cta-section     { z-index: 6; box-shadow: 0 -8px 32px rgba(0,0,0,0.10); }
-footer           { position: relative; z-index: 7; }
+/* Trajectory sticks so projects can scroll over it */
+.trajectory-section {
+  position: relative;
+  z-index: 1;
+  background: var(--white);
+}
+/* Projects dark block scrolls over the sticky trajectory */
+.projects-section {
+  position: relative;
+  z-index: 2;
+}
+.about-section   { position: relative; z-index: 3; background: var(--white); }
+.cta-section     { position: relative; z-index: 4; }
+footer           { position: relative; z-index: 5; }
 
 /* ═══════════════════════════════════
-   HERO — Monumental typography
-   Structure: big title → tagline bar → content grid
+   HERO — Structured editorial layout
    ═══════════════════════════════════ */
 .hero {
-  padding-top: 120px;
-  padding-bottom: 0;
+  padding-top: 80px;
+  padding-bottom: 80px;
 }
 .hero-title {
   font-family: var(--font-display);
@@ -220,7 +231,7 @@ footer           { position: relative; z-index: 7; }
   line-height: 1.0;
   letter-spacing: -0.02em;
   text-transform: uppercase;
-  padding: 48px 0 16px;
+  padding: 24px 0 0;
   margin-left: -0.04em;
 }
 
@@ -228,8 +239,9 @@ footer           { position: relative; z-index: 7; }
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
-  margin-bottom: 64px;
+  padding: 26px 0;
+  margin-bottom: 0;
+  border-bottom: 1px solid var(--gray-5);
 }
 .hero-bar-label {
   font-family: var(--font-display);
@@ -237,16 +249,29 @@ footer           { position: relative; z-index: 7; }
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--black);
+  color: var(--gray-3);
 }
 
 /* Content grid: subtitle + services left, image right */
 .hero-content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 0;
   align-items: stretch;
-  padding-bottom: 56px;
+}
+.hero-content-left {
+  border-right: 1px solid var(--gray-5);
+  padding: 80px 48px 48px 0;
+  position: relative;
+}
+.hero-content-left::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  bottom: -80px;
+  width: 1px;
+  height: 80px;
+  background: var(--gray-5);
 }
 .hero-h2 {
   font-family: var(--font-display);
@@ -255,47 +280,44 @@ footer           { position: relative; z-index: 7; }
   line-height: 1.1;
   letter-spacing: -0.01em;
   text-transform: uppercase;
-  margin-bottom: 48px;
+  margin-bottom: 40px;
   margin-left: -0.03em;
 }
 .hero-body {
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 400;
-  line-height: 1.6;
+  line-height: 1.7;
   color: var(--gray-3);
-  margin-bottom: 48px;
+  margin-bottom: 40px;
   max-width: 480px;
 }
-.hero-services {
-  display: flex;
-  flex-direction: column;
-}
-.hero-svc-item {
+.hero-clients {
   display: flex;
   align-items: center;
-  gap: 20px;
-  padding: 14px 0;
+  gap: 16px;
+  padding: 20px 0;
   border-top: 1px solid var(--gray-5);
   font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
+  font-size: 12px;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
-.hero-svc-item:last-child { border-bottom: 1px solid var(--gray-5); }
-.hero-svc-num {
-  font-size: 13px;
-  font-weight: 400;
+.hero-clients-label {
+  font-weight: 500;
   color: var(--gray-4);
-  min-width: 24px;
 }
-.hero-svc-name { color: var(--black); }
+.hero-clients-list {
+  font-weight: 500;
+  color: var(--black);
+  letter-spacing: 0.06em;
+}
 .hero-img {
   width: 100%;
   overflow: hidden;
-  background: var(--gray-6);
-  border-radius: 4px;
+  background: transparent;
+  border-radius: 0;
+  padding: 80px 0 48px 48px;
 }
 .hero-img img, .hero-img video {
   width: 100%; height: 100%;
@@ -308,8 +330,9 @@ footer           { position: relative; z-index: 7; }
 .marquee {
   overflow: hidden;
   white-space: nowrap;
-  padding: 12px 0;
-  margin-bottom: 48px;
+  padding: 28px 0;
+  margin: 0 0 64px 0;
+  border-bottom: 1px solid var(--gray-5);
   -webkit-mask-image: linear-gradient(90deg, transparent, black 4%, black 96%, transparent);
   mask-image: linear-gradient(90deg, transparent, black 4%, black 96%, transparent);
 }
@@ -328,16 +351,13 @@ footer           { position: relative; z-index: 7; }
   text-transform: uppercase;
   flex-shrink: 0;
 }
-.marquee-dot {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+.marquee-sep {
   padding: 0 clamp(24px, 3vw, 48px);
+  font-family: var(--font-body);
+  font-size: clamp(40px, 5vw, 64px);
+  color: var(--accent);
   flex-shrink: 0;
-}
-.marquee-dot svg {
-  width: clamp(18px, 2.2vw, 28px);
-  height: clamp(18px, 2.2vw, 28px);
+  line-height: 1;
 }
 @keyframes marquee {
   0% { transform: translateX(0); }
@@ -348,7 +368,8 @@ footer           { position: relative; z-index: 7; }
    SERVICES
    ═══════════════════════════════════ */
 .services-section {
-  padding: 64px 0 120px;
+  padding: 0 0 128px;
+  border-top: 1px solid var(--gray-5);
 }
 .section-title {
   font-family: var(--font-display);
@@ -361,42 +382,45 @@ footer           { position: relative; z-index: 7; }
 }
 .svc-row {
   display: grid;
-  grid-template-columns: 60px 1fr 1.4fr;
-  gap: 32px;
-  align-items: start;
-  padding: 36px 0;
+  grid-template-columns: 40px 200px 1fr;
+  gap: 16px;
+  align-items: baseline;
+  padding: 20px 0;
   border-bottom: 1px solid var(--gray-5);
-  transition: background 0.3s;
+  position: relative;
+  transition: color 0.3s;
 }
 .svc-row:first-child {
   border-top: 1px solid var(--gray-5);
 }
-.svc-row:hover {
-  background: var(--gray-6);
-  margin: 0 -16px;
-  padding: 36px 16px;
+.svc-row:hover .svc-name {
+  color: var(--gray-3);
+}
+.svc-row:hover .svc-num {
+  color: var(--black);
 }
 .svc-num {
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 400;
   color: var(--gray-4);
-  padding-top: 6px;
+  transition: color 0.3s;
 }
 .svc-name {
   font-family: var(--font-display);
-  font-size: clamp(20px, 2.2vw, 28px);
+  font-size: 12px;
   font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
+  line-height: 1.3;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color 0.3s;
 }
 .svc-desc {
-  font-family: var(--font-body);
+  font-family: var(--font-display);
   font-size: 14px;
   font-weight: 400;
   color: var(--gray-3);
-  line-height: 1.6;
-  text-wrap: balance;
+  line-height: 1.55;
 }
 
 /* ═══════════════════════════════════
@@ -404,7 +428,7 @@ footer           { position: relative; z-index: 7; }
    Corner marks + 4-col: number | title | image | desc+tags
    ═══════════════════════════════════ */
 .projects-section {
-  padding: 64px 0 56px;
+  padding: 0 0 128px;
   background: var(--black);
 }
 .proj-grid {
@@ -415,7 +439,7 @@ footer           { position: relative; z-index: 7; }
   grid-template-columns: 80px 1fr 1.2fr 1fr;
   gap: 48px;
   align-items: start;
-  padding: 56px 0;
+  padding: 48px 0;
   border-bottom: 1px solid var(--gray-5);
   position: relative;
   transition: background 0.4s;
@@ -464,13 +488,13 @@ footer           { position: relative; z-index: 7; }
 }
 
 .proj-num {
-  font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 400;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 500;
   color: var(--gray-4);
   line-height: 1;
-  letter-spacing: 0.02em;
-  padding-top: 8px;
+  letter-spacing: 0.04em;
+  padding-top: 6px;
 }
 .proj-info {
   display: flex;
@@ -480,10 +504,10 @@ footer           { position: relative; z-index: 7; }
 }
 .proj-name {
   font-family: var(--font-display);
-  font-size: clamp(24px, 2.8vw, 36px);
-  font-weight: 500;
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 400;
   line-height: 1.15;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   text-transform: uppercase;
 }
 .proj-img {
@@ -528,64 +552,95 @@ footer           { position: relative; z-index: 7; }
   white-space: nowrap;
 }
 
-/* Projects dark overrides */
+/* Projects dark overrides — 3 tons: white, 50% white, 12% white */
 .projects-section .marquee-text { color: var(--white); }
-.projects-section .proj-item { border-color: rgba(255,255,255,0.1); color: var(--white); }
-.projects-section .proj-item:first-of-type { border-color: rgba(255,255,255,0.1); }
+.projects-section .marquee-sep { color: var(--accent); }
+.projects-section .marquee { border-bottom-color: rgba(255,255,255,0.12); }
+.projects-section .proj-item { border-color: rgba(255,255,255,0.12); }
+.projects-section .proj-item:first-of-type { border-color: rgba(255,255,255,0.12); }
 .projects-section .proj-item::before,
 .projects-section .proj-item::after,
 .projects-section .proj-item .proj-corner-bl,
-.projects-section .proj-item .proj-corner-br { color: rgba(255,255,255,0.2); }
-.projects-section .proj-item:hover { background: rgba(255,255,255,0.05); }
-.projects-section .proj-num { color: rgba(255,255,255,0.35); }
-.projects-section .proj-name { color: var(--white); }
-.projects-section .proj-desc { color: var(--gray-4); }
-.projects-section .proj-tag { color: rgba(255,255,255,0.35); }
-.projects-section .proj-img { background: rgba(255,255,255,0.05); }
+.projects-section .proj-item .proj-corner-br { color: rgba(255,255,255,0.12); }
+.projects-section .proj-item:hover { background: rgba(255,255,255,0.04); }
+.projects-section .proj-num { color: var(--accent); }
+.projects-section .proj-name {
+  color: var(--white);
+  font-weight: 400;
+  font-size: clamp(22px, 2.5vw, 32px);
+}
+.projects-section .proj-desc {
+  color: rgba(255,255,255,0.5);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+.projects-section .proj-tag {
+  color: rgba(255,255,255,0.5);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+.projects-section .proj-img { background: rgba(255,255,255,0.04); }
 
 /* ═══════════════════════════════════
    TRAJECTORY — Clean table
    ═══════════════════════════════════ */
 .trajectory-section {
-  padding: 64px 0 56px;
+  padding: 0 0 128px;
+  border-top: 1px solid var(--gray-5);
 }
 .traj-row {
   display: grid;
-  grid-template-columns: 100px 1fr 1fr;
-  gap: 24px;
-  align-items: center;
-  padding: 18px 0;
+  grid-template-columns: 80px 200px 1fr;
+  gap: 16px;
+  align-items: baseline;
+  padding: 20px 0;
   border-bottom: 1px solid var(--gray-5);
-  transition: background 0.2s;
+  position: relative;
+  transition: color 0.3s;
 }
-.traj-row:hover { background: var(--gray-6); margin: 0 -16px; padding: 18px 16px; }
+.traj-row:first-child {
+  border-top: 1px solid var(--gray-5);
+}
+.traj-row:hover .traj-company { color: var(--gray-3); }
+.traj-row:hover .traj-year { color: var(--black); }
 .traj-year {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 11px;
   font-weight: 400;
   color: var(--gray-4);
+  transition: color 0.3s;
+}
+.traj-company {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color 0.3s;
 }
 .traj-role {
   font-family: var(--font-display);
-  font-size: 15px;
-  font-weight: 500;
-}
-.traj-company {
-  font-family: var(--font-body);
   font-size: 14px;
   font-weight: 400;
   color: var(--gray-3);
-  text-align: right;
+  line-height: 1.55;
 }
 
 /* ═══════════════════════════════════
    SOBRE MIM — Unified section
    ═══════════════════════════════════ */
 .about-section {
-  padding: 64px 0 56px;
+  padding: 0 0 128px;
+  border-top: 1px solid var(--gray-5);
 }
-.about-grid {
+.about-content {
   max-width: 640px;
+  padding: 0;
 }
 .about-text {
   font-family: var(--font-body);
@@ -606,7 +661,7 @@ footer           { position: relative; z-index: 7; }
   border-radius: 999px; border: none; cursor: pointer;
   transition: background 0.3s;
 }
-.btn-dark:hover { background: var(--gray-1); }
+.btn-dark:hover { background: var(--accent); color: var(--black); }
 .btn-outline {
   display: inline-flex; align-items: center;
   padding: 11px 26px;
@@ -617,7 +672,7 @@ footer           { position: relative; z-index: 7; }
   border: 1px solid var(--gray-5); border-radius: 999px;
   cursor: pointer; transition: all 0.3s;
 }
-.btn-outline:hover { border-color: var(--black); }
+.btn-outline:hover { border-color: var(--accent); background: var(--accent); color: var(--black); }
 
 /* ═══════════════════════════════════
    CTA — Dark section
@@ -638,7 +693,7 @@ footer           { position: relative; z-index: 7; }
 .cta-subtitle {
   font-family: var(--font-body);
   font-size: 15px; font-weight: 400;
-  color: rgba(255,255,255,0.4);
+  color: var(--accent);
   text-transform: uppercase; margin-bottom: 48px;
 }
 .cta-btn {
@@ -650,7 +705,7 @@ footer           { position: relative; z-index: 7; }
   color: var(--black); background: var(--white);
   border-radius: 999px; transition: opacity 0.3s;
 }
-.cta-btn:hover { opacity: 0.85; }
+.cta-btn:hover { background: var(--accent); color: var(--black); }
 
 /* ═══════════════════════════════════
    FOOTER — Dark
@@ -704,41 +759,30 @@ footer {
    ═══════════════════════════════════ */
 .skills-ticker {
   overflow: hidden;
-  white-space: nowrap;
-  background: #F5F1EB;
+  background: var(--black);
   width: 100%;
-  padding: 6px 0;
-  margin-bottom: 0;
+  height: 28px;
   display: flex;
   align-items: center;
+  margin: 26px 0 0 0;
 }
 .skills-ticker-track {
   display: inline-flex;
   align-items: center;
-  gap: 0;
-  animation: ticker 60s linear infinite;
-  will-change: transform;
-  width: max-content;
+  white-space: nowrap;
+  animation: ticker 35s linear infinite;
 }
-.skills-ticker-item {
-  font-family: var(--font-display);
+.skills-ticker-item,
+.skills-ticker-sep {
+  font-family: var(--font-body);
   font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
+  font-weight: 400;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #A89484;
+  color: var(--accent);
   flex-shrink: 0;
-  padding: 0 6px;
   line-height: 1;
-}
-.skills-ticker-dot {
-  flex-shrink: 0;
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: var(--black);
-  margin: 0 10px;
-  opacity: 1;
+  padding: 0 6px;
 }
 @keyframes ticker {
   0% { transform: translateX(0); }
@@ -746,46 +790,117 @@ footer {
 }
 
 /* ═══════════════════════════════════
-   ANIMATIONS
+   ANIMATIONS — fast, clean reveals
    ═══════════════════════════════════ */
-.rv{animation:fadeUp .6s ease both}.d1{animation-delay:.12s}.d2{animation-delay:.22s}.d3{animation-delay:.34s}.d4{animation-delay:.46s}
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
-.d5 { transition-delay: 0.5s; }
+
+/* Base: simple fade up */
+.rv {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out,
+              transform 0.6s ease-out;
+  will-change: opacity, transform;
+}
+.rv.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Staggered delays — tighter */
+.d1 { transition-delay: 0.08s; }
+.d2 { transition-delay: 0.16s; }
+.d3 { transition-delay: 0.24s; }
+.d4 { transition-delay: 0.32s; }
+.d5 { transition-delay: 0.4s; }
+
+/* Rows: uniform fade up, no lateral slide */
+.svc-row.rv,
+.traj-row.rv,
+.proj-item.rv {
+  opacity: 0;
+  transform: translateY(16px);
+}
+.svc-row.rv.visible,
+.traj-row.rv.visible,
+.proj-item.rv.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Marquee: fade only */
+.marquee.rv {
+  opacity: 0;
+  transform: none;
+  transition: opacity 0.5s ease-out;
+}
+.marquee.rv.visible {
+  opacity: 1;
+}
+
+/* Hero title: slightly longer */
+.hero-title.rv {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease-out,
+              transform 0.8s ease-out;
+}
+.hero-title.rv.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* CTA title */
+.cta-title.rv {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease-out,
+              transform 0.7s ease-out;
+}
+.cta-title.rv.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Trajectory rows need relative for layout */
+.traj-row {
+  position: relative;
+}
 
 /* ═══════════════════════════════════
    RESPONSIVE
    ═══════════════════════════════════ */
 @media (max-width: 1024px) {
-  .hero-content { grid-template-columns: 1fr; gap: 48px; }
+  .hero-content { grid-template-columns: 1fr; }
+  .hero-content-left { border-right: none; padding: 32px 0; }
+  .hero-img { padding: 0; }
   .hero-img { aspect-ratio: 16/9; }
-  .svc-row { grid-template-columns: 40px 1fr 1fr; gap: 24px; }
+  .svc-row { grid-template-columns: 32px 160px 1fr; gap: 12px; }
   .proj-item { grid-template-columns: 60px 1fr 1.2fr; gap: 24px; padding: 40px 0; }
   .proj-meta { display: none; }
   .proj-item::before, .proj-item::after { display: none; }
   .proj-item:hover { margin: 0; padding-left: 0; padding-right: 0; }
-  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+  .about-content { max-width: 100%; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
-  .traj-row { grid-template-columns: 80px 1fr auto; }
+  .traj-row { grid-template-columns: 80px 160px 1fr; }
 }
 @media (max-width: 640px) {
   :root { --px: 24px; }
   .nav-name { font-size: 12px; padding: 7px 16px; }
-  .hero { padding-top: 100px; }
-  .hero-title { padding: 32px 0 12px; }
-  .hero-bar { margin-bottom: 40px; }
-  .svc-row { grid-template-columns: 1fr; gap: 12px; }
-  .svc-num { padding-top: 0; }
+  .hero { padding-top: 72px; }
+  .hero-title { padding: 8px 0 0; }
+  .hero-bar { margin-bottom: 0; }
+  .svc-row { grid-template-columns: 1fr; gap: 6px; }
+  .svc-num { display: none; }
   .proj-item { grid-template-columns: 1fr; gap: 20px; padding: 32px 0; }
   .proj-num { font-size: 13px; }
   .proj-meta { display: none; }
   .services-section, .projects-section, .trajectory-section,
-  .about-section { padding: 48px 0 40px; }
-  .section-title { margin-bottom: 36px; }
-  .marquee { margin-bottom: 36px; padding: 10px 0; }
+  .about-section { padding: 0 0 80px; }
+  .section-title { margin-bottom: 24px; }
+  .marquee { padding: 16px 0; }
   .cta-section { padding: 96px 0; }
   .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-  .traj-row { grid-template-columns: 1fr; gap: 4px; }
-  .traj-company { text-align: left; }
+  .traj-row { grid-template-columns: 1fr; gap: 6px; }
 }
 </style>
 </head>
@@ -813,59 +928,12 @@ footer {
 <!-- HERO -->
 <section class="hero">
   <div class="container">
-    <h1 class="hero-title rv">Design Digital <span style="color:#E5DED5">&</span><br>Inteligência Visual</h1>
+    <h1 class="hero-title rv">Design Digital &amp;<br>Inteligência Visual</h1>
   </div>
 
-  <div class="skills-ticker rv d1">
+  <div class="skills-ticker" aria-hidden="true">
     <div class="skills-ticker-track">
-      <span class="skills-ticker-item">UI Design</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Design Systems</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Identidade Visual</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Ilustração</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Motion</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Branding de Interface</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Figma</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Prototipação</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">UI Design</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Design Systems</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Identidade Visual</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Ilustração</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Motion</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Branding de Interface</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Figma</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Prototipação</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">UI Design</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Design Systems</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Identidade Visual</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Ilustração</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Motion</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Branding de Interface</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Figma</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Prototipação</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">UI Design</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Design Systems</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Identidade Visual</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Ilustração</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Motion</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Branding de Interface</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Figma</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Prototipação</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">UI Design</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Design Systems</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Identidade Visual</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Ilustração</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Motion</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Branding de Interface</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Figma</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Prototipação</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">UI Design</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Design Systems</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Identidade Visual</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Ilustração</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Motion</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Branding de Interface</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Figma</span><span class="skills-ticker-dot"></span>
-      <span class="skills-ticker-item">Prototipação</span><span class="skills-ticker-dot"></span>
+      <span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">UI Design</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Design Systems</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Identidade Visual</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Ilustração</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Motion</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Branding de Interface</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Figma</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Prototipação</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">UI Design</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Design Systems</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Identidade Visual</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Ilustração</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Motion</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Branding de Interface</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Figma</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Prototipação</span>
     </div>
   </div>
 
@@ -879,11 +947,9 @@ footer {
       <div class="hero-content-left">
         <h2 class="hero-h2 rv d2">De pixels a sistemas,<br>de sistemas a produtos.</h2>
         <p class="hero-body rv d3">Interfaces de alta fidelidade, design systems que funcionam na prática e identidade visual de produto. Do token à experiência final.</p>
-        <div class="hero-services rv d4">
-          <div class="hero-svc-item"><span class="hero-svc-num">01</span><span class="hero-svc-name">UI & Produto</span></div>
-          <div class="hero-svc-item"><span class="hero-svc-num">02</span><span class="hero-svc-name">Design Systems</span></div>
-          <div class="hero-svc-item"><span class="hero-svc-num">03</span><span class="hero-svc-name">Identidade Visual</span></div>
-          <div class="hero-svc-item"><span class="hero-svc-num">04</span><span class="hero-svc-name">Ilustração & Motion</span></div>
+        <div class="hero-clients rv d4">
+          <span class="hero-clients-label">Empresas:</span>
+          <span class="hero-clients-list">MRV · Dasa · Ford · Vivo · Claro · Escale · Accenture</span>
         </div>
       </div>
       <div class="hero-img rv d2">
@@ -897,7 +963,7 @@ footer {
 <section class="services-section" id="services">
   <div class="marquee rv">
     <div class="marquee-track">
-      <span class="marquee-text">O Que Eu Faço</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">O Que Eu Faço</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">O Que Eu Faço</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">O Que Eu Faço</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">O Que Eu Faço</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">O Que Eu Faço</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span>
+      <span class="marquee-text">O Que Eu Faço</span><span class="marquee-sep">✦</span><span class="marquee-text">O Que Eu Faço</span><span class="marquee-sep">✦</span><span class="marquee-text">O Que Eu Faço</span><span class="marquee-sep">✦</span><span class="marquee-text">O Que Eu Faço</span><span class="marquee-sep">✦</span><span class="marquee-text">O Que Eu Faço</span><span class="marquee-sep">✦</span><span class="marquee-text">O Que Eu Faço</span><span class="marquee-sep">✦</span>
     </div>
   </div>
   <div class="container">
@@ -924,11 +990,33 @@ footer {
   </div>
 </section>
 
+<!-- TRAJECTORY -->
+<section class="trajectory-section" id="trajectory">
+  <div class="marquee rv">
+    <div class="marquee-track">
+      <span class="marquee-text">Trajetória</span><span class="marquee-sep">✦</span><span class="marquee-text">Trajetória</span><span class="marquee-sep">✦</span><span class="marquee-text">Trajetória</span><span class="marquee-sep">✦</span><span class="marquee-text">Trajetória</span><span class="marquee-sep">✦</span><span class="marquee-text">Trajetória</span><span class="marquee-sep">✦</span><span class="marquee-text">Trajetória</span><span class="marquee-sep">✦</span>
+    </div>
+  </div>
+  <div class="container">
+    <div class="traj-row rv"><span class="traj-year">2025–now</span><span class="traj-company">Freelance</span><span class="traj-role">Design Digital &amp; Arte · Projetos Independentes</span></div>
+    <div class="traj-row rv"><span class="traj-year">2021–25</span><span class="traj-company">Escale</span><span class="traj-role">Design Ops · Delta Design System</span></div>
+    <div class="traj-row rv"><span class="traj-year">2020–21</span><span class="traj-company">Dasa</span><span class="traj-role">Product Designer</span></div>
+    <div class="traj-row rv"><span class="traj-year">2019–20</span><span class="traj-company">D3</span><span class="traj-role">Design Lead · Cliente MRV</span></div>
+    <div class="traj-row rv"><span class="traj-year">2019</span><span class="traj-company">Accenture</span><span class="traj-role">Design Lead · Projeto Ford</span></div>
+    <div class="traj-row rv"><span class="traj-year">2018–19</span><span class="traj-company">SmartMEI</span><span class="traj-role">UI Designer</span></div>
+    <div class="traj-row rv"><span class="traj-year">2017–18</span><span class="traj-company">QuesttoNó</span><span class="traj-role">Designer</span></div>
+    <div class="traj-row rv"><span class="traj-year">2016</span><span class="traj-company">Papanapa</span><span class="traj-role">Designer</span></div>
+    <div class="traj-row rv"><span class="traj-year">2014–15</span><span class="traj-company">Stayfilm</span><span class="traj-role">Motion Designer</span></div>
+    <div class="traj-row rv"><span class="traj-year">2013–14</span><span class="traj-company">Ortiz Gaming</span><span class="traj-role">Motion Designer</span></div>
+    <div class="traj-row rv"><span class="traj-year">2012–13</span><span class="traj-company">agMint</span><span class="traj-role">Design Digital</span></div>
+  </div>
+</section>
+
 <!-- PROJECTS -->
 <section class="projects-section" id="work">
   <div class="marquee rv">
     <div class="marquee-track">
-      <span class="marquee-text">Projetos Selecionados</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Projetos Selecionados</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Projetos Selecionados</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Projetos Selecionados</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Projetos Selecionados</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Projetos Selecionados</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span>
+      <span class="marquee-text">Projetos Selecionados</span><span class="marquee-sep">✦</span><span class="marquee-text">Projetos Selecionados</span><span class="marquee-sep">✦</span><span class="marquee-text">Projetos Selecionados</span><span class="marquee-sep">✦</span><span class="marquee-text">Projetos Selecionados</span><span class="marquee-sep">✦</span><span class="marquee-text">Projetos Selecionados</span><span class="marquee-sep">✦</span><span class="marquee-text">Projetos Selecionados</span><span class="marquee-sep">✦</span>
     </div>
   </div>
   <div class="container">
@@ -979,7 +1067,7 @@ footer {
       </div>
     </a>
 
-    <a href="#" class="proj-item rv">
+    <div class="proj-item rv" style="cursor:default">
       <span class="proj-num">/04</span>
       <div class="proj-info">
         <h3 class="proj-name">Ford B460<br>KX738</h3>
@@ -994,26 +1082,9 @@ footer {
       </div>
       <span class="proj-corner-bl">+</span>
       <span class="proj-corner-br">+</span>
-    </a>
+    </div>
 
     </div>
-  </div>
-</section>
-
-<!-- TRAJECTORY -->
-<section class="trajectory-section" id="trajectory">
-  <div class="marquee rv">
-    <div class="marquee-track">
-      <span class="marquee-text">Trajetória</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Trajetória</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Trajetória</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Trajetória</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Trajetória</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Trajetória</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span>
-    </div>
-  </div>
-  <div class="container">
-    <div class="traj-row rv"><span class="traj-year">2021–23</span><span class="traj-role">Design Ops, Delta Design System</span><span class="traj-company">Escale</span></div>
-    <div class="traj-row rv"><span class="traj-year">2020–21</span><span class="traj-role">Product Designer Sênior</span><span class="traj-company">Dasa</span></div>
-    <div class="traj-row rv"><span class="traj-year">2020–21</span><span class="traj-role">Design Lead</span><span class="traj-company">D3 / Dasa</span></div>
-    <div class="traj-row rv"><span class="traj-year">2019–20</span><span class="traj-role">Design Lead</span><span class="traj-company">Accenture / Ford</span></div>
-    <div class="traj-row rv"><span class="traj-year">2017–19</span><span class="traj-role">UI Designer Sênior</span><span class="traj-company">MRV</span></div>
-    <div class="traj-row rv"><span class="traj-year">2008–17</span><span class="traj-role">Designer & Ilustradora</span><span class="traj-company">Agências & Freelance</span></div>
   </div>
 </section>
 
@@ -1021,14 +1092,13 @@ footer {
 <section class="about-section" id="about">
   <div class="marquee rv">
     <div class="marquee-track">
-      <span class="marquee-text">Sobre Mim</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Sobre Mim</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Sobre Mim</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Sobre Mim</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Sobre Mim</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span><span class="marquee-text">Sobre Mim</span><span class="marquee-dot"><svg viewBox="-12 -12 24 24" fill="#D1F466"><path d="M0,-11 L4,-4 L11,0 L4,4 L0,11 L-4,4 L-11,0 L-4,-4 Z"/><path d="M0,-7 L2.5,-2.5 L7,0 L2.5,2.5 L0,7 L-2.5,2.5 L-7,0 L-2.5,-2.5 Z" transform="rotate(45)"/></svg></span>
+      <span class="marquee-text">Sobre Mim</span><span class="marquee-sep">✦</span><span class="marquee-text">Sobre Mim</span><span class="marquee-sep">✦</span><span class="marquee-text">Sobre Mim</span><span class="marquee-sep">✦</span><span class="marquee-text">Sobre Mim</span><span class="marquee-sep">✦</span><span class="marquee-text">Sobre Mim</span><span class="marquee-sep">✦</span><span class="marquee-text">Sobre Mim</span><span class="marquee-sep">✦</span>
     </div>
   </div>
   <div class="container">
-    <div class="about-grid">
-      <p class="about-text rv d1">Sou designer e ilustradora. Trabalho com interface, identidade visual e criação de sistemas de design há mais de 16 anos. Passei por MRV, Dasa, Ford, Escale e agências. Saí de cargos de gestão porque prefiro criar.</p>
-      <p class="about-text rv d2">Meu melhor cenário: receber um briefing, resolver o problema visual e entregar com qualidade. Funciono bem com autonomia, trabalho remoto e ciclos objetivos. Em paralelo, desenvolvo arte ornamental para tatuagem no projeto @ultraviolenta.ink.</p>
-      <div class="about-ctas rv d3">
+    <div class="about-content">
+      <p class="about-text rv d1">Designer com mais de 17 anos de experiência em UI, identidade visual, design systems e linguagem gráfica. Construo desde interfaces e bibliotecas de componentes até direção visual para marcas e produtos digitais. Passei por Escale, Dasa, Ford, Accenture, Vivo e MRV, o que me deu repertório pra consolidar desde a comunicação visual de uma marca até o fluxo de experiência de um produto. <mark style="background:var(--accent);color:var(--black);font-weight:500;padding:2px 6px;border-radius:2px">Meu lugar é no craft.</mark></p>
+      <div class="about-ctas rv d2">
         <a href="cv-adriana-pommot.pdf" download class="btn-dark">Download CV</a>
         <a href="https://linkedin.com/in/adriana-pommot" target="_blank" class="btn-outline">LinkedIn</a>
       </div>
@@ -1085,30 +1155,34 @@ document.querySelectorAll('.nav-menu a').forEach(a => {
   });
 });
 
-/* Trajectory: stagger reveal */
-const trajSection = document.querySelector('.trajectory-section');
-if (trajSection) {
-  const trajObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        trajSection.querySelectorAll('.rv').forEach((el, i) => {
-          el.style.animationDelay = (i * 0.12) + 's';
-          el.classList.add('visible');
-        });
-        trajObs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  trajObs.observe(trajSection);
-}
-
-/* Scroll reveal */
-const ro = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); }
+/* Scroll reveal — simple, fast */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
   });
-}, { threshold: 0.1 });
-document.querySelectorAll('.rv').forEach(el => ro.observe(el));
+}, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+document.querySelectorAll('.rv').forEach(el => revealObserver.observe(el));
+
+/* Navbar background on scroll */
+const navName = document.querySelector('.nav-name');
+if (navName) {
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        navName.style.background = window.scrollY > 100
+          ? 'rgba(255,255,255,0.85)'
+          : 'rgba(255,255,255,0.55)';
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+}
 </script>
 </body>
 </html>
