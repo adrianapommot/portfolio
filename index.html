@@ -197,7 +197,17 @@ a { color: inherit; text-decoration: none; }
 .cta-section {
   position: sticky;
   top: 0;
+  max-height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
+.hero::-webkit-scrollbar,
+.services-section::-webkit-scrollbar,
+.projects-section::-webkit-scrollbar,
+.trajectory-section::-webkit-scrollbar,
+.about-section::-webkit-scrollbar,
+.cta-section::-webkit-scrollbar { display: none; }
 .hero            { z-index: 1; background: var(--white); }
 .services-section { z-index: 2; background: #FAF8F5; box-shadow: 0 -8px 32px rgba(0,0,0,0.06); }
 .projects-section { z-index: 3; box-shadow: 0 -8px 32px rgba(0,0,0,0.10); }
