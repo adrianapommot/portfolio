@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chorume Tipografia · Adriana Pommot</title>
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--black:#111;--white:#fff;--font-display:'General Sans',sans-serif;--font-body:'Roboto Mono',monospace;--max-w:1440px;--px:40px;--ch-bg:#0a0a0a;--ch-surface:#141414;--ch-border:rgba(255,255,255,.08);--ch-amber:#eb9148;--ch-text:rgba(255,255,255,.92);--ch-text-2:rgba(255,255,255,.65);--ch-text-3:rgba(255,255,255,.48);--ch-text-4:rgba(255,255,255,.25)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);color:var(--ch-text);background:var(--ch-bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--ch-amber);color:var(--black)}
+img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
+.container{max-width:var(--max-w);margin:0 auto;padding:0 var(--px)}
+
+/* ═══ NAV ═══ */
+.nav-name{position:fixed;top:20px;left:max(calc(var(--px) - 20px),calc((100vw - var(--max-w))/2 + var(--px) - 20px));z-index:100;font-family:var(--font-display);font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--white);background:rgba(20,20,20,.55);backdrop-filter:blur(12px) saturate(1.3);-webkit-backdrop-filter:blur(12px) saturate(1.3);padding:8px 20px;border-radius:999px;border:1px solid var(--ch-border)}
+.nav-float{position:fixed;top:20px;right:max(var(--px),calc((100vw - var(--max-w))/2 + var(--px)));z-index:100;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.nav-toggle{width:54px;height:54px;border-radius:50%;border:1px solid var(--ch-border);cursor:pointer;background:rgba(20,20,20,.55);backdrop-filter:blur(12px) saturate(1.3);-webkit-backdrop-filter:blur(12px) saturate(1.3);display:flex;align-items:center;justify-content:center;transition:background .3s}
+.nav-toggle:hover{background:rgba(40,40,40,.8)}
+.nav-toggle svg{width:22px;height:22px;stroke:var(--white);stroke-width:1.8;stroke-linecap:round;fill:none}
+.nav-toggle .icon-x{display:none}
+.nav-float.open .nav-toggle .icon-menu{display:none}
+.nav-float.open .nav-toggle .icon-x{display:block}
+.nav-float.open .nav-toggle{background:var(--white);border-color:transparent}
+.nav-float.open .nav-toggle svg{stroke:var(--black)}
+.nav-menu{display:flex;flex-direction:column;align-items:flex-end;gap:6px;opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .3s,transform .3s}
+.nav-float.open .nav-menu{opacity:1;transform:translateY(0);pointer-events:auto}
+.nav-menu a{font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;padding:8px 20px;border-radius:999px;white-space:nowrap;transition:color .25s,background .25s}
+.nav-menu .nav-cta{color:var(--black);background:var(--white);display:inline-flex;align-items:center;gap:8px}
+.nav-menu .nav-cta:hover{color:#555}
+.nav-menu .nav-cta svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.nav-menu .nav-link{color:var(--ch-text-3);background:rgba(20,20,20,.55);backdrop-filter:blur(12px) saturate(1.3);-webkit-backdrop-filter:blur(12px) saturate(1.3)}
+.nav-menu .nav-link:hover{color:var(--white)}
+
+/* ═══ HEADER ═══ */
+.case-header{padding:120px 0 0}
+.case-back{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--ch-text);margin-bottom:72px;transition:opacity .3s}
+.case-back:hover{opacity:.5}
+.case-back svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.case-wordmark{max-width:553px;margin-bottom:40px}
+.case-wordmark img{width:100%;height:auto}
+.case-focus{font-family:var(--font-display);font-size:16px;font-weight:400;line-height:1.75;color:var(--ch-text-2);max-width:620px;margin-bottom:56px}
+.case-focus .hl{color:var(--ch-amber)}
+.case-focus .hl-warm{color:rgba(242,215,193,.65);font-weight:700}
+.case-divider{height:1px;background:rgba(255,255,255,.1);width:100%}
+.case-meta{display:flex;flex-wrap:wrap;gap:36px;padding:24px 0}
+.case-meta-item{display:flex;flex-direction:column;gap:8px}
+.case-meta-label{font-family:var(--font-display);font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--ch-text-3)}
+.case-meta-value{font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.06em;color:var(--ch-text)}
+
+/* ═══ EDITORIAL: TWO-COLUMN (Figma grid) ═══ */
+.ed-section{padding:80px 0 64px;border-top:1px solid var(--ch-border)}
+.ed-section.no-divider{border-top:none}
+.ed-row{display:flex;justify-content:space-between;align-items:flex-start;gap:40px}
+.ed-left{flex-shrink:0}
+.ed-head{display:flex;gap:20px;align-items:baseline}
+.ed-num{font-family:var(--font-body);font-size:24px;font-weight:400;color:var(--ch-amber);letter-spacing:.08em}
+.ed-title{font-family:var(--font-display);font-size:24px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--white);line-height:1.5}
+.ed-right{width:660px;flex-shrink:0}
+.ed-body p{font-family:var(--font-display);font-size:16px;font-weight:400;color:var(--ch-text-2);line-height:1.8;margin-bottom:20px}
+.ed-body p:last-child{margin-bottom:0}
+
+/* inline image within right column */
+.ed-img-inline{margin-top:20px;overflow:hidden}
+.ed-img-inline img{width:100%;height:auto;display:block}
+
+/* full-bleed image */
+.img-bleed{width:100%;overflow:hidden;margin-top:48px}
+.img-bleed img{width:100%;height:auto;display:block}
+
+/* centered image */
+.img-centered{margin:48px auto 0;overflow:hidden}
+.img-centered img{width:100%;height:auto;display:block}
+
+/* caption (amber, right-aligned) */
+.img-caption{font-family:var(--font-body);font-size:15px;font-weight:400;color:var(--ch-amber);letter-spacing:.04em;text-transform:uppercase;margin-top:24px;text-align:right}
+
+/* ═══ MORE WORK ═══ */
+.more-work{padding:160px 0;border-top:1px solid var(--ch-border)}
+.more-work-title{font-family:var(--font-display);font-size:clamp(44px,7vw,72px);font-weight:400;line-height:1;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:64px}
+.more-work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.more-work-card{display:block;transition:opacity .3s}
+.more-work-card:hover{opacity:.8}
+.more-work-card-img{width:100%;aspect-ratio:3/2;overflow:hidden;background:var(--ch-surface);border:1px solid rgba(255,255,255,.06);border-radius:4px;margin-bottom:20px}
+.more-work-card-img img{width:100%;height:100%;object-fit:cover}
+.more-work-card-tag{display:inline-block;font-family:var(--font-body);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ch-text-3);margin-bottom:12px}
+.more-work-card-name{font-family:var(--font-display);font-size:20px;font-weight:500;line-height:1.2}
+
+/* ═══ CTA + FOOTER ═══ */
+.cta-section{background:var(--ch-bg);color:var(--white);padding:160px 0;text-align:center;border-top:1px solid var(--ch-border)}
+.cta-title{font-family:var(--font-display);font-size:clamp(44px,9vw,120px);font-weight:400;line-height:.95;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:24px}
+.cta-title a{color:var(--white);transition:color .3s}.cta-title a:hover{color:var(--ch-amber)}
+.cta-subtitle{font-family:var(--font-body);font-size:15px;color:var(--ch-amber);text-transform:uppercase;margin-bottom:48px}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 30px;font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--black);background:var(--white);border-radius:999px;transition:opacity .3s}
+.cta-btn:hover{opacity:.85}
+footer{background:var(--ch-bg);color:var(--white);padding:64px 0 32px;border-top:1px solid var(--ch-border)}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px}
+.footer-logo{font-family:var(--font-display);font-size:15px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:20px}
+.footer-social{display:flex;flex-direction:column;gap:10px}
+.footer-social a{font-family:var(--font-body);font-size:13px;color:var(--ch-text-3);transition:color .3s}
+.footer-social a:hover{color:var(--white)}
+.footer-col-title{font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ch-text-4);margin-bottom:20px}
+.footer-col-links{display:flex;flex-direction:column;gap:10px}
+.footer-col-links a{font-family:var(--font-body);font-size:13px;color:var(--ch-text-3);transition:color .3s}
+.footer-col-links a:hover{color:var(--white)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:32px;border-top:1px solid var(--ch-border)}
+.footer-copy{font-family:var(--font-body);font-size:12px;color:var(--ch-text-4)}
+
+/* ═══ REVEAL ═══ */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.rv.visible{opacity:1;transform:none}
+.d1{transition-delay:.12s}.d2{transition-delay:.22s}.d3{transition-delay:.34s}.d4{transition-delay:.46s}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1024px){
+  .ed-row{flex-direction:column;gap:24px}
+  .ed-right{width:100%}
+  .more-work-grid{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  :root{--px:24px}
+  .nav-name{font-size:12px;padding:7px 16px}
+  .case-header{padding-top:100px}
+  .case-meta{gap:20px}
+  .case-meta-item{min-width:calc(50% - 10px)}
+  .ed-section{padding:60px 0 48px}
+  .ed-num,.ed-title{font-size:18px}
+  .img-caption{font-size:12px}
+  .more-work-grid{grid-template-columns:1fr}
+  .more-work,.cta-section{padding:96px 0}
+  .footer-grid{grid-template-columns:1fr;gap:32px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<a href="index.html" class="nav-name">Adriana Pommot</a>
+<div class="nav-float" id="navFloat">
+  <button class="nav-toggle" onclick="document.getElementById('navFloat').classList.toggle('open')" aria-label="Menu">
+    <svg class="icon-menu" viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    <svg class="icon-x" viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+  </button>
+  <div class="nav-menu">
+    <a href="cv-adriana-pommot.pdf" download class="nav-cta">Download CV<svg viewBox="0 0 16 16"><path d="M8 3v8M4 8l4 4 4-4"/><path d="M3 13h10"/></svg></a>
+    <a href="index.html#work" class="nav-link">Projetos</a>
+    <a href="index.html#services" class="nav-link">Serviços</a>
+    <a href="index.html#about" class="nav-link">Sobre Mim</a>
+    <a href="#contact" class="nav-link">Contato</a>
+  </div>
+</div>
+
+<!-- HEADER -->
+<section class="case-header"><div class="container">
+  <a href="index.html#work" class="case-back rv"><svg viewBox="0 0 16 16"><path d="M13 8H3M7 4l-4 4 4 4"/></svg> Todos os Projetos</a>
+  <div class="case-wordmark rv d1"><img src="img/chorume/wordmark.webp" alt="Chorume"></div>
+  <p class="case-focus rv d2">Projeto autoral de tipografia vernacular que virou <span class="hl">ecossistema gráfico.</span><br>De um cartaz de rua à criação de uma cachaça fictícia, envolvendo fonte desenhada à mão, direção de arte, cenografia em estúdio e fotografia. <span class="hl-warm">Reconhecido com o prêmio Best of Show da Miami Ad School.</span></p>
+  <div class="case-divider"></div>
+  <div class="case-meta rv d3">
+    <div class="case-meta-item"><span class="case-meta-label">Função</span><span class="case-meta-value">Criação autoral</span></div>
+    <div class="case-meta-item"><span class="case-meta-label">Programa</span><span class="case-meta-value">Miami Ad School / ESPM</span></div>
+    <div class="case-meta-item"><span class="case-meta-label">Ano</span><span class="case-meta-value">2015</span></div>
+    <div class="case-meta-item"><span class="case-meta-label">Reconhecimento</span><span class="case-meta-value">Best of Show</span></div>
+    <div class="case-meta-item"><span class="case-meta-label">Escopo</span><span class="case-meta-value">Tipografia, Branding, Direção de Arte</span></div>
+  </div>
+  <div class="case-divider"></div>
+</div></section>
+
+<!-- 01 O CARTAZ -->
+<section class="ed-section"><div class="container">
+  <div class="ed-row rv">
+    <div class="ed-left">
+      <div class="ed-head">
+        <span class="ed-num">01</span>
+        <span class="ed-title">O Cartaz</span>
+      </div>
+    </div>
+    <div class="ed-right">
+      <div class="ed-body">
+        <p>Um cartaz colado num muro do bairro da Liberdade, em São Paulo.<br>Pincel grosso, régua nenhuma, sem pretensão estética.</p>
+      </div>
+      <div class="ed-img-inline">
+        <img src="img/chorume/cartaz.webp" alt="Cartaz Proibido jogar lixo, bairro da Liberdade, São Paulo">
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 02 VERNACULAR COMO MATÉRIA-PRIMA -->
+<section class="ed-section no-divider"><div class="container">
+  <div class="ed-row rv">
+    <div class="ed-left">
+      <div class="ed-head">
+        <span class="ed-num">02</span>
+        <span class="ed-title">Vernacular como<br>matéria-prima</span>
+      </div>
+    </div>
+    <div class="ed-right">
+      <div class="ed-body">
+        <p>A força daquele traço, sua irregularidade brutal e funcional, revelava uma identidade visual espontânea, nascida do improviso. Esse gesto gráfico foi a matéria-prima para o desenvolvimento da tipografia Chorume, que preserva o ritmo, os erros e a urgência de sua origem.</p>
+        <p>O vernacular brasileiro de rua é um tipo de design que ninguém assina.<br>Ele existe porque precisa existir, e é essa urgência que o torna honesto.</p>
+      </div>
+    </div>
+  </div>
+  <div class="img-bleed rv d1">
+    <img src="img/chorume/moodboard.webp" alt="Moodboard: decomposição, terra úmida, permanência orgânica">
+  </div>
+  <p class="img-caption rv d2">Moodboard de pesquisa: atmosfera de decomposição, terra úmida e permanência orgânica.</p>
+</div></section>
+
+<!-- 03 A FONTE -->
+<section class="ed-section"><div class="container">
+  <div class="ed-row rv">
+    <div class="ed-left">
+      <div class="ed-head">
+        <span class="ed-num">03</span>
+        <span class="ed-title">A Fonte</span>
+      </div>
+    </div>
+    <div class="ed-right">
+      <div class="ed-body">
+        <p>A partir das letras do cartaz, desenhei um alfabeto completo mantendo as imperfeições como parte da identidade. A fonte explora irregularidades como ritmo, peso e alinhamento, reforçando o aspecto orgânico e marginal do seu ponto de origem.</p>
+      </div>
+    </div>
+  </div>
+  <div class="img-bleed rv d1">
+    <img src="img/chorume/alfabeto-cenografia.webp" alt="Alfabeto completo da fonte Chorume com cenografia">
+  </div>
+</div></section>
+
+<!-- 04 INVENTAR O CHORUME -->
+<section class="ed-section"><div class="container">
+  <div class="ed-row rv">
+    <div class="ed-left">
+      <div class="ed-head">
+        <span class="ed-num">04</span>
+        <span class="ed-title">Inventar o<br>Chorume</span>
+      </div>
+    </div>
+    <div class="ed-right">
+      <div class="ed-body">
+        <p>O nome Chorume surgiu naturalmente. Imaginei uma cachaça artesanal fictícia, produzida com água da chuva, embalada em garrafas escuras, com identidade gráfica inspirada em xilogravura e signos de decomposição.</p>
+        <p>O rótulo mistura ilustração, tipografia autoral e simbologias do sertão. A parte inferior, com padrões de insetos e vegetação, remete à fermentação, à morte, à regeneração orgânica. A composição equilibra o grotesco e o lúdico, o artesanal e o especulativo.</p>
+      </div>
+    </div>
+  </div>
+  <div class="img-bleed rv d1">
+    <img src="img/chorume/garrafa-cenografia.webp" alt="Garrafa Chorume com cenografia de cactos e ilustrações">
+  </div>
+</div></section>
+
+<!-- 05 DIREÇÃO DE ARTE -->
+<section class="ed-section"><div class="container">
+  <div class="ed-row rv">
+    <div class="ed-left">
+      <div class="ed-head">
+        <span class="ed-num">05</span>
+        <span class="ed-title">Direção de arte</span>
+      </div>
+    </div>
+    <div class="ed-right">
+      <div class="ed-body">
+        <p>Para materializar essa narrativa, construí um pântano cenográfico em estúdio. Usei um aquário de vidro, terra úmida, musgo e ossos reais emprestados por um estudante de veterinária.</p>
+        <p>A composição foi pensada como um relicário fúnebre da garrafa, como se tivesse sido desenterrada de um sítio arqueológico pós-apocalíptico.</p>
+      </div>
+    </div>
+  </div>
+  <div class="img-centered rv d1" style="max-width:820px">
+    <img src="img/chorume/foto-final.webp" alt="Garrafa Chorume enterrada na lama">
+  </div>
+</div></section>
+
+<!-- 06 RESÍDUO -->
+<section class="ed-section"><div class="container">
+  <div class="ed-row rv">
+    <div class="ed-left">
+      <div class="ed-head">
+        <span class="ed-num">06</span>
+        <span class="ed-title">Resíduo</span>
+      </div>
+    </div>
+    <div class="ed-right">
+      <div class="ed-body">
+        <p>Chorume é, ao mesmo tempo, uma crítica e uma celebração. Do lixo nasce linguagem, da decomposição nasce um novo design.</p>
+        <p>Esse projeto me ensinou que vernacular não é falta de refinamento, é outro tipo de ofício. Aprendi a olhar pra coisas que ninguém olha, a respeitar a urgência do improviso e a confiar que o craft existe em todo lugar, não só nos lugares premiados.</p>
+        <p>O olho que desenhou essas letras em 2015 ainda mora em cada interface que eu construo hoje.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 07 O FUDGE -->
+<section class="ed-section"><div class="container">
+  <div class="ed-row rv">
+    <div class="ed-left">
+      <div class="ed-head">
+        <span class="ed-num">07</span>
+        <span class="ed-title">O Fudge</span>
+      </div>
+    </div>
+    <div class="ed-right">
+      <div class="ed-body">
+        <p>O projeto foi reconhecido com o prêmio Best of Show da Miami Ad School, eleito entre todos os trabalhos da turma.</p>
+        <p>Dez anos depois, o troféu ainda está na minha estante. Serve como lembrete de onde minha linguagem visual começou: olhando pra coisas que ninguém olha.</p>
+      </div>
+      <div class="ed-img-inline" style="max-width:480px">
+        <img src="img/chorume/premio-fudge.webp" alt="Troféu The Fudge, Best of Show, Miami Ad School ESPM">
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- MORE WORK -->
+<section class="more-work"><div class="container">
+  <h2 class="more-work-title rv">Mais Projetos</h2>
+  <div class="more-work-grid">
+    <a href="case-mrv.html" class="more-work-card rv d1">
+      <div class="more-work-card-img"><img src="img/mrv/overview-grid.webp" alt="MRV Ecossistema"></div>
+      <span class="more-work-card-tag">#ProductDesign</span>
+      <div class="more-work-card-name">MRV Ecossistema</div>
+    </a>
+    <a href="case-delta.html" class="more-work-card rv d2">
+      <div class="more-work-card-img"></div>
+      <span class="more-work-card-tag">#DesignSystem</span>
+      <div class="more-work-card-name">Delta Design System</div>
+    </a>
+    <a href="case-dasa.html" class="more-work-card rv d3">
+      <div class="more-work-card-img"></div>
+      <span class="more-work-card-tag">#ProductDesign</span>
+      <div class="more-work-card-name">Dasa.ai</div>
+    </a>
+  </div>
+</div></section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact"><div class="container">
+  <h2 class="cta-title rv"><a href="mailto:adrianapommot@gmail.com">Vamos<br>Conversar?</a></h2>
+  <p class="cta-subtitle rv d1">Product Design &amp; Inteligência Visual</p>
+  <a href="mailto:adrianapommot@gmail.com" class="cta-btn rv d2">Entrar em Contato →</a>
+</div></section>
+
+<!-- FOOTER -->
+<footer><div class="container">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">Adriana Pommot</div>
+      <div class="footer-social">
+        <a href="https://linkedin.com/in/adriana-pommot" target="_blank">LinkedIn</a>
+        <a href="https://instagram.com/ultraviolenta.ink" target="_blank">Instagram</a>
+        <a href="mailto:adrianapommot@gmail.com">Email</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Páginas</div>
+      <div class="footer-col-links">
+        <a href="index.html#work">Projetos</a>
+        <a href="index.html#services">Serviços</a>
+        <a href="index.html#about">Sobre Mim</a>
+        <a href="#contact">Contato</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Projetos</div>
+      <div class="footer-col-links">
+        <a href="case-mrv.html">MRV</a>
+        <a href="case-delta.html">Delta DS</a>
+        <a href="case-dasa.html">Dasa.ai</a>
+        <a href="case-chorume.html">Chorume</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Contato</div>
+      <div class="footer-col-links">
+        <a href="mailto:adrianapommot@gmail.com">adrianapommot@gmail.com</a>
+        <span style="font-family:var(--font-body);font-size:13px;color:var(--ch-text-3)">São Paulo, BR</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Adriana Pommot</span>
+    <span class="footer-copy">Product Design &amp; Inteligência Visual</span>
+  </div>
+</div></footer>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const obs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})
+  },{threshold:.15});
+  document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+});
+</script>
+</body>
+</html>
