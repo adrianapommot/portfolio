@@ -1043,37 +1043,22 @@ footer {
       </div>
     </a>
 
-    <a href="case-dasa.html" class="proj-item rv">
+    <a href="case-chorume.html" class="proj-item rv">
       <span class="proj-num">/03</span>
       <div class="proj-info">
-        <h3 class="proj-name">Dasa.ai</h3>
+        <h3 class="proj-name">Chorume<br>Tipografia</h3>
       </div>
-      <div class="proj-img"><img src="https://framerusercontent.com/images/m3xaefjWYKUFkgzSIcs7ueySXY.png?width=1200&height=870" alt="Dasa.ai"></div>
+      <div class="proj-img" style="background:#0a0a0a"><img src="img/chorume/alfabeto-cenografia.webp" alt="Chorume Tipografia"></div>
       <div class="proj-meta">
-        <p class="proj-desc">UI para produtos médicos e<br>construção da identidade visual<br>da nova marca Dasa.</p>
+        <p class="proj-desc">Tipografia vernacular, branding<br>e direção de arte para um<br>produto fictício premiado.</p>
         <div class="proj-tags">
-          <span class="proj-tag">#ui</span>
-          <span class="proj-tag">#healthtech</span>
-        </div>
-      </div>
-    </a>
-
-    <div class="proj-item rv" style="cursor:default">
-      <span class="proj-num">/04</span>
-      <div class="proj-info">
-        <h3 class="proj-name">Ford B460<br>KX738</h3>
-      </div>
-      <div class="proj-img" style="background:#1A1A19"><img src="https://framerusercontent.com/images/oNnTXiDeqJw2jQH79SzKRViGlw.png?width=1200&height=1160" alt="Ford" style="object-fit:contain;padding:24px"></div>
-      <div class="proj-meta">
-        <p class="proj-desc">Design visual completo para<br>Immersion Room automotivo.<br>Cenários, ícones e motion.</p>
-        <div class="proj-tags">
-          <span class="proj-tag">#immersive</span>
-          <span class="proj-tag">#automotive</span>
+          <span class="proj-tag">#tipografia</span>
+          <span class="proj-tag">#branding</span>
         </div>
       </div>
       <span class="proj-corner-bl">+</span>
       <span class="proj-corner-br">+</span>
-    </div>
+    </a>
 
     </div>
   </div>
@@ -1100,9 +1085,9 @@ footer {
 <!-- CTA -->
 <section class="cta-section" id="contact">
   <div class="container">
-    <h2 class="cta-title rv"><a href="mailto:adrianapommot@gmail.com">Vamos<br>Conversar?</a></h2>
+    <h2 class="cta-title rv"><a href="/cdn-cgi/l/email-protection#573633253e36393627383a3a382317303a363e3b7934383a">Vamos<br>Conversar?</a></h2>
     <p class="cta-subtitle rv d1">Disponível para projetos remotos</p>
-    <a href="mailto:adrianapommot@gmail.com" class="cta-btn rv d2">Entrar em Contato →</a>
+    <a href="/cdn-cgi/l/email-protection#026366706b636c63726d6f6f6d7642656f636b6e2c616d6f" class="cta-btn rv d2">Entrar em Contato →</a>
   </div>
 </section>
 
@@ -1115,7 +1100,7 @@ footer {
         <div class="footer-social">
           <a href="https://linkedin.com/in/adriana-pommot" target="_blank">LinkedIn</a>
           <a href="https://instagram.com/ultraviolenta.ink" target="_blank">Instagram</a>
-          <a href="mailto:adrianapommot@gmail.com">Email</a>
+          <a href="/cdn-cgi/l/email-protection#d8b9bcaab1b9b6b9a8b7b5b5b7ac98bfb5b9b1b4f6bbb7b5">Email</a>
         </div>
       </div>
       <div>
@@ -1124,11 +1109,11 @@ footer {
       </div>
       <div>
         <div class="footer-col-title">Projetos</div>
-        <div class="footer-col-links"><a href="case-mrv.html">MRV</a><a href="case-delta.html">Delta DS</a><a href="case-dasa.html">Dasa.ai</a><a href="#">Ford</a></div>
+        <div class="footer-col-links"><a href="case-mrv.html">MRV</a><a href="case-delta.html">Delta DS</a><a href="case-chorume.html">Chorume</a><a href="case-dasa.html">Dasa.ai</a></div>
       </div>
       <div>
         <div class="footer-col-title">Contato</div>
-        <div class="footer-col-links"><a href="mailto:adrianapommot@gmail.com">adrianapommot@gmail.com</a><a href="#">São Paulo, BR</a></div>
+        <div class="footer-col-links"><a href="/cdn-cgi/l/email-protection#2041445249414e41504f4d4d4f5460474d41494c0e434f4d"><span class="__cf_email__" data-cfemail="f59491879c949b94859a98989a81b59298949c99db969a98">[email&#160;protected]</span></a><a href="#">São Paulo, BR</a></div>
       </div>
     </div>
     <div class="footer-bottom">
@@ -1138,7 +1123,7 @@ footer {
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* Nav: close on link click */
 document.querySelectorAll('.nav-menu a').forEach(a => {
   a.addEventListener('click', () => {
@@ -1159,21 +1144,4 @@ const revealObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.rv').forEach(el => revealObserver.observe(el));
 
 /* Navbar background on scroll */
-const navName = document.querySelector('.nav-name');
-if (navName) {
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        navName.style.background = window.scrollY > 100
-          ? 'rgba(255,255,255,0.85)'
-          : 'rgba(255,255,255,0.55)';
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }, { passive: true });
-}
-</script>
-</body>
-</html>
+const navName = document.querySelector('.nav-nam
