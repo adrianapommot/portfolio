@@ -1144,4 +1144,14 @@ const revealObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.rv').forEach(el => revealObserver.observe(el));
 
 /* Navbar background on scroll */
-const navName = document.querySelector('.nav-nam
+const navName = document.querySelector('.nav-name');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 60) {
+    navName.style.background = 'rgba(255,255,255,0.85)';
+  } else {
+    navName.style.background = 'rgba(255,255,255,0.55)';
+  }
+});
+</script>
+</body>
+</html>
