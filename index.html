@@ -84,22 +84,20 @@ a { color: inherit; text-decoration: none; }
   padding: 8px 20px;
   border-radius: 999px;
   cursor: pointer;
-}
-.nav-name .char-wrap {
-  display: inline-block;
   overflow: hidden;
-  height: 1.15em;
-  line-height: 1.15em;
-  vertical-align: top;
+  height: calc(1.15em + 16px);
 }
-.nav-name .char-inner {
-  display: inline-block;
-  transition: transform 0.35s cubic-bezier(0.19, 1, 0.22, 1);
+.nav-name-roll {
+  display: block;
+  transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1);
 }
-.nav-name:hover .char-inner {
+.nav-name:hover .nav-name-roll {
   transform: translateY(-50%);
 }
-.nav-name .space { width: 0.3em; }
+.nav-name-roll span {
+  display: block;
+  line-height: 1.15;
+}
 
 /* ═══════════════════════════════════
    CUSTOM CURSOR — Heart
@@ -912,7 +910,7 @@ footer {
 }
 @media (max-width: 640px) {
   :root { --px: 24px; }
-  .nav-name { font-size: 12px; padding: 7px 16px; }
+  .nav-name { font-size: 12px; padding: 7px 16px; height: calc(1.15em + 14px); }
   .hero { padding-top: 72px; }
   .hero-title { padding: 8px 0 0; }
   .hero-bar { margin-bottom: 0; }
@@ -1195,30 +1193,17 @@ window.addEventListener('scroll', () => {
 });
 
 /* ═══════════════════════════════════
-   TEXT ROLL — nav-name hover (Palmer style)
+   TEXT ROLL — nav-name hover (Destello style)
    ═══════════════════════════════════ */
 (function() {
   const el = document.querySelector('.nav-name');
   if (!el) return;
   const text = el.textContent.trim();
+  const roll = document.createElement('span');
+  roll.className = 'nav-name-roll';
+  roll.innerHTML = '<span>' + text + '</span><span>' + text + '</span>';
   el.innerHTML = '';
-  const stagger = 0.025; // seconds between each letter
-  text.split('').forEach((ch, i) => {
-    if (ch === ' ') {
-      const sp = document.createElement('span');
-      sp.className = 'char-wrap space';
-      el.appendChild(sp);
-      return;
-    }
-    const wrap = document.createElement('span');
-    wrap.className = 'char-wrap';
-    const inner = document.createElement('span');
-    inner.className = 'char-inner';
-    inner.style.transitionDelay = (i * stagger) + 's';
-    inner.innerHTML = ch + '<br>' + ch;
-    wrap.appendChild(inner);
-    el.appendChild(wrap);
-  });
+  el.appendChild(roll);
 })();
 
 /* ═══════════════════════════════════
