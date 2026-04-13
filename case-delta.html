@@ -204,7 +204,15 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
   .more-work,.cta-section{padding:96px 0}
   .footer-grid{grid-template-columns:1fr;gap:32px}
 }
-.nav-name{cursor:pointer;overflow:hidden}.nav-name-roll{display:block;transition:transform .45s cubic-bezier(.19,1,.22,1)}.nav-name:hover .nav-name-roll{transform:translateY(-50%)}.nav-name-roll span{display:block;line-height:1.15}.cursor-dot{position:fixed;top:0;left:0;width:14px;height:14px;pointer-events:none;z-index:9999;mix-blend-mode:difference;transform:translate(-50%,-50%);transition:opacity .3s;opacity:0}.cursor-dot.visible{opacity:1}a,button,input,textarea,select,[role="button"]{cursor:none!important}.cursor-dot svg{width:100%;height:100%;fill:white}@media(hover:none){.cursor-dot{display:none}}</style>
+/* === SHARED: text-roll + cursor === */
+.nav-name-roll{display:block;overflow:hidden}
+.nav-name-roll span{display:block;line-height:1;transition:transform .45s cubic-bezier(.19,1,.22,1)}
+.nav-name:hover .nav-name-roll span{transform:translateY(-100%)}
+.cursor-dot{position:fixed;top:0;left:0;width:14px;height:14px;pointer-events:none;z-index:9999;mix-blend-mode:difference;transform:translate(-50%,-50%);transition:opacity .3s;opacity:0}
+.cursor-dot.visible{opacity:1}
+a,button,input,textarea,select,[role="button"]{cursor:none!important}
+.cursor-dot svg{width:100%;height:100%;fill:white}
+@media(hover:none){.cursor-dot{display:none}}</style>
 </head>
 <body>
 <div class="cursor-dot" id="cursorDot"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12"/></svg></div>
@@ -560,23 +568,22 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 <h2 class="more-work-title rv">Mais Projetos</h2>
 <div class="more-work-grid">
 <a href="case-mrv.html" class="more-work-card rv"><div class="more-work-card-img"><img src="https://framerusercontent.com/images/tJmuIg4YsOc9pGcsP4sUgCj5gw.jpg" alt="MRV"></div><span class="more-work-card-tag">#ProductDesign</span><div class="more-work-card-name">MRV</div></a>
-
-
+<a href="case-chorume.html" class="more-work-card rv d1"><div class="more-work-card-img"><img src="img/chorume/wordmark.webp" alt="Chorume Tipografia"></div><span class="more-work-card-tag">#Tipografia #IdentidadeVisual</span><div class="more-work-card-name">Chorume Tipografia</div></a>
 </div>
 </div></section>
 
 <section class="cta-section" id="contact"><div class="container">
-<h2 class="cta-title rv"><a href="mailto:adriana@pommot.com">Vamos<br>Conversar?</a></h2>
+<h2 class="cta-title rv"><a href="mailto:adrianapommot@gmail.com">Vamos<br>Conversar?</a></h2>
 <p class="cta-subtitle rv d1">Product Design & Inteligência Visual</p>
-<a href="mailto:adriana@pommot.com" class="cta-btn rv d2">Entrar em Contato →</a>
+<a href="mailto:adrianapommot@gmail.com" class="cta-btn rv d2">Entrar em Contato →</a>
 </div></section>
 
 <footer><div class="container">
 <div class="footer-grid">
-<div><div class="footer-logo">Adriana Pommot</div><div class="footer-social"><a href="https://linkedin.com/in/adriana-pommot" target="_blank">LinkedIn</a><a href="https://instagram.com/ultraviolenta.ink" target="_blank">Instagram</a><a href="mailto:adriana@pommot.com">Email</a></div></div>
+<div><div class="footer-logo">Adriana Pommot</div><div class="footer-social"><a href="https://linkedin.com/in/adriana-pommot" target="_blank">LinkedIn</a><a href="https://instagram.com/ultraviolenta.ink" target="_blank">Instagram</a><a href="mailto:adrianapommot@gmail.com">Email</a></div></div>
 <div><div class="footer-col-title">Páginas</div><div class="footer-col-links"><a href="index.html#work">Projetos</a><a href="index.html#services">Serviços</a><a href="index.html#about">Sobre Mim</a><a href="#contact">Contato</a></div></div>
 <div><div class="footer-col-title">Projetos</div><div class="footer-col-links"><a href="case-mrv.html">MRV</a><a href="case-delta.html">Delta DS</a><a href="case-chorume.html">Chorume</a></div></div>
-<div><div class="footer-col-title">Contato</div><div class="footer-col-links"><a href="mailto:adriana@pommot.com">adriana@pommot.com</a><a href="#">São Paulo, BR</a></div></div>
+<div><div class="footer-col-title">Contato</div><div class="footer-col-links"><a href="mailto:adrianapommot@gmail.com">adrianapommot@gmail.com</a><a href="#">São Paulo, BR</a></div></div>
 </div>
 <div class="footer-bottom"><span class="footer-copy">© 2026 Adriana Pommot</span><span class="footer-copy">Product Design & Inteligência Visual</span></div>
 </div></footer>
@@ -588,17 +595,49 @@ document.querySelectorAll('.nav-menu a').forEach(a=>{
     if(f) f.classList.remove('open');
   });
 });
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}
-  });
-},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+/* === SHARED: Reveal Observer === */
+(function(){try{
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add("visible");obs.unobserve(e.target)}});
+},{threshold:0.12,rootMargin:"0px 0px -40px 0px"});
+document.querySelectorAll(".rv").forEach(function(el){obs.observe(el)});
+}catch(e){console.warn("observer error",e)}})();
 
-/* TEXT ROLL */
-(function(){var el=document.querySelector(".nav-name");if(!el)return;var text=el.textContent.trim();var roll=document.createElement("span");roll.className="nav-name-roll";roll.innerHTML="<span>"+text+"</span><span>"+text+"</span>";el.innerHTML="";el.appendChild(roll);requestAnimationFrame(function(){var h=roll.querySelector("span").offsetHeight;roll.style.height=h+"px"})})();
-/* DOT CURSOR */
-(function(){var dot=document.getElementById("cursorDot");if(!dot||matchMedia("(hover:none)").matches)return;var vis=false;document.addEventListener("mousemove",function(e){if(!vis){vis=true;dot.classList.add("visible")}dot.style.left=e.clientX+"px";dot.style.top=e.clientY+"px"});document.addEventListener("mouseleave",function(){vis=false;dot.classList.remove("visible")})})();
+/* === SHARED: Text Roll === */
+(function(){try{
+  var el=document.querySelector(".nav-name");
+  if(!el)return;
+  var text=el.textContent.trim();
+  var roll=document.createElement("span");
+  roll.className="nav-name-roll";
+  roll.innerHTML="<span>"+text+"</span><span>"+text+"</span>";
+  el.innerHTML="";
+  el.appendChild(roll);
+  function setH(){var h=roll.querySelector("span").offsetHeight;if(h>0)roll.style.height=h+"px"}
+  setH();
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(setH)}
+  else{setTimeout(setH,300)}
+}catch(e){console.warn("text-roll error",e)}})();
+/* === SHARED: Dot Cursor === */
+(function(){try{
+  var dot=document.getElementById("cursorDot");
+  if(!dot||matchMedia("(hover:none)").matches)return;
+  var vis=false;
+  document.addEventListener("mousemove",function(e){
+    if(!vis){vis=true;dot.classList.add("visible")}
+    dot.style.left=e.clientX+"px";dot.style.top=e.clientY+"px";
+  });
+  document.addEventListener("mouseleave",function(){vis=false;dot.classList.remove("visible")});
+}catch(e){console.warn("cursor error",e)}})();
+/* === SHARED: Nav BG on scroll === */
+(function(){try{
+  var nn=document.querySelector(".nav-name");
+  if(!nn)return;
+  var bgLo=nn.style.background||"";
+  window.addEventListener("scroll",function(){
+    nn.style.background=window.scrollY>60?"rgba(255,255,255,0.85)":"rgba(255,255,255,0.55)";
+  });
+}catch(e){console.warn("nav-scroll error",e)}})();
 </script>
 </body>
 </html>

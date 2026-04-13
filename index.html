@@ -1170,68 +1170,50 @@ document.querySelectorAll('.nav-menu a').forEach(a => {
   });
 });
 
-/* Scroll reveal — simple, fast */
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      revealObserver.unobserve(entry.target);
-    }
+/* === SHARED: Reveal Observer === */
+(function(){try{
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add("visible");obs.unobserve(e.target)}});
+  },{threshold:0.15,rootMargin:"0px 0px -60px 0px"});
+  document.querySelectorAll(".rv").forEach(function(el){obs.observe(el)});
+}catch(e){console.warn("observer error",e)}})();
+
+/* === SHARED: Nav BG on scroll === */
+(function(){try{
+  var nn=document.querySelector(".nav-name");
+  if(!nn)return;
+  window.addEventListener("scroll",function(){
+    nn.style.background=window.scrollY>60?"rgba(255,255,255,0.85)":"rgba(255,255,255,0.55)";
   });
-}, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+}catch(e){console.warn("nav-scroll error",e)}})();
 
-document.querySelectorAll('.rv').forEach(el => revealObserver.observe(el));
-
-/* Navbar background on scroll */
-const navName = document.querySelector('.nav-name');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 60) {
-    navName.style.background = 'rgba(255,255,255,0.85)';
-  } else {
-    navName.style.background = 'rgba(255,255,255,0.55)';
-  }
-});
-
-/* ═══════════════════════════════════
-   TEXT ROLL — nav-name hover (Destello style)
-   ═══════════════════════════════════ */
-(function() {
-  var el = document.querySelector('.nav-name');
-  if (!el) return;
-  var text = el.textContent.trim();
-  var roll = document.createElement('span');
-  roll.className = 'nav-name-roll';
-  roll.innerHTML = '<span>' + text + '</span><span>' + text + '</span>';
-  el.innerHTML = '';
+/* === SHARED: Text Roll === */
+(function(){try{
+  var el=document.querySelector(".nav-name");
+  if(!el)return;
+  var text=el.textContent.trim();
+  var roll=document.createElement("span");
+  roll.className="nav-name-roll";
+  roll.innerHTML="<span>"+text+"</span><span>"+text+"</span>";
+  el.innerHTML="";
   el.appendChild(roll);
-  // Measure first span and lock roll height
-  requestAnimationFrame(function() {
-    var h = roll.querySelector('span').offsetHeight;
-    roll.style.height = h + 'px';
-  });
-})();
+  function setH(){var h=roll.querySelector("span").offsetHeight;if(h>0)roll.style.height=h+"px"}
+  setH();
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(setH)}
+  else{setTimeout(setH,300)}
+}catch(e){console.warn("text-roll error",e)}})();
 
-/* ═══════════════════════════════════
-   CUSTOM CURSOR — Dot follower
-   ═══════════════════════════════════ */
-(function() {
-  var dot = document.getElementById('cursorDot');
-  if (!dot || matchMedia('(hover:none)').matches) return;
-  var mx = -100, my = -100, vis = false;
-
-  document.addEventListener('mousemove', function(e) {
-    mx = e.clientX;
-    my = e.clientY;
-    if (!vis) { vis = true; dot.classList.add('visible'); }
-    dot.style.left = mx + 'px';
-    dot.style.top = my + 'px';
+/* === SHARED: Dot Cursor === */
+(function(){try{
+  var dot=document.getElementById("cursorDot");
+  if(!dot||matchMedia("(hover:none)").matches)return;
+  var vis=false;
+  document.addEventListener("mousemove",function(e){
+    if(!vis){vis=true;dot.classList.add("visible")}
+    dot.style.left=e.clientX+"px";dot.style.top=e.clientY+"px";
   });
-
-  document.addEventListener('mouseleave', function() {
-    vis = false;
-    dot.classList.remove('visible');
-  });
-})();
+  document.addEventListener("mouseleave",function(){vis=false;dot.classList.remove("visible")});
+}catch(e){console.warn("cursor error",e)}})();
 </script>
 </body>
 </html>
