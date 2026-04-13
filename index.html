@@ -96,12 +96,12 @@ a { color: inherit; text-decoration: none; }
 .cursor-dot {
   position: fixed;
   top: 0; left: 0;
-  width: 28px; height: 28px;
+  width: 14px; height: 14px;
   pointer-events: none;
   z-index: 9999;
   mix-blend-mode: difference;
   transform: translate(-50%, -50%);
-  transition: opacity 0.3s, transform 0.25s ease;
+  transition: opacity 0.3s;
   opacity: 0;
 }
 .cursor-dot.visible { opacity: 1; }
@@ -1246,18 +1246,18 @@ window.addEventListener('scroll', () => {
   const interactives = 'a, button, [role="button"], input, textarea, select';
   document.addEventListener('mouseover', (e) => {
     if (e.target.closest(interactives)) {
-      heart.style.transform = 'translate(-50%,-50%) scale(1.6)';
+      /* removed */
     }
   });
   document.addEventListener('mouseout', (e) => {
     if (e.target.closest(interactives)) {
-      heart.style.transform = 'translate(-50%,-50%) scale(1)';
+      /* removed */
     }
   });
 
   function tick() {
-    cx += (mx - cx) * 0.15;
-    cy += (my - cy) * 0.15;
+    cx = mx;
+    cy = my;
     heart.style.left = cx + 'px';
     heart.style.top = cy + 'px';
     requestAnimationFrame(tick);
