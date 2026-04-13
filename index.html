@@ -85,10 +85,21 @@ a { color: inherit; text-decoration: none; }
   border-radius: 999px;
   cursor: pointer;
 }
-.nav-name .char {
+.nav-name .char-wrap {
   display: inline-block;
-  transition: none;
+  overflow: hidden;
+  height: 1.15em;
+  line-height: 1.15em;
+  vertical-align: top;
 }
+.nav-name .char-inner {
+  display: inline-block;
+  transition: transform 0.35s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.nav-name:hover .char-inner {
+  transform: translateY(-50%);
+}
+.nav-name .space { width: 0.3em; }
 
 /* ═══════════════════════════════════
    CUSTOM CURSOR — Heart
@@ -1139,7 +1150,7 @@ footer {
       </div>
       <div>
         <div class="footer-col-title">Projetos</div>
-        <div class="footer-col-links"><a href="case-mrv.html">MRV</a><a href="case-delta.html">Delta DS</a><a href="case-chorume.html">Chorume</a><a href="case-dasa.html">Dasa.ai</a></div>
+        <div class="footer-col-links"><a href="case-mrv.html">MRV</a><a href="case-delta.html">Delta DS</a><a href="case-chorume.html">Chorume</a></div>
       </div>
       <div>
         <div class="footer-col-title">Contato</div>
@@ -1184,40 +1195,29 @@ window.addEventListener('scroll', () => {
 });
 
 /* ═══════════════════════════════════
-   TEXT SCRAMBLE — nav-name hover
+   TEXT ROLL — nav-name hover (Palmer style)
    ═══════════════════════════════════ */
 (function() {
   const el = document.querySelector('.nav-name');
   if (!el) return;
-  const originalText = el.textContent.trim();
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#&';
-  let animFrame = null;
-
-  el.addEventListener('mouseenter', () => {
-    if (animFrame) cancelAnimationFrame(animFrame);
-    let iteration = 0;
-    const speed = 2; // chars resolved per frame tick
-    const text = originalText.toUpperCase();
-
-    function scramble() {
-      el.textContent = text.split('').map((ch, i) => {
-        if (ch === ' ') return ' ';
-        if (i < iteration) return text[i];
-        return chars[Math.floor(Math.random() * chars.length)];
-      }).join('');
-      if (iteration < text.length) {
-        iteration += 1 / speed;
-        animFrame = requestAnimationFrame(scramble);
-      } else {
-        el.textContent = originalText.toUpperCase();
-      }
+  const text = el.textContent.trim();
+  el.innerHTML = '';
+  const stagger = 0.025; // seconds between each letter
+  text.split('').forEach((ch, i) => {
+    if (ch === ' ') {
+      const sp = document.createElement('span');
+      sp.className = 'char-wrap space';
+      el.appendChild(sp);
+      return;
     }
-    scramble();
-  });
-
-  el.addEventListener('mouseleave', () => {
-    if (animFrame) cancelAnimationFrame(animFrame);
-    el.textContent = originalText.toUpperCase();
+    const wrap = document.createElement('span');
+    wrap.className = 'char-wrap';
+    const inner = document.createElement('span');
+    inner.className = 'char-inner';
+    inner.style.transitionDelay = (i * stagger) + 's';
+    inner.innerHTML = ch + '<br>' + ch;
+    wrap.appendChild(inner);
+    el.appendChild(wrap);
   });
 })();
 

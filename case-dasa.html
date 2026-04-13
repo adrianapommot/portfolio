@@ -59,7 +59,7 @@
   .more-work,.cta-section{padding:96px 0}
   .footer-grid{grid-template-columns:1fr;gap:32px}
 }
-.nav-name{cursor:pointer}.cursor-dot{position:fixed;top:0;left:0;width:14px;height:14px;pointer-events:none;z-index:9999;mix-blend-mode:difference;transform:translate(-50%,-50%);transition:opacity .3s;opacity:0}.cursor-dot.visible{opacity:1}a,button,input,textarea,select,[role="button"]{cursor:none!important}.cursor-dot svg{width:100%;height:100%;fill:white}@media(hover:none){.cursor-dot{display:none}}</style>
+.nav-name{cursor:pointer}.nav-name .char-wrap{display:inline-block;overflow:hidden;height:1.15em;line-height:1.15em;vertical-align:top}.nav-name .char-inner{display:inline-block;transition:transform .35s cubic-bezier(.19,1,.22,1)}.nav-name:hover .char-inner{transform:translateY(-50%)}.nav-name .space{width:.3em}.cursor-dot{position:fixed;top:0;left:0;width:14px;height:14px;pointer-events:none;z-index:9999;mix-blend-mode:difference;transform:translate(-50%,-50%);transition:opacity .3s;opacity:0}.cursor-dot.visible{opacity:1}a,button,input,textarea,select,[role="button"]{cursor:none!important}.cursor-dot svg{width:100%;height:100%;fill:white}@media(hover:none){.cursor-dot{display:none}}</style>
 </head>
 <body>
 <div class="cursor-dot" id="cursorDot"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12"/></svg></div>
@@ -327,7 +327,7 @@
 <div class="more-work-grid">
 <a href="case-mrv.html" class="more-work-card rv"><div class="more-work-card-img"><img src="https://framerusercontent.com/images/tJmuIg4YsOc9pGcsP4sUgCj5gw.jpg" alt="MRV"></div><div class="more-work-card-tag">product design</div><div class="more-work-card-name">MRV</div></a>
 <a href="case-delta.html" class="more-work-card rv d1"><div class="more-work-card-img"><img src="https://framerusercontent.com/images/ibHIROqyHkxvVtTioI5nYgGNqSQ.png" alt="Delta DS"></div><div class="more-work-card-tag">design system</div><div class="more-work-card-name">Delta Design System</div></a>
-<a href="case-ford.html" class="more-work-card rv d2"><div class="more-work-card-img" style="background:#1A1A19"><img src="https://framerusercontent.com/images/oNnTXiDeqJw2jQH79SzKRViGlw.png" alt="Ford" style="object-fit:contain;padding:16px"></div><div class="more-work-card-tag">immersion room</div><div class="more-work-card-name">Ford B460 / KX738</div></a>
+
 </div>
 </div></section>
 
@@ -341,7 +341,7 @@
 <div class="footer-grid">
 <div><div class="footer-logo">Adriana Pommot</div><div class="footer-social"><a href="https://linkedin.com/in/adriana-pommot" target="_blank">LinkedIn</a><a href="https://instagram.com/ultraviolenta.ink" target="_blank">Instagram</a><a href="mailto:adrianapommot@gmail.com">Email</a></div></div>
 <div><div class="footer-col-title">Páginas</div><div class="footer-col-links"><a href="index.html#work">Projetos</a><a href="index.html#services">Serviços</a><a href="index.html#about">Sobre Mim</a><a href="#contact">Contato</a></div></div>
-<div><div class="footer-col-title">Projetos</div><div class="footer-col-links"><a href="case-mrv.html">MRV</a><a href="case-delta.html">Delta DS</a><a href="case-dasa.html">Dasa.ai</a><a href="case-ford.html">Ford</a></div></div>
+<div><div class="footer-col-title">Projetos</div><div class="footer-col-links"><a href="case-mrv.html">MRV</a><a href="case-delta.html">Delta DS</a><a href="case-chorume.html">Chorume</a></div></div>
 <div><div class="footer-col-title">Contato</div><div class="footer-col-links"><a href="mailto:adrianapommot@gmail.com">adrianapommot@gmail.com</a><a href="#">São Paulo, BR</a></div></div>
 </div>
 <div class="footer-bottom"><span class="footer-copy">© 2026 Adriana Pommot</span><span class="footer-copy">Product Design & Inteligência Visual</span></div>
@@ -355,8 +355,8 @@ document.querySelectorAll('.nav-menu a').forEach(a=>{
   });
 });
 
-/* TEXT SCRAMBLE */
-(function(){var el=document.querySelector('.nav-name');if(!el)return;var orig=el.textContent.trim();var chars='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#&';var af=null;el.addEventListener('mouseenter',function(){if(af)cancelAnimationFrame(af);var iter=0;var speed=2;var text=orig.toUpperCase();function s(){el.textContent=text.split('').map(function(ch,i){if(ch===' ')return ' ';if(i<iter)return text[i];return chars[Math.floor(Math.random()*chars.length)]}).join('');if(iter<text.length){iter+=1/speed;af=requestAnimationFrame(s)}else{el.textContent=orig.toUpperCase()}}s()});el.addEventListener('mouseleave',function(){if(af)cancelAnimationFrame(af);el.textContent=orig.toUpperCase()})})();
+/* TEXT ROLL */
+(function(){var el=document.querySelector(".nav-name");if(!el)return;var text=el.textContent.trim();el.innerHTML="";var stagger=0.025;text.split("").forEach(function(ch,i){if(ch===" "){var sp=document.createElement("span");sp.className="char-wrap space";el.appendChild(sp);return}var wrap=document.createElement("span");wrap.className="char-wrap";var inner=document.createElement("span");inner.className="char-inner";inner.style.transitionDelay=i*stagger+"s";inner.innerHTML=ch+"<br>"+ch;wrap.appendChild(inner);el.appendChild(wrap)})})();
 /* HEART CURSOR */
 (function(){var h=document.getElementById('cursorDot');if(!h||matchMedia('(hover:none)').matches)return;var mx=-100,my=-100,cx=-100,cy=-100,vis=false;document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;if(!vis){vis=true;h.classList.add('visible')}});document.addEventListener('mouseleave',function(){vis=false;h.classList.remove('visible')});var sel='a,button,[role="button"],input,textarea,select';document.addEventListener('mouseover',function(e){if(e.target.closest(sel))/* removed */});document.addEventListener('mouseout',function(e){if(e.target.closest(sel))/* removed */});function tick(){cx=mx;cy=my;h.style.left=cx+'px';h.style.top=cy+'px';requestAnimationFrame(tick)}tick()})();
 </script>
