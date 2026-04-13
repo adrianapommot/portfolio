@@ -84,19 +84,19 @@ a { color: inherit; text-decoration: none; }
   padding: 8px 20px;
   border-radius: 999px;
   cursor: pointer;
-  overflow: hidden;
-  height: calc(1.15em + 16px);
 }
 .nav-name-roll {
   display: block;
-  transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1);
-}
-.nav-name:hover .nav-name-roll {
-  transform: translateY(-50%);
+  overflow: hidden;
+  transition: none;
 }
 .nav-name-roll span {
   display: block;
-  line-height: 1.15;
+  line-height: 1;
+  transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.nav-name:hover .nav-name-roll span {
+  transform: translateY(-100%);
 }
 
 /* ═══════════════════════════════════
@@ -910,7 +910,7 @@ footer {
 }
 @media (max-width: 640px) {
   :root { --px: 24px; }
-  .nav-name { font-size: 12px; padding: 7px 16px; height: calc(1.15em + 14px); }
+  .nav-name { font-size: 12px; padding: 7px 16px; }
   .hero { padding-top: 72px; }
   .hero-title { padding: 8px 0 0; }
   .hero-bar { margin-bottom: 0; }
@@ -1196,58 +1196,41 @@ window.addEventListener('scroll', () => {
    TEXT ROLL — nav-name hover (Destello style)
    ═══════════════════════════════════ */
 (function() {
-  const el = document.querySelector('.nav-name');
+  var el = document.querySelector('.nav-name');
   if (!el) return;
-  const text = el.textContent.trim();
-  const roll = document.createElement('span');
+  var text = el.textContent.trim();
+  var roll = document.createElement('span');
   roll.className = 'nav-name-roll';
   roll.innerHTML = '<span>' + text + '</span><span>' + text + '</span>';
   el.innerHTML = '';
   el.appendChild(roll);
+  // Measure first span and lock roll height
+  requestAnimationFrame(function() {
+    var h = roll.querySelector('span').offsetHeight;
+    roll.style.height = h + 'px';
+  });
 })();
 
 /* ═══════════════════════════════════
-   CUSTOM CURSOR — Heart follower
+   CUSTOM CURSOR — Dot follower
    ═══════════════════════════════════ */
 (function() {
-  const heart = document.getElementById('cursorDot');
-  if (!heart || matchMedia('(hover:none)').matches) return;
+  var dot = document.getElementById('cursorDot');
+  if (!dot || matchMedia('(hover:none)').matches) return;
+  var mx = -100, my = -100, vis = false;
 
-  let mx = -100, my = -100, cx = -100, cy = -100;
-  let visible = false;
-
-  document.addEventListener('mousemove', (e) => {
+  document.addEventListener('mousemove', function(e) {
     mx = e.clientX;
     my = e.clientY;
-    if (!visible) { visible = true; heart.classList.add('visible'); }
+    if (!vis) { vis = true; dot.classList.add('visible'); }
+    dot.style.left = mx + 'px';
+    dot.style.top = my + 'px';
   });
 
-  document.addEventListener('mouseleave', () => {
-    visible = false;
-    heart.classList.remove('visible');
+  document.addEventListener('mouseleave', function() {
+    vis = false;
+    dot.classList.remove('visible');
   });
-
-  // Interactive elements scale the heart
-  const interactives = 'a, button, [role="button"], input, textarea, select';
-  document.addEventListener('mouseover', (e) => {
-    if (e.target.closest(interactives)) {
-      /* removed */
-    }
-  });
-  document.addEventListener('mouseout', (e) => {
-    if (e.target.closest(interactives)) {
-      /* removed */
-    }
-  });
-
-  function tick() {
-    cx = mx;
-    cy = my;
-    heart.style.left = cx + 'px';
-    heart.style.top = cy + 'px';
-    requestAnimationFrame(tick);
-  }
-  tick();
 })();
 </script>
 </body>
