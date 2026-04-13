@@ -63,19 +63,19 @@ a{color:inherit;text-decoration:none}
 .case-hero-img img{width:100%;height:auto;display:block}
 
 /* EDITORIAL SECTION — single column, text below title */
-.ed{padding:80px 0;border-top:1px solid var(--gray-5)}
+.ed{padding:96px 0;border-top:1px solid var(--gray-5)}
 .ed--shaded{background:#F6F6F6}
 .ed--shaded .ctx-metric,.ed--shaded .challenge,.ed--shaded .sprint{background:var(--white)}
-.ed-grid{display:flex;flex-direction:column;gap:20px;max-width:668px}
-.ed-num{font-family:var(--font-body);font-size:11px;font-weight:400;line-height:1.75;color:var(--gray-4);margin-bottom:4px}
+.ed-grid{display:flex;flex-direction:column;gap:24px;max-width:668px}
+.ed-num{font-family:var(--font-body);font-size:11px;font-weight:400;line-height:1.75;color:var(--gray-4);margin-bottom:8px}
 .ed-title{font-family:var(--font-display);font-size:12px;font-weight:500;line-height:1.5;letter-spacing:.06em;text-transform:uppercase;color:var(--black);display:inline;padding:2px 6px;background-color:var(--accent);box-decoration-break:clone;-webkit-box-decoration-break:clone}
 .ed-body{font-family:var(--font-display);font-size:15px;font-weight:400;color:var(--gray-3);line-height:1.7;letter-spacing:.02em;text-wrap:pretty}
 .ed-body strong{color:var(--black);font-weight:500}
 .ed-body + .ed-body{margin-top:16px}
-.ed-subtitle{font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--black);margin-top:40px;margin-bottom:20px}
+.ed-subtitle{font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--black);margin-top:40px;margin-bottom:24px}
 
 /* CONTEXT METRICS — horizontal cards with icons */
-.ctx-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.ctx-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
 .ctx-metric{border:1px solid var(--gray-5);border-radius:8px;padding:20px}
 .ctx-metric-icon{width:32px;height:32px;margin-bottom:12px;color:var(--gray-4)}
 .ctx-metric-icon svg{width:100%;height:100%;stroke:currentColor;stroke-width:1.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
@@ -92,12 +92,12 @@ a{color:inherit;text-decoration:none}
 .challenge-desc{font-family:var(--font-display);font-size:11px;font-weight:400;color:var(--gray-3);line-height:1.55;letter-spacing:.01em;text-wrap:pretty}
 
 /* KEY RESULTS LIST */
-.kr-list{margin-top:20px}
+.kr-list{margin-top:24px}
 .kr-item{font-family:var(--font-display);font-size:14px;font-weight:400;color:var(--gray-3);line-height:1.6;padding:8px 0;padding-left:16px;position:relative;text-wrap:pretty}
 .kr-item::before{content:'';position:absolute;left:0;top:16px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
 
 /* PRIORITIES LIST */
-.prio-list{margin-top:20px}
+.prio-list{margin-top:24px}
 .prio-item{font-family:var(--font-display);font-size:14px;font-weight:400;color:var(--gray-3);line-height:1.6;padding:8px 0;padding-left:16px;position:relative;text-wrap:pretty}
 .prio-item::before{content:'';position:absolute;left:0;top:15px;width:8px;height:1.5px;background:var(--gray-4)}
 
@@ -107,7 +107,7 @@ a{color:inherit;text-decoration:none}
 .fw-img-caption{font-family:var(--font-body);font-size:12px;color:var(--gray-4);margin-top:12px;letter-spacing:.02em}
 
 /* DARK BLEED SECTION */
-.dark-bleed{background:var(--black);padding:80px 0;margin:0}
+.dark-bleed{background:var(--black);padding:96px 0;margin:0}
 .dark-bleed img{width:100%;height:auto;display:block;border-radius:8px}
 
 /* CUSTOM SCROLL CURSOR */
@@ -121,23 +121,24 @@ a{color:inherit;text-decoration:none}
 .scroll-cursor-arrow{width:10px;height:10px;stroke:var(--white);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;fill:none}
 
 /* PHONE MOCKUP FRAMES */
-.phone-section{background:var(--black);padding:100px 0}
-.phone-section-title{font-family:var(--font-display);font-size:15px;font-weight:500;color:var(--white);margin-bottom:8px}
-.phone-section-desc{font-family:var(--font-body);font-size:13px;color:rgba(255,255,255,.65);line-height:1.7;max-width:560px;margin-bottom:64px;text-wrap:pretty}
-.phone-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:24px}
-.phone-step{display:grid;grid-template-rows:1fr auto}
+.phone-section{background:var(--black);padding:96px 0}
+.phone-section .ed-num{color:var(--accent)}
+.phone-section .ed-body{color:rgba(255,255,255,.55)}
+.phone-section .ed-body strong{color:var(--white)}
+.phone-section .phone-intro{margin-bottom:64px}
+.phone-flow{display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:auto auto auto 24px 1fr;gap:0 24px}
+.phone-step{display:contents}
 .phone-arrow{display:none}
-.phone-frame{grid-row:2;width:100%;background:#1A1A19;border-radius:16px;border:1.5px solid rgba(255,255,255,.08);overflow-y:auto;overflow-x:hidden;cursor:none;position:relative;aspect-ratio:9/19.5;box-shadow:0 8px 32px rgba(0,0,0,.4),0 2px 8px rgba(0,0,0,.2);scrollbar-width:none;-ms-overflow-style:none}
+.phone-caption{display:contents}
+.phone-pct{grid-row:1;font-family:var(--font-display);font-size:28px;font-weight:400;color:var(--accent);line-height:1;padding-bottom:10px;letter-spacing:-0.02em;align-self:end}
+.phone-name{grid-row:2;font-family:var(--font-display);font-size:11px;font-weight:500;color:var(--white);line-height:1.3;padding-bottom:6px;letter-spacing:0.08em;text-transform:uppercase;text-wrap:balance}
+.phone-desc{grid-row:3;font-family:var(--font-body);font-size:12px;color:rgba(255,255,255,.6);line-height:1.55;text-wrap:pretty;padding-right:12px}
+.phone-frame{grid-row:5;width:100%;background:#1A1A19;border-radius:16px;border:1.5px solid rgba(255,255,255,.08);overflow-y:auto;overflow-x:hidden;cursor:none;position:relative;aspect-ratio:9/19.5;box-shadow:0 8px 32px rgba(0,0,0,.4),0 2px 8px rgba(0,0,0,.2);scrollbar-width:none;-ms-overflow-style:none}
 .phone-frame::-webkit-scrollbar{display:none}
 .phone-frame::before{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:28%;height:4px;background:rgba(255,255,255,.06);border-radius:4px;z-index:2;pointer-events:none;position:sticky}
 .phone-frame img{width:100%;height:auto;display:block;position:relative;z-index:1}
 .phone-step.is-hero .phone-frame{border-color:var(--accent);border-width:2px;box-shadow:0 8px 32px rgba(0,0,0,.4),0 0 24px rgba(209,244,102,.12)}
 .phone-step.is-hero .phone-frame::before{background:var(--accent);opacity:.25}
-.phone-caption{grid-row:1;align-self:end;text-align:left;margin-bottom:24px;margin-top:0;width:100%;padding-right:12px}
-.phone-step.is-hero .phone-caption{width:100%}
-.phone-pct{font-family:var(--font-display);font-size:28px;font-weight:400;color:var(--accent);line-height:1;margin-bottom:10px;letter-spacing:-0.02em}
-.phone-name{font-family:var(--font-display);font-size:11px;font-weight:500;color:var(--white);line-height:1.3;margin-bottom:6px;letter-spacing:0.08em;text-transform:uppercase;text-wrap:balance}
-.phone-desc{font-family:var(--font-body);font-size:12px;color:rgba(255,255,255,.6);line-height:1.55;text-wrap:pretty}
 
 /* BROWSER MOCKUP FRAMES */
 .browser-frame{border:1px solid var(--gray-5);border-radius:12px;overflow:hidden;background:var(--white);box-shadow:0 4px 24px rgba(0,0,0,.06),0 1px 4px rgba(0,0,0,.04);display:flex;flex-direction:column}
@@ -159,8 +160,8 @@ a{color:inherit;text-decoration:none}
 .img-pair-caption{font-family:var(--font-body);font-size:12px;color:var(--gray-4);margin-top:12px;letter-spacing:.02em;grid-column:1/-1}
 
 /* RESULTS */
-.results{padding:100px 0;border-top:1px solid var(--gray-5)}
-.results .ed-grid{margin-bottom:48px}
+.results{padding:96px 0;border-top:1px solid var(--gray-5)}
+.results .ed-grid{margin-bottom:40px}
 .results-title{font-family:var(--font-body);font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-4);margin-bottom:48px}
 .results-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:48px}
 .result-num{font-family:var(--font-display);font-size:clamp(28px,4vw,48px);font-weight:400;letter-spacing:-.02em;line-height:1;margin-bottom:10px}
@@ -170,7 +171,7 @@ a{color:inherit;text-decoration:none}
 .perf-item strong{color:var(--black);font-weight:500}
 
 /* SPRINT CARDS */
-.sprints{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:32px}
+.sprints{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px}
 .sprint{border:1px solid var(--gray-5);border-radius:8px;padding:24px}
 .sprint-label{font-family:var(--font-display);font-size:12px;font-weight:500;margin-bottom:10px}
 .sprint-desc{font-family:var(--font-display);font-size:13px;color:var(--gray-3);line-height:1.6;text-wrap:pretty}
@@ -219,7 +220,10 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
   .results-grid{grid-template-columns:repeat(2,1fr);gap:32px}
   .results-perf{grid-template-columns:1fr}
   .sprints{grid-template-columns:1fr}
-  .phone-flow{grid-template-columns:repeat(3,1fr)}
+  .phone-flow{grid-template-columns:repeat(3,1fr);grid-template-rows:none;gap:32px 24px}
+  .phone-step{display:flex;flex-direction:column}
+  .phone-caption{display:flex;flex-direction:column;margin-bottom:16px}
+  .phone-pct,.phone-name,.phone-desc,.phone-frame{grid-row:auto}
   .browser-pair{grid-template-columns:1fr}
   .img-pair{grid-template-columns:1fr 1fr}
   .more-work-grid{grid-template-columns:1fr 1fr}
@@ -233,11 +237,11 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
   .case-meta-item{min-width:calc(50% - 12px)}
   .challenges{grid-template-columns:1fr 1fr}
   .ctx-metrics{grid-template-columns:1fr}
-  .ed{padding:48px 0}
-  .results{padding:64px 0}
+  .ed{padding:56px 0}
+  .results{padding:56px 0}
   .results-grid{grid-template-columns:1fr 1fr}
-  .phone-section{padding:48px 0}
-  .phone-flow{grid-template-columns:repeat(2,1fr);gap:16px}
+  .phone-section{padding:56px 0}
+  .phone-flow{grid-template-columns:repeat(2,1fr);gap:24px 16px}
   .phone-desc{display:none}
   .img-pair{grid-template-columns:1fr}
   .browser-pair{grid-template-columns:1fr}
@@ -340,7 +344,7 @@ a,button,input,textarea,select,[role="button"]{cursor:none!important}
     <p class="ed-body">A proposta aparecia no fluxo mas não comunicava segurança. Faltava transparência no progresso, a linguagem era técnica e intimidadora, e a interface tratava todos os clientes da mesma forma, independente do seu estado financeiro.</p>
   </div>
 </div>
-<div class="ed-subtitle rv d1" style="margin-top:48px">Principais desafios</div>
+<div class="ed-subtitle rv d1">Principais desafios</div>
 <div class="challenges rv d2">
       <div class="challenge">
         <div class="challenge-icon"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>
@@ -421,54 +425,56 @@ a,button,input,textarea,select,[role="button"]{cursor:none!important}
 <!-- Microinterações: phone flow -->
 <section class="phone-section">
 <div class="container">
-  <div class="ed-num rv" style="color:var(--accent)">04</div>
-  <h2 class="phone-section-title rv"><mark style="background:var(--accent);color:var(--black);padding:2px 8px;border-radius:2px">A solução</mark></h2>
-  <p class="phone-section-desc rv d1">A interface muda de tom conforme a situação financeira do cliente evolui. Cinco estados progressivos, dos 46% aos 100% da jornada. Cada estado com hierarquia visual, copy e microinterações específicas.</p>
+<div class="ed-grid rv phone-intro">
+  <div>
+    <div class="ed-num">04</div>
+    <h2 class="ed-title">A solução</h2>
+  </div>
+  <div>
+    <p class="ed-body">A interface muda de tom conforme a situação financeira do cliente evolui. Cinco estados progressivos, dos 46% aos 100% da jornada. Cada estado com hierarquia visual, copy e microinterações específicas.</p>
+  </div>
+</div>
 
   <div class="phone-flow rv d2">
     <div class="phone-step">
-      <div class="phone-frame"><img src="img/mrv/mobile-jornada-46.webp" alt="Estado 46%"></div>
       <div class="phone-caption">
         <div class="phone-pct">46%</div>
         <div class="phone-name">Sem pendências</div>
         <div class="phone-desc">Dashboard positivo, progresso em destaque</div>
       </div>
+      <div class="phone-frame"><img src="img/mrv/mobile-jornada-46.webp" alt="Estado 46%"></div>
     </div>
-    <div class="phone-arrow">→</div>
     <div class="phone-step">
-      <div class="phone-frame"><img src="img/mrv/mobile-jornada-50.webp" alt="Estado 50%"></div>
       <div class="phone-caption">
         <div class="phone-pct">50%</div>
         <div class="phone-name">Parcelas crescendo</div>
         <div class="phone-desc">Alertas gentis, tom de suporte</div>
       </div>
+      <div class="phone-frame"><img src="img/mrv/mobile-jornada-50.webp" alt="Estado 50%"></div>
     </div>
-    <div class="phone-arrow">→</div>
     <div class="phone-step">
-      <div class="phone-frame"><img src="img/mrv/mobile-jornada-70.webp" alt="Estado 70%"></div>
       <div class="phone-caption">
         <div class="phone-pct">70%</div>
         <div class="phone-name">Juros acumulados</div>
         <div class="phone-desc">Transparência, proposta visível</div>
       </div>
+      <div class="phone-frame"><img src="img/mrv/mobile-jornada-70.webp" alt="Estado 70%"></div>
     </div>
-    <div class="phone-arrow">→</div>
     <div class="phone-step is-hero">
-      <div class="phone-frame"><img src="img/mrv/mobile-jornada-70-atraso.webp" alt="Estado 70%+"></div>
       <div class="phone-caption">
         <div class="phone-pct">70%+</div>
         <div class="phone-name">Gatilho ativo</div>
         <div class="phone-desc">3 cenários de acordo, cliente escolhe</div>
       </div>
+      <div class="phone-frame"><img src="img/mrv/mobile-jornada-70-atraso.webp" alt="Estado 70%+"></div>
     </div>
-    <div class="phone-arrow">→</div>
     <div class="phone-step">
-      <div class="phone-frame"><img src="img/mrv/mobile-jornada-100.webp" alt="Estado 100%"></div>
       <div class="phone-caption">
         <div class="phone-pct">100%</div>
         <div class="phone-name">Quitação</div>
         <div class="phone-desc">Celebração, extrato de conquista</div>
       </div>
+      <div class="phone-frame"><img src="img/mrv/mobile-jornada-100.webp" alt="Estado 100%"></div>
     </div>
   </div>
 </div>
@@ -563,7 +569,7 @@ a,button,input,textarea,select,[role="button"]{cursor:none!important}
   <div class="perf-item"><strong>Virada de experiência:</strong> 100% dos clientes ativos migrados para a nova experiência de acompanhamento de obra. 187.756 clientes no total.</div>
 </div>
 
-<div class="ed-grid rv d3" style="margin-top:64px;margin-bottom:32px">
+<div class="ed-grid rv d3" style="margin-top:64px">
   <div>
     <h2 class="ed-title">Desdobramento pós-piloto</h2>
   </div>
@@ -601,7 +607,7 @@ a,button,input,textarea,select,[role="button"]{cursor:none!important}
 
 <!-- MORE WORK -->
 <!-- Visão geral do ecossistema -->
-<div class="container" style="padding:80px 0">
+<div class="container" style="padding:96px 0">
   <p class="fw-img-caption rv" style="margin-top:0;margin-bottom:24px">Visão geral: os diferentes estados e telas do ecossistema financeiro redesenhado.</p>
   <div class="fw-img rv d1"><img src="img/mrv/overview-grid.webp" alt="Visão geral do ecossistema financeiro MRV"></div>
 </div>
