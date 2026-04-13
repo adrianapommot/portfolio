@@ -11,14 +11,11 @@
 <meta name="twitter:card" content="summary_large_image">
 <title>Dasa.ai · Adriana Pommot</title>
 <link href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════
    TOKENS (same as index/case-mrv)
    ═══════════════════════════════════ */
-:root{--black:#111;--white:#fff;--gray-1:#37342F;--gray-2:#585550;--gray-3:#8A857D;--gray-4:#B8B2A8;--gray-5:#EBE7E1;--gray-6:#F5F1EB;--accent:#D1F466;--font-display:'General Sans',sans-serif;--font-body:'Roboto Mono',monospace;--max-w:1440px;--px:40px}
+:root{--black:#111;--white:#fff;--gray-1:#37342F;--gray-2:#585550;--gray-3:#756F67;--gray-4:#B8B2A8;--gray-5:#EBE7E1;--gray-6:#F5F1EB;--accent:#D1F466;--font-display:'General Sans',sans-serif;--font-body:'General Sans',sans-serif;--max-w:1440px;--px:40px}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:var(--font-body);color:var(--black);background:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden;cursor:none}::selection{background:var(--accent);color:var(--black)}img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
 .container{max-width:var(--max-w);margin:0 auto;padding:0 var(--px)}
 
@@ -56,9 +53,9 @@
 .case-focus{font-family:var(--font-display);font-size:15px;font-weight:400;line-height:1.7;color:var(--gray-3);max-width:668px;margin-bottom:48px;letter-spacing:.02em}
 .case-focus strong{color:var(--black);font-weight:500}
 .case-meta{display:flex;flex-wrap:wrap;gap:32px;padding:20px 0;border-top:1px solid var(--gray-5)}
-.case-meta-item{display:flex;flex-direction:column;gap:8px}
-.case-meta-label{font-family:var(--font-display);font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-4)}
-.case-meta-value{font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.06em;color:var(--gray-1)}
+.case-meta-item{display:flex;flex-direction:column;gap:3px}
+.case-meta-label{font-family:var(--font-display);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--gray-3)}
+.case-meta-value{font-family:var(--font-display);font-size:13px;font-weight:400;letter-spacing:.02em;color:var(--gray-3)}
 .case-hero-img{max-width:70%;margin:64px auto 0;overflow:hidden;background:transparent}
 .case-hero-img img{width:100%;height:auto;display:block}
 
@@ -79,8 +76,8 @@
 .asym-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
 .asym-grid.reverse{direction:rtl}
 .asym-grid.reverse>*{direction:ltr}
-.asym-label{font-family:var(--font-display);font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-4);margin-bottom:16px}
-.asym-heading{font-family:var(--font-display);font-size:clamp(24px,3vw,36px);font-weight:400;line-height:1.15;letter-spacing:-.01em;margin-bottom:20px}
+.asym-label{font-family:var(--font-display);font-size:14px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-3);margin-bottom:8px}
+.asym-heading{font-family:var(--font-display);font-size:14px;font-weight:500;line-height:1.5;letter-spacing:.06em;text-transform:uppercase;display:inline;padding:3px 8px;background:var(--accent);color:var(--black);margin-bottom:20px}
 .asym-body{font-family:var(--font-display);font-size:14px;color:var(--gray-3);line-height:1.7}
 .asym-visual{border-radius:8px;overflow:hidden;background:var(--gray-6)}
 .asym-visual img{width:100%;height:auto;display:block}
@@ -91,7 +88,7 @@
 /* ═══ DELIVERABLES ═══ */
 .deliverables-section{padding:96px 0;border-top:1px solid var(--gray-5)}
 .deliverables-header{text-align:center;max-width:600px;margin:0 auto 64px}
-.deliverables-title{font-family:var(--font-display);font-size:clamp(24px,3vw,36px);font-weight:400;line-height:1.15;margin-bottom:16px}
+.deliverables-title{font-family:var(--font-display);font-size:14px;font-weight:500;line-height:1.5;letter-spacing:.06em;text-transform:uppercase;display:inline;padding:3px 8px;background:var(--accent);color:var(--black);margin-bottom:16px}
 .deliverables-grid{display:grid;grid-template-columns:repeat(4,1fr)}
 .deliverable-card{padding:32px;border-right:1px solid var(--gray-5)}
 .deliverable-card:last-child{border-right:none}
@@ -104,7 +101,7 @@
 .impact-section{padding:96px 0;border-top:1px solid var(--gray-5)}
 .impact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
 .impact-body{font-family:var(--font-display);font-size:14px;color:var(--gray-3);line-height:1.7}
-.impact-quote{font-family:var(--font-display);font-size:18px;font-weight:400;line-height:1.5;color:var(--black);font-style:italic;padding-left:20px;border-left:2px solid var(--accent)}
+.impact-quote{font-family:var(--font-display);font-size:15px;font-weight:400;line-height:1.7;color:var(--gray-3);letter-spacing:.02em}
 .full-image{overflow:hidden;border-radius:8px}
 .full-image img{width:100%;height:auto;display:block}
 .img-placeholder{width:100%;aspect-ratio:16/9;background:var(--gray-6);border-radius:8px}
@@ -117,7 +114,7 @@
 .more-work-card:hover{opacity:.8}
 .more-work-card-img{width:100%;aspect-ratio:3/2;overflow:hidden;background:var(--gray-6);border-radius:4px;margin-bottom:20px}
 .more-work-card-img img{width:100%;height:100%;object-fit:cover}
-.more-work-card-tag{display:inline-block;font-family:var(--font-body);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-4);margin-bottom:12px}
+.more-work-card-tag{display:inline-block;font-family:var(--font-display);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-4);margin-bottom:12px}
 .more-work-card-name{font-family:var(--font-display);font-size:20px;font-weight:500;line-height:1.2}
 
 /* ═══ CTA + FOOTER ═══ */
