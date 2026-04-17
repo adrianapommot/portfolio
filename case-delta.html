@@ -7,13 +7,13 @@
 <meta property="og:title" content="Delta Design System · Adriana Pommot">
 <meta property="og:description" content="Tokens, componentes e bibliotecas reutilizáveis criados para unificar 20+ produtos digitais na Escale.">
 <meta property="og:type" content="article">
-<meta property="og:image" content="https://framerusercontent.com/images/ibHIROqyHkxvVtTioI5nYgGNqSQ.png">
+<meta property="og:image" content="img/delta/hero-mockup.webp">
 <meta name="twitter:card" content="summary_large_image">
 <title>Delta Design System · Adriana Pommot</title>
-<link href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ═══ TOKENS ═══ */
-:root{--black:#111111;--white:#ffffff;--gray-1:#37342F;--gray-2:#585550;--gray-3:#756F67;--gray-4:#B8B2A8;--gray-5:#EBE7E1;--gray-6:#F5F1EB;--accent:#D1F466;--font-display:'General Sans',sans-serif;--font-body:'General Sans',sans-serif;--max-w:1440px;--px:40px}
+:root{--black:#111111;--white:#ffffff;--gray-1:#37342F;--gray-2:#585550;--gray-3:#756F67;--gray-4:#B8B2A8;--gray-5:#EBE7E1;--gray-6:#F5F1EB;--cream:#F9F9F9;--accent:#D1F466;--accent-light:#EDFFB6;--font-display:'Plus Jakarta Sans',sans-serif;--font-body:'Plus Jakarta Sans',sans-serif;--max-w:1440px;--px:40px}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:var(--font-body);color:var(--black);background:var(--white);overflow-x:hidden;cursor:none}::selection{background:var(--accent);color:var(--black)}img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
 .container{max-width:var(--max-w);margin:0 auto;padding:0 var(--px)}
 
@@ -42,59 +42,62 @@
 
 /* ═══ HEADER ═══ */
 .case-header{padding-top:120px}
-.case-back{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--black);margin-bottom:48px;transition:opacity .3s}
+.case-back{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-3);margin-bottom:48px;transition:opacity .3s}
 .case-back:hover{opacity:.5}
 .case-back svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.case-title{font-family:var(--font-display);font-size:clamp(44px,7vw,96px);font-weight:400;line-height:1;letter-spacing:-.02em;text-transform:uppercase;margin-bottom:24px;margin-left:-.04em}
-.case-focus{font-family:var(--font-display);font-size:16px;font-weight:400;line-height:1.75;color:var(--gray-2);max-width:668px;margin-bottom:48px;letter-spacing:.01em;text-wrap:pretty}
-.case-focus strong{color:var(--black);font-weight:500}
-.case-meta{display:flex;flex-wrap:wrap;gap:32px;padding:20px 0;border-top:1px solid var(--gray-5)}
-.case-meta-item{display:flex;flex-direction:column;gap:3px}
-.case-meta-label{font-family:var(--font-display);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--gray-3)}
-.case-meta-value{font-family:var(--font-display);font-size:13px;font-weight:400;letter-spacing:.02em;color:var(--gray-3)}
+.case-title{font-family:var(--font-display);font-size:clamp(44px,7vw,96px);font-weight:400;line-height:1;letter-spacing:-.02em;text-transform:uppercase;margin-bottom:40px;margin-left:-.04em}
+.case-focus{font-family:var(--font-display);font-size:16px;font-weight:400;line-height:1.75;color:var(--gray-3);max-width:668px;margin-bottom:0;letter-spacing:.01em;text-wrap:pretty}
+.case-focus strong{color:var(--black);font-weight:600}
+/* Dark metadata bar — full-width bleed */
+.case-meta-bar{background:#2C2B2B;padding:20px 0;margin-top:40px;width:100vw;margin-left:calc(-50vw + 50%);margin-right:calc(-50vw + 50%);padding-left:max(var(--px),calc((100vw - var(--max-w))/2 + var(--px)));padding-right:max(var(--px),calc((100vw - var(--max-w))/2 + var(--px)))}
+.case-meta{display:flex;flex-wrap:wrap;gap:32px}
+.case-meta-item{display:flex;flex-direction:column;gap:8px}
+.case-meta-label{font-family:var(--font-display);font-size:14px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--white)}
+.case-meta-value{font-family:var(--font-display);font-size:13px;font-weight:400;letter-spacing:.02em;color:var(--accent-light)}
 .case-hero-img{max-width:70%;margin:0 auto;overflow:hidden;background:transparent}
 .case-hero-img img{width:100%;height:100%;object-fit:cover}
 
 /* ═══ EDITORIAL ═══ */
 .case-statement{padding:96px 0;border-top:1px solid var(--gray-5)}
-.case-statement-text{font-family:var(--font-display);font-size:16px;font-weight:400;line-height:1.75;letter-spacing:.01em;max-width:668px;color:var(--gray-2)}
-.case-statement-text strong{color:var(--black);font-weight:500}
+.case-statement-text{font-family:var(--font-display);font-size:16px;font-weight:400;line-height:1.75;letter-spacing:.01em;max-width:668px;color:var(--gray-3)}
+.case-statement-text strong{color:var(--black);font-weight:600}
 .case-statement-text .faded{color:transparent}
 .case-pull{padding:96px 0;border-top:1px solid var(--gray-5)}
-.case-pull-text{font-family:var(--font-display);font-size:16px;font-weight:400;line-height:1.75;letter-spacing:.01em;max-width:668px;color:var(--gray-2)}
-.case-pull-text strong{font-weight:500;color:var(--black)}
+.case-pull-text{font-family:var(--font-display);font-size:16px;font-weight:400;line-height:1.75;letter-spacing:.01em;max-width:668px;color:var(--gray-3)}
+.case-pull-text strong{font-weight:600;color:var(--black)}
 .case-pull-text .faded{color:transparent}
-.case-pull-caption{display:inline-block;background:var(--accent);color:var(--black);font-family:var(--font-display);font-size:14px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;margin-top:32px;padding:3px 8px}
+.case-pull-caption{display:inline-block;background:var(--accent);color:var(--black);font-family:var(--font-display);font-size:14px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;margin-top:32px;padding:4px 10px}
 .case-offset{padding:96px 0;border-top:1px solid var(--gray-5)}
 .case-offset-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
-.case-offset-label{font-family:var(--font-display);font-size:14px;font-weight:500;line-height:1.5;letter-spacing:.06em;text-transform:uppercase;display:inline;padding:3px 8px;background:var(--accent);color:var(--black)}
-.case-offset-num{font-family:var(--font-display);font-size:14px;font-weight:500;letter-spacing:.06em;color:var(--gray-3);margin-bottom:8px}
-.case-offset-body p{font-family:var(--font-display);font-size:16px;font-weight:400;color:var(--gray-2);line-height:1.75;margin-bottom:24px}
+.case-offset-label{font-family:var(--font-display);font-size:14px;font-weight:500;line-height:1.5;letter-spacing:.06em;text-transform:uppercase;display:inline;padding:4px 10px;background:var(--accent);color:var(--black)}
+.case-offset-num{font-family:var(--font-display);font-size:20px;font-weight:500;line-height:1;letter-spacing:0;color:var(--gray-3);margin-bottom:12px}
+.case-offset-body p{font-family:var(--font-display);font-size:16px;font-weight:400;color:var(--gray-3);line-height:1.75;letter-spacing:.01em;margin-bottom:16px;text-wrap:pretty}
 .case-offset-body p:last-child{margin-bottom:0}
-.case-offset-body p strong{color:var(--black);font-weight:500}
+.case-offset-body p strong{color:var(--black);font-weight:600}
 
 /* ═══ METRIC CARDS ═══ */
 .case-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--gray-5);margin-top:40px}
 .case-metric{background:var(--white);padding:28px 24px 32px}
-.case-metric-icon{width:32px;height:32px;margin-bottom:16px;display:block}
-.case-metric-num{font-family:var(--font-display);font-size:28px;font-weight:400;letter-spacing:-.02em;color:var(--black);line-height:1;margin-bottom:8px}
-.case-metric-label{font-family:var(--font-display);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--gray-3);margin-bottom:4px}
-.case-metric-desc{font-family:var(--font-display);font-size:12px;color:var(--gray-3);line-height:1.55}
+.case-metric-icon{width:32px;height:32px;margin-bottom:17px;display:block}
+.case-metric-num{font-family:var(--font-display);font-size:40px;font-weight:400;letter-spacing:-.014em;color:var(--black);line-height:1;margin-bottom:12px}
+.case-metric-label{font-family:var(--font-display);font-size:16px;font-weight:500;letter-spacing:.033em;text-transform:uppercase;color:var(--black);margin-bottom:8px}
+.case-metric-desc{font-family:var(--font-body);font-size:13px;font-weight:400;color:var(--gray-3);line-height:1.55;letter-spacing:.01em;text-wrap:pretty}
 
 /* ═══ PROBLEM CARDS ═══ */
 .case-problems{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--gray-5);margin-top:48px}
 .case-problem{background:var(--white);padding:40px 32px 44px}
 .case-problem-icon{width:44px;height:44px;margin-bottom:20px;display:block}
-.case-problem-title{font-family:var(--font-display);font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
-.case-problem-desc{font-family:var(--font-display);font-size:13px;color:var(--gray-3);line-height:1.65}
-.case-problem-stat{display:inline-flex;align-items:center;gap:6px;margin-top:16px;padding:4px 12px;background:var(--gray-6);border-radius:999px}
+.case-problem-title{font-family:var(--font-display);font-size:16px;font-weight:500;text-transform:uppercase;letter-spacing:.033em;line-height:1.4;margin-bottom:12px;text-wrap:balance}
+.case-problem-desc{font-family:var(--font-body);font-size:13px;font-weight:400;color:var(--gray-3);line-height:1.55;letter-spacing:.01em;text-wrap:pretty}
+.case-problem-stat{display:inline-flex;align-items:center;gap:6px;margin-top:16px;padding:6px 14px;background:var(--gray-6);border-radius:999px}
 .case-problem-stat-num{font-family:var(--font-display);font-size:14px;font-weight:500;color:var(--black)}
 .case-problem-stat-label{font-family:var(--font-display);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--gray-3)}
 
 /* ═══ TIMELINE ═══ */
 .case-timeline{padding:96px 0;border-top:1px solid var(--gray-5)}
 .case-timeline-header{margin-bottom:56px}
-.case-timeline-heading{font-family:var(--font-display);font-size:16px;font-weight:400;line-height:1.75;letter-spacing:.01em;margin-top:16px;color:var(--gray-2)}
+.case-timeline-heading{font-family:var(--font-display);font-size:16px;font-weight:400;line-height:1.75;letter-spacing:.01em;margin-top:16px;color:var(--gray-3);text-wrap:pretty}
+.case-timeline-heading strong{color:var(--black);font-weight:600}
 .case-timeline-track{display:flex;align-items:flex-start;position:relative;padding-top:24px}
 .case-timeline-line{position:absolute;top:44px;left:20px;right:20px;height:1px;background:var(--gray-5)}
 .case-timeline-line-fill{height:1px;background:var(--gray-5);width:100%}
@@ -102,43 +105,44 @@
 .case-timeline-dot{width:20px;height:20px;border-radius:50%;background:var(--white);border:1.5px solid var(--gray-5);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
 .case-timeline-dot-inner{width:8px;height:8px;border-radius:50%;background:var(--accent)}
 .case-timeline-icon{width:32px;height:32px;margin-bottom:12px;display:block}
-.case-timeline-num{font-family:var(--font-display);font-size:14px;font-weight:500;color:var(--gray-3);letter-spacing:.06em;margin-bottom:6px}
-.case-timeline-title{font-family:var(--font-display);font-size:13px;font-weight:500;line-height:1.3;margin-bottom:6px}
-.case-timeline-desc{font-family:var(--font-display);font-size:11px;color:var(--gray-3);line-height:1.5;max-width:160px;margin:0 auto}
+.case-timeline-num{font-family:var(--font-display);font-size:20px;font-weight:500;color:var(--gray-3);letter-spacing:0;margin-bottom:8px;line-height:1}
+.case-timeline-title{font-family:var(--font-display);font-size:16px;font-weight:500;letter-spacing:.033em;text-transform:uppercase;line-height:1.3;margin-bottom:8px;text-wrap:balance}
+.case-timeline-desc{font-family:var(--font-body);font-size:13px;font-weight:400;color:var(--gray-3);line-height:1.55;letter-spacing:.01em;max-width:180px;margin:0 auto;text-wrap:pretty}
 
 /* ═══ STRATEGY PILLARS ═══ */
 .case-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--gray-5);margin-top:48px}
 .case-pillar{background:var(--white);padding:40px 32px 44px}
 .case-pillar-bar{width:32px;height:3px;background:var(--accent);margin-bottom:24px}
-.case-pillar-title{font-family:var(--font-display);font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
-.case-pillar-desc{font-family:var(--font-display);font-size:13px;font-weight:400;color:var(--gray-3);line-height:1.6}
+.case-pillar-title{font-family:var(--font-display);font-size:16px;font-weight:500;text-transform:uppercase;letter-spacing:.033em;line-height:1.4;margin-bottom:16px;text-wrap:balance}
+.case-pillar-desc{font-family:var(--font-body);font-size:13px;font-weight:400;color:var(--gray-3);line-height:1.6;letter-spacing:.01em;text-wrap:pretty}
 
 /* ═══ INSIGHT NUMBERS ═══ */
 .case-insight-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--gray-5)}
-.case-insight{background:var(--white);padding:24px 20px 28px}
-.case-insight-tag{font-family:var(--font-display);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--gray-3);margin-bottom:10px}
-.case-insight-num{font-family:var(--font-display);font-size:28px;font-weight:400;letter-spacing:-.02em;color:var(--black);line-height:1;margin-bottom:8px}
-.case-insight-desc{font-family:var(--font-display);font-size:12px;color:var(--gray-3);line-height:1.6}
+.case-insight{background:var(--white);padding:28px 24px 32px}
+.case-insight-tag{font-family:var(--font-display);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--gray-3);margin-bottom:12px}
+.case-insight-num{font-family:var(--font-display);font-size:40px;font-weight:400;letter-spacing:-.014em;color:var(--black);line-height:1;margin-bottom:12px}
+.case-insight-desc{font-family:var(--font-body);font-size:13px;font-weight:400;color:var(--gray-3);line-height:1.6;letter-spacing:.01em;text-wrap:pretty}
 
 /* ═══ ATOMIC PROGRESSION ═══ */
 .case-atomic{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--gray-5);margin:48px 0}
 .case-atomic-step{background:var(--white);padding:32px 24px 36px;text-align:center}
 .case-atomic-icon{width:48px;height:48px;margin:0 auto 16px;display:block}
-.case-atomic-num{font-family:var(--font-display);font-size:14px;font-weight:500;color:var(--gray-3);letter-spacing:.06em;margin-bottom:8px}
-.case-atomic-title{font-family:var(--font-display);font-size:15px;font-weight:500;margin-bottom:6px}
-.case-atomic-desc{font-family:var(--font-display);font-size:11px;color:var(--gray-3);line-height:1.55}
+.case-atomic-num{font-family:var(--font-display);font-size:20px;font-weight:500;color:var(--gray-3);letter-spacing:0;line-height:1;margin-bottom:10px}
+.case-atomic-title{font-family:var(--font-display);font-size:16px;font-weight:500;text-transform:uppercase;letter-spacing:.033em;line-height:1.3;margin-bottom:8px;text-wrap:balance}
+.case-atomic-desc{font-family:var(--font-body);font-size:13px;font-weight:400;color:var(--gray-3);line-height:1.55;letter-spacing:.01em;text-wrap:pretty}
 
 /* ═══ STAT HIGHLIGHT CARDS ═══ */
 .case-results{padding:96px 0;border-top:1px solid var(--gray-5)}
-.case-results-statement{font-family:var(--font-display);font-size:16px;font-weight:400;line-height:1.75;letter-spacing:.01em;margin-bottom:40px;max-width:668px;color:var(--gray-2)}
+.case-results-statement{font-family:var(--font-display);font-size:16px;font-weight:400;line-height:1.75;letter-spacing:.01em;margin-bottom:40px;max-width:668px;color:var(--gray-3);text-wrap:pretty}
+.case-results-statement strong{color:var(--black);font-weight:600}
 .case-results-statement .faded{color:transparent}
 .case-stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--gray-5)}
 .case-stat{background:var(--black);padding:40px 28px 44px;display:flex;flex-direction:column}
 .case-stat-icon{width:14px;height:14px;margin-bottom:20px;display:block}
-.case-stat-num{font-family:var(--font-display);font-size:clamp(32px,3.5vw,52px);font-weight:400;letter-spacing:-.03em;color:var(--accent);line-height:1;margin-bottom:12px}
-.case-stat-label{font-family:var(--font-display);font-size:14px;font-weight:500;color:var(--white);margin-bottom:8px}
-.case-stat-desc{font-family:var(--font-display);font-size:13px;color:rgba(255,255,255,.45);line-height:1.55;margin-top:auto}
-.case-stat-category{display:inline-block;font-family:var(--font-display);font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08)}
+.case-stat-num{font-family:var(--font-display);font-size:clamp(32px,4vw,48px);font-weight:400;letter-spacing:-.02em;color:var(--accent);line-height:1;margin-bottom:16px}
+.case-stat-label{font-family:var(--font-display);font-size:14px;font-weight:500;color:var(--white);margin-bottom:8px;letter-spacing:.02em}
+.case-stat-desc{font-family:var(--font-body);font-size:13px;font-weight:400;color:rgba(255,255,255,.55);line-height:1.55;letter-spacing:.01em;margin-top:auto;text-wrap:pretty}
+.case-stat-category{display:inline-block;font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08)}
 
 /* ═══ IMAGE LAYOUTS ═══ */
 .case-inline-img{width:100%;border-radius:4px;overflow:hidden;margin:40px 0;background:var(--gray-6)}
@@ -153,6 +157,72 @@
 .case-img-placeholder{background:var(--gray-6);border-radius:4px;padding:80px 40px;text-align:center;margin:40px 0}
 .case-img-placeholder p{font-family:var(--font-display);font-size:13px;color:var(--gray-4);text-transform:uppercase;letter-spacing:.08em}
 .case-img-placeholder span{font-size:11px;text-transform:none;letter-spacing:0;display:block;margin-top:4px}
+
+/* ═══ HERO BLEED IMAGE — laptop+tablet mockup ═══ */
+.delta-hero{background:#E8E8E8;padding:80px 0;margin:0;width:100vw;margin-left:calc(-50vw + 50%);margin-right:calc(-50vw + 50%)}
+.delta-hero-inner{max-width:var(--max-w);margin:0 auto;padding:0 var(--px);display:flex;justify-content:center}
+.delta-hero img{max-width:1000px;width:100%;height:auto;display:block;filter:drop-shadow(0 30px 60px rgba(0,0,0,.25))}
+
+/* ═══ CONTRAST BLEED — diagrama de contrastes ═══ */
+.contrast-bleed{padding:96px 0;border-top:1px solid var(--gray-5)}
+.contrast-bleed-img{margin:0 auto;max-width:1100px;border-radius:8px;overflow:hidden;background:var(--gray-6);padding:40px}
+.contrast-bleed-img img{width:100%;height:auto;display:block}
+.contrast-caption{font-family:var(--font-body);font-size:13px;color:var(--gray-3);margin-top:16px;letter-spacing:.01em;line-height:1.6;max-width:586px;margin-left:auto;margin-right:auto;text-align:center;text-wrap:pretty}
+
+/* ═══ TOKEN-GRID DARK SECTION ═══ */
+.token-section{background:var(--black);padding:96px 0}
+.token-section .ed-num{color:var(--accent)}
+.token-section .ed-title{color:var(--white)}
+.token-section .ed-body{color:rgba(255,255,255,.6)}
+.token-section .ed-body strong{color:var(--white)}
+.token-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:64px}
+.token-card{background:var(--white);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+.token-card-img{width:100%;background:var(--white);display:block}
+.token-card-img img{width:100%;height:auto;display:block}
+.token-card-meta{padding:20px 24px 24px;border-top:1px solid var(--gray-5)}
+.token-card-name{font-family:var(--font-display);font-size:14px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.token-card-desc{font-family:var(--font-body);font-size:14px;font-weight:400;color:var(--gray-3);line-height:1.55;letter-spacing:.01em;text-wrap:pretty}
+
+/* ═══ PALETTE BLEED ═══ */
+.palette-section{padding:96px 0;background:var(--gray-6);border-top:1px solid var(--gray-5)}
+.palette-bleed-img{margin:48px 0 0;border-radius:8px;overflow:hidden;background:var(--white);padding:32px}
+.palette-bleed-img img{width:100%;height:auto;display:block}
+
+/* ═══ COMPONENT PAIR — light browser-style ═══ */
+.comp-section{padding:96px 0;border-top:1px solid var(--gray-5)}
+.comp-pair{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px}
+.comp-card{background:var(--cream);border:1px solid var(--gray-5);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+.comp-card-img{padding:24px;background:var(--white)}
+.comp-card-img img{width:100%;height:auto;display:block}
+.comp-card-meta{padding:16px 24px 20px;border-top:1px solid var(--gray-5);background:var(--cream)}
+.comp-card-tag{font-family:var(--font-display);font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-3);margin-bottom:4px}
+.comp-card-name{font-family:var(--font-display);font-size:16px;font-weight:500;letter-spacing:.033em;text-transform:uppercase;color:var(--black)}
+.comp-trio{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.comp-trio .comp-card-img{padding:16px}
+
+/* ═══ STORYBOOK CALLOUT ═══ */
+.storybook-callout{padding:96px 0;border-top:1px solid var(--gray-5);background:var(--gray-6)}
+.storybook-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:64px;align-items:center;margin-top:48px}
+.storybook-info h3{font-family:var(--font-display);font-size:32px;font-weight:500;line-height:1.1;letter-spacing:.026em;text-transform:uppercase;color:var(--black);margin-bottom:24px;text-wrap:balance}
+.storybook-info p{font-family:var(--font-body);font-size:16px;font-weight:400;color:var(--gray-3);line-height:1.75;letter-spacing:.01em;margin-bottom:24px;text-wrap:pretty}
+.storybook-info p strong{color:var(--black);font-weight:600}
+.storybook-link{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;background:var(--black);color:var(--white);border-radius:999px;font-family:var(--font-display);font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:background .3s,color .3s}
+.storybook-link:hover{background:var(--accent);color:var(--black)}
+.storybook-link svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.storybook-numbers{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--gray-5);border-radius:8px;overflow:hidden}
+.storybook-num{background:var(--white);padding:32px 24px;text-align:left}
+.storybook-num-val{font-family:var(--font-display);font-size:48px;font-weight:400;letter-spacing:-.02em;color:var(--black);line-height:1;margin-bottom:8px}
+.storybook-num-label{font-family:var(--font-display);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--gray-3)}
+
+/* ═══ PROTOCOL PAIR — composição + construindo componente ═══ */
+.protocol-section{padding:96px 0;border-top:1px solid var(--gray-5)}
+.protocol-pair{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px}
+.protocol-card{background:var(--white);border:1px solid var(--gray-5);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+.protocol-card-img{background:var(--white);padding:0}
+.protocol-card-img img{width:100%;height:auto;display:block}
+.protocol-card-meta{padding:20px 24px 24px;border-top:1px solid var(--gray-5)}
+.protocol-card-tag{font-family:var(--font-display);font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-3);margin-bottom:6px}
+.protocol-card-desc{font-family:var(--font-body);font-size:14px;font-weight:400;color:var(--gray-3);line-height:1.55;letter-spacing:.01em;text-wrap:pretty}
 
 /* ═══ MORE WORK ═══ */
 .more-work{padding:160px 0;border-top:1px solid var(--gray-5)}.more-work-title{font-family:var(--font-display);font-size:clamp(44px,7vw,96px);font-weight:400;line-height:1;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:64px}.more-work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}.more-work-card{display:block;transition:opacity .3s}.more-work-card:hover{opacity:.8}.more-work-card-img{width:100%;aspect-ratio:3/2;overflow:hidden;background:var(--gray-6);border-radius:4px;margin-bottom:20px}.more-work-card-img img{width:100%;height:100%;object-fit:cover}.more-work-card-tag{display:inline-block;font-family:var(--font-display);font-size:13px;font-weight:400;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-4);margin-bottom:12px}.more-work-card-name{font-family:var(--font-display);font-size:20px;font-weight:500;line-height:1.2}
@@ -181,6 +251,11 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
   .case-inline-pair{grid-template-columns:1fr}
   .more-work-grid{grid-template-columns:1fr 1fr}
   .footer-grid{grid-template-columns:1fr 1fr}
+  .token-grid{grid-template-columns:1fr 1fr}
+  .comp-pair{grid-template-columns:1fr}
+  .comp-trio{grid-template-columns:1fr}
+  .storybook-grid{grid-template-columns:1fr;gap:48px}
+  .protocol-pair{grid-template-columns:1fr}
 }
 @media(max-width:640px){
   :root{--px:24px}
@@ -202,6 +277,12 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
   .more-work-grid{grid-template-columns:1fr}
   .more-work,.cta-section{padding:96px 0}
   .footer-grid{grid-template-columns:1fr;gap:32px}
+  .delta-hero{padding:48px 0}
+  .token-grid{grid-template-columns:1fr;gap:16px}
+  .token-section,.contrast-bleed,.palette-section,.comp-section,.storybook-callout,.protocol-section{padding:56px 0}
+  .storybook-info h3{font-size:24px}
+  .storybook-num-val{font-size:36px}
+  .storybook-num{padding:24px 20px}
 }
 /* === SHARED: text-roll + cursor === */
 .nav-name-roll{display:block;overflow:hidden}
@@ -236,18 +317,27 @@ a,button,input,textarea,select,[role="button"]{cursor:none!important}
 <section class="case-header"><div class="container">
 <a href="index.html#work" class="case-back rv"><svg viewBox="0 0 16 16"><path d="M13 8H3M7 4l-4 4 4 4"/></svg> Todos os Projetos</a>
 <h1 class="case-title rv d1">Delta<br>Design System</h1>
-<p class="case-focus rv d2">Criei a arquitetura de tokens, a biblioteca de componentes<br>e o sistema de documentação que unificou<br><strong>20+ produtos digitais em 3 segmentos.</strong></p>
-<div class="case-meta rv d3">
-<div class="case-meta-item"><span class="case-meta-label">Função</span><span class="case-meta-value">Product Designer Sênior</span></div>
+<p class="case-focus rv d2">O Design System como <strong>redutor de custo operacional.</strong> Liderança técnica na concepção do Delta: da arquitetura white-label de tokens à fundação cultural do time de Design. <strong>Em produção desde 2020, sustentando 20+ produtos em 3 segmentos.</strong></p>
+<div class="case-meta-bar rv d3">
+<div class="case-meta">
+<div class="case-meta-item"><span class="case-meta-label">Função</span><span class="case-meta-value">Design System Lead</span></div>
 <div class="case-meta-item"><span class="case-meta-label">Empresa</span><span class="case-meta-value">Escale</span></div>
-<div class="case-meta-item"><span class="case-meta-label">Período</span><span class="case-meta-value">2021 – 2023</span></div>
-<div class="case-meta-item"><span class="case-meta-label">Foco</span><span class="case-meta-value">Design System, Tokens, Documentação</span></div>
+<div class="case-meta-item"><span class="case-meta-label">Período</span><span class="case-meta-value">2020 – 2021</span></div>
+<div class="case-meta-item"><span class="case-meta-label">Foco</span><span class="case-meta-value">Tokens, Componentes, Documentação Técnica</span></div>
+</div>
 </div>
 </div></section>
 
+<!-- HERO MOCKUP -->
+<div class="delta-hero rv">
+  <div class="delta-hero-inner">
+    <img src="img/delta/hero-mockup.webp" alt="Delta Design System em produção: laptop, monitor e tablet exibindo a marca, manifesto e biblioteca de componentes">
+  </div>
+</div>
+
 <!-- 01 CONTEXTO -->
 <div class="case-statement"><div class="container">
-<h2 class="case-statement-text rv">20 produtos simultâneos.<br>Cada um com <strong>sua própria cara.</strong><br>Nenhum falava<br><strong>a mesma linguagem</strong><span class="faded">.</span></h2>
+<h2 class="case-statement-text rv">20 produtos simultâneos. Cada um com <strong>sua própria cara.</strong> Nenhum falava <strong>a mesma linguagem</strong><span class="faded">.</span></h2>
 </div></div>
 
 <div class="case-offset"><div class="container">
@@ -257,14 +347,8 @@ a,button,input,textarea,select,[role="button"]{cursor:none!important}
   <div class="case-offset-label">Contexto</div>
 </div>
 <div class="case-offset-body">
-  <p>A Escale operava mais de <strong>20 produtos digitais simultâneos</strong><br>
-  em saúde, telecom e finanças. Cada produto<br>
-  tinha sua própria marca e identidade visual.</p>
-  <p>Dezenas de landing pages de captação de leads no ar<br>
-  ao mesmo tempo, criadas por squads diferentes,<br>
-  sem linguagem visual compartilhada.<br>
-  Fui responsável por <strong>projetar e construir a fundação<br>
-  que unificou todos eles</strong>.</p>
+  <p>A Escale operava mais de <strong>20 produtos digitais simultâneos</strong> em saúde, telecom e finanças. Cada produto tinha sua própria marca e identidade visual.</p>
+  <p>Dezenas de landing pages de captação de leads no ar ao mesmo tempo, criadas por squads diferentes, sem linguagem visual compartilhada. Assumi a <strong>liderança técnica para projetar e construir a fundação que unificou todos eles</strong> sem refundir código.</p>
 </div>
 </div>
 </div></div>
@@ -275,32 +359,32 @@ a,button,input,textarea,select,[role="button"]{cursor:none!important}
     <svg class="case-metric-icon" viewBox="0 0 32 32" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="10" height="10" rx="1.5"/><rect x="18" y="4" width="10" height="10" rx="1.5"/><rect x="4" y="18" width="10" height="10" rx="1.5"/><rect x="18" y="18" width="10" height="10" rx="1.5"/></svg>
     <div class="case-metric-num">20+</div>
     <div class="case-metric-label">Produtos digitais</div>
-    <div class="case-metric-desc">Em produção simultânea<br>nos três segmentos</div>
+    <div class="case-metric-desc">Em produção simultânea nos três segmentos</div>
   </div>
   <div class="case-metric">
     <svg class="case-metric-icon" viewBox="0 0 32 32" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="12"/><line x1="16" y1="4" x2="16" y2="16"/><line x1="16" y1="16" x2="26" y2="22"/><line x1="16" y1="16" x2="6" y2="22"/></svg>
     <div class="case-metric-num">3</div>
     <div class="case-metric-label">Segmentos</div>
-    <div class="case-metric-desc">Saúde, telecom e finanças<br>com marcas próprias</div>
+    <div class="case-metric-desc">Saúde, telecom e finanças com marcas próprias</div>
   </div>
   <div class="case-metric">
     <svg class="case-metric-icon" viewBox="0 0 32 32" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="10" r="5"/><path d="M6 28c0-5.5 4.5-10 10-10s10 4.5 10 10"/></svg>
     <div class="case-metric-num">1</div>
     <div class="case-metric-label">Designer do sistema</div>
-    <div class="case-metric-desc">Responsável pela arquitetura,<br>construção e documentação</div>
+    <div class="case-metric-desc">Responsável pela arquitetura, construção e documentação</div>
   </div>
   <div class="case-metric">
     <svg class="case-metric-icon" viewBox="0 0 32 32" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="24" height="16" rx="2"/><line x1="4" y1="14" x2="28" y2="14"/><line x1="16" y1="14" x2="16" y2="24"/></svg>
-    <div class="case-metric-num">2</div>
-    <div class="case-metric-label">Anos de construção</div>
-    <div class="case-metric-desc">De tokens base até<br>templates prontos</div>
+    <div class="case-metric-num">6 anos</div>
+    <div class="case-metric-label">Em produção</div>
+    <div class="case-metric-desc">Construído em 2020, vivo até hoje no time</div>
   </div>
 </div>
 </div>
 
 <!-- 02 O PROBLEMA -->
 <div class="case-pull"><div class="container">
-<div class="case-pull-text rv">Cada projeto começava do zero.<br>O resultado era uma <strong>colcha de retalhos</strong><br>entre as interfaces<span class="faded">.</span></div>
+<div class="case-pull-text rv">Cada projeto começava do zero. O resultado era uma <strong>colcha de retalhos</strong> entre as interfaces<span class="faded">.</span></div>
 </div></div>
 
 <div class="container" style="padding-top:48px;padding-bottom:80px">
@@ -308,36 +392,36 @@ a,button,input,textarea,select,[role="button"]{cursor:none!important}
 <div class="case-problems rv d1">
   <div class="case-problem">
     <svg class="case-problem-icon" viewBox="0 0 44 44" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="14" height="14" rx="1"/><rect x="24" y="6" width="14" height="14" rx="1"/><rect x="6" y="24" width="14" height="14" rx="1"/><rect x="24" y="24" width="14" height="14" rx="1"/><line x1="13" y1="10" x2="13" y2="16" stroke-width="1" opacity=".4"/><line x1="31" y1="28" x2="31" y2="34" stroke-width="1" opacity=".4"/></svg>
-    <div class="case-problem-title">Fragmentação<br>visual</div>
-    <div class="case-problem-desc">Cada produto seguia padrões próprios,<br>sem componentes compartilhados.<br>Interfaces inconsistentes<br>entre equipes e marcas.</div>
+    <div class="case-problem-title">Fragmentação visual</div>
+    <div class="case-problem-desc">Cada produto seguia padrões próprios, sem componentes compartilhados. Interfaces inconsistentes entre equipes e marcas.</div>
     <div class="case-problem-stat"><span class="case-problem-stat-num">0</span><span class="case-problem-stat-label">componentes compartilhados</span></div>
   </div>
   <div class="case-problem">
     <svg class="case-problem-icon" viewBox="0 0 44 44" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="22" cy="22" r="14"/><line x1="22" y1="12" x2="22" y2="22"/><line x1="22" y1="22" x2="30" y2="28"/></svg>
-    <div class="case-problem-title">Retrabalho<br>crônico</div>
-    <div class="case-problem-desc">Designers recriavam soluções<br>já resolvidas a cada nova<br>landing page. Sem biblioteca,<br>cada botão era desenhado do zero.</div>
+    <div class="case-problem-title">Retrabalho crônico</div>
+    <div class="case-problem-desc">Designers recriavam soluções já resolvidas a cada nova landing page. Sem biblioteca, cada botão era desenhado do zero.</div>
     <div class="case-problem-stat"><span class="case-problem-stat-num">100%</span><span class="case-problem-stat-label">retrabalho por projeto novo</span></div>
   </div>
   <div class="case-problem">
     <svg class="case-problem-icon" viewBox="0 0 44 44" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="8" width="14" height="18" rx="1.5"/><rect x="24" y="8" width="14" height="18" rx="1.5"/><path d="M20 17 L24 17" stroke-dasharray="2 2"/><line x1="6" y1="30" x2="38" y2="30"/><line x1="14" y1="34" x2="30" y2="34" stroke-width="1" opacity=".4"/></svg>
-    <div class="case-problem-title">Handoff sem<br>contrato</div>
-    <div class="case-problem-desc">Ambiguidade entre design e código<br>gerava idas e vindas desnecessárias.<br>Desenvolvedores interpretavam<br>layouts à sua maneira.</div>
+    <div class="case-problem-title">Handoff sem contrato</div>
+    <div class="case-problem-desc">Ambiguidade entre design e código gerava idas e vindas desnecessárias. Desenvolvedores interpretavam layouts à sua maneira.</div>
     <div class="case-problem-stat"><span class="case-problem-stat-num">0</span><span class="case-problem-stat-label">padrão de documentação</span></div>
   </div>
   <div class="case-problem">
     <svg class="case-problem-icon" viewBox="0 0 44 44" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 36 L22 8 L36 36 Z"/><line x1="22" y1="18" x2="22" y2="26"/><circle cx="22" cy="30" r="1.5" fill="#111"/></svg>
-    <div class="case-problem-title">Escala sem<br>fundação</div>
-    <div class="case-problem-desc">Novos produtos herdavam<br>inconsistências em vez de padrões.<br>A dívida visual crescia<br>mais rápido que a empresa.</div>
+    <div class="case-problem-title">Escala sem fundação</div>
+    <div class="case-problem-desc">Novos produtos herdavam inconsistências em vez de padrões. A dívida visual crescia mais rápido que a empresa.</div>
     <div class="case-problem-stat"><span class="case-problem-stat-num">3x</span><span class="case-problem-stat-label">mais marcas previstas no roadmap</span></div>
   </div>
 </div>
 </div>
 
-<!-- 03 PROCESSO -->
+<!-- 03 PROCESSO — A Gênese -->
 <div class="case-timeline"><div class="container">
 <div class="case-timeline-header rv">
-  <span class="case-pull-caption">03 / O Processo</span>
-  <h3 class="case-timeline-heading">Do diagnóstico ao sistema vivo.<br>4 fases em 2 anos.</h3>
+  <span class="case-pull-caption">03 / A Gênese</span>
+  <h3 class="case-timeline-heading">Construindo a fundação do zero. Quatro fases que transformaram intenção em sistema vivo.</h3>
 </div>
 <div class="case-timeline-track rv d1">
   <div class="case-timeline-line"><div class="case-timeline-line-fill"></div></div>
@@ -346,225 +430,278 @@ a,button,input,textarea,select,[role="button"]{cursor:none!important}
     <svg class="case-timeline-icon" viewBox="0 0 32 32" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="14" r="9"/><line x1="20" y1="20" x2="28" y2="28"/></svg>
     <div class="case-timeline-num">01/</div>
     <div class="case-timeline-title">Auditoria visual</div>
-    <div class="case-timeline-desc">Mapeei inconsistências<br>em todos os 20+ produtos</div>
+    <div class="case-timeline-desc">Mapeei inconsistências em todos os 20+ produtos</div>
   </div>
   <div class="case-timeline-step">
     <div class="case-timeline-dot"><div class="case-timeline-dot-inner"></div></div>
     <svg class="case-timeline-icon" viewBox="0 0 32 32" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="24" height="24" rx="2"/><line x1="4" y1="12" x2="28" y2="12"/><line x1="12" y1="4" x2="12" y2="28"/></svg>
     <div class="case-timeline-num">02/</div>
     <div class="case-timeline-title">Arquitetura de tokens</div>
-    <div class="case-timeline-desc">Defini cores, tipografia,<br>espaçamento e sombras</div>
+    <div class="case-timeline-desc">Defini cores, tipografia, espaçamento e sombras como variáveis semânticas</div>
   </div>
   <div class="case-timeline-step">
     <div class="case-timeline-dot"><div class="case-timeline-dot-inner"></div></div>
     <svg class="case-timeline-icon" viewBox="0 0 32 32" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="8" width="20" height="16" rx="2"/><line x1="6" y1="14" x2="26" y2="14"/><circle cx="12" cy="20" r="2"/><line x1="17" y1="19" x2="23" y2="19"/><line x1="17" y1="22" x2="21" y2="22"/></svg>
     <div class="case-timeline-num">03/</div>
     <div class="case-timeline-title">Componentes</div>
-    <div class="case-timeline-desc">Construí átomos, moléculas<br>e organismos documentados</div>
+    <div class="case-timeline-desc">Construí átomos, moléculas e organismos documentados</div>
   </div>
   <div class="case-timeline-step">
     <div class="case-timeline-dot"><div class="case-timeline-dot-inner"></div></div>
     <svg class="case-timeline-icon" viewBox="0 0 32 32" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="11"/><polyline points="10,16 14,21 22,11"/></svg>
     <div class="case-timeline-num">04/</div>
     <div class="case-timeline-title">Integração + escala</div>
-    <div class="case-timeline-desc">Templates em produção<br>para todas as marcas</div>
+    <div class="case-timeline-desc">Templates em produção, consumidos por 20+ produtos</div>
   </div>
 </div>
 </div></div>
 
-<!-- STATEMENT: abordagem -->
+<!-- STATEMENT: Token-first -->
 <div class="case-statement"><div class="container">
-<h2 class="case-statement-text rv">Token-first:<br>a fundação <strong>antes</strong><br>do componente<span class="faded">.</span></h2>
+<h2 class="case-statement-text rv">Token-first: a fundação <strong>antes</strong> do componente. Cada decisão técnica precedida por uma <strong>variável semântica</strong><span class="faded">.</span></h2>
 </div></div>
 
-<!-- 04 O QUE CONSTRUÍ -->
+<!-- 04 A PRIMEIRA DECISÃO: TOKENS -->
 <div class="case-offset"><div class="container">
 <div class="case-offset-grid rv">
 <div>
   <span class="case-offset-num">04</span>
-  <div class="case-offset-label">O que construí</div>
+  <div class="case-offset-label">A primeira decisão</div>
 </div>
 <div class="case-offset-body">
-  <p>Antes de desenhar qualquer botão,<br>
-  defini a <strong>arquitetura de Design Tokens</strong>:<br>
-  cores, tipografia, espaçamento, sombras e bordas<br>
-  como variáveis semânticas.</p>
-  <p>A decisão-chave: qualquer marca da Escale<br>
-  podia trocar sua identidade visual inteira<br>
-  apenas substituindo os tokens.<br>
-  Isso fez do Delta um <strong>sistema multi-marca<br>
-  desde o dia zero</strong>.</p>
+  <p>Antes de desenhar o primeiro botão, desenhei a <strong>arquitetura de Design Tokens</strong>. Defini as primitivas de cor, tipografia, espaçamento, sombras e bordas que sustentariam a estratégia <strong>white-label</strong>, garantindo que o sistema nascesse pronto para atender múltiplas marcas sem refação de código.</p>
+  <p>A decisão-chave: qualquer marca da Escale podia trocar sua identidade visual inteira apenas substituindo os tokens. Isso fez do Delta um <strong>sistema multi-marca desde o dia zero</strong>.</p>
 </div>
 </div>
 </div></div>
 
-<!-- Token images placeholder -->
-<div class="container">
-  <div class="case-img-placeholder rv">
-    <p>Tokens do Delta Design System<span>img/delta/tokens-overview.webp</span></p>
+<!-- DIAGRAMA DE CONTRASTES (delta11) — prova de craft puro -->
+<div class="contrast-bleed"><div class="container">
+  <div class="rv"><span class="case-pull-caption" style="margin-top:0;margin-bottom:32px;display:inline-block">Validação manual de contrastes</span></div>
+  <div class="contrast-bleed-img rv d1">
+    <img src="img/delta/contrast-diagram.webp" alt="Diagrama de contrastes do Delta: matriz cruzando todas as cores do sistema para validar acessibilidade WCAG AA">
   </div>
-</div>
+  <p class="contrast-caption rv d2">Validei manualmente cada combinação de cor do sistema contra <strong style="color:var(--black);font-weight:600">WCAG AA</strong>. Cada célula é uma decisão de acessibilidade documentada.</p>
+</div></div>
 
-<!-- Atomic Design progression -->
-<div class="container" style="padding-bottom:40px">
-<div class="rv"><span class="case-pull-caption" style="margin-top:0;margin-bottom:24px;display:inline-block">Progressão Atomic Design</span></div>
-<div class="case-atomic rv d1">
-  <div class="case-atomic-step">
-    <svg class="case-atomic-icon" viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="1.3" stroke-linecap="round"><circle cx="24" cy="24" r="6"/><circle cx="24" cy="24" r="3" fill="#D1F466" stroke="none"/></svg>
-    <div class="case-atomic-num">01/</div>
-    <div class="case-atomic-title">Tokens</div>
-    <div class="case-atomic-desc">Cores, tipografia, espaçamento,<br>sombras, bordas</div>
+<!-- ═══ FUNDAÇÃO VISUAL — TOKENS DARK SECTION ═══ -->
+<section class="token-section">
+  <div class="container">
+    <div class="ed-header rv">
+      <div class="ed-num">05</div>
+      <h2 class="ed-title">Os tokens que sustentam o sistema</h2>
+    </div>
+    <div class="ed-content rv d1">
+      <p class="ed-body">Toda decisão visual do Delta passa por uma camada de tokens semânticos. <strong>Opacidade, sombra, tipografia e bordas</strong> não são valores soltos no código: são primitivas nomeadas, documentadas e consumidas por código, mantendo coerência sem amarrar liberdade criativa de cada marca.</p>
+    </div>
+    <div class="token-grid rv d2">
+      <div class="token-card">
+        <div class="token-card-img"><img src="img/delta/token-opacity.webp" alt="Opacity levels do Delta: 5 níveis nomeados de 0.08 a 0.80"></div>
+        <div class="token-card-meta">
+          <div class="token-card-name">Opacity Levels</div>
+          <div class="token-card-desc">5 níveis semânticos, de Semi Transparent a Semi Opaque, garantindo hierarquia consistente em sobreposições.</div>
+        </div>
+      </div>
+      <div class="token-card">
+        <div class="token-card-img"><img src="img/delta/token-shadow.webp" alt="Shadow levels do Delta: 4 níveis de elevação"></div>
+        <div class="token-card-meta">
+          <div class="token-card-name">Shadow Levels</div>
+          <div class="token-card-desc">4 níveis de elevação (flat, soft, raised, spotlight) para construir profundidade sem improviso.</div>
+        </div>
+      </div>
+      <div class="token-card">
+        <div class="token-card-img"><img src="img/delta/token-typography.webp" alt="Typography do Delta: font family, line height, font weight e font size"></div>
+        <div class="token-card-meta">
+          <div class="token-card-name">Typography</div>
+          <div class="token-card-desc">13 tamanhos de fonte, 4 line heights e 5 pesos. Tudo nomeado e documentado para Figma e código.</div>
+        </div>
+      </div>
+      <div class="token-card">
+        <div class="token-card-img"><img src="img/delta/token-borders.webp" alt="Borders do Delta: 6 raios e 5 espessuras"></div>
+        <div class="token-card-meta">
+          <div class="token-card-name">Borders</div>
+          <div class="token-card-desc">6 raios (UltraSmall a Circular) e 5 espessuras (Hairline a Heavy), cobrindo toda a sintaxe de borda do sistema.</div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="case-atomic-step">
-    <svg class="case-atomic-icon" viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="1.3" stroke-linecap="round"><circle cx="16" cy="24" r="5"/><circle cx="32" cy="24" r="5"/><line x1="21" y1="24" x2="27" y2="24"/></svg>
-    <div class="case-atomic-num">02/</div>
-    <div class="case-atomic-title">Átomos</div>
-    <div class="case-atomic-desc">Botões, inputs, ícones,<br>badges, tags</div>
-  </div>
-  <div class="case-atomic-step">
-    <svg class="case-atomic-icon" viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="1.3" stroke-linecap="round"><circle cx="16" cy="18" r="4"/><circle cx="32" cy="18" r="4"/><circle cx="24" cy="32" r="4"/><line x1="19" y1="20" x2="22" y2="30"/><line x1="29" y1="20" x2="26" y2="30"/><line x1="20" y1="18" x2="28" y2="18"/></svg>
-    <div class="case-atomic-num">03/</div>
-    <div class="case-atomic-title">Moléculas</div>
-    <div class="case-atomic-desc">Cards, barras de navegação,<br>formulários, modais</div>
-  </div>
-  <div class="case-atomic-step">
-    <svg class="case-atomic-icon" viewBox="0 0 48 48" fill="none" stroke="#111" stroke-width="1.3" stroke-linecap="round"><rect x="8" y="8" width="32" height="32" rx="3"/><line x1="8" y1="16" x2="40" y2="16"/><line x1="20" y1="16" x2="20" y2="40"/><rect x="23" y="20" width="14" height="6" rx="1" opacity=".3"/><rect x="23" y="30" width="14" height="6" rx="1" opacity=".3"/></svg>
-    <div class="case-atomic-num">04/</div>
-    <div class="case-atomic-title">Templates</div>
-    <div class="case-atomic-desc">Páginas inteiras reutilizáveis<br>para qualquer marca</div>
-  </div>
-</div>
-</div>
+</section>
 
-<!-- Princípios -->
+<!-- ═══ PALETA — full visual statement ═══ -->
+<section class="palette-section"><div class="container">
+  <div class="ed-header rv">
+    <div class="ed-num">06</div>
+    <h2 class="ed-title">A paleta completa</h2>
+  </div>
+  <div class="ed-content rv d1">
+    <p class="ed-body"><strong>32 tons. 8 famílias.</strong> Construí a paleta inteira do Delta: brand (primary, secondary, neutral, tertiary) e feedback (critical, success, warning, info). Cada família com 6 níveis e tokens semânticos, prontos para alimentar qualquer marca da Escale via injeção de variáveis.</p>
+  </div>
+  <div class="palette-bleed-img rv d2">
+    <img src="img/delta/palette-full.webp" alt="Paleta completa do Delta: 8 famílias de cor com 6 níveis cada">
+  </div>
+</div></section>
+
+<!-- 07 OPERAÇÃO: HANDOFF -->
 <div class="case-pull"><div class="container">
-<div class="case-pull-text rv">Três palavras guiaram<br>cada decisão que tomei<br>na construção do Delta<span class="faded">.</span></div>
+<div class="case-pull-text rv">Um sistema só vive se a Engenharia consegue consumi-lo <strong>sem atrito</strong><span class="faded">.</span></div>
+<div class="case-pull-caption rv d1">07 / A Operação</div>
 </div></div>
 
-<div class="container" style="padding-top:48px;padding-bottom:80px">
-<div class="case-pillars rv">
-  <div class="case-pillar">
-    <div class="case-pillar-bar"></div>
-    <div class="case-pillar-title">Econômico</div>
-    <div class="case-pillar-desc">Biblioteca enxuta, sem redundância.<br>Aperfeiçoar o existente antes<br>de criar o novo. Remoção do<br>desnecessário, não acumulação.</div>
-  </div>
-  <div class="case-pillar">
-    <div class="case-pillar-bar"></div>
-    <div class="case-pillar-title">Versátil</div>
-    <div class="case-pillar-desc">Componentes flexíveis que atendiam<br>múltiplas marcas com pouca<br>personalização. Ponte de diálogo<br>entre times e contextos.</div>
-  </div>
-  <div class="case-pillar">
-    <div class="case-pillar-bar"></div>
-    <div class="case-pillar-title">Objetivo</div>
-    <div class="case-pillar-desc">Documentação transparente,<br>sem ambiguidade. Orientação<br>pelo exemplo, não pelo manual.<br>Cada componente auto-explicativo.</div>
-  </div>
-</div>
-</div>
-
-<!-- Princípios visual -->
-<div class="container">
-  <div class="case-img-placeholder rv" style="background:var(--black)">
-    <p style="color:var(--gray-3)">Econômico, Versátil, Objetivo<span style="color:var(--gray-4)">img/delta/principios-visual.webp</span></p>
-  </div>
-</div>
-
-<!-- 05 ENTREGAS -->
 <div class="case-offset"><div class="container">
 <div class="case-offset-grid rv">
 <div>
-  <span class="case-offset-num">05</span>
-  <div class="case-offset-label">Entregas concretas</div>
+  <span class="case-offset-num">07</span>
+  <div class="case-offset-label">Desenhando o handoff</div>
 </div>
 <div class="case-offset-body">
-  <p>Cada componente entregue com <strong>anatomia completa</strong>:<br>
-  propriedades visuais, tokens aplicados,<br>
-  estados de interação e status.</p>
-  <p>Desenvolvedores não precisavam mais interpretar<br>
-  layouts. <strong>O template de handoff eliminou<br>
-  ambiguidade entre design e código</strong>.</p>
+  <p>Desenhei o protocolo de entrega para garantir <strong>paridade total entre Figma e React</strong>. Documentei a anatomia, os estados de comportamento e as regras de acessibilidade como especificação técnica, não como sugestão visual.</p>
+  <p><strong>Documentação como contrato:</strong> não apenas pixel-perfect, mas anatomia lógica.<br>
+  <strong>Redução de ambiguidade:</strong> nada chega no dev sem estar mapeado e tokenizado.</p>
 </div>
 </div>
 </div></div>
 
-<div class="container">
-<div class="case-insight-row rv">
-  <div class="case-insight">
-    <div class="case-insight-tag">Tokens</div>
-    <div class="case-insight-num">5</div>
-    <div class="case-insight-desc">categorias de variáveis semânticas:<br>cores, tipo, espaçamento,<br>sombras e bordas</div>
+<!-- ═══ COMPONENTES — light browser-pair pattern ═══ -->
+<section class="comp-section"><div class="container">
+  <div class="ed-header rv">
+    <div class="ed-num">08</div>
+    <h2 class="ed-title">A família de componentes</h2>
   </div>
-  <div class="case-insight">
-    <div class="case-insight-tag">Componentes</div>
-    <div class="case-insight-num">A→T</div>
-    <div class="case-insight-desc">cobertura completa: de átomos<br>base até templates de página<br>reutilizáveis</div>
+  <div class="ed-content rv d1">
+    <p class="ed-body">Desenhei e documentei toda a família de buttons (<strong>primary, secondary, tertiary</strong>) em 3 tamanhos e 6 estados, cada um com light e dark mode, fill e outlined. A mesma metodologia de anatomia se estende a todos os componentes do sistema.</p>
   </div>
-  <div class="case-insight">
-    <div class="case-insight-tag">Documentação</div>
-    <div class="case-insight-num">100%</div>
-    <div class="case-insight-desc">cada componente com anatomia,<br>estados, variações e<br>instruções para devs</div>
+  <div class="comp-pair rv d2">
+    <div class="comp-card">
+      <div class="comp-card-img"><img src="img/delta/buttons-overview.webp" alt="Visão geral dos buttons do Delta: primary, secondary e tertiary com todos os estados"></div>
+      <div class="comp-card-meta">
+        <div class="comp-card-tag">Visão geral</div>
+        <div class="comp-card-name">Primary · Secondary · Tertiary</div>
+      </div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-card-img"><img src="img/delta/button-primary.webp" alt="Anatomia do button primary: variações fill e outlined em large, medium e small"></div>
+      <div class="comp-card-meta">
+        <div class="comp-card-tag">Anatomia detalhada</div>
+        <div class="comp-card-name">Button Primary · Tokens & States</div>
+      </div>
+    </div>
   </div>
-</div>
-</div>
+  <div class="comp-trio rv d3">
+    <div class="comp-card">
+      <div class="comp-card-img"><img src="img/delta/button-secondary.webp" alt="Button secondary: anatomia em três tamanhos"></div>
+      <div class="comp-card-meta"><div class="comp-card-tag">Componente</div><div class="comp-card-name">Button Secondary</div></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-card-img"><img src="img/delta/button-tertiary.webp" alt="Button tertiary: anatomia em dark e light mode"></div>
+      <div class="comp-card-meta"><div class="comp-card-tag">Componente</div><div class="comp-card-name">Button Tertiary</div></div>
+    </div>
+    <div class="comp-card">
+      <div class="comp-card-img"><img src="img/delta/links.webp" alt="Links: variações em light theme, dark theme, spacings e exemplos aplicados"></div>
+      <div class="comp-card-meta"><div class="comp-card-tag">Componente</div><div class="comp-card-name">Links</div></div>
+    </div>
+  </div>
+</div></section>
 
-<!-- Placeholder: component library / storybook -->
-<div class="container" style="padding-top:48px">
-  <div class="case-img-placeholder rv">
-    <p>Biblioteca de componentes no Storybook<span>img/delta/storybook.webp</span></p>
+<!-- ═══ STORYBOOK CALLOUT ═══ -->
+<section class="storybook-callout"><div class="container">
+  <div class="ed-header rv">
+    <div class="ed-num">09</div>
+    <h2 class="ed-title">Storybook em produção</h2>
   </div>
-</div>
-
-<!-- Placeholder: handoff template -->
-<div class="container" style="padding-top:0;padding-bottom:40px">
-  <div class="case-img-placeholder rv">
-    <p>Template de handoff design → código<span>img/delta/template-handoff.webp</span></p>
+  <div class="storybook-grid">
+    <div class="storybook-info rv d1">
+      <h3>Toda a biblioteca, viva e versionada.</h3>
+      <p>O Delta é consumido pelo time de Engenharia em produção desde 2020 através de um <strong>Storybook público</strong>. Cada componente vem com props, tokens, controles interativos e ciclo de depreciação documentado.</p>
+      <a href="https://escaletech.github.io/delta/" target="_blank" rel="noopener" class="storybook-link">Acessar Storybook
+        <svg viewBox="0 0 16 16"><path d="M5 11l6-6M6 5h5v5"/></svg>
+      </a>
+    </div>
+    <div class="storybook-numbers rv d2">
+      <div class="storybook-num">
+        <div class="storybook-num-val">23</div>
+        <div class="storybook-num-label">Componentes ativos</div>
+      </div>
+      <div class="storybook-num">
+        <div class="storybook-num-val">6</div>
+        <div class="storybook-num-label">Categorias</div>
+      </div>
+      <div class="storybook-num">
+        <div class="storybook-num-val">3</div>
+        <div class="storybook-num-label">Páginas de tokens</div>
+      </div>
+      <div class="storybook-num">
+        <div class="storybook-num-val">6 anos</div>
+        <div class="storybook-num-label">Em produção</div>
+      </div>
+    </div>
   </div>
-</div>
+</div></section>
 
-<!-- 06 RESULTADOS -->
+<!-- 10 PROTOCOLO — craft que vira protocolo -->
+<div class="case-pull"><div class="container">
+<div class="case-pull-text rv">Para que o sistema escalasse além das minhas mãos, precisei <strong>amarrar o protocolo de contribuição</strong>. Documentei a árvore de bibliotecas, defini os critérios de aceite e nivelei o conhecimento de UI no time inteiro<span class="faded">.</span></div>
+<div class="case-pull-caption rv d1">10 / O Protocolo</div>
+</div></div>
+
+<section class="protocol-section"><div class="container">
+  <div class="protocol-pair rv">
+    <div class="protocol-card">
+      <div class="protocol-card-img"><img src="img/delta/composicao.webp" alt="Composição do Delta: árvore de bibliotecas globais, core, team-tokens e team-components"></div>
+      <div class="protocol-card-meta">
+        <div class="protocol-card-tag">Arquitetura de libs</div>
+        <div class="protocol-card-desc">Desenhei a árvore de bibliotecas: globais, core, team-tokens e team-components, incluindo a lógica de herança que permitia cada time evoluir sem quebrar o sistema.</div>
+      </div>
+    </div>
+    <div class="protocol-card">
+      <div class="protocol-card-img"><img src="img/delta/construindo-componente.webp" alt="Construindo um componente: documentação completa do processo de desenho à anatomia"></div>
+      <div class="protocol-card-meta">
+        <div class="protocol-card-tag">Anatomia de componente</div>
+        <div class="protocol-card-desc">Documentei o processo completo de construção: do desenho à especificação, passando por sistema espacial, tokens, estados e animações. Mesma régua para todos.</div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 11 RESULTADOS -->
 <div class="case-results"><div class="container">
-<div class="case-results-statement rv">Um sistema que<br>mudou como o time<br>constrói produto<span class="faded">.</span></div>
+<div class="case-results-statement rv">Um sistema que mudou como o time <strong>constrói produto</strong><span class="faded">.</span></div>
 <div class="case-stats-grid rv d1">
   <div class="case-stat">
     <svg class="case-stat-icon" viewBox="0 0 28 28" fill="none" stroke="#D1F466" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="14" r="10"/><line x1="14" y1="8" x2="14" y2="14"/><line x1="14" y1="14" x2="20" y2="18"/></svg>
     <div class="case-stat-num">~47%</div>
     <div class="case-stat-label">Mais rápido</div>
-    <div class="case-stat-desc">Redução no tempo de criação<br>de novas interfaces com<br>componentes reutilizáveis</div>
+    <div class="case-stat-desc">Redução no tempo de criação de novas interfaces com componentes reutilizáveis</div>
     <div class="case-stat-category">/Velocidade</div>
   </div>
   <div class="case-stat">
     <svg class="case-stat-icon" viewBox="0 0 28 28" fill="none" stroke="#D1F466" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="8" height="8" rx="1"/><rect x="16" y="4" width="8" height="8" rx="1"/><rect x="4" y="16" width="8" height="8" rx="1"/><rect x="16" y="16" width="8" height="8" rx="1"/></svg>
     <div class="case-stat-num">20+</div>
     <div class="case-stat-label">Produtos atendidos</div>
-    <div class="case-stat-desc">Em produção simultânea<br>em três segmentos<br>de mercado</div>
+    <div class="case-stat-desc">Em produção simultânea em três segmentos de mercado</div>
     <div class="case-stat-category">/Escala</div>
   </div>
   <div class="case-stat">
     <svg class="case-stat-icon" viewBox="0 0 28 28" fill="none" stroke="#D1F466" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="20" height="20" rx="2"/><line x1="4" y1="10" x2="24" y2="10"/><line x1="12" y1="4" x2="12" y2="24"/></svg>
-    <div class="case-stat-num">A→T</div>
-    <div class="case-stat-label">Cobertura total</div>
-    <div class="case-stat-desc">De átomos base até<br>templates de página<br>prontos para produção</div>
+    <div class="case-stat-num">23</div>
+    <div class="case-stat-label">Componentes ativos</div>
+    <div class="case-stat-desc">Documentados no Storybook, consumidos pelo time de Engenharia em produção</div>
     <div class="case-stat-category">/Profundidade</div>
   </div>
   <div class="case-stat">
     <svg class="case-stat-icon" viewBox="0 0 28 28" fill="none" stroke="#D1F466" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="14" r="6"/><circle cx="18" cy="14" r="6"/></svg>
-    <div class="case-stat-num">Multi</div>
-    <div class="case-stat-label">Marca</div>
-    <div class="case-stat-desc">Troca de identidade visual<br>via tokens, sem redesenho<br>de componentes</div>
-    <div class="case-stat-category">/Flexibilidade</div>
+    <div class="case-stat-num">6 anos</div>
+    <div class="case-stat-label">Em produção</div>
+    <div class="case-stat-desc">Construído em 2020, vivo até hoje sem refundir código</div>
+    <div class="case-stat-category">/Longevidade</div>
   </div>
 </div>
 </div></div>
 
-<!-- 07 IMPACTO -->
+<!-- 12 APRENDIZADOS -->
 <div class="case-pull" style="border-bottom:1px solid var(--gray-5)"><div class="container">
-<div class="case-pull-text rv">Onde antes cada projeto partia do zero,<br>o time passou a construir sobre uma<br><strong>fundação validada e documentada</strong>.<br>O Delta se tornou referência interna<span class="faded">.</span></div>
-<div class="case-pull-caption rv d1">07 / Impacto</div>
+<div class="case-pull-text rv">Construir um Design System de ponta a ponta exige fluência em três coisas ao mesmo tempo: <strong>desenho, sistema e organização</strong>. Não consegui terceirizar nenhuma das três, e isso me ensinou que <strong>craft escala quando vira protocolo</strong>. O Delta hoje vive sem mim no código, e essa é a melhor prova de que a fundação aguenta<span class="faded">.</span></div>
+<div class="case-pull-caption rv d1">12 / Aprendizados</div>
 </div></div>
-
-<!-- HERO IMAGE (moved to end) -->
-<div class="container" style="padding:96px 0">
-  <div class="case-hero-img rv" style="max-width:70%;margin:0 auto"><img src="https://framerusercontent.com/images/ibHIROqyHkxvVtTioI5nYgGNqSQ.png" alt="Delta Design System, visão geral"></div>
-</div>
 
 <!-- MORE WORK -->
 <section class="more-work"><div class="container">
