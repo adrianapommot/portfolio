@@ -27,6 +27,7 @@
   --cream: #F9F9F9;
   --accent: #D1F466;
   --accent-light: #EDFFB6;
+  --accent-faint: #F9FDEE;
   --font-display: 'Plus Jakarta Sans', sans-serif;
   --font-body: 'Plus Jakarta Sans', sans-serif;
   --max-w: 1440px;
@@ -230,7 +231,7 @@ a { color: inherit; text-decoration: none; }
 /* Dark metadata bar — full-width */
 .case-meta-bar {
   background: #2C2B2B;
-  padding: 20px 0;
+  padding: 16px 0;
   margin-top: 40px;
   margin-left: calc(-1 * var(--px));
   margin-right: calc(-1 * var(--px));
@@ -248,18 +249,18 @@ a { color: inherit; text-decoration: none; }
 .case-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 32px;
+  gap: 16px 72px;
 }
 .case-meta-item {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 .case-meta-label {
   font-family: var(--font-display);
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--white);
 }
@@ -268,7 +269,7 @@ a { color: inherit; text-decoration: none; }
   font-size: 13px;
   font-weight: 400;
   letter-spacing: 0.02em;
-  color: var(--accent-light);
+  color: var(--white);
 }
 
 /* ═══════════════════════════════════
@@ -278,9 +279,11 @@ a { color: inherit; text-decoration: none; }
   padding: 96px 0;
   border-top: 1px solid var(--gray-5);
 }
-.ed--shaded { background: #F5F5F5; }
-.ed--shaded .ctx-metric { background: var(--cream); }
-.ed--shaded .challenge { background: var(--white); }
+.ed--shaded {
+  background: rgba(245, 245, 245, 0.6);
+  border-top: 2px solid var(--white);
+  border-bottom: 2px solid var(--white);
+}
 
 /* Section header — number + title, stacked, full width */
 .ed-header {
@@ -293,6 +296,16 @@ a { color: inherit; text-decoration: none; }
 /* Body text — constrained width, below title */
 .ed-content { max-width: 586px; }
 .ed-content > * + * { margin-top: 16px; }
+
+/* Paired layout — two columns below a title (for 03, 04) */
+.ed-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 128px;
+  align-items: start;
+}
+.ed-pair-left { display: flex; flex-direction: column; gap: 16px; }
+.ed-pair-right { display: flex; flex-direction: column; gap: 16px; padding-top: 26px; }
 
 /* Section number */
 .ed-num {
@@ -358,6 +371,7 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   justify-content: center;
   padding: 8px 16px;
+  background: var(--accent-light);
   border: 1px solid var(--black);
   border-radius: 8px;
   font-family: var(--font-display);
@@ -379,120 +393,285 @@ a { color: inherit; text-decoration: none; }
 .ed-body--lg { font-size: 18px; letter-spacing: 0.04em; color: #6d6d6d; }
 
 /* ═══════════════════════════════════
-   CONTEXT METRICS — 3 cards
+   CONTEXT METRICS — 3 cards horizontais (Figma)
    ═══════════════════════════════════ */
 .ctx-metrics {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
 }
 .ctx-metric {
-  border: 1px solid var(--gray-5);
+  background: var(--accent-faint);
+  border: 1px solid var(--black);
   border-radius: 8px;
   padding: 21px;
   display: flex;
-  flex-direction: column;
-  gap: 17px;
-}
-.ctx-metric-top {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-.ctx-metric-head {
-  display: flex;
+  gap: 32px;
   align-items: center;
-  justify-content: space-between;
 }
 .ctx-metric-icon {
-  width: 32px; height: 32px;
-  color: var(--gray-4);
+  width: 72px;
+  height: 80px;
+  flex-shrink: 0;
+  color: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .ctx-metric-icon svg {
-  width: 100%; height: 100%;
-  stroke: currentColor; stroke-width: 1.4;
-  fill: none; stroke-linecap: round; stroke-linejoin: round;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  display: block;
 }
-.ctx-metric-num {
-  font-family: var(--font-display);
-  font-size: 40px;
-  font-weight: 400;
-  letter-spacing: -0.014em;
-  line-height: 1;
+.ctx-metric-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
 }
 .ctx-metric-label {
   font-family: var(--font-display);
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 500;
-  letter-spacing: 0.033em;
+  letter-spacing: 0.026em;
   text-transform: uppercase;
   color: var(--black);
-}
-.ctx-metric-sep {
-  width: 26px;
-  height: 1px;
-  background: var(--gray-5);
+  line-height: 1.15;
+  text-wrap: balance;
 }
 .ctx-metric-desc {
   font-family: var(--font-body);
   font-size: 16px;
   font-weight: 400;
-  color: var(--black);
-  line-height: 1.75;
-  letter-spacing: 0.01em;
+  color: var(--gray-3);
+  line-height: 1.3;
+  letter-spacing: 0;
   text-wrap: pretty;
 }
 
 /* ═══════════════════════════════════
-   CHALLENGE CARDS — 5 cols
+   CHALLENGE CARDS — 5 cols (Figma)
    ═══════════════════════════════════ */
 .challenges {
   margin-top: 40px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 16px;
+  align-items: stretch;
 }
 .challenge {
-  border: 1px solid var(--white);
+  background: var(--white);
+  border: 1px solid var(--black);
   border-radius: 8px;
   padding: 21px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  height: 270px;
 }
 .challenge-icon {
   width: 32px; height: 32px;
-  color: var(--gray-4);
+  color: var(--black);
+  flex-shrink: 0;
 }
 .challenge-icon svg {
   width: 100%; height: 100%;
-  stroke: currentColor; stroke-width: 1.4;
+  stroke: currentColor; stroke-width: 1.5;
   fill: none; stroke-linecap: round; stroke-linejoin: round;
 }
 .challenge-name {
   font-family: var(--font-display);
   font-size: 16px;
   font-weight: 500;
-  line-height: 1.4;
+  line-height: 1.3;
   letter-spacing: 0.033em;
   text-transform: uppercase;
   color: var(--black);
-  text-wrap: balance;
 }
 .challenge-desc {
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 400;
   color: var(--gray-3);
-  line-height: 1.55;
+  line-height: 1.5;
   letter-spacing: 0.01em;
   text-wrap: pretty;
 }
 
 /* ═══════════════════════════════════
-   BULLET LIST — standard disc
+   PROBLEM CARD (02) — ilustração + título esquerda, card texto direita (Figma)
    ═══════════════════════════════════ */
+.problem-card {
+  display: flex;
+  gap: 247px;
+  align-items: flex-start;
+}
+.problem-card-left {
+  display: flex;
+  gap: 76px;
+  align-items: flex-end;
+  flex-shrink: 0;
+  width: 443px;
+}
+.problem-card-icon {
+  flex-shrink: 0;
+  width: 130px;
+  height: 130px;
+  color: var(--black);
+  display: block;
+}
+.problem-card-icon svg {
+  width: 100%; height: 100%;
+}
+.problem-card-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1;
+  min-width: 0;
+}
+.problem-card-statement {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.75;
+  color: var(--black);
+  text-wrap: pretty;
+}
+.problem-card-text {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  padding-top: 36px; /* alinha topo do texto com o topo do título (ed-num 20px + gap 16px) */
+  flex: 0 0 585px;
+  width: 585px;
+  max-width: 585px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+.problem-card-text p {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--gray-3);
+  line-height: 1.5;
+  letter-spacing: 0.008em;
+  text-wrap: pretty;
+}
+.problem-card-text strong {
+  color: var(--black);
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════
+   KEY RESULTS CARD (03) — Figma
+   ═══════════════════════════════════ */
+.kr-card {
+  background: #F5F5F5;
+  border: 1px solid var(--black);
+  border-radius: 8px;
+  padding: 32px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-self: start;
+}
+.kr-card-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: #2C2825;
+  line-height: 1;
+}
+.kr-card ul {
+  list-style: disc;
+  padding-left: 24px;
+  margin: 0;
+}
+.kr-card ul li {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--gray-3);
+  line-height: 1.75;
+  text-wrap: pretty;
+  margin-bottom: 4px;
+}
+.kr-card ul li:last-child { margin-bottom: 0; }
+
+/* ═══════════════════════════════════
+   OBJECTIVE / STRATEGY — two-col layout (Figma)
+   ═══════════════════════════════════ */
+.ed-two-col {
+  display: flex;
+  gap: 168px;
+  align-items: flex-start;
+}
+.ed-two-col-left {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  flex-shrink: 0;
+  min-width: 0;
+  max-width: 522px;
+}
+.ed-two-col-right {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex-shrink: 0;
+  width: 626px;
+  padding-top: 24px;
+}
+
+/* Modifier: Objetivo (seção 03) — gap 181, align-end */
+.ed-two-col--obj {
+  gap: 181px;
+  align-items: flex-end;
+}
+.ed-two-col--obj .ed-two-col-left {
+  max-width: 503px;
+}
+
+/* Modifier: Estratégia (seção 04) — gap 93, left w-590 */
+.ed-two-col--strat {
+  gap: 93px;
+  align-items: flex-start;
+}
+.ed-two-col--strat .ed-two-col-left {
+  width: 590px;
+  max-width: 590px;
+}
+.ed-two-col--strat .ed-two-col-right {
+  gap: 24px;
+  padding-top: 36px; /* alinha topo do primeiro card com o topo do título (ed-num 20px + gap 16px) */
+}
+
+.ed-two-col-body-lg {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 400;
+  color: #6d6d6d;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  max-width: 562px;
+  text-wrap: pretty;
+}
+.ed-two-col-body-lg strong {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--black);
+}
+
+
 .ed-list {
   list-style: disc;
   padding-left: 24px;
@@ -696,6 +875,82 @@ a { color: inherit; text-decoration: none; }
    RESULTS
    ═══════════════════════════════════ */
 .results { padding: 96px 0; border-top: 1px solid var(--gray-5); }
+
+/* Card lime com 4 métricas + divisores (Figma) */
+.results-hero{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0;
+  background: var(--accent-light);
+  border: 1px solid var(--black);
+  border-radius: 8px;
+  padding: 0 24px;
+  min-height: 125px;
+  margin-top: 40px;
+}
+.results-hero-item{
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  flex: 0 1 auto;
+}
+.results-hero-item .r-num{
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--black);
+}
+.results-hero-item .r-label{
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--gray-3);
+}
+.results-hero-sep{
+  width: 1px;
+  align-self: stretch;
+  background: var(--black);
+  flex-shrink: 0;
+  margin: 24px 0;
+}
+
+/* Row texto (esquerda) + tabela (direita) */
+.results-row{
+  display: flex;
+  gap: 78px;
+  align-items: flex-start;
+  margin-top: 0;
+}
+.results-row-text{
+  flex-shrink: 0;
+  width: 529px;
+  padding: 102px 0 80px;
+}
+.results-row-text p{
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--gray-3);
+  line-height: 1.75;
+  letter-spacing: 0.01em;
+  text-wrap: pretty;
+}
+.results-row-text p strong{
+  color: var(--black);
+  font-weight: 600;
+}
+.results-row-table{
+  flex: 1;
+  padding: 64px 0 56px;
+  min-width: 0;
+}
+
+/* Legacy — grid 4 metrics mantido p/ compat se usado em outros cases */
 .results-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -719,7 +974,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* KR COMPARISON TABLE */
-.kr-compare { margin-top: 40px; }
+.kr-compare { margin-top: 0; }
 .kr-compare-header {
   display: grid;
   grid-template-columns: 1fr 120px 120px;
@@ -728,11 +983,11 @@ a { color: inherit; text-decoration: none; }
 }
 .kr-compare-header span {
   font-family: var(--font-display);
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 500;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.033em;
   text-transform: uppercase;
-  color: var(--gray-3);
+  color: var(--black);
 }
 .kr-compare-header span:not(:first-child) { text-align: center; }
 .kr-compare-row {
@@ -759,17 +1014,18 @@ a { color: inherit; text-decoration: none; }
 }
 .kr-compare-result {
   font-family: var(--font-display);
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 500;
   color: var(--black);
   text-align: center;
+  justify-self: stretch;
 }
 .kr-compare-result.hit {
   color: var(--black);
-  background: var(--accent);
+  background: var(--accent-light);
+  border: 1px solid var(--black);
   padding: 4px 12px;
   border-radius: 999px;
-  font-size: 13px;
 }
 
 /* BEFORE/AFTER */
@@ -832,17 +1088,32 @@ a { color: inherit; text-decoration: none; }
 }
 .perf-item strong { color: var(--black); font-weight: 500; }
 
+/* DESDOBRAMENTO + APRENDIZADOS — layout 2 colunas */
+.post-pilot-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 96px;
+  align-items: start;
+}
+.post-pilot-col { min-width: 0; }
+.post-pilot-col .sprints { max-width: 100%; margin-top: 0; }
+@media (max-width: 900px) {
+  .post-pilot-row { grid-template-columns: 1fr; gap: 48px; }
+}
+
 /* SPRINT CARDS */
 .sprints {
   display: flex;
   flex-direction: column;
   gap: 16px;
   margin-top: 24px;
+  max-width: 547px;
 }
 .sprint {
+  background: var(--accent-faint);
   border: 1px solid var(--gray-5);
   border-radius: 8px;
-  padding: 24px;
+  padding: 25px;
 }
 .sprint-label {
   font-family: var(--font-display);
@@ -850,6 +1121,7 @@ a { color: inherit; text-decoration: none; }
   font-weight: 500;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  color: var(--black);
   margin-bottom: 10px;
 }
 .sprint-desc {
@@ -1060,11 +1332,26 @@ a, button, input, textarea, select, [role="button"] { cursor: none !important; }
    RESPONSIVE
    ═══════════════════════════════════ */
 @media (max-width: 1024px) {
+  .ed-pair { grid-template-columns: 1fr; gap: 40px; }
+  .ed-pair-right { padding-top: 0; }
+  .ed-two-col { flex-direction: column; gap: 48px; align-items: flex-start; }
+  .ed-two-col-left { width: 100%; }
+  .ed-two-col-right { width: 100%; padding-top: 0; }
   .challenges { grid-template-columns: repeat(3, 1fr); }
-  .ctx-metrics { grid-template-columns: repeat(3, 1fr); }
+  .problem-card { gap: 40px; flex-direction: column; align-items: flex-start; }
+  .problem-card-left { gap: 32px; width: 100%; }
+  .problem-card-heading { width: auto; flex: 1; }
+  .problem-card-text { padding: 0; flex: 0 0 auto; width: 100%; max-width: 100%; }
   .results-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  .results-hero { flex-wrap: wrap; padding: 16px; }
+  .results-hero-sep { display: none; }
+  .results-hero-item { flex: 1 1 calc(50% - 24px); padding: 16px; }
+  .results-row { flex-direction: column; gap: 40px; }
+  .results-row-text { width: 100%; padding: 0; }
+  .results-row-table { padding: 0; width: 100%; }
   .results-perf { grid-template-columns: 1fr; }
   .kr-compare-row { grid-template-columns: 1fr 100px 100px; }
+  .before-after { grid-template-columns: 1fr auto 1fr; }
   .phone-flow { grid-template-columns: repeat(3, 1fr); grid-template-rows: none; gap: 32px 24px; }
   .phone-step { display: flex; flex-direction: column; }
   .phone-caption { display: flex; flex-direction: column; margin-bottom: 16px; }
@@ -1081,7 +1368,10 @@ a, button, input, textarea, select, [role="button"] { cursor: none !important; }
   .case-meta { gap: 24px; }
   .case-meta-item { min-width: calc(50% - 12px); }
   .challenges { grid-template-columns: 1fr 1fr; }
-  .ctx-metrics { grid-template-columns: 1fr; }
+  .problem-card { flex-direction: column; gap: 24px; align-items: flex-start; }
+  .problem-card-left { flex-direction: column; gap: 16px; align-items: flex-start; }
+  .problem-card-icon { width: 80px; height: 80px; }
+  .problem-card-text { padding: 0; flex: 0 0 auto; width: 100%; max-width: 100%; }
   .ed { padding: 56px 0; }
   .results { padding: 56px 0; }
   .results-grid { grid-template-columns: 1fr 1fr; }
@@ -1099,6 +1389,112 @@ a, button, input, textarea, select, [role="button"] { cursor: none !important; }
   .more-work, .cta-section { padding: 96px 0; }
   .footer-grid { grid-template-columns: 1fr; gap: 32px; }
   .ed-subtitle { margin-top: 56px; }
+}
+
+/* ═══════════════════════════════════
+   FLUXO DESKTOP — Master-detail viewer
+   ═══════════════════════════════════ */
+.md-viewer{
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 48px;
+  align-items: start;
+  margin-top: 40px;
+}
+.md-thumbs{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  top: 40px;
+}
+.md-thumb{
+  all: unset;
+  display: block;
+  aspect-ratio: 16/10;
+  border: 1px solid var(--gray-5);
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--cream);
+  transition: border-color .2s, box-shadow .2s;
+}
+.md-thumb:hover{ border-color: var(--gray-3); }
+.md-thumb[aria-selected="true"]{
+  border-color: var(--black);
+  box-shadow: 0 0 0 1px var(--black);
+}
+.md-thumb img{
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+.md-stage{ display: flex; flex-direction: column; }
+.md-preview{
+  border: 1px solid var(--gray-5);
+  border-radius: 8px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 72vh;
+  min-height: 560px;
+  max-height: 800px;
+  background: var(--cream);
+  scrollbar-width: thin;
+  scrollbar-color: var(--gray-4) transparent;
+}
+.md-preview::-webkit-scrollbar{ width: 8px; }
+.md-preview::-webkit-scrollbar-track{ background: transparent; }
+.md-preview::-webkit-scrollbar-thumb{ background: var(--gray-4); border-radius: 4px; }
+.md-preview img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.md-caption{
+  margin-bottom: 24px;
+  padding: 20px 24px;
+  border-left: 3px solid var(--black);
+  background: var(--accent-faint);
+}
+.md-caption .md-num{
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--gray-3);
+  margin-bottom: 6px;
+  display: block;
+}
+.md-caption .md-title{
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.026em;
+  text-transform: uppercase;
+  color: var(--black);
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+.md-caption .md-desc{
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--gray-3);
+  line-height: 1.6;
+  max-width: 660px;
+  text-wrap: pretty;
+}
+
+@media (max-width: 900px){
+  .md-viewer{ grid-template-columns: 1fr; }
+  .md-thumbs{
+    flex-direction: row;
+    position: static;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+  .md-thumb{ width: 160px; flex-shrink: 0; }
+  .md-preview{ height: 60vh; min-height: 400px; }
 }
 </style>
 </head>
@@ -1144,93 +1540,113 @@ a, button, input, textarea, select, [role="button"] { cursor: none !important; }
      ══════════════════════════════════════════ -->
 
 <section class="ed"><div class="container">
-<div class="ed-header rv">
-  <div class="ed-num">01</div>
-  <h2 class="ed-title">Contexto do produto</h2>
-</div>
-<div class="ed-content rv d1">
-  <p class="ed-body">Produto digital de pós-compra da MRV, responsável por <strong>cobranças, pagamentos e renegociação de dívidas.</strong></p>
-  <p class="ed-body">Atendia mais de 2,5 milhões de clientes com financiamentos de até 35 anos, gerando <strong>impacto direto em custo operacional e satisfação.</strong></p>
-</div>
-<div class="ctx-metrics rv d1">
-  <div class="ctx-metric">
-    <div class="ctx-metric-top">
-      <div class="ctx-metric-head">
-        <div class="ctx-metric-num">2,5M</div>
-        <div class="ctx-metric-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-      </div>
-      <div class="ctx-metric-label">Clientes ativos</div>
+<div class="ed-two-col rv">
+  <div class="ed-two-col-left">
+    <div class="ed-header" style="margin-bottom:0">
+      <div class="ed-num">01</div>
+      <h2 class="ed-title">Contexto<br>do produto</h2>
     </div>
-    <div class="ctx-metric-sep"></div>
-    <div class="ctx-metric-desc">No app MRV, com financiamentos de longo prazo</div>
+    <div class="ed-content">
+      <p class="ed-body">Produto digital de pós-compra da MRV, responsável por <strong>cobranças, pagamentos e renegociação de dívidas.</strong></p>
+      <p class="ed-body">Atendia mais de 2,5 milhões de clientes com financiamentos de até 35 anos, gerando <strong>impacto direto em custo operacional e satisfação.</strong></p>
+    </div>
   </div>
-  <div class="ctx-metric">
-    <div class="ctx-metric-top">
-      <div class="ctx-metric-head">
-        <div class="ctx-metric-num">35</div>
-        <div class="ctx-metric-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+  <div class="ed-two-col-right">
+    <div class="ctx-metrics">
+      <div class="ctx-metric">
+        <div class="ctx-metric-icon">
+          <svg width="47" height="75" viewBox="0 0 47 75" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M19.4052 24.9443C19.4052 22.2374 21.6606 20.0376 24.43 20.0376C27.202 20.0376 29.4547 22.24 29.4547 24.9443V28.4388C29.4547 28.8899 29.0802 29.2556 28.6182 29.2556H20.2416C19.7796 29.2556 19.4051 28.8872 19.4051 28.4388L19.4052 24.9443ZM21.8957 16.0176C21.8957 14.6534 23.033 13.5455 24.4272 13.5455C25.8242 13.5455 26.9587 14.6561 26.9587 16.0176C26.9587 17.3817 25.8242 18.4896 24.4272 18.4896C23.033 18.4896 21.8957 17.3817 21.8957 16.0176ZM20.2417 30.8018H28.6155C29.9496 30.8018 31.0376 29.742 31.0376 28.4392V24.9448C31.0376 22.3233 29.4274 20.0621 27.1228 19.053C27.9921 18.3162 28.5443 17.2297 28.5443 16.0177C28.5443 13.8019 26.699 12 24.43 12C22.1609 12 20.3156 13.8019 20.3156 16.0177C20.3156 17.2297 20.8678 18.3162 21.7371 19.053C19.4325 20.0621 17.8223 22.3205 17.8223 24.9448V28.4392C17.8223 29.742 18.9077 30.8018 20.2417 30.8018ZM3.43962 36.7149C3.43962 34.0079 5.69504 31.8082 8.46437 31.8082C11.2364 31.8082 13.4891 34.0079 13.4891 36.7149V40.2067C13.4891 40.6578 13.1146 41.0236 12.6526 41.0236H4.27882C3.8168 41.0236 3.44228 40.6578 3.44228 40.2067L3.43962 36.7149ZM5.93285 27.7881C5.93285 26.424 7.07012 25.3161 8.46437 25.3161C9.86135 25.3161 10.9986 26.4267 10.9986 27.7881C10.9986 29.1523 9.86135 30.2628 8.46437 30.2628C7.07012 30.2628 5.93285 29.1523 5.93285 27.7881ZM4.27889 42.5724H12.6555C13.9895 42.5724 15.0748 41.5125 15.0748 40.2098V36.718C15.0748 34.0965 13.4646 31.8354 11.16 30.8263C12.0321 30.0895 12.5843 29.0029 12.5843 27.791C12.5843 25.5752 10.739 23.7733 8.46997 23.7733C6.2009 23.7733 4.35559 25.5752 4.35559 27.791C4.35559 29.0029 4.90782 30.0895 5.77714 30.8263C3.47251 31.8354 1.86229 34.0938 1.86229 36.718V40.2098C1.85682 41.5099 2.94482 42.5724 4.27889 42.5724ZM45.4171 40.2072C45.4171 40.6583 45.0425 41.024 44.5805 41.024H36.204C35.7419 41.024 35.3674 40.6583 35.3674 40.2072V36.7153C35.3674 34.0084 37.6229 31.8087 40.3922 31.8087C43.1642 31.8087 45.4169 34.0084 45.4169 36.7153L45.4171 40.2072ZM40.3923 25.3163C41.7893 25.3163 42.9238 26.4269 42.9238 27.7884C42.9238 29.1525 41.7866 30.2631 40.3923 30.2631C38.9953 30.2631 37.8608 29.1525 37.8608 27.7884C37.8608 26.4269 38.9953 25.3163 40.3923 25.3163ZM43.0851 30.8237C43.9572 30.0869 44.5067 29.0003 44.5067 27.7884C44.5067 25.5726 42.6614 23.7707 40.3923 23.7707C38.1233 23.7707 36.2779 25.5726 36.2779 27.7884C36.2779 29.0003 36.8302 30.0869 37.6995 30.8237C35.3949 31.8328 33.7846 34.0912 33.7846 36.7154V40.2072C33.7846 41.5099 34.87 42.5698 36.204 42.5698H44.5806C45.9147 42.5698 47 41.5099 47 40.2072V36.7154C47 34.0939 45.3898 31.8328 43.0851 30.8237ZM43.6264 48.6484C40.6411 51.4061 36.1415 55.1888 32.4477 57.5272C29.7084 59.2598 26.8023 60.8963 24.0984 61.1098C21.8594 61.2887 19.4345 60.4398 17.108 60.1114C13.5896 59.6149 9.87992 59.6523 6.28757 59.6923L6.28483 51.1312L14.0896 48.3549C15.3307 47.9117 16.4981 47.885 17.7584 48.2641L24.8633 50.3998C26.2138 50.8055 26.4134 52.5968 25.175 53.2749C24.784 53.4884 24.3357 53.5365 23.912 53.4083L16.5663 51.1979C16.1507 51.0724 15.7051 51.302 15.5766 51.7078C15.4481 52.1162 15.6832 52.5487 16.1015 52.6742L23.4444 54.8846C24.9617 55.3411 26.6128 54.6257 27.2854 53.2082C28.1657 53.1201 29.0187 52.9439 29.8251 52.6796C32.9717 51.6545 37.9091 48.9075 42.081 46.6143C42.6086 46.3233 43.2456 46.4408 43.6338 46.8973L43.7267 47.0094C44.1341 47.4979 44.0903 48.216 43.6256 48.6485L43.6264 48.6484ZM4.69981 60.9204C4.69981 61.2114 4.45103 61.4543 4.15305 61.4543H2.12731C1.82933 61.4543 1.58055 61.2114 1.58055 60.9204V49.6229C1.58055 49.3346 1.82933 49.089 2.12731 49.089H4.15305C4.4483 49.089 4.69981 49.3319 4.69981 49.6229V60.9204ZM24.4294 40.5568C21.6601 40.5568 19.4047 42.7592 19.4047 45.4635V47.1426L25.3288 48.9232C26.6 49.3077 27.4585 50.3941 27.5732 51.6222C28.2676 51.5234 28.8144 51.3872 29.4568 51.1737V45.4608C29.4541 42.7565 27.1987 40.5568 24.4294 40.5568ZM21.8952 36.5391C21.8952 35.1749 23.0324 34.0671 24.4267 34.0671C25.8237 34.0671 26.9582 35.1749 26.9582 36.5391C26.9582 37.9032 25.8237 39.0111 24.4267 39.0111C23.0324 39.0111 21.8952 37.9006 21.8952 36.5391ZM44.8567 45.9203C43.9874 44.8925 42.4947 44.6202 41.3055 45.2742C37.8965 47.1509 33.9654 49.3266 31.0372 50.568V45.4637C31.0372 42.8422 29.427 40.5811 27.1224 39.5747C27.9918 38.8379 28.5439 37.7486 28.5439 36.5394C28.5439 34.3236 26.6986 32.5217 24.4296 32.5217C22.1605 32.5217 20.3152 34.3236 20.3152 36.5394C20.3152 37.7486 20.8674 38.8379 21.7367 39.5747C19.4321 40.5838 17.8219 42.8422 17.8219 45.4637V46.6784C16.3784 46.3206 14.976 46.3954 13.5462 46.9026L6.27679 49.4894C6.20571 48.4056 5.2844 47.546 4.15539 47.546H2.12966C0.954112 47.546 0 48.4777 0 49.6229V60.9204C0 62.0683 0.954112 63 2.12966 63H4.15539C5.21882 63 6.0991 62.2338 6.25768 61.2408C9.80616 61.198 13.4697 61.1607 16.8815 61.6439C19.3282 61.9882 21.6793 62.8558 24.2272 62.653C27.2808 62.4101 30.3974 60.6695 33.3092 58.8248C38.0688 55.8136 43.2408 51.1337 44.7147 49.7723C45.7836 48.7846 45.8875 47.1428 44.9498 46.0322L44.8567 45.9203Z" fill="black"/>
+</svg>
+        </div>
+        <div class="ctx-metric-body">
+          <div class="ctx-metric-label">2,5M Clientes ativos</div>
+          <div class="ctx-metric-desc">Cadastrados no app MRV, com financiamentos de longo prazo</div>
+        </div>
       </div>
-      <div class="ctx-metric-label">Anos de contrato</div>
-    </div>
-    <div class="ctx-metric-sep"></div>
-    <div class="ctx-metric-desc">Financiamentos longos com complexidade jurídica</div>
-  </div>
-  <div class="ctx-metric">
-    <div class="ctx-metric-top">
-      <div class="ctx-metric-head">
-        <div class="ctx-metric-num">3</div>
-        <div class="ctx-metric-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+      <div class="ctx-metric">
+        <div class="ctx-metric-icon">
+          <svg width="48" height="43" viewBox="0 0 48 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M19.7612 38.5776C17.7736 41.2577 14.5531 43 10.9228 43C4.89546 43 0 38.1923 0 32.2732C0 28.5431 1.94224 25.2555 4.88691 23.3354V5.59095C4.88691 4.18742 6.04667 3.04846 7.4737 3.04846H11.785V0.848907C11.785 0.381054 12.173 0 12.6473 0H15.4065C15.8829 0 16.2688 0.381054 16.2688 0.848907V3.04846H36.312V0.848907C36.312 0.381054 36.6979 0 37.1743 0H39.9335C40.4099 0 40.7958 0.381054 40.7958 0.848907V3.04846H45.4132C46.8424 3.04846 48 4.18742 48 5.59095V31.3335C48 31.5727 47.8965 31.7929 47.7327 31.9495L40.8346 38.3472C40.6751 38.4912 40.4681 38.578 40.2396 38.578L19.7612 38.5776ZM4.88718 25.4587C2.94925 27.1163 1.72481 29.5529 1.72481 32.2731C1.72481 37.2586 5.84646 41.3063 10.923 41.3063C13.5034 41.3063 15.8379 40.2605 17.5088 38.5775C18.0154 38.0673 18.4595 37.4978 18.8324 36.8818C19.6494 35.5333 20.1236 33.9582 20.1236 32.2731C20.1236 27.2876 16.0019 23.2399 10.9231 23.2399C9.36461 23.2399 7.89874 23.621 6.61182 24.2921C5.99099 24.6181 5.41315 25.0099 4.88718 25.4587ZM6.61171 11.5181V22.4162C7.93742 21.8551 9.39254 21.5461 10.923 21.5461C13.2166 21.5461 15.3464 22.2404 17.1054 23.4281V21.5016C17.1054 21.0317 17.4913 20.6527 17.9677 20.6527H21.4167C21.891 20.6527 22.279 21.0317 22.279 21.5016V24.8888C22.279 25.3545 21.891 25.7335 21.4167 25.7335H19.5801C21.0029 27.5435 21.8479 29.8129 21.8479 32.2726C21.8479 33.9239 21.4685 35.4862 20.7873 36.8813H39.378V31.3328C39.378 30.8629 39.766 30.4839 40.2403 30.4839H46.2764V11.5179L6.61171 11.5181ZM11.7853 4.74161H7.47398C6.99973 4.74161 6.61171 5.12055 6.61171 5.59052V9.82237H46.2759V5.59052C46.2759 5.12055 45.8901 4.74161 45.4137 4.74161H40.7962V6.94539C40.7962 7.41113 40.4103 7.79007 39.9339 7.79007H37.1747C36.6983 7.79007 36.3124 7.41113 36.3124 6.94539V4.74161H16.2692V6.94539C16.2692 7.41113 15.8834 7.79007 15.407 7.79007H12.6477C12.1735 7.79007 11.7855 7.41113 11.7855 6.94539L11.7853 4.74161ZM14.5446 6.09648V1.69315H13.5098V6.09648H14.5446ZM39.0715 6.09648V1.69315H38.0368V6.09648H39.0715ZM41.1022 35.766L44.9694 32.1777H41.1022V35.766ZM36.0751 21.5463V24.9335C36.0751 25.4014 35.6871 25.7803 35.2129 25.7803H31.7638C31.2874 25.7803 30.9015 25.4014 30.9015 24.9335V21.5463C30.9015 21.0785 31.2874 20.7017 31.7638 20.7017H35.2129C35.6871 20.7017 36.0751 21.0785 36.0751 21.5463ZM34.3506 22.3931H32.6261V24.0867H34.3506V22.3931ZM29.177 14.6812V18.0663C29.177 18.5341 28.789 18.9131 28.3147 18.9131H24.8657C24.3893 18.9131 24.0034 18.5341 24.0034 18.0663V14.6812C24.0034 14.2112 24.3893 13.8323 24.8657 13.8323H28.3147C28.789 13.8323 29.177 14.2112 29.177 14.6812ZM27.4525 15.5259H25.728V17.2195H27.4525V15.5259ZM36.0751 28.2741V31.6613C36.0751 32.1292 35.6871 32.5081 35.2129 32.5081H31.7638C31.2874 32.5081 30.9015 32.1292 30.9015 31.6613V28.2741C30.9015 27.8063 31.2874 27.4273 31.7638 27.4273H35.2129C35.6871 27.4273 36.0751 27.8063 36.0751 28.2741ZM34.3506 29.1209H32.6261V30.8145H34.3506V29.1209ZM15.3808 14.6807V18.0658C15.3808 18.5336 14.9928 18.9126 14.5185 18.9126H11.0694C10.593 18.9126 10.2072 18.5336 10.2072 18.0658V14.6807C10.2072 14.2107 10.593 13.8318 11.0694 13.8318H14.5185C14.9928 13.8318 15.3808 14.2108 15.3808 14.6807ZM13.6562 15.5254H11.9317V17.219H13.6562V15.5254ZM29.177 21.5015V24.8886C29.177 25.3544 28.789 25.7333 28.3147 25.7333H24.8657C24.3893 25.7333 24.0034 25.3544 24.0034 24.8886V21.5015C24.0034 21.0315 24.3893 20.6526 24.8657 20.6526H28.3147C28.789 20.6526 29.177 21.0315 29.177 21.5015ZM27.4525 22.3461H25.728V24.0397H27.4525V22.3461ZM22.2789 14.6803V18.0653C22.2789 18.5332 21.8909 18.9121 21.4166 18.9121H17.9676C17.4912 18.9121 17.1053 18.5332 17.1053 18.0653V14.6803C17.1053 14.2103 17.4912 13.8314 17.9676 13.8314H21.4166C21.8909 13.8314 22.2789 14.2103 22.2789 14.6803ZM20.5544 15.525H18.8298V17.2186H20.5544V15.525ZM42.9733 21.5455V24.9326C42.9733 25.4005 42.5852 25.7794 42.111 25.7794H38.6619C38.1855 25.7794 37.7997 25.4005 37.7997 24.9326V21.5455C37.7997 21.0776 38.1855 20.7008 38.6619 20.7008H42.111C42.5852 20.7008 42.9733 21.0776 42.9733 21.5455ZM41.2487 22.3923H39.5242V24.0859H41.2487V22.3923ZM36.0751 14.7248V18.112C36.0751 18.5798 35.6871 18.9588 35.2129 18.9588H31.7638C31.2874 18.9588 30.9015 18.5798 30.9015 18.112V14.7248C30.9015 14.2569 31.2874 13.878 31.7638 13.878H35.2129C35.6871 13.878 36.0751 14.2569 36.0751 14.7248ZM34.3506 15.5716H32.6261V17.2652H34.3506V15.5716ZM42.9733 14.7248V18.112C42.9733 18.5798 42.5852 18.9588 42.111 18.9588H38.6619C38.1855 18.9588 37.7997 18.5798 37.7997 18.112V14.7248C37.7997 14.2569 38.1855 13.878 38.6619 13.878H42.111C42.5852 13.878 42.9733 14.2569 42.9733 14.7248ZM41.2487 15.5716H39.5242V17.2652H41.2487V15.5716ZM29.177 28.2271V31.6143C29.177 32.0843 28.789 32.4632 28.3147 32.4632H24.8657C24.3893 32.4632 24.0034 32.0843 24.0034 31.6143V28.2271C24.0034 27.7614 24.3893 27.3825 24.8657 27.3825H28.3147C28.789 27.3825 29.177 27.7614 29.177 28.2271ZM27.4525 29.0761H25.728V30.7696H27.4525V29.0761ZM13.3135 33.1195C12.9579 34.0784 12.0245 34.7665 10.9229 34.7665C9.52388 34.7665 8.38569 33.6487 8.38569 32.2727C8.38569 31.193 9.08626 30.2721 10.0607 29.9271V24.588C10.0607 24.1202 10.4487 23.7412 10.9229 23.7412C11.3993 23.7412 11.7852 24.1202 11.7852 24.588V29.9271C12.4922 30.179 13.0549 30.7294 13.3135 31.4259H16.7906C17.267 31.4259 17.6529 31.8069 17.6529 32.2727C17.6529 32.7405 17.267 33.1195 16.7906 33.1195H13.3135ZM10.9229 31.4724C10.4746 31.4724 10.1102 31.8302 10.1102 32.2727C10.1102 32.7151 10.4745 33.0708 10.9229 33.0708C11.3713 33.0708 11.7378 32.7152 11.7378 32.2727C11.7378 31.8302 11.3713 31.4724 10.9229 31.4724ZM20.5544 22.346H18.8298V24.0396H20.5544V22.346Z" fill="black"/>
+</svg>
+        </div>
+        <div class="ctx-metric-body">
+          <div class="ctx-metric-label">35 anos de contrato</div>
+          <div class="ctx-metric-desc">Financiamentos longos com complexidade jurídica</div>
+        </div>
       </div>
-      <div class="ctx-metric-label">Domínios de produto</div>
+      <div class="ctx-metric">
+        <div class="ctx-metric-icon">
+          <svg width="33" height="52" viewBox="0 0 33 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M29.8007 17.0251C29.484 16.95 29.1582 16.9124 28.8347 16.9124C28.3326 16.9124 27.853 17.003 27.4028 17.1664L29.9522 8.03696C30.5018 5.83351 29.1446 3.59248 26.921 3.04054C25.851 2.7756 24.7403 2.93678 23.7925 3.49316C22.8244 4.06058 22.1435 4.96804 21.8743 6.04325L19.8542 13.8105L19.852 4.12434C19.8497 1.85024 17.9812 0 15.6875 0H15.6852C14.5859 0 13.5498 0.421703 12.7671 1.18566C11.9664 1.96724 11.5253 3.01159 11.5275 4.12434V15.0602L8.84925 6.18004C8.52803 5.11364 7.80416 4.2371 6.8134 3.71602C5.83844 3.20159 4.72097 3.09338 3.66233 3.40692C1.47035 4.06042 0.217199 6.36109 0.870935 8.54243L4.69612 20.9286C4.85673 21.368 4.98793 22.3682 5.06937 23.2358H4.16228C3.04706 23.2358 1.99972 23.6664 1.2125 24.4501C0.429801 25.2295 0 26.2628 0 27.3601V29.4907C0 34.2884 1.93405 38.7439 5.44936 42.0357C5.45163 42.0379 5.45389 42.0379 5.45389 42.0379C7.45581 44.0427 8.55747 46.701 8.55747 49.5316L8.55521 51.1522C8.55521 51.6202 8.94429 52 9.42384 52C9.9034 52 10.2925 51.6202 10.2925 51.1522V49.5294C10.2925 46.2418 9.00534 43.1486 6.66639 40.8216C6.66186 40.8172 6.65508 40.815 6.64829 40.8106C3.4791 37.841 1.73505 33.8228 1.73505 29.4887V27.3581C1.73505 26.7068 1.9884 26.0952 2.44988 25.636C2.90682 25.1811 3.51529 24.9294 4.15773 24.9294H14.2467H14.2489C14.8914 24.9294 15.4976 25.1789 15.9545 25.6338C16.416 26.093 16.6716 26.7046 16.6716 27.3581C16.6716 28.0094 16.4183 28.621 15.9568 29.0825C15.4998 29.5373 14.8914 29.789 14.2489 29.789H12.9415L8.9602 29.7868C8.94436 29.7868 8.93079 29.7912 8.91496 29.7912C8.87424 29.7934 8.83126 29.7956 8.79054 29.8023C8.75661 29.8089 8.72268 29.8199 8.69101 29.831C8.67065 29.8376 8.65029 29.842 8.62994 29.8486C8.59827 29.8597 8.57112 29.8773 8.54397 29.8928C8.52362 29.9038 8.501 29.9127 8.48063 29.9259C8.45801 29.9414 8.43765 29.959 8.41503 29.9767C8.39241 29.9943 8.36979 30.0098 8.34943 30.0297C8.32908 30.0495 8.31324 30.0716 8.29514 30.0915C8.27705 30.1136 8.25669 30.1312 8.24085 30.1555C8.17751 30.246 8.13001 30.352 8.10739 30.4646C8.08477 30.5772 8.08477 30.6898 8.10739 30.8002C8.11192 30.8289 8.12323 30.8532 8.13227 30.8797C8.14132 30.9062 8.14585 30.9327 8.15716 30.957C8.16847 30.9835 8.1843 31.01 8.19787 31.0343C8.20919 31.0563 8.2205 31.0806 8.23407 31.1027C8.2499 31.1248 8.268 31.1447 8.2861 31.1645C8.30419 31.1866 8.32003 31.2087 8.34039 31.2308C8.36074 31.2506 8.38563 31.2683 8.40825 31.2882C8.42861 31.3036 8.4467 31.3213 8.46706 31.3367C8.51457 31.3699 8.5666 31.3964 8.62088 31.4184C13.2966 33.3526 16.3164 37.7042 16.3164 42.5063C16.3164 42.9744 16.7055 43.3541 17.1851 43.3541C17.6646 43.3541 18.0537 42.9744 18.0537 42.5063C18.0537 38.1126 15.8437 34.0569 12.2309 31.4823H14.2419C15.3572 31.4823 16.4045 31.0518 17.1917 30.268C17.9744 29.4886 18.4065 28.4553 18.4042 27.358C18.4042 26.2585 17.9744 25.2252 17.1917 24.4459C16.4045 23.6643 15.3594 23.2337 14.2465 23.2337H14.242H6.80646C6.73181 22.3771 6.58478 21.07 6.33822 20.3966L2.5289 8.05679C2.14208 6.76962 2.875 5.40954 4.15985 5.02536C4.77062 4.84431 5.41532 4.90834 5.97854 5.2042C6.55989 5.50889 6.98292 6.02552 7.17292 6.65478L11.5523 21.1803C11.6744 21.5843 12.0816 21.8405 12.5091 21.7809C12.9367 21.7212 13.2534 21.3636 13.2534 20.9418L13.2624 4.12435C13.2624 3.46418 13.5203 2.846 13.9931 2.38455C14.45 1.94077 15.0494 1.69567 15.6851 1.69567H15.6874C17.0243 1.69567 18.1123 2.78637 18.1146 4.12435V20.5954C18.1146 20.613 18.1191 20.6307 18.1214 20.6484C18.1236 20.6815 18.1259 20.7146 18.1327 20.7455C18.1372 20.772 18.144 20.7941 18.1508 20.8206C18.1598 20.8493 18.1666 20.8758 18.1779 20.9023C18.1892 20.9288 18.2005 20.9508 18.2141 20.9751C18.2277 20.9994 18.239 21.0237 18.2548 21.0458C18.2684 21.0679 18.2865 21.0899 18.3046 21.1098C18.3204 21.1319 18.3385 21.154 18.3589 21.1738C18.377 21.1937 18.3973 21.2092 18.4177 21.2268C18.4381 21.2445 18.4607 21.2644 18.4833 21.2798C18.5059 21.2953 18.5308 21.3085 18.5534 21.3218C18.5783 21.335 18.6009 21.3505 18.6281 21.3615C18.6575 21.3747 18.6869 21.3836 18.714 21.3924C18.7344 21.399 18.7502 21.4079 18.7728 21.4123C18.7796 21.4145 18.7841 21.4123 18.7887 21.4145C18.8498 21.4277 18.9131 21.4366 18.9764 21.4366L18.9855 21.4388H18.99C19.076 21.4388 19.1597 21.4211 19.2388 21.399C19.2547 21.3946 19.2682 21.3902 19.2841 21.3858C19.361 21.3571 19.4334 21.3196 19.499 21.2732C19.5103 21.2644 19.5216 21.2555 19.5329 21.2445C19.5985 21.1915 19.6596 21.1319 19.7071 21.0634C19.7093 21.0612 19.7093 21.0568 19.7116 21.0546C19.7591 20.984 19.793 20.9045 19.8179 20.8228C19.8202 20.8139 19.827 20.8095 19.8292 20.8007L23.5616 6.44925C23.7222 5.81118 24.1226 5.27688 24.6881 4.94345C25.2356 4.6211 25.878 4.52837 26.4955 4.68072C27.7962 5.00307 28.5925 6.32782 28.2713 7.60838L24.7967 20.0562C24.7945 20.0672 24.7945 20.076 24.7922 20.0871C24.7899 20.0959 24.7854 20.1025 24.7832 20.1114L22.9486 29.0446C22.4215 31.2547 23.8059 33.4803 26.0363 34.0057C26.3553 34.0808 26.6788 34.1183 27.0045 34.1183C28.3097 34.1183 29.4814 33.5178 30.2506 32.5485V32.6082C30.1805 36.898 29.7439 39.3246 29.0992 41.1215C28.8209 41.9207 28.364 42.6604 27.76 43.2609C26.6969 44.3163 25.2876 44.8992 23.7878 44.8992C23.3082 44.8992 22.9192 45.2789 22.9192 45.747C22.9192 46.2151 23.3082 46.5948 23.7878 46.5948C24.7922 46.5948 25.7649 46.3939 26.6629 46.0164C26.0114 47.6105 25.8055 49.4386 26.0951 51.28C26.1607 51.6995 26.5294 51.9997 26.9524 51.9997C26.9954 51.9997 27.0407 51.9953 27.0859 51.9887C27.5587 51.9158 27.8844 51.4831 27.812 51.0216C27.5157 49.1449 27.8188 47.297 28.6694 45.8199C28.6716 45.8177 28.6716 45.8133 28.6739 45.8111L28.6762 45.8088C28.8142 45.5616 28.9499 45.3231 29.0833 45.0891C29.7031 44.005 30.2867 42.9761 30.7663 41.6028C30.7776 41.5719 30.7912 41.5432 30.8002 41.5145C30.8025 41.5079 30.8025 41.5013 30.8047 41.4946C31.4585 39.5782 31.9132 36.9817 31.9856 32.6236V26.2846L32.8881 21.9859C33.4152 19.7758 32.0288 17.5505 29.8007 17.0251ZM29.3573 30.5592C29.0972 31.6565 28.1267 32.4249 27.0025 32.4249C26.817 32.4249 26.627 32.4028 26.4438 32.3608C25.1385 32.0517 24.3287 30.7402 24.6454 29.4067L26.4777 20.487L26.4867 20.4583C26.7537 19.3698 27.7173 18.6103 28.837 18.6103C29.0225 18.6103 29.2103 18.6324 29.3958 18.6765C30.701 18.9856 31.5108 20.2993 31.1941 21.6263L29.3573 30.5592Z" fill="black"/>
+</svg>
+        </div>
+        <div class="ctx-metric-body">
+          <div class="ctx-metric-label">3 Domínios de produto</div>
+          <div class="ctx-metric-desc">Jornadas de Renegociação, parcelas e status de obra</div>
+        </div>
+      </div>
     </div>
-    <div class="ctx-metric-sep"></div>
-    <div class="ctx-metric-desc">Renegociação, parcelas e status de obra</div>
   </div>
 </div>
 </div></section>
 
 
 <!-- ══════════════════════════════════════════
-     02. O PROBLEMA
+     02. O PROBLEMA (com cards de desafios)
      ══════════════════════════════════════════ -->
 
 <section class="ed ed--shaded"><div class="container">
-<div class="ed-header rv">
-  <div class="ed-num">02</div>
-  <h2 class="ed-title">O problema</h2>
-</div>
-<div class="ed-content rv d1">
-  <p class="ed-highlight">A renegociação digital existia mas tinha conversão baixa.</p>
-  <p class="ed-body">Os clientes iniciavam o processo no app mas não completavam o acordo.<br>O resultado era migração para o call center, inflando custos operacionais e gerando insatisfação.</p>
-  <p class="ed-body">A proposta aparecia no fluxo mas <strong>não comunicava segurança.</strong><br>Faltava transparência no progresso, a linguagem era técnica e intimidadora, e a interface tratava todos os clientes da mesma forma, independente do seu estado financeiro.</p>
+<div class="problem-card rv">
+  <div class="problem-card-left">
+    <div class="problem-card-icon">
+      <svg width="130" height="129" viewBox="0 0 130 129" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M90.2981 76.8715C89.3663 76.8715 88.6112 76.0747 88.6112 75.0914C88.6112 74.1082 89.3663 73.3114 90.2981 73.3114H110.433C111.365 73.3114 112.12 74.1082 112.12 75.0914C112.12 76.0747 111.365 76.8715 110.433 76.8715H90.2981ZM125.71 45.0134H128.253C129.185 45.0134 129.94 44.2166 129.94 43.2334V28.7112C129.94 27.7279 129.185 26.9311 128.253 26.9311L90.6949 26.9255C89.7632 26.9255 89.0081 27.7222 89.0081 28.7055V43.2277C89.0081 44.211 89.7631 45.0077 90.6949 45.0077H98.8772V55.4842H98.8825C98.8825 56.0153 99.1075 56.5409 99.5358 56.8912C100.269 57.4902 101.33 57.3489 101.897 56.5691L110.395 45.0077H115.247V116.065L97.8867 116.077L92.0286 93.005C90.9255 88.6596 88.3124 84.9415 84.9602 82.1557C81.3832 79.1777 76.9386 77.2453 72.6013 76.731L59.6266 75.194L59.2999 69.272C64.3335 66.7348 68.6441 62.6381 71.3375 56.993H75.4233C77.1905 56.993 78.7915 56.2301 79.9589 55.0039C81.1209 53.7777 81.8384 52.0826 81.8384 50.2234V47.9066H82.5024C84.0607 47.9066 85.4798 47.2341 86.5026 46.1493C87.5307 45.07 88.1679 43.5726 88.1679 41.9281V34.1471C88.1679 32.5028 87.5306 31.0053 86.5026 29.926C85.4798 28.8411 84.0608 28.1687 82.5024 28.1687H81.137C79.0647 20.2181 74.6094 13.2848 68.6387 8.28399C62.4539 3.10234 54.6411 0 46.1857 0C37.7251 0 29.918 3.10219 23.7328 8.28399C17.7621 13.2792 13.3068 20.2126 11.2345 28.1687L9.86369 28.163C8.30546 28.163 6.88636 28.8355 5.86358 29.9203C4.84081 30.9996 4.20363 32.497 4.20363 34.1415V41.9225C4.20363 42.1316 4.21434 42.335 4.23576 42.5384V116.077H1.68682C0.755072 116.077 0 116.874 0 117.857V119.14C0 121.858 1.04954 124.321 2.73633 126.107C4.4285 127.893 6.76318 129 9.33885 129H120.602C123.177 129 125.512 127.892 127.204 126.107C128.896 124.321 129.946 121.858 129.946 119.14L129.941 117.857C129.941 116.874 129.186 116.077 128.254 116.077H125.71L125.71 45.0134ZM122.331 116.071H118.62V45.0134H122.331V116.071ZM7.60377 47.3974C8.29455 47.7195 9.06029 47.8946 9.86347 47.8946H11.3146V116.076H7.60377V47.3974ZM14.6936 47.8946H18.3884C19.8021 58.3993 25.6496 65.5198 33.0715 69.2606L32.7449 75.1826L19.7701 76.7196C18.7367 76.8383 17.6818 77.0474 16.6161 77.3412C15.9628 77.5164 15.3202 77.7198 14.6938 77.9515L14.6936 47.8946ZM14.6936 81.7533C14.7204 81.742 14.7418 81.7363 14.7632 81.725C15.6736 81.3351 16.5732 81.0187 17.446 80.7814C18.3242 80.5441 19.2292 80.3689 20.1394 80.2559L32.659 78.7754L44.4718 94.3652V116.081L14.693 116.07L14.6936 81.7533ZM47.8515 116.071V94.3892L59.7178 78.7762L72.2374 80.2567C75.9589 80.6974 79.7877 82.37 82.8828 84.9468C85.6941 87.2862 87.8788 90.3602 88.7785 93.92L94.4011 116.076L73.0777 116.07L47.8515 116.071ZM126.546 119.636C126.434 121.173 125.791 122.557 124.811 123.586C123.729 124.727 122.235 125.434 120.597 125.434H74.7586V119.636H126.546ZM71.3861 119.636V125.434H58.5505V119.636H71.3861ZM55.1773 119.636V125.434H9.33912C7.70055 125.434 6.20647 124.727 5.12488 123.586C4.1503 122.558 3.5077 121.173 3.38995 119.636H55.1773ZM34.9848 66.2818C27.986 62.9253 22.4973 56.1614 21.5709 45.9675C21.5655 45.9505 21.5655 45.9336 21.5655 45.911C21.4798 44.9278 21.4316 43.9163 21.4316 42.8765V37.271C21.4316 34.8242 21.678 32.547 22.1385 30.4449C22.1599 30.3771 22.1759 30.3036 22.1867 30.2301C24.1036 21.771 29.4799 16.1655 35.9965 13.4021C39.1986 12.0459 42.69 11.3621 46.1868 11.3621C49.6835 11.3621 53.1696 12.0402 56.3717 13.4021C62.8832 16.1653 68.2648 21.7708 70.1815 30.2301C70.1923 30.3036 70.2083 30.3714 70.2244 30.4449C70.6849 32.5469 70.9312 34.8185 70.9312 37.271V42.8765C70.9312 43.9219 70.8884 44.9334 70.7974 45.911C70.7974 45.9279 70.792 45.9449 70.792 45.9675C70.5457 48.6968 69.9674 51.1775 69.1267 53.4207H52.9494C52.7138 52.6296 52.3015 51.9232 51.7606 51.3525C50.8932 50.4371 49.6883 49.8665 48.3656 49.8665H44.0014C42.6788 49.8665 41.4793 50.4372 40.6064 51.3525C39.7389 52.2679 39.1981 53.5393 39.1981 54.9351C39.1981 56.3309 39.739 57.6023 40.6064 58.5177C41.4792 59.4332 42.6787 60.0038 44.0014 60.0038H48.3656C49.6883 60.0038 50.8877 59.4331 51.7606 58.5177C52.1783 58.077 52.5157 57.5628 52.7566 56.9864L67.4561 56.9807C65.0089 61.2357 61.4534 64.3323 57.389 66.2818C57.0248 66.3157 56.7036 66.4739 56.4465 66.7056L56.3769 66.7339C53.1748 68.0957 49.6887 68.7738 46.192 68.7738C42.6952 68.7738 39.2038 68.0958 36.0017 66.7339L35.9321 66.7056C35.6751 66.4739 35.3489 66.3157 34.9848 66.2818ZM36.3663 70.6667C39.5204 71.7799 42.8564 72.3392 46.1872 72.3392C49.5179 72.3392 52.854 71.7798 56.0027 70.6667L56.3454 76.8825C56.3561 77.0577 56.3882 77.2329 56.4418 77.3967L46.1658 90.9246L35.9219 77.408C35.9862 77.2272 36.0237 77.0294 36.0237 76.826L36.3663 70.6667ZM77.6314 28.1618H73.1708C70.7611 19.1716 64.7958 13.1535 57.6255 10.1128C54.0056 8.57583 50.0912 7.81305 46.1874 7.81305C42.2783 7.81305 38.3641 8.58154 34.7441 10.1128C27.5739 13.153 21.6087 19.1709 19.1987 28.1618H14.7382C16.7141 21.3471 20.6392 15.4025 25.8226 11.0632C31.4291 6.37312 38.5083 3.55909 46.1824 3.55909C53.8559 3.55909 60.9353 6.36748 66.5421 11.0632C71.7255 15.3973 75.6554 21.3419 77.6314 28.1618ZM74.3167 37.2708C74.3167 35.3212 74.1774 33.4735 73.9151 31.7218H82.5149C83.1414 31.7218 83.7144 31.9931 84.1321 32.4338C84.5497 32.8746 84.8068 33.4736 84.8068 34.1404V41.9214C84.8068 42.5825 84.5497 43.1871 84.1321 43.6279C83.7144 44.0687 83.1414 44.3399 82.5149 44.3399H74.2952C74.3113 43.8596 74.322 43.3736 74.322 42.8821L74.3167 37.2708ZM73.9847 47.8942H78.4666V50.211C78.4666 51.0926 78.1239 51.895 77.5724 52.477C77.0208 53.0589 76.2604 53.4206 75.4251 53.4206H72.7477C73.3046 51.6972 73.7223 49.855 73.9847 47.8942ZM18.0914 44.3343H9.86636C9.23984 44.3343 8.66687 44.0631 8.24918 43.6223C7.89576 43.255 7.66014 42.7691 7.59589 42.2266V42.1927C7.58518 42.1023 7.57982 42.0062 7.57982 41.9158V34.1348C7.57982 33.4736 7.84222 32.869 8.25454 32.4282C8.66686 31.9931 9.23983 31.7219 9.86637 31.7219H18.4662C18.1985 33.4736 18.0646 35.3271 18.0646 37.2708V42.8764C18.0592 43.368 18.07 43.854 18.0914 44.3343ZM48.3678 53.4264C48.7587 53.4264 49.1175 53.5959 49.3745 53.8728C49.6369 54.1496 49.7975 54.5226 49.7975 54.9351C49.7975 54.9746 49.7975 55.0142 49.7922 55.0481V55.0764C49.76 55.4323 49.6101 55.7601 49.3745 56.0031C49.1121 56.28 48.7587 56.4495 48.3678 56.4495H44.0036C43.6127 56.4495 43.2539 56.2799 42.9968 56.0031C42.7344 55.7262 42.5738 55.3532 42.5738 54.9351C42.5738 54.5226 42.7345 54.1496 42.9968 53.8727C43.2592 53.5959 43.6127 53.4263 44.0036 53.4263L48.3678 53.4264ZM90.698 3.1403H128.262C129.193 3.1403 129.949 3.93705 129.949 4.92032V19.4483C129.949 20.4316 129.194 21.2284 128.262 21.2284H90.698C89.7662 21.2284 89.0111 20.4316 89.0111 19.4483V4.92032C89.0111 3.93709 89.7662 3.1403 90.698 3.1403ZM126.57 6.70019V17.6625H92.3841V6.70019H126.57ZM95.9935 13.9613C95.0618 13.9613 94.3067 13.1646 94.3067 12.1813C94.3067 11.1981 95.0617 10.4013 95.9935 10.4013H115.154C116.085 10.4013 116.841 11.198 116.841 12.1813C116.841 13.1645 116.086 13.9613 115.154 13.9613H95.9935ZM120.037 13.9613C119.105 13.9613 118.35 13.1646 118.35 12.1813C118.35 11.1981 119.105 10.4013 120.037 10.4013H122.955C123.887 10.4013 124.642 11.198 124.642 12.1813C124.642 13.1645 123.887 13.9613 122.955 13.9613H120.037ZM126.57 30.4899V41.4523H109.578C108.989 41.4523 108.47 41.7744 108.17 42.2547L102.253 50.2956V43.2323C102.253 42.2491 101.498 41.4523 100.566 41.4523H92.3835V30.4899L126.57 30.4899ZM95.993 37.7511C95.0612 37.7511 94.3061 36.9543 94.3061 35.971C94.3061 34.9878 95.0612 34.191 95.993 34.191H115.153C116.085 34.191 116.84 34.9878 116.84 35.971C116.84 36.9543 116.085 37.7511 115.153 37.7511H95.993ZM120.036 37.7511C119.104 37.7511 118.349 36.9543 118.349 35.971C118.349 34.9878 119.104 34.191 120.036 34.191H122.955C123.886 34.191 124.641 34.9878 124.641 35.971C124.641 36.9543 123.886 37.7511 122.955 37.7511H120.036ZM90.3012 68.6037C89.3695 68.6037 88.6144 67.807 88.6144 66.8237C88.6144 65.8404 89.3694 65.0437 90.3012 65.0437H110.436C111.368 65.0437 112.123 65.8404 112.123 66.8237C112.123 67.807 111.368 68.6037 110.436 68.6037H90.3012Z" fill="black"/>
+</svg>
+    </div>
+    <div class="problem-card-heading">
+      <div class="ed-header" style="margin-bottom:0">
+        <div class="ed-num">02</div>
+        <h2 class="ed-title">O problema</h2>
+      </div>
+      <p class="problem-card-statement">A renegociação digital existia mas tinha conversão baixa.</p>
+    </div>
+  </div>
+  <div class="problem-card-text">
+    <p>Os clientes iniciavam o processo no app mas <strong>não completavam o acordo.</strong></p>
+    <p>O resultado era <strong>migração para o call center,</strong> inflando <strong>custos operacionais</strong> e gerando insatisfação.</p>
+    <p>A proposta aparecia no fluxo mas não comunicava segurança. Faltava transparência no progresso, a linguagem era técnica e intimidadora, e a interface tratava todos os clientes da mesma forma, independente do seu estado financeiro.</p>
+  </div>
 </div>
 
-<h3 class="ed-subtitle rv d1">Principais desafios</h3>
+<div class="ed-header rv d1" style="margin-top:96px;padding-top:64px;border-top:1px solid var(--gray-4)">
+  <h2 class="ed-title">Principais desafios</h2>
+</div>
 <div class="challenges rv d2">
   <div class="challenge">
-    <div class="challenge-icon"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>
-    <h4 class="challenge-name">12 Pontos críticos de abandono</h4>
+    <div class="challenge-icon"><svg viewBox="0 0 32 32"><path d="M12 28H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h6"/><polyline points="22 22 28 16 22 10"/><line x1="28" y1="16" x2="12" y2="16"/></svg></div>
+    <h4 class="challenge-name">12 Pontos críticos<br>de abandono</h4>
     <p class="challenge-desc">O cliente chegava à proposta mas desistia. Sem indicadores de progresso, a incerteza sobre aprovação gerava desistência em 12 pontos mapeados no fluxo.</p>
   </div>
   <div class="challenge">
-    <div class="challenge-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-    <h4 class="challenge-name">Confiança fragilizada pela experiência</h4>
+    <div class="challenge-icon"><svg viewBox="0 0 32 32"><path d="M16 28c0 0 10-5 10-13V7L16 4 6 7v8c0 8 10 13 10 13z"/></svg></div>
+    <h4 class="challenge-name">Confiança fragilizada<br>pela experiência</h4>
     <p class="challenge-desc">A interface não transmitia segurança para uma decisão financeira de longo prazo. Faltavam sinais visuais de que o processo estava funcionando corretamente.</p>
   </div>
   <div class="challenge">
-    <div class="challenge-icon"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+    <div class="challenge-icon"><svg viewBox="0 0 32 32"><polyline points="4 22 12 14 17 19 28 8"/><polyline points="22 8 28 8 28 14"/></svg></div>
     <h4 class="challenge-name">Custo operacional crescente</h4>
     <p class="challenge-desc">Cada erro no autoatendimento gerava uma ligação ao call center. Duração média de 8 minutos por chamada, com volume crescente mês a mês.</p>
   </div>
   <div class="challenge">
-    <div class="challenge-icon"><svg viewBox="0 0 24 24"><line x1="1" y1="1" x2="23" y2="23"/><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/><path d="M10.71 5.05A16 16 0 0 1 22.56 9"/><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg></div>
+    <div class="challenge-icon"><svg viewBox="0 0 32 32"><line x1="4" y1="4" x2="28" y2="28"/><path d="M20 14c2 0 4 1 6 3"/><path d="M6 17c3-2 6-3 9-2"/><path d="M12 6c6-1 12 1 16 5"/><path d="M3 11c1-1 3-2 5-2"/><path d="M11 20c2-1 5-1 7 0"/><circle cx="16" cy="25" r="1" fill="currentColor"/></svg></div>
     <h4 class="challenge-name">Termos técnicos como barreira</h4>
     <p class="challenge-desc">Jargão financeiro dominava a interface. Mais de 40 termos como "encargo moratório" bloqueavam a ação do cliente e geravam insegurança.</p>
   </div>
   <div class="challenge">
-    <div class="challenge-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg></div>
-    <h4 class="challenge-name">Destravar a ação sem aumentar a carga cognitiva</h4>
-    <p class="challenge-desc">O desafio central era simplificar a tomada de decisão sem remover informação financeira obrigatória. Menos não podia significar menos seguro.</p>
+    <div class="challenge-icon"><svg viewBox="0 0 32 32"><rect x="6" y="14" width="20" height="14" rx="2"/><path d="M10 14V9a6 6 0 0 1 12 0"/></svg></div>
+    <h4 class="challenge-name">Destravar ação com<br>clareza e simplicidade</h4>
+    <p class="challenge-desc">O desafio central era simplificar a tomada de decisão sem remover informação financeira obrigatória. Menos não podia significar inseguro.</p>
   </div>
 </div>
 </div></section>
@@ -1241,25 +1657,27 @@ a, button, input, textarea, select, [role="button"] { cursor: none !important; }
      ══════════════════════════════════════════ -->
 
 <section class="ed"><div class="container">
-<div class="ed-header rv">
-  <div class="ed-num">03</div>
-  <h2 class="ed-title">Objetivo</h2>
-</div>
-<div class="ed-content rv d1">
-  <p class="ed-body"><strong>Aumentar renegociações no autoatendimento sem introduzir novas etapas ou dependência de atendimento humano.</strong></p>
-  <p class="ed-body">O desafio não era criar novas funcionalidades, mas destravar a decisão do usuário dentro de um fluxo financeiro sensível, preservando clareza, confiança e ritmo de navegação.</p>
-</div>
-<div class="rv d2" style="margin-top:40px">
-  <div class="ed-badge">Período do piloto - 2 sprints</div>
-</div>
-<div class="rv d2" style="margin-top:24px">
-  <h4 class="ed-kr-title">Key Results</h4>
-  <ul class="ed-list" style="margin-top:16px">
-    <li>Aumentar em 10 a 20% a visualização de propostas elegíveis.</li>
-    <li>Aumentar em 8 a 15% o clique e a escolha de propostas.</li>
-    <li>Manter ou aumentar pagamento sem elevar fricção, entre 3 e 8%.</li>
-    <li>Reduzir contatos no público elegível entre 5 e 12%.</li>
-  </ul>
+<div class="ed-two-col ed-two-col--obj rv">
+  <div class="ed-two-col-left">
+    <div class="ed-header" style="margin-bottom:0">
+      <div class="ed-num">03</div>
+      <h2 class="ed-title">Objetivo</h2>
+    </div>
+    <div class="ed-badge">Período do piloto - 2 sprints</div>
+    <p class="ed-two-col-body-lg"><strong>Aumentar renegociações no autoatendimento sem introduzir novas etapas ou dependência de atendimento humano.</strong></p>
+    <p class="ed-two-col-body-lg">O desafio não era criar novas funcionalidades, mas destravar a decisão do usuário dentro de um fluxo financeiro sensível, preservando clareza, confiança e ritmo de navegação.</p>
+  </div>
+  <div class="ed-two-col-right">
+    <div class="kr-card">
+      <h4 class="kr-card-title">Key Results</h4>
+      <ul>
+        <li>Aumentar em 10 a 20% a visualização de propostas elegíveis.</li>
+        <li>Aumentar em 8 a 15% o clique e a escolha de propostas.</li>
+        <li>Manter ou aumentar pagamento sem elevar fricção, entre 3 e 8%.</li>
+        <li>Reduzir contatos no público elegível entre 5 e 12%.</li>
+      </ul>
+    </div>
+  </div>
 </div>
 </div></section>
 
@@ -1268,24 +1686,44 @@ a, button, input, textarea, select, [role="button"] { cursor: none !important; }
      04. ESTRATÉGIA DE DESIGN
      ══════════════════════════════════════════ -->
 
-<section class="ed"><div class="container">
-<div class="ed-header rv">
-  <div class="ed-num">04</div>
-  <h2 class="ed-title">Estratégia de design</h2>
-</div>
-<div class="ed-content rv d1">
-  <p class="ed-body ed-body--lg">A acessibilidade cognitiva orientou cada decisão. Combinei microinterações com copywriting de baixa carga cognitiva e hierarquia visual que cria sinais claros de oportunidade e progresso dentro do fluxo financeiro.</p>
-</div>
-<div class="rv d2" style="margin-top:40px">
-  <div class="ed-badge">A solução priorizou</div>
-</div>
-<div class="rv d2" style="margin-top:24px">
-  <ul class="ed-list">
-    <li>Redução de complexidade para destravar o primeiro passo</li>
-    <li>Visibilidade automatizada de propostas dentro do ecossistema</li>
-    <li>Hierarquia visual que comunica escala e consequências</li>
-    <li>Manutenção da estrutura existente no fluxo</li>
-  </ul>
+<section class="ed ed--shaded"><div class="container">
+<div class="ed-two-col ed-two-col--strat rv">
+  <div class="ed-two-col-left">
+    <div class="ed-header" style="margin-bottom:0">
+      <div class="ed-num">04</div>
+      <h2 class="ed-title">Estratégia de design</h2>
+    </div>
+    <p class="ed-two-col-body-lg">A acessibilidade cognitiva orientou cada decisão. Combinei microinterações com copywriting de baixa carga cognitiva e hierarquia visual que cria sinais claros de oportunidade e progresso dentro do fluxo financeiro.</p>
+    <div class="ed-badge" style="margin-top:16px">A solução priorizou</div>
+    <ul class="ed-list">
+      <li>Redução de complexidade para destravar o primeiro passo</li>
+      <li>Visibilidade automatizada de propostas dentro do ecossistema</li>
+      <li>Hierarquia visual que comunica escala e consequências</li>
+      <li>Manutenção da estrutura existente no fluxo</li>
+    </ul>
+  </div>
+  <div class="ed-two-col-right">
+    <div class="ctx-metrics">
+      <div class="ctx-metric">
+        <div class="ctx-metric-body">
+          <div class="ctx-metric-label">40+ Termos reescritos</div>
+          <div class="ctx-metric-desc">Jargão financeiro traduzido em linguagem acessível e validada em testes</div>
+        </div>
+      </div>
+      <div class="ctx-metric">
+        <div class="ctx-metric-body">
+          <div class="ctx-metric-label">47 Estados mapeados</div>
+          <div class="ctx-metric-desc">Componentes documentados com cor, animação e copy contextual</div>
+        </div>
+      </div>
+      <div class="ctx-metric">
+        <div class="ctx-metric-body">
+          <div class="ctx-metric-label">5 Dashboards adaptativos</div>
+          <div class="ctx-metric-desc">Cada board sinalizado e orientado pelo estado financeiro do cliente</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 </div></section>
 
@@ -1351,7 +1789,7 @@ a, button, input, textarea, select, [role="button"] { cursor: none !important; }
 </div>
 </section>
 
-<!-- Fluxo desktop -->
+<!-- Fluxo desktop — master-detail viewer -->
 <section class="ed"><div class="container">
 <div class="ed-header rv">
   <h2 class="ed-title">Fluxo desktop</h2>
@@ -1359,25 +1797,33 @@ a, button, input, textarea, select, [role="button"] { cursor: none !important; }
 <div class="ed-content rv d1">
   <p class="ed-body">O extrato financeiro foi redesenhado com filtros por categoria (MRV, Cartório, Banco), estados claros para boletos pagos e pendentes, e <strong>ações diretas que eliminam ambiguidade</strong>. O percurso foi construído para que o cliente escolha, devolva a confiança e feche o acordo com autonomia.</p>
 </div>
-<div class="browser-pair rv d1">
-  <div class="browser-frame">
-    <div class="browser-bar"><span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span></div><div class="browser-content"><img src="img/mrv/desktop-extrato-pagos.webp" alt="Extrato: boletos pagos"></div>
-  </div>
-  <div class="browser-frame">
-    <div class="browser-bar"><span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span></div><div class="browser-content"><img src="img/mrv/desktop-extrato-cartorio.webp" alt="Extrato: cartório"></div>
-  </div>
-</div>
-<p class="browser-caption rv d2">Extrato financeiro: filtros por categoria com estados visuais claros para pagos e pendentes.</p>
 
-<div class="browser-pair rv d3">
-  <div class="browser-frame">
-    <div class="browser-bar"><span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span></div><div class="browser-content"><img src="img/mrv/desktop-extrato-boletos.webp" alt="Extrato: boletos pendentes"></div>
+<div class="md-viewer rv d2" data-viewer="fluxo">
+  <div class="md-thumbs" role="tablist" aria-label="Telas do fluxo desktop">
+    <button class="md-thumb" data-id="0" aria-selected="true" role="tab" aria-label="Boletos pagos">
+      <img src="img/mrv/desktop-extrato-pagos.webp" alt="">
+    </button>
+    <button class="md-thumb" data-id="1" role="tab" aria-label="Extrato cartório">
+      <img src="img/mrv/desktop-extrato-cartorio.webp" alt="">
+    </button>
+    <button class="md-thumb" data-id="2" role="tab" aria-label="Boletos pendentes">
+      <img src="img/mrv/desktop-extrato-boletos.webp" alt="">
+    </button>
+    <button class="md-thumb" data-id="3" role="tab" aria-label="Detalhamento bancário">
+      <img src="img/mrv/desktop-extrato-banco.webp" alt="">
+    </button>
   </div>
-  <div class="browser-frame">
-    <div class="browser-bar"><span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span></div><div class="browser-content"><img src="img/mrv/desktop-extrato-banco.webp" alt="Extrato: banco"></div>
+  <div class="md-stage">
+    <div class="md-caption">
+      <span class="md-num">01</span>
+      <div class="md-title">Boletos pagos</div>
+      <p class="md-desc">Filtro por categoria com estados visuais claros para pagamentos já confirmados. Hierarquia reduzida para não competir com ações pendentes.</p>
+    </div>
+    <div class="md-preview" role="tabpanel">
+      <img class="md-img" src="img/mrv/desktop-extrato-pagos.webp" alt="Extrato: boletos pagos">
+    </div>
   </div>
 </div>
-<p class="browser-caption rv d4">Boletos pendentes e detalhamento bancário com ações diretas visíveis.</p>
 </div></section>
 
 <!-- Fundação Visual -->
@@ -1388,16 +1834,34 @@ a, button, input, textarea, select, [role="button"] { cursor: none !important; }
 <div class="ed-content rv d1">
   <p class="ed-body">Cada padrão documentado como <strong>design tokens e componentes escaláveis</strong>: paleta semântica, escala tipográfica, sistema de espaçamento, shadow e opacidade. A base visual garantiu consistência entre os três domínios do produto.</p>
 </div>
-<div class="img-pair rv d1">
-  <img src="img/mrv/tokens-brand-colors.webp" alt="Brand Colors">
-  <img src="img/mrv/tokens-support.webp" alt="Support Colors">
-  <span class="img-pair-caption">Cores de marca e suporte.</span>
+
+<div class="md-viewer rv d2" data-viewer="foundation">
+  <div class="md-thumbs" role="tablist" aria-label="Fundação visual: tokens">
+    <button class="md-thumb" data-id="0" aria-selected="true" role="tab" aria-label="Brand colors">
+      <img src="img/mrv/tokens-brand-colors.webp" alt="">
+    </button>
+    <button class="md-thumb" data-id="1" role="tab" aria-label="Support colors">
+      <img src="img/mrv/tokens-support.webp" alt="">
+    </button>
+    <button class="md-thumb" data-id="2" role="tab" aria-label="Typography">
+      <img src="img/mrv/tokens-typography.webp" alt="">
+    </button>
+    <button class="md-thumb" data-id="3" role="tab" aria-label="Spacing">
+      <img src="img/mrv/tokens-spacing.webp" alt="">
+    </button>
+  </div>
+  <div class="md-stage">
+    <div class="md-caption">
+      <span class="md-num">01</span>
+      <div class="md-title">Brand colors</div>
+      <p class="md-desc">Paleta principal com cores semânticas e tons de marca aplicados por estado e hierarquia.</p>
+    </div>
+    <div class="md-preview" role="tabpanel">
+      <img class="md-img" src="img/mrv/tokens-brand-colors.webp" alt="Brand colors">
+    </div>
+  </div>
 </div>
-<div class="img-pair rv d2">
-  <img src="img/mrv/tokens-typography.webp" alt="Typography">
-  <img src="img/mrv/tokens-spacing.webp" alt="Spacing">
-  <span class="img-pair-caption">Tipografia e espaçamento.</span>
-</div>
+
 <div style="margin-top:48px">
   <p class="fw-img-caption rv" style="margin-top:0;margin-bottom:16px">Visão geral: os diferentes estados e telas do ecossistema financeiro redesenhado.</p>
   <div class="fw-img rv d1"><img src="img/mrv/overview-grid.webp" alt="Visão geral do ecossistema financeiro MRV"></div>
@@ -1414,80 +1878,89 @@ a, button, input, textarea, select, [role="button"] { cursor: none !important; }
   <div class="ed-num">06</div>
   <h2 class="ed-title">Resultados do piloto</h2>
 </div>
-<div class="results-grid rv d1">
-  <div>
-    <div class="result-num">R$ 147 mil</div>
-    <div class="result-label">Economia operacional estimada</div>
+
+<!-- Card lime com 4 métricas (Figma 85:2778) -->
+<div class="results-hero rv d1">
+  <div class="results-hero-item">
+    <div class="r-num">R$ 147 mil</div>
+    <div class="r-label">Economia operacional estimada</div>
   </div>
-  <div>
-    <div class="result-num">580</div>
-    <div class="result-label">Clientes acionados no piloto</div>
+  <div class="results-hero-sep"></div>
+  <div class="results-hero-item">
+    <div class="r-num">580</div>
+    <div class="r-label">Clientes acionados no piloto</div>
   </div>
-  <div>
-    <div class="result-num">155 (27%)</div>
-    <div class="result-label">Acessaram a página de propostas</div>
+  <div class="results-hero-sep"></div>
+  <div class="results-hero-item">
+    <div class="r-num">155 (27%)</div>
+    <div class="r-label">Acessaram a página de propostas</div>
   </div>
-  <div>
-    <div class="result-num">21 (14%)</div>
-    <div class="result-label">Acordos celebrados via autoatendimento</div>
+  <div class="results-hero-sep"></div>
+  <div class="results-hero-item">
+    <div class="r-num">21 (14%)</div>
+    <div class="r-label">Acordos celebrados via autoatendimento</div>
   </div>
 </div>
 
-<div class="kr-compare rv d2" style="margin-top:40px">
-  <div class="kr-compare-header">
-    <span>Indicador</span>
-    <span>Meta</span>
-    <span>Resultado</span>
+<!-- Row texto + tabela (Figma) -->
+<div class="results-row rv d2">
+  <div class="results-row-text">
+    <p>O tempo de resposta caiu de <strong>17,2s para 6,99s</strong>.</p>
+    <p style="margin-top:28px">Feedback sobre lentidão reduziu de <strong>14% para 9%</strong> dos comentários.</p>
+    <p style="margin-top:28px"><strong>187.756 clientes</strong> migrados para a nova experiência de acompanhamento de obra.</p>
   </div>
-  <div class="kr-compare-row">
-    <div class="kr-compare-label">Visualização de propostas</div>
-    <div class="kr-compare-target">10 a 30%</div>
-    <div class="kr-compare-result hit">27%</div>
-  </div>
-  <div class="kr-compare-row">
-    <div class="kr-compare-label">Escolha efetiva de propostas</div>
-    <div class="kr-compare-target">5 a 8%</div>
-    <div class="kr-compare-result hit">14%</div>
-  </div>
-  <div class="kr-compare-row">
-    <div class="kr-compare-label">Migração para nova experiência</div>
-    <div class="kr-compare-target">100%</div>
-    <div class="kr-compare-result hit">100%</div>
+  <div class="results-row-table">
+    <div class="kr-compare">
+      <div class="kr-compare-header">
+        <span>Indicador</span>
+        <span>Meta</span>
+        <span>Resultado</span>
+      </div>
+      <div class="kr-compare-row">
+        <div class="kr-compare-label">Visualização de propostas</div>
+        <div class="kr-compare-target">10 a 30%</div>
+        <div class="kr-compare-result hit">27%</div>
+      </div>
+      <div class="kr-compare-row">
+        <div class="kr-compare-label">Escolha efetiva de propostas</div>
+        <div class="kr-compare-target">5 a 8%</div>
+        <div class="kr-compare-result hit">14%</div>
+      </div>
+      <div class="kr-compare-row">
+        <div class="kr-compare-label">Migração para nova experiência</div>
+        <div class="kr-compare-target">100%</div>
+        <div class="kr-compare-result hit">100%</div>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="ed-content rv d3" style="margin-top:40px">
-  <p class="ed-body">O tempo de resposta caiu de <strong>17,2s para 6,99s</strong>. Feedback sobre lentidão reduziu de <strong>14% para 9%</strong> dos comentários. <strong>187.756 clientes</strong> migrados para a nova experiência de acompanhamento de obra.</p>
-</div>
-
-<div class="ed-header rv d3" style="margin-top:64px">
-  <h2 class="ed-title">Desdobramento pós-piloto</h2>
-</div>
-<div class="sprints rv d4">
-  <div class="sprint">
-    <div class="sprint-label">Sprint 1</div>
-    <div class="sprint-desc">Ajustes de comunicação no fluxo e regras de elegibilidade para reduzir insegurança. Integração com régua de comunicação e propostas de acordos.</div>
+<div class="post-pilot-row rv d3" style="margin-top:64px">
+  <div class="post-pilot-col">
+    <div class="ed-header" style="margin-bottom:24px">
+      <h2 class="ed-title">Desdobramento pós-piloto</h2>
+    </div>
+    <div class="sprints">
+      <div class="sprint">
+        <div class="sprint-label">Sprint 1</div>
+        <div class="sprint-desc">Ajustes de comunicação no fluxo e regras de elegibilidade para reduzir insegurança. Integração com régua de comunicação e propostas de acordos.</div>
+      </div>
+      <div class="sprint">
+        <div class="sprint-label">Sprint 2</div>
+        <div class="sprint-desc">Expansão do componente para outros pontos do portal. Padronização da solução para reuso entre squads. Campanha especial e educação financeira.</div>
+      </div>
+    </div>
   </div>
-  <div class="sprint">
-    <div class="sprint-label">Sprint 2</div>
-    <div class="sprint-desc">Expansão do componente para outros pontos do portal. Padronização da solução para reuso entre squads. Campanha especial e educação financeira.</div>
+  <div class="post-pilot-col">
+    <div class="ed-header" style="margin-bottom:24px">
+      <div class="ed-num">07</div>
+      <h2 class="ed-title">Aprendizados</h2>
+    </div>
+    <div class="ed-content">
+      <p class="ed-body">Em fluxos financeiros sensíveis, <strong>a ausência de sinalização é tão prejudicial quanto o excesso de informação.</strong> O cliente precisa de sinais claros de que está no caminho certo, especialmente quando o próximo passo envolve dinheiro.</p>
+      <p class="ed-body" style="margin-top:24px">Microinterações aplicadas com critério aumentam a acessibilidade sem comprometer a hierarquia ou o desempenho do sistema. O crescimento sustentável veio de ciclos curtos orientados a experimentação, não de grandes reformulações.</p>
+    </div>
   </div>
-</div>
-</div></section>
-
-
-<!-- ══════════════════════════════════════════
-     07. APRENDIZADOS
-     ══════════════════════════════════════════ -->
-
-<section class="ed"><div class="container">
-<div class="ed-header rv">
-  <div class="ed-num">07</div>
-  <h2 class="ed-title">Aprendizados</h2>
-</div>
-<div class="ed-content rv d1">
-  <p class="ed-body">Em fluxos financeiros sensíveis, <strong>a ausência de sinalização é tão prejudicial quanto o excesso de informação.</strong> O cliente precisa de sinais claros de que está no caminho certo, especialmente quando o próximo passo envolve dinheiro.</p>
-  <p class="ed-body">Microinterações aplicadas com critério aumentam a acessibilidade sem comprometer a hierarquia ou o desempenho do sistema. O crescimento sustentável veio de ciclos curtos orientados a experimentação, não de grandes reformulações.</p>
 </div>
 </div></section>
 
@@ -1534,6 +2007,57 @@ var ro=new IntersectionObserver(function(entries){
 },{threshold:0.1});
 document.querySelectorAll('.rv').forEach(function(el){ro.observe(el)});
 }catch(e){console.warn("observer error",e)}})();
+
+/* === Master-detail viewer (Fluxo desktop + Fundação visual) === */
+(function(){
+  var screensByViewer = {
+    fluxo: [
+      { num:'01', title:'Boletos pagos',          desc:'Filtro por categoria com estados visuais claros para pagamentos já confirmados. Hierarquia reduzida para não competir com ações pendentes.', src:'img/mrv/desktop-extrato-pagos.webp',    alt:'Extrato: boletos pagos' },
+      { num:'02', title:'Extrato cartório',       desc:'Custos de cartório separados com linguagem acessível, contexto explicativo e acesso direto aos documentos originais.',                           src:'img/mrv/desktop-extrato-cartorio.webp', alt:'Extrato: cartório' },
+      { num:'03', title:'Boletos pendentes',      desc:'Estados claros para ações que o cliente pode tomar agora, com call-to-action direto e hierarquia que prioriza o próximo passo.',                  src:'img/mrv/desktop-extrato-boletos.webp',  alt:'Extrato: boletos pendentes' },
+      { num:'04', title:'Detalhamento bancário',  desc:'Informação técnica exigida por compliance apresentada com cortes visuais que isolam o dado essencial do ruído burocrático.',                      src:'img/mrv/desktop-extrato-banco.webp',    alt:'Extrato: banco' }
+    ],
+    foundation: [
+      { num:'01', title:'Brand colors',    desc:'Paleta principal com cores semânticas e tons de marca aplicados por estado e hierarquia.',                       src:'img/mrv/tokens-brand-colors.webp', alt:'Brand colors' },
+      { num:'02', title:'Support colors',  desc:'Escala neutra de suporte para texturas, bordas, estados intermediários e camadas de fundo.',                     src:'img/mrv/tokens-support.webp',      alt:'Support colors' },
+      { num:'03', title:'Typography',      desc:'Escala tipográfica modular em Plus Jakarta Sans, definindo tamanhos, pesos e line-heights por uso.',             src:'img/mrv/tokens-typography.webp',   alt:'Typography' },
+      { num:'04', title:'Spacing',         desc:'Sistema baseado em grid de 8px aplicado em padding, margin e gap para composições previsíveis entre domínios.',  src:'img/mrv/tokens-spacing.webp',      alt:'Spacing' }
+    ]
+  };
+
+  var viewers = document.querySelectorAll('.md-viewer');
+  for (var v = 0; v < viewers.length; v++) {
+    (function(viewer){
+      var id = viewer.getAttribute('data-viewer');
+      var screens = screensByViewer[id];
+      if (!screens) return;
+      var thumbs = viewer.querySelectorAll('.md-thumb');
+      var img = viewer.querySelector('.md-img');
+      var num = viewer.querySelector('.md-num');
+      var title = viewer.querySelector('.md-title');
+      var desc = viewer.querySelector('.md-desc');
+      var preview = viewer.querySelector('.md-preview');
+      if (!thumbs.length || !img) return;
+
+      function setActive(i){
+        for (var j = 0; j < thumbs.length; j++) thumbs[j].removeAttribute('aria-selected');
+        thumbs[i].setAttribute('aria-selected','true');
+        var s = screens[i];
+        img.src = s.src; img.alt = s.alt;
+        num.textContent = s.num; title.textContent = s.title; desc.textContent = s.desc;
+        if (preview) preview.scrollTop = 0;
+      }
+
+      for (var i = 0; i < thumbs.length; i++) {
+        (function(idx,t){
+          t.addEventListener('mouseenter', function(){ setActive(idx); });
+          t.addEventListener('focus',      function(){ setActive(idx); });
+          t.addEventListener('click',      function(){ setActive(idx); });
+        })(i, thumbs[i]);
+      }
+    })(viewers[v]);
+  }
+})();
 
 /* Custom scroll cursor */
 (function(){

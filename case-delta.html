@@ -7,31 +7,50 @@
 <meta property="og:title" content="Delta Design System · Adriana Pommot">
 <meta property="og:description" content="Tokens, componentes e bibliotecas reutilizáveis criados para unificar 20+ produtos digitais na Escale.">
 <meta property="og:type" content="article">
-<meta property="og:image" content="img/delta/hero-mockup.webp">
+<meta property="og:image" content="https://framerusercontent.com/images/ibHIROqyHkxvVtTioI5nYgGNqSQ.png">
 <meta name="twitter:card" content="summary_large_image">
 <title>Delta Design System · Adriana Pommot</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ═══ TOKENS ═══ */
-:root{--black:#111111;--white:#ffffff;--gray-1:#37342F;--gray-2:#585550;--gray-3:#756F67;--gray-4:#B8B2A8;--gray-5:#EBE7E1;--gray-6:#F5F1EB;--cream:#F9F9F9;--accent:#D1F466;--accent-light:#EDFFB6;--font-display:'Plus Jakarta Sans',sans-serif;--font-body:'Plus Jakarta Sans',sans-serif;--max-w:1440px;--px:40px}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:var(--font-body);color:var(--black);background:var(--white);overflow-x:hidden;cursor:none}::selection{background:var(--accent);color:var(--black)}img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
+:root{
+  --black:#111111; --white:#ffffff;
+  --gray-1:#37342F; --gray-2:#585550; --gray-3:#756F67;
+  --gray-4:#B8B2A8; --gray-5:#EBE7E1;
+  --cream:#F9F9F9;
+  --accent:#D1F466; --accent-light:#EDFFB6; --accent-faint:#F9FDEE;
+  --dark-surface:#2C2B2B;
+  --font-display:'Plus Jakarta Sans',sans-serif;
+  --font-body:'Plus Jakarta Sans',sans-serif;
+  --max-w:1440px; --px:40px;
+}
+
+/* ═══ RESET & BASE ═══ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);color:var(--black);background:var(--white);overflow-x:hidden;cursor:none}
+::selection{background:var(--accent);color:var(--black)}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
 .container{max-width:var(--max-w);margin:0 auto;padding:0 var(--px)}
 
 /* ═══ NAV ═══ */
-.nav-name{position:fixed;top:20px;left:max(calc(var(--px) - 20px),calc((100vw - var(--max-w))/2 + var(--px) - 20px));z-index:100;font-family:var(--font-display);font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--black);background:rgba(255,255,255,0.55);backdrop-filter:blur(12px) saturate(1.3);-webkit-backdrop-filter:blur(12px) saturate(1.3);padding:8px 20px;border-radius:999px}
+.nav-name{position:fixed;top:20px;left:max(calc(var(--px) - 20px),calc((100vw - var(--max-w))/2 + var(--px) - 20px));z-index:100;font-family:var(--font-display);font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--black);background:rgba(255,255,255,0.55);backdrop-filter:blur(12px) saturate(1.3);-webkit-backdrop-filter:blur(12px) saturate(1.3);padding:8px 20px;border-radius:999px;cursor:pointer}
+.nav-name-roll{display:block;overflow:hidden}
+.nav-name-roll span{display:block;line-height:1;transition:transform .45s cubic-bezier(.19,1,.22,1)}
+.nav-name:hover .nav-name-roll span{transform:translateY(-100%)}
 .nav-float{position:fixed;top:20px;right:max(var(--px),calc((100vw - var(--max-w))/2 + var(--px)));z-index:100;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
-.nav-toggle{width:54px;height:54px;border-radius:50%;border:1px solid var(--gray-5);cursor:pointer;background:rgba(255,255,255,0.72);backdrop-filter:blur(12px) saturate(1.3);-webkit-backdrop-filter:blur(12px) saturate(1.3);display:flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s;position:relative;box-shadow:none}
-.nav-toggle::before{display:none}.nav-toggle::after{display:none}
+.nav-toggle{width:54px;height:54px;border-radius:50%;border:1px solid var(--gray-5);cursor:pointer;background:rgba(255,255,255,0.72);backdrop-filter:blur(12px) saturate(1.3);-webkit-backdrop-filter:blur(12px) saturate(1.3);display:flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s;position:relative}
 .nav-toggle:hover{background:var(--accent);border-color:var(--accent)}
 .nav-toggle svg{width:22px;height:22px;stroke:var(--black);stroke-width:1;stroke-linecap:square;fill:none}
 .nav-toggle .icon-x{display:none}
 .nav-float.open .nav-toggle .icon-menu{display:none}
 .nav-float.open .nav-toggle .icon-x{display:block}
-.nav-float.open .nav-toggle{background:var(--black);box-shadow:none}
+.nav-float.open .nav-toggle{background:var(--black)}
 .nav-float.open .nav-toggle svg{stroke:var(--white)}
 .nav-menu{display:flex;flex-direction:column;align-items:flex-end;gap:6px;opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .3s,transform .3s}
 .nav-float.open .nav-menu{opacity:1;transform:translateY(0);pointer-events:auto}
-.nav-menu a{font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;padding:8px 20px;border-radius:999px;white-space:nowrap;transition:color .25s,box-shadow .25s,background .25s}
+.nav-menu a{font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;padding:8px 20px;border-radius:999px;white-space:nowrap;transition:color .25s,background .25s}
 .nav-menu .nav-cta{color:var(--white);background:var(--black);display:inline-flex;align-items:center;gap:8px}
 .nav-menu .nav-cta:hover{color:var(--accent)}
 .nav-menu .nav-cta svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -40,678 +59,675 @@
 .nav-menu .nav-link:hover{color:var(--black)}
 .nav-menu .nav-link:hover::after{transform:scaleX(1)}
 
-/* ═══ HEADER ═══ */
+/* ═══ CASE HEADER ═══ */
 .case-header{padding-top:120px}
 .case-back{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-3);margin-bottom:48px;transition:opacity .3s}
 .case-back:hover{opacity:.5}
 .case-back svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .case-title{font-family:var(--font-display);font-size:clamp(44px,7vw,96px);font-weight:400;line-height:1;letter-spacing:-.02em;text-transform:uppercase;margin-bottom:40px;margin-left:-.04em}
-.case-focus{font-family:var(--font-display);font-size:16px;font-weight:400;line-height:1.75;color:var(--gray-3);max-width:668px;margin-bottom:0;letter-spacing:.01em;text-wrap:pretty}
+.case-focus{font-family:var(--font-body);font-size:16px;font-weight:400;line-height:1.75;color:var(--gray-3);max-width:668px;margin-bottom:0;letter-spacing:.01em;text-wrap:pretty}
 .case-focus strong{color:var(--black);font-weight:600}
+
 /* Dark metadata bar — full-width bleed */
-.case-meta-bar{background:#2C2B2B;padding:20px 0;margin-top:40px;width:100vw;margin-left:calc(-50vw + 50%);margin-right:calc(-50vw + 50%);padding-left:max(var(--px),calc((100vw - var(--max-w))/2 + var(--px)));padding-right:max(var(--px),calc((100vw - var(--max-w))/2 + var(--px)))}
-.case-meta{display:flex;flex-wrap:wrap;gap:32px}
-.case-meta-item{display:flex;flex-direction:column;gap:8px}
-.case-meta-label{font-family:var(--font-display);font-size:14px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--white)}
+.case-meta-bar{background:var(--dark-surface);padding:16px 0;margin-top:40px}
+.case-header .case-meta-bar{width:100vw;margin-left:calc(-50vw + 50%);margin-right:calc(-50vw + 50%);padding-left:max(var(--px),calc((100vw - var(--max-w))/2 + var(--px)));padding-right:max(var(--px),calc((100vw - var(--max-w))/2 + var(--px)))}
+.case-meta{display:flex;flex-wrap:wrap;gap:16px 72px}
+.case-meta-item{display:flex;flex-direction:column;gap:6px}
+.case-meta-label{font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--white)}
 .case-meta-value{font-family:var(--font-display);font-size:13px;font-weight:400;letter-spacing:.02em;color:var(--accent-light)}
-.case-hero-img{max-width:70%;margin:0 auto;overflow:hidden;background:transparent}
-.case-hero-img img{width:100%;height:100%;object-fit:cover}
 
 /* ═══ EDITORIAL ═══ */
-.case-statement{padding:96px 0;border-top:1px solid var(--gray-5)}
-.case-statement-text{font-family:var(--font-display);font-size:16px;font-weight:400;line-height:1.75;letter-spacing:.01em;max-width:668px;color:var(--gray-3)}
-.case-statement-text strong{color:var(--black);font-weight:600}
-.case-statement-text .faded{color:transparent}
-.case-pull{padding:96px 0;border-top:1px solid var(--gray-5)}
-.case-pull-text{font-family:var(--font-display);font-size:16px;font-weight:400;line-height:1.75;letter-spacing:.01em;max-width:668px;color:var(--gray-3)}
-.case-pull-text strong{font-weight:600;color:var(--black)}
-.case-pull-text .faded{color:transparent}
-.case-pull-caption{display:inline-block;background:var(--accent);color:var(--black);font-family:var(--font-display);font-size:14px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;margin-top:32px;padding:4px 10px}
-.case-offset{padding:96px 0;border-top:1px solid var(--gray-5)}
-.case-offset-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
-.case-offset-label{font-family:var(--font-display);font-size:14px;font-weight:500;line-height:1.5;letter-spacing:.06em;text-transform:uppercase;display:inline;padding:4px 10px;background:var(--accent);color:var(--black)}
-.case-offset-num{font-family:var(--font-display);font-size:20px;font-weight:500;line-height:1;letter-spacing:0;color:var(--gray-3);margin-bottom:12px}
-.case-offset-body p{font-family:var(--font-display);font-size:16px;font-weight:400;color:var(--gray-3);line-height:1.75;letter-spacing:.01em;margin-bottom:16px;text-wrap:pretty}
-.case-offset-body p:last-child{margin-bottom:0}
-.case-offset-body p strong{color:var(--black);font-weight:600}
+.ed{padding:96px 0;border-top:1px solid var(--gray-5)}
+.ed--shaded{background:rgba(245,245,245,0.6);border-top:2px solid var(--white);border-bottom:2px solid var(--white)}
 
-/* ═══ METRIC CARDS ═══ */
-.case-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--gray-5);margin-top:40px}
-.case-metric{background:var(--white);padding:28px 24px 32px}
-.case-metric-icon{width:32px;height:32px;margin-bottom:17px;display:block}
-.case-metric-num{font-family:var(--font-display);font-size:40px;font-weight:400;letter-spacing:-.014em;color:var(--black);line-height:1;margin-bottom:12px}
-.case-metric-label{font-family:var(--font-display);font-size:16px;font-weight:500;letter-spacing:.033em;text-transform:uppercase;color:var(--black);margin-bottom:8px}
-.case-metric-desc{font-family:var(--font-body);font-size:13px;font-weight:400;color:var(--gray-3);line-height:1.55;letter-spacing:.01em;text-wrap:pretty}
+.ed-header{display:flex;flex-direction:column;gap:16px;margin-bottom:40px}
+.ed-content{max-width:586px}
+.ed-content > * + *{margin-top:16px}
 
-/* ═══ PROBLEM CARDS ═══ */
-.case-problems{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--gray-5);margin-top:48px}
-.case-problem{background:var(--white);padding:40px 32px 44px}
-.case-problem-icon{width:44px;height:44px;margin-bottom:20px;display:block}
-.case-problem-title{font-family:var(--font-display);font-size:16px;font-weight:500;text-transform:uppercase;letter-spacing:.033em;line-height:1.4;margin-bottom:12px;text-wrap:balance}
-.case-problem-desc{font-family:var(--font-body);font-size:13px;font-weight:400;color:var(--gray-3);line-height:1.55;letter-spacing:.01em;text-wrap:pretty}
-.case-problem-stat{display:inline-flex;align-items:center;gap:6px;margin-top:16px;padding:6px 14px;background:var(--gray-6);border-radius:999px}
-.case-problem-stat-num{font-family:var(--font-display);font-size:14px;font-weight:500;color:var(--black)}
-.case-problem-stat-label{font-family:var(--font-display);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--gray-3)}
+.ed-num{font-family:var(--font-display);font-size:20px;font-weight:500;line-height:1;color:var(--gray-3)}
+.ed-title{font-family:var(--font-display);font-size:32px;font-weight:500;line-height:1.1;letter-spacing:.026em;text-transform:uppercase;color:var(--black);text-wrap:balance}
+.ed-body{font-family:var(--font-body);font-size:16px;font-weight:400;color:var(--gray-3);line-height:1.75;letter-spacing:.01em;text-wrap:pretty}
+.ed-body strong{color:var(--black);font-weight:600}
 
-/* ═══ TIMELINE ═══ */
-.case-timeline{padding:96px 0;border-top:1px solid var(--gray-5)}
-.case-timeline-header{margin-bottom:56px}
-.case-timeline-heading{font-family:var(--font-display);font-size:16px;font-weight:400;line-height:1.75;letter-spacing:.01em;margin-top:16px;color:var(--gray-3);text-wrap:pretty}
-.case-timeline-heading strong{color:var(--black);font-weight:600}
-.case-timeline-track{display:flex;align-items:flex-start;position:relative;padding-top:24px}
-.case-timeline-line{position:absolute;top:44px;left:20px;right:20px;height:1px;background:var(--gray-5)}
-.case-timeline-line-fill{height:1px;background:var(--gray-5);width:100%}
-.case-timeline-step{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;z-index:1}
-.case-timeline-dot{width:20px;height:20px;border-radius:50%;background:var(--white);border:1.5px solid var(--gray-5);display:flex;align-items:center;justify-content:center;margin-bottom:20px}
-.case-timeline-dot-inner{width:8px;height:8px;border-radius:50%;background:var(--accent)}
-.case-timeline-icon{width:32px;height:32px;margin-bottom:12px;display:block}
-.case-timeline-num{font-family:var(--font-display);font-size:20px;font-weight:500;color:var(--gray-3);letter-spacing:0;margin-bottom:8px;line-height:1}
-.case-timeline-title{font-family:var(--font-display);font-size:16px;font-weight:500;letter-spacing:.033em;text-transform:uppercase;line-height:1.3;margin-bottom:8px;text-wrap:balance}
-.case-timeline-desc{font-family:var(--font-body);font-size:13px;font-weight:400;color:var(--gray-3);line-height:1.55;letter-spacing:.01em;max-width:180px;margin:0 auto;text-wrap:pretty}
+/* Two-column layout: title+desc left, content right */
+.ed-two-col{display:flex;gap:128px;align-items:flex-start}
+.ed-two-col-left{display:flex;flex-direction:column;gap:40px;flex-shrink:0;min-width:0;max-width:522px}
+.ed-two-col-right{display:flex;flex-direction:column;gap:24px;flex-shrink:0;min-width:0;flex:1;padding-top:36px}
 
-/* ═══ STRATEGY PILLARS ═══ */
-.case-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--gray-5);margin-top:48px}
-.case-pillar{background:var(--white);padding:40px 32px 44px}
-.case-pillar-bar{width:32px;height:3px;background:var(--accent);margin-bottom:24px}
-.case-pillar-title{font-family:var(--font-display);font-size:16px;font-weight:500;text-transform:uppercase;letter-spacing:.033em;line-height:1.4;margin-bottom:16px;text-wrap:balance}
-.case-pillar-desc{font-family:var(--font-body);font-size:13px;font-weight:400;color:var(--gray-3);line-height:1.6;letter-spacing:.01em;text-wrap:pretty}
+/* ═══ 01 CONTEXTO — Cards editoriais ═══ */
+.ctx-card{background:var(--accent-faint);border:1px solid var(--black);border-radius:8px;padding:20px 22px;display:flex;gap:24px;align-items:center;transition:transform .4s cubic-bezier(.16,1,.3,1)}
+.ctx-card:hover{transform:translateY(-2px)}
+.ctx-card-icon{flex-shrink:0;width:56px;height:56px;display:flex;align-items:center;justify-content:center}
+.ctx-card-icon svg{max-width:100%;max-height:100%;width:auto;height:auto;display:block}
+.ctx-card-body{flex:1;display:flex;flex-direction:column;gap:10px;min-width:0}
+.ctx-card-title{font-family:var(--font-display);font-size:17px;font-weight:500;letter-spacing:.026em;text-transform:uppercase;color:var(--black);line-height:1.15;text-wrap:balance}
+.ctx-card-desc{font-family:var(--font-body);font-size:13px;font-weight:400;color:var(--gray-3);line-height:1.5;text-wrap:pretty}
+.ctx-card-desc strong{color:var(--black);font-weight:600}
 
-/* ═══ INSIGHT NUMBERS ═══ */
-.case-insight-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--gray-5)}
-.case-insight{background:var(--white);padding:28px 24px 32px}
-.case-insight-tag{font-family:var(--font-display);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--gray-3);margin-bottom:12px}
-.case-insight-num{font-family:var(--font-display);font-size:40px;font-weight:400;letter-spacing:-.014em;color:var(--black);line-height:1;margin-bottom:12px}
-.case-insight-desc{font-family:var(--font-body);font-size:13px;font-weight:400;color:var(--gray-3);line-height:1.6;letter-spacing:.01em;text-wrap:pretty}
+/* ═══ 02 PROBLEMA — Pull quote ═══ */
+.prob-section{padding:128px 0;border-top:1px solid var(--gray-5)}
+.prob-row{display:grid;grid-template-columns:1fr 2fr;gap:96px;align-items:start}
+.prob-header{padding-top:24px}
+.prob-quote{font-family:var(--font-display);font-size:clamp(26px,3.2vw,36px);font-weight:400;line-height:1.45;color:var(--gray-3);letter-spacing:-.01em;text-wrap:balance;max-width:720px}
+.prob-quote strong{color:var(--black);font-weight:500}
 
-/* ═══ ATOMIC PROGRESSION ═══ */
-.case-atomic{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--gray-5);margin:48px 0}
-.case-atomic-step{background:var(--white);padding:32px 24px 36px;text-align:center}
-.case-atomic-icon{width:48px;height:48px;margin:0 auto 16px;display:block}
-.case-atomic-num{font-family:var(--font-display);font-size:20px;font-weight:500;color:var(--gray-3);letter-spacing:0;line-height:1;margin-bottom:10px}
-.case-atomic-title{font-family:var(--font-display);font-size:16px;font-weight:500;text-transform:uppercase;letter-spacing:.033em;line-height:1.3;margin-bottom:8px;text-wrap:balance}
-.case-atomic-desc{font-family:var(--font-body);font-size:13px;font-weight:400;color:var(--gray-3);line-height:1.55;letter-spacing:.01em;text-wrap:pretty}
+/* ═══ 03 ESTRATÉGIA — Timeline horizontal ═══ */
+.strat-section{background:var(--accent-faint);padding:120px 0}
+.strat-header{margin-bottom:64px;max-width:720px}
+.strat-sub{font-family:var(--font-body);font-size:16px;font-weight:400;color:var(--black);line-height:1.65;margin-top:16px;text-wrap:pretty}
+.strat-timeline{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.strat-timeline::before{content:'';position:absolute;top:10px;left:10px;right:10px;height:1px;background:var(--black);z-index:0}
+.strat-step{position:relative;z-index:1;display:flex;flex-direction:column;gap:18px;padding-right:16px}
+.strat-dot{width:20px;height:20px;border-radius:6px;border:1px solid var(--black);background:var(--black);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.strat-dot::after{content:'';width:8px;height:8px;border-radius:3px;background:var(--accent)}
+.strat-step-num{font-family:var(--font-display);font-size:14px;font-weight:500;letter-spacing:.08em;color:var(--black);text-transform:uppercase;margin-top:8px}
+.strat-step-title{font-family:var(--font-display);font-size:18px;font-weight:500;letter-spacing:.026em;text-transform:uppercase;color:var(--black);line-height:1.15;text-wrap:balance}
+.strat-step-desc{font-family:var(--font-body);font-size:13px;font-weight:400;color:var(--gray-2);line-height:1.65;letter-spacing:.005em;text-wrap:pretty;margin-top:10px}
 
-/* ═══ STAT HIGHLIGHT CARDS ═══ */
-.case-results{padding:96px 0;border-top:1px solid var(--gray-5)}
-.case-results-statement{font-family:var(--font-display);font-size:16px;font-weight:400;line-height:1.75;letter-spacing:.01em;margin-bottom:40px;max-width:668px;color:var(--gray-3);text-wrap:pretty}
-.case-results-statement strong{color:var(--black);font-weight:600}
-.case-results-statement .faded{color:transparent}
-.case-stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--gray-5)}
-.case-stat{background:var(--black);padding:40px 28px 44px;display:flex;flex-direction:column}
-.case-stat-icon{width:14px;height:14px;margin-bottom:20px;display:block}
-.case-stat-num{font-family:var(--font-display);font-size:clamp(32px,4vw,48px);font-weight:400;letter-spacing:-.02em;color:var(--accent);line-height:1;margin-bottom:16px}
-.case-stat-label{font-family:var(--font-display);font-size:14px;font-weight:500;color:var(--white);margin-bottom:8px;letter-spacing:.02em}
-.case-stat-desc{font-family:var(--font-body);font-size:13px;font-weight:400;color:rgba(255,255,255,.55);line-height:1.55;letter-spacing:.01em;margin-top:auto;text-wrap:pretty}
-.case-stat-category{display:inline-block;font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.08)}
+/* Mobile version — simple numbered list */
+.strat-list-mobile{display:none}
 
-/* ═══ IMAGE LAYOUTS ═══ */
-.case-inline-img{width:100%;border-radius:4px;overflow:hidden;margin:40px 0;background:var(--gray-6)}
-.case-inline-img img{width:100%;height:auto;display:block}
-.case-inline-img.dark-bg{background:#1A1A19}
-.case-inline-caption{font-family:var(--font-display);font-size:13px;color:var(--gray-3);margin-top:12px;letter-spacing:.03em}
-.case-inline-pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:40px 0}
-.case-inline-pair img{width:100%;border-radius:4px;border:1px solid var(--gray-5)}
-.case-bleed{margin:0;overflow:hidden;border-radius:4px}
-.case-bleed img{width:100%;height:auto;display:block}
-.case-img-section{padding:96px 0}
-.case-img-placeholder{background:var(--gray-6);border-radius:4px;padding:80px 40px;text-align:center;margin:40px 0}
-.case-img-placeholder p{font-family:var(--font-display);font-size:13px;color:var(--gray-4);text-transform:uppercase;letter-spacing:.08em}
-.case-img-placeholder span{font-size:11px;text-transform:none;letter-spacing:0;display:block;margin-top:4px}
+/* ═══ 04 PROCESSO — Tabs + Sublist + Panel ═══ */
+.proc-section{padding:120px 0;border-top:1px solid var(--gray-5)}
+.proc-header{margin-bottom:48px}
+.proc-tabs{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:32px}
+.proc-tab{font-family:var(--font-display);font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:12px 20px;border-radius:999px;border:1px solid var(--black);background:var(--white);color:var(--black);cursor:pointer;transition:background .25s,transform .2s}
+.proc-tab:hover{transform:translateY(-1px)}
+.proc-tab.active{background:var(--accent);border-color:var(--accent)}
 
-/* ═══ HERO BLEED IMAGE — laptop+tablet mockup ═══ */
-.delta-hero{background:#E8E8E8;padding:80px 0;margin:0;width:100vw;margin-left:calc(-50vw + 50%);margin-right:calc(-50vw + 50%)}
-.delta-hero-inner{max-width:var(--max-w);margin:0 auto;padding:0 var(--px);display:flex;justify-content:center}
-.delta-hero img{max-width:1000px;width:100%;height:auto;display:block;filter:drop-shadow(0 30px 60px rgba(0,0,0,.25))}
+.proc-viewer{display:grid;grid-template-columns:minmax(240px,300px) 1fr;gap:48px;align-items:start;min-height:520px}
+.proc-sublist{display:flex;flex-direction:column;gap:6px}
+.proc-subitem{font-family:var(--font-display);font-size:14px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:14px 18px;border-radius:6px;background:var(--black);color:var(--accent-light);cursor:pointer;transition:background .2s,color .2s;text-align:left;border:none;width:100%}
+.proc-subitem:hover,.proc-subitem.active{background:var(--accent);color:var(--black)}
 
-/* ═══ CONTRAST BLEED — diagrama de contrastes ═══ */
-.contrast-bleed{padding:96px 0;border-top:1px solid var(--gray-5)}
-.contrast-bleed-img{margin:0 auto;max-width:1100px;border-radius:8px;overflow:hidden;background:var(--gray-6);padding:40px}
-.contrast-bleed-img img{width:100%;height:auto;display:block}
-.contrast-caption{font-family:var(--font-body);font-size:13px;color:var(--gray-3);margin-top:16px;letter-spacing:.01em;line-height:1.6;max-width:586px;margin-left:auto;margin-right:auto;text-align:center;text-wrap:pretty}
+.proc-panel{background:var(--white);border:1px solid var(--gray-5);border-radius:16px;padding:40px;min-height:520px;display:flex;flex-direction:column;gap:24px}
+.proc-panel-label{font-family:var(--font-display);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--gray-3)}
+.proc-panel-title{font-family:var(--font-display);font-size:28px;font-weight:500;letter-spacing:.02em;text-transform:uppercase;color:var(--black);line-height:1.1;text-wrap:balance}
+.proc-panel-desc{font-family:var(--font-body);font-size:14px;font-weight:400;color:var(--gray-3);line-height:1.65;max-width:560px;text-wrap:pretty}
+.proc-panel-visual{flex:1;min-height:280px;display:flex;align-items:center;justify-content:center;padding:24px 0;position:relative}
 
-/* ═══ TOKEN-GRID DARK SECTION ═══ */
-.token-section{background:var(--black);padding:96px 0}
-.token-section .ed-num{color:var(--accent)}
-.token-section .ed-title{color:var(--white)}
-.token-section .ed-body{color:rgba(255,255,255,.6)}
-.token-section .ed-body strong{color:var(--white)}
-.token-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:64px}
-.token-card{background:var(--white);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
-.token-card-img{width:100%;background:var(--white);display:block}
-.token-card-img img{width:100%;height:auto;display:block}
-.token-card-meta{padding:20px 24px 24px;border-top:1px solid var(--gray-5)}
-.token-card-name{font-family:var(--font-display);font-size:14px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
-.token-card-desc{font-family:var(--font-body);font-size:14px;font-weight:400;color:var(--gray-3);line-height:1.55;letter-spacing:.01em;text-wrap:pretty}
+/* Visual panel — mostra screen real do Delta */
+.proc-visual{width:100%;max-width:720px;background:#F5F5F5;border-radius:10px;padding:24px;display:flex;align-items:center;justify-content:center}
+.proc-visual img{width:100%;height:auto;display:block;border-radius:4px;background:var(--white)}
+.proc-visual.stacked{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:20px}
+.proc-visual.stacked img{height:100%;object-fit:cover}
+.proc-visual-placeholder{width:100%;max-width:560px;background:var(--accent-faint);border:1px dashed var(--gray-4);border-radius:10px;padding:48px 32px;text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center}
+.proc-visual-placeholder-label{font-family:var(--font-display);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--gray-3)}
+.proc-visual-placeholder-path{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px;color:var(--gray-2);background:var(--white);padding:6px 12px;border-radius:4px;border:1px solid var(--gray-5)}
+.proc-visual-placeholder-note{font-family:var(--font-body);font-size:12px;color:var(--gray-3);line-height:1.5;max-width:400px}
 
-/* ═══ PALETTE BLEED ═══ */
-.palette-section{padding:96px 0;background:var(--gray-6);border-top:1px solid var(--gray-5)}
-.palette-bleed-img{margin:48px 0 0;border-radius:8px;overflow:hidden;background:var(--white);padding:32px}
-.palette-bleed-img img{width:100%;height:auto;display:block}
+/* ═══ 05 O QUE CONSTRUÍ ═══ */
+.built-section{padding:120px 0;border-top:1px solid var(--gray-5)}
 
-/* ═══ COMPONENT PAIR — light browser-style ═══ */
-.comp-section{padding:96px 0;border-top:1px solid var(--gray-5)}
-.comp-pair{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px}
-.comp-card{background:var(--cream);border:1px solid var(--gray-5);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
-.comp-card-img{padding:24px;background:var(--white)}
-.comp-card-img img{width:100%;height:auto;display:block}
-.comp-card-meta{padding:16px 24px 20px;border-top:1px solid var(--gray-5);background:var(--cream)}
-.comp-card-tag{font-family:var(--font-display);font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-3);margin-bottom:4px}
-.comp-card-name{font-family:var(--font-display);font-size:16px;font-weight:500;letter-spacing:.033em;text-transform:uppercase;color:var(--black)}
-.comp-trio{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
-.comp-trio .comp-card-img{padding:16px}
+/* Princípios */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:96px}
+.pillar{background:var(--accent-faint);border:1px solid var(--black);border-radius:8px;padding:28px;display:flex;flex-direction:column;gap:16px}
+.pillar-bar{width:40px;height:4px;background:var(--black);border-radius:2px}
+.pillar-title{font-family:var(--font-display);font-size:20px;font-weight:500;letter-spacing:.026em;text-transform:uppercase;color:var(--black)}
+.pillar-desc{font-family:var(--font-body);font-size:14px;font-weight:400;color:var(--gray-3);line-height:1.6;text-wrap:pretty}
 
-/* ═══ STORYBOOK CALLOUT ═══ */
-.storybook-callout{padding:96px 0;border-top:1px solid var(--gray-5);background:var(--gray-6)}
-.storybook-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:64px;align-items:center;margin-top:48px}
-.storybook-info h3{font-family:var(--font-display);font-size:32px;font-weight:500;line-height:1.1;letter-spacing:.026em;text-transform:uppercase;color:var(--black);margin-bottom:24px;text-wrap:balance}
-.storybook-info p{font-family:var(--font-body);font-size:16px;font-weight:400;color:var(--gray-3);line-height:1.75;letter-spacing:.01em;margin-bottom:24px;text-wrap:pretty}
-.storybook-info p strong{color:var(--black);font-weight:600}
-.storybook-link{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;background:var(--black);color:var(--white);border-radius:999px;font-family:var(--font-display);font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:background .3s,color .3s}
-.storybook-link:hover{background:var(--accent);color:var(--black)}
-.storybook-link svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.storybook-numbers{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--gray-5);border-radius:8px;overflow:hidden}
-.storybook-num{background:var(--white);padding:32px 24px;text-align:left}
-.storybook-num-val{font-family:var(--font-display);font-size:48px;font-weight:400;letter-spacing:-.02em;color:var(--black);line-height:1;margin-bottom:8px}
-.storybook-num-label{font-family:var(--font-display);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--gray-3)}
+/* Atomic progression */
+.built-sub{font-family:var(--font-display);font-size:24px;font-weight:500;letter-spacing:.026em;text-transform:uppercase;color:var(--black);margin-bottom:40px;text-wrap:balance}
+.atomic{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:72px;position:relative}
+.atomic-step{display:flex;flex-direction:column;gap:14px;padding:28px 24px;background:var(--white);border:1px solid var(--gray-5);border-radius:8px}
+.atomic-visual{height:52px;display:flex;align-items:center;justify-content:flex-start}
+.atomic-num{font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.08em;color:var(--gray-3);text-transform:uppercase}
+.atomic-title{font-family:var(--font-display);font-size:18px;font-weight:500;letter-spacing:.026em;text-transform:uppercase;color:var(--black)}
+.atomic-desc{font-family:var(--font-body);font-size:13px;font-weight:400;color:var(--gray-3);line-height:1.55;text-wrap:pretty}
 
-/* ═══ PROTOCOL PAIR — composição + construindo componente ═══ */
-.protocol-section{padding:96px 0;border-top:1px solid var(--gray-5)}
-.protocol-pair{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px}
-.protocol-card{background:var(--white);border:1px solid var(--gray-5);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
-.protocol-card-img{background:var(--white);padding:0}
-.protocol-card-img img{width:100%;height:auto;display:block}
-.protocol-card-meta{padding:20px 24px 24px;border-top:1px solid var(--gray-5)}
-.protocol-card-tag{font-family:var(--font-display);font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-3);margin-bottom:6px}
-.protocol-card-desc{font-family:var(--font-body);font-size:14px;font-weight:400;color:var(--gray-3);line-height:1.55;letter-spacing:.01em;text-wrap:pretty}
+/* Insights row */
+.insights{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.insight{padding:32px 28px;background:#F5F5F5;border-radius:8px;display:flex;flex-direction:column;gap:14px}
+.insight-tag{font-family:var(--font-display);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-3);padding:4px 10px;background:var(--white);border:1px solid var(--gray-5);border-radius:999px;align-self:flex-start}
+.insight-num{font-family:var(--font-display);font-size:56px;font-weight:400;letter-spacing:-.02em;line-height:1;color:var(--black)}
+.insight-desc{font-family:var(--font-body);font-size:14px;font-weight:400;color:var(--gray-3);line-height:1.55;text-wrap:pretty}
+
+/* ═══ 06 RESULTADOS ═══ */
+.results{padding:120px 0;border-top:1px solid var(--gray-5)}
+.results-hero{display:flex;align-items:center;justify-content:space-between;gap:0;background:var(--accent-light);border:1px solid var(--black);border-radius:8px;padding:0 24px;min-height:125px;margin-top:40px}
+.results-hero-item{padding:24px;display:flex;flex-direction:column;gap:9px;flex:0 1 auto}
+.results-hero-item .r-num{font-family:var(--font-display);font-size:48px;font-weight:400;letter-spacing:-.02em;line-height:1;color:var(--black)}
+.results-hero-item .r-label{font-family:var(--font-body);font-size:13px;font-weight:400;line-height:1.5;color:var(--gray-3)}
+.results-hero-sep{width:1px;align-self:stretch;background:var(--black);flex-shrink:0;margin:24px 0}
+
+.results-row{display:flex;gap:78px;align-items:flex-start;margin-top:48px}
+.results-row-text{flex-shrink:0;width:529px;padding:24px 0 0}
+.results-row-text p{font-family:var(--font-body);font-size:16px;font-weight:400;color:var(--gray-3);line-height:1.75;letter-spacing:.01em;text-wrap:pretty}
+.results-row-text p strong{color:var(--black);font-weight:600}
+.results-row-text p + p{margin-top:16px}
+.results-row-table{flex:1;padding:0;min-width:0;display:flex;flex-direction:column;gap:12px}
+.results-kpi{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;background:#F5F5F5;border-radius:8px;font-family:var(--font-display)}
+.results-kpi-label{font-size:14px;font-weight:500;letter-spacing:.02em;color:var(--black);text-transform:uppercase}
+.results-kpi-value{font-size:16px;font-weight:500;color:var(--black);letter-spacing:-.01em}
+
+/* ═══ 07 BIBLIOTECA DE COMPONENTES ═══ */
+.library{padding:120px 0;border-top:1px solid var(--gray-5)}
+.library-intro{max-width:720px;margin-top:16px}
+.library-hero{display:flex;align-items:stretch;justify-content:space-between;gap:0;background:var(--dark-surface);border:1px solid var(--black);border-radius:8px;padding:0 24px;margin-top:40px}
+.library-hero-item{padding:32px 24px;display:flex;flex-direction:column;gap:14px;flex:1 1 0;min-width:0}
+.library-hero-item .l-num{font-family:var(--font-display);font-size:64px;font-weight:400;letter-spacing:-.02em;line-height:1;color:var(--accent-light)}
+.library-hero-item .l-label{font-family:var(--font-body);font-size:13px;font-weight:400;line-height:1.55;color:var(--gray-4);text-wrap:pretty}
+.library-hero-sep{width:1px;align-self:stretch;background:var(--gray-2);flex-shrink:0;margin:32px 0}
+.library-cta{display:inline-flex;align-items:center;gap:14px;margin-top:40px;padding:18px 28px;background:var(--black);color:var(--white);font-family:var(--font-display);font-size:14px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;transition:background .3s,color .3s}
+.library-cta:hover{background:var(--accent);color:var(--black)}
+.library-cta svg{width:18px;height:18px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.library-cta:hover svg{transform:translateX(4px)}
+
+/* ═══ IMPACTO ═══ */
+.impact{padding:120px 0;border-top:1px solid var(--gray-5);border-bottom:1px solid var(--gray-5)}
+.impact-quote{font-family:var(--font-display);font-size:clamp(26px,3.2vw,36px);font-weight:400;line-height:1.45;color:var(--gray-3);letter-spacing:-.01em;text-wrap:balance;max-width:720px}
+.impact-quote strong{color:var(--black);font-weight:500}
+.impact-caption{display:inline-block;margin-top:32px;background:var(--accent);color:var(--black);font-family:var(--font-display);font-size:14px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px}
+
+/* ═══ CASE CLOSER — Imagem de fechamento ═══ */
+.case-closer{padding:96px 0 120px}
+.case-closer-img{width:100%;border-radius:10px;overflow:hidden}
+.case-closer-img img{width:100%;height:auto;display:block}
 
 /* ═══ MORE WORK ═══ */
-.more-work{padding:160px 0;border-top:1px solid var(--gray-5)}.more-work-title{font-family:var(--font-display);font-size:clamp(44px,7vw,96px);font-weight:400;line-height:1;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:64px}.more-work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}.more-work-card{display:block;transition:opacity .3s}.more-work-card:hover{opacity:.8}.more-work-card-img{width:100%;aspect-ratio:3/2;overflow:hidden;background:var(--gray-6);border-radius:4px;margin-bottom:20px}.more-work-card-img img{width:100%;height:100%;object-fit:cover}.more-work-card-tag{display:inline-block;font-family:var(--font-display);font-size:13px;font-weight:400;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-4);margin-bottom:12px}.more-work-card-name{font-family:var(--font-display);font-size:20px;font-weight:500;line-height:1.2}
+.more-work{padding:160px 0;border-top:1px solid var(--gray-5)}
+.more-work-title{font-family:var(--font-display);font-size:clamp(44px,7vw,96px);font-weight:400;line-height:1;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:64px}
+.more-work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.more-work-card{display:block;transition:opacity .3s}
+.more-work-card:hover{opacity:.8}
+.more-work-card-img{width:100%;aspect-ratio:3/2;overflow:hidden;background:#F5F5F5;border-radius:4px;margin-bottom:20px}
+.more-work-card-img img{width:100%;height:100%;object-fit:cover}
+.more-work-card-tag{display:inline-block;font-family:var(--font-body);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-4);margin-bottom:12px}
+.more-work-card-name{font-family:var(--font-display);font-size:20px;font-weight:500;line-height:1.2}
 
 /* ═══ CTA + FOOTER ═══ */
-.cta-section{background:var(--black);color:var(--white);padding:160px 0;text-align:center}.cta-title{font-family:var(--font-display);font-size:clamp(44px,9vw,140px);font-weight:400;line-height:.95;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:24px}.cta-title a{color:var(--white);transition:color .3s}.cta-title a:hover{color:var(--accent)}.cta-subtitle{font-family:var(--font-body);font-size:15px;color:var(--accent);text-transform:uppercase;margin-bottom:48px}.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 30px;font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--black);background:var(--white);border-radius:999px;transition:opacity .3s}.cta-btn:hover{background:var(--accent);color:var(--black)}
-footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top:1px solid rgba(255,255,255,.08)}.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px}.footer-logo{font-family:var(--font-display);font-size:15px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:20px}.footer-social{display:flex;flex-direction:column;gap:10px}.footer-social a{font-family:var(--font-body);font-size:13px;color:rgba(255,255,255,.4);transition:color .3s}.footer-social a:hover{color:var(--white)}.footer-col-title{font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:20px}.footer-col-links{display:flex;flex-direction:column;gap:10px}.footer-col-links a{font-family:var(--font-body);font-size:13px;color:rgba(255,255,255,.4);transition:color .3s}.footer-col-links a:hover{color:var(--white)}.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:32px;border-top:1px solid rgba(255,255,255,.08)}.footer-copy{font-family:var(--font-body);font-size:12px;color:rgba(255,255,255,.25)}
+.cta-section{background:var(--black);color:var(--white);padding:160px 0;text-align:center}
+.cta-title{font-family:var(--font-display);font-size:clamp(44px,9vw,140px);font-weight:400;line-height:.95;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:24px}
+.cta-title a{color:var(--white);transition:color .3s}
+.cta-title a:hover{color:var(--accent)}
+.cta-subtitle{font-family:var(--font-body);font-size:15px;color:var(--accent);text-transform:uppercase;margin-bottom:48px}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 30px;font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--black);background:var(--white);border-radius:999px;transition:opacity .3s}
+.cta-btn:hover{background:var(--accent);color:var(--black)}
+
+footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top:1px solid rgba(255,255,255,0.08)}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px}
+.footer-logo{font-family:var(--font-display);font-size:15px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:20px}
+.footer-social{display:flex;flex-direction:column;gap:10px}
+.footer-social a{font-family:var(--font-body);font-size:13px;color:rgba(255,255,255,0.4);transition:color .3s}
+.footer-social a:hover{color:var(--white)}
+.footer-col-title{font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:20px}
+.footer-col-links{display:flex;flex-direction:column;gap:10px}
+.footer-col-links a{font-family:var(--font-body);font-size:13px;color:rgba(255,255,255,0.4);transition:color .3s}
+.footer-col-links a:hover{color:var(--white)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:32px;border-top:1px solid rgba(255,255,255,0.08)}
+.footer-copy{font-family:var(--font-body);font-size:12px;color:rgba(255,255,255,0.25)}
 
 /* ═══ REVEAL ═══ */
 .rv{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
 .rv.visible{opacity:1;transform:none}
-.d1{transition-delay:.12s}.d2{transition-delay:.22s}.d3{transition-delay:.34s}.d4{transition-delay:.46s}
+.d1{transition-delay:.12s} .d2{transition-delay:.22s} .d3{transition-delay:.34s} .d4{transition-delay:.46s}
+
+/* ═══ CURSOR ═══ */
+.cursor-dot{position:fixed;top:0;left:0;width:14px;height:14px;pointer-events:none;z-index:9999;mix-blend-mode:difference;transform:translate(-50%,-50%);transition:opacity .3s;opacity:0}
+.cursor-dot.visible{opacity:1}
+a,button,input,textarea,select,[role="button"]{cursor:none !important}
+.cursor-dot svg{width:100%;height:100%;fill:white}
+@media (hover:none){.cursor-dot{display:none}}
 
 /* ═══ RESPONSIVE ═══ */
-@media(max-width:1024px){
-  .case-offset-grid{grid-template-columns:1fr;gap:32px}
-  .case-metrics{grid-template-columns:repeat(2,1fr)}
-  .case-problems{grid-template-columns:1fr}
-  .case-pillars{grid-template-columns:1fr}
-  .case-atomic{grid-template-columns:repeat(2,1fr)}
-  .case-timeline-track{flex-wrap:wrap;gap:32px;justify-content:center}
-  .case-timeline-line{display:none}
-  .case-timeline-step{flex:0 0 calc(33% - 24px)}
-  .case-stats-grid{grid-template-columns:repeat(2,1fr)}
-  .case-insight-row{grid-template-columns:repeat(3,1fr)}
-  .case-inline-pair{grid-template-columns:1fr}
+@media (max-width:1024px){
+  .ed-two-col{flex-direction:column;gap:48px;align-items:flex-start}
+  .ed-two-col-left{width:100%;max-width:none}
+  .ed-two-col-right{width:100%;padding-top:0}
+  .prob-row{grid-template-columns:1fr;gap:32px}
+  .strat-timeline{grid-template-columns:1fr;gap:28px}
+  .strat-timeline::before{display:none}
+  .strat-timeline{display:none}
+  .strat-list-mobile{display:flex;flex-direction:column;gap:28px}
+  .strat-list-mobile .s-item{display:flex;flex-direction:column;gap:8px;padding:20px;background:var(--white);border:1px solid var(--gray-5);border-radius:8px}
+  .strat-list-mobile .s-num{font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.08em;color:var(--gray-3);text-transform:uppercase}
+  .strat-list-mobile .s-title{font-family:var(--font-display);font-size:16px;font-weight:500;letter-spacing:.026em;text-transform:uppercase;color:var(--black);text-wrap:balance}
+  .strat-list-mobile .s-desc{font-family:var(--font-body);font-size:13px;color:var(--gray-2);line-height:1.65;text-wrap:pretty}
+  .proc-viewer{grid-template-columns:1fr;gap:24px;min-height:auto}
+  .proc-panel{min-height:420px}
+  .pillars{grid-template-columns:1fr;gap:16px}
+  .atomic{grid-template-columns:repeat(2,1fr)}
+  .insights{grid-template-columns:1fr;gap:16px}
+  .results-row{flex-direction:column;gap:40px}
+  .results-row-text{width:100%;padding:0}
+  .results-hero{flex-wrap:wrap;padding:16px}
+  .results-hero-sep{display:none}
+  .results-hero-item{flex:1 1 calc(50% - 24px);padding:16px}
+  .library-hero{flex-direction:column;padding:16px;margin-top:32px}
+  .library-hero-item{padding:20px 16px;flex:1 1 100%}
+  .library-hero-item .l-num{font-size:48px}
+  .library-hero-sep{display:none}
+  .library-cta{width:100%;justify-content:center;margin-top:32px;padding:16px 24px;font-size:13px}
   .more-work-grid{grid-template-columns:1fr 1fr}
   .footer-grid{grid-template-columns:1fr 1fr}
-  .token-grid{grid-template-columns:1fr 1fr}
-  .comp-pair{grid-template-columns:1fr}
-  .comp-trio{grid-template-columns:1fr}
-  .storybook-grid{grid-template-columns:1fr;gap:48px}
-  .protocol-pair{grid-template-columns:1fr}
 }
-@media(max-width:640px){
+@media (max-width:640px){
   :root{--px:24px}
   .nav-name{font-size:12px;padding:7px 16px}
   .case-header{padding-top:100px}
   .case-meta{gap:24px}
   .case-meta-item{min-width:calc(50% - 12px)}
-  .case-statement{padding:56px 0}
-  .case-pull{padding:56px 0}
-  .case-metrics{grid-template-columns:1fr 1fr}
-  .case-problems{grid-template-columns:1fr}
-  .case-pillars{grid-template-columns:1fr}
-  .case-atomic{grid-template-columns:1fr 1fr}
-  .case-timeline{padding:56px 0}
-  .case-timeline-step{flex:0 0 calc(50% - 16px)}
-  .case-stats-grid{grid-template-columns:1fr}
-  .case-results{padding:56px 0}
-  .case-insight-row{grid-template-columns:1fr}
+  .ed{padding:64px 0}
+  .prob-section,.strat-section,.proc-section,.built-section,.results,.library,.impact{padding:72px 0}
+  .case-closer{padding:64px 0 72px}
+  .ctx-card{flex-direction:column;align-items:flex-start;gap:20px}
+  .ctx-card-icon{width:64px;height:64px}
+  .proc-tabs{gap:8px}
+  .proc-tab{padding:10px 16px;font-size:12px}
+  .proc-panel{padding:24px}
+  .demo-swatches{grid-template-columns:repeat(3,1fr)}
+  .demo-shadows{grid-template-columns:repeat(2,1fr)}
+  .demo-cross{grid-template-columns:repeat(3,1fr)}
+  .atomic{grid-template-columns:1fr}
   .more-work-grid{grid-template-columns:1fr}
   .more-work,.cta-section{padding:96px 0}
   .footer-grid{grid-template-columns:1fr;gap:32px}
-  .delta-hero{padding:48px 0}
-  .token-grid{grid-template-columns:1fr;gap:16px}
-  .token-section,.contrast-bleed,.palette-section,.comp-section,.storybook-callout,.protocol-section{padding:56px 0}
-  .storybook-info h3{font-size:24px}
-  .storybook-num-val{font-size:36px}
-  .storybook-num{padding:24px 20px}
 }
-/* === SHARED: text-roll + cursor === */
-.nav-name-roll{display:block;overflow:hidden}
-.nav-name-roll span{display:block;line-height:1;transition:transform .45s cubic-bezier(.19,1,.22,1)}
-.nav-name:hover .nav-name-roll span{transform:translateY(-100%)}
-.cursor-dot{position:fixed;top:0;left:0;width:14px;height:14px;pointer-events:none;z-index:9999;mix-blend-mode:difference;transform:translate(-50%,-50%);transition:opacity .3s;opacity:0}
-.cursor-dot.visible{opacity:1}
-a,button,input,textarea,select,[role="button"]{cursor:none!important}
-.cursor-dot svg{width:100%;height:100%;fill:white}
-@media(hover:none){.cursor-dot{display:none}}</style>
+</style>
 </head>
 <body>
+
 <div class="cursor-dot" id="cursorDot"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12"/></svg></div>
 
-<!-- NAV -->
 <a href="index.html" class="nav-name">Adriana Pommot</a>
+
 <div class="nav-float" id="navFloat">
-  <button class="nav-toggle" onclick="document.getElementById('navFloat').classList.toggle('open')" aria-label="Menu">
-    <svg class="icon-menu" viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+  <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">
+    <svg class="icon-menu" viewBox="0 0 24 24"><line x1="4" y1="8" x2="20" y2="8"/><line x1="4" y1="16" x2="20" y2="16"/></svg>
     <svg class="icon-x" viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
   </button>
-  <div class="nav-menu">
-    <a href="cv-adriana-pommot.pdf" download class="nav-cta">Download CV<svg viewBox="0 0 16 16"><path d="M8 3v8M4 8l4 4 4-4"/><path d="M3 13h10"/></svg></a>
+  <nav class="nav-menu">
     <a href="index.html#work" class="nav-link">Projetos</a>
     <a href="index.html#services" class="nav-link">Serviços</a>
-    <a href="index.html#about" class="nav-link">Sobre Mim</a>
-    <a href="#contact" class="nav-link">Contato</a>
-  </div>
+    <a href="index.html#about" class="nav-link">Sobre</a>
+    <a href="mailto:adrianapommot@gmail.com" class="nav-cta">Contato<svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+  </nav>
 </div>
 
-<!-- HEADER -->
+<!-- ══════════════════════════════════════════
+     CASE HEADER
+     ══════════════════════════════════════════ -->
 <section class="case-header"><div class="container">
-<a href="index.html#work" class="case-back rv"><svg viewBox="0 0 16 16"><path d="M13 8H3M7 4l-4 4 4 4"/></svg> Todos os Projetos</a>
-<h1 class="case-title rv d1">Delta<br>Design System</h1>
-<p class="case-focus rv d2">O Design System como <strong>redutor de custo operacional.</strong> Liderança técnica na concepção do Delta: da arquitetura white-label de tokens à fundação cultural do time de Design. <strong>Em produção desde 2020, sustentando 20+ produtos em 3 segmentos.</strong></p>
-<div class="case-meta-bar rv d3">
-<div class="case-meta">
-<div class="case-meta-item"><span class="case-meta-label">Função</span><span class="case-meta-value">Design System Lead</span></div>
-<div class="case-meta-item"><span class="case-meta-label">Empresa</span><span class="case-meta-value">Escale</span></div>
-<div class="case-meta-item"><span class="case-meta-label">Período</span><span class="case-meta-value">2020 – 2021</span></div>
-<div class="case-meta-item"><span class="case-meta-label">Foco</span><span class="case-meta-value">Tokens, Componentes, Documentação Técnica</span></div>
-</div>
-</div>
-</div></section>
-
-<!-- HERO MOCKUP -->
-<div class="delta-hero rv">
-  <div class="delta-hero-inner">
-    <img src="img/delta/hero-mockup.webp" alt="Delta Design System em produção: laptop, monitor e tablet exibindo a marca, manifesto e biblioteca de componentes">
-  </div>
-</div>
-
-<!-- 01 CONTEXTO -->
-<div class="case-statement"><div class="container">
-<h2 class="case-statement-text rv">20 produtos simultâneos. Cada um com <strong>sua própria cara.</strong> Nenhum falava <strong>a mesma linguagem</strong><span class="faded">.</span></h2>
-</div></div>
-
-<div class="case-offset"><div class="container">
-<div class="case-offset-grid rv">
-<div>
-  <span class="case-offset-num">01</span>
-  <div class="case-offset-label">Contexto</div>
-</div>
-<div class="case-offset-body">
-  <p>A Escale operava mais de <strong>20 produtos digitais simultâneos</strong> em saúde, telecom e finanças. Cada produto tinha sua própria marca e identidade visual.</p>
-  <p>Dezenas de landing pages de captação de leads no ar ao mesmo tempo, criadas por squads diferentes, sem linguagem visual compartilhada. Assumi a <strong>liderança técnica para projetar e construir a fundação que unificou todos eles</strong> sem refundir código.</p>
-</div>
-</div>
-</div></div>
-
-<div class="container">
-<div class="case-metrics rv">
-  <div class="case-metric">
-    <svg class="case-metric-icon" viewBox="0 0 32 32" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="10" height="10" rx="1.5"/><rect x="18" y="4" width="10" height="10" rx="1.5"/><rect x="4" y="18" width="10" height="10" rx="1.5"/><rect x="18" y="18" width="10" height="10" rx="1.5"/></svg>
-    <div class="case-metric-num">20+</div>
-    <div class="case-metric-label">Produtos digitais</div>
-    <div class="case-metric-desc">Em produção simultânea nos três segmentos</div>
-  </div>
-  <div class="case-metric">
-    <svg class="case-metric-icon" viewBox="0 0 32 32" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="12"/><line x1="16" y1="4" x2="16" y2="16"/><line x1="16" y1="16" x2="26" y2="22"/><line x1="16" y1="16" x2="6" y2="22"/></svg>
-    <div class="case-metric-num">3</div>
-    <div class="case-metric-label">Segmentos</div>
-    <div class="case-metric-desc">Saúde, telecom e finanças com marcas próprias</div>
-  </div>
-  <div class="case-metric">
-    <svg class="case-metric-icon" viewBox="0 0 32 32" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="10" r="5"/><path d="M6 28c0-5.5 4.5-10 10-10s10 4.5 10 10"/></svg>
-    <div class="case-metric-num">1</div>
-    <div class="case-metric-label">Designer do sistema</div>
-    <div class="case-metric-desc">Responsável pela arquitetura, construção e documentação</div>
-  </div>
-  <div class="case-metric">
-    <svg class="case-metric-icon" viewBox="0 0 32 32" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="24" height="16" rx="2"/><line x1="4" y1="14" x2="28" y2="14"/><line x1="16" y1="14" x2="16" y2="24"/></svg>
-    <div class="case-metric-num">6 anos</div>
-    <div class="case-metric-label">Em produção</div>
-    <div class="case-metric-desc">Construído em 2020, vivo até hoje no time</div>
-  </div>
-</div>
-</div>
-
-<!-- 02 O PROBLEMA -->
-<div class="case-pull"><div class="container">
-<div class="case-pull-text rv">Cada projeto começava do zero. O resultado era uma <strong>colcha de retalhos</strong> entre as interfaces<span class="faded">.</span></div>
-</div></div>
-
-<div class="container" style="padding-top:48px;padding-bottom:80px">
-<div class="rv"><span class="case-pull-caption">02 / O Problema</span></div>
-<div class="case-problems rv d1">
-  <div class="case-problem">
-    <svg class="case-problem-icon" viewBox="0 0 44 44" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="14" height="14" rx="1"/><rect x="24" y="6" width="14" height="14" rx="1"/><rect x="6" y="24" width="14" height="14" rx="1"/><rect x="24" y="24" width="14" height="14" rx="1"/><line x1="13" y1="10" x2="13" y2="16" stroke-width="1" opacity=".4"/><line x1="31" y1="28" x2="31" y2="34" stroke-width="1" opacity=".4"/></svg>
-    <div class="case-problem-title">Fragmentação visual</div>
-    <div class="case-problem-desc">Cada produto seguia padrões próprios, sem componentes compartilhados. Interfaces inconsistentes entre equipes e marcas.</div>
-    <div class="case-problem-stat"><span class="case-problem-stat-num">0</span><span class="case-problem-stat-label">componentes compartilhados</span></div>
-  </div>
-  <div class="case-problem">
-    <svg class="case-problem-icon" viewBox="0 0 44 44" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="22" cy="22" r="14"/><line x1="22" y1="12" x2="22" y2="22"/><line x1="22" y1="22" x2="30" y2="28"/></svg>
-    <div class="case-problem-title">Retrabalho crônico</div>
-    <div class="case-problem-desc">Designers recriavam soluções já resolvidas a cada nova landing page. Sem biblioteca, cada botão era desenhado do zero.</div>
-    <div class="case-problem-stat"><span class="case-problem-stat-num">100%</span><span class="case-problem-stat-label">retrabalho por projeto novo</span></div>
-  </div>
-  <div class="case-problem">
-    <svg class="case-problem-icon" viewBox="0 0 44 44" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="8" width="14" height="18" rx="1.5"/><rect x="24" y="8" width="14" height="18" rx="1.5"/><path d="M20 17 L24 17" stroke-dasharray="2 2"/><line x1="6" y1="30" x2="38" y2="30"/><line x1="14" y1="34" x2="30" y2="34" stroke-width="1" opacity=".4"/></svg>
-    <div class="case-problem-title">Handoff sem contrato</div>
-    <div class="case-problem-desc">Ambiguidade entre design e código gerava idas e vindas desnecessárias. Desenvolvedores interpretavam layouts à sua maneira.</div>
-    <div class="case-problem-stat"><span class="case-problem-stat-num">0</span><span class="case-problem-stat-label">padrão de documentação</span></div>
-  </div>
-  <div class="case-problem">
-    <svg class="case-problem-icon" viewBox="0 0 44 44" fill="none" stroke="#111" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 36 L22 8 L36 36 Z"/><line x1="22" y1="18" x2="22" y2="26"/><circle cx="22" cy="30" r="1.5" fill="#111"/></svg>
-    <div class="case-problem-title">Escala sem fundação</div>
-    <div class="case-problem-desc">Novos produtos herdavam inconsistências em vez de padrões. A dívida visual crescia mais rápido que a empresa.</div>
-    <div class="case-problem-stat"><span class="case-problem-stat-num">3x</span><span class="case-problem-stat-label">mais marcas previstas no roadmap</span></div>
-  </div>
-</div>
-</div>
-
-<!-- 03 PROCESSO — A Gênese -->
-<div class="case-timeline"><div class="container">
-<div class="case-timeline-header rv">
-  <span class="case-pull-caption">03 / A Gênese</span>
-  <h3 class="case-timeline-heading">Construindo a fundação do zero. Quatro fases que transformaram intenção em sistema vivo.</h3>
-</div>
-<div class="case-timeline-track rv d1">
-  <div class="case-timeline-line"><div class="case-timeline-line-fill"></div></div>
-  <div class="case-timeline-step">
-    <div class="case-timeline-dot"><div class="case-timeline-dot-inner"></div></div>
-    <svg class="case-timeline-icon" viewBox="0 0 32 32" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="14" r="9"/><line x1="20" y1="20" x2="28" y2="28"/></svg>
-    <div class="case-timeline-num">01/</div>
-    <div class="case-timeline-title">Auditoria visual</div>
-    <div class="case-timeline-desc">Mapeei inconsistências em todos os 20+ produtos</div>
-  </div>
-  <div class="case-timeline-step">
-    <div class="case-timeline-dot"><div class="case-timeline-dot-inner"></div></div>
-    <svg class="case-timeline-icon" viewBox="0 0 32 32" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="24" height="24" rx="2"/><line x1="4" y1="12" x2="28" y2="12"/><line x1="12" y1="4" x2="12" y2="28"/></svg>
-    <div class="case-timeline-num">02/</div>
-    <div class="case-timeline-title">Arquitetura de tokens</div>
-    <div class="case-timeline-desc">Defini cores, tipografia, espaçamento e sombras como variáveis semânticas</div>
-  </div>
-  <div class="case-timeline-step">
-    <div class="case-timeline-dot"><div class="case-timeline-dot-inner"></div></div>
-    <svg class="case-timeline-icon" viewBox="0 0 32 32" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="8" width="20" height="16" rx="2"/><line x1="6" y1="14" x2="26" y2="14"/><circle cx="12" cy="20" r="2"/><line x1="17" y1="19" x2="23" y2="19"/><line x1="17" y1="22" x2="21" y2="22"/></svg>
-    <div class="case-timeline-num">03/</div>
-    <div class="case-timeline-title">Componentes</div>
-    <div class="case-timeline-desc">Construí átomos, moléculas e organismos documentados</div>
-  </div>
-  <div class="case-timeline-step">
-    <div class="case-timeline-dot"><div class="case-timeline-dot-inner"></div></div>
-    <svg class="case-timeline-icon" viewBox="0 0 32 32" fill="none" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="11"/><polyline points="10,16 14,21 22,11"/></svg>
-    <div class="case-timeline-num">04/</div>
-    <div class="case-timeline-title">Integração + escala</div>
-    <div class="case-timeline-desc">Templates em produção, consumidos por 20+ produtos</div>
-  </div>
-</div>
-</div></div>
-
-<!-- STATEMENT: Token-first -->
-<div class="case-statement"><div class="container">
-<h2 class="case-statement-text rv">Token-first: a fundação <strong>antes</strong> do componente. Cada decisão técnica precedida por uma <strong>variável semântica</strong><span class="faded">.</span></h2>
-</div></div>
-
-<!-- 04 A PRIMEIRA DECISÃO: TOKENS -->
-<div class="case-offset"><div class="container">
-<div class="case-offset-grid rv">
-<div>
-  <span class="case-offset-num">04</span>
-  <div class="case-offset-label">A primeira decisão</div>
-</div>
-<div class="case-offset-body">
-  <p>Antes de desenhar o primeiro botão, desenhei a <strong>arquitetura de Design Tokens</strong>. Defini as primitivas de cor, tipografia, espaçamento, sombras e bordas que sustentariam a estratégia <strong>white-label</strong>, garantindo que o sistema nascesse pronto para atender múltiplas marcas sem refação de código.</p>
-  <p>A decisão-chave: qualquer marca da Escale podia trocar sua identidade visual inteira apenas substituindo os tokens. Isso fez do Delta um <strong>sistema multi-marca desde o dia zero</strong>.</p>
-</div>
-</div>
-</div></div>
-
-<!-- DIAGRAMA DE CONTRASTES (delta11) — prova de craft puro -->
-<div class="contrast-bleed"><div class="container">
-  <div class="rv"><span class="case-pull-caption" style="margin-top:0;margin-bottom:32px;display:inline-block">Validação manual de contrastes</span></div>
-  <div class="contrast-bleed-img rv d1">
-    <img src="img/delta/contrast-diagram.webp" alt="Diagrama de contrastes do Delta: matriz cruzando todas as cores do sistema para validar acessibilidade WCAG AA">
-  </div>
-  <p class="contrast-caption rv d2">Validei manualmente cada combinação de cor do sistema contra <strong style="color:var(--black);font-weight:600">WCAG AA</strong>. Cada célula é uma decisão de acessibilidade documentada.</p>
-</div></div>
-
-<!-- ═══ FUNDAÇÃO VISUAL — TOKENS DARK SECTION ═══ -->
-<section class="token-section">
-  <div class="container">
-    <div class="ed-header rv">
-      <div class="ed-num">05</div>
-      <h2 class="ed-title">Os tokens que sustentam o sistema</h2>
-    </div>
-    <div class="ed-content rv d1">
-      <p class="ed-body">Toda decisão visual do Delta passa por uma camada de tokens semânticos. <strong>Opacidade, sombra, tipografia e bordas</strong> não são valores soltos no código: são primitivas nomeadas, documentadas e consumidas por código, mantendo coerência sem amarrar liberdade criativa de cada marca.</p>
-    </div>
-    <div class="token-grid rv d2">
-      <div class="token-card">
-        <div class="token-card-img"><img src="img/delta/token-opacity.webp" alt="Opacity levels do Delta: 5 níveis nomeados de 0.08 a 0.80"></div>
-        <div class="token-card-meta">
-          <div class="token-card-name">Opacity Levels</div>
-          <div class="token-card-desc">5 níveis semânticos, de Semi Transparent a Semi Opaque, garantindo hierarquia consistente em sobreposições.</div>
-        </div>
-      </div>
-      <div class="token-card">
-        <div class="token-card-img"><img src="img/delta/token-shadow.webp" alt="Shadow levels do Delta: 4 níveis de elevação"></div>
-        <div class="token-card-meta">
-          <div class="token-card-name">Shadow Levels</div>
-          <div class="token-card-desc">4 níveis de elevação (flat, soft, raised, spotlight) para construir profundidade sem improviso.</div>
-        </div>
-      </div>
-      <div class="token-card">
-        <div class="token-card-img"><img src="img/delta/token-typography.webp" alt="Typography do Delta: font family, line height, font weight e font size"></div>
-        <div class="token-card-meta">
-          <div class="token-card-name">Typography</div>
-          <div class="token-card-desc">13 tamanhos de fonte, 4 line heights e 5 pesos. Tudo nomeado e documentado para Figma e código.</div>
-        </div>
-      </div>
-      <div class="token-card">
-        <div class="token-card-img"><img src="img/delta/token-borders.webp" alt="Borders do Delta: 6 raios e 5 espessuras"></div>
-        <div class="token-card-meta">
-          <div class="token-card-name">Borders</div>
-          <div class="token-card-desc">6 raios (UltraSmall a Circular) e 5 espessuras (Hairline a Heavy), cobrindo toda a sintaxe de borda do sistema.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ PALETA — full visual statement ═══ -->
-<section class="palette-section"><div class="container">
-  <div class="ed-header rv">
-    <div class="ed-num">06</div>
-    <h2 class="ed-title">A paleta completa</h2>
-  </div>
-  <div class="ed-content rv d1">
-    <p class="ed-body"><strong>32 tons. 8 famílias.</strong> Construí a paleta inteira do Delta: brand (primary, secondary, neutral, tertiary) e feedback (critical, success, warning, info). Cada família com 6 níveis e tokens semânticos, prontos para alimentar qualquer marca da Escale via injeção de variáveis.</p>
-  </div>
-  <div class="palette-bleed-img rv d2">
-    <img src="img/delta/palette-full.webp" alt="Paleta completa do Delta: 8 famílias de cor com 6 níveis cada">
-  </div>
-</div></section>
-
-<!-- 07 OPERAÇÃO: HANDOFF -->
-<div class="case-pull"><div class="container">
-<div class="case-pull-text rv">Um sistema só vive se a Engenharia consegue consumi-lo <strong>sem atrito</strong><span class="faded">.</span></div>
-<div class="case-pull-caption rv d1">07 / A Operação</div>
-</div></div>
-
-<div class="case-offset"><div class="container">
-<div class="case-offset-grid rv">
-<div>
-  <span class="case-offset-num">07</span>
-  <div class="case-offset-label">Desenhando o handoff</div>
-</div>
-<div class="case-offset-body">
-  <p>Desenhei o protocolo de entrega para garantir <strong>paridade total entre Figma e React</strong>. Documentei a anatomia, os estados de comportamento e as regras de acessibilidade como especificação técnica, não como sugestão visual.</p>
-  <p><strong>Documentação como contrato:</strong> não apenas pixel-perfect, mas anatomia lógica.<br>
-  <strong>Redução de ambiguidade:</strong> nada chega no dev sem estar mapeado e tokenizado.</p>
-</div>
-</div>
-</div></div>
-
-<!-- ═══ COMPONENTES — light browser-pair pattern ═══ -->
-<section class="comp-section"><div class="container">
-  <div class="ed-header rv">
-    <div class="ed-num">08</div>
-    <h2 class="ed-title">A família de componentes</h2>
-  </div>
-  <div class="ed-content rv d1">
-    <p class="ed-body">Desenhei e documentei toda a família de buttons (<strong>primary, secondary, tertiary</strong>) em 3 tamanhos e 6 estados, cada um com light e dark mode, fill e outlined. A mesma metodologia de anatomia se estende a todos os componentes do sistema.</p>
-  </div>
-  <div class="comp-pair rv d2">
-    <div class="comp-card">
-      <div class="comp-card-img"><img src="img/delta/buttons-overview.webp" alt="Visão geral dos buttons do Delta: primary, secondary e tertiary com todos os estados"></div>
-      <div class="comp-card-meta">
-        <div class="comp-card-tag">Visão geral</div>
-        <div class="comp-card-name">Primary · Secondary · Tertiary</div>
-      </div>
-    </div>
-    <div class="comp-card">
-      <div class="comp-card-img"><img src="img/delta/button-primary.webp" alt="Anatomia do button primary: variações fill e outlined em large, medium e small"></div>
-      <div class="comp-card-meta">
-        <div class="comp-card-tag">Anatomia detalhada</div>
-        <div class="comp-card-name">Button Primary · Tokens & States</div>
-      </div>
-    </div>
-  </div>
-  <div class="comp-trio rv d3">
-    <div class="comp-card">
-      <div class="comp-card-img"><img src="img/delta/button-secondary.webp" alt="Button secondary: anatomia em três tamanhos"></div>
-      <div class="comp-card-meta"><div class="comp-card-tag">Componente</div><div class="comp-card-name">Button Secondary</div></div>
-    </div>
-    <div class="comp-card">
-      <div class="comp-card-img"><img src="img/delta/button-tertiary.webp" alt="Button tertiary: anatomia em dark e light mode"></div>
-      <div class="comp-card-meta"><div class="comp-card-tag">Componente</div><div class="comp-card-name">Button Tertiary</div></div>
-    </div>
-    <div class="comp-card">
-      <div class="comp-card-img"><img src="img/delta/links.webp" alt="Links: variações em light theme, dark theme, spacings e exemplos aplicados"></div>
-      <div class="comp-card-meta"><div class="comp-card-tag">Componente</div><div class="comp-card-name">Links</div></div>
+  <a href="index.html#work" class="case-back rv"><svg viewBox="0 0 16 16"><path d="M13 8H3M7 4l-4 4 4 4"/></svg> Todos os Projetos</a>
+  <h1 class="case-title rv d1">Delta<br>Design System</h1>
+  <p class="case-focus rv d2"><strong>O Design System como redutor de custo operacional.</strong> Liderança técnica na concepção do Delta: da arquitetura white-label de tokens à fundação cultural do time de Design. Em produção desde 2020, sustentando <strong>20+ produtos em 3 segmentos</strong>.</p>
+  <div class="case-meta-bar rv d3">
+    <div class="case-meta">
+      <div class="case-meta-item"><span class="case-meta-label">Função</span><span class="case-meta-value">Product Designer Sênior · DS Lead</span></div>
+      <div class="case-meta-item"><span class="case-meta-label">Empresa</span><span class="case-meta-value">Escale</span></div>
+      <div class="case-meta-item"><span class="case-meta-label">Período</span><span class="case-meta-value">2020 – 2021</span></div>
+      <div class="case-meta-item"><span class="case-meta-label">Foco</span><span class="case-meta-value">Tokens, Componentes, Documentação Técnica</span></div>
     </div>
   </div>
 </div></section>
 
-<!-- ═══ STORYBOOK CALLOUT ═══ -->
-<section class="storybook-callout"><div class="container">
-  <div class="ed-header rv">
-    <div class="ed-num">09</div>
-    <h2 class="ed-title">Storybook em produção</h2>
-  </div>
-  <div class="storybook-grid">
-    <div class="storybook-info rv d1">
-      <h3>Toda a biblioteca, viva e versionada.</h3>
-      <p>O Delta é consumido pelo time de Engenharia em produção desde 2020 através de um <strong>Storybook público</strong>. Cada componente vem com props, tokens, controles interativos e ciclo de depreciação documentado.</p>
-      <a href="https://escaletech.github.io/delta/" target="_blank" rel="noopener" class="storybook-link">Acessar Storybook
-        <svg viewBox="0 0 16 16"><path d="M5 11l6-6M6 5h5v5"/></svg>
-      </a>
+<!-- ══════════════════════════════════════════
+     01. CONTEXTO DO PRODUTO
+     ══════════════════════════════════════════ -->
+<section class="ed"><div class="container">
+<div class="ed-two-col rv">
+  <div class="ed-two-col-left">
+    <div class="ed-header" style="margin-bottom:0">
+      <div class="ed-num">01</div>
+      <h2 class="ed-title">Contexto<br>do produto</h2>
     </div>
-    <div class="storybook-numbers rv d2">
-      <div class="storybook-num">
-        <div class="storybook-num-val">23</div>
-        <div class="storybook-num-label">Componentes ativos</div>
-      </div>
-      <div class="storybook-num">
-        <div class="storybook-num-val">6</div>
-        <div class="storybook-num-label">Categorias</div>
-      </div>
-      <div class="storybook-num">
-        <div class="storybook-num-val">3</div>
-        <div class="storybook-num-label">Páginas de tokens</div>
-      </div>
-      <div class="storybook-num">
-        <div class="storybook-num-val">6 anos</div>
-        <div class="storybook-num-label">Em produção</div>
-      </div>
+    <div class="ed-content">
+      <p class="ed-body">A Escale operava mais de <strong>20 produtos digitais simultâneos</strong> em saúde, telecom e finanças. Cada produto tinha sua própria marca e dezenas de landing pages de captação no ar ao mesmo tempo, criadas por squads diferentes, sem linguagem visual compartilhada.</p>
+      <p class="ed-body">Não havia biblioteca, contrato de handoff ou tokens. O custo para construir qualquer interface nova era o custo de começar do zero.</p>
+      <p class="ed-body"><strong>Assumi a liderança técnica para projetar e construir a fundação que unificou todos eles e plantar uma estrutura escalável visando reaproveitamento.</strong></p>
     </div>
   </div>
-</div></section>
-
-<!-- 10 PROTOCOLO — craft que vira protocolo -->
-<div class="case-pull"><div class="container">
-<div class="case-pull-text rv">Para que o sistema escalasse além das minhas mãos, precisei <strong>amarrar o protocolo de contribuição</strong>. Documentei a árvore de bibliotecas, defini os critérios de aceite e nivelei o conhecimento de UI no time inteiro<span class="faded">.</span></div>
-<div class="case-pull-caption rv d1">10 / O Protocolo</div>
-</div></div>
-
-<section class="protocol-section"><div class="container">
-  <div class="protocol-pair rv">
-    <div class="protocol-card">
-      <div class="protocol-card-img"><img src="img/delta/composicao.webp" alt="Composição do Delta: árvore de bibliotecas globais, core, team-tokens e team-components"></div>
-      <div class="protocol-card-meta">
-        <div class="protocol-card-tag">Arquitetura de libs</div>
-        <div class="protocol-card-desc">Desenhei a árvore de bibliotecas: globais, core, team-tokens e team-components, incluindo a lógica de herança que permitia cada time evoluir sem quebrar o sistema.</div>
+  <div class="ed-two-col-right">
+    <div class="ctx-card">
+      <div class="ctx-card-icon">
+        <svg width="83" height="58" viewBox="0 0 83 58" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M81.8667 18.6429H0.990345C0.442364 18.6429 0 18.1771 0 17.6079V7.48611C0.00330171 3.35323 3.21197 0.00344429 7.16997 0H75.6905C79.6452 0.00344958 82.8539 3.35323 82.8571 7.48611V17.6079C82.8571 18.1771 82.4147 18.6429 81.8667 18.6429ZM1.98078 16.5729H80.8763V7.4862C80.873 4.49523 78.5523 2.07002 75.6903 2.07002H7.1698C4.30448 2.07002 1.98382 4.49523 1.98052 7.4862L1.98078 16.5729Z" fill="black"/><path d="M75.6903 58.0001H7.16995C3.21196 57.9969 0.00329579 54.861 0 50.992V37.0859C0 36.5498 0.442346 36.117 0.990343 36.117C1.53832 36.117 1.98069 36.5497 1.98069 37.0859V50.992C1.98399 53.792 4.30464 56.0623 7.16995 56.0623L75.6903 56.0656C78.5523 56.0591 80.873 53.792 80.8763 50.992V18.5094H1.98094V29.5284C1.98094 30.0645 1.53859 30.4973 0.990597 30.4973C0.442616 30.4973 0.000253514 30.0646 0.000253514 29.5284V17.5404C0.000253514 17.0043 0.4426 16.5715 0.990597 16.5715H81.8668C82.4148 16.5715 82.8571 17.0043 82.8571 17.5404V50.992C82.8538 54.861 79.645 57.9969 75.6903 58.0001Z" fill="black"/><path d="M1.03571 35.2144C0.462629 35.2144 0 34.6857 0 34.0307V32.2552C0 31.6003 0.462611 31.0715 1.03571 31.0715C1.6088 31.0715 2.07143 31.6002 2.07143 32.2552V34.0307C2.07143 34.6857 1.60882 35.2144 1.03571 35.2144Z" fill="black"/><path d="M12.4315 12.4285C10.7551 12.4285 9.2446 11.4187 8.60081 9.87043C7.96024 8.3222 8.31399 6.54138 9.49955 5.35624C10.6851 4.17117 12.4666 3.81755 14.0155 4.45784C15.5643 5.10135 16.5714 6.61136 16.5714 8.28705C16.5714 10.5712 14.7166 12.4285 12.4284 12.4285L12.4315 12.4285ZM12.4315 6.05711C11.5264 6.05711 10.7137 6.59868 10.3696 7.43334C10.0222 8.26479 10.2134 9.2237 10.854 9.86088C11.4914 10.5012 12.4506 10.6923 13.2825 10.3451C14.1174 10.0011 14.6592 9.18867 14.6624 8.28717H14.6592C14.6592 7.69463 14.4266 7.12755 14.0059 6.71024C13.5884 6.28973 13.0211 6.05398 12.4284 6.05398L12.4315 6.05711Z" fill="black"/><path d="M22.7857 12.4285C21.1126 12.4285 19.602 11.4187 18.9582 9.87043C18.3177 8.3222 18.6714 6.54138 19.857 5.35624C21.0425 4.17117 22.824 3.81755 24.3729 4.45784C25.9217 5.10135 26.9288 6.61136 26.9288 8.28705C26.9288 10.5712 25.0739 12.4285 22.7857 12.4285ZM22.7857 6.05711C21.8838 6.05711 21.0711 6.59868 20.727 7.43334C20.3796 8.26479 20.5708 9.2237 21.2114 9.86088C21.8488 10.5012 22.808 10.6923 23.6399 10.3451C24.4748 10.0011 25.0166 9.18867 25.0166 8.28717C25.0166 7.69463 24.784 7.12755 24.3633 6.71024C23.9458 6.28973 23.3786 6.05398 22.7858 6.05398L22.7857 6.05711Z" fill="black"/><path d="M70.4479 12.4285H43.4812C41.2068 12.4285 39.3574 10.5707 39.3574 8.28568C39.3574 5.99753 41.2068 4.14282 43.4812 4.14282H70.4479C72.7224 4.14282 74.5717 5.99753 74.5717 8.28568C74.5717 10.5707 72.7224 12.4285 70.4479 12.4285ZM43.4845 6.05488H43.4813C42.2569 6.05488 41.2608 7.05239 41.2608 8.28568C41.2608 9.51578 42.2569 10.5165 43.4813 10.5165H70.448C71.6724 10.5165 72.6685 9.51578 72.6685 8.28568C72.6685 7.05239 71.6724 6.05488 70.448 6.05488H43.4845Z" fill="black"/><path d="M26.1595 49.7141H13.1803C12.7757 49.7108 12.4078 49.4742 12.254 49.1111L8.57522 40.4364C8.12374 39.3829 8.20401 38.1835 8.78926 37.1948L17.8927 21.7193C18.2605 21.0968 18.9395 20.7144 19.6785 20.7144C20.4143 20.7144 21.0964 21.0969 21.461 21.7193L30.5644 37.1948H30.5677C31.153 38.1835 31.2333 39.3829 30.7818 40.4364L27.103 49.1178C26.9425 49.4841 26.5676 49.7205 26.1595 49.7141ZM13.8524 47.769H25.4875L28.9187 39.6907L28.9154 39.6874C29.1328 39.1882 29.0926 38.6176 28.815 38.1476L19.7116 22.6721H19.7083C19.6916 22.6397 19.6481 22.6397 19.628 22.6721L10.5246 38.1476C10.247 38.6176 10.2069 39.1882 10.421 39.6874L13.8524 47.769Z" fill="black"/><path d="M19.6823 39.3571C18.4244 39.3571 17.2923 38.6023 16.8112 37.442C16.327 36.2816 16.5911 34.9451 17.4779 34.0553C18.3679 33.1653 19.7012 32.898 20.8647 33.3792C22.0251 33.8571 22.7829 34.9892 22.7861 36.2439C22.7892 37.9609 21.3993 39.3539 19.6823 39.3571ZM19.6823 35.0332C19.1855 35.0301 18.742 35.3288 18.5503 35.7848C18.3616 36.2439 18.4685 36.7691 18.8176 37.118C19.1698 37.464 19.6949 37.5677 20.1509 37.3759C20.6068 37.1841 20.9024 36.7375 20.8993 36.2439C20.893 35.5741 20.3521 35.0332 19.6823 35.0332Z" fill="black"/><path d="M25.99 53.8564H11.4379C10.6089 53.8743 9.80834 53.5551 9.21422 52.9704C8.6201 52.3858 8.28564 51.5859 8.28564 50.7501C8.28564 49.9108 8.62009 49.1109 9.21422 48.5262C9.80835 47.9416 10.6089 47.6223 11.4379 47.6438H25.99C27.6657 47.6833 28.9999 49.0643 28.9999 50.7501C28.9999 52.4359 27.6658 53.8133 25.99 53.8564ZM11.4379 49.796C11.1817 49.7852 10.9291 49.8785 10.7441 50.0614C10.5591 50.2408 10.4524 50.4883 10.4524 50.7501C10.4524 51.0084 10.5591 51.2595 10.7441 51.4388C10.9291 51.6181 11.1817 51.715 11.4379 51.7042H25.99C26.4987 51.6791 26.8972 51.2595 26.8972 50.7501C26.8972 50.2372 26.4987 49.8175 25.99 49.7959L11.4379 49.796Z" fill="black"/><path d="M69.1456 47.6429H42.7114C39.7149 47.6395 37.2889 45.1384 37.2856 42.0491V30.451C37.2889 27.3617 39.7149 24.8605 42.7114 24.8572H69.1456C72.1421 24.8605 74.5681 27.3617 74.5714 30.451V42.0491C74.5681 45.1384 72.1421 47.6395 69.1456 47.6429ZM42.7114 26.8675C40.7974 26.8709 39.2453 28.471 39.2421 30.4443V42.0424C39.2453 44.0157 40.7974 45.6158 42.7114 45.6191H69.1456C71.0629 45.6158 72.6149 44.0156 72.6149 42.0424V30.4443C72.6149 28.4709 71.0628 26.8709 69.1456 26.8675H42.7114Z" fill="black"/><path d="M19.6788 35.2144C19.1057 35.2144 18.6431 34.7591 18.6431 34.2027V21.726C18.6431 21.1662 19.1057 20.7144 19.6788 20.7144C20.2484 20.7144 20.7145 21.1662 20.7145 21.726V34.2027C20.7145 34.7591 20.2484 35.2144 19.6788 35.2144Z" fill="black"/></svg>
+      </div>
+      <div class="ctx-card-body">
+        <div class="ctx-card-title">Fragmentação visual</div>
+        <p class="ctx-card-desc">Cada produto seguia padrões próprios, sem componentes compartilhados. <strong>Zero componentes reutilizados entre equipes e marcas.</strong></p>
       </div>
     </div>
-    <div class="protocol-card">
-      <div class="protocol-card-img"><img src="img/delta/construindo-componente.webp" alt="Construindo um componente: documentação completa do processo de desenho à anatomia"></div>
-      <div class="protocol-card-meta">
-        <div class="protocol-card-tag">Anatomia de componente</div>
-        <div class="protocol-card-desc">Documentei o processo completo de construção: do desenho à especificação, passando por sistema espacial, tokens, estados e animações. Mesma régua para todos.</div>
+    <div class="ctx-card">
+      <div class="ctx-card-icon">
+        <svg width="82" height="87" viewBox="0 0 82 87" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M41.1821 70.3383C42.1885 70.3383 43.0043 69.5225 43.0043 68.5161C43.0043 67.5097 42.1885 66.6938 41.1821 66.6938C40.1757 66.6938 39.3599 67.5097 39.3599 68.5161C39.3599 69.5225 40.1757 70.3383 41.1821 70.3383Z" fill="black"/><path d="M10.0224 9.11189C12.0319 9.11189 13.6668 7.47699 13.6668 5.46744C13.6668 3.4579 12.0319 1.823 10.0224 1.823C8.01283 1.823 6.37793 3.4579 6.37793 5.46744C6.37793 7.47681 8.01283 9.11189 10.0224 9.11189ZM10.0224 3.64504C11.0271 3.64504 11.8446 4.46249 11.8446 5.46726C11.8446 6.47203 11.0271 7.28948 10.0224 7.28948C9.0176 7.28948 8.20015 6.47203 8.20015 5.46726C8.20015 4.46249 9.0176 3.64504 10.0224 3.64504Z" fill="black"/><path d="M74.7113 12.7563C77.7256 12.7563 80.178 10.304 80.178 7.28966C80.178 4.27534 77.7256 1.823 74.7113 1.823C71.697 1.823 69.2446 4.27534 69.2446 7.28966C69.2446 10.304 71.697 12.7563 74.7113 12.7563ZM74.7113 3.64504C76.7208 3.64504 78.3557 5.27994 78.3557 7.28948C78.3557 9.29903 76.7208 10.9339 74.7113 10.9339C72.7017 10.9339 71.0669 9.29903 71.0669 7.28948C71.0669 5.28012 72.7017 3.64504 74.7113 3.64504Z" fill="black"/><path d="M25.9668 6.37811C26.7216 6.37811 27.3334 5.76623 27.3334 5.01144C27.3334 4.25665 26.7216 3.64478 25.9668 3.64478C25.212 3.64478 24.6001 4.25665 24.6001 5.01144C24.6001 5.76623 25.212 6.37811 25.9668 6.37811Z" fill="black"/><path d="M64.2334 11.8447C64.9882 11.8447 65.6 11.2328 65.6 10.478C65.6 9.72321 64.9882 9.11133 64.2334 9.11133C63.4786 9.11133 62.8667 9.72321 62.8667 10.478C62.8667 11.2328 63.4786 11.8447 64.2334 11.8447Z" fill="black"/><path d="M36.8999 10.9335C37.6547 10.9335 38.2665 10.3217 38.2665 9.56686C38.2665 8.81207 37.6547 8.2002 36.8999 8.2002C36.1451 8.2002 35.5332 8.81207 35.5332 9.56686C35.5332 10.3217 36.1451 10.9335 36.8999 10.9335Z" fill="black"/><path d="M75.5311 14.5786H54.1537C55.3511 13.3812 58.242 10.4903 60.2004 8.53194C61.5758 7.15689 61.5762 4.93032 60.2004 3.55509L57.677 1.03149C56.3019 -0.343557 54.0754 -0.344104 52.7003 1.03149L39.1532 14.5786H6.46889C2.90189 14.5786 0 17.4805 0 21.0475V68.2433C0 71.8101 2.90189 74.7121 6.46889 74.7121H9.11111V77.4455C9.11111 77.9486 9.51911 78.3566 10.0222 78.3566H28.2444C28.7476 78.3566 29.1556 77.9486 29.1556 77.4455V74.7121H30.9778V84.7344H28.6089C28.1058 84.7344 27.6978 85.1422 27.6978 85.6455C27.6978 86.1486 28.1058 86.5566 28.6089 86.5566H31.8889C34.6441 86.5566 50.5 86.5566 53.7556 86.5566C54.2589 86.5566 54.6667 86.1486 54.6667 85.6455C54.6667 85.1422 54.2589 84.7344 53.7556 84.7344H51.2044V74.7121H52.8444V77.4455C52.8444 77.9486 53.2523 78.3566 53.7556 78.3566H71.9778C72.4811 78.3566 72.8889 77.9486 72.8889 77.4455V74.7121H75.5311C79.0981 74.7121 82 71.8101 82 68.2433V21.0473C82 17.4805 79.0981 14.5786 75.5311 14.5786ZM47.3758 8.93301L49.243 10.8004L31.9492 28.0944L29.0316 27.2771L47.3758 8.93301ZM50.9255 5.38351L55.8487 10.3068L53.5875 12.568L48.6643 7.64452L50.9255 5.38351ZM31.4694 29.8523L32.3767 33.2733L26.7112 34.6034L27.9691 28.8718L31.4694 29.8523ZM26.466 27.3422C26.4472 27.3816 26.4313 27.422 26.4182 27.4639C26.4155 27.4725 26.4109 27.4798 26.4086 27.4885C26.4067 27.4951 26.4067 27.5015 26.4053 27.508C26.3655 27.6629 24.6135 35.6723 24.6169 35.6539C24.6078 35.7029 24.6033 35.7519 24.6022 35.801C24.602 35.8079 24.6002 35.8141 24.6002 35.821C24.6002 35.825 24.6013 35.8288 24.6015 35.833C24.6069 36.2448 24.893 36.4908 24.8717 36.4699C24.8863 36.4843 24.9034 36.4947 24.9187 36.5078C25.0215 36.5965 25.0091 36.5798 25.0721 36.6144C25.1811 36.6751 25.1534 36.6594 25.2425 36.6869C25.4874 36.7625 23.4123 36.7252 63.9214 36.7319C64.8471 36.7319 65.6002 37.4851 65.6002 38.4106C65.6002 39.3362 64.8471 40.0894 63.9214 40.0894H43.7333C41.7238 40.0894 40.0889 41.7243 40.0889 43.734C40.0889 45.7434 41.7238 47.3784 43.7333 47.3784H50.1111C50.6144 47.3784 51.0222 46.9705 51.0222 46.4673C51.0222 45.964 50.6144 45.5562 50.1111 45.5562H43.7333C42.7286 45.5562 41.9111 44.7388 41.9111 43.734C41.9111 42.729 42.7286 41.9116 43.7333 41.9116H63.9212C65.8516 41.9116 67.4222 40.341 67.4222 38.4106C67.4222 36.4801 65.8516 34.9097 63.9212 34.9097H33.3793C33.405 34.9035 33.7058 34.8332 33.7313 34.8266C33.7394 34.8244 33.7463 34.8202 33.7543 34.818C33.9048 34.7736 34.0391 34.6932 34.1421 34.5903L46.865 21.8671H74.7111V61.9562H7.28889V21.8673H31.8643C26.1454 27.5913 26.5706 27.1226 26.466 27.3422ZM33.9728 32.1827L33.2319 29.3889L50.5315 12.0889L52.299 13.8565C49.4575 16.6979 35.3779 30.7775 33.9728 32.1827ZM53.9888 2.31999C54.6514 1.65688 55.725 1.6567 56.3887 2.31999L58.9121 4.8434C59.5754 5.50651 59.5754 6.57998 58.9121 7.24327L57.1371 9.01829L52.2138 4.09501L53.9888 2.31999ZM27.3333 76.5342H10.9333V74.712H27.3333V76.5342ZM49.3822 84.7342H32.8V74.712H49.3822V84.7342ZM71.0667 76.5342H54.6667V74.712H71.0667V76.5342ZM80.1778 68.2431C80.1778 70.8051 78.0932 72.8897 75.5311 72.8897C60.3932 72.8897 81.6337 72.8897 6.46889 72.8897C3.90666 72.8897 1.82222 70.8051 1.82222 68.2431V21.0473C1.82222 18.4851 3.90666 16.4007 6.46889 16.4007H37.331L33.6865 20.0451H6.37778C5.87466 20.0451 5.46667 20.4531 5.46667 20.9562V62.8675C5.46667 63.3706 5.87466 63.7786 6.37778 63.7786H75.6222C76.1255 63.7786 76.5333 63.3706 76.5333 62.8675V20.9562C76.5333 20.4531 76.1255 20.0451 75.6222 20.0451H48.687L52.3315 16.4007H75.5311C78.0932 16.4007 80.1778 18.4851 80.1778 21.0473V68.2431Z" fill="black"/><path d="M52.8442 47.3781C53.3474 47.3781 53.7553 46.9702 53.7553 46.467C53.7553 45.9638 53.3474 45.5559 52.8442 45.5559C52.341 45.5559 51.9331 45.9638 51.9331 46.467C51.9331 46.9702 52.341 47.3781 52.8442 47.3781Z" fill="black"/><path d="M55.5776 47.3781C56.0808 47.3781 56.4887 46.9702 56.4887 46.467C56.4887 45.9638 56.0808 45.5559 55.5776 45.5559C55.0744 45.5559 54.6665 45.9638 54.6665 46.467C54.6665 46.9702 55.0744 47.3781 55.5776 47.3781Z" fill="black"/><path d="M10.022 60.134H36.4442C36.9473 60.134 37.3553 59.726 37.3553 59.2229V41.0005C37.3553 40.4974 36.9473 40.0894 36.4442 40.0894H10.022C9.51884 40.0894 9.11084 40.4974 9.11084 41.0005V59.2229C9.11084 59.726 9.51884 60.134 10.022 60.134ZM10.9331 41.9116H35.5331V58.3118H10.9331V41.9116Z" fill="black"/><path d="M32.7998 43.7339H13.6665C13.1634 43.7339 12.7554 44.1417 12.7554 44.645C12.7554 45.1481 13.1634 45.5561 13.6665 45.5561H32.7998C33.3029 45.5561 33.7109 45.1481 33.7109 44.645C33.7109 44.1417 33.3029 43.7339 32.7998 43.7339Z" fill="black"/><path d="M32.7998 47.3784H13.6665C13.1634 47.3784 12.7554 47.7862 12.7554 48.2895C12.7554 48.7926 13.1634 49.2006 13.6665 49.2006H32.7998C33.3029 49.2006 33.7109 48.7926 33.7109 48.2895C33.7109 47.7862 33.3029 47.3784 32.7998 47.3784Z" fill="black"/><path d="M32.7998 51.0229H13.6665C13.1634 51.0229 12.7554 51.4308 12.7554 51.9341C12.7554 52.4372 13.1634 52.8452 13.6665 52.8452H32.7998C33.3029 52.8452 33.7109 52.4372 33.7109 51.9341C33.7109 51.4308 33.3029 51.0229 32.7998 51.0229Z" fill="black"/><path d="M20.9554 54.6675H13.6665C13.1634 54.6675 12.7554 55.0753 12.7554 55.5786C12.7554 56.0817 13.1634 56.4897 13.6665 56.4897H20.9554C21.4585 56.4897 21.8665 56.0817 21.8665 55.5786C21.8665 55.0753 21.4585 54.6675 20.9554 54.6675Z" fill="black"/></svg>
+      </div>
+      <div class="ctx-card-body">
+        <div class="ctx-card-title">Retrabalho crônico</div>
+        <p class="ctx-card-desc">Designers recriavam soluções já resolvidas a cada nova landing page. <strong>100% de retrabalho em cada projeto novo</strong>, sem biblioteca para consulta.</p>
       </div>
     </div>
-  </div>
-</div></section>
-
-<!-- 11 RESULTADOS -->
-<div class="case-results"><div class="container">
-<div class="case-results-statement rv">Um sistema que mudou como o time <strong>constrói produto</strong><span class="faded">.</span></div>
-<div class="case-stats-grid rv d1">
-  <div class="case-stat">
-    <svg class="case-stat-icon" viewBox="0 0 28 28" fill="none" stroke="#D1F466" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="14" r="10"/><line x1="14" y1="8" x2="14" y2="14"/><line x1="14" y1="14" x2="20" y2="18"/></svg>
-    <div class="case-stat-num">~47%</div>
-    <div class="case-stat-label">Mais rápido</div>
-    <div class="case-stat-desc">Redução no tempo de criação de novas interfaces com componentes reutilizáveis</div>
-    <div class="case-stat-category">/Velocidade</div>
-  </div>
-  <div class="case-stat">
-    <svg class="case-stat-icon" viewBox="0 0 28 28" fill="none" stroke="#D1F466" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="8" height="8" rx="1"/><rect x="16" y="4" width="8" height="8" rx="1"/><rect x="4" y="16" width="8" height="8" rx="1"/><rect x="16" y="16" width="8" height="8" rx="1"/></svg>
-    <div class="case-stat-num">20+</div>
-    <div class="case-stat-label">Produtos atendidos</div>
-    <div class="case-stat-desc">Em produção simultânea em três segmentos de mercado</div>
-    <div class="case-stat-category">/Escala</div>
-  </div>
-  <div class="case-stat">
-    <svg class="case-stat-icon" viewBox="0 0 28 28" fill="none" stroke="#D1F466" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="20" height="20" rx="2"/><line x1="4" y1="10" x2="24" y2="10"/><line x1="12" y1="4" x2="12" y2="24"/></svg>
-    <div class="case-stat-num">23</div>
-    <div class="case-stat-label">Componentes ativos</div>
-    <div class="case-stat-desc">Documentados no Storybook, consumidos pelo time de Engenharia em produção</div>
-    <div class="case-stat-category">/Profundidade</div>
-  </div>
-  <div class="case-stat">
-    <svg class="case-stat-icon" viewBox="0 0 28 28" fill="none" stroke="#D1F466" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="14" r="6"/><circle cx="18" cy="14" r="6"/></svg>
-    <div class="case-stat-num">6 anos</div>
-    <div class="case-stat-label">Em produção</div>
-    <div class="case-stat-desc">Construído em 2020, vivo até hoje sem refundir código</div>
-    <div class="case-stat-category">/Longevidade</div>
+    <div class="ctx-card">
+      <div class="ctx-card-icon">
+        <svg width="59" height="76" viewBox="0 0 59 76" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.73736 61.0114C9.17879 61.0114 8.7227 60.5596 8.7227 59.9988C8.7227 59.4414 9.1755 58.9862 9.73736 58.9862H9.75389C10.3125 58.9862 10.7686 59.4381 10.7686 59.9988C10.7686 60.5563 10.3157 61.0114 9.75389 61.0114H9.73736ZM15.3561 61.0114C14.7975 61.0114 14.3414 60.5596 14.3414 59.9988C14.3414 59.4414 14.7942 58.9862 15.3561 58.9862H44.4973C45.0559 58.9862 45.512 59.4381 45.512 59.9988C45.512 60.5563 45.0592 61.0114 44.4973 61.0114H15.3561ZM9.73736 53.4151C9.17879 53.4151 8.7227 52.9632 8.7227 52.4025C8.7227 51.8451 9.1755 51.3899 9.73736 51.3899H9.75389C10.3125 51.3899 10.7686 51.8418 10.7686 52.4025C10.7686 52.9599 10.3157 53.4151 9.75389 53.4151H9.73736ZM15.3561 53.4151C14.7975 53.4151 14.3414 52.9632 14.3414 52.4025C14.3414 51.8451 14.7942 51.3899 15.3561 51.3899H44.4973C45.0559 51.3899 45.512 51.8418 45.512 52.4025C45.512 52.9599 45.0592 53.4151 44.4973 53.4151H15.3561ZM9.73736 45.8188C9.17879 45.8188 8.7227 45.3669 8.7227 44.8062C8.7227 44.2487 9.1755 43.7935 9.73736 43.7935H9.75389C10.3125 43.7935 10.7686 44.2454 10.7686 44.8062C10.7686 45.3636 10.3157 45.8188 9.75389 45.8188H9.73736ZM15.3561 45.8188C14.7975 45.8188 14.3414 45.3669 14.3414 44.8062C14.3414 44.2487 14.7942 43.7935 15.3561 43.7935H44.4973C45.0559 43.7935 45.512 44.2454 45.512 44.8062C45.512 45.3636 45.0592 45.8188 44.4973 45.8188H15.3561ZM33.7524 23.5476L28.8013 14.9913V14.988C28.6228 14.6779 28.3782 14.4338 28.094 14.2689C27.813 14.1073 27.4825 14.0215 27.1157 14.0215C26.7489 14.0215 26.4183 14.1073 26.1374 14.2656V14.2689C25.8532 14.4338 25.6086 14.6779 25.4301 14.988V14.9913L15.528 32.1073H15.5247C15.3462 32.4141 15.2569 32.7472 15.2569 33.077C15.2569 33.4069 15.3462 33.74 15.5247 34.0468H15.528C15.7097 34.3601 15.951 34.6042 16.232 34.7691C16.5129 34.9307 16.8467 35.0165 17.2136 35.0165H37.0145C37.3781 35.0165 37.7119 34.9307 37.9928 34.7691H37.9961C38.277 34.6075 38.5183 34.3634 38.7001 34.0468C38.8786 33.7367 38.9678 33.4069 38.9678 33.077C38.9678 32.7472 38.8786 32.4174 38.7001 32.1073L33.749 23.551L33.7524 23.5476ZM30.5531 13.9788L40.4552 31.0949C40.8188 31.7249 41.0006 32.4011 41.0006 33.0773C41.0006 33.7535 40.8188 34.4297 40.4552 35.0597C40.095 35.6798 39.5992 36.1746 39.0076 36.5144V36.5177C38.416 36.8607 37.7384 37.0421 37.0179 37.0421H17.217C16.4998 37.0421 15.8222 36.8607 15.2305 36.5177C14.6389 36.1779 14.1431 35.6832 13.7829 35.0597V35.0564C13.4193 34.4264 13.2376 33.7535 13.2376 33.0807C13.2376 32.4079 13.4193 31.7316 13.7829 31.1049V31.1016L23.685 13.9856H23.6884C24.0519 13.3589 24.5444 12.8674 25.1294 12.5276H25.1327C25.7243 12.1846 26.4019 12.0032 27.1191 12.0032C27.8364 12.0032 28.5172 12.1846 29.1089 12.5276C29.6939 12.8641 30.1896 13.3588 30.5499 13.9856H30.5532L30.5531 13.9788ZM26.1044 30.6693C26.1044 30.1119 26.5572 29.6567 27.119 29.6567C27.6776 29.6567 28.1337 30.1086 28.1337 30.6693V30.7947C28.1337 31.3521 27.6809 31.8073 27.119 31.8073C26.5605 31.8073 26.1044 31.3554 26.1044 30.7947V30.6693ZM26.1044 20.8725C26.1044 20.3151 26.5572 19.8599 27.119 19.8599C27.6776 19.8599 28.1337 20.3118 28.1337 20.8725V27.3078C28.1337 27.8653 27.6809 28.3204 27.119 28.3204C26.5605 28.3204 26.1044 27.8685 26.1044 27.3078V20.8725ZM52.2088 13.0618H43.3643C42.7628 13.0618 42.2174 12.8144 41.8176 12.4153C41.4209 12.0195 41.1764 11.4752 41.1764 10.875L41.1797 2.02222H2.52216C2.38335 2.02222 2.26106 2.07829 2.17182 2.16736C2.08258 2.25642 2.02639 2.38505 2.02639 2.52359V67.8365C2.02639 67.9751 2.08257 68.1004 2.17182 68.1928C2.26106 68.2818 2.38335 68.3379 2.52216 68.3379H51.713C51.8518 68.3379 51.9741 68.2818 52.0633 68.1928C52.1526 68.1037 52.2088 67.9751 52.2088 67.8365L52.2088 13.0618ZM7.1792 70.3563V73.4667C7.1792 73.6053 7.23539 73.7306 7.32794 73.823C7.42048 73.9153 7.54607 73.9714 7.6849 73.9714H56.462C56.6008 73.9714 56.7264 73.9153 56.8189 73.823C56.9115 73.7306 56.9677 73.6053 56.9677 73.4667L56.971 8.17068C56.971 8.03215 56.9148 7.9068 56.8222 7.81444C56.7297 7.72208 56.6041 7.66601 56.4653 7.66601H50.2648L53.9402 11.3438C54.1352 11.5417 54.2344 11.799 54.2344 12.0563H54.2377V67.8393C54.2377 68.532 53.9534 69.1587 53.4973 69.6172C53.0379 70.0757 52.4066 70.3626 51.7158 70.3626L7.1792 70.3563ZM48.2422 5.64034L42.9606 0.352935C42.7755 0.135239 42.4978 0 42.1905 0H2.52186C1.82778 0 1.1965 0.283669 0.740354 0.745448C0.284245 1.20063 0 1.83068 0 2.52334V67.8363C0 68.529 0.284245 69.159 0.740354 69.6142C1.19977 70.0727 1.83109 70.3596 2.52186 70.3596H5.15278V73.4701C5.15278 74.166 5.43703 74.7993 5.89645 75.2578C6.35586 75.7164 6.99048 76 7.68785 76H56.4649C57.1623 76 57.7969 75.7163 58.2563 75.2578C58.7158 74.7994 59 74.166 59 73.4701L58.9967 8.17064C58.9967 7.47466 58.7124 6.84138 58.253 6.38286C57.7936 5.92438 57.159 5.64071 56.4616 5.64071L48.2422 5.64034ZM47.1648 7.41823L50.7839 11.04H43.3638C43.3176 11.04 43.2779 11.0235 43.2515 10.9938C43.2217 10.9641 43.2019 10.9212 43.2019 10.875V3.45349L47.0557 7.30938C47.0888 7.34896 47.1251 7.38524 47.1648 7.41823Z" fill="black"/></svg>
+      </div>
+      <div class="ctx-card-body">
+        <div class="ctx-card-title">Handoff sem documentação</div>
+        <p class="ctx-card-desc">Ambiguidade entre design e código gerava idas e vindas constantes. Devs interpretavam layouts à sua maneira. <strong>Nenhum padrão de documentação</strong>.</p>
+      </div>
+    </div>
+    <div class="ctx-card">
+      <div class="ctx-card-icon">
+        <svg width="95" height="81" viewBox="0 0 95 81" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M71.3207 45.4599C67.3832 45.4599 63.4884 44.417 59.9979 42.3951C54.7409 39.3515 50.9737 34.4563 49.3987 28.6034C47.8237 22.7292 48.6325 16.6208 51.676 11.3638C54.7196 6.10678 59.6148 2.33961 65.4677 0.785913C71.3207 -0.789063 77.4503 0.0197083 82.7073 3.06324C87.9643 6.10678 91.7315 11.002 93.3065 16.8549C94.8815 22.7079 94.0727 28.8375 91.0291 34.0945C87.9856 39.3515 83.0904 43.1187 77.2375 44.6937C75.2794 45.1832 73.3 45.4599 71.3207 45.4599ZM71.3845 2.10549C69.5967 2.10549 67.7876 2.33961 66.0211 2.80784C60.7002 4.23383 56.2733 7.63919 53.5064 12.4067C50.7608 17.1742 50.0159 22.7292 51.4419 28.0287C52.8679 33.3496 56.2733 37.7766 61.0408 40.5434C65.8083 43.289 71.3632 44.0339 76.6628 42.6079C81.9624 41.1819 86.4106 37.7766 89.1775 33.0091C91.9231 28.2416 92.668 22.6866 91.242 17.387C89.816 12.0661 86.4106 7.63919 81.6431 4.87234C78.4932 3.04196 74.9601 2.10549 71.3845 2.10549Z" fill="black"/><path d="M84.9425 17.7913C83.176 17.7913 81.75 16.344 81.75 14.5988C81.75 12.8535 83.1973 11.4062 84.9425 11.4062C86.6878 11.4062 88.135 12.8535 88.135 14.5988C88.135 16.344 86.6878 17.7913 84.9425 17.7913ZM84.9425 13.5133C84.3466 13.5133 83.8783 14.0028 83.8783 14.5775C83.8783 15.1521 84.3679 15.6417 84.9425 15.6417C85.5172 15.6417 86.0067 15.1521 86.0067 14.5775C86.0067 14.0028 85.5172 13.5133 84.9425 13.5133Z" fill="black"/><path d="M76.1733 35.563C76.0243 35.563 75.8753 35.5418 75.7263 35.4779C75.1942 35.2438 74.9601 34.6053 75.1942 34.0732L76.4713 31.2425L71.8527 22.1332H70.8311L66.2126 31.2425L67.4896 34.0732C67.7237 34.6053 67.4896 35.2438 66.9575 35.4779C66.4255 35.712 65.787 35.4779 65.5528 34.9458L64.063 31.6682C63.9353 31.3702 63.9353 31.0297 64.0843 30.753L69.2349 20.6008C69.4264 20.239 69.7882 20.0261 70.1926 20.0261H72.5338C72.9382 20.0261 73.3 20.2602 73.4916 20.6008L78.6422 30.753C78.7912 31.051 78.7911 31.3702 78.6634 31.6682L77.1736 34.9458C76.9608 35.3289 76.5777 35.563 76.1733 35.563Z" fill="black"/><path d="M71.3635 28.8373C70.7676 28.8373 70.2993 28.3691 70.2993 27.7731V21.0476C70.2993 20.4516 70.7676 19.9834 71.3635 19.9834C71.9594 19.9834 72.4277 20.4516 72.4277 21.0476V27.7731C72.4277 28.3691 71.9381 28.8373 71.3635 28.8373Z" fill="black"/><path d="M76.1734 39.2024H66.5319C65.936 39.2024 65.4678 38.7342 65.4678 38.1383V34.4775C65.4678 33.8816 65.936 33.4133 66.5319 33.4133H76.1734C76.7693 33.4133 77.2375 33.8816 77.2375 34.4775V38.1383C77.2375 38.7342 76.7693 39.2024 76.1734 39.2024ZM67.5961 37.0741H75.1092V35.5417H67.5961V37.0741Z" fill="black"/><path d="M60.275 24.8149C60.2111 24.8149 60.1473 24.8149 60.0834 24.7936C59.5088 24.6872 59.1257 24.1339 59.2321 23.5379C60.1686 18.6214 64.106 14.6627 69.0438 13.7262C69.6184 13.6198 70.1718 14.0029 70.2995 14.5776C70.4059 15.1522 70.0228 15.7056 69.4482 15.8333C65.383 16.5995 62.1054 19.8772 61.3392 23.9423C61.2115 24.4531 60.7858 24.8149 60.275 24.8149ZM82.4524 24.8149C81.9416 24.8149 81.4946 24.4531 81.4095 23.9423C80.6433 19.8772 77.3656 16.5995 73.3005 15.8333C72.7258 15.7269 72.3427 15.1735 72.4491 14.5989C72.5556 14.0242 73.1089 13.6411 73.7049 13.7475C78.6213 14.684 82.5801 18.6214 83.5165 23.5592C83.623 24.1339 83.2399 24.6872 82.6652 24.8149C82.5801 24.8149 82.5162 24.8149 82.4524 24.8149Z" fill="black"/><path d="M60.0831 29.0716C58.3166 29.0716 56.8906 27.6243 56.8906 25.879C56.8906 24.1338 58.3379 22.6865 60.0831 22.6865C61.8284 22.6865 63.2757 24.1338 63.2757 25.879C63.2757 27.6243 61.8284 29.0716 60.0831 29.0716ZM60.0831 24.7936C59.4872 24.7936 59.019 25.2831 59.019 25.8578C59.019 26.4324 59.5085 26.9219 60.0831 26.9219C60.6578 26.9219 61.1473 26.4324 61.1473 25.8578C61.1473 25.2831 60.6578 24.7936 60.0831 24.7936Z" fill="black"/><path d="M71.3634 17.7913C69.5969 17.7913 68.1709 16.344 68.1709 14.5988C68.1709 12.8535 69.6182 11.4062 71.3634 11.4062C73.1087 11.4062 74.5559 12.8535 74.5559 14.5988C74.5559 16.344 73.1299 17.7913 71.3634 17.7913ZM71.3634 13.5133C70.7675 13.5133 70.2992 14.0028 70.2992 14.5775C70.2992 15.1521 70.7888 15.6417 71.3634 15.6417C71.9381 15.6417 72.4276 15.1521 72.4276 14.5775C72.4276 14.0028 71.9594 13.5133 71.3634 13.5133Z" fill="black"/><path d="M82.6437 29.0716C80.8772 29.0716 79.4512 27.6243 79.4512 25.879C79.4512 24.1338 80.8984 22.6865 82.6437 22.6865C84.3889 22.6865 85.8362 24.1338 85.8362 25.879C85.8362 27.6243 84.4102 29.0716 82.6437 29.0716ZM82.6437 24.7936C82.0478 24.7936 81.5795 25.2831 81.5795 25.8578C81.5795 26.4324 82.069 26.9219 82.6437 26.9219C83.2183 26.9219 83.7079 26.4324 83.7079 25.8578C83.7079 25.2831 83.2396 24.7936 82.6437 24.7936Z" fill="black"/><path d="M82.7925 15.6415H73.4916C72.8957 15.6415 72.4275 15.1733 72.4275 14.5774C72.4275 13.9814 72.8957 13.5132 73.4916 13.5132H82.7925C83.3885 13.5132 83.8567 13.9814 83.8567 14.5774C83.8567 15.1733 83.3885 15.6415 82.7925 15.6415ZM69.2137 15.6415H59.9128C59.3169 15.6415 58.8486 15.1733 58.8486 14.5774C58.8486 13.9814 59.3169 13.5132 59.9128 13.5132H69.2137C69.8096 13.5132 70.2778 13.9814 70.2778 14.5774C70.2778 15.1733 69.8096 15.6415 69.2137 15.6415Z" fill="black"/><path d="M57.7848 17.7913C56.0183 17.7913 54.5923 16.344 54.5923 14.5988C54.5923 12.8535 56.0396 11.4062 57.7848 11.4062C59.53 11.4062 60.9773 12.8535 60.9773 14.5988C60.9773 16.344 59.5513 17.7913 57.7848 17.7913ZM57.7848 13.5133C57.1889 13.5133 56.7206 14.0028 56.7206 14.5775C56.7206 15.1521 57.2102 15.6417 57.7848 15.6417C58.3595 15.6417 58.849 15.1521 58.849 14.5775C58.849 14.0028 58.3807 13.5133 57.7848 13.5133Z" fill="black"/><path d="M62.6799 65.5089H62.6586C62.0627 65.4876 61.6157 64.9981 61.6157 64.4235V64.4022V59.4006C61.6157 58.8259 61.1475 58.3577 60.5728 58.3577H53.7408C53.2726 58.3577 52.8682 58.0597 52.7192 57.6128C52.4638 56.7827 52.1233 55.9526 51.7189 55.1864C51.5061 54.7821 51.5699 54.2713 51.9105 53.9307L56.7418 49.0994C57.1462 48.695 57.1462 48.0352 56.7418 47.6308L53.2088 44.0978C52.8044 43.6934 52.1446 43.6934 51.7402 44.0978L46.9088 48.9078C46.5683 49.2271 46.0788 49.3122 45.6531 49.0994C44.8656 48.695 44.0569 48.3545 43.2268 48.0991C42.7799 47.9714 42.4819 47.5457 42.4819 47.0774V40.2455C42.4819 39.6708 42.0136 39.2026 41.439 39.2026H36.4374C35.8627 39.2026 35.3945 39.6708 35.3945 40.2455V47.0774C35.3945 47.5457 35.0965 47.9501 34.6496 48.0991C33.8195 48.3545 32.9895 48.695 32.2233 49.0994C31.8189 49.3122 31.3081 49.2484 30.9675 48.9078L26.1362 44.0765C25.7318 43.6721 25.072 43.6721 24.6676 44.0765L21.1346 47.6095C20.7302 48.0139 20.7302 48.6737 21.1346 49.0781L25.9659 53.9094C26.3065 54.2287 26.3703 54.7395 26.1575 55.1652C25.7531 55.9314 25.4126 56.7614 25.1572 57.5915C25.0295 58.0384 24.6038 58.3364 24.1355 58.3364H17.3036C16.7289 58.3364 16.2607 58.8046 16.2607 59.3793V64.4235C16.282 65.0194 15.8137 65.5089 15.2391 65.5089C14.6431 65.5302 14.1536 65.062 14.1323 64.466C14.1323 64.4447 14.1323 64.4022 14.1323 64.3809V59.3793C14.1323 57.634 15.5583 56.208 17.3036 56.208H23.3693C23.5396 55.7611 23.7099 55.3141 23.9227 54.8672L19.6235 50.5679C18.389 49.3335 18.389 47.3328 19.6235 46.0984L23.1565 42.5654C24.391 41.3309 26.3916 41.3309 27.626 42.5654L31.9253 46.8646C32.3722 46.6518 32.7979 46.4815 33.2662 46.3112V40.2455C33.2662 38.5002 34.6921 37.0742 36.4374 37.0742H41.439C43.1842 37.0742 44.6102 38.5002 44.6102 40.2455V46.3112C45.0572 46.4815 45.5041 46.6518 45.9511 46.8646L50.2504 42.5654C51.4848 41.3309 53.4854 41.3309 54.7199 42.5654L58.2529 46.0984C59.4874 47.3328 59.4874 49.3335 58.2529 50.5679L53.9537 54.8672C54.1665 55.2929 54.3368 55.7398 54.507 56.208H60.5728C62.3181 56.208 63.7441 57.634 63.7441 59.3793V64.3809C63.7441 64.4022 63.7441 64.4447 63.7441 64.466C63.7228 65.062 63.2545 65.5089 62.6799 65.5089Z" fill="black"/><path d="M31.1163 65.5087C30.6694 65.5087 30.2437 65.232 30.0947 64.785C29.7967 63.8486 29.6265 62.8695 29.6265 61.8905C29.6265 56.7612 33.798 52.5896 38.9273 52.5896C44.0567 52.5896 48.2282 56.7612 48.2282 61.8905C48.2282 62.8695 48.0792 63.8486 47.76 64.785C47.5684 65.3384 46.9725 65.6576 46.4191 65.4661C45.8657 65.2745 45.5465 64.6786 45.738 64.1252C45.9722 63.4016 46.0999 62.6567 46.0999 61.8905C46.0999 57.9318 42.8861 54.7179 38.9273 54.7179C34.9686 54.7179 31.7548 57.9318 31.7548 61.8905C31.7548 62.6567 31.8825 63.4016 32.1166 64.1252C32.3082 64.6786 31.9889 65.2958 31.4356 65.4661C31.3291 65.5087 31.2227 65.5087 31.1163 65.5087Z" fill="black"/><path d="M74.3644 75.4268H3.49049C1.57498 75.4268 0 73.8518 0 71.9363V69.51C0 68.914 0.468236 68.4458 1.06417 68.4458H76.7907C77.3867 68.4458 77.8549 68.914 77.8549 69.51V71.9363C77.8549 73.8518 76.3012 75.4268 74.3644 75.4268ZM2.14963 70.5741V71.9363C2.14963 72.6812 2.76685 73.2984 3.51177 73.2984H74.3857C75.1306 73.2984 75.7478 72.6812 75.7478 71.9363V70.5741H2.14963Z" fill="black"/><path d="M69.533 80.2583H8.34303C6.42752 80.2583 4.85254 78.6833 4.85254 76.7678V74.3415C4.85254 73.7456 5.32078 73.2773 5.91671 73.2773C6.51265 73.2773 6.98088 73.7456 6.98088 74.3415V76.7891C6.98088 77.534 7.59811 78.1513 8.34303 78.1513H69.533C70.2779 78.1513 70.8951 77.534 70.8951 76.7891V74.3628C70.8951 73.7669 71.3633 73.2986 71.9593 73.2986C72.5552 73.2986 73.0235 73.7669 73.0235 74.3628V76.7891C73.0235 78.7046 71.4485 80.2583 69.533 80.2583Z" fill="black"/><path d="M70.2139 70.5742C69.618 70.5742 69.1498 70.1059 69.1498 69.51C69.1498 68.9141 69.618 68.4458 70.2139 68.4458C71.8102 68.4458 73.1085 67.1475 73.1085 65.5513V44.1827C73.1085 43.5867 73.5767 43.1185 74.1727 43.1185C74.7686 43.1185 75.2368 43.5867 75.2368 44.1827V65.53C75.2368 68.3181 72.9808 70.5742 70.2139 70.5742ZM7.66186 70.5742C4.89501 70.5742 2.61768 68.3181 2.61768 65.5513V24.0485C2.61768 21.2817 4.87372 19.0256 7.66186 19.0256H49.8457C50.4416 19.0256 50.9098 19.4939 50.9098 20.0898C50.9098 20.6857 50.4416 21.154 49.8457 21.154H7.66186C6.0656 21.154 4.74602 22.4523 4.74602 24.0485V65.5513C4.74602 67.1475 6.04431 68.4458 7.66186 68.4458C8.25779 68.4458 8.72603 68.9141 8.72603 69.51C8.72603 70.1059 8.25779 70.5742 7.66186 70.5742Z" fill="black"/><path d="M69.1074 65.5087H8.76876C8.17283 65.5087 7.70459 65.0405 7.70459 64.4445V25.134C7.70459 24.5381 8.17283 24.0698 8.76876 24.0698H49.8458C50.4418 24.0698 50.91 24.5381 50.91 25.134C50.91 25.7299 50.4418 26.1982 49.8458 26.1982H9.83294V63.3804H68.0432V44.2465C68.0432 43.6506 68.5114 43.1824 69.1074 43.1824C69.7033 43.1824 70.1715 43.6506 70.1715 44.2465V64.4445C70.1715 65.0405 69.7033 65.5087 69.1074 65.5087Z" fill="black"/></svg>
+      </div>
+      <div class="ctx-card-body">
+        <div class="ctx-card-title">Escala sem fundação</div>
+        <p class="ctx-card-desc">Novos produtos herdavam inconsistências em vez de padrões. A dívida visual crescia mais rápido que a empresa, com <strong>3× mais marcas no roadmap</strong>.</p>
+      </div>
+    </div>
   </div>
 </div>
-</div></div>
+</div></section>
 
-<!-- 12 APRENDIZADOS -->
-<div class="case-pull" style="border-bottom:1px solid var(--gray-5)"><div class="container">
-<div class="case-pull-text rv">Construir um Design System de ponta a ponta exige fluência em três coisas ao mesmo tempo: <strong>desenho, sistema e organização</strong>. Não consegui terceirizar nenhuma das três, e isso me ensinou que <strong>craft escala quando vira protocolo</strong>. O Delta hoje vive sem mim no código, e essa é a melhor prova de que a fundação aguenta<span class="faded">.</span></div>
-<div class="case-pull-caption rv d1">12 / Aprendizados</div>
-</div></div>
+<!-- ══════════════════════════════════════════
+     02. O PROBLEMA — Pull quote
+     ══════════════════════════════════════════ -->
+<section class="prob-section ed--shaded"><div class="container">
+<div class="prob-row rv">
+  <div class="prob-header">
+    <div class="ed-header" style="margin-bottom:0">
+      <div class="ed-num">02</div>
+      <h2 class="ed-title">O Problema</h2>
+    </div>
+  </div>
+  <div>
+    <p class="prob-quote">Cada projeto começava do zero.<br>O resultado era uma <strong>colcha de retalhos</strong> entre as interfaces.</p>
+  </div>
+</div>
+</div></section>
 
-<!-- MORE WORK -->
+<!-- ══════════════════════════════════════════
+     03. ESTRATÉGIA DE DESIGN — Timeline horizontal
+     ══════════════════════════════════════════ -->
+<section class="strat-section"><div class="container">
+<div class="strat-header rv">
+  <div class="ed-header" style="margin-bottom:0">
+    <div class="ed-num" style="color:var(--black)">03</div>
+    <h2 class="ed-title">Estratégia de design</h2>
+  </div>
+  <p class="strat-sub">Construindo a fundação do zero. Quatro fases que transformaram intenção em sistema vivo.</p>
+</div>
+
+<div class="strat-timeline rv d1">
+  <div class="strat-step">
+    <div class="strat-dot"></div>
+    <div class="strat-step-num">01 / Auditoria visual</div>
+    <div class="strat-step-title">Mapeamento de inconsistências</div>
+    <p class="strat-step-desc">Auditoria visual nos 20+ produtos em produção, identificando padrões divergentes, componentes duplicados e lacunas de cobertura.</p>
+  </div>
+  <div class="strat-step">
+    <div class="strat-dot"></div>
+    <div class="strat-step-num">02 / Arquitetura de tokens</div>
+    <div class="strat-step-title">Fundação semântica</div>
+    <p class="strat-step-desc">Definição de cores, tipografia, espaçamento, bordas e sombras como variáveis semânticas, desacopladas de marcas específicas.</p>
+  </div>
+  <div class="strat-step">
+    <div class="strat-dot"></div>
+    <div class="strat-step-num">03 / Componentes</div>
+    <div class="strat-step-title">Átomos, moléculas, organismos</div>
+    <p class="strat-step-desc">Construção da biblioteca em camadas, do botão ao template, com anatomia documentada e contratos claros para o time de engenharia.</p>
+  </div>
+  <div class="strat-step">
+    <div class="strat-dot"></div>
+    <div class="strat-step-num">04 / Integração + escala</div>
+    <div class="strat-step-title">Templates em produção</div>
+    <p class="strat-step-desc">Templates prontos consumidos por 20+ produtos. Marca trocada via tokens, sem redesenho de componente.</p>
+  </div>
+</div>
+
+<div class="strat-list-mobile rv d1">
+  <div class="s-item">
+    <div class="s-num">01 / Auditoria visual</div>
+    <div class="s-title">Mapeamento de inconsistências</div>
+    <p class="s-desc">Auditoria visual nos 20+ produtos em produção, identificando padrões divergentes, componentes duplicados e lacunas de cobertura.</p>
+  </div>
+  <div class="s-item">
+    <div class="s-num">02 / Arquitetura de tokens</div>
+    <div class="s-title">Fundação semântica</div>
+    <p class="s-desc">Definição de cores, tipografia, espaçamento, bordas e sombras como variáveis semânticas, desacopladas de marcas específicas.</p>
+  </div>
+  <div class="s-item">
+    <div class="s-num">03 / Componentes</div>
+    <div class="s-title">Átomos, moléculas, organismos</div>
+    <p class="s-desc">Construção da biblioteca em camadas, do botão ao template, com anatomia documentada e contratos claros para o time de engenharia.</p>
+  </div>
+  <div class="s-item">
+    <div class="s-num">04 / Integração + escala</div>
+    <div class="s-title">Templates em produção</div>
+    <p class="s-desc">Templates prontos consumidos por 20+ produtos. Marca trocada via tokens, sem redesenho de componente.</p>
+  </div>
+</div>
+</div></section>
+
+<!-- ══════════════════════════════════════════
+     04. PROCESSO — Tabs + Sublist + Panel
+     ══════════════════════════════════════════ -->
+<section class="proc-section"><div class="container">
+<div class="proc-header rv">
+  <div class="ed-header" style="margin-bottom:16px">
+    <div class="ed-num">04</div>
+    <h2 class="ed-title">Processo</h2>
+  </div>
+  <p class="ed-body" style="max-width:720px">Três camadas do sistema que construí, cada uma com seus próprios blocos de trabalho. Passe o cursor sobre cada item para ver o material respectivo.</p>
+</div>
+
+<div class="proc-tabs rv d1" id="procTabs">
+  <button class="proc-tab active" data-tab="tokens">Tokens iniciais</button>
+  <button class="proc-tab" data-tab="libs">Arquitetura de libs</button>
+  <button class="proc-tab" data-tab="anatomy">Anatomia de componente</button>
+</div>
+
+<div class="proc-viewer rv d2">
+  <div class="proc-sublist" id="procSublist">
+    <!-- populated by JS -->
+  </div>
+  <div class="proc-panel" id="procPanel">
+    <!-- populated by JS -->
+  </div>
+</div>
+</div></section>
+
+<!-- ══════════════════════════════════════════
+     05. O QUE CONSTRUÍ — Princípios + Atomic + Stats
+     ══════════════════════════════════════════ -->
+<section class="built-section"><div class="container">
+<div class="rv" style="margin-bottom:80px">
+  <div class="ed-header">
+    <div class="ed-num">05</div>
+    <h2 class="ed-title">O que construí</h2>
+  </div>
+  <p class="ed-body" style="max-width:720px">Antes de desenhar qualquer botão, construí a arquitetura semântica. Tokens primeiro. Componentes depois. Isso tornou o Delta um <strong>sistema multi-marca desde o dia zero</strong>: qualquer marca da Escale trocava sua identidade inteira apenas substituindo tokens.</p>
+</div>
+
+<div class="pillars rv d1">
+  <div class="pillar">
+    <div class="pillar-bar"></div>
+    <div class="pillar-title">Econômico</div>
+    <p class="pillar-desc">Biblioteca enxuta, sem redundância. Aperfeiçoar o existente antes de criar o novo. Remoção do desnecessário, não acumulação.</p>
+  </div>
+  <div class="pillar">
+    <div class="pillar-bar"></div>
+    <div class="pillar-title">Versátil</div>
+    <p class="pillar-desc">Componentes flexíveis que atendiam múltiplas marcas com pouca personalização. Ponte de diálogo entre times e contextos.</p>
+  </div>
+  <div class="pillar">
+    <div class="pillar-bar"></div>
+    <div class="pillar-title">Objetivo</div>
+    <p class="pillar-desc">Documentação transparente, sem ambiguidade. Orientação pelo exemplo, não pelo manual. Cada componente auto-explicativo.</p>
+  </div>
+</div>
+
+<h3 class="built-sub rv">De tokens base até templates prontos</h3>
+<div class="atomic rv d1">
+  <div class="atomic-step">
+    <div class="atomic-visual"><div style="width:40px;height:40px;border:2px solid var(--black);border-radius:50%;position:relative"><div style="position:absolute;inset:8px;background:var(--accent);border-radius:50%"></div></div></div>
+    <div class="atomic-num">01 / Tokens</div>
+    <div class="atomic-title">Tokens</div>
+    <p class="atomic-desc">Cores, tipografia, espaçamento, sombras, bordas como variáveis semânticas.</p>
+  </div>
+  <div class="atomic-step">
+    <div class="atomic-visual"><div style="display:flex;gap:6px;align-items:center"><div style="width:28px;height:28px;border:1.5px solid var(--black);border-radius:6px"></div><div style="width:48px;height:28px;border:1.5px solid var(--black);border-radius:6px"></div><div style="width:28px;height:28px;border:1.5px solid var(--black);border-radius:50%"></div></div></div>
+    <div class="atomic-num">02 / Átomos</div>
+    <div class="atomic-title">Átomos</div>
+    <p class="atomic-desc">Botões, inputs, ícones, badges, tags. Os blocos mínimos da interface.</p>
+  </div>
+  <div class="atomic-step">
+    <div class="atomic-visual"><div style="width:120px;height:40px;border:1.5px solid var(--black);border-radius:6px;display:flex;gap:8px;align-items:center;padding:0 10px"><div style="width:16px;height:16px;background:var(--black);border-radius:4px"></div><div style="flex:1;height:4px;background:var(--gray-5);border-radius:2px"></div></div></div>
+    <div class="atomic-num">03 / Moléculas</div>
+    <div class="atomic-title">Moléculas</div>
+    <p class="atomic-desc">Cards, barras de navegação, formulários, modais. Combinações com intenção.</p>
+  </div>
+  <div class="atomic-step">
+    <div class="atomic-visual"><div style="width:120px;height:44px;border:1.5px solid var(--black);border-radius:6px;display:grid;grid-template-columns:32px 1fr;gap:4px;padding:4px"><div style="background:var(--black);border-radius:3px"></div><div style="display:flex;flex-direction:column;gap:3px;padding:2px 0"><div style="height:4px;background:var(--gray-5);border-radius:2px"></div><div style="height:4px;background:var(--gray-5);border-radius:2px;width:70%"></div><div style="height:4px;background:var(--gray-5);border-radius:2px;width:40%"></div></div></div></div>
+    <div class="atomic-num">04 / Templates</div>
+    <div class="atomic-title">Templates</div>
+    <p class="atomic-desc">Páginas inteiras reutilizáveis para qualquer marca, via swap de tokens.</p>
+  </div>
+</div>
+
+<div class="insights rv">
+  <div class="insight">
+    <span class="insight-tag">Tokens</span>
+    <div class="insight-num">5</div>
+    <p class="insight-desc">Categorias de variáveis semânticas: cores, tipografia, espaçamento, sombras e bordas.</p>
+  </div>
+  <div class="insight">
+    <span class="insight-tag">Cobertura</span>
+    <div class="insight-num">A→T</div>
+    <p class="insight-desc">Do átomo base até templates de página reutilizáveis, com anatomia completa em cada camada.</p>
+  </div>
+  <div class="insight">
+    <span class="insight-tag">Documentação</span>
+    <div class="insight-num">100%</div>
+    <p class="insight-desc">Cada componente com anatomia, estados, variações e instruções para desenvolvedores.</p>
+  </div>
+</div>
+</div></section>
+
+<!-- ══════════════════════════════════════════
+     06. RESULTADOS
+     ══════════════════════════════════════════ -->
+<section class="results"><div class="container">
+<div class="ed-header rv" style="margin-bottom:0">
+  <div class="ed-num">06</div>
+  <h2 class="ed-title">Resultados</h2>
+</div>
+
+<div class="results-hero rv d1">
+  <div class="results-hero-item">
+    <div class="r-num">~47%</div>
+    <div class="r-label">Redução no tempo de criação<br>de novas interfaces</div>
+  </div>
+  <div class="results-hero-sep"></div>
+  <div class="results-hero-item">
+    <div class="r-num">20+</div>
+    <div class="r-label">Produtos consumindo<br>a mesma biblioteca</div>
+  </div>
+  <div class="results-hero-sep"></div>
+  <div class="results-hero-item">
+    <div class="r-num">A→T</div>
+    <div class="r-label">Cobertura completa<br>de átomos a templates</div>
+  </div>
+  <div class="results-hero-sep"></div>
+  <div class="results-hero-item">
+    <div class="r-num">Multi</div>
+    <div class="r-label">Marca via swap de tokens<br>sem redesenho</div>
+  </div>
+</div>
+
+<div class="results-row rv d2">
+  <div class="results-row-text">
+    <p>Um sistema que <strong>mudou como o time constrói produto</strong>. Retrabalho drasticamente reduzido, padrão visual coerente entre as 20+ marcas, e handoff sem ambiguidade entre design e engenharia.</p>
+    <p>A biblioteca se tornou referência interna: novos squads chegavam e encontravam <strong>uma fundação pronta, não um canvas em branco</strong>.</p>
+  </div>
+  <div class="results-row-table">
+    <div class="results-kpi">
+      <span class="results-kpi-label">Componentes compartilhados</span>
+      <span class="results-kpi-value">0 → biblioteca completa</span>
+    </div>
+    <div class="results-kpi">
+      <span class="results-kpi-label">Retrabalho por projeto</span>
+      <span class="results-kpi-value">100% → reaproveitamento</span>
+    </div>
+    <div class="results-kpi">
+      <span class="results-kpi-label">Padrão de documentação</span>
+      <span class="results-kpi-value">Nenhum → 100% documentado</span>
+    </div>
+    <div class="results-kpi">
+      <span class="results-kpi-label">Troca de marca</span>
+      <span class="results-kpi-value">Redesenho → swap de tokens</span>
+    </div>
+  </div>
+</div>
+</div></section>
+
+<!-- ══════════════════════════════════════════
+     07. BIBLIOTECA DE COMPONENTES
+     ══════════════════════════════════════════ -->
+<section class="library"><div class="container">
+<div class="rv">
+  <div class="ed-header" style="margin-bottom:0">
+    <div class="ed-num">07</div>
+    <h2 class="ed-title">Biblioteca de componentes</h2>
+  </div>
+  <p class="ed-body library-intro">A entrega final do Delta vivia no Storybook: fonte única de verdade consultada por engenharia e design em todos os 20+ produtos.</p>
+</div>
+
+<div class="library-hero rv d1">
+  <div class="library-hero-item">
+    <div class="l-num">46</div>
+    <div class="l-label">Versões em produção,<br>desktop e mobile</div>
+  </div>
+  <div class="library-hero-sep"></div>
+  <div class="library-hero-item">
+    <div class="l-num">23</div>
+    <div class="l-label">Componentes únicos, cada um com estados e variantes completos</div>
+  </div>
+  <div class="library-hero-sep"></div>
+  <div class="library-hero-item">
+    <div class="l-num">7</div>
+    <div class="l-label">Depreciados na jornada. Poda ativa como sinal de DS vivo</div>
+  </div>
+</div>
+
+<a href="https://escaletech.github.io/delta/" target="_blank" rel="noopener" class="library-cta rv d2">
+  <span>Explorar biblioteca no Storybook</span>
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+</a>
+</div></section>
+
+<!-- ══════════════════════════════════════════
+     IMPACTO — Pull quote de fechamento
+     ══════════════════════════════════════════ -->
+<section class="impact"><div class="container">
+<div class="rv">
+  <p class="impact-quote">Onde antes cada projeto partia do zero, o time passou a construir sobre uma <strong>fundação validada e documentada</strong>. O Delta se tornou referência interna.</p>
+  <span class="impact-caption">Impacto</span>
+</div>
+</div></section>
+
+<!-- ══════════════════════════════════════════
+     CASE CLOSER — Imagem mockup de fechamento
+     ══════════════════════════════════════════ -->
+<section class="case-closer"><div class="container">
+  <div class="case-closer-img rv">
+    <img src="img/delta/delta1.webp" alt="Delta Design System aplicado em desktop, notebook e tablet" loading="lazy" onerror="this.onerror=null;this.src='img/delta/delta1.jpg'">
+  </div>
+</div></section>
+
+<!-- ══════════════════════════════════════════
+     MORE WORK
+     ══════════════════════════════════════════ -->
 <section class="more-work"><div class="container">
 <h2 class="more-work-title rv">Mais Projetos</h2>
 <div class="more-work-grid">
-<a href="case-mrv.html" class="more-work-card rv"><div class="more-work-card-img"><img src="https://framerusercontent.com/images/tJmuIg4YsOc9pGcsP4sUgCj5gw.jpg" alt="MRV"></div><span class="more-work-card-tag">#ProductDesign</span><div class="more-work-card-name">MRV</div></a>
-<a href="case-chorume.html" class="more-work-card rv d1"><div class="more-work-card-img"><img src="img/chorume/wordmark.webp" alt="Chorume Tipografia"></div><span class="more-work-card-tag">#Tipografia #IdentidadeVisual</span><div class="more-work-card-name">Chorume Tipografia</div></a>
+  <a href="case-mrv.html" class="more-work-card rv"><div class="more-work-card-img"><img src="https://framerusercontent.com/images/tJmuIg4YsOc9pGcsP4sUgCj5gw.jpg" alt="MRV"></div><span class="more-work-card-tag">#ProductDesign</span><div class="more-work-card-name">MRV</div></a>
+  <a href="case-chorume.html" class="more-work-card rv d1"><div class="more-work-card-img"><img src="img/chorume/wordmark.webp" alt="Chorume Tipografia"></div><span class="more-work-card-tag">#Tipografia #IdentidadeVisual</span><div class="more-work-card-name">Chorume Tipografia</div></a>
 </div>
 </div></section>
 
+<!-- ══════════════════════════════════════════
+     CTA
+     ══════════════════════════════════════════ -->
 <section class="cta-section" id="contact"><div class="container">
 <h2 class="cta-title rv"><a href="mailto:adrianapommot@gmail.com">Vamos<br>Conversar?</a></h2>
 <p class="cta-subtitle rv d1">Product Design & Inteligência Visual</p>
@@ -720,64 +736,157 @@ a,button,input,textarea,select,[role="button"]{cursor:none!important}
 
 <footer><div class="container">
 <div class="footer-grid">
-<div><div class="footer-logo">Adriana Pommot</div><div class="footer-social"><a href="https://linkedin.com/in/adriana-pommot" target="_blank">LinkedIn</a><a href="https://instagram.com/ultraviolenta.ink" target="_blank">Instagram</a><a href="mailto:adrianapommot@gmail.com">Email</a></div></div>
-<div><div class="footer-col-title">Páginas</div><div class="footer-col-links"><a href="index.html#work">Projetos</a><a href="index.html#services">Serviços</a><a href="index.html#about">Sobre Mim</a><a href="#contact">Contato</a></div></div>
-<div><div class="footer-col-title">Projetos</div><div class="footer-col-links"><a href="case-mrv.html">MRV</a><a href="case-delta.html">Delta DS</a><a href="case-chorume.html">Chorume</a></div></div>
-<div><div class="footer-col-title">Contato</div><div class="footer-col-links"><a href="mailto:adrianapommot@gmail.com">adrianapommot@gmail.com</a><a href="#">São Paulo, BR</a></div></div>
+  <div><div class="footer-logo">Adriana Pommot</div><div class="footer-social"><a href="https://linkedin.com/in/adriana-pommot" target="_blank">LinkedIn</a><a href="https://instagram.com/ultraviolenta.ink" target="_blank">Instagram</a><a href="mailto:adrianapommot@gmail.com">Email</a></div></div>
+  <div><div class="footer-col-title">Páginas</div><div class="footer-col-links"><a href="index.html#work">Projetos</a><a href="index.html#services">Serviços</a><a href="index.html#about">Sobre Mim</a><a href="#contact">Contato</a></div></div>
+  <div><div class="footer-col-title">Projetos</div><div class="footer-col-links"><a href="case-mrv.html">MRV</a><a href="case-delta.html">Delta DS</a><a href="case-chorume.html">Chorume</a></div></div>
+  <div><div class="footer-col-title">Contato</div><div class="footer-col-links"><a href="mailto:adrianapommot@gmail.com">adrianapommot@gmail.com</a><a href="#">São Paulo, BR</a></div></div>
 </div>
 <div class="footer-bottom"><span class="footer-copy">© 2026 Adriana Pommot</span><span class="footer-copy">Product Design & Inteligência Visual</span></div>
 </div></footer>
 
 <script>
-document.querySelectorAll('.nav-menu a').forEach(a=>{
-  a.addEventListener('click',()=>{
-    const f=document.getElementById('navFloat');
-    if(f) f.classList.remove('open');
-  });
-});
-/* === SHARED: Reveal Observer === */
-(function(){try{
-var obs=new IntersectionObserver(function(entries){
-  entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add("visible");obs.unobserve(e.target)}});
-},{threshold:0.12,rootMargin:"0px 0px -40px 0px"});
-document.querySelectorAll(".rv").forEach(function(el){obs.observe(el)});
-}catch(e){console.warn("observer error",e)}})();
+/* ═══ NAV TOGGLE ═══ */
+(function(){
+  var toggle=document.getElementById('navToggle');
+  var float=document.getElementById('navFloat');
+  if(toggle&&float){
+    toggle.addEventListener('click',function(){float.classList.toggle('open')});
+    document.querySelectorAll('.nav-menu a').forEach(function(a){
+      a.addEventListener('click',function(){float.classList.remove('open')});
+    });
+  }
+})();
 
-/* === SHARED: Text Roll === */
+/* ═══ REVEAL OBSERVER ═══ */
 (function(){try{
-  var el=document.querySelector(".nav-name");
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
+  },{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.rv').forEach(function(el){obs.observe(el)});
+}catch(e){}})();
+
+/* ═══ NAV TEXT ROLL ═══ */
+(function(){try{
+  var el=document.querySelector('.nav-name');
   if(!el)return;
   var text=el.textContent.trim();
-  var roll=document.createElement("span");
-  roll.className="nav-name-roll";
-  roll.innerHTML="<span>"+text+"</span><span>"+text+"</span>";
-  el.innerHTML="";
+  var roll=document.createElement('span');
+  roll.className='nav-name-roll';
+  roll.innerHTML='<span>'+text+'</span><span>'+text+'</span>';
+  el.innerHTML='';
   el.appendChild(roll);
-  function setH(){var h=roll.querySelector("span").offsetHeight;if(h>0)roll.style.height=h+"px"}
+  function setH(){var h=roll.querySelector('span').offsetHeight;if(h>0)roll.style.height=h+'px'}
   setH();
-  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(setH)}
-  else{setTimeout(setH,300)}
-}catch(e){console.warn("text-roll error",e)}})();
-/* === SHARED: Dot Cursor === */
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(setH)}else{setTimeout(setH,300)}
+}catch(e){}})();
+
+/* ═══ CURSOR DOT ═══ */
 (function(){try{
-  var dot=document.getElementById("cursorDot");
-  if(!dot||matchMedia("(hover:none)").matches)return;
+  var dot=document.getElementById('cursorDot');
+  if(!dot||matchMedia('(hover:none)').matches)return;
   var vis=false;
-  document.addEventListener("mousemove",function(e){
-    if(!vis){vis=true;dot.classList.add("visible")}
-    dot.style.left=e.clientX+"px";dot.style.top=e.clientY+"px";
+  document.addEventListener('mousemove',function(e){
+    if(!vis){vis=true;dot.classList.add('visible')}
+    dot.style.left=e.clientX+'px';dot.style.top=e.clientY+'px';
   });
-  document.addEventListener("mouseleave",function(){vis=false;dot.classList.remove("visible")});
-}catch(e){console.warn("cursor error",e)}})();
-/* === SHARED: Nav BG on scroll === */
+  document.addEventListener('mouseleave',function(){vis=false;dot.classList.remove('visible')});
+}catch(e){}})();
+
+/* ═══ NAV SCROLL BG ═══ */
 (function(){try{
-  var nn=document.querySelector(".nav-name");
+  var nn=document.querySelector('.nav-name');
   if(!nn)return;
-  var bgLo=nn.style.background||"";
-  window.addEventListener("scroll",function(){
-    nn.style.background=window.scrollY>60?"rgba(255,255,255,0.85)":"rgba(255,255,255,0.55)";
+  window.addEventListener('scroll',function(){
+    nn.style.background=window.scrollY>60?'rgba(255,255,255,0.85)':'rgba(255,255,255,0.55)';
   });
-}catch(e){console.warn("nav-scroll error",e)}})();
+}catch(e){}})();
+
+/* ═══ 04 PROCESSO — Interactive tabs + sublist + hover panel ═══ */
+(function(){
+  var data={
+    tokens:{
+      label:'Tokens iniciais',
+      items:[
+        {id:'palette',title:'Paleta de cores',desc:'Paleta completa do Delta: Brand Colors (primária, secundária, neutral, terciária) e Feedback Colors (critical, success, warning, info), organizadas em escalas de 6 tons cada, nomeadas semanticamente como tokens primários.',img:['img/delta/delta10.webp']},
+        {id:'contrast',title:'Diagrama de contrastes',desc:'Matriz cruzando todas as cores do Delta para validar combinações texto/fundo em WCAG AA. Cada célula indica se o par de cores é aprovado para texto normal e grande.',img:['img/delta/delta11.webp']},
+        {id:'opacity',title:'Opacity levels',desc:'Cinco níveis semânticos de opacidade, de Semi Opaque (0.80) a Semi Transparent (0.08), nomeados como tokens ($opacity-level-semiopaque, intense, medium, light, semitransparent).',img:['img/delta/delta6.webp']},
+        {id:'borders',title:'Borders',desc:'Border Radius em seis escalas — UltraSmall (4px) a Circular (1000px) — e Border Widths em cinco níveis — None a Heavy. Cada valor nomeado como token para consistência.',img:['img/delta/delta9.webp']},
+        {id:'type',title:'Tipografia',desc:'Font Family dupla (Din Ot primary, Roboto secondary), Line Height em quatro níveis, Font Weight em cinco escalas e Font Size em treze tamanhos, todos como tokens nomeados.',img:['img/delta/delta8.webp']},
+        {id:'shadows',title:'Shadow levels',desc:'Quatro níveis de elevação — $shadow-flat, $shadow-soft, $shadow-raised, $shadow-spotlight — com Blur, X e Y especificados em cada camada.',img:['img/delta/delta7.webp']}
+      ]
+    },
+    libs:{
+      label:'Arquitetura de libs',
+      items:[
+        {id:'composicao',title:'Composição do Delta',desc:'Árvore completa de libraries: Lib Global Design Tokens e Delta Lib Core Components formam a fundação. Libs Comuns servem a todos os produtos. Libs de Time herdam e estendem. Libs de Suporte trazem ilustração e iconografia.',img:['img/delta/delta4.webp']},
+        {id:'guilda',title:'Cultura da Guilda',desc:'A Guilda do Design System é a camada cultural do Delta: encontros de discussão e defesa da construção de componentes, critérios de aceite, e cafezinhos que viram chapters de Design. Escalar o DS passava por escalar a prática do time.',img:['img/delta/delta2.webp','img/delta/delta3.webp']}
+      ]
+    },
+    anatomy:{
+      label:'Anatomia de componente',
+      items:[
+        {id:'slots',title:'Slots e partes',desc:'Documentação do desenho de componente: sistema espacial e grids, anatomia formal, exemplo de aplicação e tokens vinculados. Cada componente entregue com sua página de construção completa.',img:['img/delta/delta5.webp']},
+        {id:'states',title:'Estados',desc:'Todos os estados interativos especificados por variante: normal, hover, focus, active, disabled. Tanto para light quanto dark themes, com tokens de cor associados a cada estado.',img:['img/delta/delta15.webp']},
+        {id:'variants',title:'Variantes',desc:'Três variantes semânticas do botão — primary, secondary, tertiary — cada uma com versões filled e outlined. Hierarquia expressa via token, não via cor hard-coded.',img:['img/delta/delta12.webp']},
+        {id:'sizes',title:'Tamanhos',desc:'Escala Large, Medium e Small para cada variante, com padding, tipografia e ícones calibrados proporcionalmente. Versões filled e outlined em cada tamanho.',img:['img/delta/delta13.webp']},
+        {id:'handoff',title:'Documentação de handoff',desc:'Página de Links reunindo light themes, dark themes, spacings e exemplos aplicados. Documentação por componente que elimina ambiguidade entre design e engenharia.',img:['img/delta/delta16.webp']}
+      ]
+    }
+  };
+
+  var tabs=document.querySelectorAll('.proc-tab');
+  var sublistEl=document.getElementById('procSublist');
+  var panelEl=document.getElementById('procPanel');
+
+  function renderSublist(tabKey){
+    var items=data[tabKey].items;
+    sublistEl.innerHTML='';
+    items.forEach(function(item,idx){
+      var btn=document.createElement('button');
+      btn.className='proc-subitem'+(idx===0?' active':'');
+      btn.textContent=item.title;
+      btn.setAttribute('data-item',item.id);
+      btn.addEventListener('mouseenter',function(){activate(tabKey,item.id)});
+      btn.addEventListener('focus',function(){activate(tabKey,item.id)});
+      btn.addEventListener('click',function(){activate(tabKey,item.id)});
+      sublistEl.appendChild(btn);
+    });
+    activate(tabKey,items[0].id);
+  }
+
+  function buildVisual(item){
+    if(!item.img||!item.img.length)return '';
+    var stacked=item.img.length>1?' stacked':'';
+    var imgs=item.img.map(function(src){
+      return '<img src="'+src+'" alt="'+item.title+'" loading="lazy" onerror="this.parentNode.classList.add(\'proc-visual-error\');this.replaceWith(Object.assign(document.createElement(\'div\'),{className:\'proc-visual-placeholder\',innerHTML:\'<div class=\\\'proc-visual-placeholder-label\\\'>Imagem pendente</div><div class=\\\'proc-visual-placeholder-path\\\'>\'+this.src.split(\'/\').pop()+\'</div><div class=\\\'proc-visual-placeholder-note\\\'>Mover arquivo original de /mnt/project/ e converter para WebP qualidade 85 em img/delta/</div>\'}))">';
+    }).join('');
+    return '<div class="proc-visual'+stacked+'">'+imgs+'</div>';
+  }
+
+  function activate(tabKey,itemId){
+    var items=data[tabKey].items;
+    var item=items.find(function(i){return i.id===itemId});
+    if(!item)return;
+    document.querySelectorAll('.proc-subitem').forEach(function(b){
+      b.classList.toggle('active',b.getAttribute('data-item')===itemId);
+    });
+    panelEl.innerHTML=
+      '<div class="proc-panel-label">'+data[tabKey].label+' · '+(items.indexOf(item)+1).toString().padStart(2,'0')+'</div>'+
+      '<h3 class="proc-panel-title">'+item.title+'</h3>'+
+      '<p class="proc-panel-desc">'+item.desc+'</p>'+
+      '<div class="proc-panel-visual">'+buildVisual(item)+'</div>';
+  }
+
+  tabs.forEach(function(tab){
+    tab.addEventListener('click',function(){
+      var key=tab.getAttribute('data-tab');
+      tabs.forEach(function(t){t.classList.toggle('active',t===tab)});
+      renderSublist(key);
+    });
+  });
+
+  renderSublist('tokens');
+})();
 </script>
 </body>
 </html>
