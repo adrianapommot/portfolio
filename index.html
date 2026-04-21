@@ -31,8 +31,8 @@
   --gray-5: #EBE7E1;
   --gray-6: #F5F1EB;
   --cream: #F9F9F9;          /* fundo dos marquees (neutro) */
-  --accent: #D1F466;          /* lime principal */
-  --accent-light: #e0ff98;    /* lime claro do skills ticker */
+  --accent: #D1F466;          /* lime principal — bolinhas, hover, CTA */
+  --accent-light: #EDFFB6;    /* lime suave — texto sobre preto, highlights */
 
   /* ─── TIPOGRAFIA ──────────────────────────── */
   --font-display: 'Plus Jakarta Sans', sans-serif;
@@ -80,7 +80,6 @@ body {
   color: var(--black);
   background: var(--white);
   overflow-x: hidden;
-  cursor: none;
 }
 ::selection { background: var(--accent); color: var(--black); }
 img { display: block; max-width: 100%; }
@@ -139,23 +138,8 @@ p, .hero-body, .svc-desc, .traj-role,
 }
 
 /* ═══════════════════════════════════
-   CUSTOM CURSOR — Heart
+   NAV FLOAT — Circle menu right
    ═══════════════════════════════════ */
-.cursor-dot {
-  position: fixed;
-  top: 0; left: 0;
-  width: 14px; height: 14px;
-  pointer-events: none;
-  z-index: 9999;
-  mix-blend-mode: difference;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.3s;
-  opacity: 0;
-}
-.cursor-dot.visible { opacity: 1; }
-a, button, input, textarea, select, [role="button"] { cursor: none !important; }
-.cursor-dot svg { width: 100%; height: 100%; fill: white; }
-@media (hover: none) { .cursor-dot { display: none; } }
 .nav-float {
   position: fixed;
   top: 20px;
@@ -422,7 +406,7 @@ footer           { position: relative; z-index: 5; }
   padding: 0 clamp(24px, 3vw, 48px);
   font-family: var(--font-body);
   font-size: clamp(40px, 5vw, 64px);
-  color: var(--accent);
+  color: var(--black);
   flex-shrink: 0;
   line-height: 1;
 }
@@ -667,7 +651,7 @@ footer           { position: relative; z-index: 5; }
 .traj-list {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 40px;
   max-width: 560px;
   padding-top: 24px;
 }
@@ -736,6 +720,10 @@ footer           { position: relative; z-index: 5; }
   color: var(--gray-2);
   line-height: 1.75;
   margin-bottom: 40px;
+}
+.about-claim {
+  font-weight: 500;
+  color: var(--black);
 }
 .about-ctas { display: flex; gap: 10px; flex-wrap: wrap; }
 .btn-outline {
@@ -888,8 +876,7 @@ footer {
   white-space: nowrap;
   animation: ticker 70s linear infinite;
 }
-.skills-ticker-item,
-.skills-ticker-sep {
+.skills-ticker-item {
   font-family: var(--font-body);
   font-size: 11px;
   font-weight: 600;
@@ -899,6 +886,15 @@ footer {
   flex-shrink: 0;
   line-height: 1;
   padding: 0 6px;
+}
+.skills-ticker-sep {
+  color: var(--accent);
+  font-size: 11px;
+  line-height: 1;
+  flex-shrink: 0;
+  padding: 0 4px;
+  position: relative;
+  top: -1px;
 }
 @keyframes ticker {
   0% { transform: translateX(0); }
@@ -1030,11 +1026,6 @@ footer {
 </head>
 <body>
 
-<!-- CUSTOM CURSOR -->
-<div class="cursor-dot" id="cursorDot">
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12"/></svg>
-</div>
-
 <!-- NAV -->
 <a href="#" class="nav-name">Adriana Pommot</a>
 <div class="nav-float" id="navFloat">
@@ -1062,7 +1053,7 @@ footer {
 
   <div class="skills-ticker" aria-hidden="true">
     <div class="skills-ticker-track">
-      <span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">UI Design</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Design System</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Branding &amp; Identidade</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Motion</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Branding de Interface</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Figma</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Prototipação</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">UI Design</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Design System</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Branding &amp; Identidade</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Motion</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Branding de Interface</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Figma</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Prototipação</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">UI Design</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Design System</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Branding &amp; Identidade</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Motion</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Branding de Interface</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Figma</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Prototipação</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">UI Design</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Design System</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Branding &amp; Identidade</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Motion</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Branding de Interface</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Figma</span><span class="skills-ticker-sep">+++</span><span class="skills-ticker-item">Prototipação</span>
+      <span class="skills-ticker-sep">•</span><span class="skills-ticker-item">UI Design</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Design System</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Branding &amp; Identidade</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Motion</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Branding de Interface</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Figma</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Prototipação</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">UI Design</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Design System</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Branding &amp; Identidade</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Motion</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Branding de Interface</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Figma</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Prototipação</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">UI Design</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Design System</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Branding &amp; Identidade</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Motion</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Branding de Interface</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Figma</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Prototipação</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">UI Design</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Design System</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Branding &amp; Identidade</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Motion</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Branding de Interface</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Figma</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Prototipação</span>
     </div>
   </div>
 
@@ -1075,7 +1066,7 @@ footer {
     <div class="hero-content">
       <div class="hero-content-left">
         <h2 class="hero-h2 rv d2">De pixels a sistemas,<br>de sistemas a produtos.</h2>
-        <p class="hero-body rv d3">Interfaces de alta fidelidade,<br>Design System e Branding & Identidade<br>que funcionam na prática.<br>Do token à experiência final.</p>
+        <p class="hero-body rv d3">Interfaces de alta fidelidade,<br>Design System e Branding & Identidade.<br>Do token à experiência final.</p>
       </div>
       <div class="hero-img rv d2">
         <video src="img/telas-animadas.mp4" autoplay loop muted playsinline></video>
@@ -1083,8 +1074,7 @@ footer {
     </div>
 
     <div class="hero-clients">
-      <span class="hero-clients-label">Empresas:</span>
-      <span class="hero-clients-list">MRV · Dasa · Ford · Claro · Escale · Accenture</span>
+      <span class="hero-clients-list">MRV · Dasa · Ford · Escale · Accenture</span>
     </div>
   </div>
 </section>
@@ -1192,7 +1182,7 @@ footer {
   <div class="container">
     <div class="traj-list">
       <div class="traj-row rv"><span class="traj-meta">2025–Now · Freelance</span><span class="traj-role">Design Digital &amp; Arte · Projetos Independentes</span></div>
-      <div class="traj-row rv"><span class="traj-meta">2021–25 · Escale</span><span class="traj-role">Design Ops · Delta Design System</span></div>
+      <div class="traj-row rv"><span class="traj-meta">2021–25 · Escale</span><span class="traj-role">Product Designer Sênior · Delta Design System</span></div>
       <div class="traj-row rv"><span class="traj-meta">2020–21 · Dasa</span><span class="traj-role">Product Designer</span></div>
       <div class="traj-row rv"><span class="traj-meta">2019–20 · D3</span><span class="traj-role">Design Lead · Cliente MRV</span></div>
       <div class="traj-row rv"><span class="traj-meta">2019 · Accenture</span><span class="traj-role">Design Lead · Projeto Ford</span></div>
@@ -1211,7 +1201,7 @@ footer {
   </div>
   <div class="container">
     <div class="about-content">
-      <p class="about-text rv d1">Designer com mais de 17 anos de experiência em UI, Branding & Identidade, Design System e linguagem gráfica. Construo desde interfaces e bibliotecas de componentes até a linguagem visual para marcas e produtos digitais.<br><br>Passei por Escale, Dasa, Ford, Accenture e MRV, o que me deu<br>repertório pra consolidar desde a comunicação visual de uma marca<br>até o fluxo de experiência de um produto.<br><br><mark style="background:var(--accent);color:var(--black);font-weight:500;padding:2px 6px;border-radius:2px">Meu lugar é no craft.</mark></p>
+      <p class="about-text rv d1">Designer com mais de 17 anos de experiência em UI, Branding & Identidade, Design System e linguagem gráfica. Construo desde interfaces e bibliotecas de componentes até a linguagem visual para marcas e produtos digitais.<br><br>Passei por Escale, Dasa, Ford, Accenture e MRV, o que me deu<br>repertório pra consolidar desde a comunicação visual de uma marca<br>até o fluxo de experiência de um produto.<br><br><span class="about-claim">Meu lugar é no craft.</span></p>
       <div class="about-ctas rv d2">
         <a href="https://www.linkedin.com/in/adriana-pommot/" target="_blank" rel="noopener" class="btn-outline">
           <svg class="btn-outline-ico" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><path d="M12 1H2C1.45 1 1 1.45 1 2v10c0 0.55 0.45 1 1 1h10c0.55 0 1-0.45 1-1V2C13 1.45 12.55 1 12 1zM4.3 11.2H2.7V5.9h1.7v5.3zM3.5 5.1c-0.55 0-1-0.45-1-1s0.45-1 1-1s1 0.45 1 1S4.05 5.1 3.5 5.1zM11.2 11.2H9.5V8.5c0-0.65-0.05-1.45-0.9-1.45c-0.9 0-1.05 0.7-1.05 1.4V11.2H5.85V5.9h1.65v0.75h0.05c0.25-0.45 0.85-0.9 1.7-0.9c1.8 0 2.15 1.2 2.15 2.75v2.7z"/></svg>
@@ -1260,7 +1250,6 @@ footer {
         <div class="footer-logo">Adriana Pommot</div>
         <div class="footer-social">
           <a href="https://linkedin.com/in/adriana-pommot" target="_blank">LinkedIn</a>
-          <a href="https://instagram.com/ultraviolenta.ink" target="_blank">Instagram</a>
           <a href="mailto:adrianapommot@gmail.com">Email</a>
         </div>
       </div>
@@ -1324,18 +1313,6 @@ document.querySelectorAll('.nav-menu a').forEach(a => {
   if(document.fonts&&document.fonts.ready){document.fonts.ready.then(setH)}
   else{setTimeout(setH,300)}
 }catch(e){console.warn("text-roll error",e)}})();
-
-/* === SHARED: Dot Cursor === */
-(function(){try{
-  var dot=document.getElementById("cursorDot");
-  if(!dot||matchMedia("(hover:none)").matches)return;
-  var vis=false;
-  document.addEventListener("mousemove",function(e){
-    if(!vis){vis=true;dot.classList.add("visible")}
-    dot.style.left=e.clientX+"px";dot.style.top=e.clientY+"px";
-  });
-  document.addEventListener("mouseleave",function(){vis=false;dot.classList.remove("visible")});
-}catch(e){console.warn("cursor error",e)}})();
 </script>
 </body>
 </html>
