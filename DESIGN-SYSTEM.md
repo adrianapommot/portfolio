@@ -34,6 +34,8 @@ Nenhuma outra fonte. General Sans, Roboto Mono, Inter, DM Sans — todas removid
   --gray-5: #EBE7E1;
   --gray-6: #F5F1EB;
   --cream: #F9F9F9;
+  --surface-neutral: #F5F5F5;
+  --dark-surface: #2C2B2B;
   --accent: #D1F466;
   --accent-light: #EDFFB6;
 }
@@ -41,16 +43,23 @@ Nenhuma outra fonte. General Sans, Roboto Mono, Inter, DM Sans — todas removid
 
 Uso:
 - **--black** → texto principal, títulos
+- **--white** → texto em fundo escuro, ícones em superfícies escuras
+- **--gray-1** → variante mais escura de texto (reserva)
 - **--gray-2** → corpo de texto na homepage
 - **--gray-3** → corpo de texto nos cases, section numbers, captions, labels
 - **--gray-4** → ícones de cards, labels secundárias
 - **--gray-5** → bordas, linhas divisoras, borders de cards
-- **--gray-6** → fundo quente (homepage)
+- **--gray-6** → fundo alternado de seção nos cases
 - **--cream** → fundo de cards de contexto
-- **#F5F5F5** → fundo neutro de seções sombreadas nos cases
-- **#2C2B2B** → fundo da barra de metadata nos cases
+- **--surface-neutral** → fundo neutro de componentes (KR card, browser bar, image placeholder)
+- **--dark-surface** → fundo da barra de metadata nos cases
 - **--accent** → highlights, hover, pills de resultado
 - **--accent-light** → highlight inline, valores da metadata bar
+
+Regras:
+- Nunca usar `#000000` como preto. O preto oficial é `--black` (`#111111`).
+- Nunca usar `#F5F5F5` como fundo de seção. Fundo alternado de seção é sempre `--gray-6`.
+- Nenhum hex literal deve aparecer no código. Toda cor entra via `var(--token)`.
 
 ---
 
@@ -119,7 +128,7 @@ Ordem obrigatória:
 1. Back link (13px/500, gray-3, uppercase, seta SVG)
 2. Título uppercase em múltiplas linhas
 3. Parágrafo de foco (16px, gray-3, max-width 668px)
-4. Barra de metadata escura (#2C2B2B, full-width bleed, labels white, values accent-light)
+4. Barra de metadata escura (`--dark-surface`, full-width bleed, labels `--white`, values `--accent-light`)
 5. Hero image
 
 ### 5.3 Section Layout
@@ -160,7 +169,7 @@ Regra fundamental: **título sempre em cima, conteúdo abaixo. Nunca lado a lado
 - Frame hero: border accent, glow
 
 ### 5.9 Browser Mockups
-- Radius 12px, browser bar #F5F5F5 com 3 dots
+- Radius 12px, browser bar `--surface-neutral` com 3 dots
 - Grid 2 colunas, gap 24px
 
 ### 5.10 KR Compare Table
@@ -223,3 +232,4 @@ Breakpoints:
 - Cases Ford e Ultraviolenta: criar
 - Headline da homepage: resolver copy
 - CV: atualizar
+- Refatorar hex literais restantes nos HTMLs para usar os tokens `--dark-surface` e `--surface-neutral`
