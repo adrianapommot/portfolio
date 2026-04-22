@@ -436,6 +436,17 @@ a { color: inherit; text-decoration: none; }
   color: var(--gray-2);
 }
 
+/* Lead — parágrafo de destaque curto, mesmo tratamento dos .problem/results-statement
+   (20px / 400 / sem strongs). Usar pra primeira frase de uma seção narrativa. */
+.ed-body--lead {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.005em;
+  color: var(--black);
+  text-wrap: balance;
+}
+
 /* ═══════════════════════════════════
    CONTEXT METRICS — 3 cards horizontais (Figma)
    ═══════════════════════════════════ */
@@ -1047,9 +1058,14 @@ a { color: inherit; text-decoration: none; }
    ═══════════════════════════════════ */
 .post-pilot-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-xl);
+  grid-template-columns: 1fr 1.1fr;
+  gap: var(--space-lg);
   align-items: center;
+}
+.post-pilot-image {
+  /* iPhones respiram dentro da coluna sem estourar as bordas */
+  max-width: 92%;
+  margin: 0 auto;
 }
 .post-pilot-image img {
   width: 100%;
@@ -1058,6 +1074,7 @@ a { color: inherit; text-decoration: none; }
 }
 @media (max-width: 900px) {
   .post-pilot-grid { grid-template-columns: 1fr; gap: var(--space-lg); }
+  .post-pilot-image { max-width: 100%; }
 }
 
 /* ═══════════════════════════════════
@@ -1951,8 +1968,8 @@ footer {
       <h2 class="ed-title">Aprendizados</h2>
     </div>
     <div class="ed-content">
-      <p class="ed-body">Em fluxos financeiros sensíveis, <strong>a ausência de sinalização é tão prejudicial quanto o excesso de informação.</strong> O cliente precisa de sinais claros de que está no caminho certo, especialmente quando o próximo passo envolve dinheiro.</p>
-      <p class="ed-body">Microinterações aplicadas com critério aumentam a acessibilidade sem comprometer a hierarquia ou o desempenho do sistema. O crescimento sustentável veio de ciclos curtos orientados a experimentação, não de grandes reformulações.</p>
+      <p class="ed-body ed-body--lead">Em fluxos financeiros sensíveis, a ausência de sinalização é tão prejudicial quanto o excesso de informação.</p>
+      <p class="ed-body">O cliente precisa de sinais claros de que está no caminho certo, especialmente quando o próximo passo envolve dinheiro. Microinterações aplicadas com critério aumentam a acessibilidade sem comprometer a hierarquia ou o desempenho do sistema. O crescimento sustentável veio de ciclos curtos orientados a experimentação, não de grandes reformulações.</p>
     </div>
   </div>
 </div>
@@ -1989,7 +2006,7 @@ footer {
      ══════════════════════════════════════════ -->
 
 <section class="more-work"><div class="container">
-<h2 class="more-work-title rv">Mais Projetos</h2>
+<h2 class="more-work-title rv">Veja também</h2>
 <div class="more-work-grid">
 <a href="case-delta.html" class="more-work-card rv"><div class="more-work-card-img"><img src="https://framerusercontent.com/images/ibHIROqyHkxvVtTioI5nYgGNqSQ.png" alt="Delta DS"></div><span class="more-work-card-tag">#DesignSystem</span><div class="more-work-card-name">Delta Design System</div></a>
 <a href="case-chorume.html" class="more-work-card rv d1"><div class="more-work-card-img"><img src="img/chorume/wordmark.webp" alt="Chorume Tipografia"></div><span class="more-work-card-tag">#Tipografia #IdentidadeVisual</span><div class="more-work-card-name">Chorume Tipografia</div></a>
