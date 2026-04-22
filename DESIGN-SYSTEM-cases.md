@@ -257,7 +257,7 @@ Base estrutural de toda seção narrativa do case.
   padding: 96px 0;  /* via --section-gap */
 }
 .ed--shaded {
-  background: var(--gray-6);  /* alternância de superfície */
+  background: var(--surface-neutral);  /* alternância de superfície */
 }
 .ed-header {
   display: flex;
@@ -326,11 +326,21 @@ Mobile (1024px): 1 coluna, gap reduzido.
 
 #### Regra de alinhamento vertical (obrigatória)
 
-O topo do primeiro elemento da **coluna direita** sempre alinha com o topo do **`ed-num`** da coluna esquerda. Isso é resolvido por `align-items: flex-start` no `.ed-two-col` — **sem** `padding-top` customizado nos modifiers (`--obj`, `--strat` etc).
+O topo do primeiro elemento da **coluna direita** sempre alinha com o topo do **título (`.ed-title`)** da coluna esquerda — **nunca com o `.ed-num`**. Esta é regra do projeto inteiro, válida para home e todos os cases.
 
-**Por que é fixa:** tentativas anteriores de alinhar a coluna direita com elementos intermediários (ex: "alinhar o KR card com o badge") usavam valores mágicos tipo `padding-top: 116px` baseados em altura calculada do header + gap. Esses valores quebram toda vez que um token tipográfico muda (line-height, font-size, margin). A solução sustentável é sempre alinhar pelo topo — o leitor naturalmente entende que as duas colunas começam juntas.
+**Implementação:**
+```css
+.ed-two-col-right {
+  /* Offset = altura do ed-num + gap entre num e título */
+  padding-top: calc(var(--t-num-sm) + var(--space-xs));
+}
+```
 
-Se a coluna direita parece "órfã" visualmente por ser muito alta antes da coluna esquerda atingir conteúdo, ajuste o **conteúdo da coluna esquerda** (ex: adicionar pill/badge logo após o header) em vez de empurrar a direita.
+Com `--t-num-sm = 20px` e `--space-xs = 8px`, o offset é 28px — exatamente a altura visual que o `.ed-num` ocupa na coluna esquerda. O resultado: o número "01"/"03"/"04" fica acima visualmente, servindo como etiqueta da seção, enquanto as duas colunas de conteúdo começam no mesmo baseline (o título à esquerda, o primeiro card à direita).
+
+**Por que alinhar pelo título:** o número da seção é metadata (etiqueta/contador), não é peso narrativo. Alinhar o conteúdo da coluna direita pelo número faz o número virar âncora visual, o que confunde a hierarquia. Alinhar pelo título coloca conteúdo com conteúdo — que é o contrato de leitura natural.
+
+**Nunca:** `padding-top` com valor mágico tipo `116px` calculado a olho para "alinhar com o badge" ou "alinhar com o 3º parágrafo". Se a coluna direita precisa empurrar mais que 28px, o problema é outro (conteúdo mal estruturado na esquerda) e deve ser resolvido lá, não na direita.
 
 ### 5.5 Badge
 
@@ -390,7 +400,7 @@ Grid 4 colunas com icon SVG + nome + descrição.
 
 Responsive: 1024px → 3 cols, 640px → 2 cols.
 
-**Sem background cream, sem background white, sem border.** Decisão histórica: cards viraram estruturas abertas, sem container visual. Só ícone + texto no fluxo da página.
+**Sem background, sem border.** Decisão histórica: cards viraram estruturas abertas, sem container visual. Só ícone + texto no fluxo da página. Tons creme (antigos `--gray-6` e `--cream`) estão banidos — o único fundo alternado permitido é `--surface-neutral` (#F5F5F5).
 
 ### 5.7 KR card
 
@@ -399,7 +409,7 @@ Card com título e lista de Key Results.
 ```css
 .kr-card {
   padding: 40px;
-  background: var(--gray-6);
+  background: var(--surface-neutral);
   border-radius: 8px;
 }
 .kr-card-title {
@@ -450,7 +460,7 @@ Componente interativo: thumbs na lateral, caption + preview à direita. Clicar n
 .md-thumb {
   aspect-ratio: 1.6;
   border: 1px solid var(--gray-5);
-  background: var(--gray-6);
+  background: var(--surface-neutral);
   cursor: pointer;
   opacity: 0.5;
   transition: opacity 0.3s;
@@ -493,7 +503,7 @@ Componente interativo: thumbs na lateral, caption + preview à direita. Clicar n
 }
 .md-preview {
   aspect-ratio: 16/10;
-  background: var(--gray-6);
+  background: var(--surface-neutral);
   overflow: hidden;
 }
 .md-img {
@@ -516,7 +526,7 @@ Cartão de destaque com 4 métricas principais do case.
   grid-template-columns: repeat(4, 1fr);
   gap: 0;
   padding: 48px 40px;
-  background: var(--gray-6);
+  background: var(--surface-neutral);
   border-radius: 8px;
   margin: 48px 0;
 }
@@ -669,7 +679,7 @@ Seção final linkando 2 outros cases.
 .more-work-card-img {
   aspect-ratio: 3/2;
   overflow: hidden;
-  background: var(--gray-6);
+  background: var(--surface-neutral);
 }
 .more-work-card-img img {
   width: 100%; height: 100%;
@@ -773,7 +783,7 @@ Atualmente apontam para MRV e Delta. Quando Chorume e Dasa ficarem prontos, reba
 - Não use cores novas, tokens novos ou fontes novas em case
 - Não misture português e inglês (termos técnicos consagrados em inglês são aceitos: "handoff", "onboarding", "design token")
 - Não escreva em terceira pessoa ("a designer desenvolveu...") — é primeira pessoa moderada
-- Não reintroduza cards com fundo cream ou white com borders — o padrão atual é card sem container visual
+- Não reintroduza tons creme (`#F5F1EB`, `#F9F9F9`) em lugar algum — estão extirpados do DS; único fundo alternado é `--surface-neutral` (#F5F5F5, cinza neutro frio)
 - Não use spacing 120px entre seções — o padrão é 96px via `--section-gap`
 - Não adicione sprites decorativos (ícones sem função, divisores ornamentais, pull quotes com aspas gigantes)
 

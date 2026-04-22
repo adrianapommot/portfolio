@@ -32,8 +32,6 @@ Nenhuma outra fonte. General Sans, Roboto Mono, Inter, DM Sans — todas removid
   --gray-3: #756F67;
   --gray-4: #B8B2A8;
   --gray-5: #EBE7E1;
-  --gray-6: #F5F1EB;
-  --cream: #F9F9F9;
   --surface-neutral: #F5F5F5;
   --dark-surface: #2C2B2B;
   --accent: #D1F466;
@@ -43,23 +41,24 @@ Nenhuma outra fonte. General Sans, Roboto Mono, Inter, DM Sans — todas removid
 
 Uso:
 - **--black** → texto principal, títulos
-- **--white** → texto em fundo escuro, ícones em superfícies escuras
+- **--white** → fundo padrão, texto em fundo escuro, ícones em superfícies escuras
 - **--gray-1** → variante mais escura de texto (reserva)
-- **--gray-2** → corpo de texto na homepage
-- **--gray-3** → corpo de texto nos cases, section numbers, captions, labels
-- **--gray-4** → ícones de cards, labels secundárias
+- **--gray-2** → corpo de texto padrão (home e cases)
+- **--gray-3** → section numbers, captions, labels secundárias
+- **--gray-4** → ícones de cards, labels terciárias, divisores sutis
 - **--gray-5** → bordas, linhas divisoras, borders de cards
-- **--gray-6** → fundo alternado de seção nos cases
-- **--cream** → fundo de cards de contexto
-- **--surface-neutral** → fundo neutro de componentes (KR card, browser bar, image placeholder)
+- **--surface-neutral** → único fundo alternado de seção, placeholders de imagem, superfícies de componentes
 - **--dark-surface** → fundo da barra de metadata nos cases
 - **--accent** → highlights, hover, pills de resultado
 - **--accent-light** → highlight inline, valores da metadata bar
 
 Regras:
 - Nunca usar `#000000` como preto. O preto oficial é `--black` (`#111111`).
-- Nunca usar `#F5F5F5` como fundo de seção. Fundo alternado de seção é sempre `--gray-6`.
 - Nenhum hex literal deve aparecer no código. Toda cor entra via `var(--token)`.
+
+### Tons creme — PROIBIDOS
+
+`#F5F1EB` (antigo `--gray-6`) e `#F9F9F9` (antigo `--cream`) estão **extirpados do sistema**. Qualquer undertone amarelado/bege está banido como fundo de seção ou de card. A paleta de superfícies não-brancas é exclusivamente **`--surface-neutral` (#F5F5F5)**, que é cinza neutro frio — sem tom quente.
 
 ---
 
@@ -141,7 +140,7 @@ Regra fundamental: **título sempre em cima, conteúdo abaixo. Nunca lado a lado
 ```
 
 ### 5.4 Cards de Contexto
-- Bg cream, border gray-5, radius 8px, padding 21px
+- Bg white ou surface-neutral, border gray-5, radius 8px, padding 21px
 - Número 40px + ícone SVG (alinhados horizontal)
 - Label 16px/500/uppercase abaixo
 - Separador 26px × 1px gray-5
@@ -226,20 +225,20 @@ Body text tem **um único** padrão em todo o portfólio. Divergir entre home e 
 Body de destaque (`--t-body-lg`, 18px) pode ser usado em seções específicas (objetivo, estratégia, `md-title`, statement de problema), mas a regra padrão é 14px.
 
 ### Alinhamento vertical entre colunas
-Em qualquer layout two-column (home ou case), o **topo do primeiro elemento** de cada coluna alinha na mesma linha base. Usar `align-items: flex-start` no container e **nunca** `padding-top` arbitrário calculado para alinhar com elementos específicos (ex: "alinhar com o badge da esquerda") — esses valores mágicos quebram quando a tipografia muda.
+Em qualquer layout two-column (home ou case), o **topo do primeiro elemento da coluna direita** alinha com o **topo do título** da coluna esquerda — **nunca com o número/etiqueta** (ex: `.ed-num`). O número é metadata (fica acima, fora do grid), e as duas colunas de conteúdo começam no mesmo baseline.
+
+Implementação via `padding-top` calculado no container direito = altura do ed-num + gap. Exemplo em cases: `padding-top: calc(var(--t-num-sm) + var(--space-xs))` = 28px. Em outros contextos, calcular do mesmo jeito com os tokens correspondentes. **Nunca** usar valores mágicos arbitrários tipo `116px` — esses quebram quando a tipografia muda.
 
 ---
 
 ## 7.2 Disciplina de variação de estilos
 
-A escala tipográfica do projeto tem **10 tokens**. Se um elemento novo precisa de tamanho fora desses 10, primeiro revise se dá pra reaproveitar.
+A escala tipográfica do projeto tem **8 tokens**. Se um elemento novo precisa de tamanho fora desses 8, primeiro revise se dá pra reaproveitar — ou ajuste o conteúdo, não a escala.
 
 ```css
 --t-hero      /* clamp(44, 7vw, 96) — case-title, cta-title, more-work-title */
---t-h2        /* 32  — .ed-title (seções 01-07) */
---t-h3        /* 22  — .ed-subhead (subseções) */
---t-body-lg   /* 18  — destaque: objetivo, estratégia, md-title */
---t-body      /* 14  — parágrafos padrão (mesmo que home) */
+--t-h2        /* 32  — TODOS os títulos de seção e subseção */
+--t-body      /* 14  — TODO body text (mesmo que home) */
 --t-label     /* 13  — labels, captions, card-titles uppercase */
 --t-caption   /* 12  — footer, nav-links, micro-captions */
 --t-num-xl    /* 48  — r-num, ba-num, result-num */
@@ -247,7 +246,11 @@ A escala tipográfica do projeto tem **10 tokens**. Se um elemento novo precisa 
 --t-num-sm    /* 20  — .ed-num, more-work-card-name */
 ```
 
-Pesos predominantes: **400** e **500**. `600` só para bold inline (strong). Não usar 700+.
+**Princípios não-negociáveis:**
+- Destaque em body **nunca** é feito por tamanho — usar `font-weight: 500` ou `<strong>`
+- Hierarquia seção vs subseção aparece via presença/ausência do `.ed-num` (número 01-07), não via tamanho do título
+- Pesos predominantes: **400** e **500**. `600` só para bold inline (strong). Nunca 700+
+- Se for tentado a criar `--t-body-lg` ou `--t-h3`: pause — a diferença entre "body normal" e "body destaque" é resolvida por weight, não por size
 
 ---
 
