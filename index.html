@@ -475,172 +475,136 @@ footer           { position: relative; z-index: 5; }
 }
 
 /* ═══════════════════════════════════
-   PROJETOS — Effica-style editorial grid
-   Corner marks + 4-col: number | title | image | desc+tags
+   PROJETOS — layout cinematic alternado (dark)
+   Cada projeto ocupa uma "faixa" full-width com imagem de um lado e
+   texto do outro. Lados alternam pra criar ritmo editorial.
    ═══════════════════════════════════ */
 .projects-section {
   padding: 0 0 var(--section-gap);
   background: var(--black);
 }
-.proj-grid {
-  position: relative;
-}
-.proj-item {
-  display: grid;
-  grid-template-columns: 80px 1fr 1.2fr 1fr;
-  gap: 48px;
-  align-items: start;
-  padding: 48px 0;
-  border-bottom: 1px solid var(--gray-5);
-  position: relative;
-  transition: background 0.4s;
-}
-.proj-item:first-of-type { border-top: 1px solid var(--gray-5); }
-
-/* Corner marks — Effica editorial grid */
-.proj-item::before,
-.proj-item::after {
-  content: '+';
-  position: absolute;
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 400;
-  color: var(--gray-4);
-  line-height: 1;
-  pointer-events: none;
-}
-.proj-item::before {
-  top: -6px;
-  left: -20px;
-}
-.proj-item::after {
-  top: -6px;
-  right: -20px;
-}
-.proj-item:last-of-type .proj-corner-bl,
-.proj-item:last-of-type .proj-corner-br {
-  position: absolute;
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 400;
-  color: var(--gray-4);
-  line-height: 1;
-  pointer-events: none;
-  bottom: -6px;
-}
-.proj-item:last-of-type .proj-corner-bl { left: -20px; }
-.proj-item:last-of-type .proj-corner-br { right: -20px; }
-
-.proj-item:hover {
-  background: var(--gray-6);
-  margin: 0 -24px;
-  padding-left: 24px;
-  padding-right: 24px;
-}
-
-.proj-num {
-  font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--gray-4);
-  line-height: 1;
-  letter-spacing: 0.04em;
-  padding-top: 6px;
-}
-.proj-info {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding-top: 4px;
-}
-.proj-name {
-  font-family: var(--font-display);
-  font-size: clamp(22px, 2.5vw, 32px);
-  font-weight: 400;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
-}
-.proj-img {
-  width: 100%;
-  aspect-ratio: 3/2;
-  overflow: hidden;
-  border-radius: 4px;
-  background: var(--gray-6);
-}
-.proj-img img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
-}
-.proj-item:hover .proj-img img { transform: scale(1.03); }
-.proj-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  padding-top: 4px;
-}
-.proj-desc {
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 400;
-  color: var(--gray-3);
-  line-height: 1.7;
-}
-.proj-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-.proj-tag {
-  display: inline-block;
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--gray-4);
-  white-space: nowrap;
-}
-
-/* Projects dark overrides — 3 tons: white, 50% white, 12% white */
-.projects-section .marquee { background: transparent; }
+.projects-section .marquee { background: transparent; border-bottom-color: rgba(255,255,255,0.12); }
 .projects-section .marquee-text { color: var(--white); }
 .projects-section .marquee-sep { color: var(--accent); }
-.projects-section .marquee { border-bottom-color: rgba(255,255,255,0.12); }
-.projects-section .proj-item { border-color: rgba(255,255,255,0.12); }
-.projects-section .proj-item:first-of-type { border-top: none; }
-.projects-section .proj-item:last-of-type { border-bottom: none; }
-.projects-section .proj-item::before,
-.projects-section .proj-item::after,
-.projects-section .proj-item .proj-corner-bl,
-.projects-section .proj-item .proj-corner-br { color: rgba(255,255,255,0.12); }
-.projects-section .proj-item:first-of-type::before,
-.projects-section .proj-item:first-of-type::after { display: none; }
-.projects-section .proj-item:last-of-type .proj-corner-bl,
-.projects-section .proj-item:last-of-type .proj-corner-br { display: none; }
-.projects-section .proj-item:hover { background: rgba(255,255,255,0.04); }
-.projects-section .proj-num { color: var(--accent); }
-.projects-section .proj-name {
-  color: var(--white);
-  font-weight: 400;
-  font-size: 24px;
+
+.proj-list {
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
+  padding: 80px 0 40px;
 }
-.projects-section .proj-desc {
-  color: rgba(255,255,255,0.5);
+
+.proj-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  transition: opacity 0.4s;
+}
+.proj-hero:hover { opacity: 0.94; }
+
+/* Lados alternados. O texto sempre fica colado no gap (próximo da imagem),
+   criando um "centro de gravidade" simétrico entre as duas faixas. */
+.proj-hero--right .proj-hero-text { order: 1; justify-self: end; text-align: right; }
+.proj-hero--right .proj-hero-img { order: 2; }
+.proj-hero--left .proj-hero-img { order: 1; }
+.proj-hero--left .proj-hero-text { order: 2; }
+.proj-hero--right .proj-hero-tags { justify-content: flex-end; }
+.proj-hero--right .proj-hero-cta { align-self: flex-end; }
+
+/* Imagem */
+.proj-hero-img {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.04);
+}
+.proj-hero-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.4s;
+  filter: saturate(0.92);
+}
+.proj-hero:hover .proj-hero-img img {
+  transform: scale(1.03);
+  filter: saturate(1.05);
+}
+
+/* Texto */
+.proj-hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 520px;
+}
+.proj-hero-num {
   font-family: var(--font-display);
+  font-size: clamp(56px, 6vw, 96px);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 8px;
+}
+.proj-hero-name {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.2vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--white);
+  text-wrap: balance;
+}
+.proj-hero-desc {
+  font-family: var(--font-body);
   font-size: 14px;
   font-weight: 400;
-  line-height: 1.6;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.6);
+  max-width: 440px;
+  text-wrap: pretty;
 }
-.projects-section .proj-tag {
-  color: rgba(255,255,255,0.5);
+.proj-hero-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.proj-hero-tags .proj-tag {
+  display: inline-block;
+  padding: 6px 14px;
   font-family: var(--font-display);
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.65);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 999px;
+  white-space: nowrap;
 }
-.projects-section .proj-img { background: rgba(255,255,255,0.04); }
+.proj-hero-cta {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: gap 0.3s, color 0.3s;
+}
+.proj-hero-cta::after {
+  content: '→';
+  font-size: 15px;
+  transition: transform 0.3s;
+}
+.proj-hero:hover .proj-hero-cta { gap: 14px; }
+.proj-hero:hover .proj-hero-cta::after { transform: translateX(2px); }
 
 /* ═══════════════════════════════════
    TRAJECTORY — Clean table
@@ -928,13 +892,13 @@ footer {
 /* Rows: uniform fade up, no lateral slide */
 .svc-row.rv,
 .traj-row.rv,
-.proj-item.rv {
+.proj-hero.rv {
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(24px);
 }
 .svc-row.rv.visible,
 .traj-row.rv.visible,
-.proj-item.rv.visible {
+.proj-hero.rv.visible {
   opacity: 1;
   transform: none;
 }
@@ -993,10 +957,19 @@ footer {
   .hero-content-left { border-right: none; padding: 32px 0; }
   .hero-img { padding: 0; }
   .hero-img { aspect-ratio: 16/9; }
-  .proj-item { grid-template-columns: 60px 1fr 1.2fr; gap: 24px; padding: 40px 0; }
-  .proj-meta { display: none; }
-  .proj-item::before, .proj-item::after { display: none; }
-  .proj-item:hover { margin: 0; padding-left: 0; padding-right: 0; }
+  .proj-list { gap: 80px; padding: 56px 0 32px; }
+  .proj-hero { grid-template-columns: 1fr; gap: 32px; }
+  .proj-hero--left .proj-hero-img,
+  .proj-hero--right .proj-hero-img { order: 1; }
+  .proj-hero--left .proj-hero-text,
+  .proj-hero--right .proj-hero-text {
+    order: 2;
+    justify-self: start;
+    text-align: left;
+    max-width: 100%;
+  }
+  .proj-hero--right .proj-hero-tags { justify-content: flex-start; }
+  .proj-hero--right .proj-hero-cta { align-self: flex-start; }
   .about-content { max-width: 100%; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
@@ -1008,9 +981,9 @@ footer {
   .hero-bar { margin-bottom: 0; }
   .svc-row { grid-template-columns: 1fr; gap: 12px; padding: 24px 0; }
   .svc-num { display: none; }
-  .proj-item { grid-template-columns: 1fr; gap: 20px; padding: 32px 0; }
-  .proj-num { font-size: 13px; }
-  .proj-meta { display: none; }
+  .proj-list { gap: 64px; }
+  .proj-hero-num { font-size: 48px; }
+  .proj-hero-name { font-size: 26px; }
   .services-section, .projects-section, .trajectory-section,
   .about-section { padding: 0 0 80px; }
   .section-title { margin-bottom: 24px; }
@@ -1087,54 +1060,72 @@ footer {
     </div>
   </div>
   <div class="container">
-    <div class="proj-grid">
+    <div class="proj-list">
 
-    <a href="case-mrv.html" class="proj-item rv">
-      <span class="proj-num">/01</span>
-      <div class="proj-info">
-        <h3 class="proj-name">MRV</h3>
-      </div>
-      <div class="proj-img"><img src="https://framerusercontent.com/images/tJmuIg4YsOc9pGcsP4sUgCj5gw.jpg?width=1200&height=670" alt="MRV"></div>
-      <div class="proj-meta">
-        <p class="proj-desc">UI e microinterações para<br>renegociação financeira no<br>autoatendimento do cliente.</p>
-        <div class="proj-tags">
-          <span class="proj-tag">#ui</span>
-          <span class="proj-tag">#fintech</span>
+      <a href="case-mrv.html" class="proj-hero proj-hero--left rv">
+        <div class="proj-hero-img">
+          <img src="https://framerusercontent.com/images/tJmuIg4YsOc9pGcsP4sUgCj5gw.jpg?width=1200&height=900" alt="MRV Ecossistema Financeiro">
         </div>
-      </div>
-    </a>
+        <div class="proj-hero-text">
+          <div class="proj-hero-num">01</div>
+          <h3 class="proj-hero-name">MRV<br>Ecossistema Financeiro</h3>
+          <p class="proj-hero-desc">Redesign do autoatendimento financeiro da maior construtora da América Latina, com 27% de engajamento e 14% de conversão autônoma no piloto.</p>
+          <div class="proj-hero-tags">
+            <span class="proj-tag">Product Design</span>
+            <span class="proj-tag">Fintech</span>
+            <span class="proj-tag">Design System</span>
+          </div>
+          <span class="proj-hero-cta">Ver case</span>
+        </div>
+      </a>
 
-    <a href="case-delta.html" class="proj-item rv">
-      <span class="proj-num">/02</span>
-      <div class="proj-info">
-        <h3 class="proj-name">Delta<br>Design System</h3>
-      </div>
-      <div class="proj-img"><img src="https://framerusercontent.com/images/ibHIROqyHkxvVtTioI5nYgGNqSQ.png?width=1200&height=750" alt="Delta Design System"></div>
-      <div class="proj-meta">
-        <p class="proj-desc">Tokens, componentes e bibliotecas<br>que criei e mantive para múltiplos<br>produtos na Escale.</p>
-        <div class="proj-tags">
-          <span class="proj-tag">#designsystem</span>
-          <span class="proj-tag">#tokens</span>
+      <a href="case-ford.html" class="proj-hero proj-hero--right rv">
+        <div class="proj-hero-text">
+          <div class="proj-hero-num">02</div>
+          <h3 class="proj-hero-name">Ford<br>Immersion Room</h3>
+          <p class="proj-hero-desc">Identidade visual e design system espacial para sala de imersão que traduziu um ano de pesquisa cross-cultural em experiência tangível.</p>
+          <div class="proj-hero-tags">
+            <span class="proj-tag">Identidade Visual</span>
+            <span class="proj-tag">Design Espacial</span>
+          </div>
+          <span class="proj-hero-cta">Ver case</span>
         </div>
-      </div>
-    </a>
+        <div class="proj-hero-img">
+          <img src="img/ford/hero-room.webp" alt="Ford Immersion Room">
+        </div>
+      </a>
 
-    <a href="case-chorume.html" class="proj-item rv">
-      <span class="proj-num">/03</span>
-      <div class="proj-info">
-        <h3 class="proj-name">Chorume<br>Tipografia</h3>
-      </div>
-      <div class="proj-img"><img src="img/chorume/alfabeto-cenografia.webp" alt="Chorume Tipografia" style="object-fit:cover;object-position:center 20%"></div>
-      <div class="proj-meta">
-        <p class="proj-desc">Tipografia vernacular, branding<br>e direção de arte para um<br>produto fictício premiado.</p>
-        <div class="proj-tags">
-          <span class="proj-tag">#tipografia</span>
-          <span class="proj-tag">#branding</span>
+      <a href="case-delta.html" class="proj-hero proj-hero--left rv">
+        <div class="proj-hero-img">
+          <img src="img/delta/hero-mockup.webp" alt="Delta Design System">
         </div>
-      </div>
-      <span class="proj-corner-bl">+</span>
-      <span class="proj-corner-br">+</span>
-    </a>
+        <div class="proj-hero-text">
+          <div class="proj-hero-num">03</div>
+          <h3 class="proj-hero-name">Delta<br>Design System</h3>
+          <p class="proj-hero-desc">Tokens, componentes e bibliotecas que criei e mantive para múltiplos produtos na Escale.</p>
+          <div class="proj-hero-tags">
+            <span class="proj-tag">Design System</span>
+            <span class="proj-tag">Tokens</span>
+          </div>
+          <span class="proj-hero-cta">Ver case</span>
+        </div>
+      </a>
+
+      <a href="case-chorume.html" class="proj-hero proj-hero--right rv">
+        <div class="proj-hero-text">
+          <div class="proj-hero-num">04</div>
+          <h3 class="proj-hero-name">Chorume<br>Tipografia</h3>
+          <p class="proj-hero-desc">Tipografia vernacular, branding e direção de arte para um produto fictício premiado.</p>
+          <div class="proj-hero-tags">
+            <span class="proj-tag">Tipografia</span>
+            <span class="proj-tag">Branding</span>
+          </div>
+          <span class="proj-hero-cta">Ver case</span>
+        </div>
+        <div class="proj-hero-img">
+          <img src="img/chorume/garrafa-pantano-hero.png" alt="Chorume — garrafa de cachaça no pântano">
+        </div>
+      </a>
 
     </div>
   </div>
