@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Ford Immersion Room — Identidade visual e design system espacial para sala de imersão. Case por Adriana Pommot.">
+<meta property="og:title" content="Ford · Adriana Pommot">
+<meta property="og:description" content="Identidade visual e design system espacial para uma sala de imersão que traduziu um ano de pesquisa cross-cultural em experiência tangível para os times de engenharia da Ford.">
+<meta property="og:type" content="article">
+<title>Ford · Adriana Pommot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════
+   TOKENS
+   ═══════════════════════════════════ */
+:root {
+  --black: #111111;
+  --white: #ffffff;
+  --gray-1: #37342F;
+  --gray-2: #585550;
+  --gray-3: #756F67;
+  --gray-4: #B8B2A8;
+  --gray-5: #EBE7E1;
+  --surface-neutral: #F5F5F5; /* fundo de seção alternada e placeholders — neutro frio, SEM undertone creme */
+  --accent: #D1F466;
+  --accent-light: #EDFFB6;
+  --dark-surface: #2C2B2B;
+  --font-display: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --max-w: 1440px;
+  --px: 40px;
+
+  /* Escala de espaçamento — base 8px (Apple HIG) */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 40px;
+  --space-xl: 64px;
+  --space-xxl: 96px;
+
+  /* Escala tipográfica — 8 tokens, disciplinada. */
+  --t-hero:     clamp(44px, 7vw, 96px);
+  --t-h2:       32px;
+  --t-body:     14px;
+  --t-label:    13px;
+  --t-caption:  12px;
+  --t-num-xl:   48px;
+  --t-num-md:   28px;
+  --t-num-sm:   20px;
+}
+
+/* ═══════════════════════════════════
+   RESET
+   ═══════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  color: var(--black);
+  background: var(--white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--accent); color: var(--black); }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--px);
+}
+
+/* ═══════════════════════════════════
+   NAV
+   ═══════════════════════════════════ */
+.nav-name {
+  position: fixed;
+  top: 20px;
+  left: max(calc(var(--px) - 20px), calc((100vw - var(--max-w)) / 2 + var(--px) - 20px));
+  z-index: 100;
+  font-family: var(--font-display);
+  font-size: var(--t-label);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(12px) saturate(1.3);
+  -webkit-backdrop-filter: blur(12px) saturate(1.3);
+  padding: 8px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.nav-name-roll { display: block; overflow: hidden; }
+.nav-name-roll span {
+  display: block;
+  line-height: 1;
+  transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.nav-name:hover .nav-name-roll span { transform: translateY(-100%); }
+.nav-float {
+  position: fixed;
+  top: 20px;
+  right: max(var(--px), calc((100vw - var(--max-w)) / 2 + var(--px)));
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+.nav-toggle {
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  border: 1px solid var(--gray-5);
+  cursor: pointer;
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(12px) saturate(1.3);
+  -webkit-backdrop-filter: blur(12px) saturate(1.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, border-color 0.3s;
+}
+.nav-toggle:hover { background: var(--accent); border-color: var(--accent); }
+.nav-toggle svg {
+  width: 22px; height: 22px;
+  stroke: var(--black);
+  stroke-width: 1;
+  stroke-linecap: square;
+  fill: none;
+}
+.nav-toggle .icon-x { display: none; }
+.nav-float.open .nav-toggle .icon-menu { display: none; }
+.nav-float.open .nav-toggle .icon-x { display: block; }
+.nav-float.open .nav-toggle { background: var(--black); }
+.nav-float.open .nav-toggle svg { stroke: var(--white); }
+.nav-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.nav-float.open .nav-menu { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.nav-menu a {
+  font-family: var(--font-display);
+  font-size: var(--t-caption);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: color 0.25s, background 0.25s;
+}
+.nav-menu .nav-cta {
+  color: var(--white);
+  background: var(--black);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-menu .nav-cta:hover { color: var(--accent); }
+.nav-menu .nav-cta svg {
+  width: 13px; height: 13px;
+  fill: none; stroke: currentColor; stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.nav-menu .nav-link {
+  color: var(--gray-2);
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(12px) saturate(1.3);
+  -webkit-backdrop-filter: blur(12px) saturate(1.3);
+  position: relative;
+}
+.nav-menu .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 6px; left: 20px; right: 20px;
+  height: 1.5px;
+  background: var(--black);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.nav-menu .nav-link:hover { color: var(--black); }
+.nav-menu .nav-link:hover::after { transform: scaleX(1); }
+
+/* ═══════════════════════════════════
+   CASE HEADER
+   ═══════════════════════════════════ */
+.case-header { padding-top: 120px; }
+.case-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gray-3);
+  margin-bottom: 48px;
+  transition: opacity 0.3s;
+}
+.case-back:hover { opacity: 0.5; }
+.case-back svg {
+  width: 14px; height: 14px;
+  fill: none; stroke: currentColor; stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.case-title {
+  font-family: var(--font-display);
+  font-size: var(--t-hero);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-lg);
+  margin-left: -0.04em;
+  text-wrap: balance;
+}
+.case-focus {
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--gray-2);
+  max-width: 668px;
+  margin-bottom: 0;
+  text-wrap: pretty;
+}
+.case-focus strong { color: var(--black); font-weight: 600; }
+
+/* Metadata bar — full-width bleed */
+.case-meta-bar {
+  background: var(--dark-surface);
+  padding: 24px 0;
+  margin-top: 40px;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  padding-left: max(var(--px), calc((100vw - var(--max-w)) / 2 + var(--px)));
+  padding-right: max(var(--px), calc((100vw - var(--max-w)) / 2 + var(--px)));
+}
+.case-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 0;
+}
+.case-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 40px;
+  border-right: 1px solid rgba(255,255,255,0.12);
+}
+.case-meta-item:first-child { padding-left: 0; }
+.case-meta-item:last-child { border-right: none; }
+.case-meta-label {
+  font-family: var(--font-display);
+  font-size: var(--t-caption);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+.case-meta-value {
+  font-family: var(--font-display);
+  font-size: var(--t-label);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--accent-light);
+}
+
+/* ═══════════════════════════════════
+   HERO IMAGE
+   ═══════════════════════════════════ */
+.case-hero-img { margin-top: var(--space-lg); overflow: hidden; }
+.case-hero-img img { width: 100%; height: auto; display: block; }
+
+/* ═══════════════════════════════════
+   EDITORIAL SECTIONS
+   ═══════════════════════════════════ */
+.ed {
+  padding: var(--space-xxl) 0;
+  border-top: 1px solid var(--gray-5);
+}
+.ed--shaded {
+  background: var(--surface-neutral);
+}
+.ed-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-lg);
+}
+.ed-content { max-width: 668px; }
+.ed-content > * + * { margin-top: var(--space-sm); }
+
+/* Section number (H2 counter) */
+.ed-num {
+  font-family: var(--font-display);
+  font-size: var(--t-num-sm);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: var(--gray-3);
+}
+
+/* Section heading H2 */
+.ed-title {
+  font-family: var(--font-display);
+  font-size: var(--t-h2);
+  font-weight: 500;
+  line-height: 1.14;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--black);
+  text-wrap: balance;
+}
+
+/* Subsection heading — mesmo tamanho do ed-title (sem número ao lado) */
+.ed-subhead {
+  font-family: var(--font-display);
+  font-size: var(--t-h2);
+  font-weight: 500;
+  line-height: 1.14;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--black);
+  text-wrap: balance;
+}
+
+/* Bloco de subseção — separador + respiro consistente */
+.ed-subsection {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--gray-5);
+}
+.ed-subsection > .ed-subhead {
+  margin-bottom: var(--space-md);
+}
+
+/* Padrão unificado: ed-header com só subhead (sem .ed-num) — colado no body abaixo */
+.ed-header:has(.ed-subhead):not(:has(.ed-num)) {
+  margin-bottom: var(--space-xs);
+}
+.ed-header:has(.ed-subhead):not(:has(.ed-num)) + .ed-content .ed-body {
+  text-wrap: balance;
+  max-width: 780px;
+}
+
+/* Body text — unificado com a home (14/gray-2) */
+.ed-body {
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  font-weight: 400;
+  color: var(--gray-2);
+  line-height: 1.75;
+  text-wrap: pretty;
+}
+.ed-body strong { color: var(--black); font-weight: 600; }
+
+/* Lead — parágrafo de destaque curto, mesmo tratamento do .problem-statement */
+.ed-body--lead {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.005em;
+  color: var(--black);
+  text-wrap: balance;
+}
+
+/* ═══════════════════════════════════
+   PROBLEM STATEMENT (seção 02) — pull quote narrativo
+   ═══════════════════════════════════ */
+.problem-statement {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.005em;
+  color: var(--black);
+  max-width: 780px;
+  margin-bottom: var(--space-lg);
+  text-wrap: balance;
+}
+
+/* ═══════════════════════════════════
+   FULL-WIDTH IMAGE
+   ═══════════════════════════════════ */
+.full-img {
+  margin: var(--space-lg) 0 0;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.full-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.img-caption {
+  font-family: var(--font-display);
+  font-size: var(--t-label);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.03em;
+  color: var(--gray-3);
+  margin-top: 12px;
+  max-width: 720px;
+}
+
+/* ═══════════════════════════════════
+   IMAGE GRID
+   ═══════════════════════════════════ */
+.img-grid {
+  display: grid;
+  gap: 16px;
+  margin: var(--space-lg) 0 0;
+}
+.img-grid-2 { grid-template-columns: 1fr 1fr; }
+.img-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+.img-grid > div { display: flex; flex-direction: column; }
+.img-grid img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+.img-grid .img-caption { margin-top: 12px; }
+
+/* ═══════════════════════════════════
+   RESULTS (seção 06) — 4 stats lado a lado, peso igual
+   ═══════════════════════════════════ */
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  padding: 56px 0;
+  border-top: 1px solid var(--gray-5);
+  border-bottom: 1px solid var(--gray-5);
+  margin-top: var(--space-lg);
+}
+.hero-stats .stat {
+  padding: 0 32px;
+  border-right: 1px solid var(--gray-5);
+}
+.hero-stats .stat:first-child { padding-left: 0; }
+.hero-stats .stat:last-child { border-right: none; padding-right: 0; }
+.hero-stats .stat-num {
+  font-family: var(--font-display);
+  font-size: var(--t-num-xl);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--black);
+  margin-bottom: 16px;
+  font-variant-numeric: tabular-nums;
+}
+.hero-stats .stat-num .pct {
+  font-size: 0.55em;
+  font-weight: 400;
+  color: var(--gray-3);
+  margin-left: 4px;
+}
+.hero-stats .stat-label {
+  font-family: var(--font-body);
+  font-size: var(--t-label);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--gray-2);
+  text-wrap: pretty;
+}
+
+/* ═══════════════════════════════════
+   MORE WORK
+   ═══════════════════════════════════ */
+.more-work { padding: 120px 0; border-top: 1px solid var(--gray-5); }
+.more-work-title {
+  font-family: var(--font-display);
+  font-size: var(--t-hero);
+  font-weight: 400;
+  line-height: 1.07;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-xl);
+  text-wrap: balance;
+}
+.more-work-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+.more-work-card { display: block; transition: opacity 0.3s; }
+.more-work-card:hover { opacity: 0.8; }
+.more-work-card-img {
+  width: 100%;
+  aspect-ratio: 3/2;
+  overflow: hidden;
+  background: var(--surface-neutral);
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+.more-work-card-img img { width: 100%; height: 100%; object-fit: cover; }
+.more-work-card-tag {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--t-caption);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gray-4);
+  margin-bottom: 12px;
+}
+.more-work-card-name {
+  font-family: var(--font-display);
+  font-size: var(--t-num-sm);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+/* ═══════════════════════════════════
+   CTA + FOOTER
+   ═══════════════════════════════════ */
+.cta-section { background: var(--black); color: var(--white); padding: 120px 0; text-align: center; }
+.cta-title {
+  font-family: var(--font-display);
+  font-size: var(--t-hero);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-md);
+  text-wrap: balance;
+}
+.cta-title a { color: var(--white); transition: color 0.3s; }
+.cta-title a:hover { color: var(--accent); }
+.cta-subtitle {
+  font-family: var(--font-body);
+  font-size: var(--t-label);
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 48px;
+}
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 30px;
+  font-family: var(--font-display);
+  font-size: var(--t-caption);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: var(--white);
+  border-radius: 999px;
+  transition: opacity 0.3s;
+}
+.cta-btn:hover { background: var(--accent); color: var(--black); }
+
+footer {
+  background: var(--black);
+  color: var(--white);
+  padding: 64px 0 32px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 64px;
+}
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: var(--t-label);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.footer-social { display: flex; flex-direction: column; gap: 10px; }
+.footer-social a { font-family: var(--font-body); font-size: var(--t-label); color: rgba(255,255,255,0.4); transition: color 0.3s; }
+.footer-social a:hover { color: var(--white); }
+.footer-col-title {
+  font-family: var(--font-display);
+  font-size: var(--t-caption);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  margin-bottom: 20px;
+}
+.footer-col-links { display: flex; flex-direction: column; gap: 10px; }
+.footer-col-links a, .footer-col-links span { font-family: var(--font-body); font-size: var(--t-label); color: rgba(255,255,255,0.4); transition: color 0.3s; }
+.footer-col-links a:hover { color: var(--white); }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.footer-copy { font-family: var(--font-body); font-size: var(--t-caption); color: rgba(255,255,255,0.25); }
+
+/* ═══════════════════════════════════
+   REVEAL
+   ═══════════════════════════════════ */
+.rv {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.rv.visible { opacity: 1; transform: none; }
+.d1 { transition-delay: 0.12s; }
+.d2 { transition-delay: 0.22s; }
+.d3 { transition-delay: 0.34s; }
+.d4 { transition-delay: 0.46s; }
+
+/* ═══════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════ */
+@media (max-width: 1024px) {
+  .img-grid-3 { grid-template-columns: 1fr 1fr; }
+  .more-work-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); padding: 32px 0; gap: 0; }
+  .hero-stats .stat { padding: 24px 32px; }
+  .hero-stats .stat:nth-child(odd) { border-right: 1px solid var(--gray-5); }
+  .hero-stats .stat:nth-child(-n+2) { border-bottom: 1px solid var(--gray-5); }
+  .hero-stats .stat:last-child { border-right: none; }
+}
+@media (max-width: 640px) {
+  :root { --px: 24px; }
+  .nav-name { font-size: 12px; padding: 7px 16px; }
+  .case-header { padding-top: 100px; }
+  .case-meta { gap: 24px; }
+  .case-meta-item { padding: 0; border-right: none; min-width: calc(50% - 12px); }
+  .ed { padding: 56px 0; }
+  .ed-title, .ed-subhead { font-size: 26px; }
+  .img-grid-2, .img-grid-3 { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: 1fr; }
+  .hero-stats .stat { padding: 24px 0; border-right: none !important; }
+  .hero-stats .stat:not(:last-child) { border-bottom: 1px solid var(--gray-5); }
+  .more-work-grid { grid-template-columns: 1fr; }
+  .more-work, .cta-section { padding: 96px 0; }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<a href="index.html" class="nav-name">Adriana Pommot</a>
+<div class="nav-float" id="navFloat">
+  <button class="nav-toggle" onclick="document.getElementById('navFloat').classList.toggle('open')" aria-label="Menu">
+    <svg class="icon-menu" viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    <svg class="icon-x" viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+  </button>
+  <div class="nav-menu">
+    <a href="cv-adriana-pommot.pdf" download class="nav-cta">Download CV<svg viewBox="0 0 16 16"><path d="M8 3v8M4 8l4 4 4-4"/><path d="M3 13h10"/></svg></a>
+    <a href="index.html#work" class="nav-link">Projetos</a>
+    <a href="index.html#services" class="nav-link">Serviços</a>
+    <a href="index.html#about" class="nav-link">Sobre Mim</a>
+    <a href="#contact" class="nav-link">Contato</a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     HEADER
+     ══════════════════════════════════════════ -->
+<section class="case-header"><div class="container">
+<a href="index.html#work" class="case-back rv"><svg viewBox="0 0 16 16"><path d="M13 8H3M7 4l-4 4 4 4"/></svg> Todos os Projetos</a>
+<h1 class="case-title rv d1">Ford<br>Immersion<br>Room</h1>
+<p class="case-focus rv d2">Identidade visual e design system espacial para uma <strong>sala de imersão que traduziu um ano de pesquisa cross-cultural em experiência tangível</strong> para os times de engenharia da Ford.</p>
+<div class="case-meta-bar rv d3">
+  <div class="case-meta">
+    <div class="case-meta-item"><span class="case-meta-label">Função</span><span class="case-meta-value">Identidade Visual e Design System Espacial</span></div>
+    <div class="case-meta-item"><span class="case-meta-label">Empresa</span><span class="case-meta-value">Questto|Nó</span></div>
+    <div class="case-meta-item"><span class="case-meta-label">Período</span><span class="case-meta-value">2017 – 2018</span></div>
+    <div class="case-meta-item"><span class="case-meta-label">Foco</span><span class="case-meta-value">Identidade Visual, Materiais Gráficos, Design Espacial</span></div>
+  </div>
+</div>
+</div></section>
+
+<!-- HERO IMAGE -->
+<div class="case-hero-img rv">
+  <img src="img/ford/hero-room.webp" alt="Vista isométrica da Immersion Room montada na Ford em Camaçari">
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     01. CONTEXTO
+     ══════════════════════════════════════════ -->
+<section class="ed"><div class="container">
+<div class="ed-header rv">
+  <div class="ed-num">01</div>
+  <h2 class="ed-title">Contexto</h2>
+</div>
+<div class="ed-content rv d1">
+  <p class="ed-body">A Ford precisava projetar experiências para dois novos modelos de utilitário voltados ao Brasil, Argentina e Índia. A Questto|Nó, consultoria de design onde eu atuava, foi contratada para conduzir um projeto de um ano que ia de pesquisa de campo com usuários reais até a entrega de conceitos refinados e prontos para desenvolvimento.</p>
+  <p class="ed-body">Fui a <strong>designer responsável pela identidade visual de ponta a ponta:</strong> defini a linguagem visual do projeto, produzi os materiais gráficos que sustentaram cada fase da pesquisa, dirigi a estética das features que o time de produto desenhou, e projetei o design system da entrega final, uma Immersion Room montada dentro da fábrica da Ford.</p>
+</div>
+<div class="full-img rv d2">
+  <img src="img/ford/workshop-team.webp" alt="Equipe reunida no workshop de Camaçari, Ford e Questto|Nó" loading="lazy">
+  <p class="img-caption">Workshop criativo na fábrica de Camaçari com os times Ford e Questto|Nó.</p>
+</div>
+</div></section>
+
+
+<!-- ══════════════════════════════════════════
+     02. O PROBLEMA
+     ══════════════════════════════════════════ -->
+<section class="ed ed--shaded"><div class="container">
+<div class="ed-header rv">
+  <div class="ed-num">02</div>
+  <h2 class="ed-title">O problema</h2>
+</div>
+<p class="problem-statement rv d1">Como fazer centenas de engenheiros, acostumados a pensar em especificações técnicas, mergulharem na realidade emocional e cultural de pessoas que dirigem em Nova Delhi, São Paulo e Buenos Aires?</p>
+<div class="ed-content rv d2">
+  <p class="ed-body">O projeto gerou um volume imenso de pesquisa: entrevistas em três países, 118 participantes em sessões de co-criação, mais de 300 ideias organizadas em 27 clusters e 21 conceitos de features. Todo esse conteúdo precisava chegar aos times de engenharia não como um relatório, mas como uma experiência que provocasse empatia, compreensão e vontade de criar.</p>
+</div>
+<div class="img-grid img-grid-2 rv d3">
+  <div>
+    <img src="img/ford/cities.webp" alt="Nova Delhi, São Paulo e Buenos Aires" loading="lazy">
+    <p class="img-caption">Pesquisa conduzida em três mercados emergentes.</p>
+  </div>
+  <div>
+    <img src="img/ford/ideas-wall.webp" alt="Parede com mais de 300 ideias organizadas em clusters" loading="lazy">
+    <p class="img-caption">300+ ideias, 27 clusters, 21 conceitos gerados.</p>
+  </div>
+</div>
+</div></section>
+
+
+<!-- ══════════════════════════════════════════
+     03. OBJETIVO
+     ══════════════════════════════════════════ -->
+<section class="ed"><div class="container">
+<div class="ed-header rv">
+  <div class="ed-num">03</div>
+  <h2 class="ed-title">Objetivo</h2>
+</div>
+<div class="ed-content rv d1">
+  <p class="ed-body">Construir um sistema visual e espacial que transformasse meses de pesquisa cross-cultural em algo navegável, tangível e inspirador. A entrega não podia ser um deck estático. Precisava ser um ambiente onde engenheiros pudessem tocar os conceitos, entender os usuários e usar tudo aquilo como ponto de partida para ideação.</p>
+</div>
+<div class="full-img rv d2">
+  <img src="img/ford/participants.webp" alt="Participantes das sessões de co-criação nos três países" loading="lazy">
+  <p class="img-caption">118 participantes nas sessões de co-criação: Nova Delhi (28), São Paulo (54), Buenos Aires (36).</p>
+</div>
+</div></section>
+
+
+<!-- ══════════════════════════════════════════
+     04. ESTRATÉGIA E SOLUÇÃO
+     ══════════════════════════════════════════ -->
+<section class="ed ed--shaded"><div class="container">
+<div class="ed-header rv">
+  <div class="ed-num">04</div>
+  <h2 class="ed-title">Estratégia e solução</h2>
+</div>
+<div class="ed-content rv d1">
+  <p class="ed-body">Projetei um design system que cruzou a fronteira do papel para o espaço físico. A identidade visual precisava funcionar em apresentações digitais, materiais impressos de pesquisa e numa sala inteira de imersão, tudo com coerência.</p>
+</div>
+
+<!-- Subseção: Co-criação com PVC Car -->
+<div class="ed-subsection rv">
+  <div class="ed-header">
+    <h3 class="ed-subhead">Co-criação com protótipo físico</h3>
+  </div>
+  <div class="ed-content">
+    <p class="ed-body">Antes da sala, o processo passou por sessões de co-criação nos três países. A equipe construiu um carro em escala real usando tubos de PVC, uma estrutura que permitia aos participantes interagir com os conceitos de forma física. Defini a linguagem visual dos materiais usados nessas sessões, garantindo que a informação fosse clara e acessível independente do contexto cultural.</p>
+  </div>
+  <div class="img-grid img-grid-3 rv d1">
+    <div>
+      <img src="img/ford/pvc-car-diagram.webp" alt="Diagrama técnico do PVC Car" loading="lazy">
+      <p class="img-caption">Estrutura modular em PVC.</p>
+    </div>
+    <div>
+      <img src="img/ford/pvc-car-action.webp" alt="PVC Car em uso durante sessão de co-criação" loading="lazy">
+      <p class="img-caption">Sessão de co-criação no Brasil.</p>
+    </div>
+    <div>
+      <img src="img/ford/pvc-car-photos.webp" alt="Participantes interagindo com o PVC Car na Índia" loading="lazy">
+      <p class="img-caption">Workshops na Índia e Brasil.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Subseção: Linguagem visual das features -->
+<div class="ed-subsection rv">
+  <div class="ed-header">
+    <h3 class="ed-subhead">Linguagem visual das features</h3>
+  </div>
+  <div class="ed-content">
+    <p class="ed-body">Dirigi a linguagem visual que o time de produto usou para materializar 21 conceitos de UX em desenhos detalhados. Cada prancha seguia um sistema visual consistente: ilustração técnica com destaque em cor para os elementos interativos, acompanhada de descrição funcional. Contribuí diretamente com ilustrações para garantir coerência entre todas as pranchas.</p>
+  </div>
+  <div class="full-img rv">
+    <img src="img/ford/concepts-grid.webp" alt="Grid com os 21 conceitos de features desenhados" loading="lazy">
+    <p class="img-caption">Panorama dos 21 conceitos de features, cada um com linguagem visual unificada.</p>
+  </div>
+  <div class="img-grid img-grid-3 rv">
+    <div>
+      <img src="img/ford/feature-carscan.webp" alt="Car Scan: diagnóstico via app e dashboard" loading="lazy">
+      <p class="img-caption">Car Scan.</p>
+    </div>
+    <div>
+      <img src="img/ford/feature-console.webp" alt="Console ajustável modular" loading="lazy">
+      <p class="img-caption">Console ajustável.</p>
+    </div>
+    <div>
+      <img src="img/ford/feature-recognition.webp" alt="Reconhecimento pessoal por chave" loading="lazy">
+      <p class="img-caption">Reconhecimento pessoal.</p>
+    </div>
+  </div>
+  <div class="img-grid img-grid-3 rv">
+    <div>
+      <img src="img/ford/feature-weather.webp" alt="Sistema de resposta climática" loading="lazy">
+      <p class="img-caption">Resposta climática.</p>
+    </div>
+    <div>
+      <img src="img/ford/feature-trunk.webp" alt="Divisória modular para porta-malas" loading="lazy">
+      <p class="img-caption">Divisória de porta-malas.</p>
+    </div>
+    <div>
+      <img src="img/ford/feature-security.webp" alt="Monitoramento de segurança" loading="lazy">
+      <p class="img-caption">Monitoramento de segurança.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Subseção: Design system espacial -->
+<div class="ed-subsection rv">
+  <div class="ed-header">
+    <h3 class="ed-subhead">Design system da Immersion Room</h3>
+  </div>
+  <div class="ed-content">
+    <p class="ed-body">A identidade visual do espaço usou materiais crus e industriais que remetiam a prototipagem contínua: compensado, cortiça, papelão e tubos de PVC. Os tubos tinham uma função conceitual: funcionavam como wireframes físicos, mantendo os primeiros protótipos vivos dentro do espaço.</p>
+    <p class="ed-body">A tipografia combinou fontes anamórficas (que brincam com a perspectiva do espaço tridimensional) com famílias funcionais no estilo Swiss Typefaces, equilibrando impacto visual e clareza para um público de engenheiros. Para os materiais de consumo da pesquisa, trouxemos impressão em risograph, dando qualidade tátil e única ao material impresso.</p>
+    <p class="ed-body">Defini um color code com paletas distintas para cada modelo de veículo, e desenhei um conjunto de ícones para facilitar a absorção da informação nas estações de conceito.</p>
+  </div>
+  <div class="full-img rv">
+    <img src="img/ford/room-references.webp" alt="Referências visuais: DIY, plywood, makerspace, tipografia bold" loading="lazy">
+    <p class="img-caption">Referências visuais: materialidade DIY, compensado, tipografia contrastante, wayfinding industrial.</p>
+  </div>
+  <div class="full-img rv">
+    <img src="img/ford/room-floorplan.webp" alt="Planta baixa da Immersion Room com áreas demarcadas" loading="lazy">
+    <p class="img-caption">Planta da sala com entrada, sala principal e saída demarcadas.</p>
+  </div>
+</div>
+</div></section>
+
+
+<!-- ══════════════════════════════════════════
+     05. A SALA
+     ══════════════════════════════════════════ -->
+<section class="ed"><div class="container">
+<div class="ed-header rv">
+  <div class="ed-num">05</div>
+  <h2 class="ed-title">A sala</h2>
+</div>
+<div class="ed-content rv d1">
+  <p class="ed-body">A Immersion Room foi coreografada para guiar os times de produto por uma jornada completa. Intervenções gráficas no chão e no teto conectavam os códigos de cor aos modelos de veículo, conduzindo os participantes por estações temáticas: contexto cultural, momentos-chave dos usuários, conceitos detalhados e mesa de ideação para co-criação presencial.</p>
+</div>
+
+<div class="full-img rv">
+  <img src="img/ford/room-entry.webp" alt="Entrada da sala com painéis de boas-vindas e toolkit" loading="lazy">
+  <p class="img-caption">Entrada da sala com painel de boas-vindas e toolkit impresso para cada participante.</p>
+</div>
+
+<div class="img-grid img-grid-2 rv">
+  <div>
+    <img src="img/ford/room-research-wall.webp" alt="Parede de pesquisa com fotos e insights dos três países" loading="lazy">
+    <p class="img-caption">Parede de pesquisa com fotos e insights culturais.</p>
+  </div>
+  <div>
+    <img src="img/ford/room-timeline.webp" alt="Painéis de timeline do projeto" loading="lazy">
+    <p class="img-caption">Timeline do projeto de setembro a dezembro.</p>
+  </div>
+</div>
+
+<div class="full-img rv">
+  <img src="img/ford/room-moments.webp" alt="Moment boards: Out with Friends, My Castle, Always Like New" loading="lazy">
+  <p class="img-caption">Moment boards com jornadas dos usuários: saindo com amigos, meu espaço, sempre como novo.</p>
+</div>
+
+<div class="img-grid img-grid-2 rv">
+  <div>
+    <img src="img/ford/room-users.webp" alt="Painel de personas com perfis dos usuários" loading="lazy">
+    <p class="img-caption">Painéis de personas com perfis dos três países.</p>
+  </div>
+  <div>
+    <img src="img/ford/room-concepts.webp" alt="Corredor de concept boards com todas as features" loading="lazy">
+    <p class="img-caption">Corredor de concept boards com as features detalhadas.</p>
+  </div>
+</div>
+
+<div class="full-img rv">
+  <img src="img/ford/room-boxcar.webp" alt="Box car simulador com tela e volante" loading="lazy">
+  <p class="img-caption">Box car: simulador interativo onde engenheiros exploravam os conceitos em contexto.</p>
+</div>
+
+<div class="img-grid img-grid-2 rv">
+  <div>
+    <img src="img/ford/room-dashboard.webp" alt="Dashboard do box car com mapeamento de features" loading="lazy">
+    <p class="img-caption">Dashboard com mapeamento de features por momento e enabler.</p>
+  </div>
+  <div>
+    <img src="img/ford/room-boxcar-interior.webp" alt="Interior do box car com assentos reais" loading="lazy">
+    <p class="img-caption">Interior com assentos reais e concept boards ao redor.</p>
+  </div>
+</div>
+
+<div class="img-grid img-grid-2 rv">
+  <div>
+    <img src="img/ford/room-fullview.webp" alt="Vista completa da sala com mesa de ideação" loading="lazy">
+    <p class="img-caption">Vista completa com concept boards e simulador.</p>
+  </div>
+  <div>
+    <img src="img/ford/room-ideation.webp" alt="Mesa de ideação com banquetas" loading="lazy">
+    <p class="img-caption">Mesa de ideação para co-criação presencial.</p>
+  </div>
+</div>
+</div></section>
+
+
+<!-- ══════════════════════════════════════════
+     06. RESULTADOS
+     ══════════════════════════════════════════ -->
+<section class="ed"><div class="container">
+<div class="ed-header rv">
+  <div class="ed-num">06</div>
+  <h2 class="ed-title">Resultados</h2>
+</div>
+<p class="problem-statement rv d1">Os engenheiros da Ford receberam uma sala de imersão navegável dentro da fábrica de Camaçari, reunindo a pesquisa de três países, 21 features detalhadas e protótipos interativos.</p>
+<div class="hero-stats rv d2">
+  <div class="stat">
+    <div class="stat-num">1 ano</div>
+    <div class="stat-label">Projeto completo, da fase de imersão até a entrega da sala e toolkit</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">3</div>
+    <div class="stat-label">Países pesquisados: Índia, Brasil e Argentina</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">118</div>
+    <div class="stat-label">Participantes reais nas sessões de co-criação</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">21</div>
+    <div class="stat-label">Conceitos de features filtrados de mais de 300 ideias</div>
+  </div>
+</div>
+</div></section>
+
+
+<!-- ══════════════════════════════════════════
+     07. APRENDIZADOS
+     ══════════════════════════════════════════ -->
+<section class="ed"><div class="container">
+<div class="ed-header rv">
+  <div class="ed-num">07</div>
+  <h2 class="ed-title">Aprendizados</h2>
+</div>
+<div class="ed-content rv d1">
+  <p class="ed-body ed-body--lead">Identidade visual não termina na tela: projetar para um espaço físico exige pensar em fluxo, materialidade e escala de um jeito que o digital não demanda.</p>
+  <p class="ed-body">A escolha de compensado e risograph não foi estética, foi estratégica: comunicava ao público de engenheiros que aquilo era um espaço de trabalho em andamento, não uma apresentação finalizada. Esse enquadramento mudou como as pessoas interagiam com o conteúdo.</p>
+  <p class="ed-body">Trabalhar com times distribuídos entre São Paulo e Nova York me forçou a documentar decisões visuais com rigor. Cada escolha de material, cor e tipografia precisava ser justificável e replicável por pessoas que não estavam na mesma sala.</p>
+</div>
+</div></section>
+
+
+<!-- ══════════════════════════════════════════
+     VEJA TAMBÉM + CTA + FOOTER
+     ══════════════════════════════════════════ -->
+<section class="more-work"><div class="container">
+<h2 class="more-work-title rv">Veja também</h2>
+<div class="more-work-grid">
+  <a href="case-mrv.html" class="more-work-card rv"><div class="more-work-card-img"><img src="img/mrv/hero-mockups.webp" alt="MRV Ecossistema Financeiro" loading="lazy"></div><span class="more-work-card-tag">#ProductDesign #DesignSystem</span><div class="more-work-card-name">MRV Ecossistema Financeiro</div></a>
+  <a href="case-delta.html" class="more-work-card rv d1"><div class="more-work-card-img"><img src="https://framerusercontent.com/images/ibHIROqyHkxvVtTioI5nYgGNqSQ.png" alt="Delta Design System" loading="lazy"></div><span class="more-work-card-tag">#DesignSystem</span><div class="more-work-card-name">Delta Design System</div></a>
+</div>
+</div></section>
+
+<section class="cta-section" id="contact"><div class="container">
+<h2 class="cta-title rv"><a href="mailto:adrianapommot@gmail.com">Vamos<br>Conversar?</a></h2>
+<p class="cta-subtitle rv d1">Product Design & Inteligência Visual</p>
+<a href="mailto:adrianapommot@gmail.com" class="cta-btn rv d2">Entrar em Contato →</a>
+</div></section>
+
+<footer><div class="container">
+<div class="footer-grid">
+<div><div class="footer-logo">Adriana Pommot</div><div class="footer-social"><a href="https://linkedin.com/in/adriana-pommot" target="_blank">LinkedIn</a><a href="https://instagram.com/ultraviolenta.ink" target="_blank">Instagram</a><a href="mailto:adrianapommot@gmail.com">Email</a></div></div>
+<div><div class="footer-col-title">Páginas</div><div class="footer-col-links"><a href="index.html#work">Projetos</a><a href="index.html#services">Serviços</a><a href="index.html#about">Sobre Mim</a><a href="#contact">Contato</a></div></div>
+<div><div class="footer-col-title">Projetos</div><div class="footer-col-links"><a href="case-mrv.html">MRV</a><a href="case-delta.html">Delta DS</a><a href="case-ford.html">Ford</a><a href="case-chorume.html">Chorume</a></div></div>
+<div><div class="footer-col-title">Contato</div><div class="footer-col-links"><a href="mailto:adrianapommot@gmail.com">adrianapommot@gmail.com</a><span>São Paulo, BR</span></div></div>
+</div>
+<div class="footer-bottom"><span class="footer-copy">© 2026 Adriana Pommot</span><span class="footer-copy">Product Design & Inteligência Visual</span></div>
+</div></footer>
+
+<script>
+document.querySelectorAll('.nav-menu a').forEach(a=>{
+  a.addEventListener('click',()=>{
+    const f=document.getElementById('navFloat');
+    if(f)f.classList.remove('open');
+  });
+});
+/* Reveal Observer */
+(function(){try{
+  var ro=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}});
+  },{threshold:0.1});
+  document.querySelectorAll('.rv').forEach(function(el){ro.observe(el)});
+}catch(e){console.warn("observer error",e)}})();
+/* Nav BG on scroll */
+(function(){try{
+  var nn=document.querySelector(".nav-name");
+  if(!nn)return;
+  window.addEventListener("scroll",function(){
+    nn.style.background=window.scrollY>60?"rgba(255,255,255,0.85)":"rgba(255,255,255,0.55)";
+  });
+}catch(e){console.warn("nav-scroll error",e)}})();
+</script>
+</body>
+</html>
