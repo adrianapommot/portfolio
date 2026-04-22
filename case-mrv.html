@@ -28,10 +28,19 @@
   --accent: #D1F466;
   --accent-light: #EDFFB6;
   --accent-faint: #F9FDEE;
+  --dark-surface: #2C2B2B;
   --font-display: 'Plus Jakarta Sans', sans-serif;
   --font-body: 'Plus Jakarta Sans', sans-serif;
   --max-w: 1440px;
   --px: 40px;
+
+  /* Escala de espaçamento — base 8px (Apple HIG) */
+  --space-xs: 8px;    /* num ↔ título */
+  --space-sm: 16px;   /* parágrafos */
+  --space-md: 24px;   /* body ↔ pill/badge */
+  --space-lg: 40px;   /* header ↔ content */
+  --space-xl: 64px;   /* subseção ↔ seção */
+  --space-xxl: 96px;  /* entre seções */
 }
 
 /* ═══════════════════════════════════
@@ -44,7 +53,6 @@ body {
   color: var(--black);
   background: var(--white);
   overflow-x: hidden;
-  cursor: none;
 }
 ::selection { background: var(--accent); color: var(--black); }
 img { display: block; max-width: 100%; }
@@ -193,13 +201,12 @@ a { color: inherit; text-decoration: none; }
   font-family: var(--font-display);
   font-size: 13px;
   font-weight: 500;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--gray-3);
   margin-bottom: 48px;
   transition: opacity 0.3s;
 }
-.case-back:hover { opacity: 0.5; }
 .case-back svg {
   width: 14px; height: 14px;
   fill: none; stroke: currentColor; stroke-width: 2;
@@ -210,7 +217,7 @@ a { color: inherit; text-decoration: none; }
   font-size: clamp(44px, 7vw, 96px);
   font-weight: 400;
   line-height: 1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.035em;
   text-transform: uppercase;
   margin-bottom: 40px;
   margin-left: -0.04em;
@@ -231,8 +238,8 @@ a { color: inherit; text-decoration: none; }
 
 /* Dark metadata bar — full-width */
 .case-meta-bar {
-  background: #2C2B2B;
-  padding: 16px 0;
+  background: var(--dark-surface);
+  padding: 24px 0;
   margin-top: 40px;
   margin-left: calc(-1 * var(--px));
   margin-right: calc(-1 * var(--px));
@@ -250,13 +257,17 @@ a { color: inherit; text-decoration: none; }
 .case-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px 72px;
+  gap: 16px 0;
 }
 .case-meta-item {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  padding: 0 40px;
+  border-right: 1px solid rgba(255,255,255,0.12);
 }
+.case-meta-item:first-child { padding-left: 0; }
+.case-meta-item:last-child { border-right: none; }
 .case-meta-label {
   font-family: var(--font-display);
   font-size: 12px;
@@ -270,20 +281,18 @@ a { color: inherit; text-decoration: none; }
   font-size: 13px;
   font-weight: 400;
   letter-spacing: 0.02em;
-  color: var(--white);
+  color: var(--accent-light);
 }
 
 /* ═══════════════════════════════════
    EDITORIAL SECTIONS — two-column layout
    ═══════════════════════════════════ */
 .ed {
-  padding: 120px 0;
+  padding: 96px 0;
   border-top: 1px solid var(--gray-5);
 }
 .ed--shaded {
-  background: rgba(245, 245, 245, 0.6);
-  border-top: 2px solid var(--white);
-  border-bottom: 2px solid var(--white);
+  background: var(--white);
 }
 
 /* Section header — number + title, stacked, full width */
@@ -317,15 +326,38 @@ a { color: inherit; text-decoration: none; }
   color: var(--gray-3);
 }
 
-/* Section heading H2 */
+/* Section heading H2 — respira em multi-linha (Apple: 1.10–1.14 tight) */
 .ed-title {
   font-family: var(--font-display);
   font-size: 32px;
   font-weight: 500;
-  line-height: 1;
-  letter-spacing: 0.026em;
+  line-height: 1.14;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   color: var(--black);
+  text-wrap: balance;
+}
+
+/* Subsection heading H3 — nível intermediário entre ed-title e card-title */
+.ed-subhead {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--black);
+  text-wrap: balance;
+}
+
+/* Bloco de subseção — separador + respiro consistente */
+.ed-subsection {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--gray-5);
+}
+.ed-subsection > .ed-subhead {
+  margin-bottom: var(--space-md);
 }
 
 /* Body text */
@@ -340,7 +372,7 @@ a { color: inherit; text-decoration: none; }
 }
 .ed-body strong { color: var(--black); font-weight: 600; }
 
-/* Highlight inline — sem cor de assinatura */
+/* Highlight inline — lime bg */
 .ed-highlight {
   font-family: var(--font-display);
   font-size: 16px;
@@ -348,7 +380,6 @@ a { color: inherit; text-decoration: none; }
   line-height: 1.75;
   color: var(--black);
   display: inline;
-  padding: 0 2px;
 }
 
 /* Sub-heading within section */
@@ -359,32 +390,32 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: 0.026em;
   text-transform: uppercase;
   color: var(--black);
-  margin-top: 120px;
+  margin-top: 96px;
   margin-bottom: 40px;
 }
 
-/* Badge / Tag — bordered pill */
+/* Badge / Tag — bordered pill (mesmo peso visual que ed-num: label/rótulo) */
 .ed-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 16px;
-  background: var(--white);
-  border: 1px solid var(--black);
-  border-radius: 8px;
+  padding: 10px 20px;
+  background: transparent;
+  border: 1px solid var(--gray-5);
+  border-radius: 999px;
   font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--black);
-  margin-bottom: 24px;
+  color: var(--gray-3);
   align-self: flex-start;
 }
 
 /* KR subtitle */
 .ed-kr-title {
   font-family: var(--font-display); font-size: 20px; font-weight: 500;
-  letter-spacing: -0.02em; color: var(--gray-1);
+  letter-spacing: -0.02em; color: var(--black);
 }
 
 /* Strategy body — slightly larger */
@@ -396,57 +427,58 @@ a { color: inherit; text-decoration: none; }
 .ctx-metrics {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
   width: 100%;
 }
 .ctx-metric {
   background: var(--white);
-  border: 1px solid var(--black);
+  border: 1px solid var(--gray-5);
   border-radius: 8px;
   padding: 32px;
   display: flex;
-  gap: 32px;
+  gap: 24px;
   align-items: center;
 }
 .ctx-metric-icon {
-  width: 72px;
-  height: 80px;
+  width: 48px;
+  height: 48px;
   flex-shrink: 0;
-  color: var(--black);
+  color: var(--gray-3);
   display: flex;
   align-items: center;
   justify-content: center;
 }
+/* Força todos os SVGs a preencherem o mesmo bounding box 48×48 mantendo proporção
+   via preserveAspectRatio (default). Isso equaliza o peso visual entre ícones
+   com viewBox de proporções diferentes. */
 .ctx-metric-icon svg {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 100%;
   display: block;
 }
 .ctx-metric-body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 6px;
   min-width: 0;
 }
 .ctx-metric-label {
   font-family: var(--font-display);
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 500;
-  letter-spacing: 0.026em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--black);
-  line-height: 1.15;
+  line-height: 1.2;
   text-wrap: balance;
 }
 .ctx-metric-desc {
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
   color: var(--gray-3);
-  line-height: 1.3;
+  line-height: 1.5;
   letter-spacing: 0;
   text-wrap: pretty;
 }
@@ -463,18 +495,18 @@ a { color: inherit; text-decoration: none; }
 }
 .challenge {
   background: var(--white);
-  border: 1px solid var(--black);
+  border: 1px solid var(--gray-5);
   border-radius: 8px;
-  padding: 21px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  height: 270px;
+  gap: 12px;
 }
 .challenge-icon {
-  width: 32px; height: 32px;
-  color: var(--black);
+  width: 24px; height: 24px;
+  color: var(--gray-3);
   flex-shrink: 0;
+  margin-bottom: 4px;
 }
 .challenge-icon svg {
   width: 100%; height: 100%;
@@ -483,10 +515,10 @@ a { color: inherit; text-decoration: none; }
 }
 .challenge-name {
   font-family: var(--font-display);
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 500;
   line-height: 1.3;
-  letter-spacing: 0.033em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--black);
 }
@@ -496,76 +528,21 @@ a { color: inherit; text-decoration: none; }
   font-weight: 400;
   color: var(--gray-3);
   line-height: 1.5;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
   text-wrap: pretty;
 }
 
 /* ═══════════════════════════════════
-   PROBLEM CARD (02) — ilustração + título esquerda, card texto direita (Figma)
+   PROBLEM ICON (02) — stacked layout
    ═══════════════════════════════════ */
-.problem-card {
-  display: flex;
-  gap: 247px;
-  align-items: flex-start;
-}
-.problem-card-left {
-  display: flex;
-  gap: 76px;
-  align-items: flex-end;
-  flex-shrink: 0;
-  width: 443px;
-}
-.problem-card-icon {
-  flex-shrink: 0;
-  width: 130px;
-  height: 130px;
-  color: var(--black);
-  display: block;
-}
-.problem-card-icon svg {
-  width: 100%; height: 100%;
-}
-.problem-card-heading {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  flex: 1;
-  min-width: 0;
-}
-.problem-card-statement {
-  font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.75;
-  color: var(--black);
-  text-wrap: pretty;
-}
-.problem-card-text {
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  padding: 0;
-  padding-top: 36px; /* alinha topo do texto com o topo do título (ed-num 20px + gap 16px) */
-  flex: 0 0 585px;
-  width: 585px;
-  max-width: 585px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  min-width: 0;
-}
-.problem-card-text p {
-  font-family: var(--font-body);
-  font-size: 16px;
-  font-weight: 400;
+.problem-icon {
+  width: 56px;
+  height: 56px;
   color: var(--gray-3);
-  line-height: 1.5;
-  letter-spacing: 0.008em;
-  text-wrap: pretty;
+  margin-bottom: 40px;
 }
-.problem-card-text strong {
-  color: var(--black);
-  font-weight: 600;
+.problem-icon svg {
+  width: 100%; height: 100%;
 }
 
 /* ═══════════════════════════════════
@@ -573,7 +550,7 @@ a { color: inherit; text-decoration: none; }
    ═══════════════════════════════════ */
 .kr-card {
   background: var(--white);
-  border: 1px solid var(--black);
+  border: 1px solid var(--gray-5);
   border-radius: 8px;
   padding: 32px 40px;
   display: flex;
@@ -586,9 +563,8 @@ a { color: inherit; text-decoration: none; }
   font-size: 20px;
   font-weight: 500;
   letter-spacing: -0.02em;
-  color: var(--gray-1);
+  color: var(--black);
   line-height: 1;
-  text-wrap: balance;
 }
 .kr-card ul {
   list-style: disc;
@@ -602,7 +578,7 @@ a { color: inherit; text-decoration: none; }
   color: var(--gray-3);
   line-height: 1.75;
   text-wrap: pretty;
-  margin-bottom: 4px;
+  margin-bottom: 12px;
 }
 .kr-card ul li:last-child { margin-bottom: 0; }
 
@@ -617,32 +593,45 @@ a { color: inherit; text-decoration: none; }
 .ed-two-col-left {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 0;
   flex-shrink: 0;
   min-width: 0;
   max-width: 522px;
 }
+/* Ritmo interno coluna esquerda — respiração generosa (Apple: "generous whitespace")
+   header → pill/body: 48px (respiro amplo entre título e conteúdo)
+   pill → conteúdo que titula: 24px (conexão clara mas com ar)
+   entre parágrafos body: 20px
+   body → pill (novo grupo): 48px (separação de bloco) */
+.ed-two-col-left > .ed-header { margin-bottom: 48px; }
+.ed-two-col-left > .ed-badge { margin-bottom: 24px; }
+.ed-two-col-left > .ed-two-col-body-lg { margin-bottom: 20px; }
+.ed-two-col-left > .ed-two-col-body-lg:last-child { margin-bottom: 0; }
+.ed-two-col-left > .ed-list { margin-top: 0; margin-bottom: 0; }
+.ed-two-col-left > .ed-two-col-body-lg + .ed-badge { margin-top: 48px; }
 .ed-two-col-right {
   display: flex;
   flex-direction: column;
   gap: 24px;
   flex-shrink: 0;
   width: 626px;
-  padding-top: 24px;
 }
 
-/* Modifier: Objetivo (seção 03) — gap 181, align-end */
+/* Modifier: Objetivo (seção 03) */
 .ed-two-col--obj {
-  gap: 181px;
-  align-items: flex-end;
+  gap: 96px;
+  align-items: flex-start;
 }
 .ed-two-col--obj .ed-two-col-left {
   max-width: 503px;
 }
+.ed-two-col--obj .ed-two-col-right {
+  padding-top: 116px; /* alinha KR card com badge: header(68) + gap(48) */
+}
 
-/* Modifier: Estratégia (seção 04) — gap 93, left w-590 */
+/* Modifier: Estratégia (seção 04) */
 .ed-two-col--strat {
-  gap: 93px;
+  gap: 96px;
   align-items: flex-start;
 }
 .ed-two-col--strat .ed-two-col-left {
@@ -651,7 +640,7 @@ a { color: inherit; text-decoration: none; }
 }
 .ed-two-col--strat .ed-two-col-right {
   gap: 24px;
-  padding-top: 36px; /* alinha topo do primeiro card com o topo do título (ed-num 20px + gap 16px) */
+  padding-top: 116px; /* alinha metrics com body text: header(68) + gap(48) */
 }
 
 .ed-two-col-body-lg {
@@ -683,7 +672,9 @@ a { color: inherit; text-decoration: none; }
   color: var(--gray-3);
   line-height: 1.75;
   text-wrap: pretty;
+  margin-bottom: 10px;
 }
+.ed-list li:last-child { margin-bottom: 0; }
 
 /* ═══════════════════════════════════
    FULL-WIDTH IMAGE
@@ -703,22 +694,26 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: 0.03em;
 }
 
+/* Overview block — imagem full-width com caption acima */
+.overview-block { margin-top: var(--space-lg); }
+.overview-block > .fw-img-caption { margin: 0 0 var(--space-sm); }
+
 /* ═══════════════════════════════════
    PHONE SECTION — dark bg
    ═══════════════════════════════════ */
-.phone-section { background: var(--black); padding: 120px 0; }
-.phone-section .ed-num { color: var(--white); }
+.phone-section { background: var(--black); padding: 96px 0; }
+.phone-section .ed-num { color: var(--accent); }
 .phone-section .ed-title { color: var(--white); }
 .phone-section .ed-body { color: rgba(255,255,255,0.55); }
 .phone-section .ed-body strong { color: var(--white); }
 .phone-section .ed-header { margin-bottom: 40px; }
-.phone-section .phone-intro { margin-bottom: 120px; }
+.phone-section .phone-intro { margin-bottom: 96px; }
 
 .phone-flow {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: auto auto auto 24px 1fr;
-  gap: 32px 24px;
+  gap: 0 24px;
 }
 .phone-step { display: contents; }
 .phone-arrow { display: none; }
@@ -726,17 +721,17 @@ a { color: inherit; text-decoration: none; }
 .phone-pct {
   grid-row: 1;
   font-family: var(--font-display);
-  font-size: 32px; font-weight: 600;
-  color: var(--white);
+  font-size: 28px; font-weight: 400;
+  color: var(--accent);
   line-height: 1;
-  padding-bottom: 16px;
+  padding-bottom: 10px;
   letter-spacing: -0.02em;
   align-self: end;
 }
 .phone-name {
   grid-row: 2;
   font-family: var(--font-display);
-  font-size: 14px; font-weight: 500;
+  font-size: 13px; font-weight: 500;
   color: var(--white);
   line-height: 1.3;
   padding-bottom: 6px;
@@ -762,7 +757,6 @@ a { color: inherit; text-decoration: none; }
   border: 1.5px solid rgba(255,255,255,0.08);
   overflow-y: auto;
   overflow-x: hidden;
-  cursor: none;
   position: relative;
   aspect-ratio: 9/19.5;
   box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.2);
@@ -790,11 +784,11 @@ a { color: inherit; text-decoration: none; }
   z-index: 1;
 }
 .phone-step.is-hero .phone-frame {
-  border-color: rgba(255,255,255,0.3);
+  border-color: var(--accent);
   border-width: 2px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 24px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 24px rgba(209,244,102,0.12);
 }
-.phone-step.is-hero .phone-frame::before { background: rgba(255,255,255,0.3); opacity: 0.25; }
+.phone-step.is-hero .phone-frame::before { background: var(--accent); opacity: 0.25; }
 
 /* ═══════════════════════════════════
    BROWSER MOCKUPS
@@ -809,7 +803,7 @@ a { color: inherit; text-decoration: none; }
   flex-direction: column;
 }
 .browser-bar {
-  background: var(--gray-6);
+  background: #F5F5F5;
   padding: 12px 16px;
   display: flex;
   align-items: center;
@@ -824,7 +818,6 @@ a { color: inherit; text-decoration: none; }
 .browser-content {
   overflow-y: auto;
   overflow-x: hidden;
-  cursor: none;
   max-height: 420px;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -873,49 +866,47 @@ a { color: inherit; text-decoration: none; }
 /* ═══════════════════════════════════
    RESULTS
    ═══════════════════════════════════ */
-.results { padding: 120px 0; border-top: 1px solid var(--gray-5); }
+.results { padding: 96px 0; border-top: 1px solid var(--gray-5); }
 
-/* Card de métricas — neutral */
+/* Card lime com 4 métricas + divisores (Figma) */
 .results-hero{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 40px;
+  gap: 0;
   background: var(--white);
-  border: 1px solid var(--black);
+  border: 1px solid var(--gray-5);
   border-radius: 8px;
-  padding: 48px 40px;
-  min-height: auto;
+  padding: 0 24px;
+  min-height: 125px;
   margin-top: 40px;
 }
 .results-hero-item{
-  padding: 0;
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 9px;
   flex: 0 1 auto;
-  text-align: center;
 }
 .results-hero-item .r-num{
   font-family: var(--font-display);
-  font-size: 56px;
-  font-weight: 600;
+  font-size: 48px;
+  font-weight: 400;
   letter-spacing: -0.02em;
   line-height: 1;
   color: var(--black);
 }
 .results-hero-item .r-label{
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   line-height: 1.5;
   color: var(--gray-3);
-  text-wrap: pretty;
 }
 .results-hero-sep{
-  width: 2px;
+  width: 1px;
   align-self: stretch;
-  background: var(--black);
+  background: var(--gray-5);
   flex-shrink: 0;
   margin: 24px 0;
 }
@@ -941,6 +932,7 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: 0.01em;
   text-wrap: pretty;
 }
+.results-row-text p + p { margin-top: var(--space-md); }
 .results-row-text p strong{
   color: var(--black);
   font-weight: 600;
@@ -960,15 +952,15 @@ a { color: inherit; text-decoration: none; }
 }
 .result-num {
   font-family: var(--font-display);
-  font-size: clamp(32px, 4.5vw, 48px);
-  font-weight: 600;
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 400;
   letter-spacing: -0.02em;
   line-height: 1;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 .result-label {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 13px;
   color: var(--gray-3);
   line-height: 1.5;
   text-wrap: pretty;
@@ -979,8 +971,8 @@ a { color: inherit; text-decoration: none; }
 .kr-compare-header {
   display: grid;
   grid-template-columns: 1fr 120px 120px;
-  gap: 32px;
-  padding-bottom: 16px;
+  gap: 16px;
+  padding-bottom: 8px;
 }
 .kr-compare-header span {
   font-family: var(--font-display);
@@ -994,9 +986,9 @@ a { color: inherit; text-decoration: none; }
 .kr-compare-row {
   display: grid;
   grid-template-columns: 1fr 120px 120px;
-  gap: 32px;
+  gap: 16px;
   align-items: center;
-  padding: 24px 0;
+  padding: 16px 0;
   border-bottom: 1px solid var(--gray-5);
 }
 .kr-compare-header + .kr-compare-row { border-top: 1px solid var(--gray-5); }
@@ -1022,9 +1014,10 @@ a { color: inherit; text-decoration: none; }
   justify-self: stretch;
 }
 .kr-compare-result.hit {
-  color: var(--white);
-  background: var(--black);
-  border: 1px solid var(--black);
+  color: var(--black);
+  font-weight: 600;
+  background: transparent;
+  border: 1px solid var(--gray-5);
   padding: 4px 12px;
   border-radius: 999px;
 }
@@ -1067,7 +1060,7 @@ a { color: inherit; text-decoration: none; }
   left: 50%;
   transform: translateX(-50%);
   width: 80%; height: 3px;
-  background: var(--gray-4);
+  background: var(--black);
   border-radius: 2px;
 }
 
@@ -1093,7 +1086,7 @@ a { color: inherit; text-decoration: none; }
 .post-pilot-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 120px;
+  gap: 96px;
   align-items: start;
 }
 .post-pilot-col { min-width: 0; }
@@ -1114,7 +1107,7 @@ a { color: inherit; text-decoration: none; }
   background: var(--white);
   border: 1px solid var(--gray-5);
   border-radius: 8px;
-  padding: 32px;
+  padding: 25px;
 }
 .sprint-label {
   font-family: var(--font-display);
@@ -1134,56 +1127,17 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ═══════════════════════════════════
-   SCROLL CURSOR
-   ═══════════════════════════════════ */
-.scroll-cursor {
-  position: fixed;
-  z-index: 9999;
-  pointer-events: none;
-  width: 56px; height: 56px;
-  border-radius: 50%;
-  background: var(--black);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
-  transform: translate(-50%,-50%) scale(0);
-  opacity: 0;
-  transition: transform 0.2s, opacity 0.2s;
-}
-.scroll-cursor.visible { transform: translate(-50%,-50%) scale(1); opacity: 1; }
-.scroll-cursor.grabbing { transform: translate(-50%,-50%) scale(0.85); opacity: 0.9; }
-.scroll-cursor.grabbing .scroll-cursor-text { display: none; }
-.scroll-cursor.grabbing .scroll-cursor-arrow { display: none; }
-.scroll-cursor.grabbing::after { content: '☝'; font-size: 18px; }
-.scroll-cursor-text {
-  font-family: var(--font-display);
-  font-size: 8px; font-weight: 500;
-  color: var(--white);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  line-height: 1;
-}
-.scroll-cursor-arrow {
-  width: 10px; height: 10px;
-  stroke: var(--white); stroke-width: 1.5;
-  stroke-linecap: round; stroke-linejoin: round;
-  fill: none;
-}
-
-/* ═══════════════════════════════════
    MORE WORK
    ═══════════════════════════════════ */
-.more-work { padding: 160px 0; border-top: 1px solid var(--gray-5); }
+.more-work { padding: 120px 0; border-top: 1px solid var(--gray-5); }
 .more-work-title {
   font-family: var(--font-display);
   font-size: clamp(44px, 7vw, 96px);
   font-weight: 400;
-  line-height: 1;
-  letter-spacing: -0.01em;
+  line-height: 1.07;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
-  margin-bottom: 64px;
+  margin-bottom: var(--space-xl);
   text-wrap: balance;
 }
 .more-work-grid {
@@ -1216,21 +1170,20 @@ a { color: inherit; text-decoration: none; }
   font-size: 20px;
   font-weight: 500;
   line-height: 1.2;
-  text-wrap: balance;
 }
 
 /* ═══════════════════════════════════
    CTA + FOOTER
    ═══════════════════════════════════ */
-.cta-section { background: var(--black); color: var(--white); padding: 160px 0; text-align: center; }
+.cta-section { background: var(--black); color: var(--white); padding: 120px 0; text-align: center; }
 .cta-title {
   font-family: var(--font-display);
   font-size: clamp(44px, 9vw, 140px);
   font-weight: 400;
-  line-height: 0.95;
-  letter-spacing: -0.01em;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
-  margin-bottom: 24px;
+  margin-bottom: var(--space-md);
   text-wrap: balance;
 }
 .cta-title a { color: var(--white); transition: color 0.3s; }
@@ -1238,7 +1191,7 @@ a { color: inherit; text-decoration: none; }
 .cta-subtitle {
   font-family: var(--font-body);
   font-size: 15px;
-  color: var(--gray-4);
+  color: var(--accent);
   text-transform: uppercase;
   margin-bottom: 48px;
 }
@@ -1315,24 +1268,6 @@ footer {
 .d4 { transition-delay: 0.46s; }
 
 /* ═══════════════════════════════════
-   DOT CURSOR
-   ═══════════════════════════════════ */
-.cursor-dot {
-  position: fixed; top: 0; left: 0;
-  width: 14px; height: 14px;
-  pointer-events: none;
-  z-index: 9999;
-  mix-blend-mode: difference;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.3s;
-  opacity: 0;
-}
-.cursor-dot.visible { opacity: 1; }
-a, button, input, textarea, select, [role="button"] { cursor: none !important; }
-.cursor-dot svg { width: 100%; height: 100%; fill: white; }
-@media (hover: none) { .cursor-dot { display: none; } }
-
-/* ═══════════════════════════════════
    RESPONSIVE
    ═══════════════════════════════════ */
 @media (max-width: 1024px) {
@@ -1369,6 +1304,9 @@ a, button, input, textarea, select, [role="button"] { cursor: none !important; }
   :root { --px: 24px; }
   .nav-name { font-size: 12px; padding: 7px 16px; }
   .case-header { padding-top: 100px; }
+  .ed-subsection { margin-top: 40px; padding-top: 40px; }
+  .ed-title { font-size: 26px; }
+  .ed-subhead { font-size: 18px; }
   .case-meta { gap: 24px; }
   .case-meta-item { min-width: calc(50% - 12px); }
   .challenges { grid-template-columns: 1fr 1fr; }
@@ -1390,7 +1328,7 @@ a, button, input, textarea, select, [role="button"] { cursor: none !important; }
   .ba-arrow { transform: rotate(90deg); }
   .browser-pair { grid-template-columns: 1fr; }
   .more-work-grid { grid-template-columns: 1fr; }
-  .more-work, .cta-section { padding: 120px 0; }
+  .more-work, .cta-section { padding: 96px 0; }
   .footer-grid { grid-template-columns: 1fr; gap: 32px; }
   .ed-subtitle { margin-top: 56px; }
 }
@@ -1459,7 +1397,7 @@ a, button, input, textarea, select, [role="button"] { cursor: none !important; }
   margin-bottom: 24px;
   padding: 20px 24px;
   border-left: 3px solid var(--black);
-  background: var(--cream);
+  background: var(--white);
 }
 .md-caption .md-num{
   font-family: var(--font-display);
@@ -1503,7 +1441,6 @@ a, button, input, textarea, select, [role="button"] { cursor: none !important; }
 </style>
 </head>
 <body>
-<div class="cursor-dot" id="cursorDot"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12"/></svg></div>
 
 <!-- NAV -->
 <a href="index.html" class="nav-name">Adriana Pommot</a>
@@ -1526,7 +1463,7 @@ a, button, input, textarea, select, [role="button"] { cursor: none !important; }
      ══════════════════════════════════════════ -->
 <section class="case-header"><div class="container">
 <a href="index.html#work" class="case-back rv"><svg viewBox="0 0 16 16"><path d="M13 8H3M7 4l-4 4 4 4"/></svg> Todos os Projetos</a>
-<h1 class="case-title rv d1">MRV Ecossistema Financeiro</h1>
+<h1 class="case-title rv d1">MRV<br>Ecossistema<br>Financeiro</h1>
 <p class="case-focus rv d2">Redesenhei o autoatendimento financeiro da maior construtora da América Latina, transformando um fluxo de renegociação com alta taxa de abandono em um canal digital com <strong>27% de engajamento e 14% de conversão autônoma no piloto.</strong></p>
 <div class="case-meta-bar rv d3">
   <div class="case-meta">
@@ -1546,9 +1483,9 @@ a, button, input, textarea, select, [role="button"] { cursor: none !important; }
 <section class="ed"><div class="container">
 <div class="ed-two-col rv">
   <div class="ed-two-col-left">
-    <div class="ed-header" style="margin-bottom:0">
+    <div class="ed-header">
       <div class="ed-num">01</div>
-      <h2 class="ed-title">Contexto do produto</h2>
+      <h2 class="ed-title">Contexto<br>do produto</h2>
     </div>
     <div class="ed-content">
       <p class="ed-body">Produto digital de pós-compra da MRV, responsável por <strong>cobranças, pagamentos e renegociação de dívidas.</strong></p>
@@ -1601,31 +1538,23 @@ a, button, input, textarea, select, [role="button"] { cursor: none !important; }
      ══════════════════════════════════════════ -->
 
 <section class="ed ed--shaded"><div class="container">
-<div class="problem-card rv">
-  <div class="problem-card-left">
-    <div class="problem-card-icon">
-      <svg width="130" height="129" viewBox="0 0 130 129" fill="none" xmlns="http://www.w3.org/2000/svg">
+<div class="problem-icon rv">
+  <svg width="130" height="129" viewBox="0 0 130 129" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M90.2981 76.8715C89.3663 76.8715 88.6112 76.0747 88.6112 75.0914C88.6112 74.1082 89.3663 73.3114 90.2981 73.3114H110.433C111.365 73.3114 112.12 74.1082 112.12 75.0914C112.12 76.0747 111.365 76.8715 110.433 76.8715H90.2981ZM125.71 45.0134H128.253C129.185 45.0134 129.94 44.2166 129.94 43.2334V28.7112C129.94 27.7279 129.185 26.9311 128.253 26.9311L90.6949 26.9255C89.7632 26.9255 89.0081 27.7222 89.0081 28.7055V43.2277C89.0081 44.211 89.7631 45.0077 90.6949 45.0077H98.8772V55.4842H98.8825C98.8825 56.0153 99.1075 56.5409 99.5358 56.8912C100.269 57.4902 101.33 57.3489 101.897 56.5691L110.395 45.0077H115.247V116.065L97.8867 116.077L92.0286 93.005C90.9255 88.6596 88.3124 84.9415 84.9602 82.1557C81.3832 79.1777 76.9386 77.2453 72.6013 76.731L59.6266 75.194L59.2999 69.272C64.3335 66.7348 68.6441 62.6381 71.3375 56.993H75.4233C77.1905 56.993 78.7915 56.2301 79.9589 55.0039C81.1209 53.7777 81.8384 52.0826 81.8384 50.2234V47.9066H82.5024C84.0607 47.9066 85.4798 47.2341 86.5026 46.1493C87.5307 45.07 88.1679 43.5726 88.1679 41.9281V34.1471C88.1679 32.5028 87.5306 31.0053 86.5026 29.926C85.4798 28.8411 84.0608 28.1687 82.5024 28.1687H81.137C79.0647 20.2181 74.6094 13.2848 68.6387 8.28399C62.4539 3.10234 54.6411 0 46.1857 0C37.7251 0 29.918 3.10219 23.7328 8.28399C17.7621 13.2792 13.3068 20.2126 11.2345 28.1687L9.86369 28.163C8.30546 28.163 6.88636 28.8355 5.86358 29.9203C4.84081 30.9996 4.20363 32.497 4.20363 34.1415V41.9225C4.20363 42.1316 4.21434 42.335 4.23576 42.5384V116.077H1.68682C0.755072 116.077 0 116.874 0 117.857V119.14C0 121.858 1.04954 124.321 2.73633 126.107C4.4285 127.893 6.76318 129 9.33885 129H120.602C123.177 129 125.512 127.892 127.204 126.107C128.896 124.321 129.946 121.858 129.946 119.14L129.941 117.857C129.941 116.874 129.186 116.077 128.254 116.077H125.71L125.71 45.0134ZM122.331 116.071H118.62V45.0134H122.331V116.071ZM7.60377 47.3974C8.29455 47.7195 9.06029 47.8946 9.86347 47.8946H11.3146V116.076H7.60377V47.3974ZM14.6936 47.8946H18.3884C19.8021 58.3993 25.6496 65.5198 33.0715 69.2606L32.7449 75.1826L19.7701 76.7196C18.7367 76.8383 17.6818 77.0474 16.6161 77.3412C15.9628 77.5164 15.3202 77.7198 14.6938 77.9515L14.6936 47.8946ZM14.6936 81.7533C14.7204 81.742 14.7418 81.7363 14.7632 81.725C15.6736 81.3351 16.5732 81.0187 17.446 80.7814C18.3242 80.5441 19.2292 80.3689 20.1394 80.2559L32.659 78.7754L44.4718 94.3652V116.081L14.693 116.07L14.6936 81.7533ZM47.8515 116.071V94.3892L59.7178 78.7762L72.2374 80.2567C75.9589 80.6974 79.7877 82.37 82.8828 84.9468C85.6941 87.2862 87.8788 90.3602 88.7785 93.92L94.4011 116.076L73.0777 116.07L47.8515 116.071ZM126.546 119.636C126.434 121.173 125.791 122.557 124.811 123.586C123.729 124.727 122.235 125.434 120.597 125.434H74.7586V119.636H126.546ZM71.3861 119.636V125.434H58.5505V119.636H71.3861ZM55.1773 119.636V125.434H9.33912C7.70055 125.434 6.20647 124.727 5.12488 123.586C4.1503 122.558 3.5077 121.173 3.38995 119.636H55.1773ZM34.9848 66.2818C27.986 62.9253 22.4973 56.1614 21.5709 45.9675C21.5655 45.9505 21.5655 45.9336 21.5655 45.911C21.4798 44.9278 21.4316 43.9163 21.4316 42.8765V37.271C21.4316 34.8242 21.678 32.547 22.1385 30.4449C22.1599 30.3771 22.1759 30.3036 22.1867 30.2301C24.1036 21.771 29.4799 16.1655 35.9965 13.4021C39.1986 12.0459 42.69 11.3621 46.1868 11.3621C49.6835 11.3621 53.1696 12.0402 56.3717 13.4021C62.8832 16.1653 68.2648 21.7708 70.1815 30.2301C70.1923 30.3036 70.2083 30.3714 70.2244 30.4449C70.6849 32.5469 70.9312 34.8185 70.9312 37.271V42.8765C70.9312 43.9219 70.8884 44.9334 70.7974 45.911C70.7974 45.9279 70.792 45.9449 70.792 45.9675C70.5457 48.6968 69.9674 51.1775 69.1267 53.4207H52.9494C52.7138 52.6296 52.3015 51.9232 51.7606 51.3525C50.8932 50.4371 49.6883 49.8665 48.3656 49.8665H44.0014C42.6788 49.8665 41.4793 50.4372 40.6064 51.3525C39.7389 52.2679 39.1981 53.5393 39.1981 54.9351C39.1981 56.3309 39.739 57.6023 40.6064 58.5177C41.4792 59.4332 42.6787 60.0038 44.0014 60.0038H48.3656C49.6883 60.0038 50.8877 59.4331 51.7606 58.5177C52.1783 58.077 52.5157 57.5628 52.7566 56.9864L67.4561 56.9807C65.0089 61.2357 61.4534 64.3323 57.389 66.2818C57.0248 66.3157 56.7036 66.4739 56.4465 66.7056L56.3769 66.7339C53.1748 68.0957 49.6887 68.7738 46.192 68.7738C42.6952 68.7738 39.2038 68.0958 36.0017 66.7339L35.9321 66.7056C35.6751 66.4739 35.3489 66.3157 34.9848 66.2818ZM36.3663 70.6667C39.5204 71.7799 42.8564 72.3392 46.1872 72.3392C49.5179 72.3392 52.854 71.7798 56.0027 70.6667L56.3454 76.8825C56.3561 77.0577 56.3882 77.2329 56.4418 77.3967L46.1658 90.9246L35.9219 77.408C35.9862 77.2272 36.0237 77.0294 36.0237 76.826L36.3663 70.6667ZM77.6314 28.1618H73.1708C70.7611 19.1716 64.7958 13.1535 57.6255 10.1128C54.0056 8.57583 50.0912 7.81305 46.1874 7.81305C42.2783 7.81305 38.3641 8.58154 34.7441 10.1128C27.5739 13.153 21.6087 19.1709 19.1987 28.1618H14.7382C16.7141 21.3471 20.6392 15.4025 25.8226 11.0632C31.4291 6.37312 38.5083 3.55909 46.1824 3.55909C53.8559 3.55909 60.9353 6.36748 66.5421 11.0632C71.7255 15.3973 75.6554 21.3419 77.6314 28.1618ZM74.3167 37.2708C74.3167 35.3212 74.1774 33.4735 73.9151 31.7218H82.5149C83.1414 31.7218 83.7144 31.9931 84.1321 32.4338C84.5497 32.8746 84.8068 33.4736 84.8068 34.1404V41.9214C84.8068 42.5825 84.5497 43.1871 84.1321 43.6279C83.7144 44.0687 83.1414 44.3399 82.5149 44.3399H74.2952C74.3113 43.8596 74.322 43.3736 74.322 42.8821L74.3167 37.2708ZM73.9847 47.8942H78.4666V50.211C78.4666 51.0926 78.1239 51.895 77.5724 52.477C77.0208 53.0589 76.2604 53.4206 75.4251 53.4206H72.7477C73.3046 51.6972 73.7223 49.855 73.9847 47.8942ZM18.0914 44.3343H9.86636C9.23984 44.3343 8.66687 44.0631 8.24918 43.6223C7.89576 43.255 7.66014 42.7691 7.59589 42.2266V42.1927C7.58518 42.1023 7.57982 42.0062 7.57982 41.9158V34.1348C7.57982 33.4736 7.84222 32.869 8.25454 32.4282C8.66686 31.9931 9.23983 31.7219 9.86637 31.7219H18.4662C18.1985 33.4736 18.0646 35.3271 18.0646 37.2708V42.8764C18.0592 43.368 18.07 43.854 18.0914 44.3343ZM48.3678 53.4264C48.7587 53.4264 49.1175 53.5959 49.3745 53.8728C49.6369 54.1496 49.7975 54.5226 49.7975 54.9351C49.7975 54.9746 49.7975 55.0142 49.7922 55.0481V55.0764C49.76 55.4323 49.6101 55.7601 49.3745 56.0031C49.1121 56.28 48.7587 56.4495 48.3678 56.4495H44.0036C43.6127 56.4495 43.2539 56.2799 42.9968 56.0031C42.7344 55.7262 42.5738 55.3532 42.5738 54.9351C42.5738 54.5226 42.7345 54.1496 42.9968 53.8727C43.2592 53.5959 43.6127 53.4263 44.0036 53.4263L48.3678 53.4264ZM90.698 3.1403H128.262C129.193 3.1403 129.949 3.93705 129.949 4.92032V19.4483C129.949 20.4316 129.194 21.2284 128.262 21.2284H90.698C89.7662 21.2284 89.0111 20.4316 89.0111 19.4483V4.92032C89.0111 3.93709 89.7662 3.1403 90.698 3.1403ZM126.57 6.70019V17.6625H92.3841V6.70019H126.57ZM95.9935 13.9613C95.0618 13.9613 94.3067 13.1646 94.3067 12.1813C94.3067 11.1981 95.0617 10.4013 95.9935 10.4013H115.154C116.085 10.4013 116.841 11.198 116.841 12.1813C116.841 13.1645 116.086 13.9613 115.154 13.9613H95.9935ZM120.037 13.9613C119.105 13.9613 118.35 13.1646 118.35 12.1813C118.35 11.1981 119.105 10.4013 120.037 10.4013H122.955C123.887 10.4013 124.642 11.198 124.642 12.1813C124.642 13.1645 123.887 13.9613 122.955 13.9613H120.037ZM126.57 30.4899V41.4523H109.578C108.989 41.4523 108.47 41.7744 108.17 42.2547L102.253 50.2956V43.2323C102.253 42.2491 101.498 41.4523 100.566 41.4523H92.3835V30.4899L126.57 30.4899ZM95.993 37.7511C95.0612 37.7511 94.3061 36.9543 94.3061 35.971C94.3061 34.9878 95.0612 34.191 95.993 34.191H115.153C116.085 34.191 116.84 34.9878 116.84 35.971C116.84 36.9543 116.085 37.7511 115.153 37.7511H95.993ZM120.036 37.7511C119.104 37.7511 118.349 36.9543 118.349 35.971C118.349 34.9878 119.104 34.191 120.036 34.191H122.955C123.886 34.191 124.641 34.9878 124.641 35.971C124.641 36.9543 123.886 37.7511 122.955 37.7511H120.036ZM90.3012 68.6037C89.3695 68.6037 88.6144 67.807 88.6144 66.8237C88.6144 65.8404 89.3694 65.0437 90.3012 65.0437H110.436C111.368 65.0437 112.123 65.8404 112.123 66.8237C112.123 67.807 111.368 68.6037 110.436 68.6037H90.3012Z" fill="black"/>
 </svg>
-    </div>
-    <div class="problem-card-heading">
-      <div class="ed-header" style="margin-bottom:0">
-        <div class="ed-num">02</div>
-        <h2 class="ed-title">O problema</h2>
-      </div>
-      <p class="problem-card-statement">A renegociação digital existia mas tinha conversão baixa.</p>
-    </div>
-  </div>
-  <div class="problem-card-text">
-    <p>Os clientes iniciavam o processo no app mas <strong>não completavam o acordo.</strong></p>
-    <p>O resultado era <strong>migração para o call center,</strong> inflando <strong>custos operacionais</strong> e gerando insatisfação.</p>
-    <p>A proposta aparecia no fluxo mas não comunicava segurança. Faltava transparência no progresso, a linguagem era técnica e intimidadora, e a interface tratava todos os clientes da mesma forma, independente do seu estado financeiro.</p>
-  </div>
+</div>
+<div class="ed-header rv">
+  <div class="ed-num">02</div>
+  <h2 class="ed-title">O problema</h2>
+</div>
+<div class="ed-content rv d1">
+  <p class="ed-body">A renegociação digital existia mas tinha conversão baixa.<br>Os clientes iniciavam o processo no app mas <strong>não completavam o acordo.</strong></p>
+  <p class="ed-body">O resultado era <strong>migração para o call center,</strong> inflando custos<br>operacionais e gerando insatisfação para o cliente e para a operação.</p>
+  <p class="ed-body">A proposta aparecia no fluxo mas não comunicava segurança.<br>A linguagem era técnica, faltava transparência no progresso<br>e a interface tratava cada cliente do mesmo jeito, sem considerar<br>em que momento financeiro ele se encontrava.</p>
 </div>
 
-<div class="ed-header rv d1" style="margin-top:120px;padding-top:64px;border-top:1px solid var(--gray-4)">
-  <h2 class="ed-title">Principais desafios</h2>
-</div>
+<div class="ed-subsection rv d1">
+<h3 class="ed-subhead">Principais desafios</h3>
 <div class="challenges rv d2">
   <div class="challenge">
     <div class="challenge-icon"><svg viewBox="0 0 32 32"><path d="M12 28H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h6"/><polyline points="22 22 28 16 22 10"/><line x1="28" y1="16" x2="12" y2="16"/></svg></div>
@@ -1653,6 +1582,7 @@ a, button, input, textarea, select, [role="button"] { cursor: none !important; }
     <p class="challenge-desc">O desafio central era simplificar a tomada de decisão sem remover informação financeira obrigatória. Menos não podia significar inseguro.</p>
   </div>
 </div>
+</div>
 </div></section>
 
 
@@ -1663,13 +1593,13 @@ a, button, input, textarea, select, [role="button"] { cursor: none !important; }
 <section class="ed"><div class="container">
 <div class="ed-two-col ed-two-col--obj rv">
   <div class="ed-two-col-left">
-    <div class="ed-header" style="margin-bottom:0">
+    <div class="ed-header">
       <div class="ed-num">03</div>
       <h2 class="ed-title">Objetivo</h2>
     </div>
     <div class="ed-badge">Período do piloto - 2 sprints</div>
-    <p class="ed-two-col-body-lg"><strong>Aumentar renegociações no autoatendimento sem introduzir novas etapas ou dependência de atendimento humano.</strong></p>
-    <p class="ed-two-col-body-lg">O desafio não era criar novas funcionalidades, mas destravar a decisão do usuário dentro de um fluxo financeiro sensível, preservando clareza, confiança e ritmo de navegação.</p>
+    <p class="ed-two-col-body-lg"><strong>Aumentar renegociações via autoatendimento sem criar novas etapas ou dependência de atendimento humano.</strong></p>
+    <p class="ed-two-col-body-lg">O desafio não era criar funcionalidades novas, mas destravar a decisão do usuário dentro de um fluxo financeiro sensível, preservando clareza, confiança e ritmo de ação no percurso.</p>
   </div>
   <div class="ed-two-col-right">
     <div class="kr-card">
@@ -1677,7 +1607,7 @@ a, button, input, textarea, select, [role="button"] { cursor: none !important; }
       <ul>
         <li>Aumentar em 10 a 20% a visualização de propostas elegíveis.</li>
         <li>Aumentar em 8 a 15% o clique e a escolha de propostas.</li>
-        <li>Manter ou aumentar pagamento sem elevar fricção, entre 3 e 8%.</li>
+        <li>Manter ou aumentar pagamentos sem elevar fricção no processo, na faixa entre 3 e 8%.</li>
         <li>Reduzir contatos no público elegível entre 5 e 12%.</li>
       </ul>
     </div>
@@ -1693,12 +1623,12 @@ a, button, input, textarea, select, [role="button"] { cursor: none !important; }
 <section class="ed ed--shaded"><div class="container">
 <div class="ed-two-col ed-two-col--strat rv">
   <div class="ed-two-col-left">
-    <div class="ed-header" style="margin-bottom:0">
+    <div class="ed-header">
       <div class="ed-num">04</div>
       <h2 class="ed-title">Estratégia de design</h2>
     </div>
     <p class="ed-two-col-body-lg">A acessibilidade cognitiva orientou cada decisão. Combinei microinterações com copywriting de baixa carga cognitiva e hierarquia visual que cria sinais claros de oportunidade e progresso dentro do fluxo financeiro.</p>
-    <div class="ed-badge" style="margin-top:16px">A solução priorizou</div>
+    <div class="ed-badge">A solução priorizou</div>
     <ul class="ed-list">
       <li>Redução de complexidade para destravar o primeiro passo</li>
       <li>Visibilidade automatizada de propostas dentro do ecossistema</li>
@@ -1796,7 +1726,7 @@ a, button, input, textarea, select, [role="button"] { cursor: none !important; }
 <!-- Fluxo desktop — master-detail viewer -->
 <section class="ed"><div class="container">
 <div class="ed-header rv">
-  <h2 class="ed-title">Fluxo desktop</h2>
+  <h3 class="ed-subhead">Fluxo desktop</h3>
 </div>
 <div class="ed-content rv d1">
   <p class="ed-body">O extrato financeiro foi redesenhado com filtros por categoria (MRV, Cartório, Banco), estados claros para boletos pagos e pendentes, e <strong>ações diretas que eliminam ambiguidade</strong>. O percurso foi construído para que o cliente escolha, devolva a confiança e feche o acordo com autonomia.</p>
@@ -1833,7 +1763,7 @@ a, button, input, textarea, select, [role="button"] { cursor: none !important; }
 <!-- Fundação Visual -->
 <section class="ed"><div class="container">
 <div class="ed-header rv">
-  <h2 class="ed-title">Fundação visual</h2>
+  <h3 class="ed-subhead">Fundação visual</h3>
 </div>
 <div class="ed-content rv d1">
   <p class="ed-body">Cada padrão documentado como <strong>design tokens e componentes escaláveis</strong>: paleta semântica, escala tipográfica, sistema de espaçamento, shadow e opacidade. A base visual garantiu consistência entre os três domínios do produto.</p>
@@ -1866,8 +1796,8 @@ a, button, input, textarea, select, [role="button"] { cursor: none !important; }
   </div>
 </div>
 
-<div style="margin-top:48px">
-  <p class="fw-img-caption rv" style="margin-top:0;margin-bottom:16px">Visão geral: os diferentes estados e telas do ecossistema financeiro redesenhado.</p>
+<div class="overview-block">
+  <p class="fw-img-caption rv">Visão geral: os diferentes estados e telas do ecossistema financeiro redesenhado.</p>
   <div class="fw-img rv d1"><img src="img/mrv/overview-grid.webp" alt="Visão geral do ecossistema financeiro MRV"></div>
 </div>
 </div></section>
@@ -1910,8 +1840,8 @@ a, button, input, textarea, select, [role="button"] { cursor: none !important; }
 <div class="results-row rv d2">
   <div class="results-row-text">
     <p>O tempo de resposta caiu de <strong>17,2s para 6,99s</strong>.</p>
-    <p style="margin-top:28px">Feedback sobre lentidão reduziu de <strong>14% para 9%</strong> dos comentários.</p>
-    <p style="margin-top:28px"><strong>187.756 clientes</strong> migrados para a nova experiência de acompanhamento de obra.</p>
+    <p>Feedback sobre lentidão reduziu de <strong>14% para 9%</strong> dos comentários.</p>
+    <p><strong>187.756 clientes</strong> migrados para a nova experiência de acompanhamento de obra.</p>
   </div>
   <div class="results-row-table">
     <div class="kr-compare">
@@ -1939,30 +1869,36 @@ a, button, input, textarea, select, [role="button"] { cursor: none !important; }
   </div>
 </div>
 
-<div class="post-pilot-row rv d3" style="margin-top:64px">
-  <div class="post-pilot-col">
-    <div class="ed-header" style="margin-bottom:24px">
-      <h2 class="ed-title">Desdobramento pós-piloto</h2>
+<div class="ed-subsection rv d3">
+  <h3 class="ed-subhead">Desdobramento pós-piloto</h3>
+  <div class="sprints">
+    <div class="sprint">
+      <div class="sprint-label">Sprint 1</div>
+      <div class="sprint-desc">Ajustes de comunicação no fluxo e regras de elegibilidade para reduzir insegurança. Integração com régua de comunicação e propostas de acordos.</div>
     </div>
-    <div class="sprints">
-      <div class="sprint">
-        <div class="sprint-label">Sprint 1</div>
-        <div class="sprint-desc">Ajustes de comunicação no fluxo e regras de elegibilidade para reduzir insegurança. Integração com régua de comunicação e propostas de acordos.</div>
-      </div>
-      <div class="sprint">
-        <div class="sprint-label">Sprint 2</div>
-        <div class="sprint-desc">Expansão do componente para outros pontos do portal. Padronização da solução para reuso entre squads. Campanha especial e educação financeira.</div>
-      </div>
+    <div class="sprint">
+      <div class="sprint-label">Sprint 2</div>
+      <div class="sprint-desc">Expansão do componente para outros pontos do portal. Padronização da solução para reuso entre squads. Campanha especial e educação financeira.</div>
     </div>
   </div>
-  <div class="post-pilot-col">
-    <div class="ed-header" style="margin-bottom:24px">
+</div>
+</div></section>
+
+
+<!-- ══════════════════════════════════════════
+     07. APRENDIZADOS
+     ══════════════════════════════════════════ -->
+
+<section class="ed"><div class="container">
+<div class="ed-two-col rv">
+  <div class="ed-two-col-left">
+    <div class="ed-header">
       <div class="ed-num">07</div>
       <h2 class="ed-title">Aprendizados</h2>
     </div>
     <div class="ed-content">
       <p class="ed-body">Em fluxos financeiros sensíveis, <strong>a ausência de sinalização é tão prejudicial quanto o excesso de informação.</strong> O cliente precisa de sinais claros de que está no caminho certo, especialmente quando o próximo passo envolve dinheiro.</p>
-      <p class="ed-body" style="margin-top:24px">Microinterações aplicadas com critério aumentam a acessibilidade sem comprometer a hierarquia ou o desempenho do sistema. O crescimento sustentável veio de ciclos curtos orientados a experimentação, não de grandes reformulações.</p>
+      <p class="ed-body">Microinterações aplicadas com critério aumentam a acessibilidade sem comprometer a hierarquia ou o desempenho do sistema. O crescimento sustentável veio de ciclos curtos orientados a experimentação, não de grandes reformulações.</p>
     </div>
   </div>
 </div>
@@ -1982,7 +1918,7 @@ a, button, input, textarea, select, [role="button"] { cursor: none !important; }
 </div></section>
 
 <section class="cta-section" id="contact"><div class="container">
-<h2 class="cta-title rv"><a href="mailto:adrianapommot@gmail.com">Vamos Conversar?</a></h2>
+<h2 class="cta-title rv"><a href="mailto:adrianapommot@gmail.com">Vamos<br>Conversar?</a></h2>
 <p class="cta-subtitle rv d1">Product Design & Inteligência Visual</p>
 <a href="mailto:adrianapommot@gmail.com" class="cta-btn rv d2">Entrar em Contato →</a>
 </div></section>
@@ -2063,32 +1999,6 @@ document.querySelectorAll('.rv').forEach(function(el){ro.observe(el)});
   }
 })();
 
-/* Custom scroll cursor */
-(function(){
-  const cursor=document.createElement('div');
-  cursor.className='scroll-cursor';
-  cursor.innerHTML='<span class="scroll-cursor-text">scroll</span><svg class="scroll-cursor-arrow" viewBox="0 0 12 12"><path d="M6 2v8M3 7l3 3 3-3"/></svg>';
-  document.body.appendChild(cursor);
-  const targets=document.querySelectorAll('.phone-frame,.browser-content');
-  targets.forEach(el=>{
-    el.style.cursor='none';
-    el.addEventListener('mouseenter',e=>{
-      cursor.classList.add('visible');
-      cursor.style.left=e.clientX+'px';
-      cursor.style.top=e.clientY+'px';
-    });
-    el.addEventListener('mousemove',e=>{
-      cursor.style.left=e.clientX+'px';
-      cursor.style.top=e.clientY+'px';
-    });
-    el.addEventListener('mouseleave',()=>{
-      cursor.classList.remove('visible','grabbing');
-    });
-    el.addEventListener('mousedown',()=>cursor.classList.add('grabbing'));
-    el.addEventListener('mouseup',()=>cursor.classList.remove('grabbing'));
-  });
-})();
-
 /* === Text Roll === */
 (function(){try{
   var el=document.querySelector(".nav-name");
@@ -2104,17 +2014,6 @@ document.querySelectorAll('.rv').forEach(function(el){ro.observe(el)});
   if(document.fonts&&document.fonts.ready){document.fonts.ready.then(setH)}
   else{setTimeout(setH,300)}
 }catch(e){console.warn("text-roll error",e)}})();
-/* === Dot Cursor === */
-(function(){try{
-  var dot=document.getElementById("cursorDot");
-  if(!dot||matchMedia("(hover:none)").matches)return;
-  var vis=false;
-  document.addEventListener("mousemove",function(e){
-    if(!vis){vis=true;dot.classList.add("visible")}
-    dot.style.left=e.clientX+"px";dot.style.top=e.clientY+"px";
-  });
-  document.addEventListener("mouseleave",function(){vis=false;dot.classList.remove("visible")});
-}catch(e){console.warn("cursor error",e)}})();
 /* === Nav BG on scroll === */
 (function(){try{
   var nn=document.querySelector(".nav-name");
