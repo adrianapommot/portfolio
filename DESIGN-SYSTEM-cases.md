@@ -317,12 +317,20 @@ Base estrutural de toda seção narrativa do case.
   font-size: 18px;
   font-weight: 400;
   line-height: 1.6;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   color: var(--gray-2);
 }
 ```
 
 Mobile (1024px): 1 coluna, gap reduzido.
+
+#### Regra de alinhamento vertical (obrigatória)
+
+O topo do primeiro elemento da **coluna direita** sempre alinha com o topo do **`ed-num`** da coluna esquerda. Isso é resolvido por `align-items: flex-start` no `.ed-two-col` — **sem** `padding-top` customizado nos modifiers (`--obj`, `--strat` etc).
+
+**Por que é fixa:** tentativas anteriores de alinhar a coluna direita com elementos intermediários (ex: "alinhar o KR card com o badge") usavam valores mágicos tipo `padding-top: 116px` baseados em altura calculada do header + gap. Esses valores quebram toda vez que um token tipográfico muda (line-height, font-size, margin). A solução sustentável é sempre alinhar pelo topo — o leitor naturalmente entende que as duas colunas começam juntas.
+
+Se a coluna direita parece "órfã" visualmente por ser muito alta antes da coluna esquerda atingir conteúdo, ajuste o **conteúdo da coluna esquerda** (ex: adicionar pill/badge logo após o header) em vez de empurrar a direita.
 
 ### 5.5 Badge
 

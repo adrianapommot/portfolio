@@ -47,7 +47,7 @@
   --t-h2:       32px;                    /* .ed-title (seções 01-07) */
   --t-h3:       22px;                    /* .ed-subhead (subseções) */
   --t-body-lg:  18px;                    /* destaque: objetivo, estratégia, md-title, problem-statement */
-  --t-body:     16px;                    /* parágrafos padrão */
+  --t-body:     14px;                    /* parágrafos padrão — mesmo da home */
   --t-label:    13px;                    /* card-titles, metadata, labels uppercase */
   --t-caption:  12px;                    /* footer, nav-links, micro-captions */
   --t-num-xl:   48px;                    /* r-num, ba-num, result-num */
@@ -240,10 +240,9 @@ a { color: inherit; text-decoration: none; }
   font-size: var(--t-body);
   font-weight: 400;
   line-height: 1.75;
-  color: var(--gray-3);
+  color: var(--gray-2);
   max-width: 668px;
   margin-bottom: 0;
-  letter-spacing: 0.01em;
   text-wrap: pretty;
 }
 .case-focus strong { color: var(--black); font-weight: 600; }
@@ -372,14 +371,13 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: var(--space-md);
 }
 
-/* Body text */
+/* Body text — unificado com a home */
 .ed-body {
   font-family: var(--font-body);
   font-size: var(--t-body);
   font-weight: 400;
-  color: var(--gray-3);
+  color: var(--gray-2);
   line-height: 1.75;
-  letter-spacing: 0.01em;
   text-wrap: pretty;
 }
 .ed-body strong { color: var(--black); font-weight: 600; }
@@ -426,7 +424,7 @@ a { color: inherit; text-decoration: none; }
   font-size: var(--t-body-lg);
   line-height: 1.5;
   letter-spacing: 0.02em;
-  color: var(--gray-3);
+  color: var(--gray-2);
 }
 
 /* ═══════════════════════════════════
@@ -485,9 +483,8 @@ a { color: inherit; text-decoration: none; }
   font-family: var(--font-body);
   font-size: var(--t-label);
   font-weight: 400;
-  color: var(--gray-3);
+  color: var(--gray-2);
   line-height: 1.5;
-  letter-spacing: 0;
   text-wrap: pretty;
 }
 
@@ -534,9 +531,8 @@ a { color: inherit; text-decoration: none; }
   font-family: var(--font-body);
   font-size: var(--t-label);
   font-weight: 400;
-  color: var(--gray-3);
+  color: var(--gray-2);
   line-height: 1.5;
-  letter-spacing: 0;
   text-wrap: pretty;
 }
 
@@ -583,7 +579,7 @@ a { color: inherit; text-decoration: none; }
   font-family: var(--font-body);
   font-size: var(--t-body);
   font-weight: 400;
-  color: var(--gray-3);
+  color: var(--gray-2);
   line-height: 1.75;
   text-wrap: pretty;
   margin-bottom: 12px;
@@ -625,7 +621,8 @@ a { color: inherit; text-decoration: none; }
   width: 626px;
 }
 
-/* Modifier: Objetivo (seção 03) */
+/* Modifier: Objetivo (seção 03)
+   Alinhamento: topo com topo (vide DESIGN-SYSTEM-cases.md §5.4). */
 .ed-two-col--obj {
   gap: 96px;
   align-items: flex-start;
@@ -633,11 +630,9 @@ a { color: inherit; text-decoration: none; }
 .ed-two-col--obj .ed-two-col-left {
   max-width: 503px;
 }
-.ed-two-col--obj .ed-two-col-right {
-  padding-top: 116px; /* alinha KR card com badge: header(68) + gap(48) */
-}
 
-/* Modifier: Estratégia (seção 04) */
+/* Modifier: Estratégia (seção 04)
+   Alinhamento: topo com topo (vide DESIGN-SYSTEM-cases.md §5.4). */
 .ed-two-col--strat {
   gap: 96px;
   align-items: flex-start;
@@ -648,14 +643,13 @@ a { color: inherit; text-decoration: none; }
 }
 .ed-two-col--strat .ed-two-col-right {
   gap: 24px;
-  padding-top: 116px; /* alinha metrics com body text: header(68) + gap(48) */
 }
 
 .ed-two-col-body-lg {
   font-family: var(--font-display);
   font-size: var(--t-body-lg);
   font-weight: 400;
-  color: var(--gray-3);
+  color: var(--gray-2);
   line-height: 1.5;
   letter-spacing: 0.02em;
   max-width: 562px;
@@ -677,7 +671,7 @@ a { color: inherit; text-decoration: none; }
   font-family: var(--font-body);
   font-size: var(--t-body);
   font-weight: 400;
-  color: var(--gray-3);
+  color: var(--gray-2);
   line-height: 1.75;
   text-wrap: pretty;
   margin-bottom: 10px;
@@ -911,7 +905,7 @@ a { color: inherit; text-decoration: none; }
   font-size: var(--t-label);
   font-weight: 400;
   line-height: 1.5;
-  color: var(--gray-3);
+  color: var(--gray-2);
 }
 .results-hero-sep{
   width: 1px;
@@ -937,9 +931,8 @@ a { color: inherit; text-decoration: none; }
   font-family: var(--font-body);
   font-size: var(--t-body);
   font-weight: 400;
-  color: var(--gray-3);
+  color: var(--gray-2);
   line-height: 1.75;
-  letter-spacing: 0.01em;
   text-wrap: pretty;
 }
 .results-row-text p + p { margin-top: var(--space-md); }
@@ -1131,7 +1124,7 @@ a { color: inherit; text-decoration: none; }
 .sprint-desc {
   font-family: var(--font-body);
   font-size: var(--t-label);
-  color: var(--gray-3);
+  color: var(--gray-2);
   line-height: 1.6;
   text-wrap: pretty;
 }

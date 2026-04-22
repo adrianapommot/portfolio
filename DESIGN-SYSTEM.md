@@ -202,6 +202,55 @@ Regra fundamental: **título sempre em cima, conteúdo abaixo. Nunca lado a lado
 
 ---
 
+## 7.1 Diagramação tipográfica (regras absolutas)
+
+Valem para **todo** o portfólio — index e cases. Não são estéticas opcionais, são requisito de qualidade.
+
+### Zero viúvas, órfãs e rios
+- Parágrafos: sempre `text-wrap: pretty` (redistribui para evitar palavras soltas na última linha)
+- Títulos: sempre `text-wrap: balance` (equilibra linhas em multi-linha)
+- Quando `text-wrap` não resolve, ajustar **conteúdo** (reescrever uma linha) ou **max-width** do container. Nunca forçar com `<br>` arbitrário.
+- Revisar em desktop **e** em 640px — viúva boa em uma largura pode ser ruim em outra.
+
+### Body text unificado (home + cases)
+Body text tem **um único** padrão em todo o portfólio. Divergir entre home e case quebra a coerência.
+
+| Propriedade | Valor |
+|---|---|
+| font-size | **14px** |
+| font-weight | 400 |
+| line-height | 1.75 |
+| color | `--gray-2` (`#585550`) |
+| letter-spacing | 0 |
+
+Body de destaque (`--t-body-lg`, 18px) pode ser usado em seções específicas (objetivo, estratégia, `md-title`, statement de problema), mas a regra padrão é 14px.
+
+### Alinhamento vertical entre colunas
+Em qualquer layout two-column (home ou case), o **topo do primeiro elemento** de cada coluna alinha na mesma linha base. Usar `align-items: flex-start` no container e **nunca** `padding-top` arbitrário calculado para alinhar com elementos específicos (ex: "alinhar com o badge da esquerda") — esses valores mágicos quebram quando a tipografia muda.
+
+---
+
+## 7.2 Disciplina de variação de estilos
+
+A escala tipográfica do projeto tem **10 tokens**. Se um elemento novo precisa de tamanho fora desses 10, primeiro revise se dá pra reaproveitar.
+
+```css
+--t-hero      /* clamp(44, 7vw, 96) — case-title, cta-title, more-work-title */
+--t-h2        /* 32  — .ed-title (seções 01-07) */
+--t-h3        /* 22  — .ed-subhead (subseções) */
+--t-body-lg   /* 18  — destaque: objetivo, estratégia, md-title */
+--t-body      /* 14  — parágrafos padrão (mesmo que home) */
+--t-label     /* 13  — labels, captions, card-titles uppercase */
+--t-caption   /* 12  — footer, nav-links, micro-captions */
+--t-num-xl    /* 48  — r-num, ba-num, result-num */
+--t-num-md    /* 28  — phone-pct */
+--t-num-sm    /* 20  — .ed-num, more-work-card-name */
+```
+
+Pesos predominantes: **400** e **500**. `600` só para bold inline (strong). Não usar 700+.
+
+---
+
 ## 8. Framework de Seções (Case Study)
 
 1. Contexto do produto
