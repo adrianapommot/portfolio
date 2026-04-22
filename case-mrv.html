@@ -370,6 +370,16 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: var(--space-md);
 }
 
+/* Padrão unificado: quando ed-header tem só subhead (sem .ed-num),
+   aproxima do body e aplica balance no parágrafo introdutório. */
+.ed-header:has(.ed-subhead):not(:has(.ed-num)) {
+  margin-bottom: var(--space-xs);
+}
+.ed-header:has(.ed-subhead):not(:has(.ed-num)) + .ed-content .ed-body {
+  text-wrap: balance;
+  max-width: 780px;
+}
+
 /* Body text — unificado com a home */
 .ed-body {
   font-family: var(--font-body);
@@ -554,14 +564,13 @@ a { color: inherit; text-decoration: none; }
 /* Statement de destaque — pull quote do problema */
 .problem-statement {
   font-family: var(--font-display);
-  font-size: 28px;
-  font-weight: 500;
-  line-height: 1.3;
-  letter-spacing: -0.01em;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.005em;
   color: var(--black);
   max-width: 780px;
-  /* Respiro intra-seção — menor que inter-seção (96+96=192px) pra criar hierarquia clara */
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-lg);
   text-wrap: balance;
 }
 .problem-statement strong { font-weight: 600; }
@@ -575,7 +584,7 @@ a { color: inherit; text-decoration: none; }
 }
 .problem-item {
   padding-top: var(--space-md);
-  border-top: 1px solid var(--gray-4);
+  border-top: 1px solid var(--gray-5);
 }
 .problem-item-label {
   font-family: var(--font-display);
@@ -661,7 +670,7 @@ a { color: inherit; text-decoration: none; }
 .ed-two-col-left > .ed-two-col-body-lg { margin-bottom: 20px; }
 .ed-two-col-left > .ed-two-col-body-lg:last-child { margin-bottom: 0; }
 .ed-two-col-left > .ed-list { margin-top: 0; margin-bottom: 0; }
-.ed-two-col-left > .ed-two-col-body-lg + .ed-badge { margin-top: var(--space-md); }
+.ed-two-col-left > .ed-two-col-body-lg + .ed-badge { margin-top: var(--space-sm); }
 .ed-two-col-right {
   display: flex;
   flex-direction: column;
@@ -671,6 +680,13 @@ a { color: inherit; text-decoration: none; }
      o topo do TÍTULO da coluna esquerda, nunca com o .ed-num.
      Offset = altura do ed-num (--t-num-sm = 20px) + gap entre num e título (--space-xs = 8px). */
   padding-top: calc(var(--t-num-sm) + var(--space-xs));
+}
+
+/* Exceção Seção 03 Objetivo: o kr-card tem título "Key Results" interno.
+   Empurra o card pra baixo pra alinhar esse título com o pill da esquerda (não com o ed-title).
+   Offset = header completo (num + gap + title + margin-bottom) − padding interno do kr-card (32). */
+.ed-two-col--obj .ed-two-col-right {
+  padding-top: calc(var(--t-num-sm) + var(--space-xs) + var(--t-h2) + var(--space-lg) - 32px);
 }
 
 .ed-two-col-body-lg {
@@ -724,8 +740,9 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* Overview block — imagem full-width com caption acima */
-.overview-block { margin-top: var(--space-lg); }
-.overview-block > .fw-img-caption { margin: 0 0 var(--space-sm); }
+.overview-block { margin-top: var(--space-xxl); }
+.overview-block > .ed-header { margin-bottom: var(--space-xs); }
+.overview-block > .ed-content { margin-bottom: var(--space-lg); max-width: 780px; }
 
 /* ═══════════════════════════════════
    PHONE SECTION — dark bg
@@ -904,19 +921,18 @@ a { color: inherit; text-decoration: none; }
    ═══════════════════════════════════ */
 .results { padding: 96px 0; border-top: 1px solid var(--gray-5); }
 
-/* Ato 1 — Statement */
+/* Ato 1 — Statement de abertura (lead) — mesmo tratamento do .problem-statement */
 .results-statement {
   font-family: var(--font-display);
-  font-size: 28px;
-  font-weight: 500;
-  line-height: 1.3;
-  letter-spacing: -0.01em;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.005em;
   color: var(--black);
   max-width: 900px;
-  margin: 0 0 var(--space-xl);
+  margin: 0 0 var(--space-lg);
   text-wrap: balance;
 }
-.results-statement strong { font-weight: 600; }
 
 /* Ato 2 — 4 métricas lado a lado */
 .hero-stats {
@@ -1024,6 +1040,24 @@ a { color: inherit; text-decoration: none; }
   margin-right: 6px;
   font-size: 11px;
   vertical-align: middle;
+}
+
+/* ═══════════════════════════════════
+   POST-PILOT — sprints à esquerda + imagem mockup à direita
+   ═══════════════════════════════════ */
+.post-pilot-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+}
+.post-pilot-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+@media (max-width: 900px) {
+  .post-pilot-grid { grid-template-columns: 1fr; gap: var(--space-lg); }
 }
 
 /* ═══════════════════════════════════
@@ -1549,7 +1583,7 @@ footer {
   <div class="ed-num">02</div>
   <h2 class="ed-title">O problema</h2>
 </div>
-<p class="problem-statement rv d2">A renegociação digital existia, mas a <strong>conversão era baixa</strong> e o cliente sempre terminava no call center.</p>
+<p class="problem-statement rv d2">A renegociação digital existia, mas a conversão era baixa e o cliente sempre terminava no call center.</p>
 <div class="problem-grid rv d3">
   <div class="problem-item">
     <div class="problem-item-label">Abandono no fluxo</div>
@@ -1809,8 +1843,13 @@ footer {
 </div>
 
 <div class="overview-block">
-  <p class="fw-img-caption rv">Visão geral: os diferentes estados e telas do ecossistema financeiro redesenhado.</p>
-  <div class="fw-img rv d1"><img src="img/mrv/overview-grid.webp" alt="Visão geral do ecossistema financeiro MRV"></div>
+  <div class="ed-header rv">
+    <h3 class="ed-subhead">Visão geral</h3>
+  </div>
+  <div class="ed-content rv d1">
+    <p class="ed-body">Os diferentes estados e telas do ecossistema financeiro redesenhado.</p>
+  </div>
+  <div class="fw-img rv d2"><img src="img/mrv/overview-grid.webp" alt="Visão geral do ecossistema financeiro MRV"></div>
 </div>
 </div></section>
 
@@ -1826,7 +1865,7 @@ footer {
 </div>
 
 <!-- Ato 1: Statement narrativo -->
-<p class="results-statement rv d1">O piloto fechou <strong>acordos com 14% dos clientes em autoatendimento</strong> — o dobro da meta — e projetou <strong>R$ 147 mil em economia operacional.</strong></p>
+<p class="results-statement rv d1">O piloto fechou acordos com 14% dos clientes em autoatendimento, o dobro da meta, e projetou R$ 147 mil em economia operacional.</p>
 
 <!-- Ato 2: 4 métricas lado a lado, peso igual -->
 <div class="hero-stats rv d2">
@@ -1881,14 +1920,19 @@ footer {
 
 <div class="ed-subsection rv d3">
   <h3 class="ed-subhead">Desdobramento pós-piloto</h3>
-  <div class="sprints">
-    <div class="sprint">
-      <div class="sprint-label">Sprint 1</div>
-      <div class="sprint-desc">Ajustes de comunicação no fluxo e regras de elegibilidade para reduzir insegurança. Integração com régua de comunicação e propostas de acordos.</div>
+  <div class="post-pilot-grid">
+    <div class="sprints">
+      <div class="sprint">
+        <div class="sprint-label">Sprint 1</div>
+        <div class="sprint-desc">Ajustes de comunicação no fluxo e regras de elegibilidade para reduzir insegurança. Integração com régua de comunicação e propostas de acordos.</div>
+      </div>
+      <div class="sprint">
+        <div class="sprint-label">Sprint 2</div>
+        <div class="sprint-desc">Expansão do componente para outros pontos do portal. Padronização da solução para reuso entre squads. Campanha especial e educação financeira.</div>
+      </div>
     </div>
-    <div class="sprint">
-      <div class="sprint-label">Sprint 2</div>
-      <div class="sprint-desc">Expansão do componente para outros pontos do portal. Padronização da solução para reuso entre squads. Campanha especial e educação financeira.</div>
+    <div class="post-pilot-image">
+      <img src="img/mrv/mockup-pair.png" alt="Telas do app MRV mostrando a jornada financeira e o estado de planejamento da conquista">
     </div>
   </div>
 </div>
