@@ -4,12 +4,29 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chorume Tipografia · Adriana Pommot</title>
-<link href="https://api.fontshare.com/v2/css?f[]=general-sans@200,300,400,500,600,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--black:#111;--white:#fff;--font-display:'General Sans',sans-serif;--font-body:'General Sans',sans-serif;--max-w:1440px;--px:40px;--ch-bg:#0a0a0a;--ch-surface:#141414;--ch-border:rgba(255,255,255,.08);--ch-amber:#eb9148;--ch-text:rgba(255,255,255,.92);--ch-text-2:rgba(255,255,255,.65);--ch-text-3:rgba(255,255,255,.48);--ch-text-4:rgba(255,255,255,.25);--accent:#D1F466}
+:root{
+  --black:#111;--white:#fff;
+  --font-display:'Plus Jakarta Sans',sans-serif;--font-body:'Plus Jakarta Sans',sans-serif;
+  --max-w:1440px;--px:40px;
+  /* Paleta específica do Chorume — dark amber (preserva identidade do case) */
+  --ch-bg:#0a0a0a;--ch-surface:#141414;--ch-border:rgba(255,255,255,.08);
+  --ch-amber:#eb9148;
+  --ch-text:rgba(255,255,255,.92);--ch-text-2:rgba(255,255,255,.65);
+  --ch-text-3:rgba(255,255,255,.48);--ch-text-4:rgba(255,255,255,.25);
+  --accent:#D1F466;
+  /* Escala de espaçamento do DS */
+  --space-xs:8px;--space-sm:16px;--space-md:24px;
+  --space-lg:40px;--space-xl:64px;--space-xxl:96px;
+  --t-hero:clamp(44px, 7vw, 96px);
+  --t-body:14px;--t-label:13px;--t-caption:12px;
+}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:var(--font-body);color:var(--ch-text);background:var(--ch-bg);overflow-x:hidden;cursor:none}
+body{font-family:var(--font-body);color:var(--ch-text);background:var(--ch-bg);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 ::selection{background:var(--ch-amber);color:var(--black)}
 img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
 .container{max-width:var(--max-w);margin:0 auto;padding:0 var(--px)}
@@ -52,7 +69,7 @@ img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
 .case-meta-value{font-family:var(--font-display);font-size:13px;font-weight:400;letter-spacing:.02em;color:var(--ch-text-3)}
 
 /* ═══ EDITORIAL: TWO-COLUMN (Figma grid) ═══ */
-.ed-section{padding:120px 0;border-top:1px solid var(--ch-border)}
+.ed-section{padding:var(--space-xxl) 0;border-top:1px solid var(--ch-border)}
 .ed-section.no-divider{border-top:none}
 .ed-row{display:flex;justify-content:space-between;align-items:flex-start;gap:40px}
 .ed-left{flex-shrink:0}
@@ -79,35 +96,35 @@ img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
 .img-caption{font-family:var(--font-display);font-size:13px;font-weight:400;color:var(--ch-text-3);letter-spacing:.03em;margin-top:12px}
 
 /* ═══ MORE WORK ═══ */
-.more-work{padding:160px 0;border-top:1px solid var(--ch-border)}
-.more-work-title{font-family:var(--font-display);font-size:clamp(44px,7vw,96px);font-weight:400;line-height:1;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:64px;text-wrap:balance}
+.more-work{padding:120px 0;border-top:1px solid var(--ch-border)}
+.more-work-title{font-family:var(--font-display);font-size:var(--t-hero);font-weight:400;line-height:1.07;letter-spacing:-.02em;text-transform:uppercase;margin-bottom:var(--space-xl);text-wrap:balance}
 .more-work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
 .more-work-card{display:block;transition:opacity .3s}
 .more-work-card:hover{opacity:.8}
 .more-work-card-img{width:100%;aspect-ratio:3/2;overflow:hidden;background:var(--ch-surface);border:1px solid rgba(255,255,255,.06);border-radius:4px;margin-bottom:20px}
 .more-work-card-img img{width:100%;height:100%;object-fit:cover}
-.more-work-card-tag{display:inline-block;font-family:var(--font-body);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ch-text-3);margin-bottom:12px}
+.more-work-card-tag{display:inline-block;font-family:var(--font-body);font-size:var(--t-caption);letter-spacing:.06em;text-transform:uppercase;color:var(--ch-text-3);margin-bottom:12px}
 .more-work-card-name{font-family:var(--font-display);font-size:20px;font-weight:500;line-height:1.2}
 
 /* ═══ CTA + FOOTER ═══ */
-.cta-section{background:var(--ch-bg);color:var(--white);padding:160px 0;text-align:center;border-top:1px solid var(--ch-border)}
-.cta-title{font-family:var(--font-display);font-size:clamp(44px,9vw,140px);font-weight:400;line-height:.95;letter-spacing:-.01em;text-transform:uppercase;margin-bottom:24px;text-wrap:balance}
+.cta-section{background:var(--ch-bg);color:var(--white);padding:120px 0;text-align:center;border-top:1px solid var(--ch-border)}
+.cta-title{font-family:var(--font-display);font-size:var(--t-hero);font-weight:400;line-height:1.05;letter-spacing:-.02em;text-transform:uppercase;margin-bottom:var(--space-md);text-wrap:balance}
 .cta-title a{color:var(--white);transition:color .3s}.cta-title a:hover{color:var(--ch-amber)}
-.cta-subtitle{font-family:var(--font-body);font-size:15px;color:var(--ch-amber);text-transform:uppercase;margin-bottom:48px}
-.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 30px;font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--black);background:var(--white);border-radius:999px;transition:opacity .3s}
+.cta-subtitle{font-family:var(--font-body);font-size:var(--t-label);font-weight:500;color:var(--ch-amber);letter-spacing:.06em;text-transform:uppercase;margin-bottom:48px}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 30px;font-family:var(--font-display);font-size:var(--t-caption);font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--black);background:var(--white);border-radius:999px;transition:opacity .3s}
 .cta-btn:hover{opacity:.85}
 footer{background:var(--ch-bg);color:var(--white);padding:64px 0 32px;border-top:1px solid var(--ch-border)}
 .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px}
-.footer-logo{font-family:var(--font-display);font-size:15px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:20px}
+.footer-logo{font-family:var(--font-display);font-size:var(--t-label);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:20px}
 .footer-social{display:flex;flex-direction:column;gap:10px}
-.footer-social a{font-family:var(--font-body);font-size:13px;color:var(--ch-text-3);transition:color .3s}
+.footer-social a{font-family:var(--font-body);font-size:var(--t-label);color:var(--ch-text-3);transition:color .3s}
 .footer-social a:hover{color:var(--white)}
-.footer-col-title{font-family:var(--font-display);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ch-text-4);margin-bottom:20px}
+.footer-col-title{font-family:var(--font-display);font-size:var(--t-caption);font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ch-text-4);margin-bottom:20px}
 .footer-col-links{display:flex;flex-direction:column;gap:10px}
-.footer-col-links a{font-family:var(--font-body);font-size:13px;color:var(--ch-text-3);transition:color .3s}
+.footer-col-links a,.footer-col-links span{font-family:var(--font-body);font-size:var(--t-label);color:var(--ch-text-3);transition:color .3s}
 .footer-col-links a:hover{color:var(--white)}
 .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:32px;border-top:1px solid var(--ch-border)}
-.footer-copy{font-family:var(--font-body);font-size:12px;color:var(--ch-text-4)}
+.footer-copy{font-family:var(--font-body);font-size:var(--t-caption);color:var(--ch-text-4)}
 
 /* ═══ REVEAL ═══ */
 .rv{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
@@ -131,21 +148,15 @@ footer{background:var(--ch-bg);color:var(--white);padding:64px 0 32px;border-top
   .ed-num,.ed-title{font-size:14px}
   .img-caption{font-size:13px}
   .more-work-grid{grid-template-columns:1fr}
-  .more-work,.cta-section{padding:120px 0}
+  .more-work,.cta-section{padding:96px 0}
   .footer-grid{grid-template-columns:1fr;gap:32px}
 }
-/* === SHARED: text-roll + cursor === */
+/* === Nav text-roll === */
 .nav-name-roll{display:block;overflow:hidden}
 .nav-name-roll span{display:block;line-height:1;transition:transform .45s cubic-bezier(.19,1,.22,1)}
-.nav-name:hover .nav-name-roll span{transform:translateY(-100%)}
-.cursor-dot{position:fixed;top:0;left:0;width:14px;height:14px;pointer-events:none;z-index:9999;mix-blend-mode:difference;transform:translate(-50%,-50%);transition:opacity .3s;opacity:0}
-.cursor-dot.visible{opacity:1}
-a,button,input,textarea,select,[role="button"]{cursor:none!important}
-.cursor-dot svg{width:100%;height:100%;fill:white}
-@media(hover:none){.cursor-dot{display:none}}</style>
+.nav-name:hover .nav-name-roll span{transform:translateY(-100%)}</style>
 </head>
 <body>
-<div class="cursor-dot" id="cursorDot"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12"/></svg></div>
 
 <!-- NAV -->
 <a href="index.html" class="nav-name">Adriana Pommot</a>
@@ -323,17 +334,22 @@ a,button,input,textarea,select,[role="button"]{cursor:none!important}
   </div>
 </div></section>
 
-<!-- MORE WORK -->
+<!-- VEJA TAMBÉM -->
 <section class="more-work"><div class="container">
-  <h2 class="more-work-title rv">Mais Projetos</h2>
+  <h2 class="more-work-title rv">Veja também</h2>
   <div class="more-work-grid">
-    <a href="case-mrv.html" class="more-work-card rv d1">
-      <div class="more-work-card-img"><img src="img/mrv/overview-grid.webp" alt="MRV Ecossistema"></div>
-      <span class="more-work-card-tag">#ProductDesign</span>
-      <div class="more-work-card-name">MRV Ecossistema</div>
+    <a href="case-mrv.html" class="more-work-card rv">
+      <div class="more-work-card-img"><img src="img/mrv/hero-mockups.webp" alt="MRV Ecossistema Financeiro" loading="lazy"></div>
+      <span class="more-work-card-tag">#ProductDesign #Fintech</span>
+      <div class="more-work-card-name">MRV Ecossistema Financeiro</div>
+    </a>
+    <a href="case-ford.html" class="more-work-card rv d1">
+      <div class="more-work-card-img"><img src="img/ford/hero-room.webp" alt="Ford Immersion Room" loading="lazy"></div>
+      <span class="more-work-card-tag">#IdentidadeVisual #DesignEspacial</span>
+      <div class="more-work-card-name">Ford Immersion Room</div>
     </a>
     <a href="case-delta.html" class="more-work-card rv d2">
-      <div class="more-work-card-img"></div>
+      <div class="more-work-card-img"><img src="img/delta/hero-mockup.webp" alt="Delta Design System" loading="lazy"></div>
       <span class="more-work-card-tag">#DesignSystem</span>
       <div class="more-work-card-name">Delta Design System</div>
     </a>
@@ -371,8 +387,8 @@ a,button,input,textarea,select,[role="button"]{cursor:none!important}
       <div class="footer-col-title">Projetos</div>
       <div class="footer-col-links">
         <a href="case-mrv.html">MRV</a>
+        <a href="case-ford.html">Ford</a>
         <a href="case-delta.html">Delta DS</a>
-        
         <a href="case-chorume.html">Chorume</a>
       </div>
     </div>
@@ -380,7 +396,7 @@ a,button,input,textarea,select,[role="button"]{cursor:none!important}
       <div class="footer-col-title">Contato</div>
       <div class="footer-col-links">
         <a href="mailto:adrianapommot@gmail.com">adrianapommot@gmail.com</a>
-        <span style="font-family:var(--font-body);font-size:13px;color:var(--ch-text-3)">São Paulo, BR</span>
+        <span>São Paulo, BR</span>
       </div>
     </div>
   </div>
@@ -418,17 +434,6 @@ document.querySelectorAll(".nav-menu a").forEach(function(a){
   if(document.fonts&&document.fonts.ready){document.fonts.ready.then(setH)}
   else{setTimeout(setH,300)}
 }catch(e){console.warn("text-roll error",e)}})();
-/* === SHARED: Dot Cursor === */
-(function(){try{
-  var dot=document.getElementById("cursorDot");
-  if(!dot||matchMedia("(hover:none)").matches)return;
-  var vis=false;
-  document.addEventListener("mousemove",function(e){
-    if(!vis){vis=true;dot.classList.add("visible")}
-    dot.style.left=e.clientX+"px";dot.style.top=e.clientY+"px";
-  });
-  document.addEventListener("mouseleave",function(){vis=false;dot.classList.remove("visible")});
-}catch(e){console.warn("cursor error",e)}})();
 /* === SHARED: Nav BG on scroll (dark) === */
 (function(){try{
   var nn=document.querySelector(".nav-name");
