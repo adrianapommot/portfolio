@@ -23,7 +23,7 @@
   --gray-3: #756F67;
   --gray-4: #B8B2A8;
   --gray-5: #EBE7E1;
-  --surface-neutral: #F5F5F5; /* fundo de seção alternada e placeholders — neutro frio, SEM undertone creme */
+  --surface-neutral: #F5F5F5; /* fundo de seção alternada e placeholders, neutro frio, SEM undertone creme */
   --accent: #D1F466;
   --accent-light: #EDFFB6;
   --accent-faint: #F9FDEE;
@@ -33,7 +33,7 @@
   --max-w: 1440px;
   --px: 40px;
 
-  /* Escala de espaçamento — base 8px (Apple HIG) */
+  /* Escala de espaçamento, base 8px (Apple HIG) */
   --space-xs: 8px;    /* num ↔ título */
   --space-sm: 16px;   /* parágrafos */
   --space-md: 24px;   /* body ↔ pill/badge */
@@ -41,11 +41,11 @@
   --space-xl: 64px;   /* subseção ↔ seção */
   --space-xxl: 96px;  /* entre seções */
 
-  /* Escala tipográfica — 8 tokens, disciplinada.
-     Destaque em body nunca é feito por tamanho — usar peso (500) ou strong. */
+  /* Escala tipográfica, 8 tokens, disciplinada.
+     Destaque em body nunca é feito por tamanho, usar peso (500) ou strong. */
   --t-hero:     clamp(44px, 7vw, 96px); /* case-title, cta-title, more-work-title */
   --t-h2:       32px;                    /* TODOS os títulos de seção e subseção */
-  --t-body:     14px;                    /* TODO body text — igual na home */
+  --t-body:     14px;                    /* TODO body text, igual na home */
   --t-label:    13px;                    /* card-titles, metadata, labels uppercase */
   --t-caption:  12px;                    /* footer, nav-links, micro-captions */
   --t-num-xl:   48px;                    /* hero-stats .stat-num (resultados) */
@@ -245,7 +245,7 @@ a { color: inherit; text-decoration: none; }
 }
 .case-focus strong { color: var(--black); font-weight: 600; }
 
-/* Dark metadata bar — full-width */
+/* Dark metadata bar, full-width */
 .case-meta-bar {
   background: var(--dark-surface);
   padding: 24px 0;
@@ -294,7 +294,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ═══════════════════════════════════
-   EDITORIAL SECTIONS — two-column layout
+   EDITORIAL SECTIONS, two-column layout
    ═══════════════════════════════════ */
 .ed {
   padding: 96px 0;
@@ -304,7 +304,7 @@ a { color: inherit; text-decoration: none; }
   background: var(--surface-neutral);
 }
 
-/* Section header — number + title, stacked, full width */
+/* Section header, number + title, stacked, full width */
 .ed-header {
   display: flex;
   flex-direction: column;
@@ -312,11 +312,11 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 40px;
 }
 
-/* Body text — constrained width, below title */
+/* Body text, constrained width, below title */
 .ed-content { max-width: 586px; }
 .ed-content > * + * { margin-top: 16px; }
 
-/* Paired layout — two columns below a title (for 03, 04) */
+/* Paired layout, two columns below a title (for 03, 04) */
 .ed-pair {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -335,7 +335,7 @@ a { color: inherit; text-decoration: none; }
   color: var(--gray-3);
 }
 
-/* Section heading H2 — respira em multi-linha (Apple: 1.10–1.14 tight) */
+/* Section heading H2, respira em multi-linha (Apple: 1.10–1.14 tight) */
 .ed-title {
   font-family: var(--font-display);
   font-size: var(--t-h2);
@@ -347,7 +347,7 @@ a { color: inherit; text-decoration: none; }
   text-wrap: balance;
 }
 
-/* Subsection heading — mesmo tamanho do ed-title (sem número ao lado).
+/* Subsection heading, mesmo tamanho do ed-title (sem número ao lado).
    Hierarquia "seção vs subseção" é comunicada pela presença/ausência do .ed-num. */
 .ed-subhead {
   font-family: var(--font-display);
@@ -360,7 +360,7 @@ a { color: inherit; text-decoration: none; }
   text-wrap: balance;
 }
 
-/* Bloco de subseção — separador + respiro consistente */
+/* Bloco de subseção, separador + respiro consistente */
 .ed-subsection {
   margin-top: var(--space-xl);
   padding-top: var(--space-xl);
@@ -380,7 +380,7 @@ a { color: inherit; text-decoration: none; }
   max-width: 780px;
 }
 
-/* Body text — unificado com a home */
+/* Body text, unificado com a home */
 .ed-body {
   font-family: var(--font-body);
   font-size: var(--t-body);
@@ -401,7 +401,7 @@ a { color: inherit; text-decoration: none; }
   display: inline;
 }
 
-/* Badge / Tag — bordered pill */
+/* Badge / Tag, bordered pill */
 .ed-badge {
   display: inline-flex;
   align-items: center;
@@ -428,7 +428,7 @@ a { color: inherit; text-decoration: none; }
   color: var(--black);
 }
 
-/* Body de destaque — mesmo tamanho do body padrão, destaque por peso 500 */
+/* Body de destaque, mesmo tamanho do body padrão, destaque por peso 500 */
 .ed-body--lg {
   font-size: var(--t-body);
   font-weight: 500;
@@ -436,7 +436,7 @@ a { color: inherit; text-decoration: none; }
   color: var(--gray-2);
 }
 
-/* Lead — parágrafo de destaque curto, mesmo tratamento dos .problem/results-statement
+/* Lead, parágrafo de destaque curto, mesmo tratamento dos .problem/results-statement
    (20px / 400 / sem strongs). Usar pra primeira frase de uma seção narrativa. */
 .ed-body--lead {
   font-size: 20px;
@@ -448,7 +448,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ═══════════════════════════════════
-   CONTEXT METRICS — 3 cards horizontais (Figma)
+   CONTEXT METRICS, 3 cards horizontais (Figma)
    ═══════════════════════════════════ */
 .ctx-metrics {
   display: flex;
@@ -509,7 +509,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ═══════════════════════════════════
-   CHALLENGE CARDS — 5 cols (Figma)
+   CHALLENGE CARDS, 5 cols (Figma)
    ═══════════════════════════════════ */
 .challenges {
   margin-top: 40px;
@@ -557,7 +557,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ═══════════════════════════════════
-   PROBLEM SECTION (02) — header + ícone + statement + grid de 3 apoios
+   PROBLEM SECTION (02), header + ícone + statement + grid de 3 apoios
    Layout: tudo justificado à esquerda, coerente com o restante do case.
    ═══════════════════════════════════ */
 .problem-icon {
@@ -572,7 +572,7 @@ a { color: inherit; text-decoration: none; }
 }
 .problem-icon svg path { fill: currentColor; }
 
-/* Statement de destaque — pull quote do problema */
+/* Statement de destaque, pull quote do problema */
 .problem-statement {
   font-family: var(--font-display);
   font-size: 20px;
@@ -586,7 +586,7 @@ a { color: inherit; text-decoration: none; }
 }
 .problem-statement strong { font-weight: 600; }
 
-/* Grid de 3 apoios — pontos-chave do problema */
+/* Grid de 3 apoios, pontos-chave do problema */
 .problem-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -619,7 +619,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ═══════════════════════════════════
-   KEY RESULTS CARD (03) — Figma
+   KEY RESULTS CARD (03), Figma
    ═══════════════════════════════════ */
 .kr-card {
   background: var(--white);
@@ -656,11 +656,11 @@ a { color: inherit; text-decoration: none; }
 .kr-card ul li:last-child { margin-bottom: 0; }
 
 /* ═══════════════════════════════════
-   TWO-COLUMN EDITORIAL — grid fixo
+   TWO-COLUMN EDITORIAL, grid fixo
    ═══════════════════════════════════
    A coluna direita SEMPRE começa na mesma posição X, em qualquer seção.
    Isso é garantido por grid-template-columns com valores fixos para a
-   esquerda — flex com width baseado em conteúdo faz os elementos
+   esquerda, flex com width baseado em conteúdo faz os elementos
    "dançarem" entre seções, o que não é aceitável.
    Modifiers antigos (--obj, --strat) removidos para garantir consistência. */
 .ed-two-col {
@@ -675,7 +675,7 @@ a { color: inherit; text-decoration: none; }
   gap: 0;
   min-width: 0;
 }
-/* Ritmo interno coluna esquerda — respiração generosa (Apple) */
+/* Ritmo interno coluna esquerda, respiração generosa (Apple) */
 .ed-two-col-left > .ed-header { margin-bottom: 48px; }
 .ed-two-col-left > .ed-badge { margin-bottom: 24px; }
 .ed-two-col-left > .ed-two-col-body-lg { margin-bottom: 20px; }
@@ -750,13 +750,13 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: 0.03em;
 }
 
-/* Overview block — imagem full-width com caption acima */
+/* Overview block, imagem full-width com caption acima */
 .overview-block { margin-top: var(--space-xxl); }
 .overview-block > .ed-header { margin-bottom: var(--space-xs); }
 .overview-block > .ed-content { margin-bottom: var(--space-lg); max-width: 780px; }
 
 /* ═══════════════════════════════════
-   PHONE SECTION — dark bg
+   PHONE SECTION, dark bg
    ═══════════════════════════════════ */
 .phone-section { background: var(--black); padding: 96px 0; }
 .phone-section .ed-num { color: var(--accent); }
@@ -923,16 +923,16 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ═══════════════════════════════════
-   RESULTS (seção 06) — 3 atos narrativos
+   RESULTS (seção 06), 3 atos narrativos
    Ato 1: statement (pull quote narrativo de abertura)
    Ato 2: 4 métricas lado a lado, peso igual, separadas por hairlines
-   Ato 3: card unificado com stroke — tabela KR + bullets qualitativos.
+   Ato 3: card unificado com stroke, tabela KR + bullets qualitativos.
           As rows dos 2 lados usam flex:1 para garantir alinhamento perfeito
           das hairlines horizontais entre as colunas.
    ═══════════════════════════════════ */
 .results { padding: 96px 0; border-top: 1px solid var(--gray-5); }
 
-/* Ato 1 — Statement de abertura (lead) — mesmo tratamento do .problem-statement */
+/* Ato 1, Statement de abertura (lead), mesmo tratamento do .problem-statement */
 .results-statement {
   font-family: var(--font-display);
   font-size: 20px;
@@ -945,7 +945,7 @@ a { color: inherit; text-decoration: none; }
   text-wrap: balance;
 }
 
-/* Ato 2 — 4 métricas lado a lado */
+/* Ato 2, 4 métricas lado a lado */
 .hero-stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -986,7 +986,7 @@ a { color: inherit; text-decoration: none; }
   text-wrap: pretty;
 }
 
-/* Ato 3 — Card unificado (tabela + bullets) */
+/* Ato 3, Card unificado (tabela + bullets) */
 .evidence-card {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1011,7 +1011,7 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 32px;
 }
 
-/* Tabela KR — sem header, alinhamento via flex:1 */
+/* Tabela KR, sem header, alinhamento via flex:1 */
 .kr-table {
   flex: 1;
   width: 100%;
@@ -1054,7 +1054,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ═══════════════════════════════════
-   POST-PILOT — sprints à esquerda + imagem mockup à direita
+   POST-PILOT, sprints à esquerda + imagem mockup à direita
    ═══════════════════════════════════ */
 .post-pilot-grid {
   display: grid;
@@ -1078,7 +1078,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ═══════════════════════════════════
-   VIDEO GRID — embeds Adobe CCV empilhados em full-width
+   VIDEO GRID, embeds Adobe CCV empilhados em full-width
    ═══════════════════════════════════ */
 .video-grid {
   display: flex;
@@ -1137,7 +1137,7 @@ a { color: inherit; text-decoration: none; }
 }
 .qual-item-body strong { color: var(--black); font-weight: 600; }
 
-/* DESDOBRAMENTO + APRENDIZADOS — layout 2 colunas */
+/* DESDOBRAMENTO + APRENDIZADOS, layout 2 colunas */
 .post-pilot-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1387,7 +1387,7 @@ footer {
 }
 
 /* ═══════════════════════════════════
-   FLUXO DESKTOP — Master-detail viewer
+   FLUXO DESKTOP, Master-detail viewer
    ═══════════════════════════════════ */
 .md-viewer{
   display: grid;
@@ -1726,7 +1726,7 @@ footer {
 
 
 <!-- ══════════════════════════════════════════
-     05. A SOLUÇÃO — Phone flow
+     05. A SOLUÇÃO, Phone flow
      ══════════════════════════════════════════ -->
 
 <section class="phone-section">
@@ -1786,7 +1786,7 @@ footer {
 </div>
 </section>
 
-<!-- Fluxo desktop — master-detail viewer -->
+<!-- Fluxo desktop, master-detail viewer -->
 <section class="ed"><div class="container">
 <div class="ed-header rv">
   <h3 class="ed-subhead">Fluxo desktop</h3>
@@ -1904,7 +1904,7 @@ footer {
   </div>
 </div>
 
-<!-- Ato 3: Card unificado com stroke — tabela KR + bullets qualitativos -->
+<!-- Ato 3: Card unificado com stroke, tabela KR + bullets qualitativos -->
 <div class="evidence-card rv d3">
   <div class="evidence-col">
     <div class="evidence-label">Metas vs. resultados</div>
@@ -1977,7 +1977,7 @@ footer {
 
 
 <!-- ══════════════════════════════════════════
-     EM MOVIMENTO — demonstrações visuais do portal
+     EM MOVIMENTO, demonstrações visuais do portal
      ══════════════════════════════════════════ -->
 
 <section class="ed"><div class="container">
@@ -1989,13 +1989,13 @@ footer {
 </div>
 <div class="video-grid rv d2">
   <div class="video-frame">
-    <iframe src="https://www-ccv.adobe.io/v1/player/ccv/2-W_62Px7pH/embed?bgcolor=%23111111&lazyLoading=true&api_key=BehancePro2View" frameborder="0" allowfullscreen loading="lazy" title="Portal MRV — navegação"></iframe>
+    <iframe src="https://www-ccv.adobe.io/v1/player/ccv/2-W_62Px7pH/embed?bgcolor=%23111111&lazyLoading=true&api_key=BehancePro2View" frameborder="0" allowfullscreen loading="lazy" title="Portal MRV, navegação"></iframe>
   </div>
   <div class="video-frame">
-    <iframe src="https://www-ccv.adobe.io/v1/player/ccv/Qby9X5KnabB/embed?bgcolor=%23111111&lazyLoading=true&api_key=BehancePro2View" frameborder="0" allowfullscreen loading="lazy" title="Portal MRV — interface principal"></iframe>
+    <iframe src="https://www-ccv.adobe.io/v1/player/ccv/Qby9X5KnabB/embed?bgcolor=%23111111&lazyLoading=true&api_key=BehancePro2View" frameborder="0" allowfullscreen loading="lazy" title="Portal MRV, interface principal"></iframe>
   </div>
   <div class="video-frame">
-    <iframe src="https://www-ccv.adobe.io/v1/player/ccv/BJt3xBeIut_/embed?bgcolor=%23111111&lazyLoading=true&api_key=BehancePro2View" frameborder="0" allowfullscreen loading="lazy" title="Portal MRV — identidade de acesso"></iframe>
+    <iframe src="https://www-ccv.adobe.io/v1/player/ccv/BJt3xBeIut_/embed?bgcolor=%23111111&lazyLoading=true&api_key=BehancePro2View" frameborder="0" allowfullscreen loading="lazy" title="Portal MRV, identidade de acesso"></iframe>
   </div>
 </div>
 </div></section>

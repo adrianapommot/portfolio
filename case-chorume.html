@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Case Chorume Tipografia — Tipografia vernacular, branding e direção de arte para uma cachaça fictícia premiada. Por Adriana Pommot.">
+<meta name="description" content="Case Chorume: tipografia vernacular, branding e direção de arte para uma cachaça fictícia premiada. Por Adriana Pommot.">
 <meta property="og:title" content="Chorume Tipografia · Adriana Pommot">
 <meta property="og:description" content="Projeto autoral de tipografia vernacular que virou ecossistema gráfico. Best of Show da Miami Ad School.">
 <meta property="og:type" content="article">
@@ -32,7 +32,7 @@
   --max-w: 1440px;
   --px: 40px;
 
-  /* Escala de espaçamento — base 8px */
+  /* Escala de espaçamento, base 8px */
   --space-xs: 8px;
   --space-sm: 16px;
   --space-md: 24px;
@@ -40,7 +40,7 @@
   --space-xl: 64px;
   --space-xxl: 96px;
 
-  /* Escala tipográfica — 8 tokens */
+  /* Escala tipográfica, 8 tokens */
   --t-hero:     clamp(44px, 7vw, 96px);
   --t-h2:       32px;
   --t-body:     14px;
@@ -235,7 +235,7 @@ a { color: inherit; text-decoration: none; }
 }
 .case-focus strong { color: var(--black); font-weight: 600; }
 
-/* Metadata bar — full-width bleed */
+/* Metadata bar, full-width bleed */
 .case-meta-bar {
   background: var(--dark-surface);
   padding: 24px 0;
@@ -284,6 +284,12 @@ a { color: inherit; text-decoration: none; }
   border-top: 1px solid var(--gray-5);
 }
 .ed--shaded { background: var(--surface-neutral); }
+.ed--dark { background: var(--black); border-top: none; }
+.ed--dark .ed-num { color: rgba(255,255,255,0.5); }
+.ed--dark .ed-title { color: var(--white); }
+.ed--dark .ed-body { color: rgba(255,255,255,0.72); }
+.ed--dark .ed-body strong { color: var(--white); }
+.ed--dark .img-caption { color: rgba(255,255,255,0.55); }
 .ed-header {
   display: flex;
   flex-direction: column;
@@ -330,7 +336,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ═══════════════════════════════════
-   IMAGE BLOCKS — caption SEMPRE antes da imagem
+   IMAGE BLOCKS, caption SEMPRE antes da imagem
    Espaço maior entre texto e imagem (var(--space-xl) = 64px)
    ═══════════════════════════════════ */
 .full-img,
@@ -344,7 +350,7 @@ a { color: inherit; text-decoration: none; }
   overflow: hidden;
 }
 
-/* Caption agora aparece antes da imagem — wrapping interno */
+/* Caption agora aparece antes da imagem, wrapping interno */
 .figure-block { margin-top: var(--space-xl); }
 .img-caption {
   font-family: var(--font-display);
@@ -702,7 +708,7 @@ footer {
 <!-- ══════════════════════════════════════════
      05. DIREÇÃO DE ARTE
      ══════════════════════════════════════════ -->
-<section class="ed"><div class="container">
+<section class="ed ed--dark"><div class="container">
 <div class="ed-header rv">
   <div class="ed-num">05</div>
   <h2 class="ed-title">Direção de arte</h2>
@@ -730,7 +736,7 @@ footer {
 </div>
 <div class="ed-content rv d1">
   <p class="ed-body ed-body--lead">Chorume é, ao mesmo tempo, uma crítica e uma celebração: do lixo nasce linguagem, da decomposição nasce um novo design.</p>
-  <p class="ed-body">Esse projeto me ensinou que vernacular não é falta de refinamento — é outro tipo de ofício. Aprendi a olhar pra coisas que ninguém olha, a respeitar a urgência do improviso e a confiar que o craft existe em todo lugar, não só nos lugares premiados.</p>
+  <p class="ed-body">Vernacular tem ofício próprio. Aprendi a olhar pra coisas que ninguém olha, a respeitar a urgência do improviso e a confiar que o craft existe em todo lugar, não só nos lugares premiados.</p>
   <p class="ed-body">O olho que desenhou essas letras em 2015 ainda mora em cada interface que eu construo hoje.</p>
 </div>
 </div></section>

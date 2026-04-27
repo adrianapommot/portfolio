@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Case Delta Design System — Arquitetura de tokens, componentes e documentação que unificou 20+ produtos em 3 segmentos. Por Adriana Pommot.">
+<meta name="description" content="Case Delta Design System: arquitetura de tokens, componentes e documentação que unificou 20+ produtos em 3 segmentos. Por Adriana Pommot.">
 <meta property="og:title" content="Delta Design System · Adriana Pommot">
 <meta property="og:description" content="Tokens, componentes e bibliotecas reutilizáveis criados para unificar 20+ produtos digitais na Escale.">
 <meta property="og:type" content="article">
@@ -24,11 +24,11 @@
   --font-body:'Plus Jakarta Sans',sans-serif;
   --max-w:1440px; --px:40px;
 
-  /* Escala de espaçamento — base 8px */
+  /* Escala de espaçamento, base 8px */
   --space-xs:8px; --space-sm:16px; --space-md:24px;
   --space-lg:40px; --space-xl:64px; --space-xxl:96px;
 
-  /* Escala tipográfica — 8 tokens */
+  /* Escala tipográfica, 8 tokens */
   --t-hero:clamp(44px, 7vw, 96px);
   --t-h2:32px; --t-body:14px;
   --t-label:13px; --t-caption:12px;
@@ -78,7 +78,7 @@ a{color:inherit;text-decoration:none}
 .case-focus{font-family:var(--font-body);font-size:var(--t-body);font-weight:400;line-height:1.75;color:var(--gray-2);max-width:668px;margin-bottom:0;text-wrap:pretty}
 .case-focus strong{color:var(--black);font-weight:600}
 
-/* Dark metadata bar — full-width bleed */
+/* Dark metadata bar, full-width bleed */
 .case-meta-bar{background:var(--dark-surface);padding:24px 0;margin-top:40px;width:100vw;margin-left:calc(-50vw + 50%);margin-right:calc(-50vw + 50%);padding-left:max(var(--px),calc((100vw - var(--max-w))/2 + var(--px)));padding-right:max(var(--px),calc((100vw - var(--max-w))/2 + var(--px)))}
 .case-meta{display:flex;flex-wrap:wrap;gap:16px 0}
 .case-meta-item{display:flex;flex-direction:column;gap:6px;padding:0 40px;border-right:1px solid rgba(255,255,255,0.12)}
@@ -107,7 +107,7 @@ a{color:inherit;text-decoration:none}
 .ed-two-col-left{display:flex;flex-direction:column;gap:var(--space-md);min-width:0}
 .ed-two-col-right{display:flex;flex-direction:column;gap:var(--space-md);min-width:0;padding-top:calc(var(--t-num-sm) + var(--space-xs))}
 
-/* ═══ 01 CONTEXTO — Cards editoriais ═══ */
+/* ═══ 01 CONTEXTO, Cards editoriais ═══ */
 .ctx-card{background:var(--white);border:1px solid var(--gray-5);border-radius:8px;padding:32px;display:flex;gap:24px;align-items:center;transition:border-color .3s}
 .ctx-card:hover{border-color:var(--gray-4)}
 .ctx-card-icon{flex-shrink:0;width:48px;height:48px;display:flex;align-items:center;justify-content:center;color:var(--black)}
@@ -117,12 +117,12 @@ a{color:inherit;text-decoration:none}
 .ctx-card-desc{font-family:var(--font-body);font-size:var(--t-label);font-weight:400;color:var(--gray-2);line-height:1.5;text-wrap:pretty}
 .ctx-card-desc strong{color:var(--black);font-weight:600}
 
-/* ═══ 02 PROBLEMA — Seção clara com statement ═══ */
+/* ═══ 02 PROBLEMA, Seção clara com statement ═══ */
 .prob-section{padding:var(--space-xxl) 0;border-top:1px solid var(--gray-5);background:var(--surface-neutral)}
 .prob-row{display:flex;flex-direction:column;gap:var(--space-lg);align-items:flex-start;max-width:900px}
 .prob-quote{font-family:var(--font-display);font-size:20px;font-weight:400;line-height:1.5;color:var(--black);letter-spacing:-.005em;text-wrap:balance;max-width:780px}
 
-/* ═══ 03 ESTRATÉGIA — Timeline horizontal ═══ */
+/* ═══ 03 ESTRATÉGIA, Timeline horizontal ═══ */
 .strat-section{padding:var(--space-xxl) 0;border-top:1px solid var(--gray-5)}
 .strat-header{margin-bottom:var(--space-xl);max-width:720px}
 .strat-sub{font-family:var(--font-body);font-size:var(--t-body);font-weight:400;color:var(--gray-2);line-height:1.75;margin-top:var(--space-sm);text-wrap:pretty}
@@ -134,10 +134,10 @@ a{color:inherit;text-decoration:none}
 .strat-step-title{font-family:var(--font-display);font-size:var(--t-label);font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--black);line-height:1.3;text-wrap:balance}
 .strat-step-desc{font-family:var(--font-body);font-size:var(--t-label);font-weight:400;color:var(--gray-2);line-height:1.65;text-wrap:pretty;margin-top:10px}
 
-/* Mobile version — simple numbered list */
+/* Mobile version, simple numbered list */
 .strat-list-mobile{display:none}
 
-/* ═══ 04 PROCESSO — Tabs + Sublist + Panel ═══ */
+/* ═══ 04 PROCESSO, Tabs + Sublist + Panel ═══ */
 .proc-section{padding:var(--space-xxl) 0;border-top:1px solid var(--gray-5)}
 .proc-header{margin-bottom:48px}
 .proc-tabs{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:32px}
@@ -157,7 +157,7 @@ a{color:inherit;text-decoration:none}
 .proc-panel-desc{font-family:var(--font-body);font-size:var(--t-body);font-weight:400;color:var(--gray-2);line-height:1.75;max-width:560px;text-wrap:pretty}
 .proc-panel-visual{flex:1;min-height:280px;display:flex;align-items:center;justify-content:center;padding:24px 0;position:relative}
 
-/* Visual panel — mostra screen real do Delta */
+/* Visual panel, mostra screen real do Delta */
 .proc-visual{width:100%;max-width:720px;background:var(--white);border:1px solid var(--gray-5);border-radius:8px;padding:16px;display:flex;align-items:center;justify-content:center}
 .proc-visual img{width:100%;height:auto;display:block;border-radius:4px}
 .proc-visual.stacked{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:16px}
@@ -198,7 +198,7 @@ a{color:inherit;text-decoration:none}
 /* ═══ 06 RESULTADOS ═══ */
 .results{padding:var(--space-xxl) 0;border-top:1px solid var(--gray-5)}
 
-/* 4 stats lado a lado, peso igual, separadas por hairlines — padrão DS */
+/* 4 stats lado a lado, peso igual, separadas por hairlines, padrão DS */
 .results-statement{font-family:var(--font-display);font-size:20px;font-weight:400;line-height:1.5;letter-spacing:-.005em;color:var(--black);max-width:900px;margin:0 0 var(--space-lg);text-wrap:balance}
 .hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;padding:56px 0;border-top:1px solid var(--gray-5);border-bottom:1px solid var(--gray-5);margin-bottom:var(--space-xxl)}
 .hero-stats .stat{padding:0 32px;border-right:1px solid var(--gray-5)}
@@ -207,7 +207,7 @@ a{color:inherit;text-decoration:none}
 .hero-stats .stat-num{font-family:var(--font-display);font-size:var(--t-num-xl);font-weight:500;line-height:1;letter-spacing:-.02em;color:var(--black);margin-bottom:16px;font-variant-numeric:tabular-nums}
 .hero-stats .stat-label{font-family:var(--font-body);font-size:var(--t-label);font-weight:400;line-height:1.5;color:var(--gray-2);text-wrap:pretty}
 
-/* Evidência qualitativa — card unificado com stroke */
+/* Evidência qualitativa, card unificado com stroke */
 .evidence-card{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--gray-5);border-radius:12px;overflow:hidden}
 .evidence-col{padding:48px;display:flex;flex-direction:column}
 .evidence-col:first-child{border-right:1px solid var(--gray-5)}
@@ -234,12 +234,12 @@ a{color:inherit;text-decoration:none}
 .library-cta svg{width:16px;height:16px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;transition:transform .3s cubic-bezier(.16,1,.3,1)}
 .library-cta:hover svg{transform:translateX(4px)}
 
-/* ═══ IMPACTO — Lead final do case ═══ */
+/* ═══ IMPACTO, Lead final do case ═══ */
 .impact{padding:var(--space-xxl) 0;border-top:1px solid var(--gray-5)}
 .impact-label{font-family:var(--font-display);font-size:var(--t-caption);font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-3);margin-bottom:var(--space-md)}
 .impact-quote{font-family:var(--font-display);font-size:20px;font-weight:400;line-height:1.5;color:var(--black);letter-spacing:-.005em;text-wrap:balance;max-width:900px}
 
-/* ═══ CASE CLOSER — Imagem de fechamento ═══ */
+/* ═══ CASE CLOSER, Imagem de fechamento ═══ */
 .case-closer{padding:var(--space-xxl) 0}
 .case-closer-img{width:100%;border-radius:8px;overflow:hidden}
 .case-closer-img img{width:100%;height:auto;display:block}
@@ -433,7 +433,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 </div></section>
 
 <!-- ══════════════════════════════════════════
-     02. O PROBLEMA — Statement
+     02. O PROBLEMA, Statement
      ══════════════════════════════════════════ -->
 <section class="prob-section"><div class="container">
 <div class="prob-row rv">
@@ -446,7 +446,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 </div></section>
 
 <!-- ══════════════════════════════════════════
-     03. ESTRATÉGIA DE DESIGN — Timeline horizontal
+     03. ESTRATÉGIA DE DESIGN, Timeline horizontal
      ══════════════════════════════════════════ -->
 <section class="strat-section"><div class="container">
 <div class="strat-header rv">
@@ -509,7 +509,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 </div></section>
 
 <!-- ══════════════════════════════════════════
-     04. PROCESSO — Tabs + Sublist + Panel
+     04. PROCESSO, Tabs + Sublist + Panel
      ══════════════════════════════════════════ -->
 <section class="proc-section"><div class="container">
 <div class="proc-header rv">
@@ -537,7 +537,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 </div></section>
 
 <!-- ══════════════════════════════════════════
-     05. O QUE CONSTRUÍ — Princípios + Atomic + Stats
+     05. O QUE CONSTRUÍ, Princípios + Atomic + Stats
      ══════════════════════════════════════════ -->
 <section class="built-section"><div class="container">
 <div class="built-intro rv">
@@ -696,7 +696,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 </div></section>
 
 <!-- ══════════════════════════════════════════
-     IMPACTO — Pull quote de fechamento
+     IMPACTO, Pull quote de fechamento
      ══════════════════════════════════════════ -->
 <section class="impact"><div class="container">
 <div class="rv">
@@ -706,7 +706,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 </div></section>
 
 <!-- ══════════════════════════════════════════
-     CASE CLOSER — Imagem mockup de fechamento
+     CASE CLOSER, Imagem mockup de fechamento
      ══════════════════════════════════════════ -->
 <section class="case-closer"><div class="container">
   <div class="case-closer-img rv">
@@ -790,7 +790,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
   });
 }catch(e){}})();
 
-/* ═══ 04 PROCESSO — Interactive tabs + sublist + hover panel ═══ */
+/* ═══ 04 PROCESSO, Interactive tabs + sublist + hover panel ═══ */
 (function(){
   var data={
     tokens:{
@@ -799,9 +799,9 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
         {id:'palette',title:'Paleta de cores',desc:'Paleta completa do Delta: Brand Colors (primária, secundária, neutral, terciária) e Feedback Colors (critical, success, warning, info), organizadas em escalas de 6 tons cada, nomeadas semanticamente como tokens primários.',img:['img/delta/delta10.webp']},
         {id:'contrast',title:'Diagrama de contrastes',desc:'Matriz cruzando todas as cores do Delta para validar combinações texto/fundo em WCAG AA. Cada célula indica se o par de cores é aprovado para texto normal e grande.',img:['img/delta/delta11.webp']},
         {id:'opacity',title:'Opacity levels',desc:'Cinco níveis semânticos de opacidade, de Semi Opaque (0.80) a Semi Transparent (0.08), nomeados como tokens ($opacity-level-semiopaque, intense, medium, light, semitransparent).',img:['img/delta/delta6.webp']},
-        {id:'borders',title:'Borders',desc:'Border Radius em seis escalas — UltraSmall (4px) a Circular (1000px) — e Border Widths em cinco níveis — None a Heavy. Cada valor nomeado como token para consistência.',img:['img/delta/delta9.webp']},
+        {id:'borders',title:'Borders',desc:'Border Radius em seis escalas, UltraSmall (4px) a Circular (1000px), e Border Widths em cinco níveis, None a Heavy. Cada valor nomeado como token para consistência.',img:['img/delta/delta9.webp']},
         {id:'type',title:'Tipografia',desc:'Font Family dupla (Din Ot primary, Roboto secondary), Line Height em quatro níveis, Font Weight em cinco escalas e Font Size em treze tamanhos, todos como tokens nomeados.',img:['img/delta/delta8.webp']},
-        {id:'shadows',title:'Shadow levels',desc:'Quatro níveis de elevação — $shadow-flat, $shadow-soft, $shadow-raised, $shadow-spotlight — com Blur, X e Y especificados em cada camada.',img:['img/delta/delta7.webp']}
+        {id:'shadows',title:'Shadow levels',desc:'Quatro níveis de elevação, $shadow-flat, $shadow-soft, $shadow-raised, $shadow-spotlight, com Blur, X e Y especificados em cada camada.',img:['img/delta/delta7.webp']}
       ]
     },
     libs:{
@@ -816,7 +816,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
       items:[
         {id:'slots',title:'Slots e partes',desc:'Documentação do desenho de componente: sistema espacial e grids, anatomia formal, exemplo de aplicação e tokens vinculados. Cada componente entregue com sua página de construção completa.',img:['img/delta/delta5.webp']},
         {id:'states',title:'Estados',desc:'Todos os estados interativos especificados por variante: normal, hover, focus, active, disabled. Tanto para light quanto dark themes, com tokens de cor associados a cada estado.',img:['img/delta/delta15.webp']},
-        {id:'variants',title:'Variantes',desc:'Três variantes semânticas do botão — primary, secondary, tertiary — cada uma com versões filled e outlined. Hierarquia expressa via token, não via cor hard-coded.',img:['img/delta/delta12.webp']},
+        {id:'variants',title:'Variantes',desc:'Três variantes semânticas do botão, primary, secondary, tertiary, cada uma com versões filled e outlined. Hierarquia expressa via token, não via cor hard-coded.',img:['img/delta/delta12.webp']},
         {id:'sizes',title:'Tamanhos',desc:'Escala Large, Medium e Small para cada variante, com padding, tipografia e ícones calibrados proporcionalmente. Versões filled e outlined em cada tamanho.',img:['img/delta/delta13.webp']},
         {id:'handoff',title:'Documentação de handoff',desc:'Página de Links reunindo light themes, dark themes, spacings e exemplos aplicados. Documentação por componente que elimina ambiguidade entre design e engenharia.',img:['img/delta/delta16.webp']}
       ]
