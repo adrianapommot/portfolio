@@ -285,6 +285,24 @@ a { color: inherit; text-decoration: none; }
 }
 .ed--shaded { background: var(--surface-neutral); }
 .ed--dark { background: var(--black); border-top: none; }
+
+/* Layout side-by-side: imagem à esquerda, texto à direita, alinhado pelo título */
+.ed-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xxl);
+  align-items: center;
+}
+.ed-split .ed-text { max-width: 480px; }
+.ed-split .ed-text > * + * { margin-top: var(--space-sm); }
+.ed-split .ed-num { margin-bottom: var(--space-xs); }
+.ed-split .ed-title { margin-bottom: var(--space-md); }
+.ed-split .img-caption { margin-top: var(--space-md); margin-bottom: 0; }
+.ed-split .left-img { max-width: 100%; }
+@media (max-width: 900px) {
+  .ed-split { grid-template-columns: 1fr; gap: var(--space-lg); }
+  .ed-split .ed-text { max-width: 100%; }
+}
 .ed--dark .ed-num { color: rgba(255,255,255,0.5); }
 .ed--dark .ed-title { color: var(--white); }
 .ed--dark .ed-body { color: rgba(255,255,255,0.72); }
@@ -626,17 +644,16 @@ footer {
 <!-- ══════════════════════════════════════════
      01. O CARTAZ
      ══════════════════════════════════════════ -->
-<section class="ed"><div class="container">
-<div class="ed-header rv">
-  <div class="ed-num">01</div>
-  <h2 class="ed-title">O cartaz</h2>
-</div>
-<div class="ed-content rv d1">
-  <p class="ed-body">Um cartaz colado num muro do bairro da Liberdade, em São Paulo, com pincel grosso, régua nenhuma e zero pretensão estética. Foi o ponto de partida desse projeto.</p>
-</div>
-<div class="figure-block rv d2" style="max-width:520px">
-  <div class="left-img" style="margin-top:0">
+<section class="ed ed--dark"><div class="container">
+<div class="ed-split">
+  <div class="left-img rv" style="margin-top:0">
     <img src="img/chorume/cartaz.webp" alt="Cartaz Proibido Jogar Lixo encontrado no bairro da Liberdade, São Paulo" loading="lazy">
+  </div>
+  <div class="ed-text rv d1">
+    <div class="ed-num">01</div>
+    <h2 class="ed-title">O cartaz</h2>
+    <p class="ed-body">Um cartaz colado num muro do bairro da Liberdade, em São Paulo, com pincel grosso, régua nenhuma e zero pretensão estética. Foi o ponto de partida desse projeto.</p>
+    <p class="img-caption">Cartaz original encontrado no bairro da Liberdade, ponto de partida do projeto.</p>
   </div>
 </div>
 </div></section>
