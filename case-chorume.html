@@ -316,7 +316,7 @@ a { color: inherit; text-decoration: none; }
   font-weight: 400;
   color: var(--gray-2);
   line-height: 1.75;
-  text-wrap: pretty;
+  text-wrap: balance;
 }
 .ed-body strong { color: var(--black); font-weight: 600; }
 .ed-body--lead {
@@ -330,14 +330,22 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ═══════════════════════════════════
-   FULL-WIDTH IMAGE
+   IMAGE BLOCKS — caption SEMPRE antes da imagem
+   Espaço maior entre texto e imagem (var(--space-xl) = 64px)
    ═══════════════════════════════════ */
-.full-img {
-  margin: var(--space-lg) 0 0;
-  overflow: hidden;
-  border-radius: 8px;
+.full-img,
+.left-img,
+.centered-img {
+  margin-top: var(--space-xl);
 }
-.full-img img { width: 100%; height: auto; display: block; }
+.full-img,
+.centered-img {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Caption agora aparece antes da imagem — wrapping interno */
+.figure-block { margin-top: var(--space-xl); }
 .img-caption {
   font-family: var(--font-display);
   font-size: var(--t-label);
@@ -345,39 +353,25 @@ a { color: inherit; text-decoration: none; }
   line-height: 1.5;
   letter-spacing: 0.03em;
   color: var(--gray-3);
-  margin-top: 12px;
+  margin-bottom: 16px;
   max-width: 720px;
 }
 
-/* Imagem inline menor (troféu) */
-.inline-img {
-  margin-top: var(--space-lg);
-  max-width: 480px;
-}
-.inline-img img {
-  width: 100%;
-  border-radius: 8px;
-}
-
-/* Imagem centralizada (foto final do pântano) */
-.centered-img {
-  margin: var(--space-lg) auto 0;
-  max-width: 900px;
-  border-radius: 8px;
-  overflow: hidden;
-}
+.full-img img,
+.left-img img,
 .centered-img img { width: 100%; height: auto; display: block; }
 
-/* Imagem alinhada à esquerda (cartaz, troféu, anexos editoriais).
-   Segue a coluna de conteúdo do .ed-content (max-width 668px) — não fica
-   solta no meio do container. */
+/* Variantes de tamanho */
 .left-img {
-  margin-top: var(--space-lg);
   max-width: 520px;
   border-radius: 8px;
   overflow: hidden;
 }
-.left-img img { width: 100%; height: auto; display: block; }
+.centered-img {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 900px;
+}
 
 /* ═══════════════════════════════════
    RECOGNITION CARD (fechamento do case)
@@ -634,9 +628,11 @@ footer {
 <div class="ed-content rv d1">
   <p class="ed-body">Um cartaz colado num muro do bairro da Liberdade, em São Paulo. Pincel grosso, régua nenhuma, sem pretensão estética.</p>
 </div>
-<div class="left-img rv d2">
-  <img src="img/chorume/cartaz.webp" alt="Cartaz Proibido Jogar Lixo encontrado no bairro da Liberdade, São Paulo" loading="lazy">
+<div class="figure-block rv d2" style="max-width:520px">
   <p class="img-caption">Cartaz original encontrado no bairro da Liberdade. Ponto de partida do projeto.</p>
+  <div class="left-img" style="margin-top:0">
+    <img src="img/chorume/cartaz.webp" alt="Cartaz Proibido Jogar Lixo encontrado no bairro da Liberdade, São Paulo" loading="lazy">
+  </div>
 </div>
 </div></section>
 
@@ -653,9 +649,11 @@ footer {
 <div class="ed-content rv d2">
   <p class="ed-body">A força daquele traço, sua irregularidade brutal e funcional, revelava uma identidade visual espontânea, nascida do improviso. Esse gesto gráfico foi a matéria-prima para o desenvolvimento da tipografia Chorume, que preserva o ritmo, os erros e a urgência de sua origem.</p>
 </div>
-<div class="full-img rv d3">
-  <img src="img/chorume/moodboard.webp" alt="Moodboard de pesquisa: decomposição, terra úmida, permanência orgânica" loading="lazy">
+<div class="figure-block rv d3">
   <p class="img-caption">Moodboard de pesquisa: atmosfera de decomposição, terra úmida e permanência orgânica.</p>
+  <div class="full-img" style="margin-top:0">
+    <img src="img/chorume/moodboard.webp" alt="Moodboard de pesquisa: decomposição, terra úmida, permanência orgânica" loading="lazy">
+  </div>
 </div>
 </div></section>
 
@@ -671,9 +669,11 @@ footer {
 <div class="ed-content rv d1">
   <p class="ed-body">A partir das letras do cartaz, desenhei um alfabeto completo mantendo as imperfeições como parte da identidade. A fonte explora irregularidades como ritmo, peso e alinhamento, reforçando o aspecto orgânico e marginal do seu ponto de origem.</p>
 </div>
-<div class="full-img rv d2">
-  <img src="img/chorume/alfabeto-cenografia.webp" alt="Alfabeto completo da fonte Chorume em cenografia" loading="lazy">
+<div class="figure-block rv d2">
   <p class="img-caption">Alfabeto completo: cada letra preserva o pulso manual do cartaz original.</p>
+  <div class="full-img" style="margin-top:0">
+    <img src="img/chorume/alfabeto-cenografia.webp" alt="Alfabeto completo da fonte Chorume em cenografia" loading="lazy">
+  </div>
 </div>
 </div></section>
 
@@ -690,9 +690,11 @@ footer {
   <p class="ed-body">O nome Chorume surgiu naturalmente. Imaginei uma cachaça artesanal fictícia, produzida com água da chuva, embalada em garrafas escuras, com identidade gráfica inspirada em xilogravura e signos de decomposição.</p>
   <p class="ed-body">O rótulo mistura ilustração, tipografia autoral e simbologias do sertão. A parte inferior, com padrões de insetos e vegetação, remete à fermentação, à morte, à regeneração orgânica. A composição equilibra o grotesco e o lúdico, o artesanal e o especulativo.</p>
 </div>
-<div class="full-img rv d2">
-  <img src="img/chorume/garrafa-cenografia.webp" alt="Garrafa Chorume em cenografia de cactos e ilustrações" loading="lazy">
+<div class="figure-block rv d2">
   <p class="img-caption">Garrafa Chorume: rótulo mistura tipografia autoral, xilogravura e signos de fermentação.</p>
+  <div class="full-img" style="margin-top:0">
+    <img src="img/chorume/garrafa-cenografia.webp" alt="Garrafa Chorume em cenografia de cactos e ilustrações" loading="lazy">
+  </div>
 </div>
 </div></section>
 
@@ -709,10 +711,12 @@ footer {
   <p class="ed-body">Para materializar essa narrativa, construí um pântano cenográfico em estúdio. Usei um aquário de vidro, terra úmida, musgo e ossos reais emprestados por um estudante de veterinária.</p>
   <p class="ed-body">A composição foi pensada como um relicário fúnebre da garrafa, como se tivesse sido desenterrada de um sítio arqueológico pós-apocalíptico.</p>
 </div>
-<div class="centered-img rv d2">
-  <img src="img/chorume/foto-final.webp" alt="Foto final da garrafa Chorume enterrada no pântano cenográfico" loading="lazy">
+<div class="figure-block rv d2" style="max-width:900px;margin-left:auto;margin-right:auto">
+  <p class="img-caption" style="text-align:center;margin-left:auto;margin-right:auto">Foto final: garrafa enterrada em um pântano cenográfico construído em estúdio.</p>
+  <div class="centered-img" style="margin-top:0">
+    <img src="img/chorume/foto-final.webp" alt="Foto final da garrafa Chorume enterrada no pântano cenográfico" loading="lazy">
+  </div>
 </div>
-<p class="img-caption rv d3" style="text-align:center;margin-left:auto;margin-right:auto">Foto final: garrafa enterrada em um pântano cenográfico construído em estúdio.</p>
 </div></section>
 
 
