@@ -432,41 +432,30 @@ footer           { position: relative; z-index: 5; }
   margin-bottom: 48px;
 }
 /* TABELA EDITORIAL: SERVICES
-   Layout split editorial: conteúdo à esquerda, número monumental à direita.
-   Borda sutil entre rows pra criar ritmo de tabela. */
+   Asymmetric com ficha técnica. Esquerda: número + nome + descrição.
+   Direita: 3 metadata blocks (label + valor) que dão peso informacional,
+   eliminando canvas morto. */
 .svc-row {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(420px, 540px) 1fr;
   column-gap: 80px;
-  align-items: center;
-  padding: 48px 0;
+  align-items: start;
+  padding: 56px 0;
   border-top: 1px solid var(--gray-5);
 }
 .svc-row:last-child { border-bottom: 1px solid var(--gray-5); }
 .svc-content {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  max-width: 586px;
+  gap: 16px;
 }
 .svc-num {
-  display: none; /* número agora é monumental, à direita */
-}
-.svc-mark {
   font-family: var(--font-display);
-  font-size: clamp(96px, 14vw, 180px);
-  font-weight: 400;
-  line-height: 0.85;
-  letter-spacing: -0.05em;
-  color: var(--black);
-  font-variant-numeric: tabular-nums;
-  text-align: right;
-  margin-right: -0.04em;
-  transition: color 0.4s, transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
-}
-.svc-row:hover .svc-mark {
+  font-size: 12px;
+  font-weight: 500;
   color: var(--gray-3);
-  transform: translateX(-8px);
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
 }
 .svc-name {
   font-family: var(--font-display);
@@ -485,6 +474,34 @@ footer           { position: relative; z-index: 5; }
   line-height: 1.4;
   letter-spacing: -0.005em;
   text-wrap: pretty;
+  max-width: 460px;
+}
+.svc-meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  padding-top: 4px;
+}
+.svc-meta-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.svc-meta-label {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--gray-3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.svc-meta-value {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--black);
+  letter-spacing: -0.005em;
+  line-height: 1.4;
 }
 
 /* ═══════════════════════════════════
@@ -992,9 +1009,8 @@ footer {
   .hero { padding-top: 72px; }
   .hero-title { padding: 8px 0 0; }
   .hero-bar { margin-bottom: 0; }
-  .svc-row { grid-template-columns: 1fr; gap: 12px; padding: 24px 0; }
-  .svc-num { display: none; }
-  .svc-mark { font-size: clamp(72px, 18vw, 120px); text-align: left; margin-right: 0; margin-left: -0.04em; order: -1; line-height: 0.85; }
+  .svc-row { grid-template-columns: 1fr; gap: 32px; padding: 32px 0; }
+  .svc-meta { grid-template-columns: 1fr 1fr; gap: 24px; }
   .proj-list { gap: 64px; }
   .proj-hero-num { font-size: 48px; }
   .proj-hero-name { font-size: 26px; }
@@ -1155,24 +1171,66 @@ footer {
   <div class="container">
     <div class="svc-row rv">
       <div class="svc-content">
+        <span class="svc-num">01</span>
         <div class="svc-name">UI & Produto</div>
-        <div class="svc-desc">Interfaces de alta fidelidade, fluxos completos, prototipação, motion de produto (microinterações, transições, estados) e handoff preciso.<br>Do wireframe ao pixel final.</div>
+        <div class="svc-desc">Interfaces de alta fidelidade, fluxos completos, prototipação, motion de produto (microinterações, transições, estados) e handoff preciso. Do wireframe ao pixel final.</div>
       </div>
-      <span class="svc-mark" aria-hidden="true">01</span>
+      <div class="svc-meta">
+        <div class="svc-meta-block">
+          <span class="svc-meta-label">Experiência</span>
+          <span class="svc-meta-value">17 anos</span>
+        </div>
+        <div class="svc-meta-block">
+          <span class="svc-meta-label">Ferramentas</span>
+          <span class="svc-meta-value">Figma, Framer, CSS</span>
+        </div>
+        <div class="svc-meta-block">
+          <span class="svc-meta-label">Entregáveis</span>
+          <span class="svc-meta-value">Hi-fi, Protótipo, Handoff</span>
+        </div>
+      </div>
     </div>
     <div class="svc-row rv d1">
       <div class="svc-content">
+        <span class="svc-num">02</span>
         <div class="svc-name">Branding & Identidade</div>
-        <div class="svc-desc">Construção da linguagem visual de produto:<br>cor, tipo, grid e elementos que fazem uma interface ter personalidade.</div>
+        <div class="svc-desc">Construção da linguagem visual de produto: cor, tipo, grid e elementos que fazem uma interface ter personalidade.</div>
       </div>
-      <span class="svc-mark" aria-hidden="true">02</span>
+      <div class="svc-meta">
+        <div class="svc-meta-block">
+          <span class="svc-meta-label">Foco</span>
+          <span class="svc-meta-value">Produto digital</span>
+        </div>
+        <div class="svc-meta-block">
+          <span class="svc-meta-label">Disciplinas</span>
+          <span class="svc-meta-value">Tipografia, Cor, Grid</span>
+        </div>
+        <div class="svc-meta-block">
+          <span class="svc-meta-label">Entregáveis</span>
+          <span class="svc-meta-value">Manual, Tokens, Apps</span>
+        </div>
+      </div>
     </div>
     <div class="svc-row rv d2">
       <div class="svc-content">
+        <span class="svc-num">03</span>
         <div class="svc-name">Design System</div>
-        <div class="svc-desc">Tokens, componentes, documentação e bibliotecas reutilizáveis.<br>Sistemas que eu crio e alimento na prática.</div>
+        <div class="svc-desc">Tokens, componentes, documentação e bibliotecas reutilizáveis. Sistemas que eu crio e alimento na prática.</div>
       </div>
-      <span class="svc-mark" aria-hidden="true">03</span>
+      <div class="svc-meta">
+        <div class="svc-meta-block">
+          <span class="svc-meta-label">Stack</span>
+          <span class="svc-meta-value">Figma, Tokens Studio</span>
+        </div>
+        <div class="svc-meta-block">
+          <span class="svc-meta-label">Documentação</span>
+          <span class="svc-meta-value">Notion, Storybook</span>
+        </div>
+        <div class="svc-meta-block">
+          <span class="svc-meta-label">Cases</span>
+          <span class="svc-meta-value">Delta, MRV, Dasa</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
