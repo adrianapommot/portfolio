@@ -689,17 +689,17 @@ a { color: inherit; text-decoration: none; }
   flex-direction: column;
   gap: 24px;
   min-width: 0;
-  /* REGRA FIXA DO DS: o topo do primeiro elemento da coluna direita alinha com
-     o topo do TÍTULO da coluna esquerda, nunca com o .ed-num.
-     Offset = altura do ed-num (--t-num-sm = 20px) + gap entre num e título (--space-xs = 8px). */
-  padding-top: calc(var(--t-num-sm) + var(--space-xs));
+  /* REGRA FIXA DO DS: o topo do primeiro elemento da col direita alinha com o
+     PRIMEIRO PARÁGRAFO da col esquerda (logo após o espaço do título).
+     Soma: ed-num(20) + gap(8) + ed-title-line(36, com line-height 1.14) + ed-header-margin(48). */
+  padding-top: calc(var(--t-num-sm) + var(--space-xs) + var(--t-h2) * 1.14 + 48px);
 }
 
-/* Exceção Seção 03 Objetivo: o kr-card tem título "Key Results" interno.
-   Empurra o card pra baixo pra alinhar esse título com o pill da esquerda (não com o ed-title).
-   Offset = header completo (num + gap + title + margin-bottom) − padding interno do kr-card (32). */
+/* Exceção Seção 03 Objetivo: kr-card tem padding-top interno de 32px que
+   empurraria o título "Key Results". Subtraímos 32 pra alinhar o título do
+   card com o primeiro parágrafo da esquerda. */
 .ed-two-col--obj .ed-two-col-right {
-  padding-top: calc(var(--t-num-sm) + var(--space-xs) + var(--t-h2) + var(--space-lg) - 32px);
+  padding-top: calc(var(--t-num-sm) + var(--space-xs) + var(--t-h2) * 1.14 + 48px - 32px);
 }
 
 .ed-two-col-body-lg {
