@@ -448,43 +448,47 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ═══════════════════════════════════
-   CONTEXT METRICS, tipografia monumental editorial
+   CONTEXT METRICS, 3 cards horizontais harmônicos.
+   Número em escala contida (não monumental) e na MESMA família de cor da
+   informação complementar pra criar uma textura única, sem hierarquia
+   excessiva. Card branco + border gray-5 (regra do DS).
    ═══════════════════════════════════ */
 .ctx-metrics {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
   width: 100%;
 }
 .ctx-metric {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 36px 0;
-  border-top: 1px solid var(--gray-5);
+  gap: 16px;
+  padding: 28px;
+  background: var(--white);
+  border: 1px solid var(--gray-5);
+  border-radius: 8px;
+  min-width: 0;
 }
-.ctx-metric:first-child { border-top: 0; padding-top: 0; }
-.ctx-metric:last-child { padding-bottom: 0; }
 .ctx-metric-num {
   font-family: var(--font-display);
-  font-size: clamp(56px, 6.4vw, 88px);
+  font-size: clamp(36px, 3.6vw, 48px);
   font-weight: 400;
-  line-height: 0.9;
-  letter-spacing: -0.04em;
-  color: var(--black);
-  margin-left: -0.025em;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--gray-2);
+  text-wrap: nowrap;
 }
 .ctx-metric-num small {
-  font-size: 0.42em;
-  letter-spacing: -0.015em;
-  color: var(--gray-3);
+  font-size: 0.5em;
+  letter-spacing: -0.005em;
+  color: var(--gray-2);
   font-weight: 400;
   margin-left: 2px;
 }
 .ctx-metric-text {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 4px;
+  gap: 8px;
 }
 .ctx-metric-label {
   font-family: var(--font-display);
@@ -494,13 +498,14 @@ a { color: inherit; text-decoration: none; }
   text-transform: uppercase;
   color: var(--gray-3);
   line-height: 1.3;
+  text-wrap: balance;
 }
 .ctx-metric-desc {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   color: var(--gray-2);
-  line-height: 1.6;
+  line-height: 1.55;
   text-wrap: pretty;
   max-width: 48ch;
 }
@@ -1360,6 +1365,7 @@ footer {
   .hero-stats .stat:last-child { border-right: none; }
   .evidence-card { grid-template-columns: 1fr; }
   .evidence-col:first-child { border-right: none; border-bottom: 1px solid var(--gray-5); }
+  .ctx-metrics { grid-template-columns: 1fr; gap: 12px; }
   .phone-flow { grid-template-columns: repeat(3, 1fr); grid-template-rows: none; gap: 32px 24px; }
   .phone-step { display: flex; flex-direction: column; }
   .phone-caption { display: flex; flex-direction: column; margin-bottom: 16px; }
@@ -1564,21 +1570,21 @@ footer {
         <div class="ctx-metric-num">2,5<small>M</small></div>
         <div class="ctx-metric-text">
           <div class="ctx-metric-label">Clientes ativos</div>
-          <div class="ctx-metric-desc">Cadastrados no app MRV,<br>com financiamentos de longo prazo.</div>
+          <div class="ctx-metric-desc">Cadastrados no app MRV, com financiamentos de longo prazo.</div>
         </div>
       </div>
       <div class="ctx-metric">
         <div class="ctx-metric-num">35<small>&nbsp;anos</small></div>
         <div class="ctx-metric-text">
           <div class="ctx-metric-label">Tempo médio de contrato</div>
-          <div class="ctx-metric-desc">Financiamentos longos<br>com complexidade jurídica.</div>
+          <div class="ctx-metric-desc">Financiamentos longos com complexidade jurídica.</div>
         </div>
       </div>
       <div class="ctx-metric">
         <div class="ctx-metric-num">3<small>&nbsp;domínios</small></div>
         <div class="ctx-metric-text">
           <div class="ctx-metric-label">Territórios de produto</div>
-          <div class="ctx-metric-desc">Renegociação, parcelas<br>e status de obra.</div>
+          <div class="ctx-metric-desc">Renegociação, parcelas e status de obra.</div>
         </div>
       </div>
     </div>
@@ -1703,21 +1709,24 @@ footer {
   <div class="ed-two-col-right">
     <div class="ctx-metrics">
       <div class="ctx-metric">
-        <div class="ctx-metric-body">
-          <div class="ctx-metric-label">40+ Termos reescritos</div>
-          <div class="ctx-metric-desc">Jargão financeiro traduzido em linguagem acessível e validada em testes</div>
+        <div class="ctx-metric-num">40<small>+</small></div>
+        <div class="ctx-metric-text">
+          <div class="ctx-metric-label">Termos reescritos</div>
+          <div class="ctx-metric-desc">Jargão financeiro traduzido em linguagem acessível e validada em testes.</div>
         </div>
       </div>
       <div class="ctx-metric">
-        <div class="ctx-metric-body">
-          <div class="ctx-metric-label">47 Estados mapeados</div>
-          <div class="ctx-metric-desc">Componentes documentados com cor, animação e copy contextual</div>
+        <div class="ctx-metric-num">47</div>
+        <div class="ctx-metric-text">
+          <div class="ctx-metric-label">Estados mapeados</div>
+          <div class="ctx-metric-desc">Componentes documentados com cor, animação e copy contextual.</div>
         </div>
       </div>
       <div class="ctx-metric">
-        <div class="ctx-metric-body">
-          <div class="ctx-metric-label">5 Dashboards adaptativos</div>
-          <div class="ctx-metric-desc">Cada board sinalizado e orientado pelo estado financeiro do cliente</div>
+        <div class="ctx-metric-num">5</div>
+        <div class="ctx-metric-text">
+          <div class="ctx-metric-label">Dashboards adaptativos</div>
+          <div class="ctx-metric-desc">Cada board sinalizado e orientado pelo estado financeiro do cliente.</div>
         </div>
       </div>
     </div>
