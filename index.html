@@ -480,7 +480,10 @@ footer           { position: relative; z-index: 5; }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 32px;
-  padding-top: 4px;
+  /* REGRA DO DS: alinha com o primeiro parágrafo da esquerda (svc-desc),
+     não com o número/nome (svc-num/svc-name).
+     Soma: svc-num(~14) + gap(16) + svc-name(~16) + gap(16) ≈ 62px. */
+  padding-top: 62px;
 }
 .svc-meta-block {
   display: flex;
@@ -1010,7 +1013,7 @@ footer {
   .hero-title { padding: 8px 0 0; }
   .hero-bar { margin-bottom: 0; }
   .svc-row { grid-template-columns: 1fr; gap: 32px; padding: 32px 0; }
-  .svc-meta { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .svc-meta { grid-template-columns: 1fr 1fr; gap: 24px; padding-top: 0; }
   .proj-list { gap: 64px; }
   .proj-hero-num { font-size: 48px; }
   .proj-hero-name { font-size: 26px; }
@@ -1220,11 +1223,11 @@ footer {
       <div class="svc-meta">
         <div class="svc-meta-block">
           <span class="svc-meta-label">Stack</span>
-          <span class="svc-meta-value">Figma, Tokens Studio</span>
+          <span class="svc-meta-value">Figma + Vibe Coding</span>
         </div>
         <div class="svc-meta-block">
-          <span class="svc-meta-label">Documentação</span>
-          <span class="svc-meta-value">Notion, Storybook</span>
+          <span class="svc-meta-label">IA</span>
+          <span class="svc-meta-value">Claude, Cursor</span>
         </div>
         <div class="svc-meta-block">
           <span class="svc-meta-label">Cases</span>
