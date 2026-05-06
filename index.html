@@ -432,14 +432,17 @@ footer           { position: relative; z-index: 5; }
   margin-bottom: 48px;
 }
 /* TABELA EDITORIAL: SERVICES
-   col-1 (40) + gap (20) + col-2 (200) + gap (20) = 280 ✓ */
+   Layout split editorial: conteúdo à esquerda, número monumental à direita.
+   Borda sutil entre rows pra criar ritmo de tabela. */
 .svc-row {
   display: grid;
-  grid-template-columns: var(--col-num-narrow) 1fr;
-  column-gap: 40px;
-  align-items: start;
-  padding: 32px 0;
+  grid-template-columns: 1fr auto;
+  column-gap: 80px;
+  align-items: center;
+  padding: 48px 0;
+  border-top: 1px solid var(--gray-5);
 }
+.svc-row:last-child { border-bottom: 1px solid var(--gray-5); }
 .svc-content {
   display: flex;
   flex-direction: column;
@@ -447,13 +450,23 @@ footer           { position: relative; z-index: 5; }
   max-width: 586px;
 }
 .svc-num {
+  display: none; /* número agora é monumental, à direita */
+}
+.svc-mark {
   font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--gray-3);
-  letter-spacing: 0.08em;
+  font-size: clamp(96px, 14vw, 180px);
+  font-weight: 400;
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  color: var(--black);
   font-variant-numeric: tabular-nums;
-  padding-top: 2px;
+  text-align: right;
+  margin-right: -0.04em;
+  transition: color 0.4s, transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.svc-row:hover .svc-mark {
+  color: var(--gray-3);
+  transform: translateX(-8px);
 }
 .svc-name {
   font-family: var(--font-display);
@@ -981,6 +994,7 @@ footer {
   .hero-bar { margin-bottom: 0; }
   .svc-row { grid-template-columns: 1fr; gap: 12px; padding: 24px 0; }
   .svc-num { display: none; }
+  .svc-mark { font-size: clamp(72px, 18vw, 120px); text-align: left; margin-right: 0; margin-left: -0.04em; order: -1; line-height: 0.85; }
   .proj-list { gap: 64px; }
   .proj-hero-num { font-size: 48px; }
   .proj-hero-name { font-size: 26px; }
@@ -1140,25 +1154,25 @@ footer {
   </div>
   <div class="container">
     <div class="svc-row rv">
-      <span class="svc-num">01</span>
       <div class="svc-content">
         <div class="svc-name">UI & Produto</div>
         <div class="svc-desc">Interfaces de alta fidelidade, fluxos completos, prototipação, motion de produto (microinterações, transições, estados) e handoff preciso.<br>Do wireframe ao pixel final.</div>
       </div>
+      <span class="svc-mark" aria-hidden="true">01</span>
     </div>
     <div class="svc-row rv d1">
-      <span class="svc-num">02</span>
       <div class="svc-content">
         <div class="svc-name">Branding & Identidade</div>
         <div class="svc-desc">Construção da linguagem visual de produto:<br>cor, tipo, grid e elementos que fazem uma interface ter personalidade.</div>
       </div>
+      <span class="svc-mark" aria-hidden="true">02</span>
     </div>
     <div class="svc-row rv d2">
-      <span class="svc-num">03</span>
       <div class="svc-content">
         <div class="svc-name">Design System</div>
         <div class="svc-desc">Tokens, componentes, documentação e bibliotecas reutilizáveis.<br>Sistemas que eu crio e alimento na prática.</div>
       </div>
+      <span class="svc-mark" aria-hidden="true">03</span>
     </div>
   </div>
 </section>
