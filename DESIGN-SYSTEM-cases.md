@@ -4,7 +4,23 @@ Framework narrativo e visual dos case studies. Complementa `DESIGN-SYSTEM.md` (h
 
 Benchmark atual: `case-mrv.html`. Este case define o padrão que `case-delta.html`, `case-dasa.html` e `case-chorume.html` devem replicar.
 
-Atualizado em 21 de abril de 2026.
+Atualizado em 21 de abril de 2026. Bloco de decisões travadas adicionado em 28 de maio de 2026.
+
+---
+
+## DECISÕES TRAVADAS (28 de maio de 2026) — sobrescrevem qualquer texto abaixo
+
+Reconciliam as contradições entre `DESIGN-SYSTEM.md`, este documento e o código real. Onde o texto antigo divergir, vale isto:
+
+1. **Superfície alternada (`.ed--shaded`) = `#F5F5F5` (`--surface-neutral`).** Cinza neutro frio, sem undertone creme. Única superfície alternada de case. Cream (`#F9F9F9`) e `#F5F1EB` banidos como fundo em qualquer case.
+2. **`--accent-light` = `#EDFFB6`.** Versões antigas deste documento citavam um hex diferente, por engano. O valor correto é sempre o do `DESIGN-SYSTEM.md`.
+3. **Lime (`--accent` e `--accent-light`) NÃO aparece dentro de case.** É assinatura exclusiva da home. Resolve as "decisões em aberto" §7.1 e §7.2:
+   - Metadata value: `--gray-4` (não mais lime).
+   - Highlight inline: `<strong>` preto. O componente `.highlight` com bg lime fica desativado em case.
+   - `.kr-compare-result.hit`: weight 600 preto, checkmark SVG opcional. Já sem lime no código.
+4. **Plus Jakarta Sans, exclusiva.** Nenhum mono ou outra família em case (Delta tem `monospace` solto a remover).
+5. **Cursor custom = só `index.html`.** Cases usam cursor padrão (Dasa tem cursor custom a remover).
+6. **Dasa roda num sistema de tokens antigo** (`--gray-6`, sem `--surface-neutral`, sem `--accent-light`). Está fora do ar. Refazer a partir do MRV, não corrigir por cima.
 
 ---
 
@@ -28,9 +44,9 @@ Estes tokens **não aparecem** em `index.html`. Existem apenas nos HTMLs de case
 --dark-surface: #2C2B2B;   /* metadata bar do case header */
 ```
 
-O `--accent-light: #e0ff98` (definido no DS principal como token legado suspenso) tem uso específico em cases: é a cor do **valor** na metadata bar do case header. Quando a home for revisada para remover lime completamente, a metadata bar dos cases precisa ser reavaliada — hoje é a última aparição do `--accent-light` visualmente ativa no portfólio.
+O `--accent-light` é `#EDFFB6` (igual ao `DESIGN-SYSTEM.md`). Versões antigas deste doc citavam um hex diferente, que estava errado. Por decisão travada (topo, item 3), `--accent-light` NÃO é mais usado dentro de case: a metadata value passou a `--gray-4`.
 
-**Estado atual (decisão pendente):** manter `--accent-light` na metadata value até decisão final sobre o lime. Quando o lime for descartado em definitivo, metadata value passa a ser `--white` com `opacity: 0.7` ou `--gray-4`.
+**Estado: resolvido (28/mai/2026).** Lime descartado dentro de case. Metadata value = `--gray-4`. Ver decisão travada no topo.
 
 ### Outros tokens herdados
 
@@ -50,7 +66,7 @@ Case tem papéis tipográficos próprios que não existem na home. Mantive a mes
 | Case back link | `.case-back` | 13px | 500 | — | 0.08em | upper | `--gray-3` |
 | **Metadata bar** |
 | Metadata label | `.case-meta-label` | 14px | 500 | — | — | upper | `--white` |
-| Metadata value | `.case-meta-value` | 13px | 400 | — | — | — | `--accent-light` (ver nota acima) |
+| Metadata value | `.case-meta-value` | 13px | 400 | — | — | — | `--gray-4` |
 | **Estrutura editorial (ed-*)** |
 | Section number (ed-num) | `.ed-num` | 20px | 500 | 1 | — | — | `--gray-3` |
 | Section heading (ed-title) | `.ed-title` | 32px | 500 | 1.1 | 0.026em | upper | `--black` |
@@ -244,7 +260,7 @@ Barra escura full-width com 4 slots fixos: **Função**, **Empresa**, **Período
 .case-meta-value {
   font-size: 13px;
   font-weight: 400;
-  color: var(--accent-light);  /* ver nota de pendência na seção 2 */
+  color: var(--gray-4);  /* lime descartado em case, decisão 28/mai */
 }
 ```
 
