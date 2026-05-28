@@ -205,24 +205,33 @@ Regra fundamental: **título sempre em cima, conteúdo abaixo. Nunca lado a lado
 
 Valem para **todo** o portfólio — index e cases. Não são estéticas opcionais, são requisito de qualidade.
 
-### Zero viúvas, órfãs e rios
-- Parágrafos: sempre `text-wrap: pretty` (redistribui para evitar palavras soltas na última linha)
-- Títulos: sempre `text-wrap: balance` (equilibra linhas em multi-linha)
-- Quando `text-wrap` não resolve, ajustar **conteúdo** (reescrever uma linha) ou **max-width** do container. Nunca forçar com `<br>` arbitrário.
-- Revisar em desktop **e** em 640px — viúva boa em uma largura pode ser ruim em outra.
+### Borda e quebra de linha (rag controlado)
+
+**Definição de viúva (nossa):** não é só palavra única na última linha. É **qualquer linha que termina curta no meio da medida** (deixa buraco branco antes da margem) **ou que termina em conector** (e, de, que, com, em). Ambas proibidas.
+
+**Objetivo:** rag raso e parelho — alinhado à esquerda, com as linhas pousando numa faixa estreita perto da medida. Borda direita levemente viva, nunca serrilhado caótico, nunca reta artificial.
+
+- Corpo **sempre alinhado à esquerda**. `text-align: justify` é **PROIBIDO**: no navegador estica o espaço entre palavras (rios) e a hifenização que o corrigiria depende do navegador do visitante, fora do nosso controle.
+- **Bloco curto, até ~4 linhas** (intro, sobre, legenda, KR, título): `text-wrap: balance`. Equaliza o comprimento das linhas, elimina a linha curta/buraco e reequilibra sozinho em qualquer largura de tela.
+- **Texto corrido longo, acima de ~6 linhas:** `text-wrap: pretty`. O `balance` trava em ~6 linhas no Chrome e para de agir; acima disso `pretty` é quem evita órfã/viúva.
+- `balance` recolhe o bloco alguns px pra dentro da medida pra igualar as linhas — **comportamento correto, não bug**. A única forma de toda linha tocar a medida exata é justify, que é proibido.
+- **`<br>` e `&nbsp;` na mão são PROIBIDOS para controle de borda** — estilhaçam quando a largura muda (mobile). Quando `text-wrap` não fechar, **reescrever a frase** ou ajustar a `max-width` do container.
+- Revisar sempre em desktop **e** em 640px — borda boa numa largura pode quebrar em outra.
 
 ### Body text unificado (home + cases)
-Body text tem **um único** padrão em todo o portfólio. Divergir entre home e case quebra a coerência.
+Body text tem **um único** padrão em todo o portfólio. Divergir entre home e case quebra a coerência. Padrão **P3** (validado por render, mai/2026):
 
 | Propriedade | Valor |
 |---|---|
-| font-size | **14px** |
+| font-size | **17px** |
 | font-weight | 400 |
-| line-height | 1.75 |
-| color | `--gray-2` (`#585550`) |
-| letter-spacing | 0 |
+| line-height | 1.55 |
+| color | `--text-body` (`#49443c`, neutral-700) |
+| max-width (medida) | **540px** |
+| text-align | left |
+| text-wrap | `balance` (bloco curto) / `pretty` (texto longo) |
 
-Body de destaque (`--t-body-lg`, 18px) pode ser usado em seções específicas (objetivo, estratégia, `md-title`, statement de problema), mas a regra padrão é 14px.
+> **Migração P3 em andamento:** home (hero + sobre) já aplicada. Cases herdam o mesmo P3 no ciclo 2. Onde ainda não migrou, o body antigo (`--gray-2`, 14px/1.75) segue válido até ser tocado. A medida única de 540px aposenta a bagunça de larguras (586/562/547/560/520/480) que existia entre arquivos.
 
 ### Alinhamento vertical entre colunas
 Em qualquer layout two-column (home ou case), o **topo do primeiro elemento da coluna direita** alinha com o **topo do título** da coluna esquerda — **nunca com o número/etiqueta** (ex: `.ed-num`). O número é metadata (fica acima, fora do grid), e as duas colunas de conteúdo começam no mesmo baseline.
