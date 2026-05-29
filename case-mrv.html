@@ -26,6 +26,9 @@
   --font-display:'Plus Jakarta Sans',sans-serif; --font-body:'Plus Jakarta Sans',sans-serif;
   --max-w:1440px; --px:40px; --space-md:24px;
   --t-hero:clamp(44px,7vw,96px); --t-label:13px; --t-caption:12px;
+  /* escala tipográfica do conteúdo — fonte única no sistema consolidado */
+  --ty-display:clamp(54px,5.6vw,74px); --ty-title:clamp(44px,4.8vw,60px); --ty-lead:24px;
+  --ty-copy:17px; --ty-small:14px; --ty-metric:32px; --ty-label:12px;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 body{font-family:var(--font);color:var(--black);background:var(--white);-webkit-font-smoothing:antialiased}
@@ -33,8 +36,7 @@ img{display:block;max-width:100%}
 
 /* ───────── FLUXO CONTÍNUO ───────── */
 .flow{max-width:calc(1440px + 2*var(--m));margin:0 auto}
-.sec{padding:112px var(--m);border-top:1px solid var(--line)}
-.sec:first-child{border-top:none}
+.sec{padding:112px var(--m)}
 
 /* grid mestre de 12 colunas (reutilizado por todas as seções) */
 .grid{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--gut);align-items:start}
@@ -43,21 +45,21 @@ img{display:block;max-width:100%}
 .col-full{grid-column:1 / 13}
 .stack{display:flex;flex-direction:column}
 
-/* ───────── ESTILOS DE TEXTO (kit, 7) ───────── */
+/* ───────── ESTILOS DE TEXTO (estrutura/cor; tamanhos no sistema consolidado) ───────── */
 .s-index{display:flex;align-items:baseline;gap:14px;margin-bottom:16px}
-.s-index b{font-size:17px;font-weight:600;color:var(--black);letter-spacing:.02em}
+.s-index b{color:var(--black)}
 .s-index i{width:8px;height:8px;border-radius:50%;background:var(--gray-4);display:block}
 .s-index em{width:28px;height:1.5px;background:var(--line);display:block;font-style:normal}  /* traço = cor das linhas cinzas */
 .feat-idx,.card-idx{display:none}  /* seção 02: itens sem número */
-.s-title{font-size:64px;font-weight:400;line-height:1.1;letter-spacing:-.01em;text-transform:uppercase;color:var(--black);text-wrap:balance}  /* 1.1 para acentos (À, É, Ã) não colarem na linha de cima */
-.s-lead{font-size:26px;font-weight:400;line-height:1.32;letter-spacing:-.01em;color:var(--black);text-wrap:balance}
+.s-title{color:var(--black);text-wrap:balance}
+.s-lead{color:var(--black);text-wrap:balance}
 .s-lead strong{font-weight:700}
-.s-text{font-size:17px;font-weight:400;line-height:1.62;color:var(--gray-2);text-wrap:pretty}
+.s-text{color:var(--gray-2);text-wrap:pretty}
 .s-text strong{font-weight:700;color:var(--black)}
 .s-text+.s-text{margin-top:20px}
-.s-label{font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--black);text-wrap:balance}
-.s-metric{font-size:40px;font-weight:400;line-height:1;letter-spacing:-.01em;color:var(--black)}
-.s-desc{font-size:15px;line-height:1.55;color:var(--gray-2);text-wrap:balance}
+.s-label{color:var(--black);text-wrap:balance}
+.s-metric{color:var(--black)}
+.s-desc{color:var(--gray-2);text-wrap:balance}
 
 /* ───────── ÍCONES PADRÃO (linha · stroke 1.5 · glifo preto) ───────── */
 /* ÍCONE: só o traço, preto, SEM bolinha/quadrado. Mesmo tamanho em toda a página. */
@@ -76,8 +78,8 @@ img{display:block;max-width:100%}
 .data-row:first-child{border-top:none;padding-top:0}
 /* valor + nome na MESMA linha; nome no estilo da descrição (última linha) */
 .data-top{display:flex;align-items:baseline;gap:12px;margin-bottom:10px}
-.data-c .data-val{font-size:25px;font-weight:700;line-height:1;letter-spacing:-.01em;color:var(--black)}
-.data-c .data-name{font-size:15px;font-weight:400;line-height:1.55;color:var(--gray-2)}
+.data-c .data-val{font-size:var(--ty-lead);font-weight:600;line-height:1;letter-spacing:-.01em;color:var(--black)}  /* stat inline (≠ métrica grande de A Solução) */
+.data-c .data-name{font-size:var(--ty-small);font-weight:400;line-height:1.55;color:var(--gray-2)}
 
 /* ═══ 3-up (O Problema) ═══ */
 .feat .feat-hd{display:flex;align-items:center;gap:14px;margin-bottom:16px}
@@ -86,7 +88,7 @@ img{display:block;max-width:100%}
 .feat-idx em{width:22px;height:1.5px;background:var(--black);display:block}
 .feat .ico{width:28px;height:28px}
 .feat .feat-hd .s-label{line-height:1.3;min-height:0;margin:0}
-.feat-desc{font-size:16px;line-height:1.6;color:var(--gray-2);text-wrap:balance}
+.feat-desc{color:var(--gray-2);text-wrap:balance}
 
 /* ═══ card-grid 5-up (Principais desafios) ═══ */
 .cardgrid{grid-column:1 / 13;display:grid;grid-template-columns:repeat(5,1fr);gap:var(--gut);margin-top:4px}
@@ -96,19 +98,19 @@ img{display:block;max-width:100%}
 .card-idx em{display:block;width:20px;height:1.5px;background:var(--black);margin-top:8px}
 .card .ico{width:24px;height:24px}
 .card .s-label{min-height:34px;margin-bottom:12px;line-height:1.3}
-.card-desc{font-size:14px;line-height:1.55;color:var(--gray-2);text-wrap:balance}
+.card-desc{color:var(--gray-2);text-wrap:balance}
 
 /* ═══ pill badge ═══ */
-.pill{display:inline-flex;align-items:center;padding:11px 22px;border:1px solid var(--line);border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-2);align-self:flex-start}
+.pill{display:inline-flex;align-items:center;padding:11px 22px;border:1px solid var(--line);border-radius:999px;color:var(--gray-2);align-self:flex-start}
 
 /* ═══ Key Results card (Objetivo) ═══ */
 .kr{grid-column:7 / 13;border:1px solid var(--line);border-radius:16px;padding:40px 44px;align-self:start}
-.kr-title{font-size:28px;font-weight:500;letter-spacing:-.01em;margin-bottom:8px}
+.kr-title{margin-bottom:8px}
 .kr-row{display:grid;grid-template-columns:40px 1fr;gap:18px;align-items:center;padding:24px 0;border-top:1px solid var(--line)}
 .kr-row:first-of-type{border-top:none}
 .kr-chip{display:flex;align-items:center;justify-content:center}
 .kr-chip .ico{width:22px;height:22px}
-.kr-txt{font-size:17px;line-height:1.5;color:var(--gray-1);text-wrap:pretty}
+.kr-txt{color:var(--gray-1);text-wrap:pretty}
 
 /* ═══ Estratégia: metric cards ═══ */
 .mrow{grid-column:7 / 13;display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gut)}
@@ -117,7 +119,7 @@ img{display:block;max-width:100%}
 .mcard .chip .ico{width:22px;height:22px}
 .mcard .s-metric{margin-bottom:12px}
 .mcard .s-label{margin-bottom:10px}
-.mcard .mdesc{font-size:14px;line-height:1.55;color:var(--gray-2);text-wrap:balance}
+.mcard .mdesc{color:var(--gray-2);text-wrap:balance}
 
 /* ═══ Estratégia: solução list (chips lime) ═══ */
 .sol-list{display:flex;flex-direction:column}
@@ -125,8 +127,8 @@ img{display:block;max-width:100%}
 .sol-item:first-child{border-top:none;padding-top:0}
 .sol-chip{display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .sol-chip .ico{width:20px;height:20px}
-.sol-t{font-size:17px;font-weight:600;color:var(--black);margin-bottom:2px}
-.sol-d{font-size:15px;color:var(--gray-2);line-height:1.45;text-wrap:balance}
+.sol-t{color:var(--black);margin-bottom:2px}
+.sol-d{color:var(--gray-2);text-wrap:balance}
 
 /* ═══ showcase de telas originais (browser + phone) ═══ */
 .showcase{grid-column:7 / 13;position:relative;align-self:start}
@@ -147,12 +149,12 @@ img{display:block;max-width:100%}
 .s07-sprints{display:flex;flex-direction:column;gap:20px;margin-top:44px}
 .sprint-card{border:1px solid var(--line);border-radius:10px;padding:26px 28px;display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:stretch}
 .sprint-meta{display:flex;flex-direction:column}
-.sprint-n{font-size:20px;font-weight:600;line-height:1;color:var(--black)}
-.sprint-tag{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gray-3);margin-top:6px}
+.sprint-n{color:var(--black)}
+.sprint-tag{color:var(--gray-3);margin-top:6px}
 .sprint-chip{display:none}  /* ícones removidos desta tela */
 .sprint-chip .ico{width:24px;height:24px}
-.sprint-title{font-size:17px;font-weight:700;color:var(--black);margin-bottom:10px}
-.sprint-desc{font-size:15px;line-height:1.55;color:var(--gray-2);text-wrap:pretty}
+.sprint-title{color:var(--black);margin-bottom:10px}
+.sprint-desc{color:var(--gray-2);text-wrap:pretty}
 
 /* painel showcase — bg cinza estende até o traço (borda esquerda do painel) */
 /* painel recebe a composição como imagem (background); se faltar o arquivo, fica só o cinza limpo (sem ícone quebrado).
@@ -175,36 +177,36 @@ img{display:block;max-width:100%}
 
 /* faixa de impacto */
 .s07-impact{margin-top:52px;border:1px solid var(--line);border-radius:16px;padding:34px 40px;display:grid;grid-template-columns:auto repeat(4,1fr);gap:36px;align-items:center}
-.imp-label{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-3);line-height:1.45;max-width:130px}
+.imp-label{color:var(--gray-3);max-width:130px}
 .imp-item{display:flex;align-items:center;gap:16px}
 .imp-chip{display:none}  /* ícones removidos desta tela */
 .imp-chip .ico{width:24px;height:24px}
-.imp-num{font-size:30px;font-weight:600;line-height:1;letter-spacing:-.01em;color:var(--black)}
-.imp-lbl{font-size:13px;line-height:1.4;color:var(--gray-2);margin-top:7px;text-wrap:balance}
+.imp-num{color:var(--black)}
+.imp-lbl{color:var(--gray-2);margin-top:7px;text-wrap:balance}
 
 /* ═══════════ APRENDIZADOS (dark) ═══════════ */
 .sec--dark{background:#111;color:#fff;border-top:none}
 .sec--dark .s-index b{color:var(--accent)}
 .sec--dark .s-index em{background:rgba(255,255,255,.28)}
 .sec--dark .s-title{color:#fff}
-.apr-intro{font-size:17px;line-height:1.62;color:rgba(255,255,255,.6);max-width:42ch;margin-top:30px}
+.apr-intro{color:rgba(255,255,255,.6);max-width:42ch;margin-top:30px}
 .apr-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:72px}
 .apr-col{padding:0 52px;border-left:1px solid rgba(255,255,255,.13)}
 .apr-col:first-child{padding-left:0;border-left:none}
-.apr-t{font-size:25px;font-weight:600;line-height:1.18;letter-spacing:-.01em;color:#fff;text-wrap:balance}
+.apr-t{color:#fff;text-wrap:balance}
 .apr-rule{width:36px;height:1.5px;background:rgba(255,255,255,.28);margin:24px 0}
-.apr-d{font-size:15px;line-height:1.6;color:rgba(255,255,255,.55);text-wrap:pretty}
+.apr-d{color:rgba(255,255,255,.55);text-wrap:pretty}
 
 /* ═══════════ HEADER / HERO ═══════════ */
 .hero{position:relative;overflow:hidden;padding-top:72px;padding-bottom:0;background:#FAFAFA}  /* faixa fica no pé da seção; ilustração some atrás dela */
 .hero-grid{position:relative;z-index:1;align-items:stretch;min-height:560px}
 .hero-left{grid-column:1 / 6}
-.hero-back{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-3);margin-bottom:44px}
+.hero-back{display:inline-flex;align-items:center;gap:10px;color:var(--gray-3);margin-bottom:44px}
 .hero-back svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .hero-logo{margin-bottom:30px}
 .hero-logo img{height:30px;width:auto;display:block}
-.hero-title{font-size:clamp(54px,5.6vw,74px);font-weight:400;line-height:1.04;letter-spacing:-.015em;text-transform:uppercase;color:var(--black);margin-bottom:34px}
-.hero-intro{font-size:17px;line-height:1.72;color:var(--gray-2);max-width:46ch;text-wrap:pretty}
+.hero-title{color:var(--black);margin-bottom:34px}
+.hero-intro{color:var(--gray-2);max-width:46ch;text-wrap:pretty}
 .hero-intro strong{font-weight:700;color:var(--black)}
 /* ilustração maior, SEM caixa — direto sobre o fundo, alinhada à direita (fiel à referência) */
 /* área com a MESMA proporção da imagem (1536x1024) → cover não corta nada (curva inteira).
@@ -216,8 +218,8 @@ img{display:block;max-width:100%}
 .hm-item:last-child{border-right:none}
 .hm-chip{width:26px;height:26px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .hm-chip svg{width:100%;height:100%;fill:none;stroke:rgba(255,255,255,.9);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.hm-label{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:6px}
-.hm-value{font-size:15px;font-weight:500;color:#fff;line-height:1.3}
+.hm-label{color:rgba(255,255,255,.5);margin-bottom:6px}
+.hm-value{color:#fff}
 /* ═══ FLUXO DESKTOP / FUNDAÇÃO VISUAL — master-detail viewer ═══ */
 .md-viewer{display:grid;grid-template-columns:236px 1fr;gap:40px;align-items:start;margin-top:44px}
 .md-thumbs{display:flex;flex-direction:column;gap:14px;position:sticky;top:32px}
@@ -241,8 +243,8 @@ img{display:block;max-width:100%}
 .em-frame{aspect-ratio:16 / 9;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#111}
 .em-frame iframe{width:100%;height:100%;border:0;display:block}
 .em-body{padding-top:18px}
-.em-title{font-size:18px;font-weight:600;letter-spacing:-.01em;margin-bottom:6px;color:var(--black)}
-.em-desc{font-size:14px;line-height:1.6;color:var(--gray-2);text-wrap:pretty}
+.em-title{margin-bottom:6px;color:var(--black)}
+.em-desc{color:var(--gray-2);text-wrap:pretty}
 
 /* ═══ OUTROS PROJETOS (fecho) ═══ */
 .more-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gut);margin-top:48px}
@@ -250,8 +252,8 @@ img{display:block;max-width:100%}
 .more-card-img{aspect-ratio:3 / 2;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:var(--chip);margin-bottom:18px}
 .more-card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s cubic-bezier(.2,.7,.2,1)}
 .more-card:hover .more-card-img img{transform:scale(1.04)}
-.more-tag{display:block;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-3);margin-bottom:8px}
-.more-name{font-size:20px;font-weight:600;letter-spacing:-.01em;color:var(--black)}
+.more-tag{display:block;color:var(--gray-3);margin-bottom:8px}
+.more-name{color:var(--black)}
 
 /* ═══ 05 · A SOLUÇÃO — phone flow (dark) ═══ */
 /* grid com LINHAS compartilhadas: %, nome, descrição e frame alinhados entre todas as colunas */
@@ -269,22 +271,25 @@ img{display:block;max-width:100%}
 .sec--dark .s-desc{color:rgba(255,255,255,.5)}
 
 /* ════════════════════════════════════════════════
-   SISTEMA TIPOGRÁFICO CONSOLIDADO — 7 estilos
-   Regras agrupadas: cada papel lista TODAS as classes que o usam
-   (vencem por ordem de cascata). Cor permanece contextual.
+   SISTEMA TIPOGRÁFICO — fonte única da verdade
+   Escala enxuta de 7 passos: 74 · 60 · 32 · 24 · 17 · 14 · 12.
+   Cada papel lista TODAS as classes; a cor fica nos componentes.
    ════════════════════════════════════════════════ */
-.hero-title{font-size:clamp(54px,5.6vw,74px);font-weight:400;line-height:1.04;letter-spacing:-.02em;text-transform:uppercase}                                                              /* 1 · DISPLAY */
-.s-title{font-size:clamp(44px,4.8vw,60px);font-weight:400;line-height:1.08;letter-spacing:-.015em;text-transform:uppercase}                                                                 /* 2 · SECTION TITLE */
-.s-text,.hero-intro,.apr-intro,.s-lead,.apr-t,.kr-title{font-size:17px;font-weight:400;line-height:1.7;letter-spacing:-.003em;text-transform:none}                                           /* 3 · BODY LARGE */
-.s-desc,.sol-d,.sprint-desc,.apr-d,.hm-value,.feat-desc,.card-desc,.mdesc,.co-d,.imp-lbl,.kr-txt,.md-desc{font-size:15px;font-weight:400;line-height:1.6;letter-spacing:0;text-transform:none}      /* 4 · BODY */
-.s-metric,.imp-num,.data-val{font-size:32px;font-weight:500;line-height:1;letter-spacing:-.02em;text-transform:none}                                                                        /* 5 · METRIC */
-.s-label,.pill,.hm-label,.sprint-tag,.imp-label,.hero-back,.s-index .lbl,.sol-t,.sprint-title,.co-t,.data-name,.md-title{font-size:12px;font-weight:600;line-height:1.3;letter-spacing:.08em;text-transform:uppercase} /* 6 · LABEL */
-.s-index b,.sprint-n,.feat-idx b,.card-idx b,.md-num{font-size:16px;font-weight:600;letter-spacing:.02em;text-transform:none}                                                                       /* 7 · EYEBROW */
+.hero-title{font-size:var(--ty-display);font-weight:400;line-height:1.04;letter-spacing:-.02em;text-transform:uppercase}                                   /* DISPLAY · 74 */
+.s-title{font-size:var(--ty-title);font-weight:400;line-height:1.08;letter-spacing:-.015em;text-transform:uppercase}                                        /* TÍTULO · 60 */
+.s-lead{font-size:var(--ty-lead);font-weight:400;line-height:1.3;letter-spacing:-.01em}                                                                     /* LEAD · 24 */
+.apr-t,.kr-title,.more-name{font-size:var(--ty-lead);font-weight:600;line-height:1.22;letter-spacing:-.01em}                                                /* SUBTÍTULO · 24 */
+.s-text,.hero-intro,.apr-intro{font-size:var(--ty-copy);font-weight:400;line-height:1.6;letter-spacing:0}                                                   /* CORPO · 17 */
+.sol-t,.sprint-title,.em-title{font-size:var(--ty-copy);font-weight:600;line-height:1.35;letter-spacing:-.005em}                                            /* CORPO forte · 17 */
+.s-desc,.sol-d,.sprint-desc,.apr-d,.hm-value,.feat-desc,.card-desc,.mdesc,.md-desc,.em-desc,.imp-lbl,.kr-txt,.co-d{font-size:var(--ty-small);font-weight:400;line-height:1.55;letter-spacing:0}  /* MIÚDO · 14 */
+.s-metric,.imp-num,.data-val{font-size:var(--ty-metric);font-weight:500;line-height:1;letter-spacing:-.02em}                                                /* MÉTRICA · 32 */
+.s-label,.pill,.hm-label,.sprint-tag,.imp-label,.hero-back,.md-title,.more-tag,.co-t{font-size:var(--ty-label);font-weight:600;line-height:1.3;letter-spacing:.08em;text-transform:uppercase}  /* RÓTULO · 12 */
+.s-index b,.sprint-n,.md-num{font-size:var(--ty-label);font-weight:600;line-height:1.3;letter-spacing:.04em;font-variant-numeric:tabular-nums}              /* MARCADOR · 12 */
 
 /* ═══ CHROME GLOBAL (navbar · CTA · footer · reveal) ═══ */
-.container{max-width:var(--max-w);margin:0 auto;padding:0 var(--px)}
-.nav-name{position:fixed;top:20px;left:max(calc(var(--px) - 20px),calc((100vw - var(--max-w)) / 2 + var(--px) - 20px));z-index:100;font-family:var(--font-display);font-size:var(--t-label);font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--black);background:rgba(255,255,255,.55);backdrop-filter:blur(12px) saturate(1.3);-webkit-backdrop-filter:blur(12px) saturate(1.3);padding:8px 20px;border-radius:999px;cursor:pointer}
-.nav-float{position:fixed;top:20px;right:max(var(--px),calc((100vw - var(--max-w)) / 2 + var(--px)));z-index:100;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.container{max-width:calc(var(--max-w) + 2*var(--m));margin:0 auto;padding:0 var(--m)}  /* alinha CTA/rodapé ao gutter de 64px das seções */
+.nav-name{position:fixed;top:20px;left:max(calc(var(--m) - 20px),calc((100vw - var(--max-w) - 2*var(--m)) / 2 + var(--m) - 20px));z-index:100;font-family:var(--font-display);font-size:var(--t-label);font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--black);background:rgba(255,255,255,.55);backdrop-filter:blur(12px) saturate(1.3);-webkit-backdrop-filter:blur(12px) saturate(1.3);padding:8px 20px;border-radius:999px;cursor:pointer}
+.nav-float{position:fixed;top:20px;right:max(var(--m),calc((100vw - var(--max-w) - 2*var(--m)) / 2 + var(--m)));z-index:100;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
 .nav-toggle{width:54px;height:54px;border-radius:50%;border:1px solid var(--gray-5);cursor:pointer;background:rgba(255,255,255,.72);backdrop-filter:blur(12px) saturate(1.3);-webkit-backdrop-filter:blur(12px) saturate(1.3);display:flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s;position:relative}
 .nav-toggle:hover{background:var(--accent);border-color:var(--accent)}
 .nav-toggle svg{width:22px;height:22px;stroke:var(--black);stroke-width:1;stroke-linecap:square;fill:none}
@@ -392,9 +397,9 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
       <p class="s-lead" style="max-width:760px">A renegociação digital existia, mas a conversão era baixa e o cliente sempre terminava no <strong>call center.</strong></p>
     </div>
     <div class="grid">
-      <div class="feat" style="grid-column:1 / 5"><div class="feat-hd"><div class="feat-idx"><b>01</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><path d="M13 28H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h6"/><path d="M21 22l6-6-6-6M27 16H13"/></svg></div><div class="s-label">Abandono no fluxo</div></div><p class="feat-desc">Os clientes iniciavam o processo no app mas não completavam o acordo. Cada desistência alimentava o call center.</p></div>
-      <div class="feat" style="grid-column:5 / 9"><div class="feat-hd"><div class="feat-idx"><b>02</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="12"/><path d="M16 9v14M19 12.5c0-1.5-1.3-2.5-3-2.5s-3 1-3 2.5 1.3 2.2 3 2.5 3 1 3 2.5-1.3 2.5-3 2.5-3-1-3-2.5"/></svg></div><div class="s-label">Custo operacional</div></div><p class="feat-desc">A migração pro call center inflava custos e gerava insatisfação tanto para o cliente quanto para a operação interna.</p></div>
-      <div class="feat" style="grid-column:9 / 13"><div class="feat-hd"><div class="feat-idx"><b>03</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><rect x="4" y="6" width="24" height="20" rx="2"/><path d="M4 12h24M7.5 9h.01M10.5 9h.01"/></svg></div><div class="s-label">Interface genérica</div></div><p class="feat-desc">A proposta aparecia mas não comunicava segurança. Linguagem técnica, sem contexto do momento financeiro de cada cliente.</p></div>
+      <div class="feat" style="grid-column:1 / 5"><div class="feat-hd"><div class="feat-idx"><b>01</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><path d="M5 7h22L18 16v8l-4 3V16L5 7z"/></svg></div><div class="s-label">Abandono no fluxo</div></div><p class="feat-desc">Os clientes iniciavam o processo no app mas não completavam o acordo. Cada desistência alimentava o call center.</p></div>
+      <div class="feat" style="grid-column:5 / 9"><div class="feat-hd"><div class="feat-idx"><b>02</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="11"/><path d="M16 9.5v13M18.8 12.6c0-1.4-1.25-2.4-2.8-2.4s-2.8 1-2.8 2.4 1.25 2.1 2.8 2.4 2.8 1 2.8 2.4-1.25 2.4-2.8 2.4-2.8-1-2.8-2.4"/></svg></div><div class="s-label">Custo operacional</div></div><p class="feat-desc">A migração pro call center inflava custos e gerava insatisfação tanto para o cliente quanto para a operação interna.</p></div>
+      <div class="feat" style="grid-column:9 / 13"><div class="feat-hd"><div class="feat-idx"><b>03</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><rect x="5" y="6" width="22" height="20" rx="2"/><path d="M5 12h22M8.5 9h.01M11.5 9h.01"/></svg></div><div class="s-label">Interface genérica</div></div><p class="feat-desc">A proposta aparecia mas não comunicava segurança. Linguagem técnica, sem contexto do momento financeiro de cada cliente.</p></div>
     </div>
   </section>
 
