@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LAB · MRV Seção 01 — diagramação consolidada</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* tokens reais do case */
+:root{
+  --black:#111111; --white:#fff;
+  --gray-1:#37342F; --gray-2:#585550; --gray-3:#756F67; --gray-4:#B8B2A8; --gray-5:#EBE7E1;
+  --surface-neutral:#F5F5F5;
+  --font:'Plus Jakarta Sans',sans-serif;
+  --max-w:1440px; --px:40px;
+  --t-h2:32px; --t-body:14px; --t-label:13px; --t-num-sm:20px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);color:var(--black);background:var(--white);-webkit-font-smoothing:antialiased}
+.container{max-width:var(--max-w);margin:0 auto;padding:0 var(--px)}
+
+.lab-tag{background:var(--black);color:var(--white);font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:14px var(--px)}
+.lab-tag small{display:block;color:var(--gray-4);font-weight:400;letter-spacing:.03em;text-transform:none;margin-top:4px;font-size:12px}
+
+/* ─────────────────────────────────────────
+   ESQUELETO COMPARTILHADO — header de seção
+   (número quieto + título). Idêntico em toda seção.
+   ───────────────────────────────────────── */
+.ed{padding:96px 0;border-top:1px solid var(--gray-5)}
+.ed-header{display:flex;flex-direction:column;gap:12px;margin-bottom:40px}
+.ed-num{font-family:var(--font);font-size:var(--t-num-sm);font-weight:500;line-height:1;color:var(--gray-3)}
+.ed-title{
+  font-family:var(--font);font-size:var(--t-h2);font-weight:500;line-height:1.14;
+  letter-spacing:.02em;text-transform:uppercase;color:var(--black);
+}
+.ed-body{font-family:var(--font);font-size:var(--t-body);font-weight:400;color:var(--gray-2);line-height:1.75}
+.ed-body strong{color:var(--black);font-weight:600}
+.ed-body+.ed-body{margin-top:16px}
+
+/* ─────────────────────────────────────────
+   MÓDULO DE DADOS — linhas equivalentes, filete,
+   sem caixa. Mesmo módulo, reaproveitável no case.
+   Escala contida: número no mesmo patamar do título.
+   ───────────────────────────────────────── */
+.data-rows{display:flex;flex-direction:column}
+.data-row{
+  display:grid;grid-template-columns:auto 1fr;column-gap:32px;align-items:baseline;
+  padding:22px 0;border-top:1px solid var(--gray-5);
+}
+.data-rows .data-row:first-child{border-top:1px solid var(--black)}
+.data-num{
+  font-size:var(--t-h2);font-weight:500;line-height:1;letter-spacing:-.01em;
+  color:var(--black);font-variant-numeric:tabular-nums;white-space:nowrap;min-width:96px;
+}
+.data-num small{font-size:14px;font-weight:500;color:var(--gray-3);letter-spacing:0;margin-left:2px}
+.data-txt{display:flex;flex-direction:column;gap:4px}
+.data-label{font-size:var(--t-body);font-weight:600;color:var(--gray-1);letter-spacing:-.005em}
+.data-desc{font-size:var(--t-label);font-weight:400;color:var(--gray-3);line-height:1.5;max-width:42ch}
+
+/* VARIANTE A — texto à esquerda, dados à direita (mantém a lógica two-col atual) */
+.vA-grid{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:start}
+.vA-left .ed-header{margin-bottom:32px}
+.vA-content{max-width:520px}
+.vA-right{padding-top:4px}
+
+/* VARIANTE B — título e texto em cima, dados como banda horizontal de 3 colunas equivalentes */
+.vB-head{max-width:760px;margin-bottom:56px}
+.vB-head .ed-header{margin-bottom:24px}
+.vB-band{
+  display:grid;grid-template-columns:repeat(3,1fr);column-gap:32px;
+  border-top:1px solid var(--black);
+}
+.vB-cell{display:flex;flex-direction:column;gap:16px;padding:28px 32px 0 0}
+.vB-cell .data-num{font-size:var(--t-h2)}
+.vB-cell .data-txt{gap:4px}
+</style>
+</head>
+<body>
+
+<!-- ───────── VARIANTE A ───────── -->
+<div class="lab-tag">Variante A — dados ao lado (mantém a lógica two-col atual)<small>mesmo conteúdo · cards de KPI viram 3 linhas equivalentes com filete · escala contida · zero caixa</small></div>
+<section class="ed"><div class="container">
+  <div class="vA-grid">
+    <div class="vA-left">
+      <div class="ed-header">
+        <div class="ed-num">01</div>
+        <h2 class="ed-title">Contexto<br>do produto</h2>
+      </div>
+      <div class="vA-content">
+        <p class="ed-body">Produto digital de pós-compra da MRV, responsável por <strong>cobranças, pagamentos e renegociação de dívidas.</strong></p>
+        <p class="ed-body">Atendia mais de 2,5 milhões de clientes com financiamentos de até 35 anos, gerando <strong>impacto direto em custo operacional e satisfação.</strong></p>
+      </div>
+    </div>
+    <div class="vA-right">
+      <div class="data-rows">
+        <div class="data-row">
+          <div class="data-num">2,5<small>M</small></div>
+          <div class="data-txt"><div class="data-label">Clientes ativos</div><div class="data-desc">Cadastrados no app MRV, com financiamentos de longo prazo.</div></div>
+        </div>
+        <div class="data-row">
+          <div class="data-num">35<small>anos</small></div>
+          <div class="data-txt"><div class="data-label">Tempo médio de contrato</div><div class="data-desc">Financiamentos longos com complexidade jurídica.</div></div>
+        </div>
+        <div class="data-row">
+          <div class="data-num">3</div>
+          <div class="data-txt"><div class="data-label">Territórios de produto</div><div class="data-desc">Renegociação, parcelas e status de obra.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ───────── VARIANTE B ───────── -->
+<div class="lab-tag">Variante B — dados abaixo (banda horizontal de 3 colunas equivalentes)<small>mesmo conteúdo · título e texto em cima · dados lidos como conjunto único sob filete</small></div>
+<section class="ed"><div class="container">
+  <div class="vB-head">
+    <div class="ed-header">
+      <div class="ed-num">01</div>
+      <h2 class="ed-title">Contexto do produto</h2>
+    </div>
+    <p class="ed-body">Produto digital de pós-compra da MRV, responsável por <strong>cobranças, pagamentos e renegociação de dívidas.</strong></p>
+    <p class="ed-body">Atendia mais de 2,5 milhões de clientes com financiamentos de até 35 anos, gerando <strong>impacto direto em custo operacional e satisfação.</strong></p>
+  </div>
+  <div class="vB-band">
+    <div class="vB-cell">
+      <div class="data-num">2,5<small>M</small></div>
+      <div class="data-txt"><div class="data-label">Clientes ativos</div><div class="data-desc">Cadastrados no app MRV, com financiamentos de longo prazo.</div></div>
+    </div>
+    <div class="vB-cell">
+      <div class="data-num">35<small>anos</small></div>
+      <div class="data-txt"><div class="data-label">Tempo médio de contrato</div><div class="data-desc">Financiamentos longos com complexidade jurídica.</div></div>
+    </div>
+    <div class="vB-cell">
+      <div class="data-num">3</div>
+      <div class="data-txt"><div class="data-label">Territórios de produto</div><div class="data-desc">Renegociação, parcelas e status de obra.</div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- referência: como está hoje (cards de KPI) — só para contraste -->
+<div class="lab-tag" style="background:#5b1a1a">Hoje (cards de KPI) — para contraste<small>fundo branco + border + radius + padding = leitura de dashboard</small></div>
+<section class="ed"><div class="container">
+  <div class="vA-grid">
+    <div class="vA-left">
+      <div class="ed-header"><div class="ed-num">01</div><h2 class="ed-title">Contexto<br>do produto</h2></div>
+      <div class="vA-content">
+        <p class="ed-body">Produto digital de pós-compra da MRV, responsável por <strong>cobranças, pagamentos e renegociação de dívidas.</strong></p>
+        <p class="ed-body">Atendia mais de 2,5 milhões de clientes com financiamentos de até 35 anos, gerando <strong>impacto direto em custo operacional e satisfação.</strong></p>
+      </div>
+    </div>
+    <div class="vA-right">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+        <div style="display:flex;flex-direction:column;gap:20px;padding:28px;background:#fff;border:1px solid var(--gray-5);border-radius:8px">
+          <div style="font-size:28px;font-weight:500;color:var(--gray-1);letter-spacing:-.02em">2,5<small style="font-size:1em">M</small></div>
+          <div><div style="font-size:14px;font-weight:600;color:var(--gray-1);margin-bottom:6px">Clientes ativos</div><div style="font-size:13px;color:var(--gray-1);line-height:1.55">Cadastrados no app MRV, com financiamentos de longo prazo.</div></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:20px;padding:28px;background:#fff;border:1px solid var(--gray-5);border-radius:8px">
+          <div style="font-size:28px;font-weight:500;color:var(--gray-1);letter-spacing:-.02em">35<small style="font-size:1em"> anos</small></div>
+          <div><div style="font-size:14px;font-weight:600;color:var(--gray-1);margin-bottom:6px">Tempo médio de contrato</div><div style="font-size:13px;color:var(--gray-1);line-height:1.55">Financiamentos longos com complexidade jurídica.</div></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:20px;padding:28px;background:#fff;border:1px solid var(--gray-5);border-radius:8px">
+          <div style="font-size:28px;font-weight:500;color:var(--gray-1);letter-spacing:-.02em">3</div>
+          <div><div style="font-size:14px;font-weight:600;color:var(--gray-1);margin-bottom:6px">Territórios de produto</div><div style="font-size:13px;color:var(--gray-1);line-height:1.55">Renegociação, parcelas e status de obra.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+</body>
+</html>

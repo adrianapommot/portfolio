@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LAB · MRV — fluxo contínuo (01→04)</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#111111; --white:#fff;
+  --gray-1:#37342F; --gray-2:#585550; --gray-3:#756F67; --gray-4:#B8B2A8; --gray-5:#EBE7E1;
+  --line:#E3E0DA; --chip:#F2F1EE;
+  --accent:#D1F466;        /* lime claro: fundo escuro / dots / % */
+  --accent-dark:#7E9626;   /* lime escuro: legível em fundo claro (ícones em outline) */
+  --font:'Plus Jakarta Sans',sans-serif;
+  --m:64px;   /* margem */
+  --gut:24px; /* gutter */
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);color:var(--black);background:var(--white);-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+
+/* ───────── FLUXO CONTÍNUO ───────── */
+.flow{max-width:calc(1440px + 2*var(--m));margin:0 auto}
+.sec{padding:112px var(--m);border-top:1px solid var(--line)}
+.sec:first-child{border-top:none}
+
+/* grid mestre de 12 colunas (reutilizado por todas as seções) */
+.grid{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--gut);align-items:start}
+.col-left{grid-column:1 / 6}    /* 5 col */
+.col-right{grid-column:7 / 13}  /* 6 col, col6 = gap */
+.col-full{grid-column:1 / 13}
+.stack{display:flex;flex-direction:column}
+
+/* ───────── ESTILOS DE TEXTO (kit, 7) ───────── */
+.s-index{display:flex;align-items:baseline;gap:14px;margin-bottom:16px}
+.s-index b{font-size:17px;font-weight:600;color:var(--black);letter-spacing:.02em}
+.s-index i{width:8px;height:8px;border-radius:50%;background:var(--gray-4);display:block}
+.s-index em{width:28px;height:1.5px;background:var(--line);display:block;font-style:normal}  /* traço = cor das linhas cinzas */
+.feat-idx,.card-idx{display:none}  /* seção 02: itens sem número */
+.s-title{font-size:64px;font-weight:400;line-height:1.1;letter-spacing:-.01em;text-transform:uppercase;color:var(--black);text-wrap:balance}  /* 1.1 para acentos (À, É, Ã) não colarem na linha de cima */
+.s-lead{font-size:26px;font-weight:400;line-height:1.32;letter-spacing:-.01em;color:var(--black);text-wrap:balance}
+.s-lead strong{font-weight:700}
+.s-text{font-size:17px;font-weight:400;line-height:1.62;color:var(--gray-2);text-wrap:pretty}
+.s-text strong{font-weight:700;color:var(--black)}
+.s-text+.s-text{margin-top:20px}
+.s-label{font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--black);text-wrap:balance}
+.s-metric{font-size:40px;font-weight:400;line-height:1;letter-spacing:-.01em;color:var(--black)}
+.s-desc{font-size:15px;line-height:1.55;color:var(--gray-2);text-wrap:balance}
+
+/* ───────── ÍCONES PADRÃO (linha · stroke 1.5 · glifo preto) ───────── */
+/* ÍCONE: só o traço, preto, SEM bolinha/quadrado. Mesmo tamanho em toda a página. */
+.ico{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:28px;height:28px;color:var(--black)}
+.ico svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.data-row .ico,.feat .ico,.card .ico,.kr-chip .ico,.mcard .chip .ico,.sol-chip .ico{width:28px!important;height:28px!important;color:var(--black)!important;border:none!important;background:none!important}
+.data-row .ico svg,.feat .ico svg,.card .ico svg,.kr-chip .ico svg,.mcard .chip .ico svg,.sol-chip .ico svg{width:100%!important;height:100%!important}
+/* remove os fills dos chips antigos — a bolinha do .ico é o visual */
+.kr-chip,.mcard .chip,.sol-chip{background:transparent;border:none;width:auto;height:auto;border-radius:0}
+
+/* ═══ data-list (Contexto) ═══ */
+.sec01{grid-template-rows:auto 1fr;row-gap:36px}   /* título (row1) · corpo+dados (row2) alinhados no topo */
+/* ancorado à direita do grid: maior texto e linhas terminam na margem (64 = igual à esquerda) */
+.data-list{grid-column:7 / 13;width:max-content;max-width:100%;display:flex;flex-direction:column}
+.data-row{display:grid;grid-template-columns:40px 1fr;gap:18px;padding:24px 0;border-top:1px solid var(--line)}
+.data-row:first-child{border-top:none;padding-top:0}
+/* valor + nome na MESMA linha; nome no estilo da descrição (última linha) */
+.data-top{display:flex;align-items:baseline;gap:12px;margin-bottom:10px}
+.data-c .data-val{font-size:25px;font-weight:700;line-height:1;letter-spacing:-.01em;color:var(--black)}
+.data-c .data-name{font-size:15px;font-weight:400;line-height:1.55;color:var(--gray-2)}
+
+/* ═══ 3-up (O Problema) ═══ */
+.feat .feat-hd{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.feat-idx{display:none}  /* seção 02: itens sem número (override) */
+.feat-idx b{font-size:15px;font-weight:600;color:var(--black)}
+.feat-idx em{width:22px;height:1.5px;background:var(--black);display:block}
+.feat .ico{width:28px;height:28px}
+.feat .feat-hd .s-label{line-height:1.3;min-height:0;margin:0}
+.feat-desc{font-size:16px;line-height:1.6;color:var(--gray-2);text-wrap:balance}
+
+/* ═══ card-grid 5-up (Principais desafios) ═══ */
+.cardgrid{grid-column:1 / 13;display:grid;grid-template-columns:repeat(5,1fr);gap:var(--gut);margin-top:4px}
+.card{border:1px solid var(--line);border-radius:6px;padding:22px 22px 26px;display:flex;flex-direction:column}
+.card-hd{display:flex;align-items:center;margin-bottom:16px}
+.card-idx b{font-size:15px;font-weight:600;color:var(--black)}
+.card-idx em{display:block;width:20px;height:1.5px;background:var(--black);margin-top:8px}
+.card .ico{width:24px;height:24px}
+.card .s-label{min-height:34px;margin-bottom:12px;line-height:1.3}
+.card-desc{font-size:14px;line-height:1.55;color:var(--gray-2);text-wrap:balance}
+
+/* ═══ pill badge ═══ */
+.pill{display:inline-flex;align-items:center;padding:11px 22px;border:1px solid var(--line);border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-2);align-self:flex-start}
+
+/* ═══ Key Results card (Objetivo) ═══ */
+.kr{grid-column:7 / 13;border:1px solid var(--line);border-radius:16px;padding:40px 44px;align-self:start}
+.kr-title{font-size:28px;font-weight:500;letter-spacing:-.01em;margin-bottom:8px}
+.kr-row{display:grid;grid-template-columns:40px 1fr;gap:18px;align-items:center;padding:24px 0;border-top:1px solid var(--line)}
+.kr-row:first-of-type{border-top:none}
+.kr-chip{display:flex;align-items:center;justify-content:center}
+.kr-chip .ico{width:22px;height:22px}
+.kr-txt{font-size:17px;line-height:1.5;color:var(--gray-1);text-wrap:pretty}
+
+/* ═══ Estratégia: metric cards ═══ */
+.mrow{grid-column:7 / 13;display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gut)}
+.mcard{border:1px solid var(--line);border-radius:8px;padding:24px 22px;display:flex;flex-direction:column}
+.mcard .chip{display:flex;align-items:center;justify-content:center;margin-bottom:22px}
+.mcard .chip .ico{width:22px;height:22px}
+.mcard .s-metric{margin-bottom:12px}
+.mcard .s-label{margin-bottom:10px}
+.mcard .mdesc{font-size:14px;line-height:1.55;color:var(--gray-2);text-wrap:balance}
+
+/* ═══ Estratégia: solução list (chips lime) ═══ */
+.sol-list{display:flex;flex-direction:column}
+.sol-item{display:grid;grid-template-columns:40px 1fr;gap:18px;align-items:center;padding:17px 0;border-top:1px solid var(--line)}
+.sol-item:first-child{border-top:none;padding-top:0}
+.sol-chip{display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sol-chip .ico{width:20px;height:20px}
+.sol-t{font-size:17px;font-weight:600;color:var(--black);margin-bottom:2px}
+.sol-d{font-size:15px;color:var(--gray-2);line-height:1.45;text-wrap:balance}
+
+/* ═══ showcase de telas originais (browser + phone) ═══ */
+.showcase{grid-column:7 / 13;position:relative;align-self:start}
+.browser{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;box-shadow:0 10px 34px rgba(0,0,0,.07)}
+.browser-bar{height:34px;background:#FAFAF8;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:7px;padding:0 14px}
+.browser-bar b{width:9px;height:9px;border-radius:50%;background:var(--gray-4);display:block}
+.browser-img{height:300px;overflow:hidden}
+.browser-img img{width:100%}
+.phone{position:absolute;right:0;bottom:-26px;width:150px;height:300px;border:7px solid #111;border-radius:28px;overflow:hidden;background:#fff;box-shadow:0 14px 34px rgba(0,0,0,.20)}
+.phone img{width:100%;height:100%;object-fit:cover;object-position:top center}
+
+/* helpers de seção */
+.hd{margin-bottom:48px}
+.hd .s-title{margin-bottom:0}
+.two-rows{grid-template-rows:auto auto;row-gap:56px}
+
+/* ═══════════ 07 · DESDOBRAMENTO PÓS-PILOTO ═══════════ */
+.s07-sprints{display:flex;flex-direction:column;gap:20px;margin-top:44px}
+.sprint-card{border:1px solid var(--line);border-radius:10px;padding:26px 28px;display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:stretch}
+.sprint-meta{display:flex;flex-direction:column}
+.sprint-n{font-size:20px;font-weight:600;line-height:1;color:var(--black)}
+.sprint-tag{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gray-3);margin-top:6px}
+.sprint-chip{display:none}  /* ícones removidos desta tela */
+.sprint-chip .ico{width:24px;height:24px}
+.sprint-title{font-size:17px;font-weight:700;color:var(--black);margin-bottom:10px}
+.sprint-desc{font-size:15px;line-height:1.55;color:var(--gray-2);text-wrap:pretty}
+
+/* painel showcase — bg cinza estende até o traço (borda esquerda do painel) */
+/* painel recebe a composição como imagem (background); se faltar o arquivo, fica só o cinza limpo (sem ícone quebrado).
+   align-self:stretch → o retângulo acompanha a altura da coluna esquerda (topo e base alinhados, sem flutuar). */
+.s07-panel{align-self:stretch;border-radius:16px;min-height:560px;background:#F6F5F2 url("img/mrv/desdob-mockups.png") center/contain no-repeat}
+.s07-phones{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2}
+.s07-phone{width:208px;border:8px solid #111;border-radius:36px;overflow:hidden;background:#fff;box-shadow:0 18px 40px rgba(0,0,0,.15)}
+.s07-phone img{width:100%;height:448px;object-fit:cover;object-position:top center;display:block}
+/* retos (sem rotação): borda vertical → setas conectam limpas em qualquer altura */
+.s07-phone.a{z-index:3}
+.s07-phone.b{margin-left:-40px;margin-top:34px;z-index:2}
+.callout{position:absolute;max-width:172px;z-index:1}
+.co-row{display:flex;align-items:center;gap:9px;margin-bottom:7px}
+.callout .co-dot{width:7px;height:7px;border-radius:50%;background:var(--gray-3);flex-shrink:0}
+.callout .co-t{font-size:13px;font-weight:700;color:var(--black)}
+.callout .co-d{font-size:12px;line-height:1.45;color:var(--gray-2);text-wrap:pretty}
+/* linha no nível do label; longa, passa por trás dos celulares (z-index maior), que cobrem a sobra */
+.callout.left::after{content:"";position:absolute;top:7px;left:calc(100% + 12px);width:240px;border-top:1.5px dashed var(--gray-4)}
+.callout.right::after{content:"";position:absolute;top:7px;right:calc(100% + 12px);width:240px;border-top:1.5px dashed var(--gray-4)}
+
+/* faixa de impacto */
+.s07-impact{margin-top:52px;border:1px solid var(--line);border-radius:16px;padding:34px 40px;display:grid;grid-template-columns:auto repeat(4,1fr);gap:36px;align-items:center}
+.imp-label{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-3);line-height:1.45;max-width:130px}
+.imp-item{display:flex;align-items:center;gap:16px}
+.imp-chip{display:none}  /* ícones removidos desta tela */
+.imp-chip .ico{width:24px;height:24px}
+.imp-num{font-size:30px;font-weight:600;line-height:1;letter-spacing:-.01em;color:var(--black)}
+.imp-lbl{font-size:13px;line-height:1.4;color:var(--gray-2);margin-top:7px;text-wrap:balance}
+
+/* ═══════════ APRENDIZADOS (dark) ═══════════ */
+.sec--dark{background:#111;color:#fff;border-top:none}
+.sec--dark .s-index b{color:var(--accent)}
+.sec--dark .s-index em{background:rgba(255,255,255,.28)}
+.sec--dark .s-title{color:#fff}
+.apr-intro{font-size:17px;line-height:1.62;color:rgba(255,255,255,.6);max-width:42ch;margin-top:30px}
+.apr-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:72px}
+.apr-col{padding:0 52px;border-left:1px solid rgba(255,255,255,.13)}
+.apr-col:first-child{padding-left:0;border-left:none}
+.apr-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);margin-bottom:30px}
+.apr-t{font-size:25px;font-weight:600;line-height:1.18;letter-spacing:-.01em;color:#fff;text-wrap:balance}
+.apr-rule{width:36px;height:1.5px;background:rgba(255,255,255,.28);margin:24px 0}
+.apr-d{font-size:15px;line-height:1.6;color:rgba(255,255,255,.55);text-wrap:pretty}
+
+/* ═══════════ HEADER / HERO ═══════════ */
+.hero{position:relative;overflow:hidden;padding-top:72px;padding-bottom:0;background:#FAFAFA}  /* faixa fica no pé da seção; ilustração some atrás dela */
+.hero-grid{position:relative;z-index:1;align-items:stretch;min-height:560px}
+.hero-left{grid-column:1 / 6}
+.hero-back{display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-3);margin-bottom:44px}
+.hero-back svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.hero-logo{margin-bottom:30px}
+.hero-logo img{height:30px;width:auto;display:block}
+.hero-title{font-size:clamp(54px,5.6vw,74px);font-weight:400;line-height:1.04;letter-spacing:-.015em;text-transform:uppercase;color:var(--black);margin-bottom:34px}
+.hero-intro{font-size:17px;line-height:1.72;color:var(--gray-2);max-width:46ch;text-wrap:pretty}
+.hero-intro strong{font-weight:700;color:var(--black)}
+/* ilustração maior, SEM caixa — direto sobre o fundo, alinhada à direita (fiel à referência) */
+/* área com a MESMA proporção da imagem (1536x1024) → cover não corta nada (curva inteira).
+   ancorada pela base atrás da faixa; topo sangra perto do topo da seção. */
+.hero-art{position:absolute;right:0;bottom:80px;width:74%;aspect-ratio:1536 / 1024;z-index:0;background:#FAFAFA url("img/mrv/hero-iso.png") center / cover no-repeat}
+/* barra de metadados escura */
+.hero-meta{position:relative;z-index:1;margin-top:44px;background:#111;border-radius:14px;display:grid;grid-template-columns:1fr 1.05fr 0.9fr 1.85fr;padding:24px 0}
+.hm-item{display:flex;align-items:center;gap:18px;padding:0 36px;border-right:1px solid rgba(255,255,255,.1)}
+.hm-item:last-child{border-right:none}
+.hm-chip{width:26px;height:26px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.hm-chip svg{width:100%;height:100%;fill:none;stroke:rgba(255,255,255,.9);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.hm-label{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:6px}
+.hm-value{font-size:15px;font-weight:500;color:#fff;line-height:1.3}
+/* ═══ FLUXO DESKTOP / FUNDAÇÃO VISUAL — master-detail viewer ═══ */
+.md-viewer{display:grid;grid-template-columns:236px 1fr;gap:40px;align-items:start;margin-top:44px}
+.md-thumbs{display:flex;flex-direction:column;gap:14px;position:sticky;top:32px}
+.md-thumb{all:unset;display:block;aspect-ratio:16/10;border:1px solid var(--line);border-radius:8px;overflow:hidden;cursor:pointer;background:var(--chip);transition:border-color .2s,box-shadow .2s}
+.md-thumb:hover{border-color:var(--gray-3)}
+.md-thumb[aria-selected="true"]{border-color:var(--black);box-shadow:0 0 0 1px var(--black)}
+.md-thumb img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.md-stage{display:flex;flex-direction:column;min-width:0}
+.md-preview{border:1px solid var(--line);border-radius:12px;overflow-y:auto;overflow-x:hidden;height:600px;background:var(--chip);scrollbar-width:thin}
+.md-preview img{width:100%;height:auto;display:block}
+.md-caption{margin-bottom:20px;padding:18px 22px;border-left:3px solid var(--accent-dark);background:#fff}
+.md-caption .md-num{display:block;margin-bottom:6px;color:var(--gray-3)}
+.md-caption .md-title{margin-bottom:8px}
+.md-caption .md-desc{max-width:660px}
+.overview-block{margin-top:96px}
+.fw-img{margin-top:28px;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.fw-img img{width:100%;display:block}
+
+/* ═══ 08 · EM MOVIMENTO (vídeos) ═══ */
+.em-grid{display:grid;grid-template-columns:repeat(3,1fr);column-gap:24px;align-items:start;margin-top:52px}
+.em-frame{aspect-ratio:16 / 9;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#111}
+.em-frame iframe{width:100%;height:100%;border:0;display:block}
+.em-body{padding-top:18px}
+.em-title{font-size:18px;font-weight:600;letter-spacing:-.01em;margin-bottom:6px;color:var(--black)}
+.em-desc{font-size:14px;line-height:1.6;color:var(--gray-2);text-wrap:pretty}
+
+/* ═══ 05 · A SOLUÇÃO — phone flow (dark) ═══ */
+/* grid com LINHAS compartilhadas: %, nome, descrição e frame alinhados entre todas as colunas */
+.sol-flow{display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:auto auto auto 1fr;column-gap:18px;margin-top:52px}
+.sol-phone{display:contents}
+.sol-flow .data-val{grid-row:1;margin-bottom:6px;align-self:end}
+.sol-flow .s-label{grid-row:2;margin-bottom:8px}
+.sol-flow .s-desc{grid-row:3;margin-bottom:18px}
+.sol-flow .sp-frame{grid-row:4}
+.sp-frame{aspect-ratio:9 / 18.5;border-radius:16px;border:1.5px solid rgba(255,255,255,.1);overflow:hidden;background:#1a1a19}
+.sp-frame img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.sp-frame.is-hero{border-color:var(--accent);box-shadow:0 0 26px rgba(209,244,102,.12)}
+.sec--dark .data-val{color:var(--accent)}
+.sec--dark .s-label{color:#fff}
+.sec--dark .s-desc{color:rgba(255,255,255,.5)}
+
+/* ════════════════════════════════════════════════
+   SISTEMA TIPOGRÁFICO CONSOLIDADO — 7 estilos
+   Regras agrupadas: cada papel lista TODAS as classes que o usam
+   (vencem por ordem de cascata). Cor permanece contextual.
+   ════════════════════════════════════════════════ */
+.hero-title{font-size:clamp(54px,5.6vw,74px);font-weight:400;line-height:1.04;letter-spacing:-.02em;text-transform:uppercase}                                                              /* 1 · DISPLAY */
+.s-title{font-size:clamp(44px,4.8vw,60px);font-weight:400;line-height:1.08;letter-spacing:-.015em;text-transform:uppercase}                                                                 /* 2 · SECTION TITLE */
+.s-text,.hero-intro,.apr-intro,.s-lead,.apr-t,.kr-title{font-size:17px;font-weight:400;line-height:1.7;letter-spacing:-.003em;text-transform:none}                                           /* 3 · BODY LARGE */
+.s-desc,.sol-d,.sprint-desc,.apr-d,.hm-value,.feat-desc,.card-desc,.mdesc,.co-d,.imp-lbl,.kr-txt,.md-desc{font-size:15px;font-weight:400;line-height:1.6;letter-spacing:0;text-transform:none}      /* 4 · BODY */
+.s-metric,.imp-num,.data-val{font-size:32px;font-weight:500;line-height:1;letter-spacing:-.02em;text-transform:none}                                                                        /* 5 · METRIC */
+.s-label,.pill,.hm-label,.sprint-tag,.imp-label,.hero-back,.s-index .lbl,.sol-t,.sprint-title,.co-t,.data-name,.md-title{font-size:12px;font-weight:600;line-height:1.3;letter-spacing:.08em;text-transform:uppercase} /* 6 · LABEL */
+.s-index b,.sprint-n,.feat-idx b,.card-idx b,.md-num{font-size:16px;font-weight:600;letter-spacing:.02em;text-transform:none}                                                                       /* 7 · EYEBROW */
+</style>
+</head>
+<body>
+<main class="flow">
+
+  <!-- ═══ HEADER / HERO ═══ -->
+  <section class="sec hero">
+    <div class="hero-art" role="img" aria-label="Ilustração isométrica do ecossistema financeiro MRV"></div>
+    <div class="grid hero-grid">
+      <div class="hero-left">
+        <a class="hero-back"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/><path d="M5 8h7"/></svg>Todos os projetos</a>
+        <div class="hero-logo"><img src="img/mrv/logo-mrv.png" alt="MRV"></div>
+        <h1 class="hero-title">MRV<br>Ecossistema<br>Financeiro</h1>
+        <p class="hero-intro">Redesenhei o autoatendimento financeiro da maior construtora da América Latina, transformando um fluxo de renegociação com alta taxa de abandono em um canal digital com <strong>27% de engajamento</strong> e <strong>14% de conversão autônoma</strong> no piloto.</p>
+      </div>
+    </div>
+    <div class="hero-meta">
+      <div class="hm-item"><div class="hm-chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.5 3-5.5 7-5.5s7 2 7 5.5"/></svg></div><div><div class="hm-label">Função</div><div class="hm-value">Design Lead</div></div></div>
+      <div class="hm-item"><div class="hm-chip"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/></svg></div><div><div class="hm-label">Empresa</div><div class="hm-value">D3 · cliente MRV</div></div></div>
+      <div class="hm-item"><div class="hm-chip"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 9h16M8 3v4M16 3v4"/></svg></div><div><div class="hm-label">Período</div><div class="hm-value">2019 – 2020</div></div></div>
+      <div class="hm-item"><div class="hm-chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.2"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3"/></svg></div><div><div class="hm-label">Foco</div><div class="hm-value">Product Design, Microinteração, Design System</div></div></div>
+    </div>
+  </section>
+
+  <!-- ═══ 01 · CONTEXTO DO PRODUTO ═══ -->
+  <section class="sec grid sec01">
+    <div style="grid-column:1 / 6;grid-row:1">
+      <div class="s-index"><b>01</b><em></em></div>
+      <h2 class="s-title">Contexto<br>do produto</h2>
+    </div>
+    <div style="grid-column:1 / 6;grid-row:2">
+      <p class="s-text">Produto digital de pós-compra da MRV, responsável por <strong>cobranças, pagamentos e renegociação de dívidas.</strong></p>
+      <p class="s-text">Atendia mais de 2,5 milhões de clientes com financiamentos de até 35 anos, gerando <strong>impacto direto em custo operacional e satisfação.</strong></p>
+    </div>
+    <div class="data-list" style="grid-row:2">
+      <div class="data-row"><div class="ico"><svg viewBox="0 0 32 32"><circle cx="16" cy="11" r="5"/><path d="M7 27c0-5 4-8 9-8s9 3 9 8"/></svg></div><div class="data-c"><div class="data-top"><span class="data-val">2,5M</span><span class="data-name">Clientes ativos</span></div><div class="s-desc">Cadastrados no app MRV, com financiamentos de longo prazo.</div></div></div>
+      <div class="data-row"><div class="ico"><svg viewBox="0 0 32 32"><rect x="5" y="7" width="22" height="20" rx="2"/><path d="M5 13h22M11 4v6M21 4v6"/></svg></div><div class="data-c"><div class="data-top"><span class="data-val">35 anos</span><span class="data-name">Tempo médio de contrato</span></div><div class="s-desc">Financiamentos longos com complexidade jurídica.</div></div></div>
+      <div class="data-row"><div class="ico"><svg viewBox="0 0 32 32"><path d="M12 6 4 9v17l8-3 8 3 8-3V6l-8 3-8-3z"/><path d="M12 6v17M20 9v17"/></svg></div><div class="data-c"><div class="data-top"><span class="data-val">3 domínios</span><span class="data-name">Territórios de produto</span></div><div class="s-desc">Renegociação, parcelas e status de obra.</div></div></div>
+    </div>
+  </section>
+
+  <!-- ═══ 02 · O PROBLEMA ═══ -->
+  <section class="sec">
+    <div class="hd">
+      <div class="s-index"><b>02</b><em></em></div>
+      <h2 class="s-title" style="margin:14px 0 24px">O problema</h2>
+      <p class="s-lead" style="max-width:760px">A renegociação digital existia, mas a conversão era baixa e o cliente sempre terminava no <strong>call center.</strong></p>
+    </div>
+    <div class="grid">
+      <div class="feat" style="grid-column:1 / 5"><div class="feat-hd"><div class="feat-idx"><b>01</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><path d="M13 28H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h6"/><path d="M21 22l6-6-6-6M27 16H13"/></svg></div><div class="s-label">Abandono no fluxo</div></div><p class="feat-desc">Os clientes iniciavam o processo no app mas não completavam o acordo. Cada desistência alimentava o call center.</p></div>
+      <div class="feat" style="grid-column:5 / 9"><div class="feat-hd"><div class="feat-idx"><b>02</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="12"/><path d="M16 9v14M19 12.5c0-1.5-1.3-2.5-3-2.5s-3 1-3 2.5 1.3 2.2 3 2.5 3 1 3 2.5-1.3 2.5-3 2.5-3-1-3-2.5"/></svg></div><div class="s-label">Custo operacional</div></div><p class="feat-desc">A migração pro call center inflava custos e gerava insatisfação tanto para o cliente quanto para a operação interna.</p></div>
+      <div class="feat" style="grid-column:9 / 13"><div class="feat-hd"><div class="feat-idx"><b>03</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><rect x="4" y="6" width="24" height="20" rx="2"/><path d="M4 12h24M7.5 9h.01M10.5 9h.01"/></svg></div><div class="s-label">Interface genérica</div></div><p class="feat-desc">A proposta aparecia mas não comunicava segurança. Linguagem técnica, sem contexto do momento financeiro de cada cliente.</p></div>
+    </div>
+  </section>
+
+  <!-- ═══ 02 · PRINCIPAIS DESAFIOS ═══ -->
+  <section class="sec">
+    <div class="hd">
+      <div class="s-index"><b>02</b><em></em></div>
+      <h2 class="s-title" style="margin:14px 0 18px">Principais desafios</h2>
+      <p class="s-text" style="max-width:560px">Identificamos 10 pontos críticos que impediam a conversão e aumentavam custos operacionais.</p>
+    </div>
+    <div class="grid">
+      <div class="cardgrid">
+        <div class="card"><div class="card-hd"><div class="card-idx"><b>01</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><path d="M13 28H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h6"/><path d="M21 22l6-6-6-6M27 16H13"/></svg></div></div><div class="s-label">12 pontos críticos de abandono</div><p class="card-desc">O cliente chegava à proposta mas desistia. Sem indicadores de progresso, a incerteza gerava desistência em 12 pontos do fluxo.</p></div>
+        <div class="card"><div class="card-hd"><div class="card-idx"><b>02</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><path d="M16 28s10-5 10-13V7L16 4 6 7v8c0 8 10 13 10 13z"/></svg></div></div><div class="s-label">Confiança fragilizada pela experiência</div><p class="card-desc">A interface não transmitia segurança para uma decisão financeira de longo prazo. Faltavam sinais de que o processo funcionava.</p></div>
+        <div class="card"><div class="card-hd"><div class="card-idx"><b>03</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><path d="M4 22 12 14l5 5L28 8"/><path d="M22 8h6v6"/></svg></div></div><div class="s-label">Custo operacional crescente</div><p class="card-desc">Cada erro no autoatendimento gerava uma ligação ao call center. Duração média de 8 minutos por chamada, com volume crescente.</p></div>
+        <div class="card"><div class="card-hd"><div class="card-idx"><b>04</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><path d="M4 4 28 28M9 17c4-3 9-3 13 0M5 12c2-1.5 4-2.5 6-2.8M14 7c5-.4 10 1.4 13 4.6"/><circle cx="16" cy="23" r="1"/></svg></div></div><div class="s-label">Termos técnicos como barreira</div><p class="card-desc">Jargão financeiro dominava a interface. Mais de 40 termos como "encargo moratório" bloqueavam a ação do cliente.</p></div>
+        <div class="card"><div class="card-hd"><div class="card-idx"><b>05</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><rect x="6" y="14" width="20" height="13" rx="2"/><path d="M10 14V9a6 6 0 0 1 12 0v5"/></svg></div></div><div class="s-label">Destravar ação com clareza e simplicidade</div><p class="card-desc">Simplificar a decisão sem remover informação financeira obrigatória. Menos não podia significar inseguro.</p></div>
+        <div class="card"><div class="card-hd"><div class="card-idx"><b>06</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><path d="M4 16s5-9 12-9 12 9 12 9-5 9-12 9c-2 0-4-.6-5.7-1.5M4 4l24 24"/></svg></div></div><div class="s-label">Falta de visão do progresso</div><p class="card-desc">O cliente não sabia em que etapa estava nem quanto faltava para a aprovação. Isso aumentava ansiedade e abandono.</p></div>
+        <div class="card"><div class="card-hd"><div class="card-idx"><b>07</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><path d="M27 19a2 2 0 0 1-2 2H10l-5 5V8a2 2 0 0 1 2-2h18a2 2 0 0 1 2 2v11z"/><path d="M11 13h10M11 17h6"/></svg></div></div><div class="s-label">Comunicação pouco humana</div><p class="card-desc">Textos frios e institucionais dificultavam a conexão. A experiência não transmitia acolhimento durante a jornada.</p></div>
+        <div class="card"><div class="card-hd"><div class="card-idx"><b>08</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><rect x="9" y="4" width="14" height="24" rx="3"/><path d="M14 24h4"/></svg></div></div><div class="s-label">Experiência não mobile-first</div><p class="card-desc">O fluxo não foi pensado para o contexto mobile. Campos extensos e informações densas quebravam a fluidez.</p></div>
+        <div class="card"><div class="card-hd"><div class="card-idx"><b>09</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><path d="M8 4h12l6 6v18H8z"/><path d="M19 4v7h7M12 17h8M12 21h8"/></svg></div></div><div class="s-label">Informações densas e desorganizadas</div><p class="card-desc">Dados financeiros apareciam de forma fragmentada. O cliente precisava interpretar muito para entender o essencial.</p></div>
+        <div class="card"><div class="card-hd"><div class="card-idx"><b>10</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><path d="M6 18v-2a10 10 0 0 1 20 0v2"/><rect x="4" y="18" width="5" height="9" rx="2"/><rect x="23" y="18" width="5" height="9" rx="2"/><path d="M26 27a6 6 0 0 1-6 4h-2"/></svg></div></div><div class="s-label">Dependência do call center</div><p class="card-desc">Sem uma jornada autônoma e confiável, o call center se tornou o caminho mais fácil para o cliente e o mais caro para a operação.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 03 · OBJETIVO ═══ -->
+  <section class="sec grid">
+    <div class="col-left stack">
+      <div class="s-index"><b>03</b><em></em></div>
+      <h2 class="s-title">Objetivo</h2>
+      <div class="pill" style="margin-top:34px">Período do piloto - 2 sprints</div>
+      <div style="margin-top:40px">
+        <p class="s-text"><strong>Aumentar renegociações via autoatendimento sem criar novas etapas ou dependência de atendimento humano.</strong></p>
+        <p class="s-text">O desafio não era criar funcionalidades novas, mas destravar a decisão do usuário dentro de um fluxo financeiro sensível, preservando clareza, confiança e ritmo de ação no percurso.</p>
+      </div>
+    </div>
+    <div class="kr">
+      <div class="kr-title">Key Results</div>
+      <div class="kr-row"><div class="kr-chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M4 22 12 14l5 5L28 8"/><path d="M22 8h6v6"/></svg></div></div><div class="kr-txt">Aumentar em 10 a 20% a visualização de propostas elegíveis.</div></div>
+      <div class="kr-row"><div class="kr-chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M7 7l5 18 3-8 8-3z"/><path d="M19 19l6 6"/></svg></div></div><div class="kr-txt">Aumentar em 8 a 15% o clique e a escolha de propostas.</div></div>
+      <div class="kr-row"><div class="kr-chip"><div class="ico"><svg viewBox="0 0 32 32"><rect x="4" y="8" width="24" height="16" rx="2"/><path d="M4 13h24M8 19h6"/></svg></div></div><div class="kr-txt">Manter ou aumentar pagamentos sem elevar fricção no processo, na faixa entre 3 e 8%.</div></div>
+      <div class="kr-row"><div class="kr-chip"><div class="ico"><svg viewBox="0 0 32 32"><circle cx="11" cy="12" r="4"/><circle cx="22" cy="13" r="3"/><path d="M4 26c0-4 3-6 7-6s7 2 7 6M19 21c4 0 7 2 7 5"/></svg></div></div><div class="kr-txt">Reduzir contatos no público elegível entre 5 e 12%.</div></div>
+    </div>
+  </section>
+
+  <!-- ═══ 04 · ESTRATÉGIA DE DESIGN ═══ -->
+  <section class="sec grid two-rows">
+    <div class="col-left stack" style="grid-row:1">
+      <div class="s-index"><b>04</b><em></em></div>
+      <h2 class="s-title" style="margin-top:8px">Estratégia<br>de design</h2>
+      <p class="s-text" style="margin-top:28px">A acessibilidade cognitiva orientou cada decisão. Combinei microinterações com copywriting de baixa carga cognitiva e hierarquia visual que cria sinais claros de oportunidade e progresso dentro do fluxo financeiro.</p>
+    </div>
+    <div class="mrow" style="grid-row:1">
+      <div class="mcard"><div class="chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M8 4h12l6 6v18H8z"/><path d="M19 4v7h7M12 18h8M12 22h6"/></svg></div></div><div class="s-metric">40+</div><div class="s-label">Termos reescritos</div><div class="mdesc">Jargão financeiro traduzido em linguagem acessível e validada em testes.</div></div>
+      <div class="mcard"><div class="chip"><div class="ico"><svg viewBox="0 0 32 32"><rect x="5" y="5" width="9" height="9" rx="1.5"/><rect x="18" y="5" width="9" height="9" rx="1.5"/><rect x="5" y="18" width="9" height="9" rx="1.5"/><rect x="18" y="18" width="9" height="9" rx="1.5"/></svg></div></div><div class="s-metric">47</div><div class="s-label">Estados mapeados</div><div class="mdesc">Componentes documentados com cor, animação e copy contextual.</div></div>
+      <div class="mcard"><div class="chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M5 27V5M27 27H5"/><rect x="9" y="16" width="4" height="7"/><rect x="16" y="11" width="4" height="12"/><rect x="23" y="7" width="4" height="16"/></svg></div></div><div class="s-metric">5</div><div class="s-label">Dashboards adaptativos</div><div class="mdesc">Cada board sinalizado e orientado pelo estado financeiro do cliente.</div></div>
+    </div>
+    <div class="col-left stack" style="grid-row:2">
+      <div class="pill">A solução priorizou</div>
+      <div class="sol-list" style="margin-top:26px">
+        <div class="sol-item"><div class="sol-chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M9 23 23 9M13 9h10v10"/></svg></div></div><div><div class="sol-t">Redução de complexidade</div><div class="sol-d">para destravar o primeiro passo</div></div></div>
+        <div class="sol-item"><div class="sol-chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M4 16s5-9 12-9 12 9 12 9-5 9-12 9S4 16 4 16z"/><circle cx="16" cy="16" r="3.5"/></svg></div></div><div><div class="sol-t">Visibilidade automatizada</div><div class="sol-d">de propostas dentro do ecossistema</div></div></div>
+        <div class="sol-item"><div class="sol-chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M16 5 4 11l12 6 12-6-12-6z"/><path d="M4 17l12 6 12-6"/></svg></div></div><div><div class="sol-t">Hierarquia visual</div><div class="sol-d">que comunica escala e consequências</div></div></div>
+        <div class="sol-item"><div class="sol-chip"><div class="ico"><svg viewBox="0 0 32 32"><circle cx="16" cy="8" r="3.5"/><circle cx="8" cy="23" r="3.5"/><circle cx="24" cy="23" r="3.5"/><path d="M16 11v6M16 17l-6 4M16 17l6 4"/></svg></div></div><div><div class="sol-t">Manutenção da estrutura existente</div><div class="sol-d">no fluxo</div></div></div>
+      </div>
+    </div>
+    <div class="showcase" style="grid-row:2">
+      <div class="browser"><div class="browser-bar"><b></b><b></b><b></b></div><div class="browser-img"><img src="img/mrv/desktop-extrato-pagos.webp" alt="Tela original do produto MRV (desktop)"></div></div>
+      <div class="phone"><img src="img/mrv/mobile-jornada-46.webp" alt="Tela original do produto MRV (mobile)"></div>
+    </div>
+  </section>
+
+  <!-- ═══ 05 · A SOLUÇÃO ═══ -->
+  <section class="sec sec--dark">
+    <div class="s-index"><b>05</b><em></em></div>
+    <h2 class="s-title">A solução</h2>
+    <p class="apr-intro" style="max-width:62ch;margin-top:24px">A interface muda de tom conforme a situação financeira do cliente evolui. Cinco estados progressivos, dos 46% aos 100% da jornada, cada um com hierarquia, copy e microinterações próprias.</p>
+    <div class="sol-flow">
+      <div class="sol-phone">
+        <div class="data-val">46%</div><div class="s-label">Sem pendências</div><div class="s-desc sp-desc">Dashboard positivo, progresso em destaque</div>
+        <div class="sp-frame"><img src="img/mrv/mobile-jornada-46.webp" alt="Estado 46%"></div>
+      </div>
+      <div class="sol-phone">
+        <div class="data-val">50%</div><div class="s-label">Parcelas crescendo</div><div class="s-desc sp-desc">Alertas gentis, tom de suporte</div>
+        <div class="sp-frame"><img src="img/mrv/mobile-jornada-50.webp" alt="Estado 50%"></div>
+      </div>
+      <div class="sol-phone">
+        <div class="data-val">70%</div><div class="s-label">Juros acumulados</div><div class="s-desc sp-desc">Transparência, proposta visível</div>
+        <div class="sp-frame"><img src="img/mrv/mobile-jornada-70.webp" alt="Estado 70%"></div>
+      </div>
+      <div class="sol-phone">
+        <div class="data-val">70%+</div><div class="s-label">Gatilho ativo</div><div class="s-desc sp-desc">3 cenários de acordo, cliente escolhe</div>
+        <div class="sp-frame is-hero"><img src="img/mrv/mobile-jornada-70-atraso.webp" alt="Estado 70%+"></div>
+      </div>
+      <div class="sol-phone">
+        <div class="data-val">100%</div><div class="s-label">Quitação</div><div class="s-desc sp-desc">Celebração, extrato de conquista</div>
+        <div class="sp-frame"><img src="img/mrv/mobile-jornada-100.webp" alt="Estado 100%"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FLUXO DESKTOP ═══ -->
+  <section class="sec">
+    <h2 class="s-title">Fluxo desktop</h2>
+    <p class="s-text" style="max-width:62ch;margin-top:20px">O extrato financeiro foi redesenhado com filtros por categoria (MRV, Cartório, Banco), estados claros para boletos pagos e pendentes, e <strong>ações diretas que eliminam ambiguidade</strong>. O percurso devolve a confiança e fecha o acordo com autonomia.</p>
+    <div class="md-viewer" data-viewer="fluxo">
+      <div class="md-thumbs" role="tablist" aria-label="Telas do fluxo desktop">
+        <button class="md-thumb" data-id="0" aria-selected="true" role="tab" aria-label="Boletos pagos"><img src="img/mrv/desktop-extrato-pagos.webp" alt="Extrato de parcelas pagas no app MRV"></button>
+        <button class="md-thumb" data-id="1" role="tab" aria-label="Extrato cartório"><img src="img/mrv/desktop-extrato-cartorio.webp" alt="Extrato de parcelas em cartório no app MRV"></button>
+        <button class="md-thumb" data-id="2" role="tab" aria-label="Boletos pendentes"><img src="img/mrv/desktop-extrato-boletos.webp" alt="Extrato de boletos a vencer no app MRV"></button>
+        <button class="md-thumb" data-id="3" role="tab" aria-label="Detalhamento bancário"><img src="img/mrv/desktop-extrato-banco.webp" alt="Extrato bancário consolidado no app MRV"></button>
+      </div>
+      <div class="md-stage">
+        <div class="md-caption"><span class="md-num">01</span><div class="md-title">Boletos pagos</div><p class="md-desc">Filtro por categoria com estados visuais claros para pagamentos já confirmados. Hierarquia reduzida para não competir com ações pendentes.</p></div>
+        <div class="md-preview" role="tabpanel"><img class="md-img" src="img/mrv/desktop-extrato-pagos.webp" alt="Extrato: boletos pagos"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FUNDAÇÃO VISUAL ═══ -->
+  <section class="sec">
+    <h2 class="s-title">Fundação visual</h2>
+    <p class="s-text" style="max-width:62ch;margin-top:20px">Cada padrão documentado como <strong>design tokens e componentes escaláveis</strong>: paleta semântica, escala tipográfica, sistema de espaçamento, shadow e opacidade. A base garantiu consistência entre os três domínios do produto.</p>
+    <div class="md-viewer" data-viewer="foundation">
+      <div class="md-thumbs" role="tablist" aria-label="Fundação visual: tokens">
+        <button class="md-thumb" data-id="0" aria-selected="true" role="tab" aria-label="Brand colors"><img src="img/mrv/tokens-brand-colors.webp" alt="Tokens de cores de marca do design system MRV"></button>
+        <button class="md-thumb" data-id="1" role="tab" aria-label="Support colors"><img src="img/mrv/tokens-support.webp" alt="Tokens de cores de suporte do design system MRV"></button>
+        <button class="md-thumb" data-id="2" role="tab" aria-label="Typography"><img src="img/mrv/tokens-typography.webp" alt="Tokens de tipografia do design system MRV"></button>
+        <button class="md-thumb" data-id="3" role="tab" aria-label="Spacing"><img src="img/mrv/tokens-spacing.webp" alt="Tokens de espaçamento do design system MRV"></button>
+      </div>
+      <div class="md-stage">
+        <div class="md-caption"><span class="md-num">01</span><div class="md-title">Brand colors</div><p class="md-desc">Paleta principal com cores semânticas e tons de marca aplicados por estado e hierarquia.</p></div>
+        <div class="md-preview" role="tabpanel"><img class="md-img" src="img/mrv/tokens-brand-colors.webp" alt="Brand colors"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 07 · DESDOBRAMENTO PÓS-PILOTO ═══ -->
+  <section class="sec">
+    <div class="grid">
+      <div class="s07-left" style="grid-column:1 / 5">
+        <div class="s-index"><b>07</b><em></em></div>
+        <h2 class="s-title">Do piloto<br>à escala</h2>
+        <p class="s-text" style="margin-top:28px;max-width:42ch">Após validar o impacto no piloto, evoluímos o fluxo e os componentes para aumentar segurança, consistência e eficiência em todo o ecossistema.</p>
+        <div class="s07-sprints">
+          <div class="sprint-card">
+            <div class="sprint-meta">
+              <div><div class="sprint-n">01</div><div class="sprint-tag">Sprint 1</div></div>
+              <div class="sprint-chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M5 7a2 2 0 0 1 2-2h18a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H13l-6 5v-5H7a2 2 0 0 1-2-2z"/><path d="M11 11h10M11 15h6"/></svg></div></div>
+            </div>
+            <div class="sprint-body">
+              <div class="sprint-title">Comunicação e elegibilidade</div>
+              <p class="sprint-desc">Ajustes de comunicação no fluxo e regras de elegibilidade para reduzir insegurança. Integração com régua de comunicação e propostas de acordos.</p>
+            </div>
+          </div>
+          <div class="sprint-card">
+            <div class="sprint-meta">
+              <div><div class="sprint-n">02</div><div class="sprint-tag">Sprint 2</div></div>
+              <div class="sprint-chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M16 4 4 11l12 7 12-7-12-7z"/><path d="M4 17l12 7 12-7M4 22.5l12 7 12-7"/></svg></div></div>
+            </div>
+            <div class="sprint-body">
+              <div class="sprint-title">Escalabilidade e padronização</div>
+              <p class="sprint-desc">Expansão do componente para outros pontos do portal. Padronização da solução para reuso entre squads. Campanha especial e educação financeira.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- composição (celulares + callouts + setas) entra como UMA imagem exportada do design -->
+      <div class="s07-panel" style="grid-column:5 / 13"></div>
+    </div>
+
+    <div class="s07-impact">
+      <div class="imp-label">Impacto do desdobramento</div>
+      <div class="imp-item"><div class="imp-chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M16 4 6 8v7c0 6 4 10 10 13 6-3 10-7 10-13V8l-10-4z"/><path d="M12 16l3 3 6-6"/></svg></div></div><div><div class="imp-num">-34%</div><div class="imp-lbl">Redução de dúvidas sobre elegibilidade</div></div></div>
+      <div class="imp-item"><div class="imp-chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M5 7a2 2 0 0 1 2-2h18a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H13l-6 5v-5H7a2 2 0 0 1-2-2z"/><path d="M11 11h10M11 15h6"/></svg></div></div><div><div class="imp-num">+27%</div><div class="imp-lbl">Aumento na taxa de resposta às propostas</div></div></div>
+      <div class="imp-item"><div class="imp-chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M16 4 4 11l12 7 12-7-12-7z"/><path d="M4 17l12 7 12-7M4 22.5l12 7 12-7"/></svg></div></div><div><div class="imp-num">+18%</div><div class="imp-lbl">Reuso do componente em 6 jornadas do portal</div></div></div>
+      <div class="imp-item"><div class="imp-chip"><div class="ico"><svg viewBox="0 0 32 32"><circle cx="11" cy="12" r="4"/><circle cx="22" cy="13" r="3"/><path d="M4 26c0-4 3-6 7-6s7 2 7 6M19 21c4 0 7 2 7 5"/></svg></div></div><div><div class="imp-num">+12%</div><div class="imp-lbl">Acordos realizados pós-expansão</div></div></div>
+    </div>
+  </section>
+
+  <!-- ═══ 07 · APRENDIZADOS (dark) ═══ -->
+  <section class="sec sec--dark">
+    <div class="s-index"><b>07</b><em></em></div>
+    <h2 class="s-title">Aprendizados</h2>
+    <p class="apr-intro">Lições que reforçam o impacto do design em fluxos financeiros sensíveis.</p>
+    <div class="apr-cols">
+      <div class="apr-col">
+        <div class="apr-dot"></div>
+        <div class="apr-t">Sinalização importa mais que volume de informação.</div>
+        <div class="apr-rule"></div>
+        <div class="apr-d">Em fluxos financeiros, a ausência de sinalização e feedback gera mais insegurança que a falta de detalhes.</div>
+      </div>
+      <div class="apr-col">
+        <div class="apr-dot"></div>
+        <div class="apr-t">Microinterações são infraestrutura.</div>
+        <div class="apr-rule"></div>
+        <div class="apr-d">Pequenos sinais visuais reduziriam dúvidas e fricções sem alterar a arquitetura do fluxo.</div>
+      </div>
+      <div class="apr-col">
+        <div class="apr-dot"></div>
+        <div class="apr-t">Escala nasce de componentes.</div>
+        <div class="apr-rule"></div>
+        <div class="apr-d">O impacto não veio de uma tela melhor. Veio de uma solução reutilizável e sustentável.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 08 · EM MOVIMENTO (vídeos) ═══ -->
+  <section class="sec">
+    <div class="s-index"><b>08</b><em></em></div>
+    <h2 class="s-title">Em movimento</h2>
+    <p class="s-text" style="max-width:60ch;margin-top:20px">Apresentação visual do portal: navegação, interface principal e identidade de acesso em uso.</p>
+
+    <div class="em-grid">
+      <div class="em-item">
+        <div class="em-frame"><iframe src="https://www-ccv.adobe.io/v1/player/ccv/2-W_62Px7pH/embed?bgcolor=%23111111&lazyLoading=true&api_key=BehancePro2View" frameborder="0" allowfullscreen loading="lazy" title="Portal MRV, navegação"></iframe></div>
+        <div class="em-body"><div class="em-title">Navegação</div><p class="em-desc">Percurso pelo portal financeiro e a estrutura de menus do ecossistema.</p></div>
+      </div>
+      <div class="em-item">
+        <div class="em-frame"><iframe src="https://www-ccv.adobe.io/v1/player/ccv/Qby9X5KnabB/embed?bgcolor=%23111111&lazyLoading=true&api_key=BehancePro2View" frameborder="0" allowfullscreen loading="lazy" title="Portal MRV, interface principal"></iframe></div>
+        <div class="em-body"><div class="em-title">Interface principal</div><p class="em-desc">A tela central do extrato e dos acordos em funcionamento.</p></div>
+      </div>
+      <div class="em-item">
+        <div class="em-frame"><iframe src="https://www-ccv.adobe.io/v1/player/ccv/BJt3xBeIut_/embed?bgcolor=%23111111&lazyLoading=true&api_key=BehancePro2View" frameborder="0" allowfullscreen loading="lazy" title="Portal MRV, identidade de acesso"></iframe></div>
+        <div class="em-body"><div class="em-title">Identidade de acesso</div><p class="em-desc">Entrada e autenticação com a linguagem visual do produto.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 09 · VISÃO GERAL (fecho) ═══ -->
+  <section class="sec">
+    <div class="s-index"><b>09</b><em></em></div>
+    <h2 class="s-title">Visão geral</h2>
+    <div class="fw-img" style="margin-top:36px"><img src="img/mrv/overview-grid.webp" alt="Visão geral do ecossistema financeiro MRV"></div>
+  </section>
+
+</main>
+<script>
+(function(){
+  var screensByViewer = {
+    fluxo: [
+      { num:'01', title:'Boletos pagos',         desc:'Filtro por categoria com estados visuais claros para pagamentos já confirmados. Hierarquia reduzida para não competir com ações pendentes.', src:'img/mrv/desktop-extrato-pagos.webp',    alt:'Extrato: boletos pagos' },
+      { num:'02', title:'Extrato cartório',       desc:'Custos de cartório separados com linguagem acessível, contexto explicativo e acesso direto aos documentos originais.',                          src:'img/mrv/desktop-extrato-cartorio.webp', alt:'Extrato: cartório' },
+      { num:'03', title:'Boletos pendentes',      desc:'Estados claros para ações que o cliente pode tomar agora, com call-to-action direto e hierarquia que prioriza o próximo passo.',                 src:'img/mrv/desktop-extrato-boletos.webp',  alt:'Extrato: boletos pendentes' },
+      { num:'04', title:'Detalhamento bancário',  desc:'Informação técnica exigida por compliance apresentada com cortes visuais que isolam o dado essencial do ruído burocrático.',                     src:'img/mrv/desktop-extrato-banco.webp',    alt:'Extrato: banco' }
+    ],
+    foundation: [
+      { num:'01', title:'Brand colors',    desc:'Paleta principal com cores semânticas e tons de marca aplicados por estado e hierarquia.',                      src:'img/mrv/tokens-brand-colors.webp', alt:'Brand colors' },
+      { num:'02', title:'Support colors',  desc:'Escala neutra de suporte para texturas, bordas, estados intermediários e camadas de fundo.',                    src:'img/mrv/tokens-support.webp',      alt:'Support colors' },
+      { num:'03', title:'Typography',      desc:'Escala tipográfica modular em Plus Jakarta Sans, definindo tamanhos, pesos e line-heights por uso.',            src:'img/mrv/tokens-typography.webp',   alt:'Typography' },
+      { num:'04', title:'Spacing',         desc:'Sistema baseado em grid de 8px aplicado em padding, margin e gap para composições previsíveis entre domínios.', src:'img/mrv/tokens-spacing.webp',      alt:'Spacing' }
+    ]
+  };
+  var viewers = document.querySelectorAll('.md-viewer');
+  for (var v = 0; v < viewers.length; v++) {
+    (function(viewer){
+      var screens = screensByViewer[viewer.getAttribute('data-viewer')];
+      if (!screens) return;
+      var thumbs = viewer.querySelectorAll('.md-thumb');
+      var img = viewer.querySelector('.md-img');
+      var num = viewer.querySelector('.md-num');
+      var title = viewer.querySelector('.md-title');
+      var desc = viewer.querySelector('.md-desc');
+      var preview = viewer.querySelector('.md-preview');
+      if (!thumbs.length || !img) return;
+      function setActive(i){
+        for (var j = 0; j < thumbs.length; j++) thumbs[j].removeAttribute('aria-selected');
+        thumbs[i].setAttribute('aria-selected','true');
+        var s = screens[i];
+        img.src = s.src; img.alt = s.alt;
+        num.textContent = s.num; title.textContent = s.title; desc.textContent = s.desc;
+        if (preview) preview.scrollTop = 0;
+      }
+      for (var i = 0; i < thumbs.length; i++) {
+        (function(idx, t){
+          t.addEventListener('mouseenter', function(){ setActive(idx); });
+          t.addEventListener('focus',      function(){ setActive(idx); });
+          t.addEventListener('click',      function(){ setActive(idx); });
+        })(i, thumbs[i]);
+      }
+    })(viewers[v]);
+  }
+})();
+</script>
+</body>
+</html>

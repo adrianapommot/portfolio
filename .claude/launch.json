@@ -3,9 +3,9 @@
   "configurations": [
     {
       "name": "Portfolio Static Server",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["serve", "/Users/mac/Documents/portfolio-deploy", "-l", "8080", "--no-clipboard"],
-      "port": 8080
+      "runtimeExecutable": "ruby",
+      "runtimeArgs": ["/Users/mac/Documents/portfolio-deploy/.claude/static-server.rb", "8091"],
+      "port": 8091
     }
   ]
 }
