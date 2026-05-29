@@ -180,7 +180,6 @@ img{display:block;max-width:100%}
 .apr-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:72px}
 .apr-col{padding:0 52px;border-left:1px solid rgba(255,255,255,.13)}
 .apr-col:first-child{padding-left:0;border-left:none}
-.apr-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);margin-bottom:30px}
 .apr-t{font-size:25px;font-weight:600;line-height:1.18;letter-spacing:-.01em;color:#fff;text-wrap:balance}
 .apr-rule{width:36px;height:1.5px;background:rgba(255,255,255,.28);margin:24px 0}
 .apr-d{font-size:15px;line-height:1.6;color:rgba(255,255,255,.55);text-wrap:pretty}
@@ -233,6 +232,15 @@ img{display:block;max-width:100%}
 .em-body{padding-top:18px}
 .em-title{font-size:18px;font-weight:600;letter-spacing:-.01em;margin-bottom:6px;color:var(--black)}
 .em-desc{font-size:14px;line-height:1.6;color:var(--gray-2);text-wrap:pretty}
+
+/* ═══ OUTROS PROJETOS (fecho) ═══ */
+.more-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gut);margin-top:48px}
+.more-card{display:block;text-decoration:none;color:inherit}
+.more-card-img{aspect-ratio:3 / 2;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:var(--chip);margin-bottom:18px}
+.more-card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s cubic-bezier(.2,.7,.2,1)}
+.more-card:hover .more-card-img img{transform:scale(1.04)}
+.more-tag{display:block;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-3);margin-bottom:8px}
+.more-name{font-size:20px;font-weight:600;letter-spacing:-.01em;color:var(--black)}
 
 /* ═══ 05 · A SOLUÇÃO — phone flow (dark) ═══ */
 /* grid com LINHAS compartilhadas: %, nome, descrição e frame alinhados entre todas as colunas */
@@ -502,19 +510,16 @@ img{display:block;max-width:100%}
     <p class="apr-intro">Lições que reforçam o impacto do design em fluxos financeiros sensíveis.</p>
     <div class="apr-cols">
       <div class="apr-col">
-        <div class="apr-dot"></div>
         <div class="apr-t">Sinalização importa mais que volume de informação.</div>
         <div class="apr-rule"></div>
         <div class="apr-d">Em fluxos financeiros, a ausência de sinalização e feedback gera mais insegurança que a falta de detalhes.</div>
       </div>
       <div class="apr-col">
-        <div class="apr-dot"></div>
         <div class="apr-t">Microinterações são infraestrutura.</div>
         <div class="apr-rule"></div>
         <div class="apr-d">Pequenos sinais visuais reduziriam dúvidas e fricções sem alterar a arquitetura do fluxo.</div>
       </div>
       <div class="apr-col">
-        <div class="apr-dot"></div>
         <div class="apr-t">Escala nasce de componentes.</div>
         <div class="apr-rule"></div>
         <div class="apr-d">O impacto não veio de uma tela melhor. Veio de uma solução reutilizável e sustentável.</div>
@@ -549,6 +554,28 @@ img{display:block;max-width:100%}
     <div class="s-index"><b>09</b><em></em></div>
     <h2 class="s-title">Visão geral</h2>
     <div class="fw-img" style="margin-top:36px"><img src="img/mrv/overview-grid.webp" alt="Visão geral do ecossistema financeiro MRV"></div>
+  </section>
+
+  <!-- ═══ OUTROS PROJETOS ═══ -->
+  <section class="sec">
+    <h2 class="s-title">Outros projetos</h2>
+    <div class="more-grid">
+      <a class="more-card" href="case-ford.html">
+        <div class="more-card-img"><img src="img/ford/hero-room.webp" alt="Ford Immersion Room"></div>
+        <span class="more-tag">Identidade visual · Design espacial</span>
+        <div class="more-name">Ford Immersion Room</div>
+      </a>
+      <a class="more-card" href="case-delta.html">
+        <div class="more-card-img"><img src="img/delta/hero-mockup.webp" alt="Delta Design System"></div>
+        <span class="more-tag">Design System</span>
+        <div class="more-name">Delta Design System</div>
+      </a>
+      <a class="more-card" href="case-chorume.html">
+        <div class="more-card-img"><img src="img/chorume/garrafa-pantano-hero.jpg" alt="Chorume Tipografia"></div>
+        <span class="more-tag">Tipografia · Identidade visual</span>
+        <div class="more-name">Chorume Tipografia</div>
+      </a>
+    </div>
   </section>
 
 </main>
