@@ -31,9 +31,12 @@
   --gray-5: #EBE7E1;
   --gray-6: #F5F1EB;
   --cream: #F9F9F9;          /* fundo dos marquees (neutro) */
+  --paper: #F2EFE8;          /* fundo creme da página (ref do hero) · ajustar tom */
   --accent: #E8E94D;          /* amarelo ácido: hover, CTA, ✦, seleção */
   --accent-light: #F4F4A0;    /* amarelo suave: texto sobre preto, highlights */
   --line-soft: #ECEBC4;       /* hairline amarelo bem fraco — linhas "O que eu faço" */
+  --lime: #D6FF4D;            /* lime ácido da ref (blob + botão) — accent do hero */
+  --lime-glow: rgba(214,255,77,0.62);
 
   --text-body: #49443c;     /* tinta de leitura (neutral-700, quente) */
   --measure-body: 540px;    /* largura travada do corpo de leitura */
@@ -53,6 +56,8 @@
   --space-tight: 24px;
   --space-mid: 40px;
   --space-loose: 96px;
+  /* escala canônica (DESIGN-SYSTEM §0 · piso 24) — usar nos blocos novos */
+  --space-md: 24px; --space-lg: 36px; --space-title: 72px; --space-section: 112px;
 
   /* ─── ESPAÇAMENTO DE SEÇÕES ───────────────── */
   /* Distância vertical entre o fim do conteúdo de */
@@ -82,7 +87,7 @@ html { scroll-behavior: smooth; }
 body {
   font-family: var(--font-body);
   color: var(--black);
-  background: var(--white);
+  background: var(--paper);
   overflow-x: hidden;
 }
 ::selection { background: var(--accent); color: var(--black); }
@@ -288,13 +293,50 @@ footer           { position: relative; z-index: 5; }
 }
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(36px, 6.8vw, 97px);
+  font-size: clamp(40px, 7.8vw, 108px);
   font-weight: 500;
   line-height: 1.0625; /* Figma: 119/112 */
   letter-spacing: -0.035em; /* Figma: -4px @ 112px = -0.0357em (proporcional) */
   text-transform: uppercase;
   padding: 24px 0 0;
   margin-left: -0.04em;
+}
+
+/* ─── HERO TOP — texto (esq) + arte blueprint (dir) ─── */
+.hero-top { position: relative; }
+.hero-top-left { position: relative; z-index: 2; max-width: 60%; display: flex; flex-direction: column; align-items: flex-start; }
+.hero-reg { width: 26px; height: 26px; color: var(--black); display: block; flex-shrink: 0; }
+.hero-reg-row { display: flex; align-items: center; gap: 14px; margin-bottom: var(--space-md); }
+.hero-top-left .hero-title { padding: 0; }
+.hero-spark { color: var(--lime); font-weight: 400; font-size: 0.3em; vertical-align: 0.5em; }
+.hero-lead { font-family: var(--font-body); font-size: 18px; font-weight: 500; line-height: 1.45; letter-spacing: -0.005em; color: var(--gray-1); margin-top: var(--space-md); text-wrap: pretty; }
+.hero-loc { font-family: var(--font-display); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1; color: var(--gray-4); }
+.hero-scroll { margin-top: var(--space-md); font-size: 22px; line-height: 1; color: var(--black); text-decoration: none; }
+
+.hero-art { position: absolute; top: 5%; right: -2%; width: 62%; z-index: 1; pointer-events: none; }
+.hero-art-img { width: 100%; height: auto; display: block; mix-blend-mode: multiply; }
+.hero-lbl { position: absolute; font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.1em; font-size: 11px; line-height: 1.55; color: var(--gray-1); z-index: 2; white-space: nowrap; }
+.li-tl { top: 7%; left: 14%; font-weight: 600; }
+.li-001 { top: 27%; left: 14%; }
+.li-001 b { font-weight: 700; font-size: 14px; }
+.li-001 i { display: block; font-style: normal; color: var(--gray-4); margin-top: 4px; }
+.li-v03 { top: 46%; left: 14%; }
+.li-v03 i { display: block; font-style: normal; color: var(--gray-4); }
+.li-v03 b { display: block; font-weight: 700; }
+.li-tok { top: 40%; left: 35%; line-height: 2; color: var(--gray-2); font-weight: 500; }
+.hero-darkblob { position: absolute; right: 6%; bottom: 1%; width: 30%; height: 34%; border-radius: 50%; background: radial-gradient(circle at 50% 50%, rgba(17,17,17,0.5) 0%, rgba(17,17,17,0.16) 46%, transparent 72%); filter: blur(16px); z-index: 1; mix-blend-mode: multiply; }
+.hero-badge { position: absolute; top: 24%; right: 18%; width: 132px; height: 132px; z-index: 3; }
+.hero-badge svg { width: 100%; height: 100%; animation: badge-spin 22s linear infinite; }
+.hero-badge text { font-family: var(--font-display); font-size: 6.6px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; fill: var(--black); }
+.hero-badge-star { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 19px; color: var(--black); }
+@keyframes badge-spin { to { transform: rotate(360deg); } }
+.hero-swatch { position: absolute; top: 64%; left: 35%; display: flex; flex-direction: column; align-items: flex-start; gap: 5px; z-index: 2; }
+.hero-swatch-bar { display: flex; }
+.hero-swatch-bar i { width: 21px; height: 13px; display: block; }
+.hero-swatch em { font-family: var(--font-display); font-size: 10px; font-style: normal; letter-spacing: 0.06em; color: #8f961f; }
+@media (max-width: 1024px) {
+  .hero-top { grid-template-columns: 1fr; gap: var(--space-title); }
+  .hero-art { max-width: 440px; width: 100%; }
 }
 
 .hero-bar {
@@ -957,7 +999,7 @@ footer {
   height: 28px;
   display: flex;
   align-items: center;
-  margin: 26px 0 0 0;
+  margin: var(--space-md) 0 0 0;
 }
 .skills-ticker-track {
   display: inline-flex;
@@ -1156,7 +1198,32 @@ footer {
 <!-- HERO -->
 <section class="hero">
   <div class="container">
-    <h1 class="hero-title rv">Design Systems,<br>Product &amp; Visual Design</h1>
+    <div class="hero-top">
+      <div class="hero-top-left">
+        <div class="hero-reg-row">
+          <svg class="hero-reg" viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="4.5" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M14 0v9M14 19v9M0 14h9M19 14h9" stroke="currentColor" stroke-width="1.2"/></svg>
+          <span class="hero-loc">São Paulo, BR · Remoto</span>
+        </div>
+        <h1 class="hero-title rv">Design Systems,<br>Product &amp;<br>Visual Design</h1>
+        <p class="hero-lead rv d1">Do pixels a sistemas. De sistemas a produtos.</p>
+      </div>
+      <div class="hero-art rv d2" aria-hidden="true">
+        <video class="hero-art-img" src="img/animaheader.mp4" autoplay loop muted playsinline></video>
+        <div class="hero-darkblob"></div>
+        <span class="hero-lbl li-tl">Interface<br>Sistema<br>Linguagem</span>
+        <span class="hero-lbl li-001"><b>001</b><i>/ Intro</i></span>
+        <span class="hero-lbl li-v03"><i>v.03</i><b>Design System</b><i>Tokens</i></span>
+        <span class="hero-lbl li-tok">[ Colors ]<br>[ Typography ]<br>[ Spacing ]<br>[ Components ]<br>[ States ]</span>
+        <span class="hero-badge">
+          <svg viewBox="0 0 100 100"><defs><path id="badgePath" d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0"/></defs><text><textPath href="#badgePath">ADRIANA POMMOT &#10022; ADRIANA POMMOT &#10022; </textPath></text></svg>
+          <b class="hero-badge-star">&#10022;</b>
+        </span>
+        <span class="hero-swatch">
+          <span class="hero-swatch-bar"><i style="background:#111111"></i><i style="background:#2e2e2e"></i><i style="background:#4a4a4a"></i><i style="background:#6a6a6a"></i><i style="background:#8c8c8c"></i><i style="background:#b2b2b2"></i><i style="background:#dcdcdc"></i><i style="background:var(--lime)"></i></span>
+          <em>#D6FF4D</em>
+        </span>
+      </div>
+    </div>
   </div>
 
   <div class="skills-ticker" aria-hidden="true">
@@ -1166,11 +1233,6 @@ footer {
   </div>
 
   <div class="container">
-    <div class="hero-bar rv d1">
-      <span class="hero-bar-label">Interface, Sistema & Linguagem</span>
-      <span class="hero-bar-label">Remoto · São Paulo, BR</span>
-    </div>
-
     <div class="hero-content">
       <div class="hero-content-left">
         <h2 class="hero-h2 rv d2">De pixels a sistemas,<br>de sistemas a produtos.</h2>
@@ -1468,6 +1530,17 @@ document.querySelectorAll('.nav-menu a').forEach(a => {
   if(document.fonts&&document.fonts.ready){document.fonts.ready.then(setH)}
   else{setTimeout(setH,300)}
 }catch(e){console.warn("text-roll error",e)}})();
+
+/* hero video — câmera lenta + loop suave */
+(function(){
+  var v=document.querySelector(".hero-art-img");
+  if(!v||v.tagName!=="VIDEO")return;
+  var RATE=0.5; /* 0.5 = metade da velocidade · ajustar: 0.35 mais lento, 0.7 menos */
+  function slow(){try{v.playbackRate=RATE}catch(e){}}
+  slow();
+  v.addEventListener("loadedmetadata",slow);
+  v.addEventListener("play",slow);
+})();
 </script>
 </body>
 </html>
