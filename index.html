@@ -57,7 +57,8 @@
   --space-mid: 40px;
   --space-loose: 96px;
   /* escala canônica (DESIGN-SYSTEM §0 · piso 24) — usar nos blocos novos */
-  --space-md: 24px; --space-lg: 36px; --space-title: 72px; --space-section: 112px;
+  --space-md: 24px; --space-lg: 36px; --space-deck: 48px; --space-title: 72px; --space-section: 112px;
+  /* --space-deck: distância padrão título → subtítulo/deck (token único, usado em hero/.ps/serviços) */
 
   /* ─── ESPAÇAMENTO DE SEÇÕES ───────────────── */
   /* Distância vertical entre o fim do conteúdo de */
@@ -267,7 +268,7 @@ p, .hero-body, .svc-desc, .traj-role,
 .hero,
 .services-section {
   position: relative;
-  background: var(--white);
+  background: var(--white); /* fundo branco — cards num off-white sutil saltam sobre ele */
 }
 /* Trajectory sticks so projects can scroll over it */
 .trajectory-section {
@@ -289,7 +290,7 @@ footer           { position: relative; z-index: 5; }
    ═══════════════════════════════════ */
 .hero {
   padding-top: 80px;
-  padding-bottom: 76px; /* + 20px do hero-clients = --section-gap (96) */
+  padding-bottom: 0; /* anima encaixa na faixa de projetos (overlap negativo abaixo) */
 }
 .hero-title {
   font-family: var(--font-display);
@@ -309,7 +310,7 @@ footer           { position: relative; z-index: 5; }
 .hero-reg-row { display: flex; align-items: center; gap: 14px; margin-bottom: var(--space-md); }
 .hero-top-left .hero-title { padding: 0; }
 .hero-spark { color: var(--lime); font-weight: 400; font-size: 0.3em; vertical-align: 0.5em; }
-.hero-lead { font-family: var(--font-body); font-size: 18px; font-weight: 500; line-height: 1.45; letter-spacing: -0.005em; color: var(--gray-1); margin-top: var(--space-md); text-wrap: pretty; }
+.hero-lead { font-family: var(--font-body); font-size: 18px; font-weight: 500; line-height: 1.45; letter-spacing: -0.005em; color: var(--gray-1); margin-top: var(--space-deck); text-wrap: pretty; }
 .hero-loc { font-family: var(--font-display); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1; color: var(--gray-4); }
 .hero-scroll { margin-top: var(--space-md); font-size: 22px; line-height: 1; color: var(--black); text-decoration: none; }
 
@@ -336,7 +337,7 @@ footer           { position: relative; z-index: 5; }
 .hero-swatch em { font-family: var(--font-display); font-size: 10px; font-style: normal; letter-spacing: 0.06em; color: #8f961f; }
 @media (max-width: 1024px) {
   /* hero empilha: título/lead, depois a arte como bloco normal (não-absoluto) */
-  .hero { padding-top: 64px; }
+  .hero { padding-top: 64px; padding-bottom: 56px; }
   /* bloco normal no mobile: evita o gotcha do flex (align-items:flex-start vira max-content) */
   .hero-top-left { display: block; max-width: 100%; }
   .hero-title { font-size: clamp(33px, 9vw, 72px); }
@@ -378,11 +379,11 @@ footer           { position: relative; z-index: 5; }
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 56px;
   align-items: center;
-  padding-top: var(--space-section);
+  padding-top: var(--space-lg);
 }
 /* ESQUERDA: animação ocupa o lado inteiro (sem legendas) */
 .ps-illus { position: relative; display: flex; align-items: center; justify-content: center; }
-.ps-vid { width: 100%; max-width: 480px; height: auto; display: block; mix-blend-mode: multiply; }
+.ps-vid { width: 100%; max-width: 480px; height: auto; display: block; mix-blend-mode: multiply; -webkit-mask-image: linear-gradient(to bottom, #000 86%, transparent 100%); mask-image: linear-gradient(to bottom, #000 86%, transparent 100%); }
 /* DIREITA: texto */
 .ps-title {
   font-family: var(--font-display);
@@ -397,7 +398,7 @@ footer           { position: relative; z-index: 5; }
   font-family: var(--font-body);
   font-size: 18px; font-weight: 500; line-height: 1.5; letter-spacing: -0.005em;
   color: var(--gray-1);
-  margin-top: var(--space-lg);
+  margin-top: var(--space-deck);
   max-width: 36em;
   text-wrap: pretty;
 }
@@ -415,6 +416,8 @@ footer           { position: relative; z-index: 5; }
   .ps { grid-template-columns: 1fr; gap: 28px; }
   .ps-vid { max-width: 340px; margin: 0 auto; }
   .ps-title { font-size: clamp(34px, 9vw, 52px); }
+  /* serviços: os 3 cards empilham */
+  .svc-grid { grid-template-columns: 1fr; }
 }
 
 /* ═══════════════════════════════════
@@ -462,8 +465,7 @@ footer           { position: relative; z-index: 5; }
    SERVICES
    ═══════════════════════════════════ */
 .services-section {
-  --svc-col-pad: 40px; /* recuo das colunas; lead e cases usam o mesmo p/ alinhar */
-  padding: 112px 0 var(--section-gap); /* topo = respiro título→colunas */
+  padding: 112px 0 var(--section-gap); /* topo = respiro título→cards */
   border-top: 1px solid var(--gray-5);
 }
 .section-title {
@@ -487,10 +489,13 @@ footer           { position: relative; z-index: 5; }
 .svc-head {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
   align-items: start;
 }
+.svc-head-text { grid-column: 1 / 2; } /* título + lead empilhados na 1ª coluna */
+.svc-illus { grid-column: 2 / 4; align-self: center; } /* ilustração-fluxo ao lado do título */
+.svc-illus img { width: 80%; height: auto; display: block; margin: 0; mix-blend-mode: multiply; opacity: 0.42; } /* início alinhado ao 2º card (coluna 2) */
 .svc-headline {
-  grid-column: 1 / 2; /* título em 2 linhas ocupa só a 1ª coluna */
   font-family: var(--font-display);
   font-size: clamp(40px, 6.4vw, 92px);
   font-weight: 400;
@@ -500,9 +505,7 @@ footer           { position: relative; z-index: 5; }
   color: var(--black);
 }
 .svc-lead {
-  grid-column: 2 / 3; /* "Design com propósito" começa na coluna Branding */
-  padding-left: var(--svc-col-pad);
-  align-self: end; /* ancora a frase na base do título — não voa mais */
+  margin-top: var(--space-deck); /* respiro padrão título → subtítulo (token) */
   font-family: var(--font-body);
   font-size: 18px; /* LEAD — frase após título */
   font-weight: 500;
@@ -514,22 +517,21 @@ footer           { position: relative; z-index: 5; }
 
 /* — Grade de 3 colunas (subgrid → alinhamento por linha) — */
 .svc-grid {
-  margin-top: 112px; /* respiro título→colunas (era 56+56 com a linha) */
+  margin-top: var(--space-title); /* respiro lead→cards */
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: auto auto auto auto;
-  row-gap: 22px;
+  gap: var(--space-md); /* separação entre os 3 cards */
+  align-items: stretch; /* cards de altura igual */
 }
 .svc-col {
-  grid-row: 1 / -1;
-  display: grid;
-  grid-template-rows: subgrid;
-  row-gap: 22px;
-  padding: 0 var(--svc-col-pad);
-  border-left: 1px solid var(--line-soft);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  background: var(--cream);
+  border: 1px solid var(--gray-5);
+  border-radius: 16px;
+  padding: var(--space-lg);
 }
-.svc-col:first-child { padding-left: 0; border-left: none; }
-.svc-col:last-child { padding-right: 0; }
 /* ícone: glifo de linha puro, padrão MRV (sem caixa, sem número) */
 .svc-ico {
   width: 28px; height: 28px;
@@ -551,7 +553,6 @@ footer           { position: relative; z-index: 5; }
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--gray-1); /* forte: título de coluna */
-  align-self: start;
 }
 .svc-desc {
   font-family: var(--font-body);
@@ -561,15 +562,14 @@ footer           { position: relative; z-index: 5; }
   letter-spacing: 0.02em; /* entreletra mais aberta (body) */
   color: var(--gray-2); /* médio: body legível */
   text-wrap: pretty;
-  align-self: start;
 }
 .svc-ficha {
+  margin-top: auto; /* ancora a ficha na base do card → divisores alinhados entre os cards */
   display: flex;
   flex-direction: column;
-  gap: 36px; /* + espaço abaixo de cada bloco da ficha (ex.: Arquitetura) */
-  padding-top: 22px;
-  border-top: 1px solid var(--line-soft);
-  align-self: start;
+  gap: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--gray-5);
 }
 .svc-ficha-row {
   display: flex;
@@ -595,15 +595,17 @@ footer           { position: relative; z-index: 5; }
 
 /* — Cases em destaque — */
 .svc-cases {
-  margin-top: 56px;
-  padding-top: 32px;
-  border-top: 1px solid var(--line-soft);
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* mesmo grid das colunas */
-  align-items: baseline;
+  grid-column: 2 / 3; /* card no topo, na largura do 2º card (alinhado a ele) */
+  align-self: start;
+  background: var(--white);
+  border: 1px solid var(--gray-5);
+  border-radius: 16px;
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 .svc-cases-label {
-  grid-column: 1; /* alinhado à 1ª coluna */
   font-family: var(--font-display);
   font-size: 13px;
   font-weight: 600;
@@ -614,8 +616,6 @@ footer           { position: relative; z-index: 5; }
   white-space: nowrap;
 }
 .svc-cases-list {
-  grid-column: 2 / 4; /* começa na 2ª coluna (Branding) */
-  padding-left: var(--svc-col-pad);
   display: flex;
   align-items: baseline;
   gap: 12px; /* nomes juntos, separados por bolinha */
@@ -645,6 +645,10 @@ a.svc-case:hover { color: var(--gray-4); }
 .projects-section {
   padding: 0 0 var(--section-gap);
   background: var(--black);
+}
+/* desktop: faixa preta sobe sobre o corte da animação (encaixe). Mobile NÃO (cobriria o CTA). */
+@media (min-width: 1025px) {
+  .projects-section { margin-top: -72px; }
 }
 .projects-section .marquee { background: transparent; border-bottom-color: rgba(255,255,255,0.12); }
 .projects-section .marquee-text { color: var(--white); }
@@ -1116,11 +1120,10 @@ footer {
     --col-label: 168px;
     --col-content-anchor: 240px;
   }
-  .services-section { --svc-col-pad: 28px; }
   .svc-head { grid-template-columns: 1fr; }
-  .svc-headline { grid-column: auto; font-size: clamp(38px, 7vw, 72px); }
-  .svc-lead { grid-column: auto; padding-left: 0; padding-top: 20px; }
-  .svc-grid { margin-top: 88px; }
+  .svc-headline { font-size: clamp(38px, 7vw, 72px); }
+  .svc-illus { grid-column: auto; margin-top: var(--space-deck); max-width: 560px; }
+  .svc-grid { margin-top: 56px; }
   .proj-list { gap: 80px; padding: 56px 0 32px; }
   .proj-hero { grid-template-columns: 1fr; gap: 32px; }
   .proj-hero--left .proj-hero-img,
@@ -1143,15 +1146,10 @@ footer {
   .hero { padding-top: 72px; }
   .hero-title { padding: 8px 0 0; }
   .hero-bar { margin-bottom: 0; }
-  .svc-head { grid-template-columns: 1fr; }
-  .svc-headline { grid-column: auto; }
-  .svc-lead { grid-column: auto; max-width: 100%; padding-top: 18px; padding-left: 0; }
-  .svc-grid { grid-template-columns: 1fr; grid-template-rows: none; row-gap: 0; margin-top: 64px; }
-  .svc-col { grid-row: auto; display: flex; flex-direction: column; gap: 18px; padding: 36px 0; border-left: none; border-top: 1px solid var(--line-soft); }
-  .svc-col:first-child { padding: 36px 0; border-top: 1px solid var(--line-soft); }
-  .svc-col:last-child { padding-bottom: 0; }
-  .svc-cases { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
-  .svc-cases-list { grid-column: auto; padding-left: 0; padding-right: 0; justify-content: flex-start; }
+  .svc-grid { grid-template-columns: 1fr; gap: var(--space-md); margin-top: 40px; }
+  .svc-col { padding: var(--space-md); }
+  .svc-cases { padding: var(--space-md); }
+  .svc-cases-list { justify-content: flex-start; }
   .proj-list { gap: 64px; }
   .proj-hero-num { font-size: 48px; }
   .proj-hero-name { font-size: 26px; }
@@ -1325,8 +1323,11 @@ footer {
 <section class="services-section" id="services">
   <div class="container">
     <div class="svc-head rv">
-      <h2 class="svc-headline">O que<br>eu faço</h2>
-      <p class="svc-lead">Design com propósito e método. Transformo estratégia em produtos digitais inteligentes, acessíveis e memoráveis.</p>
+      <div class="svc-head-text">
+        <h2 class="svc-headline">O que<br>eu faço</h2>
+        <p class="svc-lead">Design com propósito e método.<br>Transformo estratégia em produtos digitais inteligentes, acessíveis e memoráveis.</p>
+      </div>
+      <div class="svc-illus" aria-hidden="true"><img src="img/eu-faco.png" alt=""></div>
     </div>
     <div class="svc-grid">
       <div class="svc-col rv">
@@ -1358,18 +1359,6 @@ footer {
           <div class="svc-ficha-row"><span class="svc-fl">IA + Vibe Coding</span><span class="svc-fv">Claude, Gemini, Midjourney</span></div>
           <div class="svc-ficha-row"><span class="svc-fl">Cases</span><span class="svc-fv">Delta, MRV, Dasa</span></div>
         </div>
-      </div>
-    </div>
-    <div class="svc-cases rv">
-      <span class="svc-cases-label">Onde já atuei</span>
-      <div class="svc-cases-list">
-        <a href="case-mrv.html" class="svc-case">MRV</a>
-        <span class="svc-sep" aria-hidden="true">•</span>
-        <a href="case-ford.html" class="svc-case">Ford</a>
-        <span class="svc-sep" aria-hidden="true">•</span>
-        <span class="svc-case">Vivo</span>
-        <span class="svc-sep" aria-hidden="true">•</span>
-        <span class="svc-case">Accenture</span>
       </div>
     </div>
   </div>
