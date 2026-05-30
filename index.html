@@ -335,8 +335,19 @@ footer           { position: relative; z-index: 5; }
 .hero-swatch-bar i { width: 21px; height: 13px; display: block; }
 .hero-swatch em { font-family: var(--font-display); font-size: 10px; font-style: normal; letter-spacing: 0.06em; color: #8f961f; }
 @media (max-width: 1024px) {
-  .hero-top { grid-template-columns: 1fr; gap: var(--space-title); }
-  .hero-art { max-width: 440px; width: 100%; }
+  /* hero empilha: título/lead, depois a arte como bloco normal (não-absoluto) */
+  .hero { padding-top: 64px; }
+  /* bloco normal no mobile: evita o gotcha do flex (align-items:flex-start vira max-content) */
+  .hero-top-left { display: block; max-width: 100%; }
+  .hero-title { font-size: clamp(33px, 9vw, 72px); }
+  .hero-art {
+    position: static;
+    width: 100%; max-width: 380px;
+    margin: var(--space-lg) auto 0;
+    top: auto; right: auto;
+  }
+  /* labels decorativos são posicionados por % do desktop — escondidos no mobile */
+  .hero-lbl, .hero-badge, .hero-swatch, .hero-darkblob { display: none; }
 }
 
 .hero-bar {
@@ -356,69 +367,54 @@ footer           { position: relative; z-index: 5; }
   color: var(--black);
 }
 
-/* Content grid: subtitle + services left, image right */
-.hero-content {
+/* (seção antiga "De pixels" / grid de conteúdo + clientes removida — agora é .ps) */
+
+/* ═══════════════════════════════════
+   PIXELS → SISTEMAS · seção blueprint
+   (ilustração à esquerda · texto à direita)
+   ═══════════════════════════════════ */
+.ps {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 0;
-  align-items: stretch;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 56px;
+  align-items: center;
+  padding-top: var(--space-section);
 }
-.hero-content-left {
-  border-right: 1px solid var(--gray-5);
-  padding: 80px 48px 32px 0;
-  position: relative;
-}
-.hero-h2 {
+/* ESQUERDA: animação ocupa o lado inteiro (sem legendas) */
+.ps-illus { position: relative; display: flex; align-items: center; justify-content: center; }
+.ps-vid { width: 100%; max-width: 480px; height: auto; display: block; mix-blend-mode: multiply; }
+/* DIREITA: texto */
+.ps-title {
   font-family: var(--font-display);
-  font-size: clamp(28px, 3.5vw, 48px);
-  font-weight: 400;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
+  font-size: clamp(30px, 3.55vw, 52px);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
   text-transform: uppercase;
-  margin-bottom: 40px;
   margin-left: -0.03em;
-  text-wrap: balance; /* linhas equilibradas em títulos */
 }
-.hero-body {
+.ps-lead {
   font-family: var(--font-body);
-  font-size: 17px;
-  font-weight: 400;
-  line-height: 1.55;
-  color: var(--text-body);
-  margin-bottom: 40px;
-  max-width: var(--measure-body);
+  font-size: 18px; font-weight: 500; line-height: 1.5; letter-spacing: -0.005em;
+  color: var(--gray-1);
+  margin-top: var(--space-lg);
+  max-width: 36em;
   text-wrap: pretty;
 }
-.hero-clients {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 20px 0;
-  border-top: 1px solid var(--gray-5);
+.ps-cta {
+  display: inline-flex; align-items: center; gap: 14px;
+  margin-top: var(--space-lg);
   font-family: var(--font-display);
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-.hero-clients-label {
-  font-weight: 500;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--black);
 }
-.hero-clients-list {
-  font-weight: 500;
-  color: var(--black);
-  letter-spacing: 0.06em;
-}
-.hero-img {
-  width: 100%;
-  overflow: hidden;
-  background: transparent;
-  border-radius: 0;
-  padding: 80px 0 32px 48px;
-}
-.hero-img img, .hero-img video {
-  width: 100%; height: 100%;
-  object-fit: cover;
+.ps-cta .br { color: var(--lime); font-weight: 700; }
+.ps-cta .ar { font-size: 17px; line-height: 1; transition: transform .25s ease; }
+.ps-cta:hover .ar { transform: translateX(6px); }
+@media (max-width: 900px) {
+  .ps { grid-template-columns: 1fr; gap: 28px; }
+  .ps-vid { max-width: 340px; margin: 0 auto; }
+  .ps-title { font-size: clamp(34px, 9vw, 52px); }
 }
 
 /* ═══════════════════════════════════
@@ -1125,10 +1121,6 @@ footer {
   .svc-headline { grid-column: auto; font-size: clamp(38px, 7vw, 72px); }
   .svc-lead { grid-column: auto; padding-left: 0; padding-top: 20px; }
   .svc-grid { margin-top: 88px; }
-  .hero-content { grid-template-columns: 1fr; }
-  .hero-content-left { border-right: none; padding: 32px 0; }
-  .hero-img { padding: 0; }
-  .hero-img { aspect-ratio: 16/9; }
   .proj-list { gap: 80px; padding: 56px 0 32px; }
   .proj-hero { grid-template-columns: 1fr; gap: 32px; }
   .proj-hero--left .proj-hero-img,
@@ -1210,7 +1202,7 @@ footer {
         <p class="hero-lead rv d1">Do pixels a sistemas. De sistemas a produtos.</p>
       </div>
       <div class="hero-art rv d2" aria-hidden="true">
-        <video class="hero-art-img" src="img/animaheader.mp4" autoplay loop muted playsinline></video>
+        <video class="hero-art-img" src="img/animaheader.mp4" data-rate="0.5" autoplay loop muted playsinline></video>
         <div class="hero-darkblob"></div>
         <span class="hero-lbl li-tl">Interface<br>Sistema<br>Linguagem</span>
         <span class="hero-lbl li-001"><b>001</b><i>/ Intro</i></span>
@@ -1235,18 +1227,17 @@ footer {
   </div>
 
   <div class="container">
-    <div class="hero-content">
-      <div class="hero-content-left">
-        <h2 class="hero-h2 rv d2">De pixels a sistemas,<br>de sistemas a produtos.</h2>
-        <p class="hero-body rv d3">Interfaces de alta fidelidade,<br>Design System e Branding & Identidade.<br>Do token à experiência final.</p>
+    <div class="ps">
+      <!-- ESQUERDA: animação (ocupa o lado inteiro, sem legendas) -->
+      <div class="ps-illus rv d1">
+        <video class="ps-vid" src="img/pixels-anim.mp4" data-rate="0.35" autoplay loop muted playsinline></video>
       </div>
-      <div class="hero-img rv d2">
-        <video src="img/telas-animadas.mp4" poster="img/telas-animadas-poster.jpg" autoplay loop muted playsinline></video>
+      <!-- DIREITA: texto -->
+      <div class="ps-text">
+        <h2 class="ps-title rv d2">De pixels<br>a sistemas<br>De sistemas<br>a produtos.</h2>
+        <p class="ps-lead rv d3">Interfaces de alta fidelidade, Design System<br>e Branding&nbsp;&amp;&nbsp;Identidade. Do token à experiência final.</p>
+        <a class="ps-cta rv d3" href="#work"><span class="ps-cta-label"><span class="br">[</span> Ver projetos <span class="br">]</span></span><span class="ar">&rarr;</span></a>
       </div>
-    </div>
-
-    <div class="hero-clients">
-      <span class="hero-clients-list">MRV · Dasa · Ford · Escale · Accenture</span>
     </div>
   </div>
 </section>
@@ -1533,15 +1524,17 @@ document.querySelectorAll('.nav-menu a').forEach(a => {
   else{setTimeout(setH,300)}
 }catch(e){console.warn("text-roll error",e)}})();
 
-/* hero video — câmera lenta + loop suave */
+/* vídeos blueprint — câmera lenta · data-rate por elemento (0.5 header · 0.4 pixels→sistemas) */
 (function(){
-  var v=document.querySelector(".hero-art-img");
-  if(!v||v.tagName!=="VIDEO")return;
-  var RATE=0.5; /* 0.5 = metade da velocidade · ajustar: 0.35 mais lento, 0.7 menos */
-  function slow(){try{v.playbackRate=RATE}catch(e){}}
-  slow();
-  v.addEventListener("loadedmetadata",slow);
-  v.addEventListener("play",slow);
+  var vids=document.querySelectorAll("video[data-rate]");
+  Array.prototype.forEach.call(vids,function(v){
+    var r=parseFloat(v.getAttribute("data-rate"))||1;
+    function slow(){try{v.playbackRate=r}catch(e){}}
+    slow();
+    v.addEventListener("loadedmetadata",slow);
+    v.addEventListener("play",slow);
+    v.addEventListener("seeked",slow);
+  });
 })();
 </script>
 </body>
