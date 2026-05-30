@@ -3,6 +3,72 @@ Fonte única de verdade para todos os arquivos do portfólio.
 
 ---
 
+## 0. SISTEMA ATUAL — fonte da verdade (atualizado 2026-05-29)
+
+> **Esta seção vence qualquer conflito com as seções legadas (1–10) abaixo.** O projeto está sendo unificado neste sistema; o que estiver diferente lá embaixo (escala 8-token, body 16/17px, accent lime) é histórico e será migrado.
+
+### Inegociáveis
+1. **Zero viúvas / órfãs / texto quebrado** — corta ou troca a palavra antes de deixar viúva. `text-wrap: pretty` (parágrafo) / `balance` (título). Nunca `<br>`/`&nbsp;` pra controlar borda.
+2. **Menos variação = mais coeso** — em tamanho de fonte E em tons de cinza.
+3. **Padrão de comportamento** — o mesmo elemento tem o MESMO comportamento em todas as páginas. Reutilizar componente, nunca recriar.
+
+### Cor de marca
+- `--accent: #E8E94D` (amarelo ácido) — hover, CTA, ✦, seleção, nav ao rolar. **Lime `#D1F466` APOSENTADO.**
+- `--accent-light: #F4F4A0` — glass do nav ao rolar, highlights.
+- **Banidos:** roxo (clichê de IA), creme/bege. O amarelo **não** entra em linha fina nem em ícone sobre branco (some).
+
+### Cinzas de TEXTO — só 3
+| Papel | Token | Valor |
+|---|---|---|
+| Forte | `--gray-1` | `#37342F` — títulos, H1, lead, valores |
+| Médio | `--gray-2` | `#585550` — corpo / descrições |
+| Claro | `--gray-4` | `#B8B2A8` — rótulos |
+
+**Aposentados de texto:** `--gray-3` e `--text-body`. **`#111` não é cor de texto** (texto forte = `gray-1`). `gray-5`/`line` só pra bordas.
+
+### Tipografia — papéis (Plus Jakarta Sans)
+| Papel | Tamanho | Peso | Cor / nota |
+|---|---|---|---|
+| Display / H1 | clamp (CAPS) | 400 | gray-1 |
+| Título de seção | clamp (CAPS) | 400 | gray-1 |
+| **Lead** (frase após título) | **18px** | **500** | gray-1 · alinha à BASE do título |
+| **Corpo** | **14px** | 400 | gray-2 · lh 1.6 · letter-spacing 0.02em |
+| Rótulo | 12–13px CAPS | 600 | gray-4 (gray-1 p/ rótulo de seção) |
+| Métrica | nº grande | 500 | gray-1 · tabular |
+
+Corpo é **14px em TODO o projeto** (home = cases). Hierarquia por papel+peso, **nunca** por tamanho avulso. Isto aposenta a escala 8-token (§7.2) e os P3 17/16px (§7.1).
+
+**Títulos:** alinhados **à esquerda**, **sem ícones decorativos** (o ✦ foi removido). Padrão fixo de título.
+
+### Ícones
+Só **outline** (`fill:none`), `stroke-width: 1.5`, **24px**, cor `currentColor` (segue o cinza do texto). Sem caixa/bolinha/preenchimento. *(`case-delta.html` tem ícones preenchidos → redesenhar.)*
+
+### Espaçamento — tokens (falar em token, não em px)
+| Token | Valor | Uso |
+|---|---|---|
+| `--space-md` | 24px | **piso** — eyebrow→título · ícone→rótulo · rótulo→desc · título→texto |
+| `--space-lg` | 36px | bloco: separação de blocos dentro da seção |
+| `--space-title` | 72px | **título de seção → conteúdo** |
+| `--space-section` | 112px | seção → seção |
+
+**Escala = 4 níveis** (24/36/72/112). **8, 16 e 56px aposentados** — piso de 24px (nada grudado), poucas variações. Precisou de um gap? Use um nível existente, nunca invente valor.
+
+**Numeração de seções (cases):** todo título de seção numerado e **sequencial** via `.s-index` (01, 02, 03…), sem pular nem repetir. Hero e "Outros projetos" ficam fora da contagem.
+
+Espaçamento **sempre via token**. "Aumentar o espaço entre título e conteúdo" = mexer em `--space-title` → vale o projeto inteiro. Valores vindos da seção "O que eu faço" (a régua).
+
+### Linhas (hairlines)
+1px, **uma cor**. Superfície clara: `--line`. Superfície escura: `rgba(255,255,255,.08)`. *(cor exata e regra de continuidade "fecham/full-bleed" a confirmar — depois, igual em tudo.)*
+
+### Componentes & comportamento
+- **Nav "Adriana Pommot"** — pílula glass branca; **ao rolar (>60px) → glass amarelo-claro** `rgba(244,244,160,.72)`. Comportamento IDÊNTICO em index + todos os cases (reutilizar, idealmente JS compartilhado).
+- **Tarja hero (cases)** — **card branco** (`#fff`) sobre o off-white do hero, sombra suave; **divisores amarelos** (`--accent`); texto/ícones escuros. **Straddle:** vaza ~metade pra fora do hero (`margin-bottom` negativo). Pra isso o hero é `overflow:visible` e a **ilustração é mascarada no topo E na base** (`mask-image` linear) — topo não sangra, base sem corte.
+
+### Conformidade — a unificar
+Conviviam **3 sistemas de tipografia**: `index`/`dasa` (px solto + clamps ad-hoc), `mrv` (`--ty-*`), `ford`/`delta`/`chorume` (`--t-*`). Migrar todos pros papéis acima. Pendências por página: cinzas fora do trio, corpo 17px no MRV (→14), azuis hex soltos no index, ícones preenchidos no delta.
+
+---
+
 ## 1. Tipografia
 
 Família única: **Plus Jakarta Sans** (Google Fonts)
@@ -34,8 +100,8 @@ Nenhuma outra fonte. General Sans, Roboto Mono, Inter, DM Sans — todas removid
   --gray-5: #EBE7E1;
   --surface-neutral: #F5F5F5;
   --dark-surface: #2C2B2B;
-  --accent: #D1F466;
-  --accent-light: #EDFFB6;
+  --accent: #E8E94D;        /* amarelo ácido (lime #D1F466 APOSENTADO — ver §0) */
+  --accent-light: #F4F4A0;
 }
 ```
 
@@ -236,7 +302,7 @@ Body text tem **um único** padrão em todo o portfólio. Divergir entre home e 
 ### Alinhamento vertical entre colunas
 Em qualquer layout two-column (home ou case), o **topo do primeiro elemento da coluna direita** alinha com o **topo do título** da coluna esquerda — **nunca com o número/etiqueta** (ex: `.ed-num`). O número é metadata (fica acima, fora do grid), e as duas colunas de conteúdo começam no mesmo baseline.
 
-Implementação via `padding-top` calculado no container direito = altura do ed-num + gap. Exemplo em cases: `padding-top: calc(var(--t-num-sm) + var(--space-xs))` = 28px. Em outros contextos, calcular do mesmo jeito com os tokens correspondentes. **Nunca** usar valores mágicos arbitrários tipo `116px` — esses quebram quando a tipografia muda.
+Implementação via `padding-top` calculado no container direito = altura do ed-num + gap. Exemplo em cases: `padding-top: calc(var(--t-num-sm) + 8px)` = 28px (o 8px aqui é offset de baseline, não um passo da régua). Em outros contextos, calcular do mesmo jeito com os tokens correspondentes. **Nunca** usar valores mágicos arbitrários tipo `116px` — esses quebram quando a tipografia muda.
 
 ---
 

@@ -31,8 +31,9 @@
   --gray-5: #EBE7E1;
   --gray-6: #F5F1EB;
   --cream: #F9F9F9;          /* fundo dos marquees (neutro) */
-  --accent: #D1F466;          /* lime principal, bolinhas, hover, CTA */
-  --accent-light: #EDFFB6;    /* lime suave, texto sobre preto, highlights */
+  --accent: #E8E94D;          /* amarelo ácido: hover, CTA, ✦, seleção */
+  --accent-light: #F4F4A0;    /* amarelo suave: texto sobre preto, highlights */
+  --line-soft: #ECEBC4;       /* hairline amarelo bem fraco — linhas "O que eu faço" */
 
   --text-body: #49443c;     /* tinta de leitura (neutral-700, quente) */
   --measure-body: 540px;    /* largura travada do corpo de leitura */
@@ -125,6 +126,7 @@ p, .hero-body, .svc-desc, .traj-role,
   padding: 8px 20px;
   border-radius: 999px;
   cursor: pointer;
+  transition: background 0.3s, color 0.3s;
 }
 .nav-name-roll {
   display: block;
@@ -422,7 +424,8 @@ footer           { position: relative; z-index: 5; }
    SERVICES
    ═══════════════════════════════════ */
 .services-section {
-  padding: 0 0 var(--section-gap);
+  --svc-col-pad: 40px; /* recuo das colunas; lead e cases usam o mesmo p/ alinhar */
+  padding: 112px 0 var(--section-gap); /* topo = respiro título→colunas */
   border-top: 1px solid var(--gray-5);
 }
 .section-title {
@@ -434,81 +437,167 @@ footer           { position: relative; z-index: 5; }
   text-transform: uppercase;
   margin-bottom: 48px;
 }
-/* TABELA EDITORIAL: SERVICES
-   Asymmetric com ficha técnica. Esquerda: número + nome + descrição.
-   Direita: 3 metadata blocks (label + valor) que dão peso informacional,
-   eliminando canvas morto. */
-.svc-row {
+
+/* SERVICES — editorial, grid rigoroso.
+   Cabeçalho (headline + lead + CTA) e 3 colunas em SUBGRID: número, ícone,
+   nome, descrição e ficha técnica compartilham as MESMAS linhas entre as três
+   colunas, garantindo alinhamento perpétuo independente do tamanho do texto.
+   Divisores verticais nas linhas do grid; ficha técnica por serviço (preserva
+   todo o copy). */
+
+/* — Cabeçalho — */
+.svc-head {
   display: grid;
-  grid-template-columns: minmax(420px, 540px) 1fr;
-  column-gap: 80px;
+  grid-template-columns: repeat(3, 1fr);
   align-items: start;
-  padding: 56px 0;
-  border-top: 1px solid var(--gray-5);
 }
-.svc-row:last-child { border-bottom: 1px solid var(--gray-5); }
-.svc-content {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.svc-num {
+.svc-headline {
+  grid-column: 1 / 2; /* título em 2 linhas ocupa só a 1ª coluna */
   font-family: var(--font-display);
-  font-size: 12px;
+  font-size: clamp(40px, 6.4vw, 92px);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--black);
+}
+.svc-lead {
+  grid-column: 2 / 3; /* "Design com propósito" começa na coluna Branding */
+  padding-left: var(--svc-col-pad);
+  align-self: end; /* ancora a frase na base do título — não voa mais */
+  font-family: var(--font-body);
+  font-size: 18px; /* LEAD — frase após título */
   font-weight: 500;
-  color: var(--gray-3);
-  letter-spacing: 0.08em;
-  font-variant-numeric: tabular-nums;
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  color: var(--gray-1); /* tom mais escuro da escala de cinzas — dá presença ao lead */
+  text-wrap: pretty;
+}
+
+/* — Grade de 3 colunas (subgrid → alinhamento por linha) — */
+.svc-grid {
+  margin-top: 112px; /* respiro título→colunas (era 56+56 com a linha) */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto auto auto;
+  row-gap: 22px;
+}
+.svc-col {
+  grid-row: 1 / -1;
+  display: grid;
+  grid-template-rows: subgrid;
+  row-gap: 22px;
+  padding: 0 var(--svc-col-pad);
+  border-left: 1px solid var(--line-soft);
+}
+.svc-col:first-child { padding-left: 0; border-left: none; }
+.svc-col:last-child { padding-right: 0; }
+/* ícone: glifo de linha puro, padrão MRV (sem caixa, sem número) */
+.svc-ico {
+  width: 28px; height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--black);
+}
+.svc-ico svg {
+  width: 28px; height: 28px;
+  fill: none; stroke: currentColor; stroke-width: 1.5;
+  stroke-linecap: round; stroke-linejoin: round;
 }
 .svc-name {
   font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 600;
   line-height: 1.3;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--gray-3);
-}
-.svc-desc {
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--black);
-  line-height: 1.4;
-  letter-spacing: -0.005em;
-  text-wrap: pretty;
-  max-width: 460px;
-}
-.svc-meta {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  /* REGRA DO DS: alinha com o primeiro parágrafo da esquerda (svc-desc),
-     não com o número/nome (svc-num/svc-name).
-     Soma: svc-num(~14) + gap(16) + svc-name(~16) + gap(16) ≈ 62px. */
-  padding-top: 62px;
-}
-.svc-meta-block {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.svc-meta-label {
-  font-family: var(--font-display);
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--gray-3);
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  color: var(--gray-1); /* forte: título de coluna */
+  align-self: start;
 }
-.svc-meta-value {
-  font-family: var(--font-display);
+.svc-desc {
+  font-family: var(--font-body);
   font-size: 14px;
-  font-weight: 500;
-  color: var(--black);
-  letter-spacing: -0.005em;
-  line-height: 1.4;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.02em; /* entreletra mais aberta (body) */
+  color: var(--gray-2); /* médio: body legível */
+  text-wrap: pretty;
+  align-self: start;
 }
+.svc-ficha {
+  display: flex;
+  flex-direction: column;
+  gap: 36px; /* + espaço abaixo de cada bloco da ficha (ex.: Arquitetura) */
+  padding-top: 22px;
+  border-top: 1px solid var(--line-soft);
+  align-self: start;
+}
+.svc-ficha-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.svc-fl {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray-4); /* mais claro → mais contraste com o preto do valor */
+}
+.svc-fv {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.02em; /* entreletra mais aberta (body) */
+  color: var(--gray-2); /* médio: body legível */
+}
+
+/* — Cases em destaque — */
+.svc-cases {
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line-soft);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* mesmo grid das colunas */
+  align-items: baseline;
+}
+.svc-cases-label {
+  grid-column: 1; /* alinhado à 1ª coluna */
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray-1); /* mesmo estilo de "UI & Produto" */
+  white-space: nowrap;
+}
+.svc-cases-list {
+  grid-column: 2 / 4; /* começa na 2ª coluna (Branding) */
+  padding-left: var(--svc-col-pad);
+  display: flex;
+  align-items: baseline;
+  gap: 12px; /* nomes juntos, separados por bolinha */
+  flex-wrap: wrap;
+}
+.svc-sep {
+  font-family: var(--font-display);
+  font-size: 18px;
+  line-height: 1;
+  color: var(--gray-4);
+}
+.svc-case {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--gray-1); /* forte: mesmo tom escuro do título/lead */
+  transition: color 0.25s;
+}
+a.svc-case:hover { color: var(--gray-4); }
 
 /* ═══════════════════════════════════
    PROJETOS, layout cinematic alternado (dark)
@@ -926,13 +1015,11 @@ footer {
 .d5 { transition-delay: 0.4s; }
 
 /* Rows: uniform fade up, no lateral slide */
-.svc-row.rv,
 .traj-row.rv,
 .proj-hero.rv {
   opacity: 0;
   transform: translateY(24px);
 }
-.svc-row.rv.visible,
 .traj-row.rv.visible,
 .proj-hero.rv.visible {
   opacity: 1;
@@ -989,6 +1076,11 @@ footer {
     --col-label: 168px;
     --col-content-anchor: 240px;
   }
+  .services-section { --svc-col-pad: 28px; }
+  .svc-head { grid-template-columns: 1fr; }
+  .svc-headline { grid-column: auto; font-size: clamp(38px, 7vw, 72px); }
+  .svc-lead { grid-column: auto; padding-left: 0; padding-top: 20px; }
+  .svc-grid { margin-top: 88px; }
   .hero-content { grid-template-columns: 1fr; }
   .hero-content-left { border-right: none; padding: 32px 0; }
   .hero-img { padding: 0; }
@@ -1015,8 +1107,15 @@ footer {
   .hero { padding-top: 72px; }
   .hero-title { padding: 8px 0 0; }
   .hero-bar { margin-bottom: 0; }
-  .svc-row { grid-template-columns: 1fr; gap: 32px; padding: 32px 0; }
-  .svc-meta { grid-template-columns: 1fr 1fr; gap: 24px; padding-top: 0; }
+  .svc-head { grid-template-columns: 1fr; }
+  .svc-headline { grid-column: auto; }
+  .svc-lead { grid-column: auto; max-width: 100%; padding-top: 18px; padding-left: 0; }
+  .svc-grid { grid-template-columns: 1fr; grid-template-rows: none; row-gap: 0; margin-top: 64px; }
+  .svc-col { grid-row: auto; display: flex; flex-direction: column; gap: 18px; padding: 36px 0; border-left: none; border-top: 1px solid var(--line-soft); }
+  .svc-col:first-child { padding: 36px 0; border-top: 1px solid var(--line-soft); }
+  .svc-col:last-child { padding-bottom: 0; }
+  .svc-cases { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
+  .svc-cases-list { grid-column: auto; padding-left: 0; padding-right: 0; justify-content: flex-start; }
   .proj-list { gap: 64px; }
   .proj-hero-num { font-size: 48px; }
   .proj-hero-name { font-size: 26px; }
@@ -1169,73 +1268,53 @@ footer {
 
 <!-- SERVICES -->
 <section class="services-section" id="services">
-  <div class="marquee rv">
-    <div class="marquee-track">
-      <span class="marquee-text">O Que Eu Faço</span><span class="marquee-sep">✦</span><span class="marquee-text">O Que Eu Faço</span><span class="marquee-sep">✦</span><span class="marquee-text">O Que Eu Faço</span><span class="marquee-sep">✦</span><span class="marquee-text">O Que Eu Faço</span><span class="marquee-sep">✦</span><span class="marquee-text">O Que Eu Faço</span><span class="marquee-sep">✦</span><span class="marquee-text">O Que Eu Faço</span><span class="marquee-sep">✦</span><span class="marquee-text">O Que Eu Faço</span><span class="marquee-sep">✦</span><span class="marquee-text">O Que Eu Faço</span><span class="marquee-sep">✦</span><span class="marquee-text">O Que Eu Faço</span><span class="marquee-sep">✦</span><span class="marquee-text">O Que Eu Faço</span><span class="marquee-sep">✦</span>
-    </div>
-  </div>
   <div class="container">
-    <div class="svc-row rv">
-      <div class="svc-content">
-        <span class="svc-num">01</span>
-        <div class="svc-name">UI & Produto</div>
-        <div class="svc-desc">Interfaces de alta fidelidade, fluxos end-to-end, prototipação, motion de produto (microinterações, transições, estados), acessibilidade WCAG e pixel-perfect handoff. Do discovery ao delivery, do wireframe ao pixel final.</div>
+    <div class="svc-head rv">
+      <h2 class="svc-headline">O que<br>eu faço</h2>
+      <p class="svc-lead">Design com propósito e método. Transformo estratégia em produtos digitais inteligentes, acessíveis e memoráveis.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-col rv">
+        <div class="svc-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="5" width="24" height="22" rx="2"/><path d="M4 12h24M11 12v15"/></svg></div>
+        <h3 class="svc-name">UI &amp; Produto</h3>
+        <p class="svc-desc">Interfaces de alta fidelidade, fluxos end-to-end, prototipação, motion de produto (microinterações, transições, estados), acessibilidade WCAG e handoff. Do discovery ao delivery, do wireframe ao pixel final.</p>
+        <div class="svc-ficha">
+          <div class="svc-ficha-row"><span class="svc-fl">Metodologia</span><span class="svc-fv">User-Centered Design</span></div>
+          <div class="svc-ficha-row"><span class="svc-fl">Stack</span><span class="svc-fv">Figma, Framer, HTML/CSS</span></div>
+          <div class="svc-ficha-row"><span class="svc-fl">Entregáveis</span><span class="svc-fv">Hi-fi, Protótipo, Handoff</span></div>
+        </div>
       </div>
-      <div class="svc-meta">
-        <div class="svc-meta-block">
-          <span class="svc-meta-label">Metodologia</span>
-          <span class="svc-meta-value">User-Centered Design</span>
+      <div class="svc-col rv d1">
+        <div class="svc-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M20 5l7 7-15 15-7 1 1-7L20 5z"/><path d="M17 8l7 7"/></svg></div>
+        <h3 class="svc-name">Branding &amp; Identidade</h3>
+        <p class="svc-desc">Construção da linguagem visual de marca: logo, naming, tipografia, paleta, grid, voz da marca, manifesto e guidelines. Direção de arte para produto digital, marketing e rebranding.</p>
+        <div class="svc-ficha">
+          <div class="svc-ficha-row"><span class="svc-fl">Disciplinas</span><span class="svc-fv">Direção de arte, Tipografia, Cor</span></div>
+          <div class="svc-ficha-row"><span class="svc-fl">Entregáveis</span><span class="svc-fv">Logo, Naming, Manual, Guidelines</span></div>
+          <div class="svc-ficha-row"><span class="svc-fl">Aplicações</span><span class="svc-fv">Produto, Marketing, Web</span></div>
         </div>
-        <div class="svc-meta-block">
-          <span class="svc-meta-label">Stack</span>
-          <span class="svc-meta-value">Figma, Framer, HTML/CSS</span>
-        </div>
-        <div class="svc-meta-block">
-          <span class="svc-meta-label">Entregáveis</span>
-          <span class="svc-meta-value">Hi-fi, Protótipo, Handoff</span>
+      </div>
+      <div class="svc-col rv d2">
+        <div class="svc-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4 4 10.5l12 6.5 12-6.5L16 4z"/><path d="M4 16l12 6.5 12-6.5"/><path d="M4 21.5l12 6.5 12-6.5"/></svg></div>
+        <h3 class="svc-name">Design System</h3>
+        <p class="svc-desc">Atomic design, arquitetura de tokens, componentes, documentação técnica e governança. Sistemas escaláveis que eu crio, lidero e mantenho cross-functional com engenharia.</p>
+        <div class="svc-ficha">
+          <div class="svc-ficha-row"><span class="svc-fl">Arquitetura</span><span class="svc-fv">Atomic + Tokens</span></div>
+          <div class="svc-ficha-row"><span class="svc-fl">IA + Vibe Coding</span><span class="svc-fv">Claude, Gemini, Midjourney</span></div>
+          <div class="svc-ficha-row"><span class="svc-fl">Cases</span><span class="svc-fv">Delta, MRV, Dasa</span></div>
         </div>
       </div>
     </div>
-    <div class="svc-row rv d1">
-      <div class="svc-content">
-        <span class="svc-num">02</span>
-        <div class="svc-name">Branding & Identidade</div>
-        <div class="svc-desc">Construção da linguagem visual de marca: logo, naming, tipografia, paleta, grid, voz da marca, manifesto e guidelines. Direção de arte para produto digital, marketing e rebranding.</div>
-      </div>
-      <div class="svc-meta">
-        <div class="svc-meta-block">
-          <span class="svc-meta-label">Disciplinas</span>
-          <span class="svc-meta-value">Direção de arte, Tipografia, Cor</span>
-        </div>
-        <div class="svc-meta-block">
-          <span class="svc-meta-label">Entregáveis</span>
-          <span class="svc-meta-value">Logo, Naming, Manual, Guidelines</span>
-        </div>
-        <div class="svc-meta-block">
-          <span class="svc-meta-label">Aplicações</span>
-          <span class="svc-meta-value">Produto, Marketing, Web</span>
-        </div>
-      </div>
-    </div>
-    <div class="svc-row rv d2">
-      <div class="svc-content">
-        <span class="svc-num">03</span>
-        <div class="svc-name">Design System</div>
-        <div class="svc-desc">Atomic design, arquitetura de tokens, componentes, documentação técnica e governança. Sistemas escaláveis que eu crio, lidero e mantenho cross-functional com engenharia.</div>
-      </div>
-      <div class="svc-meta">
-        <div class="svc-meta-block">
-          <span class="svc-meta-label">Arquitetura</span>
-          <span class="svc-meta-value">Atomic + Tokens</span>
-        </div>
-        <div class="svc-meta-block">
-          <span class="svc-meta-label">IA + Vibe Coding</span>
-          <span class="svc-meta-value">Claude, Gemini, Midjourney</span>
-        </div>
-        <div class="svc-meta-block">
-          <span class="svc-meta-label">Cases</span>
-          <span class="svc-meta-value">Delta, MRV, Dasa</span>
-        </div>
+    <div class="svc-cases rv">
+      <span class="svc-cases-label">Onde já atuei</span>
+      <div class="svc-cases-list">
+        <a href="case-mrv.html" class="svc-case">MRV</a>
+        <span class="svc-sep" aria-hidden="true">•</span>
+        <a href="case-ford.html" class="svc-case">Ford</a>
+        <span class="svc-sep" aria-hidden="true">•</span>
+        <span class="svc-case">Vivo</span>
+        <span class="svc-sep" aria-hidden="true">•</span>
+        <span class="svc-case">Accenture</span>
       </div>
     </div>
   </div>
@@ -1370,7 +1449,7 @@ document.querySelectorAll('.nav-menu a').forEach(a => {
   var nn=document.querySelector(".nav-name");
   if(!nn)return;
   window.addEventListener("scroll",function(){
-    nn.style.background=window.scrollY>60?"rgba(255,255,255,0.85)":"rgba(255,255,255,0.55)";
+    nn.style.background=window.scrollY>60?"rgba(244,244,160,0.72)":"rgba(255,255,255,0.55)";
   });
 }catch(e){console.warn("nav-scroll error",e)}})();
 
