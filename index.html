@@ -114,7 +114,7 @@ p, .hero-body, .svc-desc, .traj-role,
    ═══════════════════════════════════ */
 .nav-name {
   position: fixed;
-  top: 20px;
+  top: 44px; /* baixado 24px do topo (Adri 31/mai) */
   left: max(calc(var(--px) - 20px), calc((100vw - var(--max-w)) / 2 + var(--px) - 20px));
   z-index: 100;
   font-family: var(--font-display);
@@ -148,7 +148,7 @@ p, .hero-body, .svc-desc, .traj-role,
    ═══════════════════════════════════ */
 .nav-float {
   position: fixed;
-  top: 20px;
+  top: 44px; /* baixado 24px junto com a pill */
   right: max(var(--px), calc((100vw - var(--max-w)) / 2 + var(--px)));
   z-index: 100;
   display: flex;
@@ -284,14 +284,14 @@ footer           { position: relative; z-index: 5; }
    HERO, Structured editorial layout
    ═══════════════════════════════════ */
 .hero {
-  padding-top: var(--space-title);
+  padding-top: 120px; /* nav baixada (bottom ~72) + gap 48 até "São Paulo" = 120 */
   padding-bottom: var(--section-gap); /* respiro até a faixa de projetos */
 }
 .hero-title {
   font-family: var(--font-display);
   font-size: clamp(40px, 7.8vw, 108px);
   font-weight: 500;
-  line-height: 1.0625; /* Figma: 119/112 */
+  line-height: 0.9; /* entrelinha apertada (Adri 30/mai) */
   letter-spacing: -0.035em; /* Figma: -4px @ 112px = -0.0357em (proporcional) */
   text-transform: uppercase;
   padding: var(--space-md) 0 0;
@@ -302,31 +302,31 @@ footer           { position: relative; z-index: 5; }
 .hero-top { position: relative; }
 .hero-top-left { position: relative; z-index: 2; max-width: 60%; display: flex; flex-direction: column; align-items: flex-start; }
 .hero-reg { width: 26px; height: 26px; color: var(--black); display: block; flex-shrink: 0; }
-.hero-reg-row { display: flex; align-items: center; gap: 14px; margin-bottom: var(--space-md); }
+.hero-reg-row { display: flex; align-items: center; gap: 14px; margin-bottom: var(--space-md); } /* São Paulo = legenda do título → grupo coeso (24); o respiro de 96 fica ACIMA do bloco e abaixo (até a tarja) */
 .hero-top-left .hero-title { padding: 0; }
 .hero-spark { color: var(--accent); font-weight: 400; font-size: 0.3em; vertical-align: 0.5em; }
 .hero-lead { font-family: var(--font-body); font-size: 18px; font-weight: 500; line-height: 1.45; letter-spacing: -0.005em; color: var(--gray-1); margin-top: var(--space-deck); text-wrap: pretty; }
 .hero-loc { font-family: var(--font-display); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1; color: var(--gray-4); }
 .hero-scroll { margin-top: var(--space-md); font-size: 22px; line-height: 1; color: var(--black); text-decoration: none; }
 
-.hero-art { position: absolute; top: 5%; right: -2%; width: 62%; z-index: 1; pointer-events: none; }
-.hero-art-img { width: 100%; height: auto; display: block; mix-blend-mode: multiply; }
-.hero-lbl { position: absolute; font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.1em; font-size: 12px; line-height: 1.55; color: var(--gray-1); z-index: 2; white-space: nowrap; }
-.li-tl { top: 7%; left: 14%; font-weight: 600; }
-.li-001 { top: 27%; left: 14%; }
-.li-001 b { font-weight: 700; font-size: 14px; }
+.hero-art { position: absolute; bottom: 0; right: -2%; width: 56%; z-index: 1; pointer-events: none; } /* blob ancorada na base (bottom:0) e à direita (right:-2%) — aumentada p/ cima/esq via width (Adri 31/mai: maior, pode vazar o alinhamento pra cima, base mantida onde está). Labels em % acompanham as features do vídeo automaticamente. */
+.hero-art-img { width: 100%; height: auto; display: block; mix-blend-mode: multiply; filter: hue-rotate(8deg) saturate(1.03) brightness(1.06); -webkit-mask-image: linear-gradient(90deg, transparent 0%, transparent 28%, #000 44%); mask-image: linear-gradient(90deg, transparent 0%, transparent 28%, #000 44%); }/* filter: aproxima a blob (#e7f137) ao token --accent #D6FF4D (blob é do vídeo; p/ hex exato reexportar). mask: some a borda esquerda do vídeo (atrás do título) p/ os nós do blueprint não encostarem nas letras */
+.hero-lbl { position: absolute; font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.1em; font-size: 7px; line-height: 1.55; color: var(--gray-1); z-index: 2; white-space: nowrap; } /* legendas decorativas: bem pequenas (Adri 31/mai) */
+.li-tl { top: 91%; left: 74%; font-weight: 600; color: var(--black); } /* abaixo da coluna [COLORS], em preto (Adri 31/mai) */
+.li-001 { top: 46%; left: 14%; }
+.li-001 b { font-weight: 700; font-size: 8px; }
 .li-001 i { display: block; font-style: normal; color: var(--gray-4); margin-top: 4px; }
-.li-v03 { top: 46%; left: 14%; }
+.li-v03 { top: 70%; left: 14%; }
 .li-v03 i { display: block; font-style: normal; color: var(--gray-4); }
 .li-v03 b { display: block; font-weight: 700; }
-.li-tok { top: 40%; left: 35%; line-height: 2; color: var(--gray-2); font-weight: 500; }
+.li-tok { top: 74%; left: 74%; line-height: 2; color: var(--white); font-weight: 500; } /* sobre a mancha preta: branco (liberdade de ilustração) */
 .hero-darkblob { position: absolute; right: 6%; bottom: 1%; width: 30%; height: 34%; border-radius: 50%; background: radial-gradient(circle at 50% 50%, rgba(17,17,17,0.5) 0%, rgba(17,17,17,0.16) 46%, transparent 72%); filter: blur(16px); z-index: 1; mix-blend-mode: multiply; }
 .hero-badge { position: absolute; top: 24%; right: 18%; width: 132px; height: 132px; z-index: 3; }
 .hero-badge svg { width: 100%; height: 100%; animation: badge-spin 22s linear infinite; }
 .hero-badge text { font-family: var(--font-display); font-size: 6.6px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; fill: var(--black); }
 .hero-badge-star { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 19px; color: var(--black); }
 @keyframes badge-spin { to { transform: rotate(360deg); } }
-.hero-swatch { position: absolute; top: 64%; left: 35%; display: flex; flex-direction: column; align-items: flex-start; gap: 5px; z-index: 2; }
+.hero-swatch { position: absolute; top: 93%; left: 35%; display: flex; flex-direction: column; align-items: flex-start; gap: 5px; z-index: 2; } /* escala de cores alinhada com a base de "VISUAL DESIGN" */
 .hero-swatch-bar { display: flex; }
 .hero-swatch-bar i { width: 21px; height: 13px; display: block; }
 .hero-swatch em { font-family: var(--font-display); font-size: 10px; font-style: normal; letter-spacing: 0.06em; color: #8f961f; }
@@ -342,6 +342,8 @@ footer           { position: relative; z-index: 5; }
     margin: var(--space-lg) auto 0;
     top: auto; right: auto;
   }
+  /* mobile: arte empilhada e centrada — sem o mask de borda esquerda (era só p/ o overlap com o título no desktop) */
+  .hero-art-img { -webkit-mask-image: none; mask-image: none; }
   /* labels decorativos são posicionados por % do desktop — escondidos no mobile */
   .hero-lbl, .hero-badge, .hero-swatch, .hero-darkblob { display: none; }
 }
@@ -354,15 +356,15 @@ footer           { position: relative; z-index: 5; }
    ═══════════════════════════════════ */
 .ps {
   display: grid;
-  grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: var(--space-deck);
-  align-items: stretch; /* ilustração = altura do texto (topo + base alinhados) */
-  padding-top: var(--space-lg);
+  align-items: center; /* bloco de texto (tokens 48/48, grupo coeso) centralizado vert. no meio da ilustra */
+  padding-top: 80px; /* tarja→ilustra = 80 (header reduzido 96→80; sobe a ilustra). base (hero padding-bottom) segue 96 */
 }
-/* ESQUERDA: ilustração ancorada à altura do bloco de texto (caixa de grid) */
-.ps-illus { position: relative; align-self: stretch; min-height: 0; }
-.ps-vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: left center; mix-blend-mode: multiply; } /* ilustração estática de-pixels */
-/* DIREITA: texto */
+/* ESQUERDA: ilustração estática grande, define a altura da linha */
+.ps-illus { position: relative; display: flex; justify-content: center; }
+.ps-vid { width: 100%; max-width: 480px; height: auto; display: block; mix-blend-mode: multiply; }
+/* DIREITA: texto — grupo coeso (título→lead→CTA, ritmo 48), centralizado na ilustra */
 .ps-title {
   font-family: var(--font-display);
   font-size: clamp(28px, 3.3vw, 52px);
@@ -444,7 +446,7 @@ footer           { position: relative; z-index: 5; }
    SERVICES
    ═══════════════════════════════════ */
 .services-section {
-  padding: var(--space-section) 0 var(--section-gap); /* topo de seção → conteúdo */
+  padding: var(--space-loose) 0; /* topo/base de seção padronizados: 96/96 */
   border-top: 1px solid var(--gray-5);
 }
 .section-title {
@@ -622,7 +624,7 @@ a.svc-case:hover { color: var(--gray-4); }
    texto do outro. Lados alternam pra criar ritmo editorial.
    ═══════════════════════════════════ */
 .projects-section {
-  padding: 0 0 var(--section-gap);
+  padding: 0 0 var(--space-loose); /* lidera com marquee full-bleed → topo 0 (faixa encosta); respiro antes = base da seção anterior (96) */
   background: var(--black);
 }
 .projects-section .marquee { background: transparent; border-bottom-color: rgba(255,255,255,0.12); }
@@ -749,7 +751,7 @@ a.svc-case:hover { color: var(--gray-4); }
    TRAJECTORY, Clean table
    ═══════════════════════════════════ */
 .trajectory-section {
-  padding: 0 0 var(--section-gap);
+  padding: 0 0 var(--space-loose); /* lidera com marquee full-bleed → topo 0 (faixa encosta) */
 }
 .traj-list {
   display: flex;
@@ -809,7 +811,7 @@ a.svc-case:hover { color: var(--gray-4); }
    SOBRE MIM, Unified section
    ═══════════════════════════════════ */
 .about-section {
-  padding: 0 0 var(--section-gap);
+  padding: 0 0 var(--space-loose); /* lidera com marquee → topo 0 (faixa encosta) */
   border-top: 1px solid var(--gray-5);
 }
 .about-content {
@@ -863,7 +865,7 @@ a.svc-case:hover { color: var(--gray-4); }
    ═══════════════════════════════════ */
 .cta-section {
   background: var(--black); color: var(--white);
-  padding: var(--space-section) 0; text-align: center;
+  padding: var(--space-loose) 0; text-align: center; /* 96/96 padronizado */
 }
 .cta-title {
   font-family: var(--font-display);
@@ -971,7 +973,7 @@ footer {
   height: 28px;
   display: flex;
   align-items: center;
-  margin: var(--space-md) 0 0 0;
+  margin: var(--space-deck) 0 0 0; /* título→tarja = 48 (= gap São Paulo→pill); sobe a tarja */
   position: relative;
   z-index: 5;
 }
@@ -1168,7 +1170,6 @@ footer {
           <span class="hero-loc">São Paulo, BR · Remoto</span>
         </div>
         <h1 class="hero-title rv">Design Systems,<br>Product &amp;<br>Visual Design</h1>
-        <p class="hero-lead rv d1">Do pixels a sistemas. De sistemas a produtos.</p>
       </div>
       <div class="hero-art rv d2" aria-hidden="true">
         <video class="hero-art-img" src="img/animaheader.mp4" data-rate="0.5" autoplay loop muted playsinline></video>
