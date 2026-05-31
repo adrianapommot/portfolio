@@ -49,16 +49,16 @@
   --max-w: 1440px;
   --px: 40px;
 
-  /* ─── ESCALA DE ESPAÇAMENTO ───────────────── */
-  /* tight = elementos relacionados (intra-bloco) */
-  /* mid   = entre blocos do mesmo grupo */
-  /* loose = entre seções                         */
-  --space-tight: 24px;
-  --space-mid: 40px;
-  --space-loose: 96px;
-  /* escala canônica (DESIGN-SYSTEM §0 · piso 24) — usar nos blocos novos */
-  --space-md: 24px; --space-lg: 36px; --space-deck: 48px; --space-title: 72px; --space-section: 112px;
-  /* --space-deck: distância padrão título → subtítulo/deck (token único, usado em hero/.ps/serviços) */
+  /* ─── ESCALA DE ESPAÇAMENTO — escala única, tudo múltiplo de 8 ───────────────── */
+  /* Por papel: md=intra-grupo · lg=entre blocos · mid=grupo · deck=título→subtítulo
+     title=header→conteúdo · loose=entre seções · section=topo de seção */
+  --space-md: 24px;       /* 8×3 */
+  --space-lg: 32px;       /* 8×4 */
+  --space-mid: 40px;      /* 8×5 */
+  --space-deck: 48px;     /* 8×6  — título → subtítulo */
+  --space-title: 72px;    /* 8×9  — header → conteúdo */
+  --space-loose: 96px;    /* 8×12 — entre seções */
+  --space-section: 112px; /* 8×14 — topo de seção */
 
   /* ─── ESPAÇAMENTO DE SEÇÕES ───────────────── */
   /* Distância vertical entre o fim do conteúdo de */
