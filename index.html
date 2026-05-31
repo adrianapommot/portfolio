@@ -285,7 +285,7 @@ footer           { position: relative; z-index: 5; }
    ═══════════════════════════════════ */
 .hero {
   padding-top: var(--space-title);
-  padding-bottom: 0; /* anima encaixa na faixa de projetos (overlap negativo abaixo) */
+  padding-bottom: var(--section-gap); /* respiro até a faixa de projetos */
 }
 .hero-title {
   font-family: var(--font-display);
@@ -361,7 +361,7 @@ footer           { position: relative; z-index: 5; }
 }
 /* ESQUERDA: animação ocupa o lado inteiro (sem legendas) */
 .ps-illus { position: relative; display: flex; align-items: center; justify-content: center; }
-.ps-vid { width: 100%; max-width: 480px; height: auto; display: block; mix-blend-mode: multiply; -webkit-mask-image: linear-gradient(to bottom, #000 86%, transparent 100%); mask-image: linear-gradient(to bottom, #000 86%, transparent 100%); }
+.ps-vid { width: 100%; max-width: 480px; height: auto; display: block; mix-blend-mode: multiply; } /* ilustração estática de-pixels (white-bg dropado no creme) */
 /* DIREITA: texto */
 .ps-title {
   font-family: var(--font-display);
@@ -476,9 +476,9 @@ footer           { position: relative; z-index: 5; }
 .svc-headline {
   font-family: var(--font-display);
   font-size: clamp(40px, 6.5vw, 92px);
-  font-weight: 400;
-  line-height: 0.98;
-  letter-spacing: -0.02em;
+  font-weight: 500;        /* estilo-padrão de título de seção (= hero / CTA) */
+  line-height: 1.0625;
+  letter-spacing: -0.035em;
   text-transform: uppercase;
   color: var(--black);
 }
@@ -624,10 +624,6 @@ a.svc-case:hover { color: var(--gray-4); }
   padding: 0 0 var(--section-gap);
   background: var(--black);
 }
-/* desktop: faixa preta sobe sobre o corte da animação (encaixe). Mobile NÃO (cobriria o CTA). */
-@media (min-width: 1025px) {
-  .projects-section { margin-top: calc(-1 * var(--space-title)); }
-}
 .projects-section .marquee { background: transparent; border-bottom-color: rgba(255,255,255,0.12); }
 .projects-section .marquee-text { color: var(--white); }
 .projects-section .marquee-sep { color: var(--accent); }
@@ -695,9 +691,9 @@ a.svc-case:hover { color: var(--gray-4); }
 .proj-hero-name {
   font-family: var(--font-display);
   font-size: clamp(28px, 3.3vw, 52px);
-  font-weight: 400;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  font-weight: 500;        /* estilo-padrão de título sub-tier (= ps-title) */
+  line-height: 1.06;
+  letter-spacing: -0.025em;
   text-transform: uppercase;
   color: var(--white);
   text-wrap: balance;
@@ -1205,7 +1201,7 @@ footer {
     <div class="ps">
       <!-- ESQUERDA: animação (ocupa o lado inteiro, sem legendas) -->
       <div class="ps-illus rv d1">
-        <video class="ps-vid" src="img/pixels-anim.mp4" data-rate="0.35" autoplay loop muted playsinline></video>
+        <img class="ps-vid" src="img/de-pixels.png" alt="" aria-hidden="true">
       </div>
       <!-- DIREITA: texto -->
       <div class="ps-text">
