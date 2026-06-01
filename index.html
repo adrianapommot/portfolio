@@ -40,10 +40,10 @@
       </span>
       <span class="hero-tag">Designer Sênior · 15 anos</span>
     </div>
-    <h1 class="hero-title rv"><span>Design</span><span>Systems,</span><span>Product &amp;</span><span class="hl">Visual Design</span></h1>
+    <h1 class="hero-title"><span>Design</span><span>Systems,</span><span>Product &amp;</span><span class="hl">Visual Design</span></h1>
     <div class="hero-foot">
-      <p class="lead rv d1">Designer sênior · 15 anos na interseção entre produto, interface e linguagem visual.</p>
-      <div class="hero-ctas rv d2">
+      <p class="lead">Designer sênior · 15 anos na interseção entre produto, interface e linguagem visual.</p>
+      <div class="hero-ctas">
         <a href="#work" class="btn btn--primary">Ver projetos <span>→</span></a>
         <a href="#contato" class="btn btn--ghost">Download CV <span>↓</span></a>
       </div>
@@ -176,6 +176,8 @@
 (function () {
   "use strict";
   var $ = function (s, c) { return (c || document).querySelector(s); };
+  // dispara a animação de entrada do hero (estado padrão é visível; isto só ativa o fade)
+  if (document.body) document.body.classList.add("hero-ready");
 
   /* ── DATA ─────────────────────────────────────────────── */
   var SKILLS = ["UI Design", "Design System", "Branding & Identidade", "Motion", "Branding de Interface", "Figma", "Prototipação"];
@@ -232,9 +234,13 @@
   var esc = function (s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;"); };
 
   /* ── RENDER ───────────────────────────────────────────── */
-  // ticker
+  // ticker — repete a base várias vezes p/ loop contínuo (metade da faixa = -50%)
   var tk = $("#ticker");
-  if (tk) { var row = SKILLS.concat(SKILLS).map(function (s) { return '<span class="s">✦</span><span class="t">' + esc(s) + "</span>"; }).join(""); tk.innerHTML = row; }
+  if (tk) {
+    var base = SKILLS.concat(SKILLS, SKILLS, SKILLS); // 1 metade larga o bastante p/ qualquer tela
+    var half = base.map(function (s) { return '<span class="s">✦</span><span class="t">' + esc(s) + "</span>"; }).join("");
+    tk.innerHTML = half + half; // 2 metades idênticas → loop perfeito a -50%
+  }
 
   // posters
   var pc = $("#posters");
