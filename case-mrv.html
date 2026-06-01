@@ -851,6 +851,21 @@ if(t&&f)t.addEventListener('click',function(){f.classList.toggle('open');});})()
 document.querySelectorAll('.nav-menu a').forEach(function(a){
   a.addEventListener('click',function(){var f=document.getElementById('navFloat');if(f)f.classList.remove('open');});
 });
+
+/* nav: animação do carousel "Adriana Pommot" via JS (CSS :hover não funciona) */
+(function(){
+  var navName = document.querySelector('.nav-name');
+  var navRoll = document.querySelector('.nav-roll');
+  if (!navName || !navRoll) return;
+
+  navName.addEventListener('mouseenter', function(){
+    navRoll.style.transform = 'translateY(-100%)';
+  });
+
+  navName.addEventListener('mouseleave', function(){
+    navRoll.style.transform = 'translateY(0)';
+  });
+})();
 </script>
 </body>
 </html>

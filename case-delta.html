@@ -771,6 +771,18 @@ document.querySelectorAll('.nav-menu a').forEach(function(a){a.addEventListener(
   }
   renderNav();
 })();
+/* nav: animação do carousel "Adriana Pommot" via JS (CSS :hover não funciona) */
+(function(){
+  var navName = document.querySelector('.nav-name');
+  var navRoll = document.querySelector('.nav-roll');
+  if (!navName || !navRoll) return;
+  navName.addEventListener('mouseenter', function(){
+    navRoll.style.transform = 'translateY(-100%)';
+  });
+  navName.addEventListener('mouseleave', function(){
+    navRoll.style.transform = 'translateY(0)';
+  });
+})();
 </script>
 </body>
 </html>
