@@ -33,7 +33,7 @@
   --space-section:112px; /* seção → seção */
   --t-hero:clamp(44px,7vw,96px); --t-label:13px; --t-caption:12px;
   /* escala tipográfica do conteúdo — fonte única no sistema consolidado */
-  --ty-display:clamp(54px,5.6vw,74px); --ty-title:clamp(44px,4.8vw,60px); --ty-lead:clamp(16px,1.4vw,19px);
+  --ty-display:clamp(54px,5.6vw,74px); --ty-title:clamp(32px,3.4vw,48px); --ty-lead:clamp(16px,1.4vw,19px);
   --ty-copy:17px; --ty-small:14px; --ty-metric:32px; --ty-label:12px;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -372,7 +372,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 .prob-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gut)}
 .prob-card{position:relative;background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 26px 32px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(17,17,17,.04),0 10px 30px rgba(17,17,17,.03);transition:transform .28s cubic-bezier(.2,.7,.3,1),box-shadow .28s ease}
 .prob-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--line);transition:background .25s}
-.prob-card:hover{transform:translateY(-6px);box-shadow:0 18px 46px rgba(224,255,51,.5),0 6px 16px rgba(224,255,51,.3)}
+.prob-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(17,17,17,.10),0 5px 14px rgba(17,17,17,.05)}
 .prob-card:hover::before{background:var(--accent)}
 .prob-num{font-size:34px;font-weight:600;letter-spacing:-.03em;color:var(--gray-4);font-variant-numeric:tabular-nums;margin-bottom:26px}
 .prob-title{font-size:var(--ty-copy);font-weight:600;letter-spacing:-.005em;line-height:1.25;color:var(--black);margin-bottom:12px;text-wrap:balance}
@@ -437,7 +437,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 .res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gut)}
 .res-card{position:relative;background:#fff;border:1px solid var(--line);border-radius:18px;padding:34px 30px 36px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(17,17,17,.04),0 10px 30px rgba(17,17,17,.03);transition:transform .28s cubic-bezier(.2,.7,.3,1),box-shadow .28s ease}
 .res-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--line);transition:background .25s}
-.res-card:hover{transform:translateY(-6px);box-shadow:0 18px 46px rgba(224,255,51,.5),0 6px 16px rgba(224,255,51,.3)}
+.res-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(17,17,17,.10),0 5px 14px rgba(17,17,17,.05)}
 .res-card:hover::before{background:var(--accent)}
 .res-num{font-size:clamp(48px,5.5vw,72px);font-weight:600;letter-spacing:-.04em;line-height:.9;color:var(--black);font-variant-numeric:tabular-nums;margin-bottom:24px}
 .res-num i{font-style:normal;font-size:.5em;font-weight:600;color:inherit;margin-left:2px}
@@ -840,7 +840,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 <div class="footer-grid">
 <div><div class="footer-logo">Adriana Pommot</div><div class="footer-social"><a href="https://linkedin.com/in/adriana-pommot" target="_blank">LinkedIn</a><a href="https://instagram.com/ultraviolenta.ink" target="_blank">Instagram</a><a href="mailto:adrianapommot@gmail.com">Email</a></div></div>
 <div><div class="footer-col-title">Páginas</div><div class="footer-col-links"><a href="index.html#work">Projetos</a><a href="index.html#services">Serviços</a><a href="index.html#about">Sobre Mim</a><a href="#contact">Contato</a></div></div>
-<div><div class="footer-col-title">Projetos</div><div class="footer-col-links"><a href="case-mrv.html">MRV</a><a href="case-delta.html">Delta DS</a><a href="case-chorume.html">Chorume</a></div></div>
+<div><div class="footer-col-title">Projetos</div><div class="footer-col-links"><a href="case-mrv.html">MRV</a><a href="case-delta.html">Delta DS</a></div></div>
 <div><div class="footer-col-title">Contato</div><div class="footer-col-links"><a href="mailto:adrianapommot@gmail.com">adrianapommot@gmail.com</a><a href="#">São Paulo, BR</a></div></div>
 </div>
 <div class="footer-bottom"><span class="footer-copy">© 2026 Adriana Pommot</span><span class="footer-copy">Visual & Interface Design</span></div>

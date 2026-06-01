@@ -114,7 +114,7 @@ p { text-wrap: pretty; }
 @keyframes ticker { to { transform: translateX(-50%); } }
 
 /* ═══════════════════════════════════ PIXELS (A) ═══════════════ */
-.pixels { background: var(--paper); padding: clamp(72px, 10vw, 120px) 0; }
+.pixels { background: var(--paper); padding: clamp(48px, 5.5vw, 80px) 0; }
 .pixels-grid { display: grid; grid-template-columns: 0.78fr 1.22fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
 .pixels-text { display: flex; flex-direction: column; align-items: flex-start; gap: 26px; }
 .pixels-art { display: flex; justify-content: center; }
@@ -127,7 +127,7 @@ p { text-wrap: pretty; }
 .pixels-cta:hover .ar { transform: translateX(6px); }
 
 /* ═══════════════════════════════════ PROJETOS (X2 pôster) ═════ */
-.projects { background: var(--dark); color: #fff; padding: clamp(72px, 9vw, 112px) 0; }
+.projects { background: var(--dark); color: #fff; padding: clamp(48px, 5.5vw, 80px) 0; }
 .sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: clamp(40px, 5vw, 56px); }
 .sec-head .eyebrow.on-dark { color: rgba(255,255,255,.45); }
 .sec-head .eyebrow .em { color: var(--accent); }
@@ -151,7 +151,7 @@ p { text-wrap: pretty; }
 .poster:hover .poster-cta { gap: 14px; }
 
 /* ═══════════════════════════════════ SERVIÇOS (cards) ═════════ */
-.services { background: var(--bone); padding: clamp(72px, 9vw, 112px) 0; }
+.services { background: var(--bone); padding: clamp(48px, 5.5vw, 80px) 0; }
 .svc-head { display: flex; justify-content: space-between; align-items: flex-end; gap: clamp(24px,4vw,48px); margin-bottom: clamp(40px,5vw,56px); flex-wrap: wrap; }
 .svc-headline { font-size: clamp(48px, 6.5vw, 80px); font-weight: 500; letter-spacing: -0.03em; line-height: 0.95; text-transform: uppercase; color: var(--ink); }
 .svc-headline span { display: block; }
@@ -159,7 +159,7 @@ p { text-wrap: pretty; }
 .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .svc-card { background: var(--paper); border: 1px solid #ece8e1; border-radius: 18px; padding: 0 28px 28px; display: flex; flex-direction: column; position: relative; overflow: hidden; min-height: 460px; box-shadow: 0 1px 2px rgba(17,17,17,.05), 0 10px 30px rgba(17,17,17,.04);
   transition: transform .28s cubic-bezier(.2,.7,.3,1), box-shadow .28s ease; }
-.svc-card:hover { transform: translateY(-6px); box-shadow: 0 18px 46px rgba(224,255,51,.55), 0 6px 16px rgba(224,255,51,.34); }
+.svc-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(17,17,17,.10), 0 5px 14px rgba(17,17,17,.05); }
 .svc-bar { position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--line); transition: background .25s; }
 .svc-card:hover .svc-bar { background: var(--accent); }
 .svc-cardtop { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; }
@@ -176,7 +176,7 @@ p { text-wrap: pretty; }
 .svc-fv { font-size: 14px; font-weight: 500; line-height: 1.4; text-align: right; color: var(--ink-2); }
 
 /* ═══════════════════════════════════ TRAJETÓRIA (D roster) ════ */
-.traj { background: var(--paper); padding: clamp(72px, 9vw, 112px) 0; }
+.traj { background: var(--paper); padding: clamp(48px, 5.5vw, 80px) 0; }
 .traj-head { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; margin-bottom: clamp(32px,4vw,44px); }
 .traj-archive { display: inline-flex; align-items: center; gap: 9px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; color: var(--ink-2); border: 1px solid var(--line); border-radius: 999px; padding: 11px 20px; transition: background .25s, border-color .25s, color .25s; }
 .traj-archive:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
@@ -195,7 +195,7 @@ p { text-wrap: pretty; }
 .now-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); background: var(--accent); padding: 5px 11px; border-radius: 999px; white-space: nowrap; vertical-align: baseline; margin-left: 16px; }
 
 /* ═══════════════════════════════════ SOBRE MIM (C navegador) ══ */
-.about { background: var(--paper); border-top: 1px solid var(--line); padding: clamp(72px, 9vw, 112px) 0; }
+.about { background: var(--paper); border-top: 1px solid var(--line); padding: clamp(48px, 5.5vw, 80px) 0; }
 .about-wrap { display: flex; flex-direction: column; }
 .about-grid { display: grid; grid-template-columns: 440px 1fr; min-height: 620px; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: var(--paper); }
 .about-rail { border-right: 1px solid var(--line); padding: clamp(48px,6vw,64px) 0 44px; display: flex; flex-direction: column; }
@@ -227,7 +227,7 @@ p { text-wrap: pretty; }
 .about-closer .hl2 { background: linear-gradient(transparent 60%, var(--accent) 60%); }
 
 /* ═══════════════════════════════════ CTA (E menu lime) ════════ */
-.cta { background: var(--accent); padding: clamp(64px, 8vw, 96px) 0; }
+.cta { background: var(--accent); padding: clamp(44px, 5vw, 72px) 0; }
 .cta-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(32px,5vw,56px); align-items: end; }
 .cta-eyebrow { font-size: 12.5px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(17,17,17,.55); margin-bottom: 22px; }
 .cta-title { font-size: clamp(48px, 7vw, 72px); font-weight: 700; letter-spacing: -0.04em; line-height: 0.88; text-transform: uppercase; color: var(--ink); }
