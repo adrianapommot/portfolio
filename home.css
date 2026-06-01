@@ -50,9 +50,9 @@ p { text-wrap: pretty; }
 
 /* ═══════════════════════════════════ NAV ═══════════════════════ */
 .nav-name { position: fixed; top: 36px; left: var(--gut); z-index: 100; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink); background: var(--accent); padding: 9px 20px; border-radius: 999px; overflow: hidden; }
-.nav-name span { display: block; line-height: 1; white-space: nowrap; transition: transform .45s cubic-bezier(.19,1,.22,1); }
-.nav-name:hover span { transform: translateY(-100%); }
-.nav-roll { display: block; overflow: hidden; height: 1em; }
+.nav-roll { display: block; overflow: hidden; height: 1em; transition: transform .45s cubic-bezier(.19,1,.22,1); }
+.nav-name:hover .nav-roll { transform: translateY(-100%); }
+.nav-name span { display: block; line-height: 1; white-space: nowrap; }
 .nav-float { position: fixed; top: 36px; right: var(--gut); z-index: 100; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
 .nav-toggle { width: 50px; height: 50px; border-radius: 50%; border: 1px solid var(--accent); cursor: pointer; background: var(--accent); display: flex; align-items: center; justify-content: center; transition: background .3s, border-color .3s; }
 .nav-toggle:hover { background: var(--ink); border-color: var(--ink); }
