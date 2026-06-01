@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sobre mim — navegador interativo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── tokens (mesmos do portfólio; valores da referência) ── */
+:root{
+  --black:#111111; --white:#ffffff;
+  --gray-2:#585550; --gray-3:#756F67; --gray-4:#B8B2A8; --gray-5:#EBE7E1;
+  --text-body:#49443C; --paper:#ffffff;   /* fundo BRANCO (creme nunca é fundo de seção) */
+  --accent:#D6FF4D; --accent-light:#E9FFA8;
+  --font-display:'Plus Jakarta Sans',sans-serif;
+  --px:48px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font-display);background:var(--paper);color:var(--black);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* ═══ SOBRE MIM — navegador interativo ═══ */
+.sm{
+  display:grid;
+  grid-template-columns:360px 1fr;
+  gap:80px;
+  align-items:start;
+  max-width:1440px;
+  margin:0 auto;
+  padding:112px var(--px);
+}
+
+/* ── sidebar (esquerda) ── */
+.sm-side{display:flex;flex-direction:column;position:sticky;top:48px;min-width:0}
+.sm-eyebrow{font-size:13px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-3)}
+.sm-sub{margin-top:16px;font-size:15px;font-weight:400;line-height:1.5;color:var(--gray-3);max-width:300px;text-wrap:pretty}
+
+.sm-tabs{margin-top:40px;display:flex;flex-direction:column;border-top:1px solid var(--gray-5)}
+.sm-tab{
+  appearance:none;background:none;border:0;cursor:pointer;
+  display:flex;align-items:center;gap:18px;
+  width:100%;text-align:left;
+  padding:20px var(--px) 20px 0;
+  margin-left:calc(-1 * var(--px));               /* sangra a barra ativa até a borda esquerda */
+  padding-left:var(--px);
+  border-bottom:1px solid var(--gray-5);
+  font-family:inherit;color:var(--black);
+  transition:background .25s ease,color .25s ease,padding .25s ease;
+}
+.sm-tab-n{font-size:13px;font-weight:600;letter-spacing:0.04em;color:var(--gray-4);transition:color .25s ease}
+.sm-tab-l{flex:1;font-size:19px;font-weight:500;letter-spacing:-0.01em}
+.sm-tab-a{font-size:18px;line-height:1;opacity:0;transform:translateX(-6px);transition:opacity .25s ease,transform .25s ease;color:var(--accent)}
+.sm-tab:hover .sm-tab-a{opacity:.5;transform:none}
+.sm-tab:hover .sm-tab-n{color:var(--gray-2)}
+.sm-tab.is-active{background:var(--black);color:var(--white)}
+.sm-tab.is-active .sm-tab-n{color:var(--accent)}
+.sm-tab.is-active .sm-tab-a{opacity:1;transform:none;color:var(--accent)}
+
+.sm-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:40px}
+.sm-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;
+  font-size:13px;font-weight:600;letter-spacing:0.04em;text-decoration:none;cursor:pointer;
+  transition:background .25s ease,border-color .25s ease,color .25s ease}
+.sm-btn--lime{background:var(--accent);color:var(--black);border:1px solid var(--accent)}
+.sm-btn--lime:hover{background:var(--accent-light);border-color:var(--accent-light)}
+.sm-btn--out{background:transparent;color:var(--black);border:1px solid var(--black)}
+.sm-btn--out:hover{background:var(--black);color:var(--white)}
+
+/* ── painel de conteúdo (direita) ── */
+.sm-main{position:relative;min-height:360px;min-width:0}
+.sm-ghost{position:absolute;top:-24px;right:0;font-size:120px;font-weight:500;line-height:1;
+  letter-spacing:-6px;color:var(--gray-5);z-index:0;pointer-events:none;user-select:none}
+
+.sm-panel{position:relative;z-index:1;display:none}
+.sm-panel.is-active{display:block;animation:smIn .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes smIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.sm-kicker{font-size:13px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--gray-4)}
+.sm-h{margin-top:16px;font-size:clamp(30px,3.4vw,40px);font-weight:500;line-height:1.12;letter-spacing:-0.025em;color:var(--black);max-width:14ch;text-wrap:balance}
+.sm-p{margin-top:24px;font-size:18px;font-weight:400;line-height:1.65;color:var(--text-body);max-width:600px;text-wrap:pretty}
+.sm-tags{margin-top:32px;display:flex;flex-wrap:wrap;gap:8px}
+.sm-tag{font-size:13px;font-weight:500;letter-spacing:0.02em;color:var(--gray-2);
+  background:var(--white);border:1px solid var(--gray-5);border-radius:999px;padding:7px 14px}
+
+/* ── mobile ── */
+@media (max-width:900px){
+  .sm{grid-template-columns:1fr;gap:48px;padding:72px 24px}
+  :root{--px:24px}
+  .sm-side{position:static}
+  .sm-sub{max-width:none}
+  .sm-main{min-height:0}
+  .sm-ghost{font-size:72px;top:-12px}
+  .sm-tab{margin-left:0;padding-left:16px}   /* sem sangria no mobile (evita overflow) */
+  .sm-h{max-width:100%}
+  .sm-p,.sm-sub,.sm-kicker{max-width:100%}
+}
+</style>
+</head>
+<body>
+
+<section class="sm" id="sobre">
+  <!-- ESQUERDA: navegação -->
+  <div class="sm-side">
+    <div class="sm-eyebrow">Sobre mim</div>
+    <p class="sm-sub">15 anos na interseção entre produto, interface e linguagem visual. Navegue pelos temas.</p>
+
+    <nav class="sm-tabs" role="tablist" aria-label="Temas sobre mim">
+      <button class="sm-tab is-active" role="tab" aria-selected="true"  data-n="01"><span class="sm-tab-n">01</span><span class="sm-tab-l">Atuação</span><span class="sm-tab-a" aria-hidden="true">&rarr;</span></button>
+      <button class="sm-tab"            role="tab" aria-selected="false" data-n="02"><span class="sm-tab-n">02</span><span class="sm-tab-l">Processo</span><span class="sm-tab-a" aria-hidden="true">&rarr;</span></button>
+      <button class="sm-tab"            role="tab" aria-selected="false" data-n="03"><span class="sm-tab-n">03</span><span class="sm-tab-l">Inteligência Artificial</span><span class="sm-tab-a" aria-hidden="true">&rarr;</span></button>
+      <button class="sm-tab"            role="tab" aria-selected="false" data-n="04"><span class="sm-tab-n">04</span><span class="sm-tab-l">Design Systems</span><span class="sm-tab-a" aria-hidden="true">&rarr;</span></button>
+      <button class="sm-tab"            role="tab" aria-selected="false" data-n="05"><span class="sm-tab-n">05</span><span class="sm-tab-l">Craft</span><span class="sm-tab-a" aria-hidden="true">&rarr;</span></button>
+    </nav>
+
+    <div class="sm-actions">
+      <a class="sm-btn sm-btn--lime" href="https://www.linkedin.com/in/adriana-pommot/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">&#8599;</span></a>
+      <a class="sm-btn sm-btn--out" href="cv-adriana-pommot.pdf" download>Currículo</a>
+    </div>
+  </div>
+
+  <!-- DIREITA: conteúdo -->
+  <div class="sm-main">
+    <div class="sm-ghost" data-ghost aria-hidden="true">01</div>
+
+    <article class="sm-panel is-active" role="tabpanel" data-n="01">
+      <div class="sm-kicker">Atuação</div>
+      <h2 class="sm-h">Na interseção entre produto, interface e linguagem visual</h2>
+      <p class="sm-p">Designer sênior com 15 anos em UI, Visual Design, Branding e Design Systems. Ao longo desses 15 anos, construí experiências digitais para Escale, Dasa, Ford, Accenture e MRV, de produtos de alta complexidade a sistemas escaláveis e identidade de marca.</p>
+      <div class="sm-tags"><span class="sm-tag">UI</span><span class="sm-tag">Visual Design</span><span class="sm-tag">Branding</span><span class="sm-tag">Design Systems</span></div>
+    </article>
+
+    <article class="sm-panel" role="tabpanel" data-n="02" hidden>
+      <div class="sm-kicker">Processo</div>
+      <h2 class="sm-h">Da estratégia à execução, sem perder o fio</h2>
+      <p class="sm-p">Navego da estratégia à execução: estruturo fluxos, refino interfaces e conecto design, produto e tecnologia. Combino direção visual, visão sistêmica e prototipação de alta fidelidade, com atenção à consistência, à acessibilidade e à qualidade do que chega à produção.</p>
+      <div class="sm-tags"><span class="sm-tag">Discovery</span><span class="sm-tag">Fluxos</span><span class="sm-tag">Prototipação</span><span class="sm-tag">Handoff</span></div>
+    </article>
+
+    <article class="sm-panel" role="tabpanel" data-n="03" hidden>
+      <div class="sm-kicker">Inteligência Artificial</div>
+      <h2 class="sm-h">IA em todo o processo, da pesquisa ao handoff</h2>
+      <p class="sm-p">Integro IA ao longo de todo o processo, da pesquisa e exploração de soluções à documentação e handoff, otimizando fluxos e reduzindo fricção entre design e engenharia. Entrego protótipos funcionais e detalhados, próximos do comportamento real do produto, que aceleram validação, alinhamento e desenvolvimento.</p>
+      <div class="sm-tags"><span class="sm-tag">Claude</span><span class="sm-tag">Gemini</span><span class="sm-tag">Midjourney</span><span class="sm-tag">Vibe Coding</span></div>
+    </article>
+
+    <article class="sm-panel" role="tabpanel" data-n="04" hidden>
+      <div class="sm-kicker">Design Systems</div>
+      <h2 class="sm-h">Sistemas que escalam sem perder clareza</h2>
+      <p class="sm-p">Construo design systems com governança e documentação capazes de dar escala aos produtos sem perder clareza visual, consistência ou previsibilidade. Arquitetura de tokens, componentes e bibliotecas que eu crio, lidero e mantenho cross-functional com engenharia.</p>
+      <div class="sm-tags"><span class="sm-tag">Tokens</span><span class="sm-tag">Componentes</span><span class="sm-tag">Governança</span><span class="sm-tag">Documentação</span></div>
+    </article>
+
+    <article class="sm-panel" role="tabpanel" data-n="05" hidden>
+      <div class="sm-kicker">Craft</div>
+      <h2 class="sm-h">Meu lugar é no craft</h2>
+      <p class="sm-p">Cuido do detalhe que sustenta o todo: ritmo tipográfico, grid, espaçamento, microinterações e estados. É no acabamento, no que chega à produção pixel a pixel, que o design vira produto, e onde eu mais gosto de estar.</p>
+      <div class="sm-tags"><span class="sm-tag">Tipografia</span><span class="sm-tag">Grid</span><span class="sm-tag">Motion</span><span class="sm-tag">Detalhe</span></div>
+    </article>
+  </div>
+</section>
+
+<script>
+(function(){
+  var tabs=document.querySelectorAll('.sm-tab');
+  var panels=document.querySelectorAll('.sm-panel');
+  var ghost=document.querySelector('[data-ghost]');
+  function activate(n){
+    tabs.forEach(function(t){
+      var on=t.dataset.n===n;
+      t.classList.toggle('is-active',on);
+      t.setAttribute('aria-selected',on?'true':'false');
+    });
+    panels.forEach(function(p){
+      var on=p.dataset.n===n;
+      p.classList.toggle('is-active',on);
+      if(on){p.removeAttribute('hidden')}else{p.setAttribute('hidden','')}
+    });
+    if(ghost) ghost.textContent=n;
+  }
+  tabs.forEach(function(t){
+    t.addEventListener('click',function(){activate(t.dataset.n)});
+  });
+})();
+</script>
+</body>
+</html>

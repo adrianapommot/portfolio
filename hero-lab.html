@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laboratório de Hero · Padrão de Projetos</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="home.css">
+<style>
+  :root{ --bone:#f4f3ef; --paper:#fff; --ink:#111; --accent:#e0ff33; --line:#e7e2da; --warm-1:#756f67; --warm-2:#b8b2a8; --body:#49443c; }
+  body{ background:#e9e7e1; }
+  /* chrome do laboratório */
+  .lab-head{ max-width:920px; margin:0 auto; padding:64px 40px 24px; }
+  .lab-kicker{ font-size:12px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--warm-1); }
+  .lab-title{ font-size:clamp(30px,4vw,46px); font-weight:700; letter-spacing:-.03em; line-height:1.02; text-transform:uppercase; color:var(--ink); margin-top:14px; }
+  .lab-sub{ font-size:17px; line-height:1.6; color:var(--body); margin-top:18px; max-width:64ch; text-wrap:pretty; }
+  .lab-list{ margin:64px auto; max-width:1520px; padding:0 28px; display:flex; flex-direction:column; gap:56px; }
+  .opt-wrap{ background:var(--paper); border-radius:20px; overflow:hidden; box-shadow:0 1px 2px rgba(17,17,17,.05),0 24px 60px rgba(17,17,17,.10); }
+  .opt-bar{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px 26px; border-bottom:1px solid var(--line); background:var(--paper); }
+  .opt-id{ display:inline-flex; align-items:center; gap:12px; }
+  .opt-id b{ font-size:13px; font-weight:700; letter-spacing:.04em; color:var(--ink); background:var(--accent); border-radius:999px; padding:5px 13px; }
+  .opt-id span{ font-size:15px; font-weight:600; letter-spacing:-.01em; color:var(--ink); }
+  .opt-note{ font-size:13px; color:var(--warm-1); text-align:right; max-width:46ch; }
+  .opt-frame{ width:100%; }
+
+  /* base de hero compartilhada */
+  .h{ position:relative; overflow:hidden; }
+  .h .wrap{ max-width:1320px; }
+  .h-back{ display:inline-flex; align-items:center; gap:9px; font-size:12px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--warm-1); }
+  .h-back svg{ width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+  .h-meta{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border-top:1px solid var(--line); margin-top:44px; }
+  .h-mi{ padding:26px clamp(18px,2vw,34px) 0; border-right:1px solid var(--line); }
+  .h-mi:first-child{ padding-left:0; }
+  .h-mi:last-child{ border-right:none; padding-right:0; }
+  .h-ml{ display:block; font-size:11.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--warm-1); margin-bottom:9px; }
+  .h-mv{ font-size:14.5px; font-weight:500; line-height:1.4; color:var(--ink); }
+
+  /* ───────── A · EDITORIAL SPLIT ───────── */
+  .optA .h{ background:var(--bone); padding:clamp(48px,6vw,80px) 0; }
+  .optA-grid{ display:grid; grid-template-columns:1.04fr .96fr; gap:clamp(32px,4vw,64px); align-items:center; }
+  .optA .h-back{ margin-bottom:30px; }
+  .optA-eyebrow{ font-size:13px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--warm-1); margin-bottom:22px; }
+  .optA-title{ font-size:clamp(46px,5.6vw,86px); font-weight:700; letter-spacing:-.045em; line-height:.9; text-transform:uppercase; color:var(--ink); }
+  .optA-title span{ display:block; }
+  .optA-hl{ display:inline-block; background:linear-gradient(transparent 14%, var(--accent) 14%, var(--accent) 86%, transparent 86%); }
+  .optA-lead{ font-size:clamp(16px,1.3vw,19px); font-weight:500; line-height:1.5; color:var(--body); max-width:46ch; margin-top:26px; text-wrap:pretty; }
+  .optA-art{ position:relative; }
+  .optA-art img{ width:100%; display:block; filter:drop-shadow(0 30px 60px rgba(17,17,17,.18)); }
+
+  /* ───────── B · TYPE-FORWARD (espelho do index) ───────── */
+  .optB .h{ background:var(--paper); padding:clamp(48px,6vw,84px) 0 0; }
+  .optB-top{ display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap; margin-bottom:clamp(40px,6vw,72px); }
+  .optB-loc{ display:inline-flex; align-items:center; gap:11px; }
+  .optB-loc img{ height:24px; }
+  .optB-loc span,.optB-tag{ font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--warm-1); }
+  .optB-title{ font-size:clamp(52px,9vw,132px); font-weight:700; letter-spacing:-.05em; line-height:.86; text-transform:uppercase; color:var(--ink); }
+  .optB-title span{ display:block; }
+  .optB-hl{ display:inline-block; background:linear-gradient(transparent 12%, var(--accent) 12%, var(--accent) 88%, transparent 88%); }
+  .optB-foot{ display:flex; justify-content:space-between; align-items:flex-end; gap:40px; flex-wrap:wrap; margin-top:clamp(34px,4vw,52px); padding-bottom:clamp(40px,5vw,60px); }
+  .optB-lead{ font-size:clamp(16px,1.3vw,19px); font-weight:500; line-height:1.5; color:var(--body); max-width:40ch; text-wrap:pretty; }
+  .optB-side{ text-align:right; }
+  .optB-side b{ display:block; font-size:13px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--ink); }
+  .optB-side span{ font-size:13px; color:var(--warm-1); }
+  .optB-ticker{ background:var(--ink); height:54px; display:flex; align-items:center; overflow:hidden; }
+  .optB-ticker .tk{ display:inline-flex; align-items:center; white-space:nowrap; animation:labtk 38s linear infinite; }
+  .optB-ticker .s{ color:var(--accent); padding:0 16px; font-size:12px; }
+  .optB-ticker .t{ font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:#eeffa0; }
+  @keyframes labtk{ to{ transform:translateX(-50%); } }
+
+  /* ───────── C · PAINEL EMOLDURADO (DNA do "Sobre mim") ───────── */
+  .optC .h{ background:var(--bone); padding:clamp(40px,5vw,68px) 0; }
+  .optC-panel{ display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--line); border-radius:20px; overflow:hidden; background:var(--paper); min-height:540px; }
+  .optC-rail{ padding:clamp(40px,4vw,60px); display:flex; flex-direction:column; }
+  .optC-eyebrow{ font-size:13px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--warm-1); }
+  .optC-logo{ height:30px; margin:0 0 28px; }
+  .optC-title{ font-size:clamp(40px,4.4vw,68px); font-weight:700; letter-spacing:-.04em; line-height:.92; text-transform:uppercase; color:var(--ink); margin-top:20px; }
+  .optC-hl{ display:inline-block; background:linear-gradient(transparent 14%, var(--accent) 14%, var(--accent) 86%, transparent 86%); }
+  .optC-lead{ font-size:16.5px; line-height:1.55; color:var(--body); max-width:42ch; margin-top:24px; text-wrap:pretty; }
+  .optC-meta{ margin-top:auto; padding-top:30px; border-top:1px solid var(--line); display:grid; grid-template-columns:1fr 1fr; gap:22px 18px; }
+  .optC-art{ position:relative; background:radial-gradient(120% 100% at 70% 10%, #fbfbf9 0%, var(--bone) 70%); border-left:1px solid var(--line); display:flex; align-items:center; justify-content:center; padding:36px; }
+  .optC-art img{ width:100%; max-width:520px; display:block; filter:drop-shadow(0 26px 54px rgba(17,17,17,.16)); }
+
+  @media(max-width:900px){
+    .optA-grid,.optC-panel{ grid-template-columns:1fr; }
+    .optC-art{ border-left:none; border-top:1px solid var(--line); }
+    .h-meta,.optC-meta{ grid-template-columns:1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="lab-head">
+  <div class="lab-kicker">Exercício · Padrão de Hero para os projetos</div>
+  <h1 class="lab-title">Três direções,<br>uma mesma linguagem</h1>
+  <p class="lab-sub">Todas claras, editoriais e alimentadas pelo index: bone e off-white, tipografia uppercase, acento lime e os mockups reais do produto. Role e me diga qual direção te encanta (ou o que misturar de cada). A escolhida vira o padrão do MRV e dos próximos cases.</p>
+</div>
+
+<div class="lab-list">
+
+  <!-- A -->
+  <div class="opt-wrap optA">
+    <div class="opt-bar">
+      <span class="opt-id"><b>A</b><span>Editorial Split</span></span>
+      <span class="opt-note">Texto à esquerda, mockup à direita. O DNA do hero da home com o produto ao lado.</span>
+    </div>
+    <div class="opt-frame">
+      <section class="h">
+        <div class="wrap">
+          <a class="h-back" href="#"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/><path d="M5 8h7"/></svg>Todos os projetos</a>
+          <div class="optA-grid">
+            <div class="optA-text">
+              <div class="optA-eyebrow">MRV · Ecossistema Financeiro</div>
+              <h1 class="optA-title"><span>Ecossistema</span><span class="optA-hl">Financeiro</span></h1>
+              <p class="optA-lead">Redesenho do autoatendimento financeiro da maior construtora da América Latina, de um fluxo de renegociação com alto abandono a um canal digital com autonomia real.</p>
+            </div>
+            <div class="optA-art"><img src="img/mrv/mockup-pair.png" alt="Telas do app financeiro MRV"></div>
+          </div>
+          <div class="h-meta">
+            <div class="h-mi"><span class="h-ml">Função</span><div class="h-mv">Design Lead</div></div>
+            <div class="h-mi"><span class="h-ml">Empresa</span><div class="h-mv">D3 · cliente MRV</div></div>
+            <div class="h-mi"><span class="h-ml">Período</span><div class="h-mv">2019 a 2020</div></div>
+            <div class="h-mi"><span class="h-ml">Foco</span><div class="h-mv">Product Design, Microinteração, Design System</div></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- B -->
+  <div class="opt-wrap optB">
+    <div class="opt-bar">
+      <span class="opt-id"><b>B</b><span>Type-forward</span></span>
+      <span class="opt-note">Tipografia gigante, igual à home. Sem imagem no hero: o produto entra na seção seguinte. Faixa lime de skills fecha o bloco.</span>
+    </div>
+    <div class="opt-frame">
+      <section class="h">
+        <div class="wrap">
+          <div class="optB-top">
+            <span class="optB-loc"><img src="img/mrv/logo-mrv.png" alt="MRV"><span>MRV · Fintech</span></span>
+            <span class="optB-tag">Case de Product Design · 2019</span>
+          </div>
+          <h1 class="optB-title"><span>Ecossistema</span><span class="optB-hl">Financeiro</span></h1>
+          <div class="optB-foot">
+            <p class="optB-lead">Redesenho do autoatendimento financeiro da maior construtora da América Latina, com autonomia real na renegociação.</p>
+            <div class="optB-side"><b>27% engajamento · 14% conversão</b><span>resultados do piloto</span></div>
+          </div>
+        </div>
+        <div class="optB-ticker"><div class="tk" id="labtk"></div></div>
+      </section>
+    </div>
+  </div>
+
+  <!-- C -->
+  <div class="opt-wrap optC">
+    <div class="opt-bar">
+      <span class="opt-id"><b>C</b><span>Painel Emoldurado</span></span>
+      <span class="opt-note">Cartão com borda arredondada, o mesmo DNA do bloco "Sobre mim" da home. Contido e premium.</span>
+    </div>
+    <div class="opt-frame">
+      <section class="h">
+        <div class="wrap">
+          <div class="optC-panel">
+            <div class="optC-rail">
+              <img class="optC-logo" src="img/mrv/logo-mrv.png" alt="MRV">
+              <div class="optC-eyebrow">Ecossistema Financeiro · 2019</div>
+              <h1 class="optC-title"><span>Ecossistema</span> <span class="optC-hl">Financeiro</span></h1>
+              <p class="optC-lead">Redesenho do autoatendimento financeiro da maior construtora da América Latina, com autonomia real na renegociação de dívidas.</p>
+              <div class="optC-meta">
+                <div class="h-mi" style="padding:0;border:none"><span class="h-ml">Função</span><div class="h-mv">Design Lead</div></div>
+                <div class="h-mi" style="padding:0;border:none"><span class="h-ml">Período</span><div class="h-mv">2019 a 2020</div></div>
+                <div class="h-mi" style="padding:0;border:none"><span class="h-ml">Empresa</span><div class="h-mv">D3 · cliente MRV</div></div>
+                <div class="h-mi" style="padding:0;border:none"><span class="h-ml">Foco</span><div class="h-mv">Product, Microinteração, DS</div></div>
+              </div>
+            </div>
+            <div class="optC-art"><img src="img/mrv/mockup-pair.png" alt="Telas do app financeiro MRV"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  (function(){
+    var skills = ["Renegociação digital","Microinterações","Design System","Acessibilidade cognitiva","Copy de baixa carga","5 estados adaptativos","Fintech"];
+    var base = skills.concat(skills, skills).map(function(s){ return '<span class="s">✦</span><span class="t">'+s+'</span>'; }).join("");
+    var el = document.getElementById("labtk");
+    if(el) el.innerHTML = base + base;
+  })();
+</script>
+</body>
+</html>

@@ -16,10 +16,10 @@
   --black:#111111; --white:#fff;
   --gray-1:#37342F; --gray-2:#585550; --gray-3:#756F67; --gray-4:#B8B2A8; --gray-5:#EBE7E1;
   --line:#E3E0DA; --chip:#F2F1EE;
-  --accent:#E8E94D;        /* amarelo ácido: fundo escuro / dots / % */
+  --accent:#e0ff33;--accent-press:#d2f51c;--bone:#f4f3ef;        /* amarelo ácido: fundo escuro / dots / % */
   --accent-dark:#8A8A20;   /* amarelo escuro: legível em fundo claro (bordas/ícones) */
   --font:'Plus Jakarta Sans',sans-serif;
-  --m:64px;   /* margem */
+  --m:clamp(24px,5vw,64px);   /* margem — fluida, alinhada à home (--gut) */
   --gut:24px; /* gutter */
   /* tokens do chrome global (navbar · CTA · footer) */
   --accent-light:#F4F4A0; --dark-surface:#2C2B2B; --surface-neutral:#F5F5F5;
@@ -33,7 +33,7 @@
   --space-section:112px; /* seção → seção */
   --t-hero:clamp(44px,7vw,96px); --t-label:13px; --t-caption:12px;
   /* escala tipográfica do conteúdo — fonte única no sistema consolidado */
-  --ty-display:clamp(54px,5.6vw,74px); --ty-title:clamp(44px,4.8vw,60px); --ty-lead:24px;
+  --ty-display:clamp(54px,5.6vw,74px); --ty-title:clamp(44px,4.8vw,60px); --ty-lead:clamp(16px,1.4vw,19px);
   --ty-copy:17px; --ty-small:14px; --ty-metric:32px; --ty-label:12px;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -42,7 +42,7 @@ img{display:block;max-width:100%}
 
 /* ───────── FLUXO CONTÍNUO ───────── */
 .flow{max-width:calc(1440px + 2*var(--m));margin:0 auto}
-.sec{padding:var(--space-section) var(--m)}
+.sec{padding:clamp(48px,5.5vw,80px) var(--m)}/* ritmo de seção alinhado à home (reduzido) */
 
 /* grid mestre de 12 colunas (reutilizado por todas as seções) */
 .grid{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--gut);align-items:start}
@@ -60,7 +60,7 @@ img{display:block;max-width:100%}
 .s-title{color:var(--black);text-wrap:balance}
 .s-lead{color:var(--gray-1);text-wrap:balance}
 .s-lead strong{font-weight:700}
-.s-text{color:var(--gray-2);text-wrap:pretty}
+.s-text{color:var(--gray-2);text-wrap:balance}
 .s-text strong{font-weight:700;color:var(--black)}
 .s-text+.s-text{margin-top:var(--space-md)}
 .s-label{color:var(--gray-1);text-wrap:balance}
@@ -201,7 +201,7 @@ img{display:block;max-width:100%}
 .sec--dark .s-index b{color:var(--accent)}
 .sec--dark .s-index em{background:rgba(255,255,255,.28)}
 .sec--dark .s-title{color:#fff}
-.apr-intro{color:rgba(255,255,255,.6);max-width:42ch;margin-top:30px}
+.apr-intro{color:rgba(255,255,255,.6);max-width:42ch;margin-top:30px;text-wrap:balance}
 .apr-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:72px}
 .apr-col{padding:0 52px;border-left:1px solid rgba(255,255,255,.13)}
 .apr-col:first-child{padding-left:0;border-left:none}
@@ -242,10 +242,10 @@ img{display:block;max-width:100%}
 .md-stage{display:flex;flex-direction:column;min-width:0}
 .md-preview{border:1px solid var(--line);border-radius:12px;overflow-y:auto;overflow-x:hidden;height:600px;background:var(--chip);scrollbar-width:thin}
 .md-preview img{width:100%;height:auto;display:block}
-.md-caption{margin-bottom:20px;padding:18px 22px;border-left:3px solid var(--accent-dark);background:#fff}
-.md-caption .md-num{display:block;margin-bottom:6px;color:var(--gray-3)}
-.md-caption .md-title{margin-bottom:8px}
-.md-caption .md-desc{max-width:660px}
+.md-caption{margin-bottom:22px}
+.md-caption .md-num{display:block;margin-bottom:10px;color:var(--gray-3)}
+.md-caption .md-title{margin-bottom:8px;font-size:var(--ty-copy);font-weight:600;line-height:1.25;letter-spacing:-.005em;color:var(--black)}
+.md-caption .md-desc{max-width:660px;text-wrap:balance}
 .overview-block{margin-top:96px}
 .fw-img{margin-top:28px;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
 .fw-img img{width:100%;display:block}
@@ -261,8 +261,8 @@ img{display:block;max-width:100%}
 /* ═══ OUTROS PROJETOS (fecho) ═══ */
 .more-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gut);margin-top:48px}
 .more-card{display:block;text-decoration:none;color:inherit}
-.more-card-img{aspect-ratio:3 / 2;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:var(--chip);margin-bottom:18px}
-.more-card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s cubic-bezier(.2,.7,.2,1)}
+.more-card-img{position:relative;aspect-ratio:3 / 2;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:var(--chip);margin-bottom:18px}
+.more-card-img img{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s cubic-bezier(.2,.7,.2,1)}
 .more-card:hover .more-card-img img{transform:scale(1.04)}
 .more-tag{display:block;color:var(--gray-3);margin-bottom:8px}
 .more-name{color:var(--black)}
@@ -275,8 +275,10 @@ img{display:block;max-width:100%}
 .sol-flow .s-label{grid-row:2;margin-bottom:8px}
 .sol-flow .s-desc{grid-row:3;margin-bottom:18px}
 .sol-flow .sp-frame{grid-row:4}
-.sp-frame{aspect-ratio:9 / 18.5;border-radius:16px;border:1.5px solid rgba(255,255,255,.1);overflow:hidden;background:#1a1a19}
-.sp-frame img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.sp-frame{aspect-ratio:9 / 18.5;border-radius:16px;border:1.5px solid rgba(255,255,255,.12);overflow:hidden;overflow-y:auto;background:#1a1a19;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.42) transparent;-webkit-overflow-scrolling:touch;box-shadow:inset 0 -30px 24px -20px rgba(17,17,17,.78)}
+.sp-frame::-webkit-scrollbar{width:6px}
+.sp-frame::-webkit-scrollbar-thumb{background:rgba(255,255,255,.42);border-radius:3px}
+.sp-frame img{width:100%;height:auto;display:block}
 .sp-frame.is-hero{border-color:var(--accent);box-shadow:0 0 26px rgba(232,233,77,.12)}
 .sec--dark .data-val{color:var(--accent)}
 .sec--dark .s-label{color:#fff}
@@ -288,45 +290,54 @@ img{display:block;max-width:100%}
    Cada papel lista TODAS as classes; a cor fica nos componentes.
    ════════════════════════════════════════════════ */
 .hero-title{font-size:var(--ty-display);font-weight:400;line-height:1.04;letter-spacing:-.02em;text-transform:uppercase}                                   /* DISPLAY · 74 */
-.s-title{font-size:var(--ty-title);font-weight:400;line-height:1.08;letter-spacing:-.015em;text-transform:uppercase}                                        /* TÍTULO · 60 */
-.s-lead{font-size:var(--ty-lead);font-weight:500;line-height:1.3;letter-spacing:-.01em}                                                                     /* LEAD · 24 */
-.apr-t,.kr-title,.more-name{font-size:var(--ty-lead);font-weight:600;line-height:1.22;letter-spacing:-.01em}                                                /* SUBTÍTULO · 24 */
+.s-title{font-size:var(--ty-title);font-weight:600;line-height:1.08;letter-spacing:-.015em;text-transform:uppercase}                                        /* TÍTULO · 60 */
+.s-lead{font-size:var(--ty-lead);font-weight:500;line-height:1.5;letter-spacing:0}                                                                     /* LEAD · igual ao index (16-19) */
+.more-name{font-size:var(--ty-copy);font-weight:600;line-height:1.25;letter-spacing:-.005em}                                                /* título de card · 17 */
+.estr-subtitle,.kr-title,.apr-t{font-size:13px;font-weight:700;line-height:1.3;letter-spacing:.16em;text-transform:uppercase;color:var(--gray-3)}                          /* LABEL (papel do index, não subtítulo) */
 .s-text,.hero-intro,.apr-intro{font-size:var(--ty-copy);font-weight:400;line-height:1.6;letter-spacing:0}                                                   /* CORPO · 17 */
 .sol-t,.sprint-title,.em-title{font-size:var(--ty-copy);font-weight:600;line-height:1.35;letter-spacing:-.005em}                                            /* CORPO forte · 17 */
 .s-desc,.sol-d,.sprint-desc,.apr-d,.hm-value,.feat-desc,.card-desc,.mdesc,.md-desc,.em-desc,.imp-lbl,.kr-txt,.co-d{font-size:var(--ty-small);font-weight:400;line-height:1.55;letter-spacing:0}  /* MIÚDO · 14 */
 .s-metric,.imp-num,.data-val{font-size:var(--ty-metric);font-weight:500;line-height:1;letter-spacing:-.02em}                                                /* MÉTRICA · 32 */
-.s-label,.pill,.hm-label,.sprint-tag,.imp-label,.hero-back,.md-title,.more-tag,.co-t{font-size:var(--ty-label);font-weight:600;line-height:1.3;letter-spacing:.08em;text-transform:uppercase}  /* RÓTULO · 12 */
+.s-label,.pill,.hm-label,.sprint-tag,.imp-label,.more-tag,.co-t{font-size:var(--ty-label);font-weight:600;line-height:1.3;letter-spacing:.08em;text-transform:uppercase}  /* RÓTULO · 12 */
 .s-index b,.sprint-n,.md-num{font-size:var(--ty-label);font-weight:600;line-height:1.3;letter-spacing:.04em;font-variant-numeric:tabular-nums}              /* MARCADOR · 12 */
 
 /* ═══ CHROME GLOBAL (navbar · CTA · footer · reveal) ═══ */
 .container{max-width:calc(var(--max-w) + 2*var(--m));margin:0 auto;padding:0 var(--m)}  /* alinha CTA/rodapé ao gutter de 64px das seções */
-.nav-name{position:fixed;top:20px;left:max(calc(var(--m) - 20px),calc((100vw - var(--max-w) - 2*var(--m)) / 2 + var(--m) - 20px));z-index:100;font-family:var(--font-display);font-size:var(--t-label);font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--black);background:rgba(255,255,255,.55);backdrop-filter:blur(12px) saturate(1.3);-webkit-backdrop-filter:blur(12px) saturate(1.3);padding:8px 20px;border-radius:999px;cursor:pointer}
-.nav-float{position:fixed;top:20px;right:max(var(--m),calc((100vw - var(--max-w) - 2*var(--m)) / 2 + var(--m)));z-index:100;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
-.nav-toggle{width:54px;height:54px;border-radius:50%;border:1px solid var(--gray-5);cursor:pointer;background:rgba(255,255,255,.72);backdrop-filter:blur(12px) saturate(1.3);-webkit-backdrop-filter:blur(12px) saturate(1.3);display:flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s;position:relative}
-.nav-toggle:hover{background:var(--accent);border-color:var(--accent)}
-.nav-toggle svg{width:22px;height:22px;stroke:var(--black);stroke-width:1;stroke-linecap:square;fill:none}
+.nav-name{position:fixed;top:36px;left:var(--m);z-index:100;font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--black);background:var(--accent);padding:9px 20px;border-radius:999px;overflow:hidden}
+.nav-name span{display:block;line-height:1;white-space:nowrap;transition:transform .45s cubic-bezier(.19,1,.22,1)}
+.nav-name:hover span{transform:translateY(-100%)}
+.nav-roll{display:block;overflow:hidden;height:1em}
+.nav-float{position:fixed;top:36px;right:var(--m);z-index:100;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.nav-toggle{width:50px;height:50px;border-radius:50%;border:1px solid var(--accent);cursor:pointer;background:var(--accent);display:flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s}
+.nav-toggle:hover{background:var(--black);border-color:var(--black)}
+.nav-toggle:hover svg{stroke:#fff}
+.nav-toggle svg{width:20px;height:20px;stroke:var(--black);stroke-width:1.2;fill:none}
 .nav-toggle .icon-x{display:none}
+.nav-float.open .nav-toggle{background:var(--black);border-color:var(--black)}
+.nav-float.open .nav-toggle svg{stroke:#fff}
 .nav-float.open .nav-toggle .icon-menu{display:none}
 .nav-float.open .nav-toggle .icon-x{display:block}
-.nav-float.open .nav-toggle{background:var(--black)}
-.nav-float.open .nav-toggle svg{stroke:var(--white)}
 .nav-menu{display:flex;flex-direction:column;align-items:flex-end;gap:6px;opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .3s,transform .3s}
-.nav-float.open .nav-menu{opacity:1;transform:translateY(0);pointer-events:auto}
-.nav-menu a{font-family:var(--font-display);font-size:var(--t-caption);font-weight:500;letter-spacing:.04em;text-transform:uppercase;padding:8px 20px;border-radius:999px;white-space:nowrap;transition:color .25s,background .25s}
-.nav-menu .nav-cta{color:var(--white);background:var(--black);display:inline-flex;align-items:center;gap:8px}
-.nav-menu .nav-cta:hover{color:var(--accent)}
+.nav-float.open .nav-menu{opacity:1;transform:none;pointer-events:auto}
+.nav-menu a{font-family:var(--font-display);font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:9px 18px;border-radius:999px;white-space:nowrap;transition:background .25s,color .25s}
+.nav-menu .nav-cta{color:#fff;background:var(--black);display:inline-flex;align-items:center;gap:8px}
+.nav-menu .nav-cta:hover{background:var(--accent);color:var(--black)}
 .nav-menu .nav-cta svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.nav-menu .nav-link{color:var(--gray-2);background:rgba(255,255,255,.55);backdrop-filter:blur(12px) saturate(1.3);-webkit-backdrop-filter:blur(12px) saturate(1.3);position:relative}
-.nav-menu .nav-link::after{content:'';position:absolute;bottom:6px;left:20px;right:20px;height:1.5px;background:var(--black);transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.25,.46,.45,.94)}
-.nav-menu .nav-link:hover{color:var(--black)}
-.nav-menu .nav-link:hover::after{transform:scaleX(1)}
-.cta-section{background:var(--black);color:var(--white);padding:120px 0;text-align:center}
-.cta-title{font-family:var(--font-display);font-size:var(--t-hero);font-weight:400;line-height:1.05;letter-spacing:-.02em;text-transform:uppercase;margin-bottom:var(--space-md);text-wrap:balance}
-.cta-title a{color:var(--white);transition:color .3s}
-.cta-title a:hover{color:var(--accent)}
-.cta-subtitle{font-family:var(--font-body);font-size:var(--t-label);font-weight:500;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:48px}
-.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 30px;font-family:var(--font-display);font-size:var(--t-caption);font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--black);background:var(--white);border-radius:999px;transition:opacity .3s}
-.cta-btn:hover{background:var(--accent);color:var(--black)}
+.nav-menu .nav-link{color:var(--gray-1);background:rgba(255,255,255,.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.nav-menu .nav-link:hover{background:var(--black);color:#fff}
+.cta{background:var(--accent);padding:clamp(56px,6vw,84px) 0}
+.cta-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(32px,5vw,56px);align-items:end}
+.cta-eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(17,17,17,.55);margin-bottom:22px}
+.cta-title{font-size:clamp(48px,7vw,72px);font-weight:700;letter-spacing:-.04em;line-height:.88;text-transform:uppercase;color:var(--black)}
+.cta-sub{margin-top:22px;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,17,17,.6)}
+.cta-menu{border-top:1px solid rgba(17,17,17,.2)}
+.cta-row{display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:baseline;padding:clamp(16px,2vw,20px) 8px;border-bottom:1px solid rgba(17,17,17,.2);color:var(--black);transition:padding-left .25s ease}
+.cta-row:hover{padding-left:18px}
+.cta-row .cl{font-size:clamp(26px,3vw,34px);font-weight:600;letter-spacing:-.02em;text-transform:uppercase}
+.cta-row .cv{font-size:15px;font-weight:500;color:rgba(17,17,17,.6)}
+.cta-row .car{font-size:22px;transition:transform .25s ease}
+.cta-row:hover .car{transform:translate(4px,-4px)}
+@media(max-width:760px){.cta-grid{grid-template-columns:1fr}}
 footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top:1px solid rgba(255,255,255,.08)}
 .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px}
 .footer-logo{font-family:var(--font-display);font-size:var(--t-label);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:20px}
@@ -343,14 +354,136 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 .rv.visible{opacity:1;transform:none}
 .d1{transition-delay:.12s}.d2{transition-delay:.22s}.d3{transition-delay:.34s}.d4{transition-delay:.46s}
 @media (max-width:760px){.footer-grid{grid-template-columns:1fr 1fr}}
+/* ═══════════ REDESIGN v2 · alinhado à home (01 Contexto · 02 Problema) ═══════════ */
+.ctx-head{max-width:760px}
+.ctx-head .s-title{margin-bottom:var(--space-md)}
+.ctx-lead{color:var(--gray-1)}
+.ctx-facts{margin-top:var(--space-title);border-top:1px solid var(--line)}
+.ctx-fact{display:grid;grid-template-columns:190px 1fr;gap:40px;padding:28px 0;border-bottom:1px solid var(--line);align-items:start}
+.ctx-val{font-size:28px;font-weight:600;letter-spacing:-.02em;line-height:1.1;color:var(--black);font-variant-numeric:tabular-nums}
+.ctx-fact-body{padding-top:6px}
+.ctx-name{display:block;font-size:var(--ty-label);font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-1);margin-bottom:12px}
+.ctx-desc{font-size:var(--ty-copy);line-height:1.6;color:var(--gray-2);max-width:48ch;text-wrap:pretty}
+@media(max-width:768px){.ctx-fact{grid-template-columns:1fr;gap:14px}}
+
+.prob-head{max-width:760px;margin-bottom:var(--space-title)}
+.prob-head .s-title{margin-bottom:var(--space-md)}
+.prob-lead{color:var(--gray-1)}
+.prob-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gut)}
+.prob-card{position:relative;background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 26px 32px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(17,17,17,.04),0 10px 30px rgba(17,17,17,.03);transition:transform .28s cubic-bezier(.2,.7,.3,1),box-shadow .28s ease}
+.prob-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--line);transition:background .25s}
+.prob-card:hover{transform:translateY(-6px);box-shadow:0 18px 46px rgba(224,255,51,.5),0 6px 16px rgba(224,255,51,.3)}
+.prob-card:hover::before{background:var(--accent)}
+.prob-num{font-size:34px;font-weight:600;letter-spacing:-.03em;color:var(--gray-4);font-variant-numeric:tabular-nums;margin-bottom:26px}
+.prob-title{font-size:var(--ty-copy);font-weight:600;letter-spacing:-.005em;line-height:1.25;color:var(--black);margin-bottom:12px;text-wrap:balance}
+.prob-desc{font-size:var(--ty-small);line-height:1.6;color:var(--gray-2);text-wrap:pretty}
+@media(max-width:1080px){.prob-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.prob-grid{grid-template-columns:1fr}}
+
+/* HERO — type-forward claro (padrão de projeto, definido no hero-lab) */
+.hero{position:relative;overflow:hidden;background:#FAFAF8;padding-top:clamp(120px,14vh,168px);padding-bottom:0}
+.hero-inner{position:relative}
+.hero-back{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:none;color:var(--gray-4);margin-bottom:clamp(52px,8vh,92px);transition:color .25s}
+.hero-back:hover{color:var(--gray-1)}
+.hero-back svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.hero-top{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:clamp(16px,2vw,22px)}
+.hero-brand{display:inline-flex;align-items:center;gap:13px}
+.hero-brand img{height:24px;width:auto;display:block}
+.hero-brand span{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-3)}
+.hero-tag{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-3)}
+.hero .hero-title{font-size:clamp(38px,4.4vw,62px);font-weight:700;letter-spacing:-.04em;line-height:.94;text-transform:uppercase;color:var(--black)}
+.hero .hero-title>span{display:block;width:fit-content}
+.hero-hl{display:inline-block;background:linear-gradient(transparent 12%, var(--accent) 12%, var(--accent) 88%, transparent 88%)}
+.hero-foot{display:flex;flex-direction:row;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap;margin-top:clamp(32px,4vw,52px)}
+.hero-foot-main{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(20px,2.4vw,30px)}
+.hero-foot .hero-tag{padding-bottom:3px;white-space:nowrap}
+.hero-intro{max-width:40ch;font-size:var(--ty-lead);font-weight:500;line-height:1.4;color:var(--gray-2);text-wrap:balance}
+.hero-intro strong{font-weight:700;color:var(--black)}
+.hero-result{text-align:left}
+.hero-result span{display:block;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-3);margin-bottom:9px}
+.hero-result b{display:block;font-size:15px;font-weight:700;letter-spacing:-.01em;color:var(--black)}
+.hero-meta{margin-top:clamp(44px,6vh,72px);margin-bottom:0;background:transparent;box-shadow:none;border-radius:0;border-top:1px solid var(--line);padding:32px 0 clamp(44px,6vh,72px);grid-template-columns:repeat(4,minmax(0,1fr))}
+.hm-item{border-right:1px solid var(--line);padding:0 clamp(20px,2.4vw,40px);align-items:flex-start}
+.hm-item:first-child{padding-left:0}
+.hm-item:last-child{border-right:none;padding-right:0}
+.hm-chip svg{stroke:var(--gray-1)}
+.hm-label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-3);margin-bottom:8px}
+.hm-value{font-size:16px;font-weight:600;line-height:1.35;color:var(--black)}
+.hm-label,.hm-value{text-align:left}
+@keyframes heroUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.hero-top,.hero .hero-title>span,.hero-foot{animation:heroUp .85s cubic-bezier(.2,.7,.3,1) backwards}
+.hero-top{animation-delay:.05s}
+.hero .hero-title>span:nth-child(1){animation-delay:.12s}
+.hero .hero-title>span:nth-child(2){animation-delay:.19s}
+.hero-foot{animation-delay:.32s}
+@media(prefers-reduced-motion:reduce){.hero-top,.hero .hero-title>span,.hero-foot{animation:none}}
+@media(max-width:860px){.hero-meta{grid-template-columns:1fr 1fr!important;gap:0;row-gap:0}.hm-item{border-bottom:1px solid var(--line);padding:20px 28px}.hm-item:nth-child(2n){border-right:none}}
+
+/* 10 Aprendizados — dark, premium numerado */
+.apr-head{max-width:680px;margin-bottom:clamp(48px,6vw,72px)}
+.apr-head .s-title{margin-bottom:var(--space-md)}
+.apr-lead{font-size:var(--ty-lead);font-weight:500;line-height:1.4;color:rgba(255,255,255,.55);max-width:46ch;text-wrap:balance}
+.apr-list{display:flex;flex-direction:column;border-top:1px solid rgba(255,255,255,.14)}
+.apr-item{display:grid;grid-template-columns:120px 1fr;gap:clamp(24px,4vw,56px);padding:clamp(32px,4vw,48px) 0;border-bottom:1px solid rgba(255,255,255,.14);align-items:start}
+.apr-n{font-size:clamp(40px,5vw,68px);font-weight:600;letter-spacing:-.03em;line-height:.9;color:var(--accent);font-variant-numeric:tabular-nums}
+.apr-stmt{font-size:clamp(23px,2.5vw,33px);font-weight:600;letter-spacing:-.02em;line-height:1.15;color:#fff;margin-bottom:14px;text-wrap:balance;max-width:26ch}
+.apr-txt{font-size:var(--ty-copy);line-height:1.6;color:rgba(255,255,255,.55);max-width:62ch;text-wrap:balance}
+@media(max-width:768px){.apr-item{grid-template-columns:1fr;gap:14px}.apr-n{font-size:40px}}
+
+/* 06 Resultados — cards de métrica no padrão home */
+.res-head{max-width:760px;margin-bottom:var(--space-title)}
+.res-head .s-title{margin-bottom:var(--space-md)}
+.res-lead{color:var(--gray-1)}
+.res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gut)}
+.res-card{position:relative;background:#fff;border:1px solid var(--line);border-radius:18px;padding:34px 30px 36px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(17,17,17,.04),0 10px 30px rgba(17,17,17,.03);transition:transform .28s cubic-bezier(.2,.7,.3,1),box-shadow .28s ease}
+.res-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--line);transition:background .25s}
+.res-card:hover{transform:translateY(-6px);box-shadow:0 18px 46px rgba(224,255,51,.5),0 6px 16px rgba(224,255,51,.3)}
+.res-card:hover::before{background:var(--accent)}
+.res-num{font-size:clamp(48px,5.5vw,72px);font-weight:600;letter-spacing:-.04em;line-height:.9;color:var(--black);font-variant-numeric:tabular-nums;margin-bottom:24px}
+.res-num i{font-style:normal;font-size:.5em;font-weight:600;color:inherit;margin-left:2px}
+.res-title{font-size:var(--ty-copy);font-weight:600;letter-spacing:-.005em;line-height:1.25;color:var(--black);margin-bottom:12px;text-wrap:balance}
+.res-desc{font-size:var(--ty-small);line-height:1.6;color:var(--gray-2);text-wrap:balance}
+@media(max-width:900px){.res-grid{grid-template-columns:1fr}}
+
+/* 07 Do piloto à escala — empilhado: header, 3 sprints, imagem full-width (padrão home) */
+.esc-head{max-width:760px;margin-bottom:var(--space-title)}
+.esc-head .s-title{margin-bottom:var(--space-md)}
+.esc-lead{color:var(--gray-1)}
+.esc-sprints{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gut);border-top:1px solid var(--line);padding-top:30px;margin-bottom:var(--space-title)}
+.esc-n{display:block;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-3);margin-bottom:16px}
+.esc-title{font-size:var(--ty-copy);font-weight:600;letter-spacing:-.005em;line-height:1.25;color:var(--black);margin-bottom:10px;text-wrap:balance}
+.esc-desc{font-size:var(--ty-small);line-height:1.6;color:var(--gray-2);text-wrap:balance;max-width:36ch}
+.esc-art img{width:100%;display:block;border-radius:16px}
+@media(max-width:760px){.esc-sprints{grid-template-columns:1fr;gap:28px;margin-bottom:var(--space-lg)}}
+
+/* placeholder dos outros cases (mostra a capa do index quando existir; senão, letra) */
+.more-ph{background:linear-gradient(135deg,#2a2925,#161512)}
+.more-ph::after{content:attr(data-mono);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:clamp(56px,7vw,96px);font-weight:700;letter-spacing:-.04em;color:rgba(224,255,51,.16)}
+
+/* 03 Estratégia — refeita: título real + faixa de dados editorial (sem cards) */
+.estr-head{max-width:780px;margin-bottom:var(--space-title)}
+.estr-head .s-title{margin-bottom:var(--space-md)}
+.estr-lead{color:var(--gray-1)}
+.estr-main{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:start}
+.estr-subtitle{margin-bottom:var(--space-lg)}
+.estr-main .showcase{grid-column:auto;margin-top:var(--space-md)}
+.estr-showlabel{display:block;color:var(--gray-3);margin-bottom:var(--space-md)}
+.estr-stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);margin-top:calc(var(--space-title) + 26px)}
+.estr-stat{padding:30px clamp(20px,2.4vw,40px) 0;border-right:1px solid var(--line)}
+.estr-stat:first-child{padding-left:0}
+.estr-stat:last-child{border-right:none;padding-right:0}
+.estr-stat .s-metric{margin-bottom:16px}
+.estr-stat .s-label{display:block;margin-bottom:10px}
+.estr-statdesc{color:var(--gray-2);max-width:36ch}
+@media(max-width:900px){.estr-main{grid-template-columns:1fr;gap:48px}.estr-stats{grid-template-columns:1fr}.estr-stat{border-right:none;border-bottom:1px solid var(--line);padding:24px 0}.estr-stat:first-child{padding-top:0}.estr-stat:last-child{border-bottom:none}}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<a href="index.html" class="nav-name">Adriana Pommot</a>
+<a href="index.html" class="nav-name"><span class="nav-roll"><span>Adriana Pommot</span><span>Adriana Pommot</span></span></a>
 <div class="nav-float" id="navFloat">
-  <button class="nav-toggle" onclick="document.getElementById('navFloat').classList.toggle('open')" aria-label="Menu">
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
     <svg class="icon-menu" viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
     <svg class="icon-x" viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
   </button>
@@ -366,14 +499,19 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 <main class="flow">
 
   <!-- ═══ HEADER / HERO ═══ -->
-  <section class="sec hero">
-    <div class="hero-art" role="img" aria-label="Ilustração isométrica do ecossistema financeiro MRV"></div>
-    <div class="grid hero-grid">
-      <div class="hero-left">
-        <a class="hero-back"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/><path d="M5 8h7"/></svg>Todos os projetos</a>
-        <div class="hero-logo"><img src="img/mrv/logo-mrv.png" alt="MRV"></div>
-        <h1 class="hero-title">MRV<br>Ecossistema<br>Financeiro</h1>
-        <p class="hero-intro">Redesenhei o autoatendimento financeiro da maior construtora da América Latina, transformando um fluxo de renegociação com alta taxa de abandono em um canal digital com <strong>27% de engajamento</strong> e <strong>14% de conversão autônoma</strong> no piloto.</p>
+  <section class="sec hero" id="top">
+    <div class="hero-inner">
+      <a class="hero-back" href="index.html#work"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/><path d="M5 8h7"/></svg>Todos os projetos</a>
+      <div class="hero-top">
+        <span class="hero-brand"><img src="img/mrv/logo-mrv.png" alt="MRV"></span>
+      </div>
+      <h1 class="hero-title"><span>Fluxo de</span><span><span class="hero-hl">Renegociação</span> MRV</span></h1>
+      <div class="hero-foot">
+        <div class="hero-foot-main">
+          <p class="hero-intro">Redesenho do autoatendimento financeiro da maior construtora da América Latina, com autonomia real na renegociação de dívidas.</p>
+          <div class="hero-result"><span>resultados do piloto</span><b>27% engajamento · 14% conversão</b></div>
+        </div>
+        <span class="hero-tag">Case de Product Design · 2019</span>
       </div>
     </div>
     <div class="hero-meta">
@@ -385,109 +523,103 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
   </section>
 
   <!-- ═══ 01 · CONTEXTO DO PRODUTO ═══ -->
-  <section class="sec grid sec01">
-    <div style="grid-column:1 / 6;grid-row:1">
+  <section class="sec ctx" id="contexto">
+    <div class="ctx-head">
       <div class="s-index"><b>01</b><em></em></div>
       <h2 class="s-title">Contexto<br>do produto</h2>
+      <p class="s-lead ctx-lead">Produto digital de pós-compra da MRV, responsável por <strong>cobranças, pagamentos e renegociação de dívidas</strong>. Atendia mais de 2,5 milhões de clientes com financiamentos de até 35 anos, com impacto direto em custo operacional e satisfação.</p>
     </div>
-    <div style="grid-column:1 / 6;grid-row:2">
-      <p class="s-text">Produto digital de pós-compra da MRV, responsável por <strong>cobranças, pagamentos e renegociação de dívidas.</strong></p>
-      <p class="s-text">Atendia mais de 2,5 milhões de clientes com financiamentos de até 35 anos, gerando <strong>impacto direto em custo operacional e satisfação.</strong></p>
-    </div>
-    <div class="data-list" style="grid-row:2">
-      <div class="data-row"><div class="ico"><svg viewBox="0 0 32 32"><circle cx="16" cy="11" r="5"/><path d="M7 27c0-5 4-8 9-8s9 3 9 8"/></svg></div><div class="data-c"><div class="data-top"><span class="data-val">2,5M</span><span class="data-name">Clientes ativos</span></div><div class="s-desc">Cadastrados no app MRV, com financiamentos de longo prazo.</div></div></div>
-      <div class="data-row"><div class="ico"><svg viewBox="0 0 32 32"><rect x="5" y="7" width="22" height="20" rx="2"/><path d="M5 13h22M11 4v6M21 4v6"/></svg></div><div class="data-c"><div class="data-top"><span class="data-val">35 anos</span><span class="data-name">Tempo médio de contrato</span></div><div class="s-desc">Financiamentos longos com complexidade jurídica.</div></div></div>
-      <div class="data-row"><div class="ico"><svg viewBox="0 0 32 32"><path d="M12 6 4 9v17l8-3 8 3 8-3V6l-8 3-8-3z"/><path d="M12 6v17M20 9v17"/></svg></div><div class="data-c"><div class="data-top"><span class="data-val">3 domínios</span><span class="data-name">Territórios de produto</span></div><div class="s-desc">Renegociação, parcelas e status de obra.</div></div></div>
+    <div class="ctx-facts">
+      <div class="ctx-fact">
+        <span class="ctx-val">2,5 milhões</span>
+        <div class="ctx-fact-body">
+          <span class="ctx-name">Clientes ativos</span>
+          <p class="ctx-desc">Cadastrados no app MRV, com financiamentos de longo prazo.</p>
+        </div>
+      </div>
+      <div class="ctx-fact">
+        <span class="ctx-val">35 anos</span>
+        <div class="ctx-fact-body">
+          <span class="ctx-name">Tempo médio de contrato</span>
+          <p class="ctx-desc">Financiamentos longos, com alta complexidade jurídica e financeira.</p>
+        </div>
+      </div>
+      <div class="ctx-fact">
+        <span class="ctx-val">3 domínios</span>
+        <div class="ctx-fact-body">
+          <span class="ctx-name">Territórios de produto</span>
+          <p class="ctx-desc">Renegociação de dívidas, parcelas a vencer e status de obra.</p>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- ═══ 02 · O PROBLEMA ═══ -->
-  <section class="sec">
-    <div class="hd">
+  <section class="sec prob" id="problema">
+    <div class="prob-head">
       <div class="s-index"><b>02</b><em></em></div>
-      <h2 class="s-title" style="margin:0 0 var(--space-md)">O problema</h2>
-      <p class="s-text" style="max-width:62ch">A renegociação digital existia, mas a conversão era baixa e o cliente sempre terminava no <strong>call center.</strong></p>
+      <h2 class="s-title">O problema</h2>
+      <p class="s-lead prob-lead">A renegociação digital já existia, mas a conversão era baixa e o cliente quase sempre terminava no <strong>call center</strong>. Mapeei os pontos de fricção e os agrupei em quatro frentes.</p>
     </div>
-    <div class="feat-grid">
-      <div class="feat"><div class="ico"><svg viewBox="0 0 32 32"><path d="M5 7h22L18 16v8l-4 3V16L5 7z"/></svg></div><div class="s-label">Abandono no fluxo</div><p class="feat-desc">Os clientes iniciavam o processo no app mas não completavam o acordo. Cada desistência alimentava o call center.</p></div>
-      <div class="feat"><div class="ico"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="11"/><path d="M16 9.5v13M18.8 12.6c0-1.4-1.25-2.4-2.8-2.4s-2.8 1-2.8 2.4 1.25 2.1 2.8 2.4 2.8 1 2.8 2.4-1.25 2.4-2.8 2.4-2.8-1-2.8-2.4"/></svg></div><div class="s-label">Custo operacional</div><p class="feat-desc">A migração pro call center inflava custos e gerava insatisfação tanto para o cliente quanto para a operação interna.</p></div>
-      <div class="feat"><div class="ico"><svg viewBox="0 0 32 32"><rect x="5" y="6" width="22" height="20" rx="2"/><path d="M5 12h22M8.5 9h.01M11.5 9h.01"/></svg></div><div class="s-label">Interface genérica</div><p class="feat-desc">A proposta aparecia mas não comunicava segurança. Linguagem técnica, sem contexto do momento financeiro de cada cliente.</p></div>
-    </div>
-  </section>
-
-  <!-- ═══ 03 · PRINCIPAIS DESAFIOS ═══ -->
-  <section class="sec">
-    <div class="hd">
-      <div class="s-index"><b>03</b><em></em></div>
-      <h2 class="s-title" style="margin:0 0 var(--space-md)">Principais desafios</h2>
-      <p class="s-text" style="max-width:560px">Identificamos 10 pontos críticos que impediam a conversão e aumentavam custos operacionais.</p>
-    </div>
-    <div class="grid">
-      <div class="cardgrid">
-        <div class="card"><div class="card-hd"><div class="card-idx"><b>01</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><path d="M13 28H7a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h6"/><path d="M21 22l6-6-6-6M27 16H13"/></svg></div></div><div class="s-label">12 pontos críticos de abandono</div><p class="card-desc">O cliente chegava à proposta mas desistia. Sem indicadores de progresso, a incerteza gerava desistência em 12 pontos do fluxo.</p></div>
-        <div class="card"><div class="card-hd"><div class="card-idx"><b>02</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><path d="M16 28s10-5 10-13V7L16 4 6 7v8c0 8 10 13 10 13z"/></svg></div></div><div class="s-label">Confiança fragilizada pela experiência</div><p class="card-desc">A interface não transmitia segurança para uma decisão financeira de longo prazo. Faltavam sinais de que o processo funcionava.</p></div>
-        <div class="card"><div class="card-hd"><div class="card-idx"><b>03</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><path d="M4 22 12 14l5 5L28 8"/><path d="M22 8h6v6"/></svg></div></div><div class="s-label">Custo operacional crescente</div><p class="card-desc">Cada erro no autoatendimento gerava uma ligação ao call center. Duração média de 8 minutos por chamada, com volume crescente.</p></div>
-        <div class="card"><div class="card-hd"><div class="card-idx"><b>04</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><path d="M4 4 28 28M9 17c4-3 9-3 13 0M5 12c2-1.5 4-2.5 6-2.8M14 7c5-.4 10 1.4 13 4.6"/><circle cx="16" cy="23" r="1"/></svg></div></div><div class="s-label">Termos técnicos como barreira</div><p class="card-desc">Jargão financeiro dominava a interface. Mais de 40 termos como "encargo moratório" bloqueavam a ação do cliente.</p></div>
-        <div class="card"><div class="card-hd"><div class="card-idx"><b>05</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><rect x="6" y="14" width="20" height="13" rx="2"/><path d="M10 14V9a6 6 0 0 1 12 0v5"/></svg></div></div><div class="s-label">Destravar ação com clareza e simplicidade</div><p class="card-desc">Simplificar a decisão sem remover informação financeira obrigatória. Menos não podia significar inseguro.</p></div>
-        <div class="card"><div class="card-hd"><div class="card-idx"><b>06</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><path d="M4 16s5-9 12-9 12 9 12 9-5 9-12 9c-2 0-4-.6-5.7-1.5M4 4l24 24"/></svg></div></div><div class="s-label">Falta de visão do progresso</div><p class="card-desc">O cliente não sabia em que etapa estava nem quanto faltava para a aprovação. Isso aumentava ansiedade e abandono.</p></div>
-        <div class="card"><div class="card-hd"><div class="card-idx"><b>07</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><path d="M27 19a2 2 0 0 1-2 2H10l-5 5V8a2 2 0 0 1 2-2h18a2 2 0 0 1 2 2v11z"/><path d="M11 13h10M11 17h6"/></svg></div></div><div class="s-label">Comunicação pouco humana</div><p class="card-desc">Textos frios e institucionais dificultavam a conexão. A experiência não transmitia acolhimento durante a jornada.</p></div>
-        <div class="card"><div class="card-hd"><div class="card-idx"><b>08</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><rect x="9" y="4" width="14" height="24" rx="3"/><path d="M14 24h4"/></svg></div></div><div class="s-label">Experiência não mobile-first</div><p class="card-desc">O fluxo não foi pensado para o contexto mobile. Campos extensos e informações densas quebravam a fluidez.</p></div>
-        <div class="card"><div class="card-hd"><div class="card-idx"><b>09</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><path d="M8 4h12l6 6v18H8z"/><path d="M19 4v7h7M12 17h8M12 21h8"/></svg></div></div><div class="s-label">Informações densas e desorganizadas</div><p class="card-desc">Dados financeiros apareciam de forma fragmentada. O cliente precisava interpretar muito para entender o essencial.</p></div>
-        <div class="card"><div class="card-hd"><div class="card-idx"><b>10</b><em></em></div><div class="ico"><svg viewBox="0 0 32 32"><path d="M6 18v-2a10 10 0 0 1 20 0v2"/><rect x="4" y="18" width="5" height="9" rx="2"/><rect x="23" y="18" width="5" height="9" rx="2"/><path d="M26 27a6 6 0 0 1-6 4h-2"/></svg></div></div><div class="s-label">Dependência do call center</div><p class="card-desc">Sem uma jornada autônoma e confiável, o call center se tornou o caminho mais fácil para o cliente e o mais caro para a operação.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ 04 · OBJETIVO ═══ -->
-  <section class="sec grid">
-    <div class="col-left stack">
-      <div class="s-index"><b>04</b><em></em></div>
-      <h2 class="s-title">Objetivo</h2>
-      <div class="pill" style="margin-top:var(--space-lg)">Período do piloto - 2 sprints</div>
-      <div style="margin-top:var(--space-lg)">
-        <p class="s-text"><strong>Aumentar renegociações via autoatendimento sem criar novas etapas ou dependência de atendimento humano.</strong></p>
-        <p class="s-text">O desafio não era criar funcionalidades novas, mas destravar a decisão do usuário dentro de um fluxo financeiro sensível, preservando clareza, confiança e ritmo de ação no percurso.</p>
-      </div>
-    </div>
-    <div class="kr">
-      <div class="kr-title">Key Results</div>
-      <div class="kr-row"><div class="kr-chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M4 22 12 14l5 5L28 8"/><path d="M22 8h6v6"/></svg></div></div><div class="kr-txt">Aumentar em 10 a 20% a visualização de propostas elegíveis.</div></div>
-      <div class="kr-row"><div class="kr-chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M7 7l5 18 3-8 8-3z"/><path d="M19 19l6 6"/></svg></div></div><div class="kr-txt">Aumentar em 8 a 15% o clique e a escolha de propostas.</div></div>
-      <div class="kr-row"><div class="kr-chip"><div class="ico"><svg viewBox="0 0 32 32"><rect x="4" y="8" width="24" height="16" rx="2"/><path d="M4 13h24M8 19h6"/></svg></div></div><div class="kr-txt">Manter ou aumentar pagamentos sem elevar fricção no processo, na faixa entre 3 e 8%.</div></div>
-      <div class="kr-row"><div class="kr-chip"><div class="ico"><svg viewBox="0 0 32 32"><circle cx="11" cy="12" r="4"/><circle cx="22" cy="13" r="3"/><path d="M4 26c0-4 3-6 7-6s7 2 7 6M19 21c4 0 7 2 7 5"/></svg></div></div><div class="kr-txt">Reduzir contatos no público elegível entre 5 e 12%.</div></div>
+    <div class="prob-grid">
+      <article class="prob-card">
+        <span class="prob-num">01</span>
+        <h3 class="prob-title">Abandono e fricção</h3>
+        <p class="prob-desc">Doze pontos críticos de desistência ao longo do fluxo. Sem indicadores de progresso, a incerteza fazia o cliente parar antes de fechar o acordo.</p>
+      </article>
+      <article class="prob-card">
+        <span class="prob-num">02</span>
+        <h3 class="prob-title">Confiança fragilizada</h3>
+        <p class="prob-desc">A interface não transmitia segurança para uma decisão financeira de longo prazo. A comunicação fria e institucional afastava em vez de acolher.</p>
+      </article>
+      <article class="prob-card">
+        <span class="prob-num">03</span>
+        <h3 class="prob-title">Barreira de linguagem</h3>
+        <p class="prob-desc">Mais de quarenta termos técnicos, como “encargo moratório”, bloqueavam a ação. A informação densa exigia esforço para entender o essencial.</p>
+      </article>
+      <article class="prob-card">
+        <span class="prob-num">04</span>
+        <h3 class="prob-title">Custo<br>operacional</h3>
+        <p class="prob-desc">Cada falha no autoatendimento virava uma ligação de oito minutos. A dependência do call center crescia, cara para a operação e lenta para o cliente.</p>
+      </article>
     </div>
   </section>
 
   <!-- ═══ 05 · ESTRATÉGIA DE DESIGN ═══ -->
-  <section class="sec grid two-rows">
-    <div class="col-left stack" style="grid-row:1">
-      <div class="s-index"><b>05</b><em></em></div>
+  <section class="sec estr" id="estrategia">
+    <div class="estr-head">
+      <div class="s-index"><b>03</b><em></em></div>
       <h2 class="s-title">Estratégia<br>de design</h2>
-      <p class="s-text" style="margin-top:var(--space-md)">A acessibilidade cognitiva orientou cada decisão. Combinei microinterações com copywriting de baixa carga cognitiva e hierarquia visual que cria sinais claros de oportunidade e progresso dentro do fluxo financeiro.</p>
+      <p class="s-lead estr-lead">A acessibilidade cognitiva orientou cada decisão. Combinei microinterações, copywriting de baixa carga cognitiva e hierarquia visual para criar sinais claros de oportunidade e de progresso dentro do fluxo financeiro.</p>
     </div>
-    <div class="mrow" style="grid-row:1">
-      <div class="mcard"><div class="chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M8 4h12l6 6v18H8z"/><path d="M19 4v7h7M12 18h8M12 22h6"/></svg></div></div><div class="s-metric">40+</div><div class="s-label">Termos reescritos</div><div class="mdesc">Jargão financeiro traduzido em linguagem acessível e validada em testes.</div></div>
-      <div class="mcard"><div class="chip"><div class="ico"><svg viewBox="0 0 32 32"><rect x="5" y="5" width="9" height="9" rx="1.5"/><rect x="18" y="5" width="9" height="9" rx="1.5"/><rect x="5" y="18" width="9" height="9" rx="1.5"/><rect x="18" y="18" width="9" height="9" rx="1.5"/></svg></div></div><div class="s-metric">47</div><div class="s-label">Estados mapeados</div><div class="mdesc">Componentes documentados com cor, animação e copy contextual.</div></div>
-      <div class="mcard"><div class="chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M5 27V5M27 27H5"/><rect x="9" y="16" width="4" height="7"/><rect x="16" y="11" width="4" height="12"/><rect x="23" y="7" width="4" height="16"/></svg></div></div><div class="s-metric">5</div><div class="s-label">Dashboards adaptativos</div><div class="mdesc">Cada board sinalizado e orientado pelo estado financeiro do cliente.</div></div>
-    </div>
-    <div class="col-left stack" style="grid-row:2">
-      <div class="pill">A solução priorizou</div>
-      <div class="sol-list" style="margin-top:var(--space-md)">
-        <div class="sol-item"><div class="sol-chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M9 23 23 9M13 9h10v10"/></svg></div></div><div><div class="sol-t">Redução de complexidade</div><div class="sol-d">para destravar o primeiro passo</div></div></div>
-        <div class="sol-item"><div class="sol-chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M4 16s5-9 12-9 12 9 12 9-5 9-12 9S4 16 4 16z"/><circle cx="16" cy="16" r="3.5"/></svg></div></div><div><div class="sol-t">Visibilidade automatizada</div><div class="sol-d">de propostas dentro do ecossistema</div></div></div>
-        <div class="sol-item"><div class="sol-chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M16 5 4 11l12 6 12-6-12-6z"/><path d="M4 17l12 6 12-6"/></svg></div></div><div><div class="sol-t">Hierarquia visual</div><div class="sol-d">que comunica escala e consequências</div></div></div>
-        <div class="sol-item"><div class="sol-chip"><div class="ico"><svg viewBox="0 0 32 32"><circle cx="16" cy="8" r="3.5"/><circle cx="8" cy="23" r="3.5"/><circle cx="24" cy="23" r="3.5"/><path d="M16 11v6M16 17l-6 4M16 17l6 4"/></svg></div></div><div><div class="sol-t">Manutenção da estrutura existente</div><div class="sol-d">no fluxo</div></div></div>
+    <div class="estr-main">
+      <div class="estr-principles">
+        <h3 class="estr-subtitle">A solução priorizou</h3>
+        <div class="sol-list">
+          <div class="sol-item"><div class="sol-chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M9 23 23 9M13 9h10v10"/></svg></div></div><div><div class="sol-t">Redução de complexidade</div><div class="sol-d">para destravar o primeiro passo da decisão</div></div></div>
+          <div class="sol-item"><div class="sol-chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M4 16s5-9 12-9 12 9 12 9-5 9-12 9S4 16 4 16z"/><circle cx="16" cy="16" r="3.5"/></svg></div></div><div><div class="sol-t">Visibilidade automatizada</div><div class="sol-d">das propostas dentro do ecossistema</div></div></div>
+          <div class="sol-item"><div class="sol-chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M16 5 4 11l12 6 12-6-12-6z"/><path d="M4 17l12 6 12-6"/></svg></div></div><div><div class="sol-t">Hierarquia visual</div><div class="sol-d">que comunica escala e consequências</div></div></div>
+          <div class="sol-item"><div class="sol-chip"><div class="ico"><svg viewBox="0 0 32 32"><circle cx="16" cy="8" r="3.5"/><circle cx="8" cy="23" r="3.5"/><circle cx="24" cy="23" r="3.5"/><path d="M16 11v6M16 17l-6 4M16 17l6 4"/></svg></div></div><div><div class="sol-t">Manutenção da estrutura existente</div><div class="sol-d">sem criar novas etapas no fluxo</div></div></div>
+        </div>
+      </div>
+      <div class="estr-showcase">
+        <span class="estr-showlabel s-label">Ponto de partida</span>
+        <div class="showcase">
+          <div class="browser"><div class="browser-bar"><b></b><b></b><b></b></div><div class="browser-img"><img src="img/mrv/desktop-extrato-pagos.webp" alt="Tela original do produto MRV no desktop"></div></div>
+          <div class="phone"><img src="img/mrv/mobile-jornada-46.webp" alt="Tela original do produto MRV no mobile"></div>
+        </div>
       </div>
     </div>
-    <div class="showcase" style="grid-row:2">
-      <div class="browser"><div class="browser-bar"><b></b><b></b><b></b></div><div class="browser-img"><img src="img/mrv/desktop-extrato-pagos.webp" alt="Tela original do produto MRV (desktop)"></div></div>
-      <div class="phone"><img src="img/mrv/mobile-jornada-46.webp" alt="Tela original do produto MRV (mobile)"></div>
+    <div class="estr-stats">
+      <div class="estr-stat"><div class="s-metric">40+</div><span class="s-label">Termos reescritos</span><p class="s-desc estr-statdesc">Jargão financeiro traduzido em linguagem acessível e validada em testes.</p></div>
+      <div class="estr-stat"><div class="s-metric">47</div><span class="s-label">Estados mapeados</span><p class="s-desc estr-statdesc">Componentes documentados com cor, animação e copy contextual.</p></div>
+      <div class="estr-stat"><div class="s-metric">5</div><span class="s-label">Dashboards adaptativos</span><p class="s-desc estr-statdesc">Cada board sinalizado e orientado pelo estado financeiro do cliente.</p></div>
     </div>
   </section>
 
   <!-- ═══ 06 · A SOLUÇÃO ═══ -->
   <section class="sec sec--dark">
-    <div class="s-index"><b>06</b><em></em></div>
+    <div class="s-index"><b>04</b><em></em></div>
     <h2 class="s-title">A solução</h2>
     <p class="apr-intro" style="max-width:62ch;margin-top:var(--space-md)">A interface muda de tom conforme a situação financeira do cliente evolui. Cinco estados progressivos, dos 46% aos 100% da jornada, cada um com hierarquia, copy e microinterações próprias.</p>
     <div class="sol-flow">
@@ -516,7 +648,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 
   <!-- ═══ 07 · FLUXO DESKTOP ═══ -->
   <section class="sec">
-    <div class="s-index"><b>07</b><em></em></div>
+    <div class="s-index"><b>05</b><em></em></div>
     <h2 class="s-title">Fluxo desktop</h2>
     <p class="s-text" style="max-width:62ch;margin-top:var(--space-md)">O extrato financeiro foi redesenhado com filtros por categoria (MRV, Cartório, Banco), estados claros para boletos pagos e pendentes, e <strong>ações diretas que eliminam ambiguidade</strong>. O percurso devolve a confiança e fecha o acordo com autonomia.</p>
     <div class="md-viewer" data-viewer="fluxo">
@@ -531,6 +663,59 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
         <div class="md-preview" role="tabpanel"><img class="md-img" src="img/mrv/desktop-extrato-pagos.webp" alt="Extrato: boletos pagos"></div>
       </div>
     </div>
+  </section>
+
+  <!-- ═══ 06 · RESULTADOS ═══ -->
+  <section class="sec res" id="resultados">
+    <div class="res-head">
+      <div class="s-index"><b>06</b><em></em></div>
+      <h2 class="s-title">Resultados</h2>
+      <p class="s-lead res-lead">A meta do piloto era destravar a renegociação no autoatendimento <strong>sem criar novas etapas nem dependência humana</strong>. Em dois sprints, os sinais de progresso e a linguagem acessível reverteram o quadro.</p>
+    </div>
+    <div class="res-grid">
+      <article class="res-card">
+        <span class="res-num">+27<i>%</i></span>
+        <h3 class="res-title">Engajamento no fluxo</h3>
+        <p class="res-desc">Mais clientes visualizando e respondendo às propostas de acordo elegíveis dentro do app.</p>
+      </article>
+      <article class="res-card">
+        <span class="res-num">+14<i>%</i></span>
+        <h3 class="res-title">Conversão autônoma</h3>
+        <p class="res-desc">Acordos fechados sem passar pelo call center, com o cliente decidindo no próprio fluxo.</p>
+      </article>
+      <article class="res-card">
+        <span class="res-num">−34<i>%</i></span>
+        <h3 class="res-title">Dúvidas sobre elegibilidade</h3>
+        <p class="res-desc">Queda nos contatos do público elegível, efeito direto da clareza e da sinalização de progresso.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ═══ 07 · DO PILOTO À ESCALA ═══ -->
+  <section class="sec esc" id="escala">
+    <div class="esc-head">
+      <div class="s-index"><b>07</b><em></em></div>
+      <h2 class="s-title">Do piloto<br>à escala</h2>
+      <p class="s-lead esc-lead">Validado o impacto no piloto, evoluí o fluxo e os componentes para ganhar segurança, consistência e eficiência em todo o ecossistema financeiro do portal.</p>
+    </div>
+    <div class="esc-sprints">
+      <article class="esc-sprint">
+        <span class="esc-n">Sprint 1</span>
+        <h3 class="esc-title">Comunicação e elegibilidade</h3>
+        <p class="esc-desc">Ajustes de comunicação no fluxo e regras de elegibilidade para reduzir insegurança, integrados à régua de comunicação e às propostas de acordo.</p>
+      </article>
+      <article class="esc-sprint">
+        <span class="esc-n">Sprint 2</span>
+        <h3 class="esc-title">Escalabilidade e padronização</h3>
+        <p class="esc-desc">Expansão do componente para outros pontos do portal e padronização da solução para reuso entre squads, com campanha de educação financeira.</p>
+      </article>
+      <article class="esc-sprint">
+        <span class="esc-n">Reuso</span>
+        <h3 class="esc-title">6 jornadas no portal</h3>
+        <p class="esc-desc">O componente foi reaproveitado em seis jornadas após a expansão, sustentando o ganho com consistência visual entre as squads.</p>
+      </article>
+    </div>
+    <div class="esc-art"><img src="img/mrv/desdob-mockups.png" alt="Telas do app MRV com destaques: mensagem clara, transparência, confirmação e orientação"></div>
   </section>
 
   <!-- ═══ 08 · FUNDAÇÃO VISUAL ═══ -->
@@ -552,77 +737,41 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
     </div>
   </section>
 
-  <!-- ═══ 09 · DESDOBRAMENTO PÓS-PILOTO ═══ -->
-  <section class="sec">
-    <div class="grid">
-      <div class="s07-left" style="grid-column:1 / 5">
-        <div class="s-index"><b>09</b><em></em></div>
-        <h2 class="s-title">Do piloto<br>à escala</h2>
-        <p class="s-text" style="margin-top:var(--space-md);max-width:42ch">Após validar o impacto no piloto, evoluímos o fluxo e os componentes para aumentar segurança, consistência e eficiência em todo o ecossistema.</p>
-        <div class="s07-sprints">
-          <div class="sprint-card">
-            <div class="sprint-meta">
-              <div><div class="sprint-n">01</div><div class="sprint-tag">Sprint 1</div></div>
-              <div class="sprint-chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M5 7a2 2 0 0 1 2-2h18a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H13l-6 5v-5H7a2 2 0 0 1-2-2z"/><path d="M11 11h10M11 15h6"/></svg></div></div>
-            </div>
-            <div class="sprint-body">
-              <div class="sprint-title">Comunicação e elegibilidade</div>
-              <p class="sprint-desc">Ajustes de comunicação no fluxo e regras de elegibilidade para reduzir insegurança. Integração com régua de comunicação e propostas de acordos.</p>
-            </div>
-          </div>
-          <div class="sprint-card">
-            <div class="sprint-meta">
-              <div><div class="sprint-n">02</div><div class="sprint-tag">Sprint 2</div></div>
-              <div class="sprint-chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M16 4 4 11l12 7 12-7-12-7z"/><path d="M4 17l12 7 12-7M4 22.5l12 7 12-7"/></svg></div></div>
-            </div>
-            <div class="sprint-body">
-              <div class="sprint-title">Escalabilidade e padronização</div>
-              <p class="sprint-desc">Expansão do componente para outros pontos do portal. Padronização da solução para reuso entre squads. Campanha especial e educação financeira.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- composição (celulares + callouts + setas) entra como UMA imagem exportada do design -->
-      <div class="s07-panel" style="grid-column:5 / 13"></div>
-    </div>
-
-    <div class="s07-impact">
-      <div class="imp-label">Impacto do desdobramento</div>
-      <div class="imp-item"><div class="imp-chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M16 4 6 8v7c0 6 4 10 10 13 6-3 10-7 10-13V8l-10-4z"/><path d="M12 16l3 3 6-6"/></svg></div></div><div><div class="imp-num">-34%</div><div class="imp-lbl">Redução de dúvidas sobre elegibilidade</div></div></div>
-      <div class="imp-item"><div class="imp-chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M5 7a2 2 0 0 1 2-2h18a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H13l-6 5v-5H7a2 2 0 0 1-2-2z"/><path d="M11 11h10M11 15h6"/></svg></div></div><div><div class="imp-num">+27%</div><div class="imp-lbl">Aumento na taxa de resposta às propostas</div></div></div>
-      <div class="imp-item"><div class="imp-chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M16 4 4 11l12 7 12-7-12-7z"/><path d="M4 17l12 7 12-7M4 22.5l12 7 12-7"/></svg></div></div><div><div class="imp-num">+18%</div><div class="imp-lbl">Reuso do componente em 6 jornadas do portal</div></div></div>
-      <div class="imp-item"><div class="imp-chip"><div class="ico"><svg viewBox="0 0 32 32"><circle cx="11" cy="12" r="4"/><circle cx="22" cy="13" r="3"/><path d="M4 26c0-4 3-6 7-6s7 2 7 6M19 21c4 0 7 2 7 5"/></svg></div></div><div><div class="imp-num">+12%</div><div class="imp-lbl">Acordos realizados pós-expansão</div></div></div>
-    </div>
-  </section>
-
   <!-- ═══ 10 · APRENDIZADOS (dark) ═══ -->
-  <section class="sec sec--dark">
-    <div class="s-index"><b>10</b><em></em></div>
-    <h2 class="s-title">Aprendizados</h2>
-    <p class="apr-intro">Lições que reforçam o impacto do design em fluxos financeiros sensíveis.</p>
-    <div class="apr-cols">
-      <div class="apr-col">
-        <div class="apr-t">Sinalização importa mais que volume de informação.</div>
-        <div class="apr-rule"></div>
-        <div class="apr-d">Em fluxos financeiros, a ausência de sinalização e feedback gera mais insegurança que a falta de detalhes.</div>
-      </div>
-      <div class="apr-col">
-        <div class="apr-t">Microinterações são infraestrutura.</div>
-        <div class="apr-rule"></div>
-        <div class="apr-d">Pequenos sinais visuais reduziriam dúvidas e fricções sem alterar a arquitetura do fluxo.</div>
-      </div>
-      <div class="apr-col">
-        <div class="apr-t">Escala nasce de componentes.</div>
-        <div class="apr-rule"></div>
-        <div class="apr-d">O impacto não veio de uma tela melhor. Veio de uma solução reutilizável e sustentável.</div>
-      </div>
+  <section class="sec sec--dark apr" id="aprendizados">
+    <div class="apr-head">
+      <div class="s-index"><b>09</b><em></em></div>
+      <h2 class="s-title">Aprendizados</h2>
+      <p class="apr-lead">Lições que reforçam o impacto do design em fluxos financeiros sensíveis.</p>
+    </div>
+    <div class="apr-list">
+      <article class="apr-item">
+        <span class="apr-n">01</span>
+        <div class="apr-body">
+          <h3 class="apr-stmt">Sinalização importa mais que volume de informação.</h3>
+          <p class="apr-txt">Em fluxos financeiros, a ausência de sinalização e de feedback gera mais insegurança do que a falta de detalhes.</p>
+        </div>
+      </article>
+      <article class="apr-item">
+        <span class="apr-n">02</span>
+        <div class="apr-body">
+          <h3 class="apr-stmt">Microinterações são infraestrutura.</h3>
+          <p class="apr-txt">Pequenos sinais visuais reduzem dúvidas e fricções sem alterar a arquitetura do fluxo.</p>
+        </div>
+      </article>
+      <article class="apr-item">
+        <span class="apr-n">03</span>
+        <div class="apr-body">
+          <h3 class="apr-stmt">Escala nasce de componentes.</h3>
+          <p class="apr-txt">O impacto não veio de uma tela melhor, e sim de uma solução reutilizável e sustentável.</p>
+        </div>
+      </article>
     </div>
   </section>
 
   <!-- ═══ 11 · EM MOVIMENTO (vídeos) ═══ -->
   <section class="sec">
-    <div class="s-index"><b>11</b><em></em></div>
+    <div class="s-index"><b>10</b><em></em></div>
     <h2 class="s-title">Em movimento</h2>
     <p class="s-text" style="max-width:60ch;margin-top:var(--space-md)">Apresentação visual do portal: navegação, interface principal e identidade de acesso em uso.</p>
 
@@ -644,7 +793,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 
   <!-- ═══ 12 · VISÃO GERAL (fecho) ═══ -->
   <section class="sec">
-    <div class="s-index"><b>12</b><em></em></div>
+    <div class="s-index"><b>11</b><em></em></div>
     <h2 class="s-title">Visão geral</h2>
     <div class="fw-img" style="margin-top:var(--space-lg)"><img src="img/mrv/overview-grid.webp" alt="Visão geral do ecossistema financeiro MRV"></div>
   </section>
@@ -654,17 +803,17 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
     <h2 class="s-title">Outros projetos</h2>
     <div class="more-grid">
       <a class="more-card" href="case-ford.html">
-        <div class="more-card-img"><img src="img/ford/hero-room.webp" alt="Ford Immersion Room"></div>
+        <div class="more-card-img more-ph" data-mono="F"><img src="img/ford/hero-room.webp" alt="Ford Immersion Room" loading="lazy" style="object-position:center 48%"></div>
         <span class="more-tag">Identidade visual · Design espacial</span>
         <div class="more-name">Ford Immersion Room</div>
       </a>
       <a class="more-card" href="case-delta.html">
-        <div class="more-card-img"><img src="img/delta/hero-mockup.webp" alt="Delta Design System"></div>
+        <div class="more-card-img more-ph" data-mono="D"><img src="img/delta/hero-mockup.webp" alt="Delta Design System" loading="lazy" style="object-position:center 50%"></div>
         <span class="more-tag">Design System</span>
         <div class="more-name">Delta Design System</div>
       </a>
       <a class="more-card" href="case-chorume.html">
-        <div class="more-card-img"><img src="img/chorume/garrafa-pantano-hero.jpg" alt="Chorume Tipografia"></div>
+        <div class="more-card-img more-ph" data-mono="C"><img src="img/chorume/alfabeto-chorume.png" alt="Chorume Tipografia" loading="lazy" style="object-position:center 42%"></div>
         <span class="more-tag">Tipografia · Identidade visual</span>
         <div class="more-name">Chorume Tipografia</div>
       </a>
@@ -673,10 +822,18 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 
 </main>
 
-<section class="cta-section" id="contact"><div class="container">
-<h2 class="cta-title rv"><a href="mailto:adrianapommot@gmail.com">Vamos<br>Conversar?</a></h2>
-<p class="cta-subtitle rv d1">Visual & Interface Design</p>
-<a href="mailto:adrianapommot@gmail.com" class="cta-btn rv d2">Entrar em Contato →</a>
+<section class="cta" id="contact"><div class="container cta-grid">
+<div class="rv">
+<div class="cta-eyebrow">✦ Contato</div>
+<h2 class="cta-title">Vamos<br>Conversar?</h2>
+<p class="cta-sub">Disponível para projetos remotos</p>
+</div>
+<div class="cta-menu rv d1">
+<a href="mailto:adrianapommot@gmail.com" class="cta-row"><span class="cl">Email</span><span class="cv">adrianapommot@gmail.com</span><span class="car">→</span></a>
+<a href="https://www.linkedin.com/in/adriana-pommot/" target="_blank" rel="noopener" class="cta-row"><span class="cl">LinkedIn</span><span class="cv">/in/adriana-pommot</span><span class="car">↗</span></a>
+<a href="https://wa.me/5511962724879" target="_blank" rel="noopener" class="cta-row"><span class="cl">WhatsApp</span><span class="cv">+55 11 96272-4879</span><span class="car">↗</span></a>
+<a href="#" class="cta-row"><span class="cl">Currículo</span><span class="cv">PDF · 2026</span><span class="car">↓</span></a>
+</div>
 </div></section>
 
 <footer><div class="container">
@@ -744,7 +901,9 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
   document.querySelectorAll('.rv').forEach(function(el){ro.observe(el)});
 }catch(e){}})();
 
-/* fecha o menu ao clicar num link */
+/* nav: abre/fecha + fecha ao clicar num link (idêntico à home) */
+(function(){var t=document.getElementById('navToggle'),f=document.getElementById('navFloat');
+if(t&&f)t.addEventListener('click',function(){f.classList.toggle('open');});})();
 document.querySelectorAll('.nav-menu a').forEach(function(a){
   a.addEventListener('click',function(){var f=document.getElementById('navFloat');if(f)f.classList.remove('open');});
 });

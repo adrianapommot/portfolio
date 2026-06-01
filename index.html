@@ -183,10 +183,10 @@
   var SKILLS = ["UI Design", "Design System", "Branding & Identidade", "Motion", "Branding de Interface", "Figma", "Prototipação"];
 
   var PROJECTS = [
-    { num: "01", name: "MRV", sub: "Ecossistema Financeiro", img: "img/mrv/overview-grid.webp", tags: ["Product Design", "Fintech", "Design System"], href: "case-mrv.html" },
-    { num: "02", name: "Ford", sub: "Immersion Room", img: "img/ford/hero-room.webp", tags: ["Identidade Visual", "Design Espacial"], href: "case-ford.html" },
-    { num: "03", name: "Delta", sub: "Design System", img: "img/delta/hero-mockup.webp", tags: ["Design System", "Tokens"], href: "case-delta.html" },
-    { num: "04", name: "Chorume", sub: "Tipografia", img: "img/chorume/garrafa-pantano-hero.jpg", tags: ["Tipografia", "Branding"], href: "case-chorume.html" }
+    { num: "01", name: "MRV", sub: "Fluxo de Renegociação", img: "img/mrv/overview-grid.webp", pos: "center 50%", tags: ["Product Design", "Fintech", "Design System"], href: "case-mrv.html" },
+    { num: "02", name: "Ford", sub: "Immersion Room", img: "img/ford/hero-room.webp", pos: "center 48%", tags: ["Identidade Visual", "Design Espacial"], href: "case-ford.html" },
+    { num: "03", name: "Delta", sub: "Design System", img: "img/delta/hero-mockup.webp", pos: "center 50%", tags: ["Design System", "Tokens"], href: "case-delta.html" },
+    { num: "04", name: "Chorume", sub: "Tipografia", img: "img/chorume/alfabeto-chorume.png", pos: "center 42%", tags: ["Tipografia", "Branding"], href: "case-chorume.html" }
   ];
 
   var ICONS = {
@@ -246,7 +246,7 @@
   var pc = $("#posters");
   if (pc) pc.innerHTML = PROJECTS.map(function (p) {
     return '<a href="' + p.href + '" class="poster rv">' +
-      '<img src="' + p.img + '" alt="' + esc(p.name) + " " + esc(p.sub) + '" loading="lazy" />' +
+      '<img src="' + p.img + '" alt="' + esc(p.name) + " " + esc(p.sub) + '" loading="lazy" style="object-position:' + (p.pos || "center") + '" />' +
       '<span class="poster-scrim"></span>' +
       '<span class="poster-top"><span class="poster-num">' + p.num + " / 04</span>" +
       '<span class="poster-tags">' + p.tags.map(function (t) { return "<span>" + esc(t) + "</span>"; }).join("") + "</span></span>" +

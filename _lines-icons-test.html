@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teste · linhas e ícones em amarelo</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --black:#111; --text-body:#49443c; --gray-3:#756F67; --gray-4:#B8B2A8; --gray-5:#EBE7E1; --accent:#E8E94D; --accent-light:#F4F4A0; --accent-dark:#8A8A20; }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Plus Jakarta Sans',sans-serif;background:#fff;color:#111;padding:48px 40px 96px;-webkit-font-smoothing:antialiased}
+  h1{font-size:32px;font-weight:600;letter-spacing:-.02em;text-transform:uppercase;margin-bottom:10px}
+  .intro{font-size:15px;color:#585550;max-width:66ch;line-height:1.55;margin-bottom:8px}
+  .intro b{color:#111}
+  .variant{border-top:1px solid #E3E0DA;padding:34px 0}
+  .vlabel{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#756F67;margin-bottom:26px}
+  .vlabel span{color:#B8B2A8;font-weight:500;text-transform:none;letter-spacing:0}
+  .cols{display:grid;grid-template-columns:repeat(3,1fr)}
+  .col{padding:0 32px;border-left:1px solid var(--ln);display:flex;flex-direction:column;gap:18px}
+  .col:first-child{padding-left:0;border-left:none}
+  .col:last-child{padding-right:0}
+  .ico{width:28px;height:28px;display:flex}
+  .ico svg{width:28px;height:28px;fill:none;stroke:var(--ic);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+  .nm{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#111}
+  .ds{font-size:14px;line-height:1.6;color:#49443c}
+  .fi{border-top:1px solid var(--ln);padding-top:22px}
+  .fl{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#B8B2A8;margin-bottom:5px}
+  .fv{font-size:14px;color:#49443c}
+</style>
+</head>
+<body>
+  <h1>Linhas &amp; ícones em amarelo</h1>
+  <p class="intro">Simulação da seção "O que eu faço" com o amarelo nas <b>linhas</b> (divisores/réguas) e nos <b>ícones</b>. Como o fundo é branco, amarelo vivo tende a ter pouco contraste — por isso testei também um amarelo escuro (mustard) pros ícones. Compare as 5 faixas e me diz a combinação. Nada vai pro site antes da sua escolha.</p>
+  <div id="root"></div>
+<script>
+  var ICONS = [
+    '<rect x="4" y="5" width="24" height="22" rx="2"/><path d="M4 12h24M11 12v15"/>',
+    '<path d="M20 5l7 7-15 15-7 1 1-7L20 5z"/><path d="M17 8l7 7"/>',
+    '<path d="M16 4 4 10.5l12 6.5 12-6.5L16 4z"/><path d="M4 16l12 6.5 12-6.5"/><path d="M4 21.5l12 6.5 12-6.5"/>'
+  ];
+  var COLS = [
+    {nm:'UI &amp; Produto', ds:'Interfaces de alta fidelidade, fluxos end-to-end, prototipação e handoff.', fl:'Metodologia', fv:'User-Centered Design'},
+    {nm:'Branding &amp; Identidade', ds:'Linguagem visual de marca: logo, naming, tipografia, paleta e guidelines.', fl:'Disciplinas', fv:'Direção de arte, Tipografia, Cor'},
+    {nm:'Design System', ds:'Atomic design, tokens, componentes, documentação e governança.', fl:'Arquitetura', fv:'Atomic + Tokens'}
+  ];
+  var VARS = [
+    {label:'Atual',                 note:'ícones pretos · linhas cinza',                       ic:'#111',     ln:'#EBE7E1'},
+    {label:'Linhas amarelas',       note:'ícones pretos · linhas amarelo bem fraco (1px, quase imperceptível)',                ic:'#111',     ln:'#ECEBC4'},
+    {label:'Ícones amarelo vivo',   note:'ícones #E8E94D · linhas cinza — repare como somem no branco', ic:'#E8E94D', ln:'#EBE7E1'},
+    {label:'Ícones mustard',        note:'ícones #8A8A20 · linhas cinza — amarelo legível no branco',    ic:'#8A8A20', ln:'#EBE7E1'},
+    {label:'Mustard + linhas amarelas', note:'ícones #8A8A20 · linhas amarelo bem fraco',          ic:'#8A8A20', ln:'#ECEBC4'}
+  ];
+  var root = document.getElementById('root');
+  VARS.forEach(function(v){
+    var cols = COLS.map(function(c,i){
+      return '<div class="col">'+
+        '<div class="ico"><svg viewBox="0 0 32 32">'+ICONS[i]+'</svg></div>'+
+        '<div class="nm">'+c.nm+'</div>'+
+        '<div class="ds">'+c.ds+'</div>'+
+        '<div class="fi"><div class="fl">'+c.fl+'</div><div class="fv">'+c.fv+'</div></div>'+
+      '</div>';
+    }).join('');
+    var s = document.createElement('section');
+    s.className='variant';
+    s.style.cssText='--ic:'+v.ic+';--ln:'+v.ln+';';
+    s.innerHTML = '<h2 class="vlabel">'+v.label+' <span>— '+v.note+'</span></h2><div class="cols">'+cols+'</div>';
+    root.appendChild(s);
+  });
+</script>
+</body>
+</html>
