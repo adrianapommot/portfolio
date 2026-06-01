@@ -43,6 +43,7 @@ img{display:block;max-width:100%}
 /* ───────── FLUXO CONTÍNUO ───────── */
 .flow{max-width:calc(1440px + 2*var(--m));margin:0 auto}
 .sec{padding:clamp(48px,5.5vw,80px) var(--m)}/* ritmo de seção alinhado à home (reduzido) */
+.sec+.sec{border-top:1px solid var(--line)}
 
 /* grid mestre de 12 colunas (reutilizado por todas as seções) */
 .grid{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--gut);align-items:start}
@@ -57,8 +58,8 @@ img{display:block;max-width:100%}
 .s-index i{width:8px;height:8px;border-radius:50%;background:var(--gray-4);display:block}
 .s-index em{width:28px;height:1.5px;background:var(--line);display:block;font-style:normal}  /* traço = cor das linhas cinzas */
 .feat-idx,.card-idx{display:none}  /* seção 02: itens sem número */
-.s-title{color:var(--black);text-wrap:balance}
-.s-lead{color:var(--gray-1);text-wrap:balance}
+.s-title{color:var(--black);text-wrap:balance;margin-bottom:var(--space-md)}
+.s-lead{color:var(--gray-1);text-wrap:balance;margin-bottom:var(--space-lg)}
 .s-lead strong{font-weight:700}
 .s-text{color:var(--gray-2);text-wrap:balance}
 .s-text strong{font-weight:700;color:var(--black)}
@@ -840,7 +841,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 <div class="footer-grid">
 <div><div class="footer-logo">Adriana Pommot</div><div class="footer-social"><a href="https://linkedin.com/in/adriana-pommot" target="_blank">LinkedIn</a><a href="https://instagram.com/ultraviolenta.ink" target="_blank">Instagram</a><a href="mailto:adrianapommot@gmail.com">Email</a></div></div>
 <div><div class="footer-col-title">Páginas</div><div class="footer-col-links"><a href="index.html#work">Projetos</a><a href="index.html#services">Serviços</a><a href="index.html#about">Sobre Mim</a><a href="#contact">Contato</a></div></div>
-<div><div class="footer-col-title">Projetos</div><div class="footer-col-links"><a href="case-mrv.html">MRV</a><a href="case-delta.html">Delta DS</a></div></div>
+<div><div class="footer-col-title">Projetos</div><div class="footer-col-links"><a href="case-mrv.html">MRV</a><a href="case-delta.html">Delta DS</a><a href="case-chorume.html">Chorume</a></div></div>
 <div><div class="footer-col-title">Contato</div><div class="footer-col-links"><a href="mailto:adrianapommot@gmail.com">adrianapommot@gmail.com</a><a href="#">São Paulo, BR</a></div></div>
 </div>
 <div class="footer-bottom"><span class="footer-copy">© 2026 Adriana Pommot</span><span class="footer-copy">Visual & Interface Design</span></div>
