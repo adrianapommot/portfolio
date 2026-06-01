@@ -49,7 +49,7 @@ p { text-wrap: pretty; }
 .btn--dark:hover { box-shadow: 0 10px 26px rgba(17,17,17,.28); transform: translateY(-2px); }
 
 /* ═══════════════════════════════════ NAV ═══════════════════════ */
-.nav-name { position: fixed; top: 36px; left: var(--gut); z-index: 100; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink); background: var(--accent); padding: 9px 20px; border-radius: 999px; overflow: hidden; }
+.nav-name { position: fixed; top: 36px; left: var(--gut); z-index: 100; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink); background: var(--accent); padding: 9px 20px; border-radius: 999px; display: inline-block; }
 .nav-roll { display: block; overflow: hidden; height: 1em; transition: transform .45s cubic-bezier(.19,1,.22,1); }
 .nav-name:hover .nav-roll { transform: translateY(-100%); }
 .nav-name span { display: block; line-height: 1; white-space: nowrap; }
