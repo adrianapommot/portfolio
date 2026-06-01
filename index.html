@@ -1,1440 +1,167 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Adriana Pommot. Designer Sênior com 15 anos em UI, UX, Visual Design, Branding, Direção de Arte e Design System. End-to-end, com acessibilidade e governança. Cases MRV, Dasa, Ford, Escale.">
-<meta property="og:title" content="Adriana Pommot · Design Systems, Product &amp; Visual Design">
-<meta property="og:description" content="Designer Sênior com 15 anos em UI, Design System e Branding & Identidade. Portfolio com cases MRV, Dasa, Ford e Escale.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://adrianapommot.com">
-<meta property="og:image" content="https://framerusercontent.com/images/tJmuIg4YsOc9pGcsP4sUgCj5gw.jpg">
-<meta name="twitter:card" content="summary_large_image">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Adriana Pommot · Designer Sênior — Design Systems, Product & Visual Design. 15 anos. Cases MRV, Dasa, Ford, Escale." />
 <title>Adriana Pommot · Design Systems, Product &amp; Visual Design</title>
-<!-- Plus Jakarta Sans, Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-<style>
-/* ═══════════════════════════════════
-   TOKENS
-   ═══════════════════════════════════ */
-:root {
-  /* ─── COR ─────────────────────────────────── */
-  --black: #111111;
-  --white: #ffffff;
-  --gray-1: #37342F;
-  --gray-2: #585550;
-  --gray-3: #756F67;
-  --gray-4: #B8B2A8;
-  --gray-5: #EBE7E1;
-  --gray-6: #F5F1EB;
-  --cream: #F9F9F9;          /* fundo dos marquees (neutro) */
-  --paper: #F2EFE8;          /* fundo creme da página (ref do hero) · ajustar tom */
-  --accent: #D6FF4D;          /* lime ácido — accent ÚNICO do projeto */
-  --accent-light: #E9FFA8;    /* lime suave: texto/realce sobre preto */
-
-  --text-body: #49443c;     /* tinta de leitura (neutral-700, quente) */
-  --measure-body: 540px;    /* largura travada do corpo de leitura */
-
-  /* ─── TIPOGRAFIA ──────────────────────────── */
-  --font-display: 'Plus Jakarta Sans', sans-serif;
-  --font-body: 'Plus Jakarta Sans', sans-serif;
-
-  /* ─── LAYOUT BASE ─────────────────────────── */
-  --max-w: 1440px;
-  --px: 40px;
-
-  /* ─── ESCALA DE ESPAÇAMENTO — escala única, tudo múltiplo de 8 ───────────────── */
-  /* Por papel: md=intra-grupo · lg=entre blocos · mid=grupo · deck=título→subtítulo
-     title=header→conteúdo · loose=entre seções · section=topo de seção */
-  --space-md: 24px;       /* 8×3 */
-  --space-lg: 32px;       /* 8×4 */
-  --space-mid: 40px;      /* 8×5 */
-  --space-deck: 48px;     /* 8×6  — título → subtítulo */
-  --space-title: 72px;    /* 8×9  — header → conteúdo */
-  --space-loose: 96px;    /* 8×12 — entre seções */
-  --space-section: 112px; /* 8×14 — topo de seção */
-
-  /* ─── ESPAÇAMENTO DE SEÇÕES ───────────────── */
-  /* Distância vertical entre o fim do conteúdo de */
-  /* uma seção e o início do marquee da próxima.   */
-  /* Implementado como padding-bottom de cada      */
-  /* seção. NÃO somar com padding-top da próxima.  */
-  --section-gap: var(--space-loose);
-
-  /* ─── TABELA EDITORIAL (sistema) ──────────── */
-  /* Toda tabela tipo svc-row, traj-row, etc deve  */
-  /* respeitar este sistema. A coluna de conteúdo  */
-  /* sempre começa em --col-content-anchor para    */
-  /* garantir alinhamento visual perpétuo entre    */
-  /* seções. A coluna 1 (número/ano) varia em      */
-  /* largura, e o column-gap compensa.             */
-  --col-num-narrow: 40px;       /* services: "01" */
-  --col-num-wide: 80px;         /* trajectory: "2025-now" */
-  --col-label: 200px;           /* labels uppercase */
-  --col-content-anchor: 280px;  /* X onde col 3 começa SEMPRE */
-}
-
-/* ═══════════════════════════════════
-   RESET & BASE
-   ═══════════════════════════════════ */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: var(--font-body);
-  color: var(--black);
-  background: var(--paper);
-  overflow-x: hidden;
-}
-::selection { background: var(--accent); color: var(--black); }
-img { display: block; max-width: 100%; }
-a { color: inherit; text-decoration: none; }
-
-/* ─── TIPOGRAFIA: anti-viúva global ──────── */
-/* text-wrap: pretty redistribui linhas pra    */
-/* evitar palavras soltas no fim de parágrafos */
-p, .hero-body, .svc-desc, .traj-role,
-.proj-desc, .about-text {
-  text-wrap: pretty;
-}
-
-/* ═══════════════════════════════════
-   CONTAINER
-   ═══════════════════════════════════ */
-.container {
-  max-width: var(--max-w);
-  margin: 0 auto;
-  padding: 0 var(--px);
-}
-
-/* ═══════════════════════════════════
-   NAV, Name pill left + circle menu right
-   ═══════════════════════════════════ */
-.nav-name {
-  position: fixed;
-  top: 44px; /* baixado 24px do topo (Adri 31/mai) */
-  left: max(calc(var(--px) - 20px), calc((100vw - var(--max-w)) / 2 + var(--px) - 20px));
-  z-index: 100;
-  font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--black);
-  background: var(--accent);
-  padding: 8px 20px;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: background 0.3s, color 0.3s;
-}
-.nav-name-roll {
-  display: block;
-  overflow: hidden;
-  transition: none;
-}
-.nav-name-roll span {
-  display: block;
-  line-height: 1;
-  transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1);
-}
-.nav-name:hover .nav-name-roll span {
-  transform: translateY(-100%);
-}
-
-/* ═══════════════════════════════════
-   NAV FLOAT, Circle menu right
-   ═══════════════════════════════════ */
-.nav-float {
-  position: fixed;
-  top: 44px; /* baixado 24px junto com a pill */
-  right: max(var(--px), calc((100vw - var(--max-w)) / 2 + var(--px)));
-  z-index: 100;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
-}
-.nav-toggle {
-  width: 54px; height: 54px;
-  border-radius: 50%;
-  border: 1px solid var(--gray-5);
-  cursor: pointer;
-  background: rgba(255,255,255,0.72);
-  backdrop-filter: blur(12px) saturate(1.3);
-  -webkit-backdrop-filter: blur(12px) saturate(1.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.3s, border-color 0.3s;
-  position: relative;
-  box-shadow: none;
-}
-.nav-toggle:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-}
-.nav-toggle:hover svg {
-  stroke: var(--black);
-}
-.nav-toggle svg {
-  width: 22px; height: 22px;
-  stroke: var(--black);
-  stroke-width: 1;
-  stroke-linecap: square;
-  fill: none;
-}
-.nav-toggle .icon-x { display: none; }
-.nav-float.open .nav-toggle .icon-menu { display: none; }
-.nav-float.open .nav-toggle .icon-x { display: block; }
-.nav-float.open .nav-toggle {
-  background: var(--black);
-  box-shadow: none;
-}
-.nav-menu {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 6px;
-  opacity: 0;
-  transform: translateY(-8px);
-  pointer-events: none;
-  transition: opacity 0.3s, transform 0.3s;
-}
-.nav-float.open .nav-menu {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-.nav-menu a {
-  font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  padding: 8px 20px;
-  border-radius: 999px;
-  white-space: nowrap;
-  transition: color 0.25s, box-shadow 0.25s, background 0.25s;
-}
-.nav-menu .nav-cta {
-  color: var(--white);
-  background: var(--black);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-.nav-menu .nav-cta:hover { color: var(--accent); }
-.nav-menu .nav-cta svg {
-  width: 13px; height: 13px;
-  fill: none; stroke: currentColor; stroke-width: 2;
-  stroke-linecap: round; stroke-linejoin: round;
-}
-.nav-menu .nav-link {
-  color: var(--gray-2);
-  background: rgba(255,255,255,0.55);
-  backdrop-filter: blur(12px) saturate(1.3);
-  -webkit-backdrop-filter: blur(12px) saturate(1.3);
-  position: relative;
-}
-.nav-menu .nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 6px;
-  left: 20px;
-  right: 20px;
-  height: 1.5px;
-  background: var(--black);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-.nav-menu .nav-link:hover {
-  color: var(--black);
-}
-.nav-menu .nav-link:hover::after {
-  transform: scaleX(1);
-}
-
-/* ═══════════════════════════════════
-   SECTIONS, sticky stack on projects
-   ═══════════════════════════════════ */
-.hero,
-.services-section {
-  position: relative;
-  background: var(--white); /* fundo branco — cards num off-white sutil saltam sobre ele */
-}
-/* Trajectory sticks so projects can scroll over it */
-.trajectory-section {
-  position: relative;
-  z-index: 1;
-  background: var(--white);
-}
-/* Projects dark block scrolls over the sticky trajectory */
-.projects-section {
-  position: relative;
-  z-index: 2;
-}
-.about-section   { position: relative; z-index: 3; background: var(--white); }
-.cta-section     { position: relative; z-index: 4; }
-footer           { position: relative; z-index: 5; }
-
-/* ═══════════════════════════════════
-   HERO, Structured editorial layout
-   ═══════════════════════════════════ */
-.hero {
-  padding-top: 120px; /* nav baixada (bottom ~72) + gap 48 até "São Paulo" = 120 */
-  padding-bottom: var(--section-gap); /* respiro até a faixa de projetos */
-}
-.hero-title {
-  font-family: var(--font-display);
-  font-size: clamp(40px, 7.8vw, 108px);
-  font-weight: 500;
-  line-height: 0.9; /* entrelinha apertada (Adri 30/mai) */
-  letter-spacing: -0.035em; /* Figma: -4px @ 112px = -0.0357em (proporcional) */
-  text-transform: uppercase;
-  padding: var(--space-md) 0 0;
-  margin-left: -0.04em;
-}
-
-/* ─── HERO TOP — texto (esq) + arte blueprint (dir) ─── */
-.hero-top { position: relative; }
-.hero-top-left { position: relative; z-index: 2; max-width: 60%; display: flex; flex-direction: column; align-items: flex-start; }
-.hero-reg { width: 26px; height: 26px; color: var(--black); display: block; flex-shrink: 0; }
-.hero-reg-row { display: flex; align-items: center; gap: 14px; margin-bottom: var(--space-md); } /* São Paulo = legenda do título → grupo coeso (24); o respiro de 96 fica ACIMA do bloco e abaixo (até a tarja) */
-.hero-top-left .hero-title { padding: 0; }
-.hero-spark { color: var(--accent); font-weight: 400; font-size: 0.3em; vertical-align: 0.5em; }
-.hero-lead { font-family: var(--font-body); font-size: 18px; font-weight: 500; line-height: 1.45; letter-spacing: -0.005em; color: var(--gray-1); margin-top: var(--space-deck); text-wrap: pretty; }
-.hero-loc { font-family: var(--font-display); font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1; color: var(--gray-4); }
-.hero-scroll { margin-top: var(--space-md); font-size: 22px; line-height: 1; color: var(--black); text-decoration: none; }
-
-.hero-art { position: absolute; bottom: 0; right: -2%; width: 56%; z-index: 1; pointer-events: none; } /* blob ancorada na base (bottom:0) e à direita (right:-2%) — aumentada p/ cima/esq via width (Adri 31/mai: maior, pode vazar o alinhamento pra cima, base mantida onde está). Labels em % acompanham as features do vídeo automaticamente. */
-.hero-art-img { width: 100%; height: auto; display: block; mix-blend-mode: multiply; filter: hue-rotate(8deg) saturate(1.03) brightness(1.06); -webkit-mask-image: linear-gradient(90deg, transparent 0%, transparent 28%, #000 44%); mask-image: linear-gradient(90deg, transparent 0%, transparent 28%, #000 44%); }/* filter: aproxima a blob (#e7f137) ao token --accent #D6FF4D (blob é do vídeo; p/ hex exato reexportar). mask: some a borda esquerda do vídeo (atrás do título) p/ os nós do blueprint não encostarem nas letras */
-.hero-lbl { position: absolute; font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.1em; font-size: 7px; line-height: 1.55; color: var(--gray-1); z-index: 2; white-space: nowrap; } /* legendas decorativas: bem pequenas (Adri 31/mai) */
-.li-tl { top: 91%; left: 74%; font-weight: 600; color: var(--black); } /* abaixo da coluna [COLORS], em preto (Adri 31/mai) */
-.li-001 { top: 46%; left: 14%; }
-.li-001 b { font-weight: 700; font-size: 8px; }
-.li-001 i { display: block; font-style: normal; color: var(--gray-4); margin-top: 4px; }
-.li-v03 { top: 70%; left: 14%; }
-.li-v03 i { display: block; font-style: normal; color: var(--gray-4); }
-.li-v03 b { display: block; font-weight: 700; }
-.li-tok { top: 74%; left: 74%; line-height: 2; color: var(--white); font-weight: 500; } /* sobre a mancha preta: branco (liberdade de ilustração) */
-.hero-darkblob { position: absolute; right: 6%; bottom: 1%; width: 30%; height: 34%; border-radius: 50%; background: radial-gradient(circle at 50% 50%, rgba(17,17,17,0.5) 0%, rgba(17,17,17,0.16) 46%, transparent 72%); filter: blur(16px); z-index: 1; mix-blend-mode: multiply; }
-.hero-badge { position: absolute; top: 24%; right: 18%; width: 132px; height: 132px; z-index: 3; }
-.hero-badge svg { width: 100%; height: 100%; animation: badge-spin 22s linear infinite; }
-.hero-badge text { font-family: var(--font-display); font-size: 6.6px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; fill: var(--black); }
-.hero-badge-star { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 19px; color: var(--black); }
-@keyframes badge-spin { to { transform: rotate(360deg); } }
-.hero-swatch { position: absolute; top: 93%; left: 35%; display: flex; flex-direction: column; align-items: flex-start; gap: 5px; z-index: 2; } /* escala de cores alinhada com a base de "VISUAL DESIGN" */
-.hero-swatch-bar { display: flex; }
-.hero-swatch-bar i { width: 21px; height: 13px; display: block; }
-.hero-swatch em { font-family: var(--font-display); font-size: 10px; font-style: normal; letter-spacing: 0.06em; color: #8f961f; }
-@media (max-width: 1024px) {
-  /* hero empilha: título/lead, depois a arte como bloco normal (não-absoluto) */
-  .hero { padding-top: var(--space-title); padding-bottom: var(--space-deck); }
-  /* bloco normal no mobile: evita o gotcha do flex (align-items:flex-start vira max-content) */
-  .hero-top-left { display: block; max-width: 100%; }
-  .hero-title { font-size: clamp(33px, 9vw, 72px); }
-  .hero-art {
-    position: static;
-    width: 100%; max-width: 380px;
-    margin: var(--space-lg) auto 0;
-    top: auto; right: auto;
-  }
-  /* mobile: arte empilhada e centrada — sem o mask de borda esquerda (era só p/ o overlap com o título no desktop) */
-  .hero-art-img { -webkit-mask-image: none; mask-image: none; }
-  /* labels decorativos são posicionados por % do desktop — escondidos no mobile */
-  .hero-lbl, .hero-badge, .hero-swatch, .hero-darkblob { display: none; }
-}
-
-/* (seção antiga "De pixels" / grid de conteúdo + clientes removida — agora é .ps) */
-
-/* ═══════════════════════════════════
-   PIXELS → SISTEMAS · seção blueprint
-   (ilustração à esquerda · texto à direita)
-   ═══════════════════════════════════ */
-.ps {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: var(--space-deck);
-  align-items: center; /* bloco de texto (tokens 48/48, grupo coeso) centralizado vert. no meio da ilustra */
-  padding-top: 80px; /* tarja→ilustra = 80 (header reduzido 96→80; sobe a ilustra). base (hero padding-bottom) segue 96 */
-}
-/* ESQUERDA: ilustração estática grande, define a altura da linha */
-.ps-illus { position: relative; display: flex; justify-content: center; }
-.ps-vid { width: 100%; max-width: 480px; height: auto; display: block; mix-blend-mode: multiply; }
-/* DIREITA: texto — grupo coeso (título→lead→CTA, ritmo 48), centralizado na ilustra */
-.ps-title {
-  font-family: var(--font-display);
-  font-size: clamp(28px, 3.3vw, 52px);
-  font-weight: 500;
-  line-height: 1.06;
-  letter-spacing: -0.025em;
-  text-transform: uppercase;
-  margin-left: -0.03em;
-}
-.ps-lead {
-  font-family: var(--font-body);
-  font-size: 18px; font-weight: 500; line-height: 1.45; letter-spacing: -0.005em;
-  color: var(--gray-1);
-  margin-top: var(--space-deck);
-  max-width: 36em;
-  text-wrap: pretty;
-}
-.ps-cta {
-  display: inline-flex; align-items: center; gap: 14px;
-  margin-top: var(--space-deck); /* lead → ação: mesmo padrão do CTA (48) */
-  font-family: var(--font-display);
-  font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--black);
-}
-.ps-cta .br { color: var(--accent); font-weight: 700; }
-.ps-cta .ar { font-size: 18px; line-height: 1; transition: transform .25s ease; }
-.ps-cta:hover .ar { transform: translateX(6px); }
-@media (max-width: 900px) {
-  .ps { grid-template-columns: 1fr; gap: var(--space-md); }
-  .ps-illus { position: static; }
-  .ps-vid { position: static; width: 100%; height: auto; max-width: 340px; margin: 0 auto; }
-  .ps-title { font-size: clamp(34px, 9vw, 52px); }
-  /* serviços: os 3 cards empilham */
-  .svc-grid { grid-template-columns: 1fr; }
-}
-
-/* ═══════════════════════════════════
-   MARQUEE, Infinite scroll titles
-   ═══════════════════════════════════ */
-.marquee {
-  overflow: hidden;
-  white-space: nowrap;
-  padding: var(--space-md) 0;
-  margin: 0 0 var(--space-title) 0;
-  background: var(--cream);
-  border-bottom: 1px solid var(--gray-5);
-  -webkit-mask-image: linear-gradient(90deg, transparent, black 4%, black 96%, transparent);
-  mask-image: linear-gradient(90deg, transparent, black 4%, black 96%, transparent);
-}
-.marquee-track {
-  display: inline-flex;
-  align-items: center;
-  animation: marquee 55s linear infinite;
-  will-change: transform;
-}
-.marquee-text {
-  font-family: var(--font-display);
-  font-size: clamp(44px, 7vw, 96px);
-  font-weight: 400;
-  line-height: 1.1; /* respiro pros acentos (Ó, Ç, Ã) */
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
-  flex-shrink: 0;
-}
-.marquee-sep {
-  padding: 0 clamp(24px, 3vw, 48px);
-  font-family: var(--font-body);
-  font-size: clamp(40px, 5vw, 64px);
-  color: var(--black);
-  flex-shrink: 0;
-  line-height: 1;
-}
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-/* ═══════════════════════════════════
-   SERVICES
-   ═══════════════════════════════════ */
-.services-section {
-  padding: var(--space-loose) 0; /* topo/base de seção padronizados: 96/96 */
-  border-top: 1px solid var(--gray-5);
-}
-.section-title {
-  font-family: var(--font-display);
-  font-size: clamp(44px, 7vw, 96px);
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
-  margin-bottom: var(--space-deck);
-}
-
-/* SERVICES — editorial, grid rigoroso.
-   Cabeçalho (headline + lead + CTA) e 3 colunas em SUBGRID: número, ícone,
-   nome, descrição e ficha técnica compartilham as MESMAS linhas entre as três
-   colunas, garantindo alinhamento perpétuo independente do tamanho do texto.
-   Divisores verticais nas linhas do grid; ficha técnica por serviço (preserva
-   todo o copy). */
-
-/* — Cabeçalho — */
-.svc-head {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-md);
-  align-items: start;
-}
-.svc-head-text { grid-column: 1 / 2; } /* título + lead empilhados na 1ª coluna */
-.svc-illus { grid-column: 2 / 4; align-self: center; } /* ilustração-fluxo ao lado do título */
-.svc-illus img { width: 80%; height: auto; display: block; margin: 0; mix-blend-mode: multiply; opacity: 0.42; } /* início alinhado ao 2º card (coluna 2) */
-.svc-headline {
-  font-family: var(--font-display);
-  font-size: clamp(40px, 6.5vw, 92px);
-  font-weight: 500;        /* estilo-padrão de título de seção (= hero / CTA) */
-  line-height: 1.0625;
-  letter-spacing: -0.035em;
-  text-transform: uppercase;
-  color: var(--black);
-}
-.svc-lead {
-  margin-top: var(--space-deck); /* respiro padrão título → subtítulo (token) */
-  font-family: var(--font-body);
-  font-size: 18px; /* LEAD — frase após título */
-  font-weight: 500;
-  line-height: 1.45;
-  letter-spacing: -0.005em;
-  color: var(--gray-1); /* tom mais escuro da escala de cinzas — dá presença ao lead */
-  text-wrap: pretty;
-}
-
-/* — Grade de 3 colunas (subgrid → alinhamento por linha) — */
-.svc-grid {
-  margin-top: var(--space-title); /* respiro lead→cards */
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-md); /* separação entre os 3 cards */
-  align-items: stretch; /* cards de altura igual */
-}
-.svc-col {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-  background: var(--cream);
-  border: 1px solid var(--gray-5);
-  border-radius: 16px;
-  padding: var(--space-lg);
-}
-/* ícone: glifo de linha puro, padrão MRV (sem caixa, sem número) */
-.svc-ico {
-  width: 28px; height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--black);
-}
-.svc-ico svg {
-  width: 28px; height: 28px;
-  fill: none; stroke: currentColor; stroke-width: 1.5;
-  stroke-linecap: round; stroke-linejoin: round;
-}
-.svc-name {
-  font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--gray-1); /* forte: título de coluna */
-}
-.svc-desc {
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.6;
-  letter-spacing: 0.02em; /* entreletra mais aberta (body) */
-  color: var(--gray-2); /* médio: body legível */
-  text-wrap: pretty;
-}
-.svc-ficha {
-  margin-top: auto; /* ancora a ficha na base do card → divisores alinhados entre os cards */
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-  padding-top: var(--space-md);
-  border-top: 1px solid var(--gray-5);
-}
-.svc-ficha-row {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.svc-fl {
-  font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--gray-4); /* mais claro → mais contraste com o preto do valor */
-}
-.svc-fv {
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.6;
-  letter-spacing: 0.02em; /* entreletra mais aberta (body) */
-  color: var(--gray-2); /* médio: body legível */
-}
-
-/* — Cases em destaque — */
-.svc-cases {
-  grid-column: 2 / 3; /* card no topo, na largura do 2º card (alinhado a ele) */
-  align-self: start;
-  background: var(--white);
-  border: 1px solid var(--gray-5);
-  border-radius: 16px;
-  padding: var(--space-lg);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.svc-cases-label {
-  font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--gray-1); /* mesmo estilo de "UI & Produto" */
-  white-space: nowrap;
-}
-.svc-cases-list {
-  display: flex;
-  align-items: baseline;
-  gap: 12px; /* nomes juntos, separados por bolinha */
-  flex-wrap: wrap;
-}
-.svc-sep {
-  font-family: var(--font-display);
-  font-size: 18px;
-  line-height: 1;
-  color: var(--gray-4);
-}
-.svc-case {
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: var(--gray-1); /* forte: mesmo tom escuro do título/lead */
-  transition: color 0.25s;
-}
-a.svc-case:hover { color: var(--gray-4); }
-
-/* ═══════════════════════════════════
-   PROJETOS, layout cinematic alternado (dark)
-   Cada projeto ocupa uma "faixa" full-width com imagem de um lado e
-   texto do outro. Lados alternam pra criar ritmo editorial.
-   ═══════════════════════════════════ */
-.projects-section {
-  padding: 0 0 var(--space-loose); /* lidera com marquee full-bleed → topo 0 (faixa encosta); respiro antes = base da seção anterior (96) */
-  background: var(--black);
-}
-.projects-section .marquee { background: transparent; border-bottom-color: rgba(255,255,255,0.12); }
-.projects-section .marquee-text { color: var(--white); }
-.projects-section .marquee-sep { color: var(--accent); }
-
-.proj-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-section);
-  padding: var(--space-title) 0 var(--space-mid);
-}
-
-.proj-hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-title);
-  align-items: center;
-  transition: opacity 0.4s;
-}
-.proj-hero:hover { opacity: 0.94; }
-
-/* Lados alternados. O texto sempre fica colado no gap (próximo da imagem),
-   criando um "centro de gravidade" simétrico entre as duas faixas. */
-.proj-hero--right .proj-hero-text { order: 1; justify-self: end; text-align: right; }
-.proj-hero--right .proj-hero-img { order: 2; }
-.proj-hero--left .proj-hero-img { order: 1; }
-.proj-hero--left .proj-hero-text { order: 2; }
-.proj-hero--right .proj-hero-tags { justify-content: flex-end; }
-.proj-hero--right .proj-hero-cta { align-self: flex-end; }
-
-/* Imagem */
-.proj-hero-img {
-  aspect-ratio: 4/3;
-  overflow: hidden;
-  border-radius: 16px;
-  background: rgba(255,255,255,0.04);
-}
-.proj-hero-img img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.4s;
-  filter: saturate(0.92);
-}
-.proj-hero:hover .proj-hero-img img {
-  transform: scale(1.03);
-  filter: saturate(1.05);
-}
-
-/* Texto */
-.proj-hero-text {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md); /* ritmo único do bloco de projeto */
-  max-width: 520px;
-}
-.proj-hero-num {
-  font-family: var(--font-display);
-  font-size: clamp(56px, 6vw, 96px);
-  font-weight: 400;
-  line-height: 0.9;
-  letter-spacing: -0.03em;
-  color: var(--accent);
-  font-variant-numeric: tabular-nums;
-}
-.proj-hero-name {
-  font-family: var(--font-display);
-  font-size: clamp(28px, 3.3vw, 52px);
-  font-weight: 500;        /* estilo-padrão de título sub-tier (= ps-title) */
-  line-height: 1.06;
-  letter-spacing: -0.025em;
-  text-transform: uppercase;
-  color: var(--white);
-  text-wrap: balance;
-}
-.proj-hero-desc {
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.75;
-  color: rgba(255,255,255,0.6);
-  max-width: 440px;
-  text-wrap: balance;
-}
-.proj-hero-tags {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.proj-hero-tags .proj-tag {
-  display: inline-block;
-  padding: 6px 14px;
-  font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.65);
-  border: 1px solid rgba(255,255,255,0.18);
-  border-radius: 999px;
-  white-space: nowrap;
-}
-.proj-hero-cta {
-  font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--accent);
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  transition: gap 0.3s, color 0.3s;
-}
-.proj-hero-cta::after {
-  content: '→';
-  font-size: 14px;
-  transition: transform 0.3s;
-}
-.proj-hero:hover .proj-hero-cta { gap: 14px; }
-.proj-hero:hover .proj-hero-cta::after { transform: translateX(2px); }
-
-/* ═══════════════════════════════════
-   TRAJECTORY, Clean table
-   ═══════════════════════════════════ */
-.trajectory-section {
-  padding: 0 0 var(--space-loose); /* lidera com marquee full-bleed → topo 0 (faixa encosta) */
-}
-.traj-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-mid);
-  max-width: 560px;
-  padding-top: var(--space-md);
-}
-.traj-row {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 0;
-  border: none;
-  background: transparent;
-}
-.traj-meta {
-  font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--gray-3);
-}
-.traj-role {
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.4;
-  letter-spacing: -0.005em;
-  color: var(--black);
-  text-wrap: pretty;
-}
-.traj-archive {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: var(--space-mid);
-  font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--gray-1);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
-  transition: color 0.3s ease, text-decoration-thickness 0.2s ease;
-}
-.traj-archive:hover {
-  color: var(--black);
-  text-decoration-thickness: 2px;
-}
-.traj-archive svg { width: 11px; height: 11px; }
-
-/* ═══════════════════════════════════
-   SOBRE MIM, Unified section
-   ═══════════════════════════════════ */
-.about-section {
-  padding: 0 0 var(--space-loose); /* lidera com marquee → topo 0 (faixa encosta) */
-  border-top: 1px solid var(--gray-5);
-}
-.about-content {
-  max-width: 600px;
-  padding: 0;
-}
-.about-text {
-  font-family: var(--font-body);
-  font-size: 18px;
-  font-weight: 400;
-  color: var(--text-body);
-  line-height: 1.55;
-  max-width: var(--measure-body);
-  margin-bottom: var(--space-mid);
-}
-.about-text p { text-wrap: pretty; }
-.about-text p + p { margin-top: 1.1em; }
-.about-claim { margin-top: 1.4em; font-weight: 500; color: var(--black); }
-.about-ctas { display: flex; gap: 10px; flex-wrap: wrap; }
-.btn-outline {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  padding: 13px 24px;
-  font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--black);
-  background: transparent;
-  border: 1px solid var(--gray-5);
-  border-radius: 999px;
-  text-decoration: none;
-  cursor: pointer;
-  transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
-}
-.btn-outline:hover {
-  border-color: var(--black);
-  background: var(--accent);
-  color: var(--black);
-}
-.btn-outline-ico {
-  width: 13px;
-  height: 13px;
-  flex-shrink: 0;
-}
-
-/* ═══════════════════════════════════
-   CTA, Dark section
-   ═══════════════════════════════════ */
-.cta-section {
-  background: var(--black); color: var(--white);
-  padding: var(--space-loose) 0; text-align: center; /* 96/96 padronizado */
-}
-.cta-title {
-  font-family: var(--font-display);
-  font-size: clamp(40px, 6.5vw, 92px);
-  font-weight: 500;
-  line-height: 1.0625;
-  letter-spacing: -0.035em;
-  text-transform: uppercase;
-  margin: 0 0 var(--space-deck);
-  margin-left: -0.02em;
-  white-space: nowrap;
-  color: var(--white);
-}
-.cta-subtitle {
-  font-family: var(--font-display);
-  font-size: 12px; font-weight: 400;
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin: 0 0 var(--space-deck);
-}
-.cta-actions {
-  display: inline-flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  max-width: 640px;
-}
-.cta-btn {
-  display: inline-flex; align-items: center; gap: 9px;
-  padding: 13px 24px;
-  font-family: var(--font-display);
-  font-size: 12px; font-weight: 500;
-  letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--white); background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 999px;
-  text-decoration: none;
-  transition: border-color 0.3s ease, color 0.3s ease;
-  cursor: pointer;
-}
-.cta-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-.cta-btn-ico {
-  width: 13px; height: 13px;
-  flex-shrink: 0;
-}
-
-/* ═══════════════════════════════════
-   FOOTER, Dark
-   ═══════════════════════════════════ */
-footer {
-  background: var(--black); color: var(--white);
-  padding: var(--space-title) 0 var(--space-lg);
-  border-top: 1px solid rgba(255,255,255,0.08);
-}
-.footer-grid {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
-  gap: var(--space-deck); margin-bottom: var(--space-title);
-}
-.footer-logo {
-  font-family: var(--font-display);
-  font-size: 14px; font-weight: 600;
-  letter-spacing: 0.04em; text-transform: uppercase;
-  margin-bottom: 20px;
-}
-.footer-social { display: flex; flex-direction: column; gap: 10px; }
-.footer-social a {
-  font-family: var(--font-body); font-size: 12px;
-  color: rgba(255,255,255,0.4); transition: color 0.3s;
-}
-.footer-social a:hover { color: var(--white); }
-.footer-col-title {
-  font-family: var(--font-display);
-  font-size: 12px; font-weight: 500;
-  letter-spacing: 0.08em; text-transform: uppercase;
-  color: rgba(255,255,255,0.25); margin-bottom: 20px;
-}
-.footer-col-links { display: flex; flex-direction: column; gap: 10px; }
-.footer-col-links a {
-  font-family: var(--font-body); font-size: 12px;
-  color: rgba(255,255,255,0.4); transition: color 0.3s;
-}
-.footer-col-links a:hover { color: var(--white); }
-.footer-bottom {
-  display: flex; justify-content: space-between;
-  align-items: center; padding-top: var(--space-lg);
-  border-top: 1px solid rgba(255,255,255,0.08);
-}
-.footer-copy {
-  font-family: var(--font-body); font-size: 12px;
-  color: rgba(255,255,255,0.25);
-}
-
-/* ═══════════════════════════════════
-   SKILLS TICKER, Dark strip, Skold-style
-   ═══════════════════════════════════ */
-.skills-ticker {
-  overflow: hidden;
-  background: var(--black);
-  width: 100%;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  margin: var(--space-deck) 0 0 0; /* título→tarja = 48 (= gap São Paulo→pill); sobe a tarja */
-  position: relative;
-  z-index: 5;
-}
-.skills-ticker-track {
-  display: inline-flex;
-  align-items: center;
-  white-space: nowrap;
-  animation: ticker 70s linear infinite;
-}
-.skills-ticker-item {
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent-light);
-  flex-shrink: 0;
-  line-height: 1;
-  padding: 0 6px;
-}
-.skills-ticker-sep {
-  color: var(--accent);
-  font-size: 12px;
-  line-height: 1;
-  flex-shrink: 0;
-  padding: 0 4px;
-  position: relative;
-  top: -1px;
-}
-@keyframes ticker {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-/* ═══════════════════════════════════
-   ANIMATIONS, fast, clean reveals
-   ═══════════════════════════════════ */
-
-/* Base: simple fade up */
-.rv {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease-out,
-              transform 0.6s ease-out;
-  will-change: opacity, transform;
-}
-.rv.visible {
-  opacity: 1;
-  transform: none;
-}
-
-/* Staggered delays, tighter */
-.d1 { transition-delay: 0.08s; }
-.d2 { transition-delay: 0.16s; }
-.d3 { transition-delay: 0.24s; }
-.d4 { transition-delay: 0.32s; }
-.d5 { transition-delay: 0.4s; }
-
-/* Rows: uniform fade up, no lateral slide */
-.traj-row.rv,
-.proj-hero.rv {
-  opacity: 0;
-  transform: translateY(24px);
-}
-.traj-row.rv.visible,
-.proj-hero.rv.visible {
-  opacity: 1;
-  transform: none;
-}
-
-/* Marquee: fade only */
-.marquee.rv {
-  opacity: 0;
-  transform: none;
-  transition: opacity 0.5s ease-out;
-}
-.marquee.rv.visible {
-  opacity: 1;
-}
-
-/* Hero title: slightly longer */
-.hero-title.rv {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.8s ease-out,
-              transform 0.8s ease-out;
-}
-.hero-title.rv.visible {
-  opacity: 1;
-  transform: none;
-}
-
-/* CTA title */
-.cta-title.rv {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.7s ease-out,
-              transform 0.7s ease-out;
-}
-.cta-title.rv.visible {
-  opacity: 1;
-  transform: none;
-}
-
-/* Trajectory rows need relative for layout */
-.traj-row {
-  position: relative;
-}
-
-/* ═══════════════════════════════════
-   RESPONSIVE
-   ═══════════════════════════════════ */
-@media (max-width: 1024px) {
-  /* Tabela editorial: re-âncora em 240px no desktop reduzido */
-  :root {
-    --col-num-narrow: 32px;
-    --col-num-wide: 72px;
-    --col-label: 168px;
-    --col-content-anchor: 240px;
-  }
-  .svc-head { grid-template-columns: 1fr; }
-  .svc-headline { font-size: clamp(38px, 7vw, 72px); }
-  .svc-illus { grid-column: auto; margin-top: var(--space-deck); max-width: 560px; }
-  .svc-grid { margin-top: var(--space-deck); }
-  .proj-list { gap: var(--space-title); padding: var(--space-deck) 0 var(--space-lg); }
-  .proj-hero { grid-template-columns: 1fr; gap: var(--space-lg); }
-  .proj-hero--left .proj-hero-img,
-  .proj-hero--right .proj-hero-img { order: 1; }
-  .proj-hero--left .proj-hero-text,
-  .proj-hero--right .proj-hero-text {
-    order: 2;
-    justify-self: start;
-    text-align: left;
-    max-width: 100%;
-  }
-  .proj-hero--right .proj-hero-tags { justify-content: flex-start; }
-  .proj-hero--right .proj-hero-cta { align-self: flex-start; }
-  .about-content { max-width: 100%; }
-  .footer-grid { grid-template-columns: 1fr 1fr; }
-}
-@media (max-width: 640px) {
-  :root { --px: 24px; }
-  .nav-name { font-size: 12px; padding: 7px 16px; }
-  .hero { padding-top: var(--space-title); }
-  .hero-title { padding: 8px 0 0; }
-  .svc-grid { grid-template-columns: 1fr; gap: var(--space-md); margin-top: var(--space-mid); }
-  .svc-col { padding: var(--space-md); }
-  .svc-cases { padding: var(--space-md); }
-  .svc-cases-list { justify-content: flex-start; }
-  .proj-list { gap: var(--space-title); }
-  .proj-hero-num { font-size: 48px; }
-  .proj-hero-name { font-size: 26px; }
-  .services-section, .projects-section, .trajectory-section,
-  .about-section { padding: 0 0 var(--space-title); }
-  .section-title { margin-bottom: var(--space-md); }
-  .marquee { padding: 16px 0; }
-  .cta-section { padding: var(--space-loose) 0; }
-  .cta-title { white-space: normal; font-size: clamp(36px, 9vw, 64px); }
-  .cta-actions { gap: 8px; padding: 0 var(--space-md); }
-  .footer-grid { grid-template-columns: 1fr; gap: var(--space-lg); }
-  .traj-list { gap: var(--space-md); max-width: 100%; }
-  .traj-archive { margin-top: var(--space-lg); }
-}
-</style>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="home.css" />
 </head>
 <body>
 
 <!-- NAV -->
-<a href="#" class="nav-name">Adriana Pommot</a>
+<a href="#top" class="nav-name"><span class="nav-roll"><span>Adriana Pommot</span><span>Adriana Pommot</span></span></a>
 <div class="nav-float" id="navFloat">
-  <button class="nav-toggle" onclick="document.getElementById('navFloat').classList.toggle('open')" aria-label="Menu">
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
     <svg class="icon-menu" viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
     <svg class="icon-x" viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
   </button>
-  <div class="nav-menu">
-    <a href="cv-adriana-pommot.pdf" download class="nav-cta">
-      Download CV
-      <svg viewBox="0 0 16 16"><path d="M8 3v8M4 8l4 4 4-4"/><path d="M3 13h10"/></svg>
+  <nav class="nav-menu">
+    <a href="#contato" class="nav-cta">Download CV
+      <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v8M4 8l4 4 4-4"/><path d="M3 13h10"/></svg>
     </a>
     <a href="#work" class="nav-link">Projetos</a>
     <a href="#services" class="nav-link">Serviços</a>
     <a href="#about" class="nav-link">Sobre Mim</a>
-    <a href="#contact" class="nav-link">Contato</a>
-  </div>
+    <a href="#contato" class="nav-link">Contato</a>
+  </nav>
 </div>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="container">
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
     <div class="hero-top">
-      <div class="hero-top-left">
-        <div class="hero-reg-row">
-          <svg class="hero-reg" viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="4.5" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M14 0v9M14 19v9M0 14h9M19 14h9" stroke="currentColor" stroke-width="1.2"/></svg>
-          <span class="hero-loc">São Paulo, BR · Remoto</span>
-        </div>
-        <h1 class="hero-title rv">Design Systems,<br>Product &amp;<br>Visual Design</h1>
-      </div>
-      <div class="hero-art rv d2" aria-hidden="true">
-        <video class="hero-art-img" src="img/animaheader.mp4" data-rate="0.5" autoplay loop muted playsinline></video>
-        <div class="hero-darkblob"></div>
-        <span class="hero-lbl li-tl">Interface<br>Sistema<br>Linguagem</span>
-        <span class="hero-lbl li-001"><b>001</b><i>/ Intro</i></span>
-        <span class="hero-lbl li-v03"><i>v.03</i><b>Design System</b><i>Tokens</i></span>
-        <span class="hero-lbl li-tok">[ Colors ]<br>[ Typography ]<br>[ Spacing ]<br>[ Components ]<br>[ States ]</span>
-        <span class="hero-badge">
-          <svg viewBox="0 0 100 100"><defs><path id="badgePath" d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0"/></defs><text><textPath href="#badgePath">ADRIANA POMMOT &#10022; ADRIANA POMMOT &#10022; </textPath></text></svg>
-          <b class="hero-badge-star">&#10022;</b>
-        </span>
-        <span class="hero-swatch">
-          <span class="hero-swatch-bar"><i style="background:#111111"></i><i style="background:#2e2e2e"></i><i style="background:#4a4a4a"></i><i style="background:#6a6a6a"></i><i style="background:#8c8c8c"></i><i style="background:#b2b2b2"></i><i style="background:#dcdcdc"></i><i style="background:var(--accent)"></i></span>
-          <em>#D6FF4D</em>
-        </span>
+      <span class="loc">
+        <svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="4.5" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M14 0v9M14 19v9M0 14h9M19 14h9" stroke="currentColor" stroke-width="1.2"/></svg>
+        <span>São Paulo, BR · Remoto</span>
+      </span>
+      <span class="hero-tag">Designer Sênior · 15 anos</span>
+    </div>
+    <h1 class="hero-title rv"><span>Design</span><span>Systems,</span><span>Product &amp;</span><span class="hl">Visual Design</span></h1>
+    <div class="hero-foot">
+      <p class="lead rv d1">Designer sênior · 15 anos na interseção entre produto, interface e linguagem visual.</p>
+      <div class="hero-ctas rv d2">
+        <a href="#work" class="btn btn--primary">Ver projetos <span>→</span></a>
+        <a href="#contato" class="btn btn--ghost">Download CV <span>↓</span></a>
       </div>
     </div>
   </div>
-
-  <div class="skills-ticker" aria-hidden="true">
-    <div class="skills-ticker-track">
-      <span class="skills-ticker-sep">•</span><span class="skills-ticker-item">UI Design</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Design System</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Branding &amp; Identidade</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Motion</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Branding de Interface</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Figma</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Prototipação</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">UI Design</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Design System</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Branding &amp; Identidade</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Motion</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Branding de Interface</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Figma</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Prototipação</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">UI Design</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Design System</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Branding &amp; Identidade</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Motion</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Branding de Interface</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Figma</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Prototipação</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">UI Design</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Design System</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Branding &amp; Identidade</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Motion</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Branding de Interface</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Figma</span><span class="skills-ticker-sep">•</span><span class="skills-ticker-item">Prototipação</span>
-    </div>
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track" id="ticker"></div>
   </div>
+</header>
 
-  <div class="container">
-    <div class="ps">
-      <!-- ESQUERDA: animação (ocupa o lado inteiro, sem legendas) -->
-      <div class="ps-illus rv d1">
-        <img class="ps-vid" src="img/de-pixels.png" alt="" aria-hidden="true">
-      </div>
-      <!-- DIREITA: texto -->
-      <div class="ps-text">
-        <h2 class="ps-title rv d2">De pixels<br>a sistemas<br>De sistemas<br>a produtos.</h2>
-        <p class="ps-lead rv d3">Interfaces de alta fidelidade, Design System<br>e Branding&nbsp;&amp;&nbsp;Identidade. Do token à experiência final.</p>
-        <a class="ps-cta rv d3" href="#work"><span class="ps-cta-label"><span class="br">[</span> Ver projetos <span class="br">]</span></span><span class="ar">&rarr;</span></a>
-      </div>
+<!-- DE PIXELS A SISTEMAS -->
+<section class="pixels">
+  <div class="wrap pixels-grid">
+    <div class="pixels-text">
+      <h2 class="pixels-title rv"><span>De pixels</span><span>a sistemas</span><span>De sistemas</span><span>a produtos.</span></h2>
+      <p class="lead rv d1" style="max-width:460px">Interfaces de alta fidelidade, Design System e Branding &amp; Identidade. Do token à experiência final.</p>
+      <a href="#work" class="pixels-cta rv d1"><span><b>[</b> Ver projetos <b>]</b></span><span class="ar">→</span></a>
     </div>
+    <div class="pixels-art rv d2"><img src="img/final.png" alt="Diagrama: pixels, sistemas e produtos" /></div>
   </div>
 </section>
 
-<!-- PROJECTS -->
-<section class="projects-section" id="work">
-  <div class="marquee rv">
-    <div class="marquee-track">
-      <span class="marquee-text">Projetos Selecionados</span><span class="marquee-sep">✦</span><span class="marquee-text">Projetos Selecionados</span><span class="marquee-sep">✦</span><span class="marquee-text">Projetos Selecionados</span><span class="marquee-sep">✦</span><span class="marquee-text">Projetos Selecionados</span><span class="marquee-sep">✦</span><span class="marquee-text">Projetos Selecionados</span><span class="marquee-sep">✦</span><span class="marquee-text">Projetos Selecionados</span><span class="marquee-sep">✦</span><span class="marquee-text">Projetos Selecionados</span><span class="marquee-sep">✦</span><span class="marquee-text">Projetos Selecionados</span><span class="marquee-sep">✦</span><span class="marquee-text">Projetos Selecionados</span><span class="marquee-sep">✦</span><span class="marquee-text">Projetos Selecionados</span><span class="marquee-sep">✦</span>
+<!-- PROJETOS -->
+<section class="projects" id="work">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <div class="eyebrow on-dark">Projetos Selecionados <span class="em">/ 04 cases</span></div>
+        <h2 class="sec-title" style="margin-top:18px">Trabalho<br/>selecionado</h2>
+      </div>
+      <span class="sec-note">↓ role para explorar</span>
     </div>
-  </div>
-  <div class="container">
-    <div class="proj-list">
-
-      <a href="case-mrv.html" class="proj-hero proj-hero--left rv">
-        <div class="proj-hero-img">
-          <img src="img/mrv/overview-grid.webp" alt="MRV Ecossistema Financeiro">
-        </div>
-        <div class="proj-hero-text">
-          <div class="proj-hero-num">01</div>
-          <h3 class="proj-hero-name">MRV<br>Ecossistema Financeiro</h3>
-          <p class="proj-hero-desc">Redesign do autoatendimento financeiro da maior construtora da América Latina, com 27% de engajamento e 14% de conversão autônoma no piloto.</p>
-          <div class="proj-hero-tags">
-            <span class="proj-tag">Product Design</span>
-            <span class="proj-tag">Fintech</span>
-            <span class="proj-tag">Design System</span>
-          </div>
-          <span class="proj-hero-cta">Ver case</span>
-        </div>
-      </a>
-
-      <a href="case-ford.html" class="proj-hero proj-hero--right rv">
-        <div class="proj-hero-text">
-          <div class="proj-hero-num">02</div>
-          <h3 class="proj-hero-name">Ford<br>Immersion Room</h3>
-          <p class="proj-hero-desc">Identidade visual e design system espacial para sala de imersão que traduziu um ano de pesquisa cross-cultural em experiência tangível.</p>
-          <div class="proj-hero-tags">
-            <span class="proj-tag">Identidade Visual</span>
-            <span class="proj-tag">Design Espacial</span>
-          </div>
-          <span class="proj-hero-cta">Ver case</span>
-        </div>
-        <div class="proj-hero-img">
-          <img src="img/ford/hero-room.webp" alt="Ford Immersion Room">
-        </div>
-      </a>
-
-      <a href="case-delta.html" class="proj-hero proj-hero--left rv">
-        <div class="proj-hero-img">
-          <img src="img/delta/hero-mockup.webp" alt="Delta Design System">
-        </div>
-        <div class="proj-hero-text">
-          <div class="proj-hero-num">03</div>
-          <h3 class="proj-hero-name">Delta<br>Design System</h3>
-          <p class="proj-hero-desc">Tokens, componentes e bibliotecas que criei e mantive para múltiplos produtos na Escale.</p>
-          <div class="proj-hero-tags">
-            <span class="proj-tag">Design System</span>
-            <span class="proj-tag">Tokens</span>
-          </div>
-          <span class="proj-hero-cta">Ver case</span>
-        </div>
-      </a>
-
-      <a href="case-chorume.html" class="proj-hero proj-hero--right rv">
-        <div class="proj-hero-text">
-          <div class="proj-hero-num">04</div>
-          <h3 class="proj-hero-name">Chorume<br>Tipografia</h3>
-          <p class="proj-hero-desc">Tipografia vernacular, branding e direção de arte para um produto fictício premiado.</p>
-          <div class="proj-hero-tags">
-            <span class="proj-tag">Tipografia</span>
-            <span class="proj-tag">Branding</span>
-          </div>
-          <span class="proj-hero-cta">Ver case</span>
-        </div>
-        <div class="proj-hero-img">
-          <img src="img/chorume/garrafa-pantano-hero.jpg" alt="Chorume, garrafa de cachaça no pântano">
-        </div>
-      </a>
-
-    </div>
+    <div class="posters" id="posters"></div>
   </div>
 </section>
 
-<!-- SERVICES -->
-<section class="services-section" id="services">
-  <div class="container">
+<!-- SERVIÇOS -->
+<section class="services" id="services">
+  <div class="wrap">
     <div class="svc-head rv">
-      <div class="svc-head-text">
-        <h2 class="svc-headline">O que<br>eu faço</h2>
-        <p class="svc-lead">Design com propósito e método.<br>Transformo estratégia em produtos digitais inteligentes, acessíveis e memoráveis.</p>
+      <div>
+        <div class="eyebrow">Serviços</div>
+        <h2 class="svc-headline" style="margin-top:20px"><span>O que</span><span>eu faço</span></h2>
       </div>
-      <div class="svc-illus" aria-hidden="true"><img src="img/eu-faco.png" alt=""></div>
+      <p class="lead">Design com propósito e método. Transformo estratégia em produtos digitais inteligentes, acessíveis e memoráveis.</p>
     </div>
-    <div class="svc-grid">
-      <div class="svc-col rv">
-        <div class="svc-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="5" width="24" height="22" rx="2"/><path d="M4 12h24M11 12v15"/></svg></div>
-        <h3 class="svc-name">UI &amp; Produto</h3>
-        <p class="svc-desc">Interfaces de alta fidelidade, fluxos end-to-end, prototipação, motion de produto (microinterações, transições, estados), acessibilidade WCAG e handoff. Do discovery ao delivery, do wireframe ao pixel final.</p>
-        <div class="svc-ficha">
-          <div class="svc-ficha-row"><span class="svc-fl">Metodologia</span><span class="svc-fv">User-Centered Design</span></div>
-          <div class="svc-ficha-row"><span class="svc-fl">Stack</span><span class="svc-fv">Figma, Framer, HTML/CSS</span></div>
-          <div class="svc-ficha-row"><span class="svc-fl">Entregáveis</span><span class="svc-fv">Hi-fi, Protótipo, Handoff</span></div>
-        </div>
-      </div>
-      <div class="svc-col rv d1">
-        <div class="svc-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M20 5l7 7-15 15-7 1 1-7L20 5z"/><path d="M17 8l7 7"/></svg></div>
-        <h3 class="svc-name">Branding &amp; Identidade</h3>
-        <p class="svc-desc">Construção da linguagem visual de marca: logo, naming, tipografia, paleta, grid, voz da marca, manifesto e guidelines. Direção de arte para produto digital, marketing e rebranding.</p>
-        <div class="svc-ficha">
-          <div class="svc-ficha-row"><span class="svc-fl">Disciplinas</span><span class="svc-fv">Direção de arte, Tipografia, Cor</span></div>
-          <div class="svc-ficha-row"><span class="svc-fl">Entregáveis</span><span class="svc-fv">Logo, Naming, Manual, Guidelines</span></div>
-          <div class="svc-ficha-row"><span class="svc-fl">Aplicações</span><span class="svc-fv">Produto, Marketing, Web</span></div>
-        </div>
-      </div>
-      <div class="svc-col rv d2">
-        <div class="svc-ico"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4 4 10.5l12 6.5 12-6.5L16 4z"/><path d="M4 16l12 6.5 12-6.5"/><path d="M4 21.5l12 6.5 12-6.5"/></svg></div>
-        <h3 class="svc-name">Design System</h3>
-        <p class="svc-desc">Atomic design, arquitetura de tokens, componentes, documentação técnica e governança. Sistemas escaláveis que eu crio, lidero e mantenho cross-functional com engenharia.</p>
-        <div class="svc-ficha">
-          <div class="svc-ficha-row"><span class="svc-fl">Arquitetura</span><span class="svc-fv">Atomic + Tokens</span></div>
-          <div class="svc-ficha-row"><span class="svc-fl">IA + Vibe Coding</span><span class="svc-fv">Claude, Gemini, Midjourney</span></div>
-          <div class="svc-ficha-row"><span class="svc-fl">Cases</span><span class="svc-fv">Delta, MRV, Dasa</span></div>
-        </div>
-      </div>
-    </div>
+    <div class="svc-grid" id="svcGrid"></div>
   </div>
 </section>
 
-<!-- TRAJECTORY -->
-<section class="trajectory-section" id="trajectory">
-  <div class="marquee rv">
-    <div class="marquee-track">
-      <span class="marquee-text">Trajetória</span><span class="marquee-sep">✦</span><span class="marquee-text">Trajetória</span><span class="marquee-sep">✦</span><span class="marquee-text">Trajetória</span><span class="marquee-sep">✦</span><span class="marquee-text">Trajetória</span><span class="marquee-sep">✦</span><span class="marquee-text">Trajetória</span><span class="marquee-sep">✦</span><span class="marquee-text">Trajetória</span><span class="marquee-sep">✦</span><span class="marquee-text">Trajetória</span><span class="marquee-sep">✦</span><span class="marquee-text">Trajetória</span><span class="marquee-sep">✦</span><span class="marquee-text">Trajetória</span><span class="marquee-sep">✦</span><span class="marquee-text">Trajetória</span><span class="marquee-sep">✦</span>
+<!-- TRAJETÓRIA -->
+<section class="traj" id="trajectory">
+  <div class="wrap">
+    <div class="traj-head rv">
+      <div class="eyebrow">Trajetória · 2012 — Agora</div>
+      <a href="https://www.linkedin.com/in/adriana-pommot/" target="_blank" rel="noopener" class="traj-archive">Designer desde 2012 · Histórico completo no LinkedIn
+        <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6h7M6 2.5L9.5 6L6 9.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
     </div>
-  </div>
-  <div class="container">
-    <div class="traj-list">
-      <div class="traj-row rv"><span class="traj-meta">2024–Now · Freelance</span><span class="traj-role">Senior UI Designer · Projetos Independentes</span></div>
-      <div class="traj-row rv"><span class="traj-meta">2021–23 · Escale</span><span class="traj-role">Lead Designer · Delta Design System</span></div>
-      <div class="traj-row rv"><span class="traj-meta">2020–21 · Dasa</span><span class="traj-role">Senior UI Designer · Health Tech</span></div>
-      <div class="traj-row rv"><span class="traj-meta">2019–20 · D3</span><span class="traj-role">Design Lead · MRV Ecossistema Financeiro</span></div>
-      <div class="traj-row rv"><span class="traj-meta">2019 · Accenture</span><span class="traj-role">Senior UI Designer · Vivo</span></div>
-      <div class="traj-row rv"><span class="traj-meta">2017–18 · QuesttoNó</span><span class="traj-role">Senior Designer · Ford Immersion Room</span></div>
-    </div>
-    <a href="https://www.linkedin.com/in/adriana-pommot/" target="_blank" rel="noopener" class="traj-archive rv">Designer desde 2012 · Histórico completo no LinkedIn<svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2.5 6h7M6 2.5L9.5 6L6 9.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <div class="traj-list" id="trajList"></div>
   </div>
 </section>
-
 
 <!-- SOBRE MIM -->
-<section class="about-section" id="about">
-  <div class="marquee rv">
-    <div class="marquee-track">
-      <span class="marquee-text">Sobre Mim</span><span class="marquee-sep">✦</span><span class="marquee-text">Sobre Mim</span><span class="marquee-sep">✦</span><span class="marquee-text">Sobre Mim</span><span class="marquee-sep">✦</span><span class="marquee-text">Sobre Mim</span><span class="marquee-sep">✦</span><span class="marquee-text">Sobre Mim</span><span class="marquee-sep">✦</span><span class="marquee-text">Sobre Mim</span><span class="marquee-sep">✦</span><span class="marquee-text">Sobre Mim</span><span class="marquee-sep">✦</span><span class="marquee-text">Sobre Mim</span><span class="marquee-sep">✦</span><span class="marquee-text">Sobre Mim</span><span class="marquee-sep">✦</span><span class="marquee-text">Sobre Mim</span><span class="marquee-sep">✦</span>
+<section class="about" id="about">
+  <div class="wrap about-wrap">
+    <div class="about-grid rv">
+      <div class="about-rail">
+        <div class="about-railhead">
+          <div class="eyebrow">Perfil</div>
+          <h2 class="about-railtitle">Sobre mim</h2>
+          <p class="lead">15 anos na interseção entre produto, interface e linguagem visual. Navegue pelos temas.</p>
+        </div>
+      <nav class="about-nav" id="aboutNav" role="tablist" aria-label="Temas"></nav>
+      <div class="about-ctas">
+        <a href="https://www.linkedin.com/in/adriana-pommot/" target="_blank" rel="noopener" class="btn btn--primary">LinkedIn <span>↗</span></a>
+        <a href="#contato" class="btn btn--ghost">Currículo</a>
+      </div>
     </div>
-  </div>
-  <div class="container">
-    <div class="about-content">
-      <div class="about-text rv d1">
-        <p>Designer sênior com 15 anos em UI, Visual Design, Branding e Design Systems, atuando na interseção entre produto, interface e linguagem visual. Ao longo desses 15 anos, construí experiências digitais para Escale, Dasa, Ford, Accenture e MRV, de produtos de alta complexidade a sistemas escaláveis e identidade de marca.</p>
-        <p>Navego da estratégia à execução: estruturo fluxos, refino interfaces e conecto design, produto e tecnologia. Combino direção visual, visão sistêmica e prototipação de alta fidelidade, com atenção à consistência, à acessibilidade e à qualidade do que chega à produção.</p>
-        <p>Integro IA ao longo de todo o processo, da pesquisa e exploração de soluções à documentação e handoff, otimizando fluxos e reduzindo fricção entre design e engenharia. Entrego protótipos funcionais e detalhados, próximos do comportamento real do produto, que aceleram validação, alinhamento e desenvolvimento.</p>
-        <p>Construo design systems com governança e documentação capazes de dar escala aos produtos sem perder clareza visual, consistência ou previsibilidade.</p>
-        <p class="about-claim">Meu lugar é no craft.</p>
-      </div>
-      <div class="about-ctas rv d2">
-        <a href="https://www.linkedin.com/in/adriana-pommot/" target="_blank" rel="noopener" class="btn-outline">
-          <svg class="btn-outline-ico" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><path d="M12 1H2C1.45 1 1 1.45 1 2v10c0 0.55 0.45 1 1 1h10c0.55 0 1-0.45 1-1V2C13 1.45 12.55 1 12 1zM4.3 11.2H2.7V5.9h1.7v5.3zM3.5 5.1c-0.55 0-1-0.45-1-1s0.45-1 1-1s1 0.45 1 1S4.05 5.1 3.5 5.1zM11.2 11.2H9.5V8.5c0-0.65-0.05-1.45-0.9-1.45c-0.9 0-1.05 0.7-1.05 1.4V11.2H5.85V5.9h1.65v0.75h0.05c0.25-0.45 0.85-0.9 1.7-0.9c1.8 0 2.15 1.2 2.15 2.75v2.7z"/></svg>
-          LinkedIn
-        </a>
-        <a href="cv-adriana-pommot.pdf" download class="btn-outline">
-          Currículo
-          <svg class="btn-outline-ico" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 1.5V10.5M6 10.5L10 6.5M6 10.5L2 6.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
+      <div class="about-detail" id="aboutDetail"></div>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="cta-section" id="contact">
-  <div class="container">
-    <h2 class="cta-title rv">Vamos Conversar?</h2>
-    <p class="cta-subtitle rv d1">Disponível para projetos remotos</p>
-    <div class="cta-actions rv d2">
-      <a class="cta-btn" href="mailto:adrianapommot@gmail.com">
-        <svg class="cta-btn-ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1.5" y="3" width="11" height="8" rx="1"/><path d="M1.5 4 L7 8 L12.5 4"/></svg>
-        Email
-      </a>
-      <a class="cta-btn" href="https://www.linkedin.com/in/adriana-pommot/" target="_blank" rel="noopener">
-        <svg class="cta-btn-ico" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><path d="M12 1H2C1.45 1 1 1.45 1 2v10c0 0.55 0.45 1 1 1h10c0.55 0 1-0.45 1-1V2C13 1.45 12.55 1 12 1zM4.3 11.2H2.7V5.9h1.7v5.3zM3.5 5.1c-0.55 0-1-0.45-1-1s0.45-1 1-1s1 0.45 1 1S4.05 5.1 3.5 5.1zM11.2 11.2H9.5V8.5c0-0.65-0.05-1.45-0.9-1.45c-0.9 0-1.05 0.7-1.05 1.4V11.2H5.85V5.9h1.65v0.75h0.05c0.25-0.45 0.85-0.9 1.7-0.9c1.8 0 2.15 1.2 2.15 2.75v2.7z"/></svg>
-        LinkedIn
-      </a>
-      <a class="cta-btn" href="https://wa.me/5511962724879" target="_blank" rel="noopener">
-        <svg class="cta-btn-ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 1.5C3.95 1.5 1.5 3.95 1.5 7c0 1.02 0.28 1.98 0.77 2.8L1.5 12.5l2.8-0.77C5.1 12.22 6.04 12.5 7 12.5c3.05 0 5.5-2.45 5.5-5.5S10.05 1.5 7 1.5z"/></svg>
-        WhatsApp
-      </a>
-      <a class="cta-btn" href="cv-adriana-pommot.pdf" download>
-        Currículo
-        <svg class="cta-btn-ico" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 1.5V10.5M6 10.5L10 6.5M6 10.5L2 6.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+<section class="cta" id="contato">
+  <div class="wrap cta-grid">
+    <div class="rv">
+      <div class="cta-eyebrow">✦ Contato</div>
+      <h2 class="cta-title">Vamos<br/>Conversar?</h2>
+      <p class="cta-sub">Disponível para projetos remotos</p>
     </div>
+    <div class="cta-menu rv d1" id="ctaMenu"></div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer>
-  <div class="container">
+<footer class="footer">
+  <div class="wrap">
     <div class="footer-grid">
       <div>
         <div class="footer-logo">Adriana Pommot</div>
-        <div class="footer-social">
-          <a href="https://linkedin.com/in/adriana-pommot" target="_blank">LinkedIn</a>
+        <div class="footer-links">
+          <a href="https://www.linkedin.com/in/adriana-pommot/" target="_blank" rel="noopener">LinkedIn</a>
           <a href="mailto:adrianapommot@gmail.com">Email</a>
         </div>
       </div>
       <div>
         <div class="footer-col-title">Páginas</div>
-        <div class="footer-col-links"><a href="#work">Projetos</a><a href="#services">Serviços</a><a href="#about">Sobre Mim</a><a href="#contact">Contato</a></div>
+        <div class="footer-links"><a href="#work">Projetos</a><a href="#services">Serviços</a><a href="#about">Sobre Mim</a><a href="#contato">Contato</a></div>
       </div>
       <div>
         <div class="footer-col-title">Projetos</div>
-        <div class="footer-col-links"><a href="case-mrv.html">MRV</a><a href="case-ford.html">Ford</a><a href="case-delta.html">Delta DS</a><a href="case-chorume.html">Chorume</a></div>
+        <div class="footer-links"><a href="case-mrv.html">MRV</a><a href="case-ford.html">Ford</a><a href="case-delta.html">Delta DS</a><a href="case-chorume.html">Chorume</a></div>
       </div>
       <div>
         <div class="footer-col-title">Contato</div>
-        <div class="footer-col-links"><a href="mailto:adrianapommot@gmail.com">adrianapommot@gmail.com</a><a href="#">São Paulo, BR</a></div>
+        <div class="footer-links"><a href="mailto:adrianapommot@gmail.com">adrianapommot@gmail.com</a><a href="#">São Paulo, BR</a></div>
       </div>
     </div>
     <div class="footer-bottom">
@@ -1445,58 +172,149 @@ footer {
 </footer>
 
 <script>
-/* Nav: close on link click */
-document.querySelectorAll('.nav-menu a').forEach(a => {
-  a.addEventListener('click', () => {
-    document.getElementById('navFloat').classList.remove('open');
-  });
-});
+/* Adriana Pommot — Home · data + render + interactions */
+(function () {
+  "use strict";
+  var $ = function (s, c) { return (c || document).querySelector(s); };
 
-/* === SHARED: Reveal Observer === */
-(function(){try{
-  var obs=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add("visible");obs.unobserve(e.target)}});
-  },{threshold:0.15,rootMargin:"0px 0px -60px 0px"});
-  document.querySelectorAll(".rv").forEach(function(el){obs.observe(el)});
-}catch(e){console.warn("observer error",e)}})();
+  /* ── DATA ─────────────────────────────────────────────── */
+  var SKILLS = ["UI Design", "Design System", "Branding & Identidade", "Motion", "Branding de Interface", "Figma", "Prototipação"];
 
-/* === SHARED: Nav BG on scroll === */
-(function(){try{
-  var nn=document.querySelector(".nav-name");
-  if(!nn)return;
-  window.addEventListener("scroll",function(){
-    nn.style.background=window.scrollY>60?"rgba(244,244,160,0.72)":"rgba(255,255,255,0.55)";
-  });
-}catch(e){console.warn("nav-scroll error",e)}})();
+  var PROJECTS = [
+    { num: "01", name: "MRV", sub: "Ecossistema Financeiro", img: "img/mrv/overview-grid.webp", tags: ["Product Design", "Fintech", "Design System"], href: "case-mrv.html" },
+    { num: "02", name: "Ford", sub: "Immersion Room", img: "img/ford/hero-room.webp", tags: ["Identidade Visual", "Design Espacial"], href: "case-ford.html" },
+    { num: "03", name: "Delta", sub: "Design System", img: "img/delta/hero-mockup.webp", tags: ["Design System", "Tokens"], href: "case-delta.html" },
+    { num: "04", name: "Chorume", sub: "Tipografia", img: "img/chorume/garrafa-pantano-hero.jpg", tags: ["Tipografia", "Branding"], href: "case-chorume.html" }
+  ];
 
-/* === SHARED: Text Roll === */
-(function(){try{
-  var el=document.querySelector(".nav-name");
-  if(!el)return;
-  var text=el.textContent.trim();
-  var roll=document.createElement("span");
-  roll.className="nav-name-roll";
-  roll.innerHTML="<span>"+text+"</span><span>"+text+"</span>";
-  el.innerHTML="";
-  el.appendChild(roll);
-  function setH(){var h=roll.querySelector("span").offsetHeight;if(h>0)roll.style.height=h+"px"}
-  setH();
-  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(setH)}
-  else{setTimeout(setH,300)}
-}catch(e){console.warn("text-roll error",e)}})();
+  var ICONS = {
+    ui: '<svg viewBox="0 0 32 32"><rect x="4" y="5" width="24" height="22" rx="2"/><path d="M4 12h24M11 12v15"/></svg>',
+    brand: '<svg viewBox="0 0 32 32"><path d="M20 5l7 7-15 15-7 1 1-7L20 5z"/><path d="M17 8l7 7"/></svg>',
+    ds: '<svg viewBox="0 0 32 32"><path d="M16 4 4 10.5l12 6.5 12-6.5L16 4z"/><path d="M4 16l12 6.5 12-6.5"/><path d="M4 21.5l12 6.5 12-6.5"/></svg>'
+  };
+  var SERVICES = [
+    { num: "01", ico: "ui", name: "UI & Produto", desc: "Interfaces de alta fidelidade, fluxos end-to-end, prototipação, motion de produto e handoff. Do discovery ao delivery, do wireframe ao pixel final.",
+      ficha: [["Metodologia", "User-Centered Design"], ["Stack", "Figma, Framer, HTML/CSS"], ["Entregáveis", "Hi-fi, Protótipo, Handoff"]] },
+    { num: "02", ico: "brand", name: "Branding & Identidade", desc: "Construção da linguagem visual de marca: logo, naming, tipografia, paleta, grid, voz e guidelines. Direção de arte para produto, marketing e rebranding.",
+      ficha: [["Disciplinas", "Direção de arte, Tipografia, Cor"], ["Entregáveis", "Logo, Naming, Manual"], ["Aplicações", "Produto, Marketing, Web"]] },
+    { num: "03", ico: "ds", name: "Design System", desc: "Atomic design, arquitetura de tokens, componentes, documentação técnica e governança. Sistemas escaláveis que eu crio, lidero e mantenho cross-functional com engenharia.",
+      ficha: [["Arquitetura", "Atomic + Tokens"], ["IA + Vibe Coding", "Claude, Gemini, Midjourney"], ["Cases", "Delta, MRV, Dasa"]] }
+  ];
 
-/* vídeos blueprint — câmera lenta · data-rate por elemento (0.5 header · 0.4 pixels→sistemas) */
-(function(){
-  var vids=document.querySelectorAll("video[data-rate]");
-  Array.prototype.forEach.call(vids,function(v){
-    var r=parseFloat(v.getAttribute("data-rate"))||1;
-    function slow(){try{v.playbackRate=r}catch(e){}}
-    slow();
-    v.addEventListener("loadedmetadata",slow);
-    v.addEventListener("play",slow);
-    v.addEventListener("seeked",slow);
-  });
+  var TRAJ = [
+    { period: "2021 — 23", org: "Escale", role: "Lead Designer · Delta Design System" },
+    { period: "2020 — 21", org: "Dasa", role: "Senior UI Designer · Health Tech" },
+    { period: "2019 — 20", org: "D3", role: "Design Lead · MRV Ecossistema Financeiro" },
+    { period: "2019", org: "Accenture", role: "Senior UI Designer · Vivo" },
+    { period: "2017 — 18", org: "QuesttoNó", role: "Senior Designer · Ford Immersion Room" }
+  ];
+
+  var ABOUT = [
+    { id: "atuacao", num: "01", label: "Atuação", title: "Na interseção entre produto, interface e linguagem visual",
+      body: "Designer sênior com 15 anos em UI, Visual Design, Branding e Design Systems. Ao longo desses 15 anos, construí experiências digitais para Escale, Dasa, Ford, Accenture e MRV, de produtos de alta complexidade a sistemas escaláveis e identidade de marca.",
+      tags: ["UI", "Visual Design", "Branding", "Design Systems"] },
+    { id: "processo", num: "02", label: "Processo", title: "Da estratégia à execução",
+      body: "Estruturo fluxos, refino interfaces e conecto design, produto e tecnologia. Combino direção visual, visão sistêmica e prototipação de alta fidelidade, com atenção à consistência, à acessibilidade e à qualidade do que chega à produção." },
+    { id: "ia", num: "03", label: "Inteligência Artificial", title: "IA em todo o processo",
+      body: "Integro IA da pesquisa e exploração de soluções à documentação e handoff, otimizando fluxos e reduzindo fricção entre design e engenharia. Entrego protótipos funcionais e detalhados, próximos do comportamento real do produto, que aceleram validação, alinhamento e desenvolvimento." },
+    { id: "systems", num: "04", label: "Design Systems", title: "Sistemas com governança",
+      body: "Construo design systems com governança e documentação capazes de dar escala aos produtos sem perder clareza visual, consistência ou previsibilidade." },
+    { id: "craft", num: "05", label: "Craft", closer: true }
+  ];
+
+  var CONTACTS = [
+    { l: "Email", v: "adrianapommot@gmail.com", a: "mailto:adrianapommot@gmail.com", ar: "→" },
+    { l: "LinkedIn", v: "/in/adriana-pommot", a: "https://www.linkedin.com/in/adriana-pommot/", ar: "↗" },
+    { l: "WhatsApp", v: "+55 11 96272-4879", a: "https://wa.me/5511962724879", ar: "↗" },
+    { l: "Currículo", v: "PDF · 2026", a: "#", ar: "↓" }
+  ];
+
+  var esc = function (s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;"); };
+
+  /* ── RENDER ───────────────────────────────────────────── */
+  // ticker
+  var tk = $("#ticker");
+  if (tk) { var row = SKILLS.concat(SKILLS).map(function (s) { return '<span class="s">✦</span><span class="t">' + esc(s) + "</span>"; }).join(""); tk.innerHTML = row; }
+
+  // posters
+  var pc = $("#posters");
+  if (pc) pc.innerHTML = PROJECTS.map(function (p) {
+    return '<a href="' + p.href + '" class="poster rv">' +
+      '<img src="' + p.img + '" alt="' + esc(p.name) + " " + esc(p.sub) + '" loading="lazy" />' +
+      '<span class="poster-scrim"></span>' +
+      '<span class="poster-top"><span class="poster-num">' + p.num + " / 04</span>" +
+      '<span class="poster-tags">' + p.tags.map(function (t) { return "<span>" + esc(t) + "</span>"; }).join("") + "</span></span>" +
+      '<span class="poster-bot"><span class="poster-name">' + esc(p.name) + "</span>" +
+      '<span class="poster-sub"><b>' + esc(p.sub) + '</b><span class="poster-cta">Ver case →</span></span></span></a>';
+  }).join("");
+
+  // services
+  var sg = $("#svcGrid");
+  if (sg) sg.innerHTML = SERVICES.map(function (s, i) {
+    return '<article class="svc-card rv ' + (i ? "d" + i : "") + '"><span class="svc-bar"></span>' +
+      '<div class="svc-cardtop"><span class="svc-icoc">' + ICONS[s.ico] + '</span><span class="svc-num">' + s.num + "</span></div>" +
+      '<h3 class="svc-name">' + esc(s.name) + "</h3>" +
+      '<p class="svc-desc">' + esc(s.desc) + "</p>" +
+      '<div class="svc-ficha">' + s.ficha.map(function (f) { return '<div class="svc-frow"><span class="svc-fl">' + esc(f[0]) + '</span><span class="svc-fv">' + esc(f[1]) + "</span></div>"; }).join("") + "</div></article>";
+  }).join("");
+
+  // trajectory
+  var tl = $("#trajList");
+  if (tl) tl.innerHTML = TRAJ.map(function (t) {
+    var org = t.now ? '<span class="org-hl">' + esc(t.org) + "</span>" : esc(t.org);
+    var badge = t.now ? '<span class="now-badge">● Agora</span>' : "";
+    return '<a href="https://www.linkedin.com/in/adriana-pommot/" target="_blank" rel="noopener" class="traj-row rv">' +
+      '<div class="traj-meta"><span class="traj-period">' + esc(t.period) + '</span><span class="traj-role">' + esc(t.role) + "</span></div>" +
+      '<div class="traj-org-line"><h3 class="traj-org">' + org + badge + '</h3><span class="traj-arrow">→</span></div></a>';
+  }).join("");
+
+  // about navigator
+  var nav = $("#aboutNav"), det = $("#aboutDetail");
+  if (nav && det) {
+    nav.innerHTML = ABOUT.map(function (b, i) {
+      return '<button class="about-tab' + (i === 0 ? " active" : "") + '" role="tab" data-id="' + b.id + '" aria-selected="' + (i === 0) + '">' +
+        '<span class="num">' + b.num + '</span><span class="lbl">' + esc(b.label) + '</span><span class="ar">→</span></button>';
+    }).join("");
+    det.innerHTML = ABOUT.map(function (b, i) {
+      var inner;
+      if (b.closer) {
+        inner = '<span class="plabel">Craft</span><div class="about-closer">Meu lugar é no <span class="hl2">craft.</span></div>';
+      } else {
+        var tags = b.tags ? '<div class="about-tags">' + b.tags.map(function (t) { return "<span>" + esc(t) + "</span>"; }).join("") + "</div>" : "";
+        inner = '<span class="plabel">' + esc(b.label) + '</span><h3 class="ptitle">' + esc(b.title) + '</h3><p class="pbody">' + esc(b.body) + "</p>" + tags;
+      }
+      return '<article class="about-panel' + (b.closer ? " about-panel--closer" : "") + (i === 0 ? " active" : "") + '" data-id="' + b.id + '">' +
+        '<span class="about-ghost">' + b.num + "</span>" + inner + "</article>";
+    }).join("");
+    nav.addEventListener("click", function (e) {
+      var btn = e.target.closest(".about-tab"); if (!btn) return;
+      var id = btn.dataset.id;
+      nav.querySelectorAll(".about-tab").forEach(function (t) { var on = t.dataset.id === id; t.classList.toggle("active", on); t.setAttribute("aria-selected", on); });
+      det.querySelectorAll(".about-panel").forEach(function (p) { p.classList.toggle("active", p.dataset.id === id); });
+    });
+  }
+
+  // cta menu
+  var cm = $("#ctaMenu");
+  if (cm) cm.innerHTML = CONTACTS.map(function (c) {
+    return '<a href="' + c.a + '" class="cta-row"><span class="cl">' + esc(c.l) + '</span><span class="cv">' + esc(c.v) + '</span><span class="car">' + c.ar + "</span></a>";
+  }).join("");
+
+  /* ── INTERAÇÕES ───────────────────────────────────────── */
+  // nav
+  var nf = $("#navFloat"), ntg = $("#navToggle");
+  if (ntg) ntg.addEventListener("click", function () { nf.classList.toggle("open"); });
+  document.querySelectorAll(".nav-menu a").forEach(function (a) { a.addEventListener("click", function () { nf.classList.remove("open"); }); });
+
+  // reveal
+  try {
+    var obs = new IntersectionObserver(function (en) {
+      en.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("vis"); obs.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: "0px 0px -50px 0px" });
+    document.querySelectorAll(".rv").forEach(function (el) { obs.observe(el); });
+  } catch (e) { document.querySelectorAll(".rv").forEach(function (el) { el.classList.add("vis"); }); }
 })();
+
 </script>
 </body>
 </html>
