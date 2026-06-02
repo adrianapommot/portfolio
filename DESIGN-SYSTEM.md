@@ -1,362 +1,742 @@
-# Portfolio Adriana Pommot — Mini Design System
-Fonte única de verdade para todos os arquivos do portfólio.
+# Design System — Adriana Pommot Portfolio
+
+Documentação completa do sistema visual usado em todo o portfólio: home (index.html) e cases (MRV, Delta, Ford).
 
 ---
 
-## 0. SISTEMA ATUAL — fonte da verdade (atualizado 2026-05-29)
+## 1. Paleta de Cores
 
-> **Esta seção vence qualquer conflito com as seções legadas (1–10) abaixo.** O projeto está sendo unificado neste sistema; o que estiver diferente lá embaixo (escala 8-token, body 16/17px, accent lime) é histórico e será migrado.
+### Cores Base
 
-### Inegociáveis
-1. **Zero viúvas / órfãs / texto quebrado** — corta ou troca a palavra antes de deixar viúva. `text-wrap: pretty` (parágrafo) / `balance` (título). Nunca `<br>`/`&nbsp;` pra controlar borda.
-2. **Menos variação = mais coeso** — em tamanho de fonte E em tons de cinza.
-3. **Padrão de comportamento** — o mesmo elemento tem o MESMO comportamento em todas as páginas. Reutilizar componente, nunca recriar.
+| Token | Hex | Uso | Context |
+|-------|-----|-----|---------|
+| `--black` | `#111111` | Texto principal, títulos, elementos de destaque | Foreground |
+| `--white` | `#ffffff` | Fundo padrão | Background |
+| `--bone` | `#f4f3ef` | Off-white discreto (backgrounds alternativos) | Background |
 
-### Cor de marca
-- `--accent: #E8E94D` (amarelo ácido) — hover, CTA, ✦, seleção, nav ao rolar. **Lime `#D1F466` APOSENTADO.**
-- `--accent-light: #F4F4A0` — glass do nav ao rolar, highlights.
-- **Banidos:** roxo (clichê de IA), creme/bege. O amarelo **não** entra em linha fina nem em ícone sobre branco (some).
+### Escala de Cinzas
 
-### Cinzas de TEXTO — só 3
-| Papel | Token | Valor |
-|---|---|---|
-| Forte | `--gray-1` | `#37342F` — títulos, H1, lead, valores |
-| Médio | `--gray-2` | `#585550` — corpo / descrições |
-| Claro | `--gray-4` | `#B8B2A8` — rótulos |
+| Token | Hex | Uso |
+|-------|-----|-----|
+| `--gray-1` | `#37342F` | Títulos, texto forte, labels em contextos claros |
+| `--gray-2` | `#585550` | Corpo de texto, descrições |
+| `--gray-3` | `#756F67` | Labels, eyebrows, text subdued |
+| `--gray-4` | `#B8B2A8` | Texto muito leve, placeholders |
+| `--gray-5` | `#EBE7E1` | (Reservado para backgrounds muito claros) |
 
-**Aposentados de texto:** `--gray-3` e `--text-body`. **`#111` não é cor de texto** (texto forte = `gray-1`). `gray-5`/`line` só pra bordas.
+### Cores Funcionais
 
-### Tipografia — papéis (Plus Jakarta Sans)
-| Papel | Tamanho | Peso | Cor / nota |
-|---|---|---|---|
-| Display / H1 | clamp (CAPS) | 400 | gray-1 |
-| Título de seção | clamp (CAPS) | 400 | gray-1 |
-| **Lead** (frase após título) | **18px** | **500** | gray-1 · alinha à BASE do título |
-| **Corpo** | **14px** | 400 | gray-2 · lh 1.6 · letter-spacing 0.02em |
-| Rótulo | 12–13px CAPS | 600 | gray-4 (gray-1 p/ rótulo de seção) |
-| Métrica | nº grande | 500 | gray-1 · tabular |
+| Token | Hex | Uso |
+|-------|-----|-----|
+| `--line` | `#E3E0DA` | Dividers, borders, separadores |
+| `--chip` | `#F2F1EE` | Background de cards, buttons hover (neutro) |
+| `--accent` | `#e0ff33` | Lime — destaque principal, nav pill, CTA buttons, highlights |
+| `--accent-press` | `#d2f51c` | Lime escuro — hover state do accent |
+| `--accent-dark` | `#8A8A20` | Lime muito escuro — ícones/bordas legíveis em fundo claro |
 
-Corpo é **14px em TODO o projeto** (home = cases). Hierarquia por papel+peso, **nunca** por tamanho avulso. Isto aposenta a escala 8-token (§7.2) e os P3 17/16px (§7.1).
+### Dark Mode (Aprendizados, Footer)
 
-**Títulos:** alinhados **à esquerda**, **sem ícones decorativos** (o ✦ foi removido). Padrão fixo de título.
-
-### Ícones
-Só **outline** (`fill:none`), `stroke-width: 1.5`, **24px**, cor `currentColor` (segue o cinza do texto). Sem caixa/bolinha/preenchimento. *(`case-delta.html` tem ícones preenchidos → redesenhar.)*
-
-### Espaçamento — tokens (falar em token, não em px)
-| Token | Valor | Uso |
-|---|---|---|
-| `--space-md` | 24px | **piso** — eyebrow→título · ícone→rótulo · rótulo→desc · título→texto |
-| `--space-lg` | 36px | bloco: separação de blocos dentro da seção |
-| `--space-title` | 72px | **título de seção → conteúdo** |
-| `--space-section` | 112px | seção → seção |
-
-**Escala = 4 níveis** (24/36/72/112). **8, 16 e 56px aposentados** — piso de 24px (nada grudado), poucas variações. Precisou de um gap? Use um nível existente, nunca invente valor.
-
-**Numeração de seções (cases):** todo título de seção numerado e **sequencial** via `.s-index` (01, 02, 03…), sem pular nem repetir. Hero e "Outros projetos" ficam fora da contagem.
-
-Espaçamento **sempre via token**. "Aumentar o espaço entre título e conteúdo" = mexer em `--space-title` → vale o projeto inteiro. Valores vindos da seção "O que eu faço" (a régua).
-
-### Linhas (hairlines)
-1px, **uma cor**. Superfície clara: `--line`. Superfície escura: `rgba(255,255,255,.08)`. *(cor exata e regra de continuidade "fecham/full-bleed" a confirmar — depois, igual em tudo.)*
-
-### Componentes & comportamento
-- **Nav "Adriana Pommot"** — pílula glass branca; **ao rolar (>60px) → glass amarelo-claro** `rgba(244,244,160,.72)`. Comportamento IDÊNTICO em index + todos os cases (reutilizar, idealmente JS compartilhado).
-- **Tarja hero (cases)** — **card branco** (`#fff`) sobre o off-white do hero, sombra suave; **divisores amarelos** (`--accent`); texto/ícones escuros. **Straddle:** vaza ~metade pra fora do hero (`margin-bottom` negativo). Pra isso o hero é `overflow:visible` e a **ilustração é mascarada no topo E na base** (`mask-image` linear) — topo não sangra, base sem corte.
-
-### Conformidade — a unificar
-Conviviam **3 sistemas de tipografia**: `index`/`dasa` (px solto + clamps ad-hoc), `mrv` (`--ty-*`), `ford`/`delta`/`chorume` (`--t-*`). Migrar todos pros papéis acima. Pendências por página: cinzas fora do trio, corpo 17px no MRV (→14), azuis hex soltos no index, ícones preenchidos no delta.
+Para seções com fundo `#111` (dark):
+- Texto base: `#ffffff` (white)
+- Texto secundário: `rgba(255,255,255,0.6)` (60% opacity)
+- Texto terciário: `rgba(255,255,255,0.4)` (40% opacity)
+- Dividers: `rgba(255,255,255,0.14)` (14% opacity)
+- Accent: `--accent` (#e0ff33) mantém legibilidade em dark
 
 ---
 
-## 1. Tipografia
+## 2. Tipografia
 
-Família única: **Plus Jakarta Sans** (Google Fonts)
+### Fonte Única
 
-```
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-```
+**Plus Jakarta Sans** (Google Fonts)
+- Weights: 400 (regular), 500 (medium), 600 (semibold), 700 (bold)
+- URL: `https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap`
 
-Pesos utilizados:
-- **400** — body, títulos grandes (case title, hero title, result numbers)
-- **500** — section headings, labels, nav links, badge text, metric labels
-- **600** — nav name, bold inline (strong), footer logo
-- **700** — reservado (não utilizado atualmente)
+### Escala Tipográfica
 
-Nenhuma outra fonte. General Sans, Roboto Mono, Inter, DM Sans — todas removidas.
+Todos os tamanhos usam `clamp()` para fluidez responsiva.
 
----
+| Token | Fórmula | Desktop Min | Desktop Max | Uso |
+|-------|---------|------------|-------------|-----|
+| `--ty-display` | `clamp(54px, 5.6vw, 74px)` | 54px | 74px | Headlines grandes (reservado) |
+| `--ty-title` | `clamp(32px, 3.4vw, 48px)` | 32px | 48px | Títulos de seção (uppercase, 700) |
+| `--ty-lead` | `clamp(16px, 1.4vw, 19px)` | 16px | 19px | Leads, subtítulos (500) |
+| `--ty-copy` | `17px` | 17px | 17px | Corpo de texto (400) |
+| `--ty-small` | `14px` | 14px | 14px | Descrições, captions (400) |
+| `--ty-metric` | `32px` | 32px | 32px | Números grandes (stats) |
+| `--ty-label` | `12px` | 12px | 12px | Labels, eyebrows uppercase (700) |
 
-## 2. Paleta de Cores
+### Hierarquia de Peso
+
+| Função | Weight | Line-height | Letter-spacing |
+|--------|--------|-------------|-----------------|
+| Títulos, headlines | 700 | 1.0–1.1 | -0.015em a -0.04em |
+| Subtítulos, leads | 500–600 | 1.4–1.6 | -0.005em a 0 |
+| Corpo | 400 | 1.6 | 0 |
+| Labels, badges | 600–700 | 1.3 | 0.08em–0.2em |
+
+### Estilos de Texto (Classes CSS)
 
 ```css
-:root {
-  --black: #111111;
-  --white: #ffffff;
-  --gray-1: #37342F;
-  --gray-2: #585550;
-  --gray-3: #756F67;
-  --gray-4: #B8B2A8;
-  --gray-5: #EBE7E1;
-  --surface-neutral: #F5F5F5;
-  --dark-surface: #2C2B2B;
-  --accent: #E8E94D;        /* amarelo ácido (lime #D1F466 APOSENTADO — ver §0) */
-  --accent-light: #F4F4A0;
+.s-index     /* Numeração + traço (01, 02, ...) */
+.s-title     /* Título de seção: clamp 32–48px / 700 / uppercase / -0.015em */
+.s-lead      /* Lead/subtítulo: clamp 16–19px / 500 / -0.005em */
+.s-body      /* Corpo: 17px / 400 / 1.6 */
+.s-label     /* Label: 12px / 700 / uppercase / 0.14em */
+.s-metric    /* Número grande: 32px / 500 / -0.02em */
+.s-small     /* Caption: 14px / 400 */
+```
+
+---
+
+## 3. Espaçamento (Spacing Scale)
+
+Hierarquia de 4 níveis + tokens de seção:
+
+| Token | Valor | Uso |
+|-------|-------|-----|
+| `--space-md` | `24px` | Piso: eyebrow→título, ícone→label, componentes tight |
+| `--space-lg` | `36px` | Separação de blocos dentro de uma seção |
+| `--space-title` | `72px` | Título de seção → conteúdo |
+| `--space-section` | `112px` | Seção → seção (via `.sec+.sec` padding) |
+| `--m` | `clamp(24px, 5vw, 64px)` | Margem lateral (padding left/right) |
+| `--gut` | `24px` | Gutter de grid (gap entre colunas) |
+
+### Padrões
+
+- **Títulos + conteúdo**: `.s-title { margin-bottom: var(--space-md) }` + `.s-lead { margin-bottom: var(--space-lg) }`
+- **Entre paragrafos**: `.s-body + .s-body { margin-top: var(--space-md) }`
+- **Entre seções**: `.sec + .sec { border-top: 1px solid var(--line); padding: clamp(48px, 5.5vw, 80px) }`
+- **Dentro de cards**: `padding: 22px 22px 26px` (tight)
+
+---
+
+## 4. Layout & Grid
+
+### Container Principal
+
+```css
+.flow {
+  max-width: calc(1440px + 2 * var(--m));
+  margin: 0 auto;
+}
+
+.sec {
+  padding: clamp(48px, 5.5vw, 80px) var(--m);
+}
+
+.sec + .sec {
+  border-top: 1px solid var(--line);
 }
 ```
 
-Uso:
-- **--black** → texto principal, títulos
-- **--white** → fundo padrão, texto em fundo escuro, ícones em superfícies escuras
-- **--gray-1** → variante mais escura de texto (reserva)
-- **--gray-2** → corpo de texto padrão (home e cases)
-- **--gray-3** → section numbers, captions, labels secundárias
-- **--gray-4** → ícones de cards, labels terciárias, divisores sutis
-- **--gray-5** → bordas, linhas divisoras, borders de cards
-- **--surface-neutral** → único fundo alternado de seção, placeholders de imagem, superfícies de componentes
-- **--dark-surface** → fundo da barra de metadata nos cases
-- **--accent** → highlights, hover, pills de resultado
-- **--accent-light** → highlight inline, valores da metadata bar
+- **Max-width desktop**: 1440px
+- **Margin lateral fluida**: `clamp(24px, 5vw, 64px)` (24px mobile → 64px desktop)
+- **Divisória entre seções**: linha cinza `--line`
 
-Regras:
-- Nunca usar `#000000` como preto. O preto oficial é `--black` (`#111111`).
-- Nenhum hex literal deve aparecer no código. Toda cor entra via `var(--token)`.
+### Grids Responsivos
 
-### Tons creme — PROIBIDOS
-
-`#F5F1EB` (antigo `--gray-6`) e `#F9F9F9` (antigo `--cream`) estão **extirpados do sistema**. Qualquer undertone amarelado/bege está banido como fundo de seção ou de card. A paleta de superfícies não-brancas é exclusivamente **`--surface-neutral` (#F5F5F5)**, que é cinza neutro frio — sem tom quente.
-
----
-
-## 3. Escala Tipográfica
-
-### Homepage
-
-- **Hero title:** clamp(56px, 8vw, 112px) / 400 / uppercase / -0.02em
-- **Hero H2:** clamp(28px, 3.5vw, 48px) / 400 / uppercase / -0.01em
-- **Hero body:** 16px / 400 / lh 1.75 / gray-2
-- **Section label:** 11px / 500 / uppercase / 0.1em / gray-3
-- **Nav name:** 13px / 600 / uppercase / 0.04em
-- **Nav links:** 12px / 500 / uppercase / 0.04em
-
-### Cases (MRV como benchmark)
-
-- **Case title:** clamp(44px, 7vw, 96px) / 400 / uppercase / -0.02em
-- **Section number:** 20px / 500 / gray-3
-- **Section heading (H2):** 32px / 500 / uppercase / 0.026em
-- **Body text:** 16px / 400 / lh 1.75 / gray-3 / ls 0.01em
-- **Body bold (strong):** 600 / black
-- **Body large (estratégia):** 18px / 400 / ls 0.04em / #6d6d6d
-- **Highlight inline:** 16px / 500 / bg accent-light
-- **Caption:** 13px / 400 / gray-3 / ls 0.03em
-- **Card title:** 16px / 500 / uppercase / 0.033em
-- **Card description:** 13px / 400 / gray-3 / lh 1.55
-- **Card number (big):** 40px / 400 / ls -0.014em
-- **Metric label:** 16px / 500 / uppercase / 0.033em
-- **Metadata label:** 14px / 500 / uppercase / white
-- **Metadata value:** 13px / 400 / accent-light
-- **Badge text:** 14px / 400 / uppercase
-- **KR subtitle:** 20px / 500 / ls -0.02em
-- **Result number:** clamp(28px, 4vw, 48px) / 400 / ls -0.02em
-
----
-
-## 4. Espaçamento
-
-### Seções
-- Padding de seção: **96px** top e bottom (56px mobile)
-- Border entre seções: **1px solid gray-5**
-
-### Dentro de seções
-- ed-header → conteúdo: **40px**
-- Entre parágrafos (ed-content > * + *): **16px**
-- Subtítulo margin-top: **96px** (56px mobile)
-- Subtítulo margin-bottom: **40px**
-- Cards gap: **16px**
-
-### Container
-- max-width: **1440px**
-- padding horizontal: **40px** (24px mobile)
-
----
-
-## 5. Componentes
-
-### 5.1 Nav (cross-file)
-- Name pill: fixed top-left, 13px/600, uppercase, radius 999px, bg rgba(255,255,255,0.55), blur
-- Menu toggle: 54px circle, radius 50%, bg rgba(255,255,255,0.72)
-- Menu links: 12px/500, uppercase, radius 999px
-- CTA link: bg black, color white, ícone SVG
-
-### 5.2 Case Header (padrão fixo)
-Ordem obrigatória:
-1. Back link (13px/500, gray-3, uppercase, seta SVG)
-2. Título uppercase em múltiplas linhas
-3. Parágrafo de foco (16px, gray-3, max-width 668px)
-4. Barra de metadata escura (`--dark-surface`, full-width bleed, labels `--white`, values `--accent-light`)
-5. Hero image
-
-### 5.3 Section Layout
-Regra fundamental: **título sempre em cima, conteúdo abaixo. Nunca lado a lado.**
-
-```
-.ed-header (number + title, full width, margin-bottom 40px)
-.ed-content (body text, max-width 586px)
-[cards, images, badges, listas etc.]
-```
-
-### 5.4 Cards de Contexto
-- Bg white ou surface-neutral, border gray-5, radius 8px, padding 21px
-- Número 40px + ícone SVG (alinhados horizontal)
-- Label 16px/500/uppercase abaixo
-- Separador 26px × 1px gray-5
-- Descrição 16px abaixo
-- Grid 3 colunas, gap 16px
-
-### 5.5 Challenge Cards
-- Bg white (em seção sombreada = float effect), border white
-- Radius 8px, padding 21px
-- Ícone + título 16px/500/uppercase + descrição 13px
-- Grid 5 colunas, gap 16px
-
-### 5.6 Badge / Tag
-- Border 1px solid black, radius 8px, padding 8px 16px
-- Font 14px/400, uppercase
-
-### 5.7 Highlight Inline
-- Bg accent-light, font 16px/500
-- box-decoration-break clone
-
-### 5.8 Phone Mockups (seção escura)
-- Bg seção: black
-- Frames: radius 16px, bg #1A1A19, aspect-ratio 9/19.5
-- Grid 5 colunas (percentual → nome → descrição → gap → frame)
-- Frame hero: border accent, glow
-
-### 5.9 Browser Mockups
-- Radius 12px, browser bar `--surface-neutral` com 3 dots
-- Grid 2 colunas, gap 24px
-
-### 5.10 KR Compare Table
-- Grid 1fr 120px 120px
-- Header 13px/500/uppercase/gray-3
-- Rows border-bottom gray-5
-- Result hit: bg accent, pill radius 999px
-
----
-
-## 6. Animações
-
-- Reveal: classe `.rv` com IntersectionObserver
-- Keyframe: translateY(24px) → none, opacity 0 → 1
-- Easing: cubic-bezier(0.16, 1, 0.3, 1), duração 0.7s
-- Delays: .d1 (0.12s), .d2 (0.22s), .d3 (0.34s), .d4 (0.46s)
-- Nav text roll: translateY(-100%) no hover
-- Nav bg scroll: rgba(0.55) → rgba(0.85) após 60px
-
----
-
-## 7. Tom de Voz
-
-- ZERO travessões (—)
-- Linguagem humanizada, designer falando do próprio trabalho
-- Proibido: "direção de arte" → usar "identidade visual de produto"
-- Sem linguagem corporativa genérica
-- Todo texto em português
-- text-wrap: pretty em body, balance em headings
-
----
-
-## 7.1 Diagramação tipográfica (regras absolutas)
-
-Valem para **todo** o portfólio — index e cases. Não são estéticas opcionais, são requisito de qualidade.
-
-### Borda e quebra de linha (rag controlado)
-
-**Definição de viúva (nossa):** não é só palavra única na última linha. É **qualquer linha que termina curta no meio da medida** (deixa buraco branco antes da margem) **ou que termina em conector** (e, de, que, com, em). Ambas proibidas.
-
-**Objetivo:** rag raso e parelho — alinhado à esquerda, com as linhas pousando numa faixa estreita perto da medida. Borda direita levemente viva, nunca serrilhado caótico, nunca reta artificial.
-
-- Corpo **sempre alinhado à esquerda**. `text-align: justify` é **PROIBIDO**: no navegador estica o espaço entre palavras (rios) e a hifenização que o corrigiria depende do navegador do visitante, fora do nosso controle.
-- **Bloco curto, até ~4 linhas** (intro, sobre, legenda, KR, título): `text-wrap: balance`. Equaliza o comprimento das linhas, elimina a linha curta/buraco e reequilibra sozinho em qualquer largura de tela.
-- **Texto corrido longo, acima de ~6 linhas:** `text-wrap: pretty`. O `balance` trava em ~6 linhas no Chrome e para de agir; acima disso `pretty` é quem evita órfã/viúva.
-- `balance` recolhe o bloco alguns px pra dentro da medida pra igualar as linhas — **comportamento correto, não bug**. A única forma de toda linha tocar a medida exata é justify, que é proibido.
-- **`<br>` e `&nbsp;` na mão são PROIBIDOS para controle de borda** — estilhaçam quando a largura muda (mobile). Quando `text-wrap` não fechar, **reescrever a frase** ou ajustar a `max-width` do container.
-- Revisar sempre em desktop **e** em 640px — borda boa numa largura pode quebrar em outra.
-
-### Body text unificado (home + cases)
-Body text tem **um único** padrão em todo o portfólio. Divergir entre home e case quebra a coerência. Padrão **P3** (validado por render, mai/2026):
-
-| Propriedade | Valor |
-|---|---|
-| font-size | **17px** |
-| font-weight | 400 |
-| line-height | 1.55 |
-| color | `--text-body` (`#49443c`, neutral-700) |
-| max-width (medida) | **540px** |
-| text-align | left |
-| text-wrap | `balance` (bloco curto) / `pretty` (texto longo) |
-
-> **Migração P3 em andamento:** home (hero + sobre) já aplicada. Cases herdam o mesmo P3 no ciclo 2. Onde ainda não migrou, o body antigo (`--gray-2`, 14px/1.75) segue válido até ser tocado. A medida única de 540px aposenta a bagunça de larguras (586/562/547/560/520/480) que existia entre arquivos.
-
-### Alinhamento vertical entre colunas
-Em qualquer layout two-column (home ou case), o **topo do primeiro elemento da coluna direita** alinha com o **topo do título** da coluna esquerda — **nunca com o número/etiqueta** (ex: `.ed-num`). O número é metadata (fica acima, fora do grid), e as duas colunas de conteúdo começam no mesmo baseline.
-
-Implementação via `padding-top` calculado no container direito = altura do ed-num + gap. Exemplo em cases: `padding-top: calc(var(--t-num-sm) + 8px)` = 28px (o 8px aqui é offset de baseline, não um passo da régua). Em outros contextos, calcular do mesmo jeito com os tokens correspondentes. **Nunca** usar valores mágicos arbitrários tipo `116px` — esses quebram quando a tipografia muda.
-
----
-
-## 7.2 Disciplina de variação de estilos
-
-A escala tipográfica do projeto tem **8 tokens**. Se um elemento novo precisa de tamanho fora desses 8, primeiro revise se dá pra reaproveitar — ou ajuste o conteúdo, não a escala.
+#### Grid 2-coluna (Hero, Main)
 
 ```css
---t-hero      /* clamp(44, 7vw, 96) — case-title, cta-title, more-work-title */
---t-h2        /* 32  — TODOS os títulos de seção e subseção */
---t-body      /* 14  — TODO body text (mesmo que home) */
---t-label     /* 13  — labels, captions, card-titles uppercase */
---t-caption   /* 12  — footer, nav-links, micro-captions */
---t-num-xl    /* 48  — r-num, ba-num, result-num */
---t-num-md    /* 28  — phone-pct */
---t-num-sm    /* 20  — .ed-num, more-work-card-name */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gut);
+}
+
+@media (max-width: 768px) {
+  .grid-2 { grid-template-columns: 1fr; }
+}
 ```
 
-**Princípios não-negociáveis:**
-- Destaque em body **nunca** é feito por tamanho — usar `font-weight: 500` ou `<strong>`
-- Hierarquia seção vs subseção aparece via presença/ausência do `.ed-num` (número 01-07), não via tamanho do título
-- Pesos predominantes: **400** e **500**. `600` só para bold inline (strong). Nunca 700+
-- Se for tentado a criar `--t-body-lg` ou `--t-h3`: pause — a diferença entre "body normal" e "body destaque" é resolvida por weight, não por size
+#### Grid 3-coluna (Features, Stats)
+
+```css
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gut);
+}
+
+@media (max-width: 1024px) {
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .grid-3 { grid-template-columns: 1fr; }
+}
+```
+
+#### Grid 4-coluna (Stats, Metadata)
+
+```css
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gut);
+}
+
+@media (max-width: 1024px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .grid-4 { grid-template-columns: 1fr; }
+}
+```
+
+### Breakpoints Responsivos
+
+| Ponto | Largura | Contexto |
+|-------|---------|----------|
+| Desktop | > 1024px | Layout full 4/3 colunas, grids multi-col |
+| Tablet | 768px–1024px | Grids 2-col, ajustes de spacing |
+| Mobile | < 768px | Single-column, margins reduzidas |
 
 ---
 
-## 8. Framework de Seções (Case Study)
+## 5. Componentes Reutilizáveis
 
-1. Contexto do produto
-2. O problema (highlight + body + challenge cards)
-3. Objetivo (body + badge + KR list, tudo empilhado)
-4. Estratégia de design (body + badge + prioridades, tudo empilhado)
-5. A solução (mockups phone, desktop, fundação visual)
-6. Resultados (números, tabela KR, performance inline, sprints empilhados)
-7. Aprendizados
+### Card Padrão
+
+```html
+<div class="card">
+  <div class="card-hd">
+    <div class="card-idx"><b>01</b></div>
+    <svg class="ico"><!-- icon --></svg>
+  </div>
+  <h3 class="s-label">Label</h3>
+  <p class="card-desc">Description text</p>
+</div>
+```
+
+**Estilos**:
+```css
+.card {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 22px 22px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.card:hover {
+  border-color: var(--gray-3);
+  /* optional: box-shadow para depth */
+}
+```
+
+### Imagens
+
+```html
+<div class="full-img">
+  <img src="img/..." alt="..." loading="lazy">
+  <p class="img-caption">Caption text</p>
+</div>
+
+<div class="img-grid img-grid-2">
+  <div><img src="..." alt="..."><p class="img-caption">Caption</p></div>
+  <div><img src="..." alt="..."><p class="img-caption">Caption</p></div>
+</div>
+```
+
+**Estilos**:
+```css
+.full-img {
+  margin-top: var(--space-lg);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.full-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.img-caption {
+  font-size: var(--ty-label);
+  color: var(--gray-3);
+  margin-top: 12px;
+  max-width: 720px;
+}
+
+.img-grid {
+  display: grid;
+  gap: 16px;
+  margin-top: var(--space-lg);
+}
+
+.img-grid-2 { grid-template-columns: 1fr 1fr; }
+.img-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+@media (max-width: 768px) {
+  .img-grid-2, .img-grid-3 { grid-template-columns: 1fr; }
+}
+```
+
+### Stats (Resultados)
+
+```html
+<div class="res-stats">
+  <div class="res-stat">
+    <div class="res-num">4</div>
+    <div class="res-label">Label describing the metric</div>
+  </div>
+  <!-- repeat 3x para 4-col layout -->
+</div>
+```
+
+**Estilos**:
+```css
+.res-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 48px 0;
+  margin-top: var(--space-lg);
+  gap: 0;
+}
+
+.res-stat {
+  padding: 0 32px;
+  border-right: 1px solid var(--line);
+}
+
+.res-stat:first-child { padding-left: 0; }
+.res-stat:last-child { border-right: none; padding-right: 0; }
+
+.res-num {
+  font-size: clamp(40px, 5vw, 48px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--black);
+  margin-bottom: 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+.res-label {
+  font-size: var(--ty-small);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--gray-2);
+  text-wrap: pretty;
+}
+```
 
 ---
 
-## 9. Responsivo
+## 6. Componentes Chrome (Navbar, CTA, Footer)
 
-Breakpoints:
-- Acima de 1024px: layout completo
-- 1024px ou menos: challenges 3 cols, phones 3 cols
-- 640px ou menos: px 24px, challenges 2 cols, phones 2 cols, metrics 1 col
+### Navbar (Fixed, Top)
+
+```html
+<a href="index.html" class="nav-name">
+  <span class="nav-roll">
+    <span>Adriana Pommot</span>
+    <span>Adriana Pommot</span>
+  </span>
+</a>
+<div class="nav-float" id="navFloat">
+  <button class="nav-toggle" id="navToggle">
+    <svg class="icon-menu"><!-- menu icon --></svg>
+    <svg class="icon-x"><!-- x icon --></svg>
+  </button>
+  <div class="nav-menu">
+    <a href="..." class="nav-cta">Download CV</a>
+    <a href="..." class="nav-link">Projetos</a>
+    <!-- ... -->
+  </div>
+</div>
+```
+
+**Estilos**:
+```css
+.nav-name {
+  position: fixed;
+  top: 36px;
+  left: var(--m);
+  z-index: 100;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: var(--accent);
+  padding: 9px 20px;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.nav-name span {
+  display: block;
+  line-height: 1;
+  white-space: nowrap;
+  transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.nav-name:hover span {
+  transform: translateY(-100%);
+}
+
+.nav-toggle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  cursor: pointer;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.nav-toggle:hover {
+  background: var(--black);
+  border-color: var(--black);
+}
+
+.nav-menu {
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.nav-float.open .nav-menu {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+```
+
+### CTA Section (Lime Background)
+
+```html
+<section class="cta" id="contact">
+  <div class="cta-grid">
+    <div>
+      <p class="cta-eyebrow">Disponível para projetos</p>
+      <h2 class="cta-title">Vamos<br>conversar?</h2>
+      <p class="cta-sub">Visual & Interface Design</p>
+    </div>
+    <nav class="cta-menu">
+      <a href="..." class="cta-row">
+        <span class="cl">E-mail</span>
+        <span class="cv">adrianapommot@gmail.com</span>
+        <span class="car">↗</span>
+      </a>
+      <!-- ... -->
+    </nav>
+  </div>
+</section>
+```
+
+**Estilos**:
+```css
+.cta {
+  background: var(--accent);
+  padding: clamp(56px, 6vw, 84px) 0;
+}
+
+.cta-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(32px, 5vw, 56px);
+  align-items: end;
+}
+
+.cta-title {
+  font-size: clamp(48px, 7vw, 72px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.88;
+  text-transform: uppercase;
+  color: var(--black);
+}
+
+.cta-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 20px;
+  align-items: baseline;
+  padding: clamp(16px, 2vw, 20px) 8px;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.2);
+  color: var(--black);
+  transition: padding-left 0.25s ease;
+}
+
+.cta-row:hover {
+  padding-left: 18px;
+}
+
+.cta-row .car {
+  transition: transform 0.25s ease;
+}
+
+.cta-row:hover .car {
+  transform: translate(4px, -4px);
+}
+
+@media (max-width: 760px) {
+  .cta-grid { grid-template-columns: 1fr; }
+}
+```
+
+### Footer (Dark Background)
+
+```html
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Adriana Pommot</div>
+        <div class="footer-social">
+          <a href="...">LinkedIn</a>
+          <a href="...">Instagram</a>
+          <a href="...">Email</a>
+        </div>
+      </div>
+      <!-- ... 3 more columns ... -->
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Adriana Pommot</span>
+      <span class="footer-copy">Visual & Interface Design</span>
+    </div>
+  </div>
+</footer>
+```
+
+**Estilos**:
+```css
+footer {
+  background: var(--black);
+  color: var(--white);
+  padding: 64px 0 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 64px;
+}
+
+.footer-col-title {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.25);
+  margin-bottom: 20px;
+}
+
+.footer-col-links a {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+  transition: color 0.3s;
+}
+
+.footer-col-links a:hover {
+  color: var(--white);
+}
+
+@media (max-width: 768px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+```
 
 ---
 
-## 10. Pendências
+## 7. Animações & Interações
 
-- Homepage: migrar de General Sans para Plus Jakarta Sans
-- Case Delta: aplicar novo layout
-- Case Chorume: aplicar novo layout
-- Case Dasa: continuar construção com novo layout
-- Cases Ford e Ultraviolenta: criar
-- Headline da homepage: resolver copy
-- CV: atualizar
-- Refatorar hex literais restantes nos HTMLs para usar os tokens `--dark-surface` e `--surface-neutral`
+### Reveal on Scroll (`.rv` class)
+
+```css
+.rv {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rv.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.d1 { transition-delay: 0.12s; }
+.d2 { transition-delay: 0.22s; }
+.d3 { transition-delay: 0.34s; }
+.d4 { transition-delay: 0.46s; }
+```
+
+**JavaScript**:
+```javascript
+(function() {
+  try {
+    var ro = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          ro.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.rv').forEach(function(el) {
+      ro.observe(el);
+    });
+  } catch (e) {
+    console.warn('observer error', e);
+  }
+})();
+```
+
+### Hover States
+
+- **Cards**: `border-color: var(--gray-3)` + opcional shadow
+- **Images**: `transform: scale(1.04)` (duration 0.55s)
+- **Links**: `color: var(--accent)` ou underline
+- **Buttons**: `background: var(--black)` (lime → black)
+
+### Transitions
+
+```css
+transition: background 0.25s, 
+            color 0.25s, 
+            border-color 0.25s,
+            transform 0.55s cubic-bezier(0.2, 0.7, 0.2, 1);
+```
+
+---
+
+## 8. Ícones
+
+### Estilo & Tamanho
+
+```css
+.ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  color: var(--black);
+}
+
+.ico svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+```
+
+- **Stroke only**: sem fills, preto (#111), stroke-width 1.5
+- **Tamanho padrão**: 28px × 28px
+- **Variações**: 20px, 22px, 24px conforme contexto
+- **Cores**: herdam `currentColor` (preto por padrão, white em dark mode)
+
+---
+
+## 9. Acessibilidade & Performance
+
+### Acessibilidade
+
+- Semântica HTML: `<h1>`, `<h2>`, `<button>`, `<nav>`, `<section>`, etc.
+- Contraste: todos os textos >= 4.5:1 WCAG AA
+- Labels em SVGs: `aria-label` quando necessário
+- Mobile: hit targets >= 44px × 44px
+
+### Performance
+
+- **Imagens**: `loading="lazy"` em todas as `<img>` fora do fold
+- **Formatos**: webp otimizado, fallback PNG/JPG
+- **Fonts**: Google Fonts pré-carregada (1 request)
+- **CSS**: inline (sem separate stylesheet) ou concatenado
+- **JS**: vanilla (sem dependencies)
+
+### SEO
+
+- Meta tags: og:title, og:description, og:image
+- Structured data: (optional, não usado atualmente)
+- Alt text: em todas as imagens
+
+---
+
+## 10. Arquivos & Estrutura
+
+```
+portfolio/
+├── index.html           (Home)
+├── home.css             (Estilos globais da home)
+├── case-mrv.html        (Case MRV completo, CSS inline)
+├── case-delta.html      (Case Delta completo, CSS inline)
+├── case-ford.html       (Case Ford completo, CSS inline)
+└── img/
+    ├── mrv/             (18 imagens)
+    ├── delta/           (15 imagens)
+    ├── ford/            (20 imagens)
+    └── chorume/         (17 imagens)
+```
+
+---
+
+## 11. Regras de Uso
+
+### Copy (NUNCA fazer)
+
+- ❌ Travessões (—) ou en-dash: use vírgula, ponto, parênteses
+- ❌ Viúvas ou frases quebradas no meio: usar `text-wrap: balance` ou ajustar max-width
+- ❌ Novos tamanhos de fonte: só usar `--ty-*` tokens existentes
+
+### Espaçamento (SEMPRE fazer)
+
+- ✅ Usar `--space-md`, `--space-lg`, `--space-title`, `--space-section`
+- ✅ Adicionar `.sec+.sec { border-top }` em novo caso
+- ✅ Respeitar `--m` (margin lateral fluida) e `--gut` (gap de grid)
+
+### Cores (NUNCA inventar)
+
+- ❌ Inventar hex codes novo
+- ✅ Só usar tokens de `--black`, `--gray-*`, `--accent`, `--line`
+
+### Tipografia
+
+- ✅ Font-weight: 400, 500, 600, 700 (Plus Jakarta Sans)
+- ✅ Hierarquia por weight, não só por size
+- ✅ letter-spacing: só para labels (uppercase) e headlines
+
+---
+
+## 12. Checklist para Novo Case
+
+- [ ] Hero com back-link, brand, título 2-linhas (uppercase), intro, metadata 4-col
+- [ ] `.sec` com `.s-index`, `.s-title` (margin-bottom), `.s-lead` (margin-bottom)
+- [ ] `.sec+.sec` divisória (border-top)
+- [ ] Imagens com `loading="lazy"` e captions
+- [ ] Grids responsivos (3-col desktop → 1-col mobile)
+- [ ] Stats 4-col com números grandes
+- [ ] Dark section (aprendizados) com `--black` bg
+- [ ] CTA + Footer idênticos à home
+- [ ] Nav pill + toggle menu
+- [ ] Reveal animations (`.rv` + delay classes)
+- [ ] Sem erros console (check com done → fork_verifier_agent)
+
+---
+
+**Versão**: 1.0  
+**Última atualização**: 2026-01-XX  
+**Responsável**: Adriana Pommot

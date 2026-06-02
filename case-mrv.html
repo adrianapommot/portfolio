@@ -859,11 +859,11 @@ document.querySelectorAll('.nav-menu a').forEach(function(a){
   if (!navName || !navRoll) return;
 
   navName.addEventListener('mouseenter', function(){
-    navRoll.style.transform = 'translateY(-100%)';
+    navRoll.querySelectorAll('span').forEach(function(s){ s.style.transform = 'translateY(-100%)'; });
   });
 
   navName.addEventListener('mouseleave', function(){
-    navRoll.style.transform = 'translateY(0)';
+    navRoll.querySelectorAll('span').forEach(function(s){ s.style.transform = ''; });
   });
 })();
 </script>

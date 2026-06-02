@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Chorume Tipografia: projeto autoral de tipografia vernacular que virou ecossistema gráfico. Reconhecido com o prêmio Best of Show da Miami Ad School. Por Adriana Pommot.">
+<meta property="og:title" content="Chorume Tipografia · Adriana Pommot">
+<meta property="og:description" content="De um cartaz de rua à criação de uma cachaça fictícia: fonte desenhada a mão, direção de arte, cenografia em estúdio e fotografia.">
+<meta property="og:type" content="article">
+<title>Chorume Tipografia · Adriana Pommot</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="chrome.css">
+<style>
+:root{
+  --black:#111111; --white:#fff;
+  --gray-1:#37342F; --gray-2:#585550; --gray-3:#756F67; --gray-4:#B8B2A8; --gray-5:#EBE7E1;
+  --line:#E3E0DA; --chip:#F2F1EE;
+  --accent:#e0ff33; --accent-press:#d2f51c; --bone:#f4f3ef;
+  --surface-neutral:#F5F5F5;
+  --font:'Plus Jakarta Sans',sans-serif; --font-display:'Plus Jakarta Sans',sans-serif; --font-body:'Plus Jakarta Sans',sans-serif;
+  --m:clamp(24px,5vw,64px); --gut:24px; --max-w:1440px; --px:40px;
+  --space-md:24px; --space-lg:36px; --space-title:72px; --space-section:112px;
+  --ty-display:clamp(54px,5.6vw,74px); --ty-title:clamp(32px,3.4vw,48px); --ty-lead:clamp(16px,1.4vw,19px);
+  --ty-copy:17px; --ty-small:14px; --ty-metric:32px; --ty-label:12px;
+  --t-label:13px; --t-caption:12px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);color:var(--black);background:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--accent);color:var(--black)}
+
+/* ───────── LAYOUT ───────── */
+.flow{max-width:calc(var(--max-w) + 2*var(--m));margin:0 auto}
+.sec{padding:clamp(48px,5.5vw,80px) var(--m)}
+.sec+.sec{border-top:1px solid var(--line)}
+
+/* ───────── TEXTO COMPARTILHADO ───────── */
+.s-index{display:flex;align-items:baseline;gap:14px;margin-bottom:var(--space-md)}
+.s-index b{font-size:var(--ty-label);font-weight:600;letter-spacing:.04em;color:var(--black);font-variant-numeric:tabular-nums}
+.s-index em{width:28px;height:1.5px;background:var(--line);display:block;font-style:normal}
+.s-title{font-size:var(--ty-title);font-weight:600;line-height:1.08;letter-spacing:-.015em;text-transform:uppercase;color:var(--black);text-wrap:balance;margin-bottom:var(--space-md)}
+.s-lead{font-size:var(--ty-lead);font-weight:500;line-height:1.5;color:var(--gray-1);text-wrap:balance}
+.s-lead strong{font-weight:700;color:var(--black)}
+.s-body{font-size:var(--ty-copy);font-weight:400;line-height:1.6;color:var(--gray-2);text-wrap:pretty}
+.s-body+.s-body{margin-top:var(--space-md)}
+.s-label{font-size:var(--ty-label);font-weight:700;line-height:1.3;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-3)}
+
+/* ───────── HERO ───────── */
+.hero{position:relative;overflow:hidden;background:#FAFAF8;padding-top:clamp(120px,14vh,168px);padding-bottom:0}
+.hero-inner{position:relative}
+.hero-back{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--gray-4);margin-bottom:clamp(52px,8vh,92px);transition:color .25s}
+.hero-back:hover{color:var(--gray-1)}
+.hero-back svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.hero-top{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:clamp(16px,2vw,22px)}
+.hero-brand{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-3)}
+.hero .hero-title{font-size:clamp(38px,4.4vw,62px);font-weight:700;letter-spacing:-.04em;line-height:.94;text-transform:uppercase;color:var(--black)}
+.hero .hero-title>span{display:block;width:fit-content}
+.hero-hl{display:inline-block;background:linear-gradient(transparent 12%, var(--accent) 12%, var(--accent) 88%, transparent 88%)}
+.hero-foot{display:flex;flex-direction:row;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap;margin-top:clamp(32px,4vw,52px)}
+.hero-foot-main{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(20px,2.4vw,30px)}
+.hero-intro{max-width:42ch;font-size:var(--ty-lead);font-weight:500;line-height:1.4;color:var(--gray-2);text-wrap:balance}
+.hero-intro strong{font-weight:700;color:var(--black)}
+.hero-result{text-align:left}
+.hero-result span{display:block;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-3);margin-bottom:9px}
+.hero-result b{display:block;font-size:15px;font-weight:700;letter-spacing:-.01em;color:var(--black)}
+.hero-tag{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--gray-3);white-space:nowrap;padding-bottom:3px}
+.hero-meta{margin-top:clamp(44px,6vh,72px);border-top:1px solid var(--line);padding:32px 0 clamp(44px,6vh,72px);display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.hm-item{border-right:1px solid var(--line);padding:0 clamp(20px,2.4vw,40px)}
+.hm-item:first-child{padding-left:0}
+.hm-item:last-child{border-right:none;padding-right:0}
+.hm-label{display:block;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-3);margin-bottom:8px}
+.hm-value{font-size:16px;font-weight:600;line-height:1.35;color:var(--black)}
+@keyframes heroUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.hero-top,.hero .hero-title>span,.hero-foot{animation:heroUp .85s cubic-bezier(.2,.7,.3,1) backwards}
+.hero-top{animation-delay:.05s}
+.hero .hero-title>span:nth-child(1){animation-delay:.12s}
+.hero .hero-title>span:nth-child(2){animation-delay:.19s}
+.hero-foot{animation-delay:.32s}
+@media(prefers-reduced-motion:reduce){.hero-top,.hero .hero-title>span,.hero-foot{animation:none}}
+@media(max-width:860px){
+  .hero-meta{grid-template-columns:1fr 1fr;gap:0}
+  .hm-item{border-bottom:1px solid var(--line);padding:20px 28px}
+  .hm-item:first-child{padding-left:28px}
+  .hm-item:nth-child(2n){border-right:none}
+}
+
+/* ───────── SECOES EDITORIAIS ───────── */
+.ed{padding:clamp(56px,6.5vw,96px) var(--m);border-top:1px solid var(--line)}
+
+/* Superfície alternada: cinza neutro frio */
+.ed--shaded{background:var(--surface-neutral)}
+
+/* Dark */
+.ed--dark{background:var(--black);border-top:none}
+.ed--dark+.ed--dark{border-top:1px solid rgba(255,255,255,.08)}
+
+/* Split: imagem esquerda, texto direita */
+.ed-split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(48px,7vw,96px);align-items:center}
+
+/* Conteudo */
+.ed-header{margin-bottom:var(--space-title)}
+.ed-content{max-width:668px}
+.ed-num{display:block;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-3);margin-bottom:var(--space-md)}
+.ed-title{font-size:var(--ty-title);font-weight:600;line-height:1.08;letter-spacing:-.015em;text-transform:uppercase;color:var(--black);text-wrap:balance;margin-bottom:var(--space-md)}
+.ed-body{font-size:var(--ty-copy);font-weight:400;line-height:1.6;color:var(--gray-2);text-wrap:pretty}
+.ed-body+.ed-body{margin-top:var(--space-md)}
+.ed-body--lead{font-size:clamp(18px,1.6vw,22px);font-weight:500;line-height:1.5;color:var(--gray-1);margin-bottom:var(--space-lg);text-wrap:balance}
+
+/* Dark overrides */
+.ed--dark .ed-num{color:rgba(255,255,255,.35)}
+.ed--dark .ed-title{color:#fff}
+.ed--dark .ed-body{color:rgba(255,255,255,.65)}
+.ed--dark .ed-body--lead{color:rgba(255,255,255,.85)}
+
+/* ───────── IMAGENS ───────── */
+.figure-block{margin-top:var(--space-lg)}
+.img-caption{font-size:var(--ty-label);font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-3);margin-bottom:16px;text-wrap:balance}
+.ed--dark .img-caption{color:rgba(255,255,255,.35)}
+.full-img{border-radius:8px;overflow:hidden}
+.full-img img{width:100%;height:auto;display:block}
+.left-img{border-radius:8px;overflow:hidden}
+.left-img img{width:100%;height:auto;display:block}
+
+/* ───────── RECONHECIMENTO ───────── */
+.recognition{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;border:1px solid var(--line);border-radius:12px;padding:48px;margin-top:var(--space-lg);align-items:start}
+.recognition-label{display:block;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-3);margin-bottom:var(--space-md)}
+.recognition-title{font-size:var(--ty-copy);font-weight:600;line-height:1.35;color:var(--black);margin-bottom:14px}
+.recognition-body{font-size:var(--ty-small);line-height:1.65;color:var(--gray-2);text-wrap:pretty}
+.recognition-img{max-width:360px;margin-left:auto}
+.recognition-img img{border-radius:8px;width:100%;height:auto;display:block}
+@media(max-width:1024px){
+  .recognition{grid-template-columns:1fr}
+  .recognition-img{max-width:100%;margin-left:0}
+}
+
+/* ───────── OUTROS PROJETOS ───────── */
+.more-work{padding:clamp(64px,8vw,112px) var(--m);border-top:1px solid var(--line)}
+.more-work-title{font-size:var(--ty-title);font-weight:700;line-height:1.08;letter-spacing:-.03em;text-transform:uppercase;color:var(--black);margin-bottom:var(--space-title);text-wrap:balance}
+.more-work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.more-work-card{display:block;transition:opacity .3s}
+.more-work-card:hover{opacity:.82}
+.more-work-card-img{position:relative;aspect-ratio:3/2;overflow:hidden;background:var(--surface-neutral);border-radius:6px;border:1px solid var(--line);margin-bottom:20px}
+.more-work-card-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s cubic-bezier(.2,.7,.2,1)}
+.more-work-card:hover .more-work-card-img img{transform:scale(1.04)}
+.more-work-card-tag{display:block;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-4);margin-bottom:10px}
+.more-work-card-name{font-size:18px;font-weight:600;letter-spacing:-.01em;color:var(--black)}
+
+/* ───────── RESPONSIVO ───────── */
+@media(max-width:900px){
+  .ed-split{grid-template-columns:1fr}
+  .more-work-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .ed{padding:56px var(--m)}
+  .ed-split{gap:var(--space-lg)}
+}
+@media(max-width:560px){
+  .more-work-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<a href="index.html" class="nav-name"><span class="nav-roll"><span>Adriana Pommot</span><span>Adriana Pommot</span></span></a>
+<div class="nav-float" id="navFloat">
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <svg class="icon-menu" viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    <svg class="icon-x" viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+  </button>
+  <nav class="nav-menu">
+    <a href="cv-adriana-pommot.pdf" download class="nav-cta">Download CV<svg viewBox="0 0 16 16"><path d="M8 3v8M4 8l4 4 4-4"/><path d="M3 13h10"/></svg></a>
+    <a href="index.html#work" class="nav-link">Projetos</a>
+    <a href="index.html#services" class="nav-link">Serviços</a>
+    <a href="index.html#about" class="nav-link">Sobre Mim</a>
+    <a href="#contact" class="nav-link">Contato</a>
+  </nav>
+</div>
+
+<main class="flow">
+
+  <!-- HERO -->
+  <section class="sec hero" id="top">
+    <div class="hero-inner">
+      <a class="hero-back" href="index.html#work">
+        <svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/><path d="M5 8h7"/></svg>
+        Todos os projetos
+      </a>
+      <div class="hero-top">
+        <span class="hero-brand">Projeto Autoral · Miami Ad School / ESPM</span>
+      </div>
+      <h1 class="hero-title">
+        <span><span class="hero-hl">Chorume</span></span>
+        <span>Tipografia</span>
+      </h1>
+      <div class="hero-foot">
+        <div class="hero-foot-main">
+          <p class="hero-intro">Projeto autoral de tipografia vernacular que virou ecossistema gráfico: fonte desenhada a mão, branding de cachaça fictícia, cenografia em estúdio e fotografia.</p>
+          <div class="hero-result"><span>reconhecimento</span><b>Best of Show · Miami Ad School</b></div>
+        </div>
+        <span class="hero-tag">Case de Criação Autoral · 2015</span>
+      </div>
+    </div>
+    <div class="hero-meta">
+      <div class="hm-item"><span class="hm-label">Função</span><div class="hm-value">Criação Autoral</div></div>
+      <div class="hm-item"><span class="hm-label">Programa</span><div class="hm-value">Miami Ad School / ESPM</div></div>
+      <div class="hm-item"><span class="hm-label">Ano</span><div class="hm-value">2015</div></div>
+      <div class="hm-item"><span class="hm-label">Escopo</span><div class="hm-value">Tipografia, Branding, Direção de Arte</div></div>
+    </div>
+  </section>
+
+  <!-- 01 O CARTAZ — dark, split -->
+  <section class="ed ed--dark" id="cartaz">
+    <div class="ed-split">
+      <div class="left-img">
+        <img src="img/chorume/cartaz.webp" alt="Cartaz tipográfico colado num muro do bairro da Liberdade, em Sao Paulo" loading="lazy">
+      </div>
+      <div class="ed-content">
+        <span class="ed-num">01</span>
+        <h2 class="ed-title">O cartaz</h2>
+        <p class="ed-body">Um cartaz colado num muro do bairro da Liberdade, em São Paulo, com pincel grosso, régua nenhuma e zero pretensão estética. Foi o ponto de partida desse projeto.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 VERNACULAR COMO MATERIA-PRIMA — shaded -->
+  <section class="ed ed--shaded" id="vernacular">
+    <div class="ed-header">
+      <span class="ed-num">02</span>
+      <h2 class="ed-title">Vernacular como<br>matéria-prima</h2>
+    </div>
+    <div class="ed-content">
+      <p class="ed-body--lead">O vernacular brasileiro de rua é um tipo de design que ninguém assina. Ele existe porque precisa existir, e é essa urgência que o torna honesto.</p>
+      <p class="ed-body">A força daquele traço, sua irregularidade brutal e funcional, revelava uma identidade visual espontânea, nascida do improviso. Esse gesto gráfico foi a matéria-prima para o desenvolvimento da tipografia Chorume, que preserva o ritmo, os erros e a urgência de sua origem.</p>
+    </div>
+    <div class="figure-block">
+      <div class="img-caption">Moodboard de pesquisa: atmosfera de decomposição, terra úmida e permanência orgânica.</div>
+      <div class="full-img">
+        <img src="img/chorume/moodboard.webp" alt="Moodboard de pesquisa visual para o projeto Chorume Tipografia" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 A FONTE — dark -->
+  <section class="ed ed--dark" id="fonte">
+    <div class="ed-header">
+      <span class="ed-num">03</span>
+      <h2 class="ed-title">A fonte</h2>
+    </div>
+    <div class="ed-content">
+      <p class="ed-body">A partir das letras do cartaz, desenhei um alfabeto completo mantendo as imperfeições como parte da identidade. A fonte explora irregularidades como ritmo, peso e alinhamento, reforçando o aspecto orgânico e marginal do seu ponto de origem.</p>
+    </div>
+    <div class="figure-block">
+      <div class="img-caption">Alfabeto completo: cada letra preserva o pulso manual do cartaz original.</div>
+      <div class="full-img">
+        <img src="img/chorume/alfabeto-cenografia.webp" alt="Alfabeto completo da tipografia Chorume, preservando imperfeicoes manuais" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 INVENTAR O CHORUME — dark -->
+  <section class="ed ed--dark" id="produto">
+    <div class="ed-header">
+      <span class="ed-num">04</span>
+      <h2 class="ed-title">Inventar o Chorume</h2>
+    </div>
+    <div class="ed-content">
+      <p class="ed-body">O nome Chorume surgiu naturalmente. Imaginei uma cachaça artesanal fictícia, produzida com água da chuva, embalada em garrafas escuras, com identidade gráfica inspirada em xilogravura e signos de decomposição.</p>
+      <p class="ed-body">O rótulo mistura ilustração, tipografia autoral e simbologias do sertão. A parte inferior, com padrões de insetos e vegetação, remete a fermentação, a morte, a regeneração orgânica. A composição equilibra o grotesco e o lúdico, o artesanal e o especulativo.</p>
+    </div>
+    <div class="figure-block">
+      <div class="img-caption">Garrafa Chorume: rótulo mistura tipografia autoral, xilogravura e signos de fermentação.</div>
+      <div class="full-img">
+        <img src="img/chorume/garrafa-cenografia.webp" alt="Garrafa Chorume com rótulo de tipografia autoral e xilogravura" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 DIREÇÃO DE ARTE — dark -->
+  <section class="ed ed--dark" id="direcao">
+    <div class="ed-header">
+      <span class="ed-num">05</span>
+      <h2 class="ed-title">Direção de arte</h2>
+    </div>
+    <div class="ed-content">
+      <p class="ed-body">Para materializar essa narrativa, construí um pântano cenográfico em estúdio. Usei um aquário de vidro, terra umida, musgo e ossos reais emprestados por um estudante de veterinária.</p>
+      <p class="ed-body">A composicao foi pensada como um relicário fúnebre da garrafa, como se tivesse sido desenterrada de um sítio arqueológico pós-apocalíptico.</p>
+    </div>
+    <div class="figure-block">
+      <div class="img-caption">Foto final: garrafa enterrada em um pântano cenográfico construído em estúdio.</div>
+      <div class="full-img">
+        <img src="img/chorume/foto-final.webp" alt="Foto final do projeto Chorume: garrafa em pântano cenográfico construído em estúdio" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 RESIDUO (aprendizados) — shaded -->
+  <section class="ed ed--shaded" id="residuo">
+    <div class="ed-header">
+      <span class="ed-num">06</span>
+      <h2 class="ed-title">Resíduo</h2>
+    </div>
+    <div class="ed-content">
+      <p class="ed-body--lead">Chorume é, ao mesmo tempo, uma crítica e uma celebração: do lixo nasce linguagem, da decomposição nasce um novo design.</p>
+      <p class="ed-body">Vernacular tem ofício próprio. Aprendi a olhar pra coisas que ninguém olha, a respeitar a urgência do improviso e a confiar que o craft existe em todo lugar, não só nos lugares premiados.</p>
+      <p class="ed-body">O olho que desenhou essas letras em 2015 ainda mora em cada interface que eu construo hoje.</p>
+    </div>
+  </section>
+
+  <!-- 07 O FUDGE — reconhecimento -->
+  <section class="sec" id="reconhecimento">
+    <div class="recognition rv">
+      <div>
+        <span class="recognition-label">Best of Show · Miami Ad School / ESPM</span>
+        <h2 class="recognition-title">O Fudge</h2>
+        <p class="recognition-body">O projeto foi reconhecido com o prêmio Best of Show da Miami Ad School, eleito entre todos os trabalhos da turma. Dez anos depois, o troféu ainda está na minha estante. Serve como lembrete de onde minha linguagem visual começou: olhando pra coisas que ninguém olha.</p>
+      </div>
+      <div class="recognition-img">
+        <img src="img/chorume/premio-fudge.webp" alt="Troféu Fudge do Best of Show da Miami Ad School" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- OUTROS PROJETOS -->
+<section class="more-work">
+  <div class="flow">
+    <h2 class="more-work-title">Outros projetos</h2>
+    <div class="more-work-grid">
+      <a class="more-work-card rv" href="case-mrv.html">
+        <div class="more-work-card-img">
+          <img src="img/mrv/overview-grid.webp" alt="MRV Fluxo de Renegociação" loading="lazy">
+        </div>
+        <span class="more-work-card-tag">#ProductDesign #Fintech</span>
+        <div class="more-work-card-name">Fluxo de Renegociação MRV</div>
+      </a>
+      <a class="more-work-card rv d1" href="case-ford.html">
+        <div class="more-work-card-img">
+          <img src="img/ford/hero-room.webp" alt="Ford Immersion Room" loading="lazy">
+        </div>
+        <span class="more-work-card-tag">#IdentidadeVisual #DesignEspacial</span>
+        <div class="more-work-card-name">Ford Immersion Room</div>
+      </a>
+      <a class="more-work-card rv d2" href="case-delta.html">
+        <div class="more-work-card-img">
+          <img src="img/delta/hero-mockup.webp" alt="Delta Design System" loading="lazy">
+        </div>
+        <span class="more-work-card-tag">#DesignSystem</span>
+        <div class="more-work-card-name">Delta Design System</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contact"><div class="container cta-grid">
+  <div class="rv">
+    <div class="cta-eyebrow">✦ Contato</div>
+    <h2 class="cta-title">Vamos<br>Conversar?</h2>
+    <p class="cta-sub">Disponível para projetos remotos</p>
+  </div>
+  <div class="cta-menu rv d1">
+    <a href="mailto:adrianapommot@gmail.com" class="cta-row"><span class="cl">Email</span><span class="cv">adrianapommot@gmail.com</span><span class="car">→</span></a>
+    <a href="https://www.linkedin.com/in/adriana-pommot/" target="_blank" rel="noopener" class="cta-row"><span class="cl">LinkedIn</span><span class="cv">/in/adriana-pommot</span><span class="car">↗</span></a>
+    <a href="https://wa.me/5511962724879" target="_blank" rel="noopener" class="cta-row"><span class="cl">WhatsApp</span><span class="cv">+55 11 96272-4879</span><span class="car">↗</span></a>
+    <a href="cv-adriana-pommot.pdf" download class="cta-row"><span class="cl">Currículo</span><span class="cv">PDF · 2026</span><span class="car">↓</span></a>
+  </div>
+</div></section>
+
+<!-- FOOTER -->
+<footer><div class="container">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">Adriana Pommot</div>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/adriana-pommot/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://instagram.com/ultraviolenta.ink" target="_blank" rel="noopener">Instagram</a>
+        <a href="mailto:adrianapommot@gmail.com">Email</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Páginas</div>
+      <div class="footer-col-links">
+        <a href="index.html#work">Projetos</a>
+        <a href="index.html#services">Serviços</a>
+        <a href="index.html#about">Sobre Mim</a>
+        <a href="#contact">Contato</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Projetos</div>
+      <div class="footer-col-links">
+        <a href="case-mrv.html">MRV</a>
+        <a href="case-ford.html">Ford</a>
+        <a href="case-delta.html">Delta DS</a>
+        <a href="case-chorume.html">Chorume</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Contato</div>
+      <div class="footer-col-links">
+        <a href="mailto:adrianapommot@gmail.com">adrianapommot@gmail.com</a>
+        <span>São Paulo, BR</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Adriana Pommot</span>
+    <span class="footer-copy">Visual &amp; Interface Design</span>
+  </div>
+</div></footer>
+
+<script>
+/* nav: abre/fecha + fecha ao clicar num link */
+(function(){
+  var t=document.getElementById('navToggle'),f=document.getElementById('navFloat');
+  if(t&&f)t.addEventListener('click',function(){f.classList.toggle('open');});
+  document.querySelectorAll('.nav-menu a').forEach(function(a){
+    a.addEventListener('click',function(){if(f)f.classList.remove('open');});
+  });
+})();
+
+/* reveal ao rolar */
+(function(){try{
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+  },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.rv').forEach(function(el){obs.observe(el);});
+}catch(e){}})();
+
+/* nav: animacao do carousel "Adriana Pommot" via JS */
+(function(){
+  var navName=document.querySelector('.nav-name');
+  var navRoll=document.querySelector('.nav-roll');
+  if(!navName||!navRoll)return;
+  navName.addEventListener('mouseenter',function(){
+    navRoll.querySelectorAll('span').forEach(function(s){s.style.transform='translateY(-100%)';});
+  });
+  navName.addEventListener('mouseleave',function(){
+    navRoll.querySelectorAll('span').forEach(function(s){s.style.transform='';});
+  });
+})();
+</script>
+</body>
+</html>
