@@ -271,16 +271,16 @@ p{text-wrap:balance}
 .lib-cta:hover svg{transform:translateX(4px)}
 @media(max-width:760px){.lib-stats{grid-template-columns:1fr}.lib-stat{border-right:none;border-bottom:1px solid rgba(255,255,255,.16);padding:28px 0}.lib-stat:last-child{border-bottom:none}.lib-cta{width:100%;justify-content:center}}
 
-/* ═══ 06 RESULTADOS — stats hairline + evidência ═══ */
-.res-statement{font-size:var(--ty-lead);font-weight:500;line-height:1.5;color:var(--gray-1);max-width:900px;margin-bottom:var(--space-title);text-wrap:balance}
-.res-stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:48px 0;margin-bottom:var(--space-title)}
-.res-visual{margin:var(--space-title) 0;border-radius:18px;overflow:hidden}
+/* ═══ 03 · tokens-stack ═══ */
+.atomic-img{margin-bottom:var(--space-title);border-radius:18px;overflow:hidden}
+.atomic-img img{width:100%;display:block}
+
+/* ═══ 06 RESULTADOS — split texto|visual ═══ */
+.res-split{display:grid;grid-template-columns:1fr 1.5fr;gap:clamp(40px,6vw,96px);align-items:start}
+.res-split .sec-head{margin-bottom:0}
+.res-visual{border-radius:18px;overflow:hidden}
 .res-visual img{width:100%;display:block}
-.res-stat{padding:0 32px;border-right:1px solid var(--line)}
-.res-stat:first-child{padding-left:0}
-.res-stat:last-child{border-right:none;padding-right:0}
-.res-num{font-size:clamp(40px,4.6vw,56px);font-weight:600;line-height:1;letter-spacing:-.03em;color:var(--black);margin-bottom:16px;font-variant-numeric:tabular-nums}
-.res-stat-label{font-size:var(--ty-small);line-height:1.5;color:var(--gray-2);text-wrap:balance}
+@media(max-width:960px){.res-split{grid-template-columns:1fr;gap:var(--space-title)}}
 .evidence{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:16px;overflow:hidden}
 .evidence-col{padding:clamp(32px,4vw,48px);display:flex;flex-direction:column}
 .evidence-col:first-child{border-right:1px solid var(--line)}
@@ -491,6 +491,9 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
       </article>
     </div>
 
+    <div class="atomic-img rv">
+      <img src="img/delta/tokens-stack.webp" alt="Arquitetura em camadas do Delta Design System: tokens, átomos, moléculas e templates" loading="lazy">
+    </div>
     <h3 class="built-sub">De tokens base até templates prontos</h3>
     <div class="atomic">
       <article class="atomic-step">
@@ -557,19 +560,15 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
 
   <!-- ═══ 06 · RESULTADOS ═══ -->
   <section class="sec" id="resultados">
-    <div class="sec-head">
-      <div class="s-index"><b>06</b><em></em></div>
-      <h2 class="s-title">Resultados</h2>
-      <p class="s-lead" style="max-width:900px">Um sistema que mudou como o time constrói produto: retrabalho reduzido, padrão visual coerente entre as 20+ marcas e handoff sem ambiguidade entre design e engenharia.</p>
-    </div>
-    <div class="res-stats">
-      <div class="res-stat"><div class="res-num">~47<span style="font-size:.5em;font-weight:600">%</span></div><p class="res-stat-label">Redução no tempo de criação de novas interfaces.</p></div>
-      <div class="res-stat"><div class="res-num">20+</div><p class="res-stat-label">Produtos consumindo a mesma biblioteca.</p></div>
-      <div class="res-stat"><div class="res-num">A→T</div><p class="res-stat-label">Cobertura completa, de átomos a templates.</p></div>
-      <div class="res-stat"><div class="res-num">Multi</div><p class="res-stat-label">Troca de marca via tokens, sem redesenho.</p></div>
-    </div>
-    <div class="res-visual rv">
-      <img src="img/delta/resultados.webp" alt="Delta Design System: ~47% de redução no tempo de criação de interfaces, 20+ produtos consumindo a mesma base" loading="lazy">
+    <div class="res-split">
+      <div class="sec-head">
+        <div class="s-index"><b>06</b><em></em></div>
+        <h2 class="s-title">Resultados</h2>
+        <p class="s-lead">Um sistema que mudou como o time constrói produto: retrabalho reduzido, padrão visual coerente entre as 20+ marcas e handoff sem ambiguidade entre design e engenharia.</p>
+      </div>
+      <div class="res-visual rv">
+        <img src="img/delta/resultados.webp" alt="Delta Design System: ~47% de redução no tempo de criação de interfaces, 20+ produtos na mesma base" loading="lazy">
+      </div>
     </div>
     <div class="ba rv">
       <div class="ba-head">
