@@ -18,6 +18,9 @@
   --warm-2: #b8b2a8;
   --body: #49443c;
   --dark: #111110;
+  /* aliases para site-nav.js */
+  --black: #111111;
+  --gray-1: #37342f;
   /* layout */
   --maxw: 1440px;
   --m: clamp(24px, 5vw, 64px);
