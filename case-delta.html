@@ -8,8 +8,7 @@
 <meta property="og:description" content="Tokens, componentes e bibliotecas reutilizáveis que unificaram 20+ produtos digitais na Escale.">
 <meta property="og:type" content="article">
 <title>Delta Design System · Adriana Pommot</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="chrome.css">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --black:#111111; --white:#fff;
@@ -46,14 +45,41 @@ p{text-wrap:balance}
 .s-body+.s-body{margin-top:var(--space-md)}
 .s-label{font-size:var(--ty-label);font-weight:700;line-height:1.3;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-3)}
 
+/* ═══ NAV (idêntica à home) ═══ */
+.nav-name{position:fixed;top:36px;left:var(--m);z-index:100;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--black);background:var(--accent);padding:9px 20px;border-radius:999px;overflow:hidden}
+.nav-name span{display:block;line-height:1;white-space:nowrap;transition:transform .45s cubic-bezier(.19,1,.22,1)}
+.nav-name:hover span{transform:translateY(-100%)}
+.nav-roll{display:block;overflow:hidden;height:1em}
+.nav-float{position:fixed;top:36px;right:var(--m);z-index:100;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.nav-toggle{width:50px;height:50px;border-radius:50%;border:1px solid var(--accent);cursor:pointer;background:var(--accent);display:flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s}
+.nav-toggle:hover{background:var(--black);border-color:var(--black)}
+.nav-toggle:hover svg{stroke:#fff}
+.nav-toggle svg{width:20px;height:20px;stroke:var(--black);stroke-width:1.2;fill:none}
+.nav-toggle .icon-x{display:none}
+.nav-float.open .nav-toggle{background:var(--black);border-color:var(--black)}
+.nav-float.open .nav-toggle svg{stroke:#fff}
+.nav-float.open .nav-toggle .icon-menu{display:none}
+.nav-float.open .nav-toggle .icon-x{display:block}
+.nav-menu{display:flex;flex-direction:column;align-items:flex-end;gap:6px;opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .3s,transform .3s}
+.nav-float.open .nav-menu{opacity:1;transform:none;pointer-events:auto}
+.nav-menu a{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:9px 18px;border-radius:999px;white-space:nowrap;transition:background .25s,color .25s}
+.nav-menu .nav-cta{color:#fff;background:var(--black);display:inline-flex;align-items:center;gap:8px}
+.nav-menu .nav-cta:hover{background:var(--accent);color:var(--black)}
+.nav-menu .nav-cta svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.nav-menu .nav-link{color:var(--gray-1);background:rgba(255,255,255,.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.nav-menu .nav-link:hover{background:var(--black);color:#fff}
+
 /* ═══ HERO (type-forward claro, padrão de projeto) ═══ */
 .hero{position:relative;overflow:hidden;background:#FAFAF8;padding-top:clamp(120px,14vh,168px);padding-bottom:0}
-.hero-inner{position:relative}
+.hero-inner{position:relative;z-index:2}
+.hero-illo{position:absolute;right:var(--m);width:min(52%,680px);height:auto;z-index:0;pointer-events:none;user-select:none;-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 44px),transparent 100%);mask-image:linear-gradient(to bottom,#000 calc(100% - 44px),transparent 100%);animation:heroUp 1s cubic-bezier(.2,.7,.3,1) backwards;animation-delay:.25s}
+@media(max-width:1080px){.hero-illo{display:none}}
 .hero-back{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--gray-4);margin-bottom:clamp(52px,8vh,92px);transition:color .25s}
 .hero-back:hover{color:var(--gray-1)}
 .hero-back svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .hero-top{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:clamp(16px,2vw,22px)}
-.hero-brand{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-3)}
+.hero-brand{display:inline-flex;align-items:center;gap:13px}
+.hero-brand img{height:24px;width:auto;display:block}
 .hero .hero-title{font-size:clamp(38px,4.4vw,62px);font-weight:700;letter-spacing:-.04em;line-height:.94;text-transform:uppercase;color:var(--black)}
 .hero .hero-title>span{display:block;width:fit-content}
 .hero-hl{display:inline-block;background:linear-gradient(transparent 12%, var(--accent) 12%, var(--accent) 88%, transparent 88%)}
@@ -61,11 +87,12 @@ p{text-wrap:balance}
 .hero-foot-main{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(20px,2.4vw,30px)}
 .hero-intro{max-width:42ch;font-size:var(--ty-lead);font-weight:500;line-height:1.4;color:var(--gray-2);text-wrap:balance}
 .hero-intro strong{font-weight:700;color:var(--black)}
+.hero-intro .hl{background:linear-gradient(transparent 10%, var(--accent) 10%, var(--accent) 88%, transparent 88%);-webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0 .04em}
 .hero-result{text-align:left}
 .hero-result span{display:block;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-3);margin-bottom:9px}
 .hero-result b{display:block;font-size:15px;font-weight:700;letter-spacing:-.01em;color:var(--black)}
 .hero-tag{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--gray-3);white-space:nowrap;padding-bottom:3px}
-.hero-meta{margin-top:clamp(44px,6vh,72px);border-top:1px solid var(--line);padding:32px 0 clamp(44px,6vh,72px);display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.hero-meta{position:relative;z-index:2;margin-top:clamp(44px,6vh,72px);border-top:1px solid var(--line);padding:32px 0 clamp(44px,6vh,72px);display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
 .hm-item{border-right:1px solid var(--line);padding:0 clamp(20px,2.4vw,40px)}
 .hm-item:first-child{padding-left:0}
 .hm-item:last-child{border-right:none;padding-right:0}
@@ -84,27 +111,35 @@ p{text-wrap:balance}
 .sec-head{max-width:760px;margin-bottom:var(--space-title)}
 .sec-head .s-title{margin-bottom:var(--space-md)}
 
-/* ═══ 01 CONTEXTO & PROBLEMA — cards numerados ═══ */
-.prob-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gut)}
-.prob-card{position:relative;background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 26px 32px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(17,17,17,.04),0 10px 30px rgba(17,17,17,.03);transition:transform .28s cubic-bezier(.2,.7,.3,1),box-shadow .28s ease}
-.prob-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--line);transition:background .25s}
-.prob-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(17,17,17,.10),0 5px 14px rgba(17,17,17,.05)}
-.prob-card:hover::before{background:var(--accent)}
-.prob-num{font-size:34px;font-weight:600;letter-spacing:-.03em;color:var(--gray-4);font-variant-numeric:tabular-nums;margin-bottom:26px}
-.prob-title{font-size:var(--ty-copy);font-weight:600;letter-spacing:-.005em;line-height:1.25;color:var(--black);margin-bottom:12px;text-wrap:balance}
-.prob-desc{font-size:var(--ty-small);line-height:1.6;color:var(--gray-2);text-wrap:balance}
+/* ═══ 01 CONTEXTO & PROBLEMA — ícones lúdicos, sem cards ═══ */
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,4.5vw,56px) clamp(48px,6vw,88px);margin-top:8px}
+.prob-item{display:grid;grid-template-columns:auto 1fr;gap:clamp(18px,2vw,28px);align-items:start}
+.prob-ico{width:clamp(88px,9vw,116px);height:clamp(88px,9vw,116px);flex-shrink:0}
+.prob-ico img{width:100%;height:100%;object-fit:contain}
+.prob-txt{display:flex;flex-direction:column;gap:9px;padding-top:0;min-width:0}
+.prob-num{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--gray-3);font-variant-numeric:tabular-nums;line-height:1}
+.prob-title{font-size:var(--ty-copy);font-weight:600;letter-spacing:-.005em;line-height:1.3;color:var(--black);text-wrap:balance}
+.prob-desc{font-size:var(--ty-small);line-height:1.65;color:var(--gray-2);text-wrap:balance}
 .prob-desc strong{font-weight:700;color:var(--black)}
-@media(max-width:1080px){.prob-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.prob-grid{grid-template-columns:1fr}}
+@media(max-width:760px){.prob-grid{grid-template-columns:1fr;gap:32px}}
 
-/* ═══ 02 ESTRATÉGIA — 4 passos em lista ═══ */
-.strat-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gut);border-top:1px solid var(--line);padding-top:30px}
-.strat-step{display:flex;flex-direction:column}
-.strat-n{display:block;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-3);margin-bottom:16px}
-.strat-t{font-size:var(--ty-copy);font-weight:600;letter-spacing:-.005em;line-height:1.25;color:var(--black);margin-bottom:10px;text-wrap:balance}
-.strat-d{font-size:var(--ty-small);line-height:1.6;color:var(--gray-2);text-wrap:balance}
-@media(max-width:900px){.strat-steps{grid-template-columns:1fr 1fr;gap:32px}}
-@media(max-width:560px){.strat-steps{grid-template-columns:1fr}}
+/* ═══ 02 ESTRATÉGIA — 2 col header + 4 col footer ═══ */
+#estrategia .strat-head{padding-top:0}
+.strat-head{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(48px,7vw,80px);align-items:stretch;margin-bottom:var(--space-md)}
+.strat-head-left{display:flex;flex-direction:column;gap:var(--space-md);max-width:500px}
+.strat-head-title{font-size:var(--ty-title);font-weight:600;line-height:1.08;letter-spacing:-.015em;text-transform:uppercase;color:var(--black);text-wrap:balance}
+.strat-head-intro{font-size:var(--ty-lead);font-weight:500;line-height:1.5;color:var(--gray-2);text-wrap:balance}
+.strat-head-right{width:100%;position:relative;align-self:stretch;min-height:200px}
+.strat-visual{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center}
+.strat-visual img{width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain}
+.strat-steps{display:flex;flex-direction:column;margin-top:0;border-top:1px solid var(--line)}
+.strat-step{display:grid;grid-template-columns:1fr 1.5fr;grid-template-rows:auto auto;column-gap:clamp(24px,4vw,72px);align-items:start;padding:clamp(22px,2.4vw,30px) 0;border-bottom:1px solid var(--line);transition:padding-left .25s ease}
+.strat-step:hover{padding-left:12px}
+.strat-n{grid-column:1;grid-row:1;display:block;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-3);margin-bottom:10px}
+.strat-t{grid-column:1;grid-row:2;font-size:var(--ty-lead);font-weight:600;letter-spacing:-.01em;line-height:1.25;color:var(--black);text-wrap:balance}
+.strat-d{grid-column:2;grid-row:1/span 2;font-size:var(--ty-small);line-height:1.65;color:var(--gray-2);text-wrap:pretty}
+@media(max-width:1100px){.strat-head{grid-template-columns:1fr;gap:48px}.strat-head-right{justify-content:center}}
+@media(max-width:760px){.strat-step{grid-template-columns:1fr;column-gap:0;row-gap:10px}.strat-n{margin-bottom:4px}.strat-t{grid-row:2}.strat-d{grid-column:1;grid-row:3;margin-top:6px}.strat-step:hover{padding-left:0}}
 
 /* ═══ 03 O QUE CONSTRUÍ — pilares + atomic + insights ═══ */
 .built-lead{max-width:720px;margin-bottom:var(--space-title)}
@@ -123,6 +158,20 @@ p{text-wrap:balance}
 .atomic-d{font-size:var(--ty-small);line-height:1.6;color:var(--gray-2);text-wrap:balance}
 @media(max-width:900px){.pillars{grid-template-columns:1fr}.atomic{grid-template-columns:1fr 1fr;gap:32px}}
 @media(max-width:560px){.atomic{grid-template-columns:1fr}}
+
+/* ═══ MOCKUPS DESKTOP + MOBILE ═══ */
+.opt1-grid{display:grid;grid-template-columns:2fr 1fr;gap:clamp(40px,6vw,80px);align-items:center}
+.opt1-frame-desktop{border:1px solid var(--line);border-radius:12px;overflow:auto;width:100%;aspect-ratio:1440/900;max-height:60vh;background:#1c1c1c;position:relative}
+.opt1-frame-desktop iframe{width:100%;height:100%;border:none;display:block}
+.opt1-frame-mobile{width:100%;max-width:360px;margin:0 auto;border:1px solid var(--line);border-radius:12px;overflow:auto;aspect-ratio:360/800;max-height:60vh;background:#1c1c1c;position:relative}
+.opt1-frame-mobile iframe{width:100%;height:100%;border:none;display:block}
+@keyframes pulse-hand{0%,100%{opacity:1;transform:translateY(0)}50%{opacity:.6;transform:translateY(-8px)}}
+@keyframes glow{0%,100%{box-shadow:0 0 20px rgba(224,255,51,.6)}50%{box-shadow:0 0 30px rgba(224,255,51,.8)}}
+.scroll-hint{position:absolute;top:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:12px;padding:8px 18px;font-size:13px;font-weight:600;color:var(--accent);background:rgba(255,255,255,.25);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.4);border-radius:8px;pointer-events:none;z-index:100;animation:glow 2s ease-in-out infinite;transition:opacity .3s ease;white-space:nowrap}
+.scroll-hint span:first-child{font-size:20px;animation:pulse-hand 1.5s ease-in-out infinite}
+.scroll-hint.hidden{display:none}
+.label{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-3);margin-bottom:12px}
+@media(max-width:1024px){.opt1-grid{grid-template-columns:1fr}}
 
 /* ═══ 04 PROCESSO — master-detail (padrão "Sobre mim" da home) ═══ */
 .proc-card{display:grid;grid-template-columns:380px 1fr;min-height:640px;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff;margin-top:var(--space-lg)}
@@ -250,37 +299,54 @@ p{text-wrap:balance}
 .lb-imgs{display:flex;gap:16px;align-items:center;justify-content:center;max-width:100%;max-height:100%}
 .lb-imgs img{max-width:100%;max-height:86vh;width:auto;height:auto;border-radius:6px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
 .lb-close{position:absolute;top:24px;right:28px;color:rgba(255,255,255,.7);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+
+/* ═══ WHITE LABEL SIMULATION ═══ */
+.white-label-sim{padding:clamp(48px,5.5vw,80px) var(--m);border-top:1px solid var(--line)}
+.white-label-sim .sec-head{margin-bottom:var(--space-lg)}
+.sim-container{margin:0 calc(-1*var(--m));background:#000}
+.sim-svg-wrapper{width:100%;overflow:hidden}
+.sim-svg{width:100%;height:auto;display:block;cursor:pointer}
+.sim-content{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:flex-start;margin-top:var(--space-lg)}
+.sim-info{display:flex;flex-direction:column;gap:24px}
+.sim-card{display:none;opacity:0;animation:fadeIn .4s ease forwards}
+.sim-card.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.sim-card-title{font-size:var(--ty-copy);font-weight:600;color:var(--black);margin-bottom:12px}
+.sim-card-desc{font-size:var(--ty-small);color:var(--gray-2);line-height:1.6;margin-bottom:16px;text-wrap:balance}
+.sim-card-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.sim-card-list li{font-size:var(--ty-small);color:var(--gray-2);line-height:1.5}
+.sim-card-list li strong{color:var(--black);font-weight:600}
+/* Animação de brilho no botão 2 */
+@keyframes pulse-glow{0%,100%{filter:drop-shadow(0 0 0 rgba(224,255,51,0))}50%{filter:drop-shadow(0 0 12px rgba(224,255,51,.8))}}
+.sim-button-glow{animation:pulse-glow 2s ease-in-out infinite}
+@media(max-width:900px){.sim-content{grid-template-columns:1fr}}
 @media(max-width:900px){.proc-card{grid-template-columns:1fr}.proc-rail{border-right:none;border-bottom:1px solid var(--line)}.proc-ghost{display:none}}
 
-/* ═══ 05 BIBLIOTECA — bloco escuro ═══ */
-.lib{background:#111;color:#fff;border-radius:20px;padding:clamp(40px,5vw,64px);margin-top:var(--space-lg)}
-.lib-head{max-width:680px;margin-bottom:clamp(36px,5vw,52px)}
-.lib-head .s-index b{color:var(--accent)}
-.lib-head .s-index em{background:rgba(255,255,255,.28)}
-.lib-head .s-title{color:#fff;margin-bottom:var(--space-md)}
-.lib-lead{font-size:var(--ty-lead);font-weight:500;line-height:1.45;color:rgba(255,255,255,.62);max-width:60ch}
-.lib-stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(255,255,255,.16)}
-.lib-stat{padding:34px clamp(20px,2.4vw,40px) 0;border-right:1px solid rgba(255,255,255,.16)}
+/* ═══ 05 BIBLIOTECA — claro, hairlines ═══ */
+.lib{margin-top:0}
+.lib-head{max-width:760px;margin-bottom:var(--space-title)}
+.lib-head .s-title{margin-bottom:var(--space-md)}
+.lib-lead{font-size:var(--ty-lead);font-weight:500;line-height:1.5;color:var(--gray-1);max-width:62ch}
+.lib-stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:48px 0}
+.lib-stat{padding:0 clamp(20px,2.4vw,40px);border-right:1px solid var(--line)}
 .lib-stat:first-child{padding-left:0}
 .lib-stat:last-child{border-right:none;padding-right:0}
-.lib-num{font-size:clamp(40px,5vw,60px);font-weight:600;letter-spacing:-.03em;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums;margin-bottom:16px}
-.lib-label{font-size:var(--ty-small);line-height:1.55;color:rgba(255,255,255,.6);text-wrap:balance}
-.lib-cta{display:inline-flex;align-items:center;gap:12px;margin-top:clamp(36px,5vw,48px);padding:14px 26px;background:var(--accent);color:var(--black);font-size:var(--ty-label);font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;transition:transform .25s ease,box-shadow .25s ease}
-.lib-cta:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(224,255,51,.4)}
+.lib-num{font-size:clamp(40px,4.6vw,56px);font-weight:600;letter-spacing:-.03em;line-height:1;color:var(--black);font-variant-numeric:tabular-nums;margin-bottom:16px}
+.lib-label{font-size:var(--ty-small);line-height:1.55;color:var(--gray-2);text-wrap:balance}
+.lib-cta{display:inline-flex;align-items:center;gap:12px;margin-top:clamp(36px,5vw,48px);padding:15px 28px;background:var(--black);color:#fff;font-size:var(--ty-label);font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;transition:transform .25s ease,box-shadow .25s ease,background .25s ease,color .25s ease}
+.lib-cta:hover{transform:translateY(-2px);background:var(--accent);color:var(--black);box-shadow:0 12px 30px rgba(17,17,17,.14)}
 .lib-cta svg{width:16px;height:16px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s cubic-bezier(.16,1,.3,1)}
 .lib-cta:hover svg{transform:translateX(4px)}
-@media(max-width:760px){.lib-stats{grid-template-columns:1fr}.lib-stat{border-right:none;border-bottom:1px solid rgba(255,255,255,.16);padding:28px 0}.lib-stat:last-child{border-bottom:none}.lib-cta{width:100%;justify-content:center}}
+@media(max-width:760px){.lib-stats{grid-template-columns:1fr;padding:32px 0}.lib-stat{border-right:none;border-bottom:1px solid var(--line);padding:28px 0}.lib-stat:first-child{padding-top:0}.lib-stat:last-child{border-bottom:none;padding-bottom:0}.lib-cta{width:100%;justify-content:center}}
 
-/* ═══ 03 · tokens-stack ═══ */
-.atomic-img{margin-bottom:var(--space-title);border-radius:18px;overflow:hidden}
-.atomic-img img{width:100%;display:block}
-
-/* ═══ 06 RESULTADOS — split texto|visual ═══ */
-.res-split{display:grid;grid-template-columns:1fr 1.5fr;gap:clamp(40px,6vw,96px);align-items:start}
-.res-split .sec-head{margin-bottom:0}
-.res-visual{border-radius:18px;overflow:hidden}
-.res-visual img{width:100%;display:block}
-@media(max-width:960px){.res-split{grid-template-columns:1fr;gap:var(--space-title)}}
+/* ═══ 06 RESULTADOS — stats hairline + evidência ═══ */
+.res-statement{font-size:var(--ty-lead);font-weight:500;line-height:1.5;color:var(--gray-1);max-width:900px;margin-bottom:var(--space-title);text-wrap:balance}
+.res-stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:48px 0;margin-bottom:var(--space-title)}
+.res-stat{padding:0 32px;border-right:1px solid var(--line)}
+.res-stat:first-child{padding-left:0}
+.res-stat:last-child{border-right:none;padding-right:0}
+.res-num{font-size:clamp(40px,4.6vw,56px);font-weight:600;line-height:1;letter-spacing:-.03em;color:var(--black);margin-bottom:16px;font-variant-numeric:tabular-nums}
+.res-stat-label{font-size:var(--ty-small);line-height:1.5;color:var(--gray-2);text-wrap:balance}
 .evidence{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:16px;overflow:hidden}
 .evidence-col{padding:clamp(32px,4vw,48px);display:flex;flex-direction:column}
 .evidence-col:first-child{border-right:1px solid var(--line)}
@@ -360,6 +426,69 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
 .rv.visible{opacity:1;transform:none}
 .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* ═══ FUNDAÇÃO DE TOKENS (escopado .tkz) ═══ */
+.tkz{--pink:#E6007A;--mono:'IBM Plex Mono',monospace;margin-top:clamp(48px,6vw,80px)}
+.tkz .tk-head{margin-bottom:clamp(28px,3.5vw,44px)}
+.tkz .tk-eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-3);margin-bottom:16px}
+.tkz .tk-title{font-size:var(--ty-title);font-weight:700;letter-spacing:-.02em;line-height:1.05;text-transform:uppercase;color:var(--black)}
+.tkz .tk-lead{margin-top:16px;font-size:var(--ty-small);color:var(--gray-2);line-height:1.6}
+.tkz .tk-lead strong{font-weight:700;color:var(--black)}
+.tkz .tok-buttons{display:flex;gap:clamp(8px,1.5vw,20px);flex-wrap:wrap;margin-bottom:clamp(28px,3vw,40px)}
+.tkz .tok-btn{display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px 14px 16px;border:none;cursor:pointer;background:var(--bone);border-radius:10px;min-width:130px;flex:1;font-family:var(--font);font-size:13px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:var(--gray-3);transition:background .25s,color .25s,transform .25s,box-shadow .25s}
+.tkz .tok-btn img{width:96px;height:96px;object-fit:contain;transition:transform .3s cubic-bezier(.2,.7,.3,1)}
+.tkz .tok-btn:hover{transform:translateY(-4px);box-shadow:0 10px 26px rgba(17,17,17,.08);color:var(--gray-1)}
+.tkz .tok-btn:hover img{transform:scale(1.04)}
+.tkz .tok-btn.active{background:#fff;color:var(--black);box-shadow:0 6px 18px rgba(17,17,17,.07)}
+.tkz .gallery{display:none;padding-top:8px;animation:tkfade .4s ease}
+.tkz .gallery.active{display:block}
+@keyframes tkfade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.tkz .tok-name{font-family:var(--mono);font-size:10px;font-weight:500;color:var(--pink);letter-spacing:.01em}
+.tkz .tok-meta{font-size:11px;font-weight:600;color:var(--black)}
+.tkz .tok-sub{font-family:var(--mono);font-size:11px;color:var(--gray-3)}
+.tkz .col-grouplabel{font-size:15px;font-weight:700;color:var(--black);margin-bottom:22px}
+.tkz .col-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px 24px}
+.tkz .col-fam-title{font-size:13px;font-weight:700;color:var(--gray-3);padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:24px}
+.tkz .col-scale{display:flex;flex-direction:column}
+.tkz .col-sw{display:grid;grid-template-columns:84px 1fr;align-items:center;gap:12px;height:48px}
+.tkz .col-chip{width:100%;height:100%}
+.tkz .col-sw-meta{display:flex;flex-direction:column;gap:1px;min-width:0}
+.tkz .col-tone{font-size:8.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-3)}
+.tkz .col-block+.col-block{margin-top:clamp(32px,3.5vw,48px)}
+.tkz .op-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:24px}
+.tkz .op-item{display:flex;flex-direction:column;gap:14px}
+.tkz .op-square{width:100px;height:100px;border-radius:4px;border:1px solid var(--line)}
+.tkz .op-info{display:flex;flex-direction:column;gap:3px}
+.tkz .ty-fam-grid{display:flex;gap:80px;flex-wrap:wrap}
+.tkz .ty-fam-name{font-size:18px;font-weight:700;color:var(--black);margin-bottom:10px}
+.tkz .ty-lh-grid{display:flex;gap:64px;flex-wrap:wrap}
+.tkz .ty-lh-item,.tkz .ty-fw-item{display:flex;flex-direction:column;gap:4px}
+.tkz .ty-lh-val,.tkz .ty-fw-val{font-size:12px;color:var(--gray-2)}
+.tkz .ty-fw-grid{display:flex;gap:56px;flex-wrap:wrap}
+.tkz .ty-fw-aa{font-size:18px;color:var(--black);margin-bottom:6px}
+.tkz .ty-fw-lbl{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-3)}
+.tkz .ty-sizes{display:flex;align-items:flex-end;gap:22px;flex-wrap:wrap}
+.tkz .ty-size-item{display:flex;flex-direction:column;gap:8px}
+.tkz .ty-size-aa{color:var(--black);line-height:1;font-weight:500}
+.tkz .ty-size-info{display:flex;flex-direction:column;gap:2px}
+.tkz .ts-list{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.tkz .ts-row{display:grid;grid-template-columns:1fr 300px;gap:40px;align-items:center;padding:22px 0;border-bottom:1px solid var(--line)}
+.tkz .ts-sample{color:var(--black);letter-spacing:-.01em;text-wrap:balance}
+.tkz .ts-spec{display:flex;flex-direction:column;gap:5px}
+.tkz .ts-spec-tok{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--pink)}
+.tkz .ts-spec-meta{font-family:var(--mono);font-size:11px;color:var(--gray-3);line-height:1.4}
+.tkz .sh-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.tkz .sh-box{width:100px;height:100px;background:#fff;border-radius:4px;margin-bottom:24px}
+.tkz .sh-level{font-size:12px;font-weight:700;color:var(--black);margin:8px 0 10px}
+.tkz .sh-spec{font-family:var(--mono);font-size:11px;color:var(--gray-3);line-height:1.7}
+.tkz .bd-grid{display:flex;gap:36px;flex-wrap:wrap}
+.tkz .bd-item{display:flex;flex-direction:column;gap:14px}
+.tkz .bd-radius{width:100px;height:100px;background:var(--black)}
+.tkz .bd-width{width:100px;height:100px;background:transparent;border:0 solid var(--black)}
+.tkz .bd-info{display:flex;flex-direction:column;gap:3px}
+@media(max-width:1000px){.tkz .col-grid{grid-template-columns:repeat(2,1fr)}.tkz .op-grid{grid-template-columns:repeat(2,1fr)}.tkz .sh-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.tkz .ts-row{grid-template-columns:1fr;gap:12px}}
+@media(max-width:560px){.tkz .tok-btn{min-width:100px}.tkz .tok-btn img{width:72px;height:72px}.tkz .col-grid,.tkz .op-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -384,18 +513,18 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
 
   <!-- ═══ HERO ═══ -->
   <section class="sec hero" id="top">
+    <img class="hero-illo" src="hero-delta.png" alt="Cena do Delta Design System: tokens de cor, tipografia, elevação, opacidade e bordas" loading="eager">
     <div class="hero-inner">
       <a class="hero-back" href="index.html#work"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/><path d="M5 8h7"/></svg>Todos os projetos</a>
       <div class="hero-top">
-        <span class="hero-brand">Escale · Plataforma white-label</span>
+        <span class="hero-brand"><img src="logo-delta.svg" alt="Delta Design System"></span>
       </div>
-      <h1 class="hero-title"><span class="hero-hl">Delta</span><span>Design System</span></h1>
+      <h1 class="hero-title"><span>Design</span><span>System</span></h1>
       <div class="hero-foot">
         <div class="hero-foot-main">
-          <p class="hero-intro">O design system como redutor de custo operacional, criado para unificar mais de 20 produtos digitais em três segmentos de negócio.</p>
+          <p class="hero-intro">O design system como <span class="hl">redutor de custo</span> operacional, criado para <span class="hl">unificar mais de 20 produtos digitais</span> em três segmentos de negócio.</p>
           <div class="hero-result"><span>em produção desde 2021</span><b>20+ produtos · uma base compartilhada</b></div>
         </div>
-        <span class="hero-tag">Case de Design System · 2021</span>
       </div>
     </div>
     <div class="hero-meta">
@@ -414,35 +543,50 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
       <p class="s-lead">A Escale operava <strong>mais de 20 produtos digitais simultâneos</strong> em saúde, telecom e finanças. Cada produto tinha sua marca e dezenas de landing pages no ar, criadas por squads diferentes, sem linguagem visual compartilhada. Cada projeto começava do zero.</p>
     </div>
     <div class="prob-grid">
-      <article class="prob-card">
-        <span class="prob-num">01</span>
-        <h3 class="prob-title">Fragmentação visual</h3>
-        <p class="prob-desc">Cada produto seguia padrões próprios, sem componentes compartilhados. <strong>Zero reuso entre equipes e marcas.</strong></p>
+      <article class="prob-item">
+        <div class="prob-ico"><img src="icn_prob_frag.png" alt="Fragmentação visual"></div>
+        <div class="prob-txt">
+          <h3 class="prob-title">Fragmentação visual</h3>
+          <p class="prob-desc">Cada produto seguia padrões próprios, sem componentes compartilhados. <strong>Zero reuso entre equipes e marcas.</strong></p>
+        </div>
       </article>
-      <article class="prob-card">
-        <span class="prob-num">02</span>
-        <h3 class="prob-title">Retrabalho crônico</h3>
-        <p class="prob-desc">Designers recriavam soluções já resolvidas a cada landing nova. <strong>Cada projeto recomeçava do zero</strong>, sem biblioteca de consulta.</p>
+      <article class="prob-item">
+        <div class="prob-ico"><img src="icn_prob_retrabalho.png" alt="Retrabalho crônico"></div>
+        <div class="prob-txt">
+          <h3 class="prob-title">Retrabalho crônico</h3>
+          <p class="prob-desc">Designers recriavam soluções já resolvidas a cada landing nova. <strong>Cada projeto recomeçava do zero</strong>, sem biblioteca de consulta.</p>
+        </div>
       </article>
-      <article class="prob-card">
-        <span class="prob-num">03</span>
-        <h3 class="prob-title">Handoff sem padrão</h3>
-        <p class="prob-desc">A ambiguidade entre design e código gerava idas e vindas. Cada dev interpretava o layout à sua maneira, <strong>sem documentação</strong>.</p>
+      <article class="prob-item">
+        <div class="prob-ico"><img src="icn_prob_handoff.png" alt="Handoff sem padrão"></div>
+        <div class="prob-txt">
+          <h3 class="prob-title">Handoff sem padrão</h3>
+          <p class="prob-desc">A ambiguidade entre design e código gerava idas e vindas. Cada dev interpretava o layout à sua maneira, <strong>sem documentação</strong>.</p>
+        </div>
       </article>
-      <article class="prob-card">
-        <span class="prob-num">04</span>
-        <h3 class="prob-title">Escala sem fundação</h3>
-        <p class="prob-desc">Novos produtos herdavam inconsistências em vez de padrões. A dívida visual crescia mais rápido que a empresa, com <strong>3× mais marcas no roadmap</strong>.</p>
+      <article class="prob-item">
+        <div class="prob-ico"><img src="icn_prob_escala.png" alt="Escala sem fundação"></div>
+        <div class="prob-txt">
+          <h3 class="prob-title">Escala sem fundação</h3>
+          <p class="prob-desc">Novos produtos herdavam inconsistências em vez de padrões. A dívida visual crescia mais rápido que a empresa, com <strong>3× mais marcas no roadmap</strong>.</p>
+        </div>
       </article>
     </div>
   </section>
 
   <!-- ═══ 02 · ESTRATÉGIA DE DESIGN ═══ -->
   <section class="sec" id="estrategia">
-    <div class="sec-head">
-      <div class="s-index"><b>02</b><em></em></div>
-      <h2 class="s-title">Estratégia<br>de design</h2>
-      <p class="s-lead">Construir a fundação do zero, em quatro fases que transformaram intenção em sistema vivo, consumido por produto e engenharia.</p>
+    <div class="strat-head">
+      <div class="strat-head-left">
+        <div class="s-index"><b>02</b><em></em></div>
+        <h2 class="strat-head-title">Estratégia<br>de design</h2>
+        <p class="strat-head-intro">Construir a fundação do zero, em quatro fases que transformaram intenção em sistema vivo, consumido por produto e engenharia.</p>
+      </div>
+      <div class="strat-head-right">
+        <div class="strat-visual">
+          <img src="Deltailustra.png" alt="Arquitetura em camadas do Delta Design System" loading="lazy">
+        </div>
+      </div>
     </div>
     <div class="strat-steps">
       <article class="strat-step">
@@ -476,6 +620,31 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
       <p class="s-lead">Antes de desenhar qualquer botão, construí a arquitetura semântica. Tokens primeiro, componentes depois. Isso tornou o Delta um <strong>sistema multi-marca desde o dia zero</strong>: qualquer marca da Escale trocava a identidade inteira só substituindo tokens.</p>
     </div>
 
+    <!-- Mockups Desktop + Mobile -->
+    <div class="opt1-grid" style="margin-bottom: clamp(48px, 5.5vw, 80px);">
+      <div>
+        <div class="label">Desktop — 1440px / Scrollável</div>
+        <div class="opt1-frame-desktop">
+          <iframe id="desktop-frame" title="Desktop"></iframe>
+          <div class="scroll-hint" id="desktop-hint">
+            <span>👇</span>
+            <span>Scroll para explorar</span>
+          </div>
+        </div>
+      </div>
+      
+      <div>
+        <div class="label">Mobile — 360px / Scrollável</div>
+        <div class="opt1-frame-mobile">
+          <iframe id="mobile-frame" title="Mobile"></iframe>
+          <div class="scroll-hint" id="mobile-hint">
+            <span>👇</span>
+            <span>Scroll para explorar</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="pillars">
       <article class="pillar">
         <span class="pillar-tag">Econômico</span>
@@ -491,9 +660,6 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
       </article>
     </div>
 
-    <div class="atomic-img rv">
-      <img src="img/delta/tokens-stack.webp" alt="Arquitetura em camadas do Delta Design System: tokens, átomos, moléculas e templates" loading="lazy">
-    </div>
     <h3 class="built-sub">De tokens base até templates prontos</h3>
     <div class="atomic">
       <article class="atomic-step">
@@ -516,6 +682,147 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
         <h4 class="atomic-t">Templates</h4>
         <p class="atomic-d">Páginas prontas, consumidas pelos produtos e adaptadas por token.</p>
       </article>
+    </div>
+
+    <!-- ═══ FUNDAÇÃO DE TOKENS (galeria interativa) ═══ -->
+    <div class="tkz" id="tkz">
+      <div class="tk-head">
+        <div class="tk-eyebrow">Global design tokens</div>
+        <h3 class="tk-title">Fundação de tokens</h3>
+        <p class="tk-lead"><strong>A base semântica do Delta.</strong><br>Clique em cada token para ver a galeria de documentação:<br>cor, tipografia, elevação, opacidade e bordas.</p>
+      </div>
+
+      <div class="tok-buttons" id="tokButtons">
+        <button class="tok-btn active" data-tok="colors" onclick="showTok('colors')">
+          <img src="icn_colors.png" alt="Cores">Cores
+        </button>
+        <button class="tok-btn" data-tok="typography" onclick="showTok('typography')">
+          <img src="icn_typography.png" alt="Tipografia">Tipografia
+        </button>
+        <button class="tok-btn" data-tok="elevation" onclick="showTok('elevation')">
+          <img src="icn_shadows.png" alt="Elevação">Elevação
+        </button>
+        <button class="tok-btn" data-tok="opacity" onclick="showTok('opacity')">
+          <img src="icn_opacity.png" alt="Opacidade">Opacidade
+        </button>
+        <button class="tok-btn" data-tok="borders" onclick="showTok('borders')">
+          <img src="icn_borders.png" alt="Bordas">Bordas
+        </button>
+      </div>
+
+      <div class="gallery active" id="gal-colors">
+        <div class="col-block">
+          <div class="col-grouplabel">Delta Brand Colors</div>
+          <div class="col-grid" id="brandColors"></div>
+        </div>
+        <div class="col-block">
+          <div class="col-grouplabel">Delta Feedback Colors</div>
+          <div class="col-grid" id="feedbackColors"></div>
+        </div>
+      </div>
+
+      <div class="gallery" id="gal-typography">
+        <div class="col-block">
+          <div class="col-grouplabel">Font Family</div>
+          <div class="ty-fam-grid">
+            <div>
+              <div class="ty-fam-name">Din Ot</div>
+              <div class="tok-name">$font-family-primary</div>
+              <div class="tok-sub" style="margin-top:4px">Font Brand Primary</div>
+            </div>
+            <div>
+              <div class="ty-fam-name">Roboto</div>
+              <div class="tok-name">$font-family-secondary</div>
+              <div class="tok-sub" style="margin-top:4px">Font Brand Secondary</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-block">
+          <div class="col-grouplabel">Line Height</div>
+          <div class="ty-lh-grid" id="lineHeights"></div>
+        </div>
+        <div class="col-block">
+          <div class="col-grouplabel">Font Weight</div>
+          <div class="ty-fw-grid" id="fontWeights"></div>
+        </div>
+        <div class="col-block">
+          <div class="col-grouplabel">Font Size</div>
+          <div class="ty-sizes" id="fontSizes"></div>
+        </div>
+        <div class="col-block">
+          <div class="col-grouplabel">Text Styles</div>
+          <div class="ts-list" id="textStyles"></div>
+        </div>
+      </div>
+
+      <div class="gallery" id="gal-elevation">
+        <div class="col-block">
+          <div class="col-grouplabel">Shadow Levels</div>
+          <div class="sh-grid" id="shadowLevels"></div>
+        </div>
+      </div>
+
+      <div class="gallery" id="gal-opacity">
+        <div class="col-block">
+          <div class="col-grouplabel">Opacity Levels</div>
+          <div class="op-grid" id="opacityLevels"></div>
+        </div>
+      </div>
+
+      <div class="gallery" id="gal-borders">
+        <div class="col-block">
+          <div class="col-grouplabel">Border Radius</div>
+          <div class="bd-grid" id="borderRadius"></div>
+        </div>
+        <div class="col-block">
+          <div class="col-grouplabel">Border Widths</div>
+          <div class="bd-grid" id="borderWidths"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ WHITE LABEL SIMULATION ═══ -->
+    <div class="white-label-sim rv" style="margin-top: var(--space-title);">
+      <div class="sec-head" style="margin-bottom: var(--space-lg);">
+        <h3 class="s-title">Design System white label</h3>
+        <p class="s-lead">Clique em uma das simulações para ver como o Delta se adapta a diferentes marcas alterando apenas tokens.</p>
+      </div>
+      <div class="sim-container">
+        <div class="sim-svg-wrapper">
+          <object class="sim-svg" id="simSvg" data="simulacao.svg" type="image/svg+xml"></object>
+        </div>
+      </div>
+      <div class="sim-content">
+        <div class="sim-info">
+          <div class="sim-card sim-card-1 active">
+            <h4 class="sim-card-title">Simulação 1: Marca A</h4>
+            <p class="sim-card-desc">Paleta vibrante com destaque em amarelo. Tipografia robusta, densidade alta.</p>
+            <ul class="sim-card-list">
+              <li><strong>Tokens alterados:</strong> cores, pesos de fonte</li>
+              <li><strong>Componentes:</strong> mantêm estrutura</li>
+              <li><strong>Resultado:</strong> nova identidade visual</li>
+            </ul>
+          </div>
+          <div class="sim-card sim-card-2">
+            <h4 class="sim-card-title">Simulação 2: Marca B</h4>
+            <p class="sim-card-desc">Paleta neutra com acentos em azul. Tipografia clara, espaçamento generoso.</p>
+            <ul class="sim-card-list">
+              <li><strong>Tokens alterados:</strong> cores, espaçamento</li>
+              <li><strong>Componentes:</strong> mantêm estrutura</li>
+              <li><strong>Resultado:</strong> nova identidade visual</li>
+            </ul>
+          </div>
+          <div class="sim-card sim-card-3">
+            <h4 class="sim-card-title">Simulação 3: Marca C</h4>
+            <p class="sim-card-desc">Paleta premium com ouro e preto. Tipografia elegante, detalhes refinados.</p>
+            <ul class="sim-card-list">
+              <li><strong>Tokens alterados:</strong> cores, sombras, raios</li>
+              <li><strong>Componentes:</strong> mantêm estrutura</li>
+              <li><strong>Resultado:</strong> nova identidade visual</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -560,15 +867,16 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
 
   <!-- ═══ 06 · RESULTADOS ═══ -->
   <section class="sec" id="resultados">
-    <div class="res-split">
-      <div class="sec-head">
-        <div class="s-index"><b>06</b><em></em></div>
-        <h2 class="s-title">Resultados</h2>
-        <p class="s-lead">Um sistema que mudou como o time constrói produto: retrabalho reduzido, padrão visual coerente entre as 20+ marcas e handoff sem ambiguidade entre design e engenharia.</p>
-      </div>
-      <div class="res-visual rv">
-        <img src="img/delta/resultados.webp" alt="Delta Design System: ~47% de redução no tempo de criação de interfaces, 20+ produtos na mesma base" loading="lazy">
-      </div>
+    <div class="sec-head">
+      <div class="s-index"><b>06</b><em></em></div>
+      <h2 class="s-title">Resultados</h2>
+      <p class="s-lead" style="max-width:900px">Um sistema que mudou como o time constrói produto: retrabalho reduzido, padrão visual coerente entre as 20+ marcas e handoff sem ambiguidade entre design e engenharia.</p>
+    </div>
+    <div class="res-stats">
+      <div class="res-stat"><div class="res-num">~47<span style="font-size:.5em;font-weight:600">%</span></div><p class="res-stat-label">Redução no tempo de criação de novas interfaces.</p></div>
+      <div class="res-stat"><div class="res-num">20+</div><p class="res-stat-label">Produtos consumindo a mesma biblioteca.</p></div>
+      <div class="res-stat"><div class="res-num">A→T</div><p class="res-stat-label">Cobertura completa, de átomos a templates.</p></div>
+      <div class="res-stat"><div class="res-num">Multi</div><p class="res-stat-label">Troca de marca via tokens, sem redesenho.</p></div>
     </div>
     <div class="ba rv">
       <div class="ba-head">
@@ -604,10 +912,82 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
         <span class="more-tag">Identidade visual · Design espacial</span>
         <div class="more-name">Ford Immersion Room</div>
       </a>
+      <a class="more-card" href="case-chorume.html">
+        <div class="more-card-img"><img src="img/chorume/alfabeto-chorume.png" alt="Chorume Tipografia" loading="lazy" style="object-position:center 42%"></div>
+        <span class="more-tag">Tipografia · Identidade visual</span>
+        <div class="more-name">Chorume Tipografia</div>
+      </a>
     </div>
   </section>
 
 <div class="lb" id="procLb" aria-hidden="true"><span class="lb-close">Fechar ✕</span><div class="lb-imgs" id="procLbImgs"></div></div>
+
+<script>
+// Mockups Desktop + Mobile
+const desktopSvgData = `<svg width="1440" height="7349" viewBox="0 0 1440 7349" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect width="1440" height="7349" fill="black"/></svg>`;
+const mobileSvgData = `<svg width="360" height="7349" viewBox="0 0 360 7349" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect width="360" height="7349" fill="black"/></svg>`;
+
+// Desktop frame
+const desktopFrame = document.getElementById('desktop-frame');
+const desktopHint = document.getElementById('desktop-hint');
+
+if (desktopFrame) {
+  desktopFrame.srcdoc = `
+    <html>
+      <head>
+        <style>
+          * { margin: 0; padding: 0; }
+          body { background: white; }
+          svg { display: block; width: 100%; height: auto; }
+        </style>
+      </head>
+      <body>${desktopSvgData}</body>
+    </html>
+  `;
+
+  setTimeout(() => {
+    try {
+      const body = desktopFrame.contentDocument?.body;
+      if (body) {
+        body.addEventListener('scroll', () => {
+          if (body.scrollTop > 10) desktopHint.classList.add('hidden');
+        });
+      }
+    } catch (e) {}
+  }, 500);
+}
+
+// Mobile frame
+const mobileFrame = document.getElementById('mobile-frame');
+const mobileHint = document.getElementById('mobile-hint');
+
+if (mobileFrame) {
+  mobileFrame.srcdoc = `
+    <html>
+      <head>
+        <style>
+          * { margin: 0; padding: 0; }
+          body { background: white; }
+          svg { display: block; width: 100%; height: auto; }
+        </style>
+      </head>
+      <body>${mobileSvgData}</body>
+    </html>
+  `;
+
+  setTimeout(() => {
+    try {
+      const body = mobileFrame.contentDocument?.body;
+      if (body) {
+        body.addEventListener('scroll', () => {
+          if (body.scrollTop > 10) mobileHint.classList.add('hidden');
+        });
+      }
+    } catch (e) {}
+  }, 500);
+}
+</script>
+
 </main>
 
 <!-- CTA -->
@@ -618,7 +998,7 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
     <p class="cta-sub">Disponível para projetos remotos</p>
   </div>
   <div class="cta-menu rv d1">
-    <a href="mailto:adrianapommot@gmail.com" class="cta-row"><span class="cl">Email</span><span class="cv">adrianapommot@gmail.com</span><span class="car">→</span></a>
+    <a href="/cdn-cgi/l/email-protection#8beaeff9e2eae5eafbe4e6e6e4ffcbece6eae2e7a5e8e4e6" class="cta-row"><span class="cl">Email</span><span class="cv"><span class="__cf_email__" data-cfemail="4f2e2b3d262e212e3f202222203b0f28222e2623612c2022">[email&#160;protected]</span></span><span class="car">→</span></a>
     <a href="https://www.linkedin.com/in/adriana-pommot/" target="_blank" rel="noopener" class="cta-row"><span class="cl">LinkedIn</span><span class="cv">/in/adriana-pommot</span><span class="car">↗</span></a>
     <a href="https://wa.me/5511962724879" target="_blank" rel="noopener" class="cta-row"><span class="cl">WhatsApp</span><span class="cv">+55 11 96272-4879</span><span class="car">↗</span></a>
     <a href="#" class="cta-row"><span class="cl">Currículo</span><span class="cv">PDF · 2026</span><span class="car">↓</span></a>
@@ -627,15 +1007,15 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
 
 <footer><div class="footer-in">
   <div class="footer-grid">
-    <div><div class="footer-logo">Adriana Pommot</div><div class="footer-col-links"><a href="https://www.linkedin.com/in/adriana-pommot/" target="_blank" rel="noopener">LinkedIn</a><a href="https://instagram.com/ultraviolenta.ink" target="_blank" rel="noopener">Instagram</a><a href="mailto:adrianapommot@gmail.com">Email</a></div></div>
+    <div><div class="footer-logo">Adriana Pommot</div><div class="footer-col-links"><a href="https://www.linkedin.com/in/adriana-pommot/" target="_blank" rel="noopener">LinkedIn</a><a href="https://instagram.com/ultraviolenta.ink" target="_blank" rel="noopener">Instagram</a><a href="/cdn-cgi/l/email-protection#345550465d555a55445b59595b40745359555d581a575b59">Email</a></div></div>
     <div><div class="footer-col-title">Páginas</div><div class="footer-col-links"><a href="index.html#work">Projetos</a><a href="index.html#services">Serviços</a><a href="index.html#about">Sobre Mim</a><a href="#contact">Contato</a></div></div>
-    <div><div class="footer-col-title">Projetos</div><div class="footer-col-links"><a href="case-mrv.html">MRV</a><a href="case-ford.html">Ford</a><a href="case-delta.html">Delta DS</a></div></div>
-    <div><div class="footer-col-title">Contato</div><div class="footer-col-links"><a href="mailto:adrianapommot@gmail.com">adrianapommot@gmail.com</a><span>São Paulo, BR</span></div></div>
+    <div><div class="footer-col-title">Projetos</div><div class="footer-col-links"><a href="case-mrv.html">MRV</a><a href="case-ford.html">Ford</a><a href="case-delta.html">Delta DS</a><a href="case-chorume.html">Chorume</a></div></div>
+    <div><div class="footer-col-title">Contato</div><div class="footer-col-links"><a href="/cdn-cgi/l/email-protection#ddbcb9afb4bcb3bcadb2b0b0b2a99dbab0bcb4b1f3beb2b0"><span class="__cf_email__" data-cfemail="6a0b0e18030b040b1a050707051e2a0d070b030644090507">[email&#160;protected]</span></a><span>São Paulo, BR</span></div></div>
   </div>
   <div class="footer-bottom"><span class="footer-copy">© 2026 Adriana Pommot</span><span class="footer-copy">Design Systems, Product &amp; Visual Design</span></div>
 </div></footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* nav: abre/fecha + fecha ao clicar num link */
 (function(){var t=document.getElementById('navToggle'),f=document.getElementById('navFloat');
 if(t&&f)t.addEventListener('click',function(){f.classList.toggle('open');});
@@ -775,17 +1155,274 @@ document.querySelectorAll('.nav-menu a').forEach(function(a){a.addEventListener(
   }
   renderNav();
 })();
-/* nav: animação do carousel "Adriana Pommot" via JS (CSS :hover não funciona) */
+</script>
+
+<!-- ═══ FUNDAÇÃO DE TOKENS SCRIPT ═══ -->
+<script>
 (function(){
-  var navName = document.querySelector('.nav-name');
-  var navRoll = document.querySelector('.nav-roll');
-  if (!navName || !navRoll) return;
-  navName.addEventListener('mouseenter', function(){
-    navRoll.style.transform = 'translateY(-100%)';
+const TONES=['DARKEST','DARK','MEDIUM','LIGHT','LIGHTEST','ULTRALIGHT'];
+const TONE_SUFFIX=['darkest','dark','','light','lightest','ultralight'];
+const BRAND=[
+  {name:'Delta Brand Primary',key:'primary',colors:['#CE9A23','#F0A60D','#F9B500','#FBCB4D','#FCE08F','#FEF6DB']},
+  {name:'Delta Brand Secondary',key:'secondary',colors:['#2A2D31','#474B51','#6C7077','#9498A0','#C6C9CE','#FFFFFF']},
+  {name:'Delta Brand Neutral',key:'neutral',colors:['#000000','#5C5C5C','#9C9C9C','#C9C9C9','#ECECEC','#FFFFFF']},
+  {name:'Delta Brand Tertiary',key:'tertiary',colors:['#4B2D49','#6E4068','#8C5A84','#A87CA0','#C9A8C3','#EDE0EA']},
+];
+const FEEDBACK=[
+  {name:'Delta Critical Colors',key:'critical',colors:['#8C2A39','#B23048','#D43C56','#E37486','#F0AEB8','#FBE7EB']},
+  {name:'Delta Success Colors',key:'success',colors:['#0E7A5F','#14997D','#1CC6A0','#5CD8BD','#A6E8DA','#DFF6F0']},
+  {name:'Delta Warning Colors',key:'warning',colors:['#C2590E','#DE6F0E','#F5841A','#F8A85C','#FBCD9F','#FDEAD7']},
+  {name:'Delta Info Colors',key:'info',colors:['#0D3A6A','#15549C','#1E6FC6','#5793D8','#9FC1E8','#DBE9F6']},
+];
+const LINE_HEIGHTS=[
+  {tok:'$line-height-tight',lbl:'TIGHT',val:'100%'},
+  {tok:'$line-height-xs',lbl:'XS',val:'120%'},
+  {tok:'$line-height-distant',lbl:'DISTANT',val:'150%'},
+  {tok:'$line-height-superdistant',lbl:'SUPERDISTANT',val:'200%'},
+];
+const FONT_WEIGHTS=[
+  {tok:'$font-weight-bold',lbl:'BOLD',w:700,val:'700'},
+  {tok:'$font-weight-semibold',lbl:'SEMI BOLD',w:600,val:'600'},
+  {tok:'$font-weight-medium',lbl:'MEDIUM',w:500,val:'500'},
+  {tok:'$font-weight-regular',lbl:'REGULAR',w:400,val:'400'},
+  {tok:'$font-weight-light',lbl:'LIGHT',w:300,val:'300'},
+];
+const FONT_SIZES=[
+  {tok:'$font-size-xxxxs',lbl:'XXXXS',px:12},{tok:'$font-size-xxxs',lbl:'XXXS',px:14},
+  {tok:'$font-size-xxs',lbl:'XXS',px:16},{tok:'$font-size-xs',lbl:'XS',px:18},
+  {tok:'$font-size-sm',lbl:'SM',px:20},{tok:'$font-size-md',lbl:'MD',px:24},
+  {tok:'$font-size-lg',lbl:'LG',px:28},{tok:'$font-size-xlg',lbl:'XLG',px:32},
+  {tok:'$font-size-xxl',lbl:'XXL',px:40},{tok:'$font-size-xxxl',lbl:'XXXL',px:48},
+  {tok:'$font-size-xxxxl',lbl:'XXXXL',px:64},{tok:'$font-size-display',lbl:'DISPLAY',px:80},
+  {tok:'$font-size-giant',lbl:'GIANT',px:96},
+];
+const SHADOWS=[
+  {tok:'$shadow-flat',level:'Level 1',b:8,x:0,y:4},
+  {tok:'$shadow-soft',level:'Level 2',b:16,x:0,y:8},
+  {tok:'$shadow-raised',level:'Level 3',b:32,x:0,y:16},
+  {tok:'$shadow-spotlight',level:'Level 4',b:48,x:0,y:16},
+];
+const OPACITIES=[
+  {tok:'$opacity-level-semiopaque',lbl:'Semi Opaque',val:'0.80',o:0.80},
+  {tok:'$opacity-level-intense',lbl:'Intense',val:'0.64',o:0.64},
+  {tok:'$opacity-level-medium',lbl:'Medium',val:'0.32',o:0.32},
+  {tok:'$opacity-level-light',lbl:'Light',val:'0.16',o:0.16},
+  {tok:'$opacity-level-semitransparent',lbl:'Semi Transparent',val:'0.08',o:0.08},
+];
+const BORDER_RADIUS=[
+  {tok:'$border-radius-US',lbl:'UltraSmall',val:'4px',r:4},
+  {tok:'$border-radius-sm',lbl:'Small',val:'8px',r:8},
+  {tok:'$border-radius-md',lbl:'Medium',val:'16px',r:16},
+  {tok:'$border-radius-lg',lbl:'Large',val:'24px',r:24},
+  {tok:'$border-radius-pill',lbl:'Pill',val:'500px',r:999,pill:true},
+  {tok:'$border-radius-circular',lbl:'Circular',val:'1000px',r:999,circ:true},
+];
+const BORDER_WIDTHS=[
+  {tok:'$border-width-none',lbl:'None',val:'0px',w:0},
+  {tok:'$border-width-hairline',lbl:'Hairline',val:'1px',w:1},
+  {tok:'$border-width-thin',lbl:'Thin',val:'2px',w:2},
+  {tok:'$border-width-thick',lbl:'Thick',val:'4px',w:4},
+  {tok:'$border-width-heavy',lbl:'Heavy',val:'8px',w:8},
+];
+const TEXT_STYLES=[
+  {tok:'$text-display',sample:'Fundação de tokens',font:'Din Ot',px:48,weight:700,wlbl:'Bold',lh:'100%'},
+  {tok:'$text-heading-1',sample:'O design system como base',font:'Din Ot',px:40,weight:700,wlbl:'Bold',lh:'110%'},
+  {tok:'$text-heading-2',sample:'Componentes reutilizáveis',font:'Din Ot',px:32,weight:600,wlbl:'SemiBold',lh:'120%'},
+  {tok:'$text-heading-3',sample:'Tokens semânticos primeiro',font:'Din Ot',px:24,weight:600,wlbl:'SemiBold',lh:'120%'},
+  {tok:'$text-subtitle',sample:'Uma base compartilhada entre vinte produtos',font:'Roboto',px:20,weight:500,wlbl:'Medium',lh:'150%'},
+  {tok:'$text-body',sample:'Cada componente é documentado com sua anatomia, estados e variantes para consumo direto por engenharia.',font:'Roboto',px:16,weight:400,wlbl:'Regular',lh:'150%'},
+  {tok:'$text-body-small',sample:'Texto de apoio para legendas, descrições e notas auxiliares na interface.',font:'Roboto',px:14,weight:400,wlbl:'Regular',lh:'150%'},
+  {tok:'$text-caption',sample:'LABEL · METADADOS · TAG',font:'Roboto',px:12,weight:700,wlbl:'Bold',lh:'120%',upper:true},
+];
+function tokenName(key,i){const suf=TONE_SUFFIX[i];return '$color-'+key+(suf?'-'+suf:'');}
+function renderColorGroup(elId,families){
+  const el=document.getElementById(elId);if(!el)return;
+  el.innerHTML=families.map(fam=>{
+    const swatches=fam.colors.map((c,i)=>{
+      const border=(c.toUpperCase()==='#FFFFFF')?'border:1px solid var(--line);':'';
+      return `<div class="col-sw"><div class="col-chip" style="background:${c};${border}"></div><div class="col-sw-meta"><span class="tok-name">${tokenName(fam.key,i)}</span><span class="col-tone">${TONES[i]}</span></div></div>`;
+    }).join('');
+    return `<div class="col-fam"><div class="col-fam-title">${fam.name}</div><div class="col-scale">${swatches}</div></div>`;
+  }).join('');
+}
+function renderTokens(){
+  renderColorGroup('brandColors',BRAND);
+  renderColorGroup('feedbackColors',FEEDBACK);
+  document.getElementById('lineHeights').innerHTML=LINE_HEIGHTS.map(lh=>`<div class="ty-lh-item"><span class="tok-name">${lh.tok}</span><span class="tok-sub">${lh.lbl}</span><span class="ty-lh-val">${lh.val}</span></div>`).join('');
+  document.getElementById('fontWeights').innerHTML=FONT_WEIGHTS.map(fw=>`<div class="ty-fw-item"><span class="ty-fw-aa" style="font-weight:${fw.w}">Aa</span><span class="tok-name">${fw.tok}</span><span class="ty-fw-lbl">${fw.lbl}</span><span class="ty-fw-val">${fw.val}</span></div>`).join('');
+  document.getElementById('fontSizes').innerHTML=FONT_SIZES.map(fs=>{const d=Math.min(fs.px,44);return `<div class="ty-size-item"><span class="ty-size-aa" style="font-size:${d}px">Aa</span><div class="ty-size-info"><span class="tok-name">${fs.tok}</span><span class="ty-fw-lbl">${fs.lbl}</span><span class="ty-lh-val">${fs.px}px</span></div></div>`;}).join('');
+  document.getElementById('textStyles').innerHTML=TEXT_STYLES.map(ts=>{const d=Math.min(ts.px,40);const up=ts.upper?'text-transform:uppercase;letter-spacing:.08em;':'';return `<div class="ts-row"><div class="ts-sample" style="font-size:${d}px;font-weight:${ts.weight};${up}">${ts.sample}</div><div class="ts-spec"><span class="ts-spec-tok">${ts.tok}</span><span class="ts-spec-meta">${ts.font} · ${ts.px}px · ${ts.wlbl} · ${ts.lh}</span></div></div>`;}).join('');
+  document.getElementById('shadowLevels').innerHTML=SHADOWS.map(sh=>`<div class="sh-item"><div class="sh-box" style="box-shadow:${sh.x}px ${sh.y}px ${sh.b}px rgba(17,17,17,.16)"></div><span class="tok-name">${sh.tok}</span><div class="sh-level">${sh.level}</div><div class="sh-spec">B ${sh.b}<br>X ${sh.x}<br>Y ${sh.y}</div></div>`).join('');
+  document.getElementById('opacityLevels').innerHTML=OPACITIES.map(op=>`<div class="op-item"><div class="op-square" style="background:rgba(232,17,45,${op.o})"></div><div class="op-info"><span class="tok-name">${op.tok}</span><span class="tok-meta">${op.lbl}</span><span class="tok-sub">${op.val}</span></div></div>`).join('');
+  document.getElementById('borderRadius').innerHTML=BORDER_RADIUS.map(br=>{let s=`border-radius:${br.r}px;`;if(br.pill)s='border-radius:999px;width:160px;';if(br.circ)s='border-radius:50%;';return `<div class="bd-item"><div class="bd-radius" style="${s}"></div><div class="bd-info"><span class="tok-name">${br.tok}</span><span class="tok-meta">${br.lbl}</span><span class="tok-sub">${br.val}</span></div></div>`;}).join('');
+  document.getElementById('borderWidths').innerHTML=BORDER_WIDTHS.map(bw=>{const bg=bw.w===0?'background:var(--chip);':'';return `<div class="bd-item"><div class="bd-width" style="border-width:${bw.w}px;${bg}"></div><div class="bd-info"><span class="tok-name">${bw.tok}</span><span class="tok-meta">${bw.lbl}</span><span class="tok-sub">${bw.val}</span></div></div>`;}).join('');
+}
+window.showTok=function(tok){
+  var btns=document.getElementById('tokButtons');
+  var before=btns.getBoundingClientRect().top;
+  document.querySelectorAll('.tkz .gallery').forEach(g=>g.classList.remove('active'));
+  document.querySelectorAll('.tkz .tok-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('gal-'+tok).classList.add('active');
+  document.querySelector('.tkz .tok-btn[data-tok="'+tok+'"]').classList.add('active');
+  var after=btns.getBoundingClientRect().top;
+  window.scrollBy(0,after-before);
+};
+renderTokens();
+})();
+</script>
+
+<!-- ═══ WHITE LABEL SIMULATION SCRIPT ═══ -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const svgObject = document.getElementById('simSvg');
+  const cards = document.querySelectorAll('.sim-card');
+  
+  if (!svgObject) return;
+  
+  // Aguardar o SVG carregar
+  svgObject.addEventListener('load', function() {
+    const svgDoc = svgObject.contentDocument || svgObject.getSVGDocument();
+    if (!svgDoc) return;
+    
+    // Encontrar os 3 rects com stroke (os botões clicáveis)
+    const rects = svgDoc.querySelectorAll('rect[stroke]');
+    let clickableRects = [];
+    
+    // Filtrar rects que são os botões (x=157, 579, 1001, y=366)
+    rects.forEach(rect => {
+      const x = rect.getAttribute('x');
+      const y = rect.getAttribute('y');
+      
+      if ((x === '157' || x === '579' || x === '1001') && y === '366') {
+        clickableRects.push({rect: rect, x: x});
+      }
+    });
+    
+    // Ordenar por x para garantir ordem correta
+    clickableRects.sort((a, b) => parseInt(a.x) - parseInt(b.x));
+    
+    // Mapear rects aos índices e adicionar listeners
+    clickableRects.forEach((item, index) => {
+      const rect = item.rect;
+      rect.style.cursor = 'pointer';
+      
+      // Adicionar brilho ao segundo botão (índice 1)
+      if (index === 1) {
+        rect.classList.add('sim-button-glow');
+      }
+      
+      rect.addEventListener('click', function(e) {
+        e.stopPropagation();
+        
+        // Remover active de todos
+        cards.forEach(card => card.classList.remove('active'));
+        // Adicionar ao clicado
+        if (cards[index]) {
+          cards[index].classList.add('active');
+        }
+      });
+      
+      // Hover effect
+      rect.addEventListener('mouseenter', function() {
+        rect.style.opacity = '0.8';
+      });
+      
+      rect.addEventListener('mouseleave', function() {
+        rect.style.opacity = '1';
+      });
+    });
   });
-  navName.addEventListener('mouseleave', function(){
-    navRoll.style.transform = 'translateY(0)';
-  });
+});
+</script>
+
+<!-- ═══ SEÇÃO: SITE OFICIAL WHITE LABEL ═══ -->
+<section class="sec" style="background:#fff">
+  <div class="flow">
+    <div class="sec-head">
+      <h2 class="s-title">Site oficial <span class="hero-hl">white label</span></h2>
+      <p class="s-lead">Implementação completa do design system em um site institucional navegável, testando componentes em contexto real.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(48px,6vw,72px);margin-top:var(--space-title)">
+      
+      <!-- Desktop -->
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <div style="font-size:var(--ty-copy);font-weight:600;color:var(--black);text-transform:uppercase;letter-spacing:.05em">Versão desktop</div>
+        <div style="position:relative;background:#f9f9f9;border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:24px;aspect-ratio:16/9;max-height:480px">
+          <iframe 
+            src="desktop-siteoficial.svg"
+            style="width:100%;height:100%;border:none;background:#000"
+            title="Desktop - Site Oficial White Label">
+          </iframe>
+        </div>
+        <p style="font-size:var(--ty-small);line-height:1.6;color:var(--gray-2);text-wrap:balance">Viewport completo em 1440px. Navegação, hero, seções e interatividade padrão do design system implementados.</p>
+      </div>
+
+      <!-- Mobile -->
+      <div style="display:flex;flex-direction:column;gap:24px">
+        <div style="font-size:var(--ty-copy);font-weight:600;color:var(--black);text-transform:uppercase;letter-spacing:.05em">Versão mobile</div>
+        <div style="position:relative;background:#f9f9f9;border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:24px">
+          <div style="max-width:360px;width:100%">
+            <iframe 
+              src="mobile-siteoficial.svg"
+              style="width:100%;height:auto;border:none;background:#000;display:block"
+              title="Mobile - Site Oficial White Label">
+            </iframe>
+          </div>
+        </div>
+        <p style="font-size:var(--ty-small);line-height:1.6;color:var(--gray-2);text-wrap:balance">Viewport 360px. Layouts responsivos, menu colapsável e componentes otimizados para toque.</p>
+      </div>
+
+    </div>
+
+    <!-- Destaques -->
+    <div style="margin-top:clamp(48px,6vw,72px);display:grid;grid-template-columns:repeat(2,1fr);gap:var(--gut);border-top:1px solid var(--line);padding-top:clamp(48px,5.5vw,80px)">
+      
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font-size:var(--ty-label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-3)">Componentes testados</span>
+        <ul style="font-size:var(--ty-copy);line-height:1.8;color:var(--gray-2);list-style:none;padding:0;margin:0">
+          <li style="margin-bottom:8px">✓ Navegação e paginação</li>
+          <li style="margin-bottom:8px">✓ Botões e estados interativos</li>
+          <li style="margin-bottom:8px">✓ Cards e grids responsivos</li>
+          <li>✓ Tipografia e espaçamento</li>
+        </ul>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font-size:var(--ty-label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-3)">Validações</span>
+        <ul style="font-size:var(--ty-copy);line-height:1.8;color:var(--gray-2);list-style:none;padding:0;margin:0">
+          <li style="margin-bottom:8px">✓ Acessibilidade (WCAG AA)</li>
+          <li style="margin-bottom:8px">✓ Performance desktop/mobile</li>
+          <li style="margin-bottom:8px">✓ Compatibilidade cross-browser</li>
+          <li>✓ Tokens herdados corretamente</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+</script>
+
+<!-- ═══ HERO ILLO ALIGN ═══ -->
+<script>
+(function(){
+  function alignHeroIllo(){
+    var hero=document.querySelector('.hero');
+    var illo=document.querySelector('.hero-illo');
+    var meta=document.querySelector('.hero-meta');
+    if(!hero||!illo||!meta) return;
+    if(getComputedStyle(illo).display==='none'){ illo.style.top=''; return; }
+    var h=hero.getBoundingClientRect(), m=meta.getBoundingClientRect();
+    var lineY=m.top-h.top;
+    var ih=illo.getBoundingClientRect().height;
+    illo.style.top=(lineY-ih)+'px';
+  }
+  window.addEventListener('load',alignHeroIllo);
+  window.addEventListener('resize',alignHeroIllo);
+  document.addEventListener('DOMContentLoaded',alignHeroIllo);
+  setTimeout(alignHeroIllo,300);
 })();
 </script>
 </body>
