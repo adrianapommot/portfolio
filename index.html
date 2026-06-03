@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="home.css" />
+<link rel="stylesheet" href="home.css?v=2" />
 </head>
 <body>
 
@@ -185,7 +185,7 @@
   var PROJECTS = [
     { num: "01", name: "MRV", sub: "Fluxo de Renegociação", img: "img/mrv/overview-grid.webp", pos: "center 50%", tags: ["Product Design", "Fintech", "Design System"], href: "case-mrv.html" },
     { num: "02", name: "Ford", sub: "Immersion Room", img: "img/ford/hero-room.webp", pos: "center 48%", tags: ["Identidade Visual", "Design Espacial"], href: "case-ford.html" },
-    { num: "03", name: "Delta", sub: "Design System", img: "img/delta/Delta_thumb1.png", pos: "center 50%", tags: ["Design System", "Tokens"], href: "case-delta.html" },
+    { num: "03", name: "Delta", sub: "Design System", img: "img/delta/Delta_thumb1.png", pos: "center 50%", tags: ["Design System", "Tokens"], href: "case-delta.html", logo: "img/delta/logo-delta.svg" },
   ];
 
   var ICONS = {
@@ -249,8 +249,8 @@
       '<span class="poster-scrim"></span>' +
       '<span class="poster-top"><span class="poster-num">' + p.num + " / 04</span>" +
       '<span class="poster-tags">' + p.tags.map(function (t) { return "<span>" + esc(t) + "</span>"; }).join("") + "</span></span>" +
-      '<span class="poster-bot"><span class="poster-name">' + esc(p.name) + "</span>" +
-      '<span class="poster-sub"><b>' + esc(p.sub) + '</b><span class="poster-cta">Ver case →</span></span></span></a>';
+      '<div class="poster-bot">' + (p.logo ? '<img class="poster-logo" src="' + p.logo + '" alt="' + esc(p.name) + '">' : '<span class="poster-name">' + esc(p.name) + '</span>') +
+      '<span class="poster-sub"><b>' + esc(p.sub) + '</b><span class="poster-cta">Ver case →</span></span></div></a>';
   }).join("");
 
   // services
