@@ -18,6 +18,7 @@
   --font:'Plus Jakarta Sans',sans-serif; --font-display:'Plus Jakarta Sans',sans-serif;
   --m:clamp(24px,5vw,64px); --gut:24px; --max-w:1440px;
   --space-md:24px; --space-lg:36px; --space-title:72px; --space-section:112px;
+  --s1:8px; --s2:16px; --s3:24px; --s4:clamp(32px,3.4vw,40px); --s5:clamp(48px,5vw,64px); --s6:clamp(72px,8vw,104px);
   --ty-display:clamp(54px,5.6vw,74px); --ty-title:clamp(32px,3.4vw,48px); --ty-lead:clamp(16px,1.4vw,19px);
   --ty-copy:17px; --ty-small:14px; --ty-metric:32px; --ty-label:12px;
 }
@@ -46,11 +47,11 @@ p{text-wrap:balance}
 .s-label{font-size:var(--ty-label);font-weight:700;line-height:1.3;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-3)}
 
 /* ═══ NAV (idêntica à home) ═══ */
-.nav-name{position:fixed;top:36px;left:var(--m);z-index:100;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--black);background:var(--accent);padding:9px 20px;border-radius:999px;overflow:hidden}
+.nav-name{position:absolute;top:40px;left:var(--m);z-index:30;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--black)}
 .nav-name span{display:block;line-height:1;white-space:nowrap;transition:transform .45s cubic-bezier(.19,1,.22,1)}
 .nav-name:hover span{transform:translateY(-100%)}
 .nav-roll{display:block;overflow:hidden;height:1em}
-.nav-float{position:fixed;top:36px;right:var(--m);z-index:100;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.nav-float{position:fixed;top:24px;right:var(--m);z-index:30;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
 .nav-toggle{width:50px;height:50px;border-radius:50%;border:1px solid var(--accent);cursor:pointer;background:var(--accent);display:flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s}
 .nav-toggle:hover{background:var(--black);border-color:var(--black)}
 .nav-toggle:hover svg{stroke:#fff}
@@ -111,6 +112,27 @@ p{text-wrap:balance}
 .sec-head{max-width:760px;margin-bottom:var(--space-title)}
 .sec-head .s-title{margin-bottom:var(--space-md)}
 
+/* ═══ ABERTURA / STATEMENT (suíço, herda o grid do case) ═══ */
+.intro-grid{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--gut)}
+.intro-over{grid-column:1/8;align-self:end}
+.intro-over .s-index{margin-bottom:0}
+.intro-idx{grid-column:11/13;text-align:right;align-self:end}
+.intro-idx span{font-size:var(--ty-label);font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-4)}
+.intro-rule{grid-column:1/-1;height:1px;background:var(--line);margin:20px 0 clamp(40px,4vw,56px)}
+.intro-statement{grid-column:1/8;font-size:clamp(26px,2.9vw,40px);font-weight:400;line-height:1.16;letter-spacing:-.016em;color:var(--black);text-wrap:balance}
+.intro-side{grid-column:9/13;align-self:start;display:flex;flex-direction:column;gap:18px}
+.intro-micro{font-size:var(--ty-small);font-weight:400;line-height:1.72;color:var(--gray-2);text-wrap:balance}
+.intro-micro strong{font-weight:600;color:var(--gray-1)}
+.intro-pivot{grid-column:1/8;margin-top:clamp(48px,5vw,72px);align-self:end}
+.intro-pivot .s-lead{margin-bottom:16px}
+.intro-mark{display:block;width:38px;height:3px;background:var(--accent)}
+.intro-role{grid-column:9/13;margin-top:clamp(48px,5vw,72px);display:flex;flex-direction:column;gap:12px}
+@media(max-width:860px){
+  .intro-over,.intro-statement,.intro-pivot{grid-column:1/9}
+  .intro-idx{grid-column:1/13;text-align:left;margin-top:10px}
+  .intro-side,.intro-role{grid-column:1/13;margin-top:32px}
+}
+
 /* ═══ 01 CONTEXTO & PROBLEMA — ícones lúdicos, sem cards ═══ */
 .prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,4.5vw,56px) clamp(48px,6vw,88px);margin-top:8px}
 .prob-item{display:grid;grid-template-columns:auto 1fr;gap:clamp(18px,2vw,28px);align-items:start}
@@ -142,7 +164,7 @@ p{text-wrap:balance}
 @media(max-width:760px){.strat-step{grid-template-columns:1fr;column-gap:0;row-gap:10px}.strat-n{margin-bottom:4px}.strat-t{grid-row:2}.strat-d{grid-column:1;grid-row:3;margin-top:6px}.strat-step:hover{padding-left:0}}
 
 /* ═══ 03 O QUE CONSTRUÍ — pilares + atomic + insights ═══ */
-.built-lead{max-width:720px;margin-bottom:var(--space-title)}
+.built-lead{max-width:720px;margin-bottom:var(--s5)}
 .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gut);margin-bottom:var(--space-title)}
 .pillar{position:relative;background:#fff;border:1px solid var(--line);border-radius:18px;padding:32px 28px;display:flex;flex-direction:column;gap:14px;overflow:hidden;box-shadow:0 1px 2px rgba(17,17,17,.04),0 10px 30px rgba(17,17,17,.03);transition:transform .28s cubic-bezier(.2,.7,.3,1),box-shadow .28s ease}
 .pillar::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--line);transition:background .25s}
@@ -167,9 +189,9 @@ p{text-wrap:balance}
 .opt1-frame-mobile iframe{width:100%;height:100%;border:none;display:block}
 @keyframes pulse-hand{0%,100%{opacity:1;transform:translateY(0)}50%{opacity:.6;transform:translateY(-8px)}}
 @keyframes glow{0%,100%{box-shadow:0 0 20px rgba(224,255,51,.6)}50%{box-shadow:0 0 30px rgba(224,255,51,.8)}}
-.scroll-hint{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:12px;padding:8px 18px;font-size:13px;font-weight:600;color:var(--accent);background:rgba(0,0,0,.55);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.15);border-radius:8px;pointer-events:none;z-index:100;animation:glow 2s ease-in-out infinite;transition:opacity .4s ease;white-space:nowrap}
+.scroll-hint{position:absolute;top:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:12px;padding:8px 18px;font-size:13px;font-weight:600;color:var(--accent);background:rgba(255,255,255,.25);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.4);border-radius:8px;pointer-events:none;z-index:100;animation:glow 2s ease-in-out infinite;transition:opacity .3s ease;white-space:nowrap}
 .scroll-hint span:first-child{font-size:20px;animation:pulse-hand 1.5s ease-in-out infinite}
-.scroll-hint.hidden{opacity:0}
+.scroll-hint.hidden{display:none}
 .label{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-3);margin-bottom:12px}
 @media(max-width:1024px){.opt1-grid{grid-template-columns:1fr}}
 
@@ -300,6 +322,35 @@ p{text-wrap:balance}
 .lb-imgs img{max-width:100%;max-height:86vh;width:auto;height:auto;border-radius:6px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
 .lb-close{position:absolute;top:24px;right:28px;color:rgba(255,255,255,.7);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
 
+/* ═══ 03 · O QUE CONSTRUÍ — abas (estrutura E) ═══ */
+.wb-tabs{display:flex;gap:clamp(20px,3vw,44px);border-bottom:1px solid var(--line);margin-bottom:var(--s4);flex-wrap:wrap}
+.wb-tab{display:flex;align-items:baseline;gap:8px;text-align:left;background:none;border:none;cursor:pointer;padding:0 0 16px;border-bottom:2px solid transparent;margin-bottom:-1px;color:var(--gray-3);transition:color .2s,border-color .2s}
+.wb-tab .n{font-size:11px;font-weight:600;color:var(--gray-4);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.wb-tab .t{font-size:clamp(16px,1.5vw,19px);font-weight:600;letter-spacing:-.01em}
+.wb-tab:hover{color:var(--gray-1)}
+.wb-tab.on{color:var(--black);border-bottom-color:var(--black)}
+.wb-tab.on .n{color:var(--black)}
+.wb-panel{display:none}
+.wb-panel.on{display:block;animation:wbfade .35s ease}
+@keyframes wbfade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.wb-head{max-width:820px;margin-bottom:var(--s3)}
+.wb-kicker{font-size:var(--ty-label);font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--gray-4);margin-bottom:14px}
+.wb-title{font-size:clamp(24px,2.6vw,36px);font-weight:400;line-height:1.16;letter-spacing:-.015em;color:var(--black);text-wrap:balance}
+.wb-intro{margin-top:0;max-width:64ch}
+#construi .s-index{margin-bottom:var(--s2)}
+#construi .sec-head .s-title{margin-bottom:var(--s2)}
+.wb-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:var(--s4)}
+.wb-chip{font-size:14px;font-weight:500;color:var(--gray-1);border:1px solid var(--line);border-radius:999px;padding:7px 15px;background:#fff}
+.wb-note{font-size:var(--ty-small);line-height:1.7;color:var(--gray-2);max-width:64ch;margin-top:clamp(24px,3vw,32px)}
+.wb-gov{margin-top:4px}
+.wb-gov .s-label{display:block;margin-bottom:16px}
+.wb-items{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:0 48px;border-top:1px solid var(--line)}
+.wb-items li{font-size:var(--ty-copy);color:var(--gray-1);padding:14px 0;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;text-wrap:pretty}
+.wb-items li::before{content:"";width:6px;height:6px;background:var(--accent);flex:0 0 auto}
+/* sim dentro da aba: remove padding/borda da seção, mantém o full-bleed preto */
+.wb-panel .white-label-sim{padding:0;border-top:none}
+@media(max-width:760px){.wb-items{grid-template-columns:1fr}}
+
 /* ═══ WHITE LABEL SIMULATION ═══ */
 .white-label-sim{padding:clamp(48px,5.5vw,80px) var(--m);border-top:1px solid var(--line)}
 .white-label-sim .sec-head{margin-bottom:var(--space-lg)}
@@ -428,7 +479,7 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
 
 /* ═══ FUNDAÇÃO DE TOKENS (escopado .tkz) ═══ */
-.tkz{--pink:#E6007A;--mono:'IBM Plex Mono',monospace;margin-top:clamp(48px,6vw,80px)}
+.tkz{--pink:#E6007A;--mono:'IBM Plex Mono',monospace;margin-top:0}
 .tkz .tk-head{margin-bottom:clamp(28px,3.5vw,44px)}
 .tkz .tk-eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-3);margin-bottom:16px}
 .tkz .tk-title{font-size:var(--ty-title);font-weight:700;letter-spacing:-.02em;line-height:1.05;text-transform:uppercase;color:var(--black)}
@@ -436,88 +487,103 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
 .tkz .tk-lead strong{font-weight:700;color:var(--black)}
 .tkz .tok-buttons{display:flex;gap:clamp(8px,1.5vw,20px);flex-wrap:wrap;margin-bottom:clamp(28px,3vw,40px)}
 .tkz .tok-btn{display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px 14px 16px;border:none;cursor:pointer;background:var(--bone);border-radius:10px;min-width:130px;flex:1;font-family:var(--font);font-size:13px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:var(--gray-3);transition:background .25s,color .25s,transform .25s,box-shadow .25s}
-.tkz .tok-btn img{width:96px;height:96px;object-fit:contain;mix-blend-mode:multiply;transition:transform .3s cubic-bezier(.2,.7,.3,1)}
+.tkz .tok-btn img{width:96px;height:96px;object-fit:contain;transition:transform .3s cubic-bezier(.2,.7,.3,1)}
 .tkz .tok-btn:hover{transform:translateY(-4px);box-shadow:0 10px 26px rgba(17,17,17,.08);color:var(--gray-1)}
 .tkz .tok-btn:hover img{transform:scale(1.04)}
 .tkz .tok-btn.active{background:#fff;color:var(--black);box-shadow:0 6px 18px rgba(17,17,17,.07)}
 .tkz .gallery{display:none;padding-top:8px;animation:tkfade .4s ease}
 .tkz .gallery.active{display:block}
 @keyframes tkfade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-.tkz .tok-name{font-family:var(--mono);font-size:10px;font-weight:500;color:var(--pink);letter-spacing:.01em}
+.tkz .tok-name{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--pink);letter-spacing:.01em}
 .tkz .tok-meta{font-size:11px;font-weight:600;color:var(--black)}
 .tkz .tok-sub{font-family:var(--mono);font-size:11px;color:var(--gray-3)}
-.tkz .col-grouplabel{font-size:15px;font-weight:700;color:var(--black);margin-bottom:22px}
-.tkz .col-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px 24px}
-.tkz .col-fam-title{font-size:13px;font-weight:700;color:var(--gray-3);padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:24px}
+.tkz .col-grouplabel{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-3);margin-bottom:22px}
+.tkz .col-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px 20px}
+.tkz .col-fam-title{font-size:12px;font-weight:700;color:var(--gray-3);padding-bottom:8px;border-bottom:1px solid var(--line);margin-bottom:8px}
 .tkz .col-scale{display:flex;flex-direction:column}
-.tkz .col-sw{display:grid;grid-template-columns:84px 1fr;align-items:center;gap:12px;height:48px}
-.tkz .col-chip{width:100%;height:100%}
-.tkz .col-sw-meta{display:flex;flex-direction:column;gap:1px;min-width:0}
-.tkz .col-tone{font-size:8.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-3)}
-.tkz .col-block+.col-block{margin-top:clamp(32px,3.5vw,48px)}
-.tkz .op-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:24px}
-.tkz .op-item{display:flex;flex-direction:column;gap:14px}
-.tkz .op-square{width:100px;height:100px;border-radius:4px;border:1px solid var(--line)}
+.tkz .col-sw{display:grid;grid-template-columns:60px 1fr;align-items:center;gap:10px;height:26px}
+.tkz .col-chip{width:100%;height:16px;border-radius:2px}
+.tkz .col-sw-meta{display:flex;flex-direction:row;align-items:baseline;gap:8px;min-width:0;overflow:hidden}
+.tkz .col-tone{display:none}
+.tkz .col-block+.col-block{margin-top:var(--s4)}
+.tkz .op-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+.tkz .op-item{display:flex;flex-direction:column;gap:10px}
+.tkz .op-square{width:76px;height:76px;border-radius:4px;border:1px solid var(--line)}
 .tkz .op-info{display:flex;flex-direction:column;gap:3px}
-.tkz .ty-fam-grid{display:flex;gap:80px;flex-wrap:wrap}
-.tkz .ty-fam-name{font-size:18px;font-weight:700;color:var(--black);margin-bottom:10px}
-.tkz .ty-lh-grid{display:flex;gap:64px;flex-wrap:wrap}
+.tkz .ty-fam-grid{display:flex;gap:48px;flex-wrap:wrap}
+.tkz .ty-fam-name{font-size:15px;font-weight:700;color:var(--black);margin-bottom:6px}
+.tkz .ty-lh-grid{display:flex;gap:40px;flex-wrap:wrap}
 .tkz .ty-lh-item,.tkz .ty-fw-item{display:flex;flex-direction:column;gap:4px}
 .tkz .ty-lh-val,.tkz .ty-fw-val{font-size:12px;color:var(--gray-2)}
-.tkz .ty-fw-grid{display:flex;gap:56px;flex-wrap:wrap}
-.tkz .ty-fw-aa{font-size:18px;color:var(--black);margin-bottom:6px}
-.tkz .ty-fw-lbl{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-3)}
-.tkz .ty-sizes{display:flex;align-items:flex-end;gap:22px;flex-wrap:wrap}
-.tkz .ty-size-item{display:flex;flex-direction:column;gap:8px}
+.tkz .ty-fw-grid{display:flex;gap:36px;flex-wrap:wrap}
+.tkz .ty-fw-aa{font-size:16px;color:var(--black);margin-bottom:4px}
+.tkz .ty-fw-lbl{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-3)}
+.tkz .ty-sizes{display:flex;align-items:flex-end;gap:18px;flex-wrap:wrap}
+.tkz .ty-size-item{display:flex;flex-direction:column;gap:6px}
 .tkz .ty-size-aa{color:var(--black);line-height:1;font-weight:500}
 .tkz .ty-size-info{display:flex;flex-direction:column;gap:2px}
 .tkz .ts-list{display:flex;flex-direction:column;border-top:1px solid var(--line)}
-.tkz .ts-row{display:grid;grid-template-columns:1fr 300px;gap:40px;align-items:center;padding:22px 0;border-bottom:1px solid var(--line)}
+.tkz .ts-row{display:grid;grid-template-columns:1fr 300px;gap:32px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}
 .tkz .ts-sample{color:var(--black);letter-spacing:-.01em;text-wrap:balance}
 .tkz .ts-spec{display:flex;flex-direction:column;gap:5px}
 .tkz .ts-spec-tok{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--pink)}
 .tkz .ts-spec-meta{font-family:var(--mono);font-size:11px;color:var(--gray-3);line-height:1.4}
-.tkz .sh-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-.tkz .sh-box{width:100px;height:100px;background:#fff;border-radius:4px;margin-bottom:24px}
-.tkz .sh-level{font-size:12px;font-weight:700;color:var(--black);margin:8px 0 10px}
+.tkz .sh-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.tkz .sh-box{width:76px;height:76px;background:#fff;border-radius:4px;margin-bottom:18px}
+.tkz .sh-level{font-size:12px;font-weight:700;color:var(--black);margin:6px 0 8px}
 .tkz .sh-spec{font-family:var(--mono);font-size:11px;color:var(--gray-3);line-height:1.7}
-.tkz .bd-grid{display:flex;gap:36px;flex-wrap:wrap}
-.tkz .bd-item{display:flex;flex-direction:column;gap:14px}
-.tkz .bd-radius{width:100px;height:100px;background:var(--black)}
-.tkz .bd-width{width:100px;height:100px;background:transparent;border:0 solid var(--black)}
+.tkz .bd-grid{display:flex;gap:24px;flex-wrap:wrap}
+.tkz .bd-item{display:flex;flex-direction:column;gap:10px}
+.tkz .bd-radius{width:76px;height:76px;background:var(--black)}
+.tkz .bd-width{width:76px;height:76px;background:transparent;border:0 solid var(--black)}
 .tkz .bd-info{display:flex;flex-direction:column;gap:3px}
 @media(max-width:1000px){.tkz .col-grid{grid-template-columns:repeat(2,1fr)}.tkz .op-grid{grid-template-columns:repeat(2,1fr)}.tkz .sh-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:760px){.tkz .ts-row{grid-template-columns:1fr;gap:12px}}
 @media(max-width:560px){.tkz .tok-btn{min-width:100px}.tkz .tok-btn img{width:72px;height:72px}.tkz .col-grid,.tkz .op-grid{grid-template-columns:1fr}}
+
+/* ═══ SEÇÕES DARK (pausa explicativa) ═══ */
+.sec.dark{background:var(--black);border-top-color:rgba(255,255,255,.12)}
+.sec.dark .s-index b{color:#fff}
+.sec.dark .s-index em{background:rgba(255,255,255,.28)}
+.sec.dark .s-title{color:#fff}
+.sec.dark .s-lead{color:rgba(255,255,255,.82)}
+.sec.dark .s-lead strong{color:#fff}
+.sec.dark .s-label{color:rgba(255,255,255,.5)}
+.sec.dark .prob-title{color:#fff}
+.sec.dark .prob-desc{color:rgba(255,255,255,.62)}
+.sec.dark .prob-desc strong{color:#fff}
+.sec.dark .intro-idx span{color:rgba(255,255,255,.45)}
+.sec.dark .intro-rule{background:rgba(255,255,255,.18)}
+.sec.dark .intro-statement{color:#fff}
+.sec.dark .intro-micro{color:rgba(255,255,255,.62)}
+.sec.dark .intro-micro strong{color:#fff}
+@media(min-width:861px){
+  .sec.dark .intro-grid{grid-template-columns:calc(50% - clamp(24px,3vw,44px)) 1fr;column-gap:calc(clamp(48px,6vw,88px) + clamp(88px,9vw,116px) + clamp(18px,2vw,28px))}
+  .sec.dark .intro-over{grid-column:1}
+  .sec.dark .intro-idx{grid-column:2;justify-self:end}
+  .sec.dark .intro-rule{grid-column:1 / -1}
+  .sec.dark .intro-statement{grid-column:1}
+  .sec.dark .intro-side{grid-column:2}
+  .sec.dark .intro-pivot{grid-column:1}
+  .sec.dark .intro-role{grid-column:2}
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<a href="index.html" class="nav-name"><span class="nav-roll"><span>Adriana Pommot</span><span>Adriana Pommot</span></span></a>
-<div class="nav-float" id="navFloat">
-  <button class="nav-toggle" id="navToggle" aria-label="Menu">
-    <svg class="icon-menu" viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
-    <svg class="icon-x" viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
-  </button>
-  <nav class="nav-menu">
-    <a href="cv-adriana-pommot.pdf" download class="nav-cta">Download CV<svg viewBox="0 0 16 16"><path d="M8 3v8M4 8l4 4 4-4"/><path d="M3 13h10"/></svg></a>
-    <a href="index.html#work" class="nav-link">Projetos</a>
-    <a href="index.html#services" class="nav-link">Serviços</a>
-    <a href="index.html#about" class="nav-link">Sobre Mim</a>
-    <a href="#contact" class="nav-link">Contato</a>
-  </nav>
-</div>
+<!-- NAV (componente compartilhado) -->
+<site-nav></site-nav>
+<script src="site-nav.js"></script>
 
 <main class="flow">
 
   <!-- ═══ HERO ═══ -->
   <section class="sec hero" id="top">
-    <img class="hero-illo" src="img/delta/hero-delta.png" alt="Cena do Delta Design System: tokens de cor, tipografia, elevação, opacidade e bordas" loading="eager">
+    <img class="hero-illo" src="hero-delta.png" alt="Cena do Delta Design System: tokens de cor, tipografia, elevação, opacidade e bordas" loading="eager">
     <div class="hero-inner">
       <a class="hero-back" href="index.html#work"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/><path d="M5 8h7"/></svg>Todos os projetos</a>
       <div class="hero-top">
-        <span class="hero-brand"><img src="img/delta/logo-delta.svg" alt="Delta Design System"></span>
+        <span class="hero-brand"><img src="logo-delta.svg" alt="Delta Design System"></span>
       </div>
       <h1 class="hero-title"><span>Design</span><span>System</span></h1>
       <div class="hero-foot">
@@ -535,37 +601,61 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
     </div>
   </section>
 
+  <!-- ═══ ABERTURA · DELTA DESIGN SYSTEM ═══ -->
+  <section class="sec dark" id="intro">
+    <div class="intro-grid rv">
+      <div class="intro-over"><div class="s-index"><b>Delta Design System</b><em></em></div></div>
+      <div class="intro-idx"><span>Contexto</span></div>
+      <div class="intro-rule"></div>
+
+      <h2 class="intro-statement">Uma plataforma de design capaz de escalar múltiplas marcas, produtos e equipes.</h2>
+      <div class="intro-side">
+        <p class="intro-micro">À medida que a Escale crescia, novas marcas e frentes de negócio surgiam em ritmos diferentes. Cada equipe decidia de forma independente, o que gerava inconsistências e retrabalho.</p>
+        <p class="intro-micro">O desafio não era apenas criar componentes. Era estabelecer uma <strong>linguagem comum</strong> capaz de conectar pessoas, produtos e marcas em uma operação em expansão.</p>
+      </div>
+
+      <div class="intro-pivot">
+        <p class="s-lead">Foi nesse contexto que nasceu o Delta.</p>
+        <span class="intro-mark"></span>
+      </div>
+      <div class="intro-role">
+        <span class="s-label">Meu papel</span>
+        <p class="intro-micro">Liderei a construção do design system desde a fundação, definindo os ativos visuais, a estratégia, a governança e os processos que garantiriam sua adoção ao longo do tempo.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══ 01 · CONTEXTO & PROBLEMA ═══ -->
   <section class="sec" id="contexto">
     <div class="sec-head">
       <div class="s-index"><b>01</b><em></em></div>
-      <h2 class="s-title">Contexto<br>e problema</h2>
-      <p class="s-lead">A Escale operava <strong>mais de 20 produtos digitais simultâneos</strong> em saúde, telecom e finanças. Cada produto tinha sua marca e dezenas de landing pages no ar, criadas por squads diferentes, sem linguagem visual compartilhada. Cada projeto começava do zero.</p>
+      <h2 class="s-title">Entendendo o desafio</h2>
+      <p class="s-lead">Antes de desenhar qualquer componente, era necessário compreender como os produtos eram construídos, onde estavam os pontos de atrito e quais decisões precisavam ser padronizadas. Mais do que um problema visual, era um <strong>problema de operação</strong>. Mapeamos então os principais desafios.</p>
     </div>
     <div class="prob-grid">
       <article class="prob-item">
-        <div class="prob-ico"><img src="img/delta/icn_prob_frag.png" alt="Fragmentação visual"></div>
+        <div class="prob-ico"><img src="icn_prob_frag.png" alt="Fragmentação visual"></div>
         <div class="prob-txt">
           <h3 class="prob-title">Fragmentação visual</h3>
           <p class="prob-desc">Cada produto seguia padrões próprios, sem componentes compartilhados. <strong>Zero reuso entre equipes e marcas.</strong></p>
         </div>
       </article>
       <article class="prob-item">
-        <div class="prob-ico"><img src="img/delta/icn_prob_retrabalho.png" alt="Retrabalho crônico"></div>
+        <div class="prob-ico"><img src="icn_prob_retrabalho.png" alt="Retrabalho crônico"></div>
         <div class="prob-txt">
           <h3 class="prob-title">Retrabalho crônico</h3>
           <p class="prob-desc">Designers recriavam soluções já resolvidas a cada landing nova. <strong>Cada projeto recomeçava do zero</strong>, sem biblioteca de consulta.</p>
         </div>
       </article>
       <article class="prob-item">
-        <div class="prob-ico"><img src="img/delta/icn_prob_handoff.png" alt="Handoff sem padrão"></div>
+        <div class="prob-ico"><img src="icn_prob_handoff.png" alt="Handoff sem padrão"></div>
         <div class="prob-txt">
           <h3 class="prob-title">Handoff sem padrão</h3>
           <p class="prob-desc">A ambiguidade entre design e código gerava idas e vindas. Cada dev interpretava o layout à sua maneira, <strong>sem documentação</strong>.</p>
         </div>
       </article>
       <article class="prob-item">
-        <div class="prob-ico"><img src="img/delta/icn_prob_escala.png" alt="Escala sem fundação"></div>
+        <div class="prob-ico"><img src="icn_prob_escala.png" alt="Escala sem fundação"></div>
         <div class="prob-txt">
           <h3 class="prob-title">Escala sem fundação</h3>
           <p class="prob-desc">Novos produtos herdavam inconsistências em vez de padrões. A dívida visual crescia mais rápido que a empresa, com <strong>3× mais marcas no roadmap</strong>.</p>
@@ -575,40 +665,26 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
   </section>
 
   <!-- ═══ 02 · ESTRATÉGIA DE DESIGN ═══ -->
-  <section class="sec" id="estrategia">
-    <div class="strat-head">
-      <div class="strat-head-left">
-        <div class="s-index"><b>02</b><em></em></div>
-        <h2 class="strat-head-title">Estratégia<br>de design</h2>
-        <p class="strat-head-intro">Construir a fundação do zero, em quatro fases que transformaram intenção em sistema vivo, consumido por produto e engenharia.</p>
+  <section class="sec dark" id="estrategia">
+    <div class="intro-grid rv">
+      <div class="intro-over"><div class="s-index"><b>02 · Definindo a estratégia</b><em></em></div></div>
+      <div class="intro-idx"><span>White label</span></div>
+      <div class="intro-rule"></div>
+
+      <h2 class="intro-statement">Uma plataforma capaz de atender diferentes contextos, sem abrir mão de consistência, velocidade ou qualidade.</h2>
+      <div class="intro-side">
+        <p class="intro-micro">A estratégia partiu de uma <strong>arquitetura white label</strong>: múltiplas marcas compartilham a mesma fundação enquanto preservam suas identidades próprias.</p>
+        <p class="intro-micro">Uma separação clara entre regras&nbsp;estruturais e características&nbsp;visuais, flexível o&nbsp;suficiente para evoluir junto com a empresa.</p>
       </div>
-      <div class="strat-head-right">
-        <div class="strat-visual">
-          <img src="img/delta/Deltailustra.png" alt="Arquitetura em camadas do Delta Design System" loading="lazy">
-        </div>
+
+      <div class="intro-pivot">
+        <p class="s-lead">Uma fundação. Muitas marcas.</p>
+        <span class="intro-mark"></span>
       </div>
-    </div>
-    <div class="strat-steps">
-      <article class="strat-step">
-        <span class="strat-n">01 · Auditoria visual</span>
-        <h3 class="strat-t">Mapeamento de inconsistências</h3>
-        <p class="strat-d">Auditoria nos 20+ produtos em produção, identificando padrões divergentes, componentes duplicados e lacunas de cobertura.</p>
-      </article>
-      <article class="strat-step">
-        <span class="strat-n">02 · Arquitetura de tokens</span>
-        <h3 class="strat-t">Fundação semântica</h3>
-        <p class="strat-d">Cores, tipografia, espaçamento, bordas e sombras definidos como variáveis semânticas, desacopladas de qualquer marca.</p>
-      </article>
-      <article class="strat-step">
-        <span class="strat-n">03 · Componentes</span>
-        <h3 class="strat-t">Átomos, moléculas, organismos</h3>
-        <p class="strat-d">Biblioteca construída em camadas, do botão ao template, com anatomia documentada e contratos claros para engenharia.</p>
-      </article>
-      <article class="strat-step">
-        <span class="strat-n">04 · Integração e escala</span>
-        <h3 class="strat-t">Templates em produção</h3>
-        <p class="strat-d">Templates prontos consumidos por 20+ produtos. A marca troca via token, sem redesenhar componente.</p>
-      </article>
+      <div class="intro-role">
+        <span class="s-label">O princípio</span>
+        <p class="intro-micro">Separar o que é estrutura do que é aparência, para que o sistema cresça sem se repetir.</p>
+      </div>
     </div>
   </section>
 
@@ -617,242 +693,117 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
     <div class="sec-head built-lead">
       <div class="s-index"><b>03</b><em></em></div>
       <h2 class="s-title">O que construí</h2>
-      <p class="s-lead">Antes de desenhar qualquer botão, construí a arquitetura semântica. Tokens primeiro, componentes depois. Isso tornou o Delta um <strong>sistema multi-marca desde o dia zero</strong>: qualquer marca da Escale trocava a identidade inteira só substituindo tokens.</p>
+      <p class="s-lead">A construção do Delta aconteceu em diferentes camadas, cada uma responsável por <strong>sustentar a próxima</strong>.</p>
     </div>
 
-    <!-- Mockups Desktop + Mobile -->
-    <div class="opt1-grid" style="margin-bottom: clamp(48px, 5.5vw, 80px);">
-      <div>
-        <div class="label">Desktop — 1440px / Scrollável</div>
-        <div class="opt1-frame-desktop">
-          <iframe id="desktop-frame" title="Desktop"></iframe>
-          <div class="scroll-hint" id="desktop-hint">
-            <span>👇</span>
-            <span>Scroll para explorar</span>
+    <nav class="wb-tabs" data-group="c3">
+      <button class="wb-tab on" data-group="c3" data-i="0"><span class="n">01</span><span class="t">Fundação</span></button>
+      <button class="wb-tab" data-group="c3" data-i="1"><span class="n">02</span><span class="t">Biblioteca</span></button>
+      <button class="wb-tab" data-group="c3" data-i="2"><span class="n">03</span><span class="t">White Label</span></button>
+      <button class="wb-tab" data-group="c3" data-i="3"><span class="n">04</span><span class="t">Governança</span></button>
+    </nav>
+
+    <div class="wb-panel on" data-group="c3" data-i="0">
+      <div class="wb-head">
+        <p class="wb-intro intro-micro">Estruturei os fundamentos visuais que serviriam de base para todo o ecossistema de produtos, transformando decisões visuais em regras compartilhadas e escaláveis.</p>
+      </div>
+      <div class="wb-chips"><span class="wb-chip">Tokens de cor</span><span class="wb-chip">Tipografia</span><span class="wb-chip">Espaçamentos</span><span class="wb-chip">Grids</span><span class="wb-chip">Elevação</span><span class="wb-chip">Iconografia</span><span class="wb-chip">Acessibilidade</span></div>
+      <div class="tkz" id="tkz">
+        <div class="tok-buttons" id="tokButtons">
+          <button class="tok-btn active" data-tok="colors" onclick="showTok('colors')">
+            <img src="icn_colors.png" alt="Cores">Cores
+          </button>
+          <button class="tok-btn" data-tok="typography" onclick="showTok('typography')">
+            <img src="icn_typography.png" alt="Tipografia">Tipografia
+          </button>
+          <button class="tok-btn" data-tok="elevation" onclick="showTok('elevation')">
+            <img src="icn_shadows.png" alt="Elevação">Elevação
+          </button>
+          <button class="tok-btn" data-tok="opacity" onclick="showTok('opacity')">
+            <img src="icn_opacity.png" alt="Opacidade">Opacidade
+          </button>
+          <button class="tok-btn" data-tok="borders" onclick="showTok('borders')">
+            <img src="icn_borders.png" alt="Bordas">Bordas
+          </button>
+        </div>
+
+        <div class="gallery active" id="gal-colors">
+          <div class="col-block">
+            <div class="col-grouplabel">Delta Brand Colors</div>
+            <div class="col-grid" id="brandColors"></div>
+          </div>
+          <div class="col-block">
+            <div class="col-grouplabel">Delta Feedback Colors</div>
+            <div class="col-grid" id="feedbackColors"></div>
           </div>
         </div>
-      </div>
-      
-      <div>
-        <div class="label">Mobile — 360px / Scrollável</div>
-        <div class="opt1-frame-mobile">
-          <iframe id="mobile-frame" title="Mobile"></iframe>
-          <div class="scroll-hint" id="mobile-hint">
-            <span>👇</span>
-            <span>Scroll para explorar</span>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="pillars">
-      <article class="pillar">
-        <span class="pillar-tag">Econômico</span>
-        <p class="pillar-desc">Biblioteca enxuta, sem redundância. Aperfeiçoar o existente antes de criar o novo: remover o desnecessário, não acumular.</p>
-      </article>
-      <article class="pillar">
-        <span class="pillar-tag">Versátil</span>
-        <p class="pillar-desc">Componentes flexíveis que atendiam múltiplas marcas com pouca personalização. Ponte de diálogo entre times e contextos.</p>
-      </article>
-      <article class="pillar">
-        <span class="pillar-tag">Objetivo</span>
-        <p class="pillar-desc">Documentação transparente, sem ambiguidade. Orientação pelo exemplo, não pelo manual. Cada componente auto-explicativo.</p>
-      </article>
-    </div>
-
-    <h3 class="built-sub">De tokens base até templates prontos</h3>
-    <div class="atomic">
-      <article class="atomic-step">
-        <span class="atomic-n">01 · Tokens</span>
-        <h4 class="atomic-t">Tokens</h4>
-        <p class="atomic-d">Cores, tipografia, espaçamento, sombras e bordas como variáveis semânticas.</p>
-      </article>
-      <article class="atomic-step">
-        <span class="atomic-n">02 · Átomos</span>
-        <h4 class="atomic-t">Átomos</h4>
-        <p class="atomic-d">Botões, inputs, ícones, badges e tags. Os blocos mínimos da interface.</p>
-      </article>
-      <article class="atomic-step">
-        <span class="atomic-n">03 · Moléculas</span>
-        <h4 class="atomic-t">Moléculas</h4>
-        <p class="atomic-d">Cards, navegação, formulários e modais. Combinações com intenção.</p>
-      </article>
-      <article class="atomic-step">
-        <span class="atomic-n">04 · Templates</span>
-        <h4 class="atomic-t">Templates</h4>
-        <p class="atomic-d">Páginas prontas, consumidas pelos produtos e adaptadas por token.</p>
-      </article>
-    </div>
-
-    <!-- ═══ FUNDAÇÃO DE TOKENS (galeria interativa) ═══ -->
-    <div class="tkz" id="tkz">
-      <div class="tk-head">
-        <div class="tk-eyebrow">Global design tokens</div>
-        <h3 class="tk-title">Fundação de tokens</h3>
-        <p class="tk-lead"><strong>A base semântica do Delta.</strong><br>Clique em cada token para ver a galeria de documentação:<br>cor, tipografia, elevação, opacidade e bordas.</p>
-      </div>
-
-      <div class="tok-buttons" id="tokButtons">
-        <button class="tok-btn active" data-tok="colors" onclick="showTok('colors')">
-          <img src="img/delta/icn_colors.png" alt="Cores">Cores
-        </button>
-        <button class="tok-btn" data-tok="typography" onclick="showTok('typography')">
-          <img src="img/delta/icn_typography.png" alt="Tipografia">Tipografia
-        </button>
-        <button class="tok-btn" data-tok="elevation" onclick="showTok('elevation')">
-          <img src="img/delta/icn_shadows.png" alt="Elevação">Elevação
-        </button>
-        <button class="tok-btn" data-tok="opacity" onclick="showTok('opacity')">
-          <img src="img/delta/icn_opacity.png" alt="Opacidade">Opacidade
-        </button>
-        <button class="tok-btn" data-tok="borders" onclick="showTok('borders')">
-          <img src="img/delta/icn_borders.png" alt="Bordas">Bordas
-        </button>
-      </div>
-
-      <div class="gallery active" id="gal-colors">
-        <div class="col-block">
-          <div class="col-grouplabel">Delta Brand Colors</div>
-          <div class="col-grid" id="brandColors"></div>
-        </div>
-        <div class="col-block">
-          <div class="col-grouplabel">Delta Feedback Colors</div>
-          <div class="col-grid" id="feedbackColors"></div>
-        </div>
-      </div>
-
-      <div class="gallery" id="gal-typography">
-        <div class="col-block">
-          <div class="col-grouplabel">Font Family</div>
-          <div class="ty-fam-grid">
-            <div>
-              <div class="ty-fam-name">Din Ot</div>
-              <div class="tok-name">$font-family-primary</div>
-              <div class="tok-sub" style="margin-top:4px">Font Brand Primary</div>
-            </div>
-            <div>
-              <div class="ty-fam-name">Roboto</div>
-              <div class="tok-name">$font-family-secondary</div>
-              <div class="tok-sub" style="margin-top:4px">Font Brand Secondary</div>
+        <div class="gallery" id="gal-typography">
+          <div class="col-block">
+            <div class="col-grouplabel">Font Family</div>
+            <div class="ty-fam-grid">
+              <div>
+                <div class="ty-fam-name">Din Ot</div>
+                <div class="tok-name">$font-family-primary</div>
+                <div class="tok-sub" style="margin-top:4px">Font Brand Primary</div>
+              </div>
+              <div>
+                <div class="ty-fam-name">Roboto</div>
+                <div class="tok-name">$font-family-secondary</div>
+                <div class="tok-sub" style="margin-top:4px">Font Brand Secondary</div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-block">
-          <div class="col-grouplabel">Line Height</div>
-          <div class="ty-lh-grid" id="lineHeights"></div>
-        </div>
-        <div class="col-block">
-          <div class="col-grouplabel">Font Weight</div>
-          <div class="ty-fw-grid" id="fontWeights"></div>
-        </div>
-        <div class="col-block">
-          <div class="col-grouplabel">Font Size</div>
-          <div class="ty-sizes" id="fontSizes"></div>
-        </div>
-        <div class="col-block">
-          <div class="col-grouplabel">Text Styles</div>
-          <div class="ts-list" id="textStyles"></div>
-        </div>
-      </div>
-
-      <div class="gallery" id="gal-elevation">
-        <div class="col-block">
-          <div class="col-grouplabel">Shadow Levels</div>
-          <div class="sh-grid" id="shadowLevels"></div>
-        </div>
-      </div>
-
-      <div class="gallery" id="gal-opacity">
-        <div class="col-block">
-          <div class="col-grouplabel">Opacity Levels</div>
-          <div class="op-grid" id="opacityLevels"></div>
-        </div>
-      </div>
-
-      <div class="gallery" id="gal-borders">
-        <div class="col-block">
-          <div class="col-grouplabel">Border Radius</div>
-          <div class="bd-grid" id="borderRadius"></div>
-        </div>
-        <div class="col-block">
-          <div class="col-grouplabel">Border Widths</div>
-          <div class="bd-grid" id="borderWidths"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ WHITE LABEL SIMULATION ═══ -->
-    <div class="white-label-sim rv" style="margin-top: var(--space-title);">
-      <div class="sec-head" style="margin-bottom: var(--space-lg);">
-        <h3 class="s-title">Design System white label</h3>
-        <p class="s-lead">Clique em uma das simulações para ver como o Delta se adapta a diferentes marcas alterando apenas tokens.</p>
-      </div>
-      <div class="sim-container">
-        <div class="sim-svg-wrapper">
-          <object class="sim-svg" id="simSvg" data="img/delta/Simulacao.svg" type="image/svg+xml"></object>
-        </div>
-      </div>
-      <div class="sim-content">
-        <div class="sim-info">
-          <div class="sim-card sim-card-1 active">
-            <h4 class="sim-card-title">Simulação 1: Marca A</h4>
-            <p class="sim-card-desc">Paleta vibrante com destaque em amarelo. Tipografia robusta, densidade alta.</p>
-            <ul class="sim-card-list">
-              <li><strong>Tokens alterados:</strong> cores, pesos de fonte</li>
-              <li><strong>Componentes:</strong> mantêm estrutura</li>
-              <li><strong>Resultado:</strong> nova identidade visual</li>
-            </ul>
+          <div class="col-block">
+            <div class="col-grouplabel">Line Height</div>
+            <div class="ty-lh-grid" id="lineHeights"></div>
           </div>
-          <div class="sim-card sim-card-2">
-            <h4 class="sim-card-title">Simulação 2: Marca B</h4>
-            <p class="sim-card-desc">Paleta neutra com acentos em azul. Tipografia clara, espaçamento generoso.</p>
-            <ul class="sim-card-list">
-              <li><strong>Tokens alterados:</strong> cores, espaçamento</li>
-              <li><strong>Componentes:</strong> mantêm estrutura</li>
-              <li><strong>Resultado:</strong> nova identidade visual</li>
-            </ul>
+          <div class="col-block">
+            <div class="col-grouplabel">Font Weight</div>
+            <div class="ty-fw-grid" id="fontWeights"></div>
           </div>
-          <div class="sim-card sim-card-3">
-            <h4 class="sim-card-title">Simulação 3: Marca C</h4>
-            <p class="sim-card-desc">Paleta premium com ouro e preto. Tipografia elegante, detalhes refinados.</p>
-            <ul class="sim-card-list">
-              <li><strong>Tokens alterados:</strong> cores, sombras, raios</li>
-              <li><strong>Componentes:</strong> mantêm estrutura</li>
-              <li><strong>Resultado:</strong> nova identidade visual</li>
-            </ul>
+          <div class="col-block">
+            <div class="col-grouplabel">Font Size</div>
+            <div class="ty-sizes" id="fontSizes"></div>
+          </div>
+          <div class="col-block">
+            <div class="col-grouplabel">Text Styles</div>
+            <div class="ts-list" id="textStyles"></div>
+          </div>
+        </div>
+
+        <div class="gallery" id="gal-elevation">
+          <div class="col-block">
+            <div class="col-grouplabel">Shadow Levels</div>
+            <div class="sh-grid" id="shadowLevels"></div>
+          </div>
+        </div>
+
+        <div class="gallery" id="gal-opacity">
+          <div class="col-block">
+            <div class="col-grouplabel">Opacity Levels</div>
+            <div class="op-grid" id="opacityLevels"></div>
+          </div>
+        </div>
+
+        <div class="gallery" id="gal-borders">
+          <div class="col-block">
+            <div class="col-grouplabel">Border Radius</div>
+            <div class="bd-grid" id="borderRadius"></div>
+          </div>
+          <div class="col-block">
+            <div class="col-grouplabel">Border Widths</div>
+            <div class="bd-grid" id="borderWidths"></div>
           </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- ═══ 04 · PROCESSO ═══ -->
-  <section class="sec" id="processo">
-    <div class="sec-head">
-      <div class="s-index"><b>04</b><em></em></div>
-      <h2 class="s-title">Processo</h2>
-      <p class="s-lead">Três camadas do sistema, cada uma com seus blocos de trabalho. Navegue pelas abas e itens para ver o material de cada uma.</p>
-    </div>
-    <div class="proc-card rv">
-      <div class="proc-rail">
-        <div class="proc-railhead">
-          <span class="proc-railkicker">O sistema em camadas</span>
-          <p class="proc-railhint">Três categorias, doze blocos. Passe o mouse ou toque em qualquer um para ver o conteúdo ao lado.</p>
-        </div>
-        <div class="proc-nav" id="procNav"></div>
+    <div class="wb-panel" data-group="c3" data-i="1">
+      <div class="wb-head">
+        <p class="wb-intro intro-micro">Com a fundação estabelecida, desenvolvi a biblioteca que passou a servir como referência para designers e desenvolvedores. O foco não era apenas reutilizar elementos, mas construir padrões consistentes capazes de acelerar entregas sem comprometer a experiência.</p>
       </div>
-      <div class="proc-detail" id="procDetail"></div>
-    </div>
-  </section>
-
-  <!-- ═══ 05 · BIBLIOTECA DE COMPONENTES ═══ -->
-  <section class="sec" id="biblioteca">
-    <div class="lib">
-      <div class="lib-head">
-        <div class="s-index"><b>05</b><em></em></div>
-        <h2 class="s-title">Biblioteca<br>de componentes</h2>
-        <p class="lib-lead">A entrega final do Delta vivia no Storybook: fonte única de verdade consultada por engenharia e design em todos os 20+ produtos.</p>
-      </div>
+      <div class="wb-chips"><span class="wb-chip">Componentes documentados</span><span class="wb-chip">Variantes</span><span class="wb-chip">Estados</span><span class="wb-chip">Comportamentos por cenário</span></div>
       <div class="lib-stats">
         <div class="lib-stat"><div class="lib-num">46</div><p class="lib-label">Versões em produção, desktop e mobile.</p></div>
         <div class="lib-stat"><div class="lib-num">23</div><p class="lib-label">Componentes únicos, cada um com estados e variantes completos.</p></div>
@@ -863,12 +814,75 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
         <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
     </div>
+
+    <div class="wb-panel" data-group="c3" data-i="2">
+      <div class="wb-head">
+        <p class="wb-intro intro-micro">Um dos principais diferenciais do Delta foi atender diferentes marcas a partir de uma única base. Combinando tokens e componentes compartilhados, adaptei rapidamente interfaces para telecomunicações, saúde e serviços financeiros, mantendo consistência estrutural e reduzindo custos de manutenção.</p>
+      </div>
+      <div class="wb-chips"><span class="wb-chip">Telecomunicações</span><span class="wb-chip">Saúde</span><span class="wb-chip">Serviços financeiros</span></div>
+      <div class="white-label-sim rv" style="margin-top:0">
+        <div class="sim-container">
+          <div class="sim-svg-wrapper">
+            <object class="sim-svg" id="simSvg" data="simulacao.svg" type="image/svg+xml"></object>
+          </div>
+        </div>
+        <div class="sim-content">
+          <div class="sim-info">
+            <div class="sim-card sim-card-1 active">
+              <h4 class="sim-card-title">Simulação 1: Marca A</h4>
+              <p class="sim-card-desc">Paleta vibrante com destaque em amarelo. Tipografia robusta, densidade alta.</p>
+              <ul class="sim-card-list">
+                <li><strong>Tokens alterados:</strong> cores, pesos de fonte</li>
+                <li><strong>Componentes:</strong> mantêm estrutura</li>
+                <li><strong>Resultado:</strong> nova identidade visual</li>
+              </ul>
+            </div>
+            <div class="sim-card sim-card-2">
+              <h4 class="sim-card-title">Simulação 2: Marca B</h4>
+              <p class="sim-card-desc">Paleta neutra com acentos em azul. Tipografia clara, espaçamento generoso.</p>
+              <ul class="sim-card-list">
+                <li><strong>Tokens alterados:</strong> cores, espaçamento</li>
+                <li><strong>Componentes:</strong> mantêm estrutura</li>
+                <li><strong>Resultado:</strong> nova identidade visual</li>
+              </ul>
+            </div>
+            <div class="sim-card sim-card-3">
+              <h4 class="sim-card-title">Simulação 3: Marca C</h4>
+              <p class="sim-card-desc">Paleta premium com ouro e preto. Tipografia elegante, detalhes refinados.</p>
+              <ul class="sim-card-list">
+                <li><strong>Tokens alterados:</strong> cores, sombras, raios</li>
+                <li><strong>Componentes:</strong> mantêm estrutura</li>
+                <li><strong>Resultado:</strong> nova identidade visual</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wb-panel" data-group="c3" data-i="3">
+      <div class="wb-head">
+        <p class="wb-intro intro-micro">A construção do sistema não terminava na biblioteca. Para garantir consistência ao longo do tempo, estruturei processos de governança que ajudaram o Delta a se tornar parte da cultura da organização.</p>
+      </div>
+      <div class="wb-gov">
+        <span class="s-label">Iniciativas que conduzi</span>
+        <ul class="wb-items">
+          <li>Criação da Guilda de Design</li>
+          <li>Processos de contribuição</li>
+          <li>Manuais de uso do sistema</li>
+          <li>Documentação de criação e evolução de componentes</li>
+          <li>Alinhamento entre design e desenvolvimento</li>
+          <li>Disseminação de boas práticas entre equipes</li>
+        </ul>
+      </div>
+      <p class="wb-note micro">Essas iniciativas permitiram que o sistema continuasse evoluindo de forma sustentável, mesmo diante do crescimento da empresa.</p>
+    </div>
   </section>
 
-  <!-- ═══ 06 · RESULTADOS ═══ -->
+  <!-- ═══ 04 · RESULTADOS ═══ -->
   <section class="sec" id="resultados">
     <div class="sec-head">
-      <div class="s-index"><b>06</b><em></em></div>
+      <div class="s-index"><b>04</b><em></em></div>
       <h2 class="s-title">Resultados</h2>
       <p class="s-lead" style="max-width:900px">Um sistema que mudou como o time constrói produto: retrabalho reduzido, padrão visual coerente entre as 20+ marcas e handoff sem ambiguidade entre design e engenharia.</p>
     </div>
@@ -920,34 +934,70 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
     </div>
   </section>
 
-<div class="lb" id="procLb" aria-hidden="true"><span class="lb-close">Fechar ✕</span><div class="lb-imgs" id="procLbImgs"></div></div>
-
 <script>
 // Mockups Desktop + Mobile
-function loadSvgFrame(frameId, hintId, svgPath) {
-  const frame = document.getElementById(frameId);
-  const hint = document.getElementById(hintId);
-  if (!frame) return;
+const desktopSvgData = `<svg width="1440" height="7349" viewBox="0 0 1440 7349" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect width="1440" height="7349" fill="black"/></svg>`;
+const mobileSvgData = `<svg width="360" height="7349" viewBox="0 0 360 7349" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect width="360" height="7349" fill="black"/></svg>`;
 
-  fetch(svgPath)
-    .then(r => r.text())
-    .then(svg => {
-      frame.srcdoc = `<html><head><style>* { margin: 0; padding: 0; } body { background: #fff; overflow-x: hidden; } svg { display: block; width: 100%; height: auto; }</style></head><body>${svg}</body></html>`;
-      setTimeout(() => {
-        try {
-          const doc = frame.contentDocument;
-          if (doc && hint) {
-            (doc.scrollingElement || doc.body).addEventListener('scroll', () => {
-              if ((doc.scrollingElement || doc.body).scrollTop > 10) hint.classList.add('hidden');
-            });
-          }
-        } catch (e) {}
-      }, 600);
-    });
+// Desktop frame
+const desktopFrame = document.getElementById('desktop-frame');
+const desktopHint = document.getElementById('desktop-hint');
+
+if (desktopFrame) {
+  desktopFrame.srcdoc = `
+    <html>
+      <head>
+        <style>
+          * { margin: 0; padding: 0; }
+          body { background: white; }
+          svg { display: block; width: 100%; height: auto; }
+        </style>
+      </head>
+      <body>${desktopSvgData}</body>
+    </html>
+  `;
+
+  setTimeout(() => {
+    try {
+      const body = desktopFrame.contentDocument?.body;
+      if (body) {
+        body.addEventListener('scroll', () => {
+          if (body.scrollTop > 10) desktopHint.classList.add('hidden');
+        });
+      }
+    } catch (e) {}
+  }, 500);
 }
 
-loadSvgFrame('desktop-frame', 'desktop-hint', 'desktop-siteoficial.svg');
-loadSvgFrame('mobile-frame',  'mobile-hint',  'mobile-siteoficial.svg');
+// Mobile frame
+const mobileFrame = document.getElementById('mobile-frame');
+const mobileHint = document.getElementById('mobile-hint');
+
+if (mobileFrame) {
+  mobileFrame.srcdoc = `
+    <html>
+      <head>
+        <style>
+          * { margin: 0; padding: 0; }
+          body { background: white; }
+          svg { display: block; width: 100%; height: auto; }
+        </style>
+      </head>
+      <body>${mobileSvgData}</body>
+    </html>
+  `;
+
+  setTimeout(() => {
+    try {
+      const body = mobileFrame.contentDocument?.body;
+      if (body) {
+        body.addEventListener('scroll', () => {
+          if (body.scrollTop > 10) mobileHint.classList.add('hidden');
+        });
+      }
+    } catch (e) {}
+  }, 500);
+}
 </script>
 
 </main>
@@ -960,7 +1010,7 @@ loadSvgFrame('mobile-frame',  'mobile-hint',  'mobile-siteoficial.svg');
     <p class="cta-sub">Disponível para projetos remotos</p>
   </div>
   <div class="cta-menu rv d1">
-    <a href="/cdn-cgi/l/email-protection#8beaeff9e2eae5eafbe4e6e6e4ffcbece6eae2e7a5e8e4e6" class="cta-row"><span class="cl">Email</span><span class="cv"><span class="__cf_email__" data-cfemail="4f2e2b3d262e212e3f202222203b0f28222e2623612c2022">[email&#160;protected]</span></span><span class="car">→</span></a>
+    <a href="mailto:adrianapommot@gmail.com" class="cta-row"><span class="cl">Email</span><span class="cv">adrianapommot@gmail.com</span><span class="car">→</span></a>
     <a href="https://www.linkedin.com/in/adriana-pommot/" target="_blank" rel="noopener" class="cta-row"><span class="cl">LinkedIn</span><span class="cv">/in/adriana-pommot</span><span class="car">↗</span></a>
     <a href="https://wa.me/5511962724879" target="_blank" rel="noopener" class="cta-row"><span class="cl">WhatsApp</span><span class="cv">+55 11 96272-4879</span><span class="car">↗</span></a>
     <a href="#" class="cta-row"><span class="cl">Currículo</span><span class="cv">PDF · 2026</span><span class="car">↓</span></a>
@@ -969,15 +1019,15 @@ loadSvgFrame('mobile-frame',  'mobile-hint',  'mobile-siteoficial.svg');
 
 <footer><div class="footer-in">
   <div class="footer-grid">
-    <div><div class="footer-logo">Adriana Pommot</div><div class="footer-col-links"><a href="https://www.linkedin.com/in/adriana-pommot/" target="_blank" rel="noopener">LinkedIn</a><a href="https://instagram.com/ultraviolenta.ink" target="_blank" rel="noopener">Instagram</a><a href="/cdn-cgi/l/email-protection#345550465d555a55445b59595b40745359555d581a575b59">Email</a></div></div>
+    <div><div class="footer-logo">Adriana Pommot</div><div class="footer-col-links"><a href="https://www.linkedin.com/in/adriana-pommot/" target="_blank" rel="noopener">LinkedIn</a><a href="https://instagram.com/ultraviolenta.ink" target="_blank" rel="noopener">Instagram</a><a href="mailto:adrianapommot@gmail.com">Email</a></div></div>
     <div><div class="footer-col-title">Páginas</div><div class="footer-col-links"><a href="index.html#work">Projetos</a><a href="index.html#services">Serviços</a><a href="index.html#about">Sobre Mim</a><a href="#contact">Contato</a></div></div>
     <div><div class="footer-col-title">Projetos</div><div class="footer-col-links"><a href="case-mrv.html">MRV</a><a href="case-ford.html">Ford</a><a href="case-delta.html">Delta DS</a><a href="case-chorume.html">Chorume</a></div></div>
-    <div><div class="footer-col-title">Contato</div><div class="footer-col-links"><a href="/cdn-cgi/l/email-protection#ddbcb9afb4bcb3bcadb2b0b0b2a99dbab0bcb4b1f3beb2b0"><span class="__cf_email__" data-cfemail="6a0b0e18030b040b1a050707051e2a0d070b030644090507">[email&#160;protected]</span></a><span>São Paulo, BR</span></div></div>
+    <div><div class="footer-col-title">Contato</div><div class="footer-col-links"><a href="mailto:adrianapommot@gmail.com">adrianapommot@gmail.com</a><span>São Paulo, BR</span></div></div>
   </div>
   <div class="footer-bottom"><span class="footer-copy">© 2026 Adriana Pommot</span><span class="footer-copy">Design Systems, Product &amp; Visual Design</span></div>
 </div></footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 /* nav: abre/fecha + fecha ao clicar num link */
 (function(){var t=document.getElementById('navToggle'),f=document.getElementById('navFloat');
 if(t&&f)t.addEventListener('click',function(){f.classList.toggle('open');});
@@ -986,137 +1036,16 @@ document.querySelectorAll('.nav-menu a').forEach(function(a){a.addEventListener(
 /* reveal */
 (function(){try{var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -40px 0px'});document.querySelectorAll('.rv').forEach(function(el){obs.observe(el);});}catch(e){}})();
 
-/* 04 Processo — explorer master-detail (tokens nativos, claro) */
+/* 03 · O que construí — abas (estrutura E) */
 (function(){
-  var RAMPS=[
-    {name:'Primary',tones:['#C28A0C','#E0A50F','#F5B500','#F8CB57','#FADF95','#FCEFC8']},
-    {name:'Secondary',tones:['#2B2F34','#3E444B','#5B616A','#9CA2AA','#D4D7DB','#F1F2F3']},
-    {name:'Neutral',tones:['#111111','#555555','#888888','#BBBBBB','#E5E5E5','#FFFFFF']},
-    {name:'Tertiary',tones:['#482C43','#6C4561','#8C5C7E','#A67D9A','#C8B1C2','#ECE4E9']},
-    {name:'Critical',tones:['#8C2231','#BE2E4E','#E24E68','#F19EAC','#F7CED4','#FBEDEF']},
-    {name:'Success',tones:['#188862','#1DA675','#2DC691','#7DDEBE','#C3EEDE','#E6F9F0']},
-    {name:'Warning',tones:['#C75810','#E3731D','#EE882D','#F3B67D','#F8D7BE','#FBECDE']},
-    {name:'Info',tones:['#082C6C','#124588','#1E5EC6','#5A8DDE','#9EBEEE','#CEDEF8']}
-  ];
-  var SIZES=[12,14,16,18,20,24,28,32,40,48,64,80,96];
-  var SIZETOK=['xxxxs','xxxs','xxs','xs','sm','md','lg','xl','xxl','xxxl','display','giant','mega'];
-  var SHADOWS=[{n:'flat',v:'0 1px 2px rgba(17,17,17,.06)'},{n:'soft',v:'0 2px 10px rgba(17,17,17,.10)'},{n:'raised',v:'0 10px 28px rgba(17,17,17,.14)'},{n:'spotlight',v:'0 22px 60px rgba(17,17,17,.20)'}];
-  var RADII=[{n:'sm',v:4},{n:'md',v:8},{n:'lg',v:16},{n:'xl',v:24},{n:'xxl',v:32},{n:'full',v:1000}];
-  var OPAC=[{n:'opaque',v:.80},{n:'strong',v:.56},{n:'mid',v:.32},{n:'soft',v:.16},{n:'faint',v:.08}];
-  function _lum(x){var c=x.replace('#','');return .299*parseInt(c.substr(0,2),16)+.587*parseInt(c.substr(2,2),16)+.114*parseInt(c.substr(4,2),16);}
-  function rmpColor(){return '<div class="tk-canvas"><div class="tk-ramps">'+RAMPS.map(function(r){return '<div><div class="tk-rname">'+r.name+'</div><div class="tk-ramp">'+r.tones.map(function(t){return '<div class="tk-sw" style="background:'+t+'"><span class="tk-swhex" style="color:'+(_lum(t)>140?'#111':'#fff')+'">'+t.replace('#','')+'</span></div>';}).join('')+'</div></div>';}).join('')+'</div><span class="tk-legend">$color-[família]-[darkest → ultralight] · 48 tokens</span></div>';}
-  function rmpType(){return '<div class="tk-canvas"><div class="tk-type">'+SIZES.map(function(s,i){var d=Math.min(s,42);return '<div class="tk-trow"><span class="tk-tpx">'+s+'px</span><span class="tk-tspec" style="font-size:'+d+'px">Aa Sistema Delta</span><span class="tk-ttok">$font-size-'+SIZETOK[i]+'</span></div>';}).join('')+'</div></div>';}
-  function rmpShadow(){return '<div class="tk-canvas"><div class="tk-row">'+SHADOWS.map(function(s){return '<div class="tk-cell"><div class="tk-shadow-box" style="box-shadow:'+s.v+'"></div><span class="tk-cap"><b>'+s.n+'</b>$shadow-'+s.n+'</span></div>';}).join('')+'</div></div>';}
-  function rmpRadius(){return '<div class="tk-canvas"><div class="tk-row">'+RADII.map(function(r){var rad=r.v>100?'50% / 60%':r.v+'px';return '<div class="tk-cell"><div class="tk-radius-box" style="border-radius:'+rad+'"></div><span class="tk-cap"><b>'+(r.v>100?'full':r.v+'px')+'</b>$radius-'+r.n+'</span></div>';}).join('')+'</div></div>';}
-  function rmpOpacity(){return '<div class="tk-canvas"><div class="tk-row">'+OPAC.map(function(o){return '<div class="tk-cell"><div class="tk-op-box" style="opacity:'+o.v+'"></div><span class="tk-cap"><b>'+o.v.toFixed(2)+'</b>$opacity-'+o.n+'</span></div>';}).join('')+'</div></div>';}
-  function rmpLibs(){return '<div class="tk-canvas tk-arch">'+
-    '<div class="tk-foundation"><div class="tk-node"><b>Lib Global Design Tokens</b><span>Fundação semântica</span></div><span class="tk-arrow">→</span><div class="tk-node"><b>Delta Lib Core Components</b><span>Componentes base</span></div></div>'+
-    '<div class="tk-layers">'+
-      '<div class="tk-layer"><div class="tk-layer-h"><span class="tk-dot" style="background:#F5B500"></span><span class="tk-layer-t">Libs Comuns</span></div><p class="tk-layer-d">Base compartilhada entre todos os produtos, nas frentes de design, conteúdo e desenvolvimento.</p><div class="tk-chips"><span class="tk-chip">Global Design Tokens</span><span class="tk-chip">Core Components</span></div></div>'+
-      '<div class="tk-layer"><div class="tk-layer-h"><span class="tk-dot" style="background:#2DC691"></span><span class="tk-layer-t">Libs de Time</span></div><p class="tk-layer-d">Herdam a fundação e a estendem com tokens e componentes específicos de cada produto ou marca.</p><div class="tk-chips"><span class="tk-chip">Team Tokens</span><span class="tk-chip">Team Components</span></div></div>'+
-      '<div class="tk-layer"><div class="tk-layer-h"><span class="tk-dot" style="background:#1E5EC6"></span><span class="tk-layer-t">Libs de Suporte</span></div><p class="tk-layer-d">Sustentam a composição com ilustração e iconografia, sempre a serviço do conteúdo.</p><div class="tk-chips"><span class="tk-chip">Ilustração</span><span class="tk-chip">Ícones</span></div></div>'+
-    '</div></div>';}
-  function rmpGuild(){return '<div class="tk-canvas tk-guild">'+
-    '<div class="tk-guild-lead"><span class="tk-guild-eyebrow">Objetivo</span><p>Escalar os processos de administração e as boas práticas das libs de time e de tokens, com todos os times contribuindo na construção do sistema segundo premissas, padrões e critérios de aceite.</p></div>'+
-    '<div class="tk-guild-how"><span class="tk-guild-eyebrow">Como funcionava</span><ul><li>Encontros recorrentes para discussão e defesa da construção e da documentação de cada componente.</li><li>O cafezinho virou um chapter de Design, com tempo dedicado à prática e ao alinhamento.</li><li>Fórum de solução de problemas e orientação aberto entre os times de produto.</li></ul></div>'+
-    '</div>';}
-
-  var CHEV='<svg class="chev" viewBox="0 0 16 16"><path d="M6 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  function rmpAnatSlots(){return '<div class="tk-canvas tk-anat">'+
-    '<div class="tk-anat-stage"><span class="tk-btn primary lg"><span class="dot"></span>Button Text'+CHEV+'</span></div>'+
-    '<div class="tk-parts">'+
-      '<div class="tk-part"><b>Ícone à esquerda</b><span>slot opcional</span><span class="pt-tok">$icon</span></div>'+
-      '<div class="tk-part"><b>Rótulo</b><span>texto do botão</span><span class="pt-tok">$font-size-md</span></div>'+
-      '<div class="tk-part"><b>Ícone à direita</b><span>chevron de ação</span><span class="pt-tok">$icon</span></div>'+
-      '<div class="tk-part"><b>Padding</b><span>interno do contêiner</span><span class="pt-tok">$spacing-md</span></div>'+
-      '<div class="tk-part"><b>Raio</b><span>cantos do contêiner</span><span class="pt-tok">$radius-md</span></div>'+
-      '<div class="tk-part"><b>Fundo</b><span>cor da variante</span><span class="pt-tok">$color-primary</span></div>'+
-    '</div>'+
-    '<span class="tk-note">Sistema espacial em múltiplos de 8, com exceções de 4 e 12px.</span></div>';}
-  function rmpAnatStates(){
-    var st=[['normal','primary'],['hover','primary s-hover'],['focus','primary s-focus'],['active','primary s-active'],['disabled','primary s-disabled']];
-    var mk=function(s){return '<div class="tk-stateline"><span class="tk-statelabel">'+s[0]+'</span><span class="tk-btn md '+s[1]+'"><span class="dot"></span>Button Text'+CHEV+'</span></div>';};
-    return '<div class="tk-canvas"><div class="tk-stateset">'+st.map(mk).join('')+'</div>'+
-      '<div class="tk-darktheme"><span class="tk-darktheme-h">dark theme</span><div class="tk-stateset">'+st.map(mk).join('')+'</div></div></div>';
-  }
-  function rmpAnatVariants(){
-    var rows=[['Primary','primary'],['Secondary','secondary'],['Tertiary','tertiary']];
-    var cells='<span class="tk-vh"></span><span class="tk-vh">Filled</span><span class="tk-vh">Outlined</span>';
-    rows.forEach(function(r){cells+='<span class="tk-vrow-label">'+r[0]+'</span><span class="tk-btn md '+r[1]+'"><span class="dot"></span>Button Text'+CHEV+'</span><span class="tk-btn md '+r[1]+' outline"><span class="dot"></span>Button Text'+CHEV+'</span>';});
-    return '<div class="tk-canvas"><div class="tk-vgrid">'+cells+'</div></div>';
-  }
-  function rmpAnatSizes(){
-    var sz=[['Large','lg','$spacing-lg'],['Medium','md','$spacing-md'],['Small','sm','$spacing-sm']];
-    var rows=sz.map(function(s){return '<div class="tk-stateline"><span class="tk-statelabel">'+s[0]+'</span><span class="tk-btn '+s[1]+' primary"><span class="dot"></span>Button Text'+CHEV+'</span><span class="tk-note">'+s[2]+'</span></div>';}).join('');
-    return '<div class="tk-canvas"><div class="tk-stateset">'+rows+'</div></div>';
-  }
-  function rmpAnatHandoff(){
-    var rows=[['Fundo','$color-primary'],['Texto','$color-secondary-darkest'],['Borda','$border-width-sm'],['Raio','$radius-md'],['Padding','$spacing-md'],['Tipografia','$font-size-md · $font-weight-bold'],['Hover','$color-primary-dark']];
-    var table=rows.map(function(r){return '<div class="tk-spec-row"><span class="tk-spec-prop">'+r[0]+'</span><span class="tk-spec-tok">'+r[1]+'</span></div>';}).join('');
-    return '<div class="tk-canvas"><div class="tk-btnrow" style="margin-bottom:8px"><span class="tk-btn md primary"><span class="dot"></span>Button Text'+CHEV+'</span><span class="tk-btn md primary outline"><span class="dot"></span>Button Text'+CHEV+'</span></div><div class="tk-spec">'+table+'</div><span class="tk-note">Cada propriedade mapeada a um token, válida em light e dark theme.</span></div>';
-  }
-  var data={
-    tokens:{label:'Tokens iniciais',items:[
-      {id:'cor',title:'Cor',native:rmpColor,desc:'Quatro famílias de marca e quatro de feedback, cada uma em seis tons semânticos nomeados, do darkest ao ultralight.'},
-      {id:'tipo',title:'Tipografia',native:rmpType,desc:'Din Ot e Roboto como famílias, com escala de treze tamanhos (12 a 96px) e cinco pesos, todos nomeados como tokens reutilizáveis.'},
-      {id:'elev',title:'Elevação',native:rmpShadow,desc:'Quatro níveis de sombra, do flat ao spotlight, cada um com blur e deslocamento próprios para criar profundidade consistente entre componentes.'},
-      {id:'forma',title:'Forma',native:rmpRadius,desc:'Seis raios de borda, do small de 4px ao full circular, padronizando o arredondamento de todos os componentes do sistema.'},
-      {id:'opac',title:'Opacidade',native:rmpOpacity,desc:'Cinco níveis de opacidade semântica, do opaque de 0.80 ao faint de 0.08, usados em estados, sobreposições e hierarquia visual.'}
-    ]},
-    libs:{label:'Arquitetura de libs',items:[
-      {id:'composicao',title:'Composição do Delta',native:rmpLibs,desc:'O sistema vivia como uma árvore de libraries: uma fundação compartilhada que se ramifica em libs de time e de suporte.'},
-      {id:'guilda',title:'Cultura da Guilda',native:rmpGuild,desc:'A camada cultural do Delta. Escalar o sistema passava por escalar a prática do time, não só os componentes.'}
-    ]},
-    anatomy:{label:'Anatomia de componente',items:[
-      {id:'slots',title:'Slots e partes',native:rmpAnatSlots,desc:'A anatomia formal do componente: cada parte (ícones, rótulo, padding, raio, fundo) vinculada a um token.'},
-      {id:'states',title:'Estados',native:rmpAnatStates,desc:'Os cinco estados interativos, do normal ao disabled, com tokens de cor dedicados em light e dark theme.'},
-      {id:'variants',title:'Variantes',native:rmpAnatVariants,desc:'Três variantes semânticas (primary, secondary, tertiary), cada uma em filled e outlined. Hierarquia via token, não cor fixa.'},
-      {id:'sizes',title:'Tamanhos',native:rmpAnatSizes,desc:'Escala Large, Medium e Small, com padding e tipografia calibrados proporcionalmente a cada tamanho.'},
-      {id:'handoff',title:'Documentação de handoff',native:rmpAnatHandoff,desc:'Cada propriedade do componente mapeada a um token, eliminando a ambiguidade entre design e engenharia.'}
-    ]}
-  };
-  var groups=[{key:'tokens',label:'Tokens',color:'#F5B500'},{key:'libs',label:'Bibliotecas',color:'#2DC691'},{key:'anatomy',label:'Anatomia',color:'#1E5EC6'}];
-  var navEl=document.getElementById('procNav'),detEl=document.getElementById('procDetail');
-  var lb=document.getElementById('procLb'),lbImgs=document.getElementById('procLbImgs');
-  function openLb(imgs){if(!lb)return;lbImgs.innerHTML=imgs.map(function(s){return '<img src="'+s+'" alt="">';}).join('');lb.classList.add('open');}
-  if(lb){lb.addEventListener('click',function(){lb.classList.remove('open');});document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('open');});}
-  function showDetail(cat,idx){
-    var item=data[cat].items[idx];if(!item)return;
-    navEl.querySelectorAll('.proc-tab').forEach(function(b){b.classList.toggle('active', b.getAttribute('data-cat')===cat && +b.getAttribute('data-idx')===idx);});
-    var head='<div class="proc-dhead"><div><div class="proc-dlabel">'+data[cat].label+'</div><h3 class="proc-dtitle">'+item.title+'</h3></div>'+
-      (item.native?'':'<button class="proc-zoom" type="button">Ampliar<svg viewBox="0 0 24 24"><path d="M15 3h6v6M21 3l-7 7M9 21H3v-6M3 21l7-7"/></svg></button>')+'</div>'+
-      '<p class="proc-ddesc">'+item.desc+'</p>';
-    if(item.native){
-      detEl.innerHTML=head+item.native();
-    }else{
-      var stacked=item.img.length>1?' stacked':'';
-      var imgs=item.img.map(function(s){return '<img src="'+s+'" alt="'+item.title+'" loading="lazy">';}).join('');
-      detEl.innerHTML=head+'<div class="proc-dvisual'+stacked+'">'+imgs+'</div>';
-      var vis=detEl.querySelector('.proc-dvisual');if(vis)vis.addEventListener('click',function(){openLb(item.img);});
-      var z=detEl.querySelector('.proc-zoom');if(z)z.addEventListener('click',function(ev){ev.stopPropagation();openLb(item.img);});
-    }
-  }
-  function renderNav(){
-    navEl.innerHTML='';
-    groups.forEach(function(g){
-      var items=data[g.key].items;
-      var lab=document.createElement('div');lab.className='proc-grouplabel';
-      lab.innerHTML='<span class="proc-gdot" style="background:'+g.color+'"></span><span class="gl">'+g.label+'</span><span class="cnt">'+String(items.length).padStart(2,'0')+'</span>';
-      navEl.appendChild(lab);
-      items.forEach(function(item,idx){
-        var b=document.createElement('button');b.className='proc-tab';
-        b.setAttribute('data-cat',g.key);b.setAttribute('data-idx',idx);
-        b.innerHTML='<span class="lbl">'+item.title+'</span><span class="ar">→</span>';
-        b.addEventListener('mouseenter',function(){showDetail(g.key,idx);});
-        b.addEventListener('focus',function(){showDetail(g.key,idx);});
-        b.addEventListener('click',function(){showDetail(g.key,idx);});
-        navEl.appendChild(b);
-      });
-    });
-    showDetail('tokens',0);
-  }
-  renderNav();
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest('.wb-tab'); if(!btn) return;
+    var g=btn.getAttribute('data-group'), i=btn.getAttribute('data-i');
+    document.querySelectorAll('.wb-tab[data-group="'+g+'"]').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-i')===i);});
+    document.querySelectorAll('.wb-panel[data-group="'+g+'"]').forEach(function(p){p.classList.toggle('on',p.getAttribute('data-i')===i);});
+  });
 })();
+
 </script>
 
 <!-- ═══ FUNDAÇÃO DE TOKENS SCRIPT ═══ -->

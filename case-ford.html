@@ -9,7 +9,6 @@
 <meta property="og:type" content="article">
 <title>Ford · Adriana Pommot</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="chrome.css">
 <style>
 :root{
   --black:#111111;--white:#fff;
@@ -45,6 +44,30 @@ p{text-wrap:balance}
 .s-body strong{font-weight:700;color:var(--black)}
 .s-body+.s-body{margin-top:var(--space-md)}
 .s-label{font-size:var(--ty-label);font-weight:700;line-height:1.3;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-3)}
+
+/* ═══ NAV (idêntica à home) ═══ */
+.nav-name{position:absolute;top:40px;left:var(--m);z-index:30;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--black)}
+.nav-name span{display:block;line-height:1;white-space:nowrap;transition:transform .45s cubic-bezier(.19,1,.22,1)}
+.nav-name:hover span{transform:translateY(-100%)}
+.nav-roll{display:block;overflow:hidden;height:1em}
+.nav-float{position:fixed;top:36px;right:var(--m);z-index:100;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.nav-toggle{width:50px;height:50px;border-radius:50%;border:1px solid var(--accent);cursor:pointer;background:var(--accent);display:flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s}
+.nav-toggle:hover{background:var(--black);border-color:var(--black)}
+.nav-toggle:hover svg{stroke:#fff}
+.nav-toggle svg{width:20px;height:20px;stroke:var(--black);stroke-width:1.2;fill:none}
+.nav-toggle .icon-x{display:none}
+.nav-float.open .nav-toggle{background:var(--black);border-color:var(--black)}
+.nav-float.open .nav-toggle svg{stroke:#fff}
+.nav-float.open .nav-toggle .icon-menu{display:none}
+.nav-float.open .nav-toggle .icon-x{display:block}
+.nav-menu{display:flex;flex-direction:column;align-items:flex-end;gap:6px;opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .3s,transform .3s}
+.nav-float.open .nav-menu{opacity:1;transform:none;pointer-events:auto}
+.nav-menu a{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:9px 18px;border-radius:999px;white-space:nowrap;transition:background .25s,color .25s}
+.nav-menu .nav-cta{color:#fff;background:var(--black);display:inline-flex;align-items:center;gap:8px}
+.nav-menu .nav-cta:hover{background:var(--accent);color:var(--black)}
+.nav-menu .nav-cta svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.nav-menu .nav-link{color:var(--gray-1);background:rgba(255,255,255,.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.nav-menu .nav-link:hover{background:var(--black);color:#fff}
 
 /* ═══ HERO (type-forward claro, padrão de projeto) ═══ */
 .hero{position:relative;overflow:hidden;background:#FAFAF8;padding-top:clamp(120px,14vh,168px);padding-bottom:0}
@@ -132,6 +155,40 @@ p{text-wrap:balance}
 .more-tag{display:block;font-size:var(--ty-label);font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-3);margin-bottom:8px}
 .more-name{font-size:var(--ty-copy);font-weight:600;line-height:1.25;letter-spacing:-.005em;color:var(--black)}
 
+/* ═══ CTA + FOOTER ═══ */
+.container{max-width:calc(var(--max-w) + 2*var(--m));margin:0 auto;padding:0 var(--m)}
+.cta{background:var(--accent);padding:clamp(56px,6vw,84px) 0}
+.cta-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(32px,5vw,56px);align-items:end}
+.cta-eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(17,17,17,.55);margin-bottom:22px}
+.cta-title{font-size:clamp(48px,7vw,72px);font-weight:700;letter-spacing:-.04em;line-height:.88;text-transform:uppercase;color:var(--black)}
+.cta-sub{margin-top:22px;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,17,17,.6)}
+.cta-menu{border-top:1px solid rgba(17,17,17,.2)}
+.cta-row{display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:baseline;padding:clamp(16px,2vw,20px) 8px;border-bottom:1px solid rgba(17,17,17,.2);color:var(--black);transition:padding-left .25s ease}
+.cta-row:hover{padding-left:18px}
+.cta-row .cl{font-size:clamp(26px,3vw,34px);font-weight:600;letter-spacing:-.02em;text-transform:uppercase}
+.cta-row .cv{font-size:15px;font-weight:500;color:rgba(17,17,17,.6)}
+.cta-row .car{font-size:22px;transition:transform .25s ease}
+.cta-row:hover .car{transform:translate(4px,-4px)}
+@media(max-width:760px){.cta-grid{grid-template-columns:1fr}}
+footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top:1px solid rgba(255,255,255,.08)}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px}
+.footer-logo{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:20px}
+.footer-social{display:flex;flex-direction:column;gap:10px}
+.footer-social a{font-size:13px;color:rgba(255,255,255,.4);transition:color .3s}
+.footer-social a:hover{color:var(--white)}
+.footer-col-title{font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:20px}
+.footer-col-links{display:flex;flex-direction:column;gap:10px}
+.footer-col-links a,
+.footer-col-links span{font-size:13px;color:rgba(255,255,255,.4);transition:color .3s}
+.footer-col-links a:hover{color:var(--white)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:32px;border-top:1px solid rgba(255,255,255,.08)}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.25)}
+
+/* ═══ REVEAL ═══ */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.rv.visible{opacity:1;transform:none}
+.d1{transition-delay:.12s}.d2{transition-delay:.22s}.d3{transition-delay:.34s}.d4{transition-delay:.46s}
+
 /* ═══ RESPONSIVE ═══ */
 @media(max-width:1024px){
   .img-grid-3{grid-template-columns:1fr 1fr}
@@ -155,20 +212,9 @@ p{text-wrap:balance}
 </head>
 <body>
 
-<!-- NAV -->
-<a href="index.html" class="nav-name"><span class="nav-roll"><span>Adriana Pommot</span><span>Adriana Pommot</span></span></a>
-<div class="nav-float" id="navFloat">
-  <button class="nav-toggle" id="navToggle" aria-label="Menu">
-    <svg class="icon-menu" viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
-    <svg class="icon-x" viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
-  </button>
-  <div class="nav-menu">
-    <a href="cv-adriana-pommot.pdf" download class="nav-cta">Download CV<svg viewBox="0 0 16 16"><path d="M8 3v8M4 8l4 4 4-4"/><path d="M3 13h10"/></svg></a>
-    <a href="index.html#work" class="nav-link">Projetos</a>
-    <a href="index.html#services" class="nav-link">Serviços</a>
-    <a href="index.html#about" class="nav-link">Sobre Mim</a>
-    <a href="#contact" class="nav-link">Contato</a>
-  </div>
+<!-- NAV (componente compartilhado) -->
+<site-nav></site-nav>
+<script src="site-nav.js"></script>
 </div>
 
 <main class="flow">
@@ -475,6 +521,11 @@ p{text-wrap:balance}
         <span class="more-tag">#DesignSystem</span>
         <div class="more-name">Delta Design System</div>
       </a>
+      <a href="case-chorume.html" class="more-card rv d2">
+        <div class="more-card-img"><img src="img/chorume/garrafa-pantano-hero.jpg" alt="Chorume Tipografia" loading="lazy"></div>
+        <span class="more-tag">#Tipografia #IdentidadeVisual</span>
+        <div class="more-name">Chorume Tipografia</div>
+      </a>
     </div>
   </section>
 
@@ -501,7 +552,7 @@ p{text-wrap:balance}
 <div class="footer-grid">
   <div><div class="footer-logo">Adriana Pommot</div><div class="footer-social"><a href="https://linkedin.com/in/adriana-pommot" target="_blank">LinkedIn</a><a href="https://instagram.com/ultraviolenta.ink" target="_blank">Instagram</a><a href="mailto:adrianapommot@gmail.com">Email</a></div></div>
   <div><div class="footer-col-title">Páginas</div><div class="footer-col-links"><a href="index.html#work">Projetos</a><a href="index.html#services">Serviços</a><a href="index.html#about">Sobre Mim</a><a href="#contact">Contato</a></div></div>
-  <div><div class="footer-col-title">Projetos</div><div class="footer-col-links"><a href="case-mrv.html">MRV</a><a href="case-delta.html">Delta DS</a><a href="case-ford.html">Ford</a></div></div>
+  <div><div class="footer-col-title">Projetos</div><div class="footer-col-links"><a href="case-mrv.html">MRV</a><a href="case-delta.html">Delta DS</a><a href="case-ford.html">Ford</a><a href="case-chorume.html">Chorume</a></div></div>
   <div><div class="footer-col-title">Contato</div><div class="footer-col-links"><a href="mailto:adrianapommot@gmail.com">adrianapommot@gmail.com</a><span>São Paulo, BR</span></div></div>
 </div>
 <div class="footer-bottom"><span class="footer-copy">© 2026 Adriana Pommot</span><span class="footer-copy">Visual & Interface Design</span></div>
@@ -515,18 +566,6 @@ document.querySelectorAll('.nav-menu a').forEach(function(a){a.addEventListener(
   var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}})},{threshold:0.1});
   document.querySelectorAll('.rv').forEach(function(el){ro.observe(el)});
 }catch(e){console.warn("observer error",e)}})();
-/* nav: animação do carousel "Adriana Pommot" via JS (CSS :hover não funciona) */
-(function(){
-  var navName = document.querySelector('.nav-name');
-  var navRoll = document.querySelector('.nav-roll');
-  if (!navName || !navRoll) return;
-  navName.addEventListener('mouseenter', function(){
-    navRoll.style.transform = 'translateY(-100%)';
-  });
-  navName.addEventListener('mouseleave', function(){
-    navRoll.style.transform = 'translateY(0)';
-  });
-})();
 </script>
 </body>
 </html>

@@ -8,27 +8,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="home.css?v=2" />
+<link rel="stylesheet" href="home.css" />
 </head>
 <body>
 
-<!-- NAV -->
-<a href="#top" class="nav-name"><span class="nav-roll"><span>Adriana Pommot</span><span>Adriana Pommot</span></span></a>
-<div class="nav-float" id="navFloat">
-  <button class="nav-toggle" id="navToggle" aria-label="Menu">
-    <svg class="icon-menu" viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
-    <svg class="icon-x" viewBox="0 0 24 24"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
-  </button>
-  <nav class="nav-menu">
-    <a href="#contato" class="nav-cta">Download CV
-      <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v8M4 8l4 4 4-4"/><path d="M3 13h10"/></svg>
-    </a>
-    <a href="#work" class="nav-link">Projetos</a>
-    <a href="#services" class="nav-link">Serviços</a>
-    <a href="#about" class="nav-link">Sobre Mim</a>
-    <a href="#contato" class="nav-link">Contato</a>
-  </nav>
-</div>
+<!-- NAV (componente compartilhado) -->
+<site-nav brand-href="#top" base="" contact="#contato" cv="#contato"></site-nav>
+<script src="site-nav.js"></script>
 
 <!-- HERO -->
 <header class="hero" id="top">
@@ -62,7 +48,7 @@
       <p class="lead rv d1" style="max-width:460px">Interfaces de alta fidelidade, Design System e Branding &amp; Identidade. Do token à experiência final.</p>
       <a href="#work" class="pixels-cta rv d1"><span><b>[</b> Ver projetos <b>]</b></span><span class="ar">→</span></a>
     </div>
-    <div class="pixels-art rv d2"></div>
+    <div class="pixels-art rv d2"><img src="img/final.png" alt="Diagrama: pixels, sistemas e produtos" /></div>
   </div>
 </section>
 
@@ -157,7 +143,7 @@
       </div>
       <div>
         <div class="footer-col-title">Projetos</div>
-        <div class="footer-links"><a href="case-mrv.html">MRV</a><a href="case-ford.html">Ford</a><a href="case-delta.html">Delta DS</a></div>
+        <div class="footer-links"><a href="case-mrv.html">MRV</a><a href="case-ford.html">Ford</a><a href="case-delta.html">Delta DS</a><a href="case-chorume.html">Chorume</a></div>
       </div>
       <div>
         <div class="footer-col-title">Contato</div>
@@ -185,7 +171,8 @@
   var PROJECTS = [
     { num: "01", name: "MRV", sub: "Fluxo de Renegociação", img: "img/mrv/overview-grid.webp", pos: "center 50%", tags: ["Product Design", "Fintech", "Design System"], href: "case-mrv.html" },
     { num: "02", name: "Ford", sub: "Immersion Room", img: "img/ford/hero-room.webp", pos: "center 48%", tags: ["Identidade Visual", "Design Espacial"], href: "case-ford.html" },
-    { num: "03", name: "Delta", sub: "Design System", img: "img/delta/Delta_thumb1.png", pos: "center 50%", tags: ["Design System", "Tokens"], href: "case-delta.html", logo: "img/delta/logo-delta.svg" },
+    { num: "03", name: "Delta", sub: "Design System", img: "img/delta/hero-mockup.webp", pos: "center 50%", tags: ["Design System", "Tokens"], href: "case-delta.html" },
+    { num: "04", name: "Chorume", sub: "Tipografia", img: "img/chorume/alfabeto-chorume.png", pos: "center 42%", tags: ["Tipografia", "Branding"], href: "case-chorume.html" }
   ];
 
   var ICONS = {
@@ -249,8 +236,8 @@
       '<span class="poster-scrim"></span>' +
       '<span class="poster-top"><span class="poster-num">' + p.num + " / 04</span>" +
       '<span class="poster-tags">' + p.tags.map(function (t) { return "<span>" + esc(t) + "</span>"; }).join("") + "</span></span>" +
-      '<div class="poster-bot">' + (p.logo ? '<img class="poster-logo" src="' + p.logo + '" alt="' + esc(p.name) + '">' : '<span class="poster-name">' + esc(p.name) + '</span>') +
-      '<span class="poster-sub"><b>' + esc(p.sub) + '</b><span class="poster-cta">Ver case →</span></span></div></a>';
+      '<span class="poster-bot"><span class="poster-name">' + esc(p.name) + "</span>" +
+      '<span class="poster-sub"><b>' + esc(p.sub) + '</b><span class="poster-cta">Ver case →</span></span></span></a>';
   }).join("");
 
   // services
@@ -318,21 +305,6 @@
     }, { threshold: 0.12, rootMargin: "0px 0px -50px 0px" });
     document.querySelectorAll(".rv").forEach(function (el) { obs.observe(el); });
   } catch (e) { document.querySelectorAll(".rv").forEach(function (el) { el.classList.add("vis"); }); }
-})();
-
-/* nav: animação do carousel "Adriana Pommot" via JS (CSS :hover não funciona) */
-(function(){
-  var navName = document.querySelector('.nav-name');
-  var navRoll = document.querySelector('.nav-roll');
-  if (!navName || !navRoll) return;
-
-  navName.addEventListener('mouseenter', function(){
-    navRoll.querySelectorAll('span').forEach(function(s){ s.style.transform = 'translateY(-100%)'; });
-  });
-
-  navName.addEventListener('mouseleave', function(){
-    navRoll.querySelectorAll('span').forEach(function(s){ s.style.transform = ''; });
-  });
 })();
 
 </script>
