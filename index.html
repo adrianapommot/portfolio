@@ -293,10 +293,6 @@
   }).join("");
 
   /* ── INTERAÇÕES ───────────────────────────────────────── */
-  // nav
-  var nf = $("#navFloat"), ntg = $("#navToggle");
-  if (ntg) ntg.addEventListener("click", function () { nf.classList.toggle("open"); });
-  document.querySelectorAll(".nav-menu a").forEach(function (a) { a.addEventListener("click", function () { nf.classList.remove("open"); }); });
 
   // reveal
   try {
