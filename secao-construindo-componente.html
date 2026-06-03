@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Construindo um componente · Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #111111;
+      --gray-1: #37342f;
+      --gray-2: #585550;
+      --gray-3: #756f67;
+      --gray-4: #b8b2a8;
+      --line: #e7e2da;
+      --bone: #f4f3ef;
+      --accent: #e0ff33;
+      --accent-press: #d2f51c;
+      --white: #ffffff;
+      --font: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+      --mono: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); color: var(--ink); background: var(--bone); -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    p { text-wrap: pretty; }
+    button { font-family: inherit; cursor: pointer; }
+    
+    /* ═══════════════════════════════════ DASHBOARD SHELL ═════════════════════ */
+    .dashboard {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+      max-width: 1600px;
+      margin: 0 auto;
+      background: var(--white);
+    }
+    
+    /* ─── SIDEBAR ─── */
+    .sidebar {
+      background: var(--ink);
+      color: var(--white);
+      padding: 32px 24px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      overflow-y: auto;
+    }
+    
+    .sidebar-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    
+    .sidebar-brand .kicker {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    
+    .sidebar-brand .name {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--white);
+    }
+    
+    .sidebar-section {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    
+    .sidebar-section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 12px;
+    }
+    
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.65);
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+      border: none;
+      background: none;
+      text-align: left;
+      width: 100%;
+    }
+    
+    .sidebar-link:hover {
+      background: rgba(255,255,255,0.06);
+      color: var(--white);
+    }
+    
+    .sidebar-link.active {
+      background: var(--accent);
+      color: var(--ink);
+      font-weight: 600;
+    }
+    
+    .sidebar-link .num {
+      font-size: 11px;
+      font-weight: 700;
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
+      background: rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-variant-numeric: tabular-nums;
+    }
+    
+    .sidebar-link.active .num {
+      background: rgba(17,17,17,0.15);
+    }
+    
+    .sidebar-footer {
+      margin-top: auto;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .sidebar-status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+    }
+    
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(224,255,51,0.2);
+    }
+    
+    /* ─── MAIN ─── */
+    .main {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    
+    .main-header {
+      padding: 28px 40px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 24px;
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(12px);
+      z-index: 10;
+    }
+    
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gray-3);
+      margin-bottom: 10px;
+    }
+    
+    .breadcrumb .sep { color: var(--gray-4); }
+    
+    .main-header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink);
+      background: var(--accent);
+      padding: 8px 14px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    
+    .main-body {
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 64px;
+    }
+    
+    /* ─── PANEL ─── */
+    .panel {
+      scroll-margin-top: 100px;
+    }
+    
+    .panel-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 8px;
+    }
+    
+    .panel-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--ink);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    
+    .panel-head h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+    }
+    
+    .panel-intro {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--gray-2);
+      max-width: 680px;
+      margin-bottom: 28px;
+      margin-left: 46px;
+    }
+    
+    /* ─── METRIC ROW ─── */
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-left: 46px;
+      margin-bottom: 28px;
+    }
+    
+    .metric {
+      background: var(--bone);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    
+    .metric-value {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+    }
+    
+    .metric-value .unit {
+      font-size: 14px;
+      color: var(--gray-3);
+      font-weight: 600;
+    }
+    
+    .metric-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gray-3);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    
+    @media (max-width: 1100px) {
+      .metrics { grid-template-columns: repeat(2, 1fr); }
+    }
+    
+    /* ─── SPEC GRID (Desenho) ─── */
+    .spec-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 28px;
+      margin-left: 46px;
+      align-items: start;
+    }
+    
+    .spec-text {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    
+    .spec-text p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--gray-2);
+    }
+    
+    .spec-text p strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+    
+    .grid-visual {
+      background: var(--bone);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 28px;
+    }
+    
+    .grid-visual-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray-3);
+      margin-bottom: 18px;
+    }
+    
+    .grid-demo {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+    
+    .grid-col {
+      height: 80px;
+      background: rgba(224,255,51,0.25);
+      border: 1px solid var(--accent-press);
+      border-radius: 4px;
+    }
+    
+    .grid-scale {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    
+    .grid-chip {
+      font-size: 11px;
+      font-weight: 600;
+      font-family: var(--mono);
+      padding: 5px 10px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--gray-2);
+    }
+    
+    .grid-chip.hl {
+      background: var(--ink);
+      color: var(--white);
+      border-color: var(--ink);
+    }
+    
+    @media (max-width: 1100px) {
+      .spec-grid { grid-template-columns: 1fr; }
+    }
+    
+    /* ─── STATES MATRIX ─── */
+    .states-wrap {
+      margin-left: 46px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--white);
+    }
+    
+    .states-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .states-table th {
+      text-align: left;
+      padding: 16px 24px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray-3);
+      background: var(--bone);
+      border-bottom: 1px solid var(--line);
+    }
+    
+    .states-table th:first-child { width: 140px; }
+    
+    .states-table td {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: middle;
+    }
+    
+    .states-table tr:last-child td { border-bottom: none; }
+    
+    .states-table tr:hover td { background: rgba(244,243,239,0.5); }
+    
+    .state-name {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    
+    .state-name .label {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    
+    .state-name .token {
+      font-size: 11px;
+      font-family: var(--mono);
+      color: var(--gray-3);
+    }
+    
+    /* ─── THE ACTUAL BUTTON COMPONENT ─── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--ink);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 999px;
+      border: 2px solid var(--ink);
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    
+    .btn-primary svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+    
+    /* state variants */
+    .btn-primary.s-hover {
+      background: #2e2e2a;
+      border-color: #2e2e2a;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(17,17,17,0.2);
+    }
+    
+    .btn-primary.s-disabled {
+      background: var(--bone);
+      color: var(--gray-4);
+      border-color: var(--line);
+      cursor: not-allowed;
+    }
+    
+    .btn-primary.s-active {
+      background: var(--ink);
+      border-color: var(--accent);
+      transform: translateY(1px);
+    }
+    
+    .btn-primary.s-focused {
+      background: var(--ink);
+      border-color: var(--ink);
+      box-shadow: 0 0 0 3px var(--accent);
+    }
+    
+    .btn-primary.s-loading {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: rgba(255,255,255,0.7);
+    }
+    
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    
+    @keyframes spin { to { transform: rotate(360deg); } }
+    
+    @media (prefers-reduced-motion: reduce) {
+      .spinner { animation: none; }
+    }
+    
+    .state-desc {
+      font-size: 12px;
+      color: var(--gray-2);
+      line-height: 1.5;
+      max-width: 240px;
+    }
+    
+    /* ─── TOKENS GRID ─── */
+    .tokens-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-left: 46px;
+    }
+    
+    @media (max-width: 1100px) {
+      .tokens-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 700px) {
+      .tokens-grid { grid-template-columns: 1fr; }
+    }
+    
+    .token-card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background: var(--white);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    
+    .token-card:hover {
+      border-color: var(--gray-3);
+      box-shadow: 0 8px 24px rgba(17,17,17,0.06);
+    }
+    
+    .token-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .token-card-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink);
+    }
+    
+    .token-card-tag {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--gray-3);
+      background: var(--bone);
+      padding: 4px 8px;
+      border-radius: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    
+    .token-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .token-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      font-family: var(--mono);
+      color: var(--gray-2);
+    }
+    
+    .token-swatch {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      border: 1px solid var(--line);
+      flex-shrink: 0;
+    }
+    
+    .token-row .key { color: var(--gray-3); }
+    .token-row .val { color: var(--ink); font-weight: 600; margin-left: auto; }
+    
+    /* ─── EXAMPLE CHECKLIST ─── */
+    .checklist {
+      margin-left: 46px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    
+    .check-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--white);
+      transition: border-color 0.2s;
+    }
+    
+    .check-item:hover { border-color: var(--accent-press); }
+    
+    .check-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+    
+    .check-content h4 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    
+    .check-content p {
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--gray-2);
+    }
+    
+    /* ─── TIP CALLOUT ─── */
+    .tip {
+      margin-left: 46px;
+      background: #faffdd;
+      border: 1px solid var(--accent-press);
+      border-radius: 12px;
+      padding: 18px 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 28px;
+    }
+    
+    .tip-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    
+    .tip p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--gray-1);
+    }
+    
+    .tip p strong { font-weight: 700; }
+    
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .dashboard { grid-template-columns: 1fr; }
+      .sidebar { position: relative; height: auto; flex-direction: row; flex-wrap: wrap; align-items: center; }
+      .sidebar-footer { margin: 0; padding: 0; border: none; }
+      .main-body { padding: 24px; }
+      .main-header { padding: 20px 24px; }
+      .spec-grid, .states-wrap, .tokens-grid, .checklist, .metrics, .panel-intro, .tip { margin-left: 0; }
+      .states-wrap { overflow-x: auto; }
+    }
+    
+    /* ─── REVEAL ─── */
+    .rv { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+    .rv.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+  
+  <div class="dashboard">
+    
+    <!-- ═══════════════ SIDEBAR ═══════════════ -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <span class="kicker">Guilda Delta Design System</span>
+        <span class="name">Construindo um componente</span>
+      </div>
+      
+      <nav class="sidebar-section">
+        <span class="sidebar-section-label">Construindo um componente</span>
+        <button class="sidebar-link active" data-target="overview">
+          <span class="num">00</span>
+          Visão geral
+        </button>
+        <button class="sidebar-link" data-target="desenho">
+          <span class="num">01</span>
+          Desenho & Grids
+        </button>
+        <button class="sidebar-link" data-target="anatomia">
+          <span class="num">02</span>
+          Anatomia & States
+        </button>
+        <button class="sidebar-link" data-target="tokens">
+          <span class="num">03</span>
+          Tokens
+        </button>
+        <button class="sidebar-link" data-target="checklist">
+          <span class="num">04</span>
+          Checklist de docs
+        </button>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div class="sidebar-status">
+          <span class="status-dot"></span>
+          Button Primary · v1.0
+        </div>
+      </div>
+    </aside>
+    
+    <!-- ═══════════════ MAIN ═══════════════ -->
+    <div class="main">
+      
+      <header class="main-header">
+        <div>
+          <div class="breadcrumb">
+            <span>Componentes</span>
+            <span class="sep">/</span>
+            <span>Button</span>
+            <span class="sep">/</span>
+            <span>Primary Medium</span>
+          </div>
+          <h1>Construindo um componente</h1>
+        </div>
+        <span class="header-badge">
+          <span class="status-dot"></span>
+          Documentado
+        </span>
+      </header>
+      
+      <div class="main-body">
+        
+        <!-- ─── OVERVIEW ─── -->
+        <section class="panel" id="overview">
+          <div class="panel-head">
+            <div class="panel-num">00</div>
+            <h2>Visão geral</h2>
+          </div>
+          <p class="panel-intro">Antes de codar: desenhar atendendo ao sistema espacial, documentar a anatomia e mapear todos os states. Este guia cobre o Button Primary Medium do início ao handoff.</p>
+          
+          <div class="metrics">
+            <div class="metric">
+              <div class="metric-value">6</div>
+              <div class="metric-label">States mapeados</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value">2</div>
+              <div class="metric-label">Variações</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value">8<span class="unit">px</span></div>
+              <div class="metric-label">Base do grid</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value">4</div>
+              <div class="metric-label">Grupos de tokens</div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- ─── DESENHO ─── -->
+        <section class="panel" id="desenho">
+          <div class="panel-head">
+            <div class="panel-num">01</div>
+            <h2>Desenho atendendo ao sistema espacial e Grids</h2>
+          </div>
+          <p class="panel-intro">Um sistema espacial é um conjunto de regras de como medir as dimensões dos componentes e seus espaçamentos.</p>
+          
+          <div class="spec-grid">
+            <div class="spec-text">
+              <p>O apoio de um sistema espacial traz <strong>uniformidade, consistência</strong> e uma melhor comunicação do time, reduzindo a quantidade de decisões que o designer faz durante o trabalho.</p>
+              <p>Nossos componentes são criados com valores de um sistema de <strong>múltiplos de oito</strong>, com exceções para uso de 4 e 12 px.</p>
+              <p>Os grids e suas colunas, nas versões desktop e mobile, também são um ótimo parâmetro: sustentar um componente em colunagem facilita a adaptação aos demais breakpoints.</p>
+            </div>
+            
+            <div class="grid-visual">
+              <div class="grid-visual-label">Grid base · múltiplos de 8</div>
+              <div class="grid-demo">
+                <div class="grid-col"></div>
+                <div class="grid-col"></div>
+                <div class="grid-col"></div>
+                <div class="grid-col"></div>
+                <div class="grid-col"></div>
+                <div class="grid-col"></div>
+                <div class="grid-col"></div>
+                <div class="grid-col"></div>
+              </div>
+              <div class="grid-scale">
+                <span class="grid-chip">4px</span>
+                <span class="grid-chip hl">8px</span>
+                <span class="grid-chip hl">16px</span>
+                <span class="grid-chip hl">24px</span>
+                <span class="grid-chip">12px</span>
+                <span class="grid-chip hl">32px</span>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- ─── ANATOMIA / STATES ─── -->
+        <section class="panel" id="anatomia">
+          <div class="panel-head">
+            <div class="panel-num">02</div>
+            <h2>Anatomia do Button Primary Medium</h2>
+          </div>
+          <p class="panel-intro">Assim que o componente é desenhado, as informações sobre especificações visuais, variações e comportamentos devem ser documentadas. Cada state altera cor, formato ou conteúdo gerando feedback de sistema.</p>
+          
+          <div class="tip">
+            <div class="tip-icon">!</div>
+            <p>Vale a pena mostrar a documentação de forma informal aos devs do seu time para colher opiniões e sugestões de melhoria. <strong>O diálogo inicial é entre vocês e o time de tecnologia.</strong></p>
+          </div>
+          
+          <div class="states-wrap">
+            <table class="states-table">
+              <thead>
+                <tr>
+                  <th>State</th>
+                  <th>Button Primary</th>
+                  <th>+ Icon</th>
+                  <th>Comportamento</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="state-name">
+                      <span class="label">Normal</span>
+                      <span class="token">button-primary-rest</span>
+                    </div>
+                  </td>
+                  <td><button class="btn-primary">Contrate Online</button></td>
+                  <td>
+                    <button class="btn-primary">
+                      <svg viewBox="0 0 24 24"><path d="M3 5l9 7 9-7M3 5h18v14H3z"/></svg>
+                      Contrate Online
+                    </button>
+                  </td>
+                  <td><p class="state-desc">Estado padrão, repouso. Aguarda interação do usuário.</p></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="state-name">
+                      <span class="label">Hover</span>
+                      <span class="token">button-primary-hover</span>
+                    </div>
+                  </td>
+                  <td><button class="btn-primary s-hover">Contrate Online</button></td>
+                  <td>
+                    <button class="btn-primary s-hover">
+                      <svg viewBox="0 0 24 24"><path d="M3 5l9 7 9-7M3 5h18v14H3z"/></svg>
+                      Contrate Online
+                    </button>
+                  </td>
+                  <td><p class="state-desc">Cursor sobre o botão. Eleva levemente com sombra.</p></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="state-name">
+                      <span class="label">Disabled</span>
+                      <span class="token">button-primary-disabled</span>
+                    </div>
+                  </td>
+                  <td><button class="btn-primary s-disabled">Contrate Online</button></td>
+                  <td>
+                    <button class="btn-primary s-disabled">
+                      <svg viewBox="0 0 24 24"><path d="M3 5l9 7 9-7M3 5h18v14H3z"/></svg>
+                      Contrate Online
+                    </button>
+                  </td>
+                  <td><p class="state-desc">Indisponível. Sem interação, contraste reduzido.</p></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="state-name">
+                      <span class="label">Active</span>
+                      <span class="token">button-primary-active</span>
+                    </div>
+                  </td>
+                  <td><button class="btn-primary s-active">Contrate Online</button></td>
+                  <td>
+                    <button class="btn-primary s-active">
+                      <svg viewBox="0 0 24 24"><path d="M3 5l9 7 9-7M3 5h18v14H3z"/></svg>
+                      Contrate Online
+                    </button>
+                  </td>
+                  <td><p class="state-desc">No momento do clique. Borda accent, leve afundamento.</p></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="state-name">
+                      <span class="label">Focused</span>
+                      <span class="token">button-primary-focused</span>
+                    </div>
+                  </td>
+                  <td><button class="btn-primary s-focused">Contrate Online</button></td>
+                  <td>
+                    <button class="btn-primary s-focused">
+                      <svg viewBox="0 0 24 24"><path d="M3 5l9 7 9-7M3 5h18v14H3z"/></svg>
+                      Contrate Online
+                    </button>
+                  </td>
+                  <td><p class="state-desc">Foco via teclado. Anel accent para acessibilidade.</p></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="state-name">
+                      <span class="label">Loading</span>
+                      <span class="token">button-primary-loading</span>
+                    </div>
+                  </td>
+                  <td>
+                    <button class="btn-primary s-loading">
+                      <span class="spinner"></span>
+                      Loading
+                    </button>
+                  </td>
+                  <td>
+                    <button class="btn-primary s-loading">
+                      <span class="spinner"></span>
+                      Loading
+                    </button>
+                  </td>
+                  <td><p class="state-desc">Processando. Spinner substitui o ícone, ação travada.</p></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        
+        <!-- ─── TOKENS ─── -->
+        <section class="panel" id="tokens">
+          <div class="panel-head">
+            <div class="panel-num">03</div>
+            <h2>Tokens</h2>
+          </div>
+          <p class="panel-intro">De cor, texto, espaçamento, radius e sombra. Tudo o que o componente tem de visual é documentado para facilitar a construção no código.</p>
+          
+          <div class="tokens-grid">
+            <div class="token-card">
+              <div class="token-card-head">
+                <span class="token-card-title">Cor</span>
+                <span class="token-card-tag">Color</span>
+              </div>
+              <div class="token-rows">
+                <div class="token-row">
+                  <span class="token-swatch" style="background:#111111"></span>
+                  <span class="key">surface</span>
+                  <span class="val">#111111</span>
+                </div>
+                <div class="token-row">
+                  <span class="token-swatch" style="background:#ffffff"></span>
+                  <span class="key">label</span>
+                  <span class="val">#FFFFFF</span>
+                </div>
+                <div class="token-row">
+                  <span class="token-swatch" style="background:#e0ff33"></span>
+                  <span class="key">focus-ring</span>
+                  <span class="val">#E0FF33</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="token-card">
+              <div class="token-card-head">
+                <span class="token-card-title">Fonte</span>
+                <span class="token-card-tag">Type</span>
+              </div>
+              <div class="token-rows">
+                <div class="token-row"><span class="key">family</span><span class="val">Jakarta</span></div>
+                <div class="token-row"><span class="key">size</span><span class="val">14px</span></div>
+                <div class="token-row"><span class="key">weight</span><span class="val">600</span></div>
+              </div>
+            </div>
+            
+            <div class="token-card">
+              <div class="token-card-head">
+                <span class="token-card-title">Shape</span>
+                <span class="token-card-tag">Radius</span>
+              </div>
+              <div class="token-rows">
+                <div class="token-row"><span class="key">border-radius</span><span class="val">999px</span></div>
+                <div class="token-row"><span class="key">border-width</span><span class="val">2px</span></div>
+                <div class="token-row"><span class="key">icon-size</span><span class="val">16px</span></div>
+              </div>
+            </div>
+            
+            <div class="token-card">
+              <div class="token-card-head">
+                <span class="token-card-title">Padding</span>
+                <span class="token-card-tag">Spacing</span>
+              </div>
+              <div class="token-rows">
+                <div class="token-row"><span class="key">inline</span><span class="val">24px</span></div>
+                <div class="token-row"><span class="key">block</span><span class="val">12px</span></div>
+                <div class="token-row"><span class="key">gap-icon</span><span class="val">8px</span></div>
+              </div>
+            </div>
+            
+            <div class="token-card">
+              <div class="token-card-head">
+                <span class="token-card-title">Sombra</span>
+                <span class="token-card-tag">Elevation</span>
+              </div>
+              <div class="token-rows">
+                <div class="token-row"><span class="key">hover-y</span><span class="val">6px</span></div>
+                <div class="token-row"><span class="key">blur</span><span class="val">18px</span></div>
+                <div class="token-row"><span class="key">opacity</span><span class="val">20%</span></div>
+              </div>
+            </div>
+            
+            <div class="token-card">
+              <div class="token-card-head">
+                <span class="token-card-title">Motion</span>
+                <span class="token-card-tag">Transition</span>
+              </div>
+              <div class="token-rows">
+                <div class="token-row"><span class="key">duration</span><span class="val">200ms</span></div>
+                <div class="token-row"><span class="key">easing</span><span class="val">ease</span></div>
+                <div class="token-row"><span class="key">spinner</span><span class="val">700ms</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- ─── CHECKLIST ─── -->
+        <section class="panel" id="checklist">
+          <div class="panel-head">
+            <div class="panel-num">04</div>
+            <h2>Checklist de documentação</h2>
+          </div>
+          <p class="panel-intro">O que toda documentação de componente deve cobrir antes do handoff para o time de desenvolvimento.</p>
+          
+          <div class="checklist">
+            <div class="check-item">
+              <div class="check-num">1</div>
+              <div class="check-content">
+                <h4>Função e contexto</h4>
+                <p>O motivo pelo qual o time viu a necessidade da existência do componente.</p>
+              </div>
+            </div>
+            <div class="check-item">
+              <div class="check-num">2</div>
+              <div class="check-content">
+                <h4>Grids e colunas</h4>
+                <p>Racional de construção em relação à colunagem dos grids e encaixe na interface.</p>
+              </div>
+            </div>
+            <div class="check-item">
+              <div class="check-num">3</div>
+              <div class="check-content">
+                <h4>Tokens</h4>
+                <p>Cor, texto, espaçamento, radius e sombra documentados para os devs.</p>
+              </div>
+            </div>
+            <div class="check-item">
+              <div class="check-num">4</div>
+              <div class="check-content">
+                <h4>Comportamentos</h4>
+                <p>Status que alteram cor ou formato, gerando feedback de sistema.</p>
+              </div>
+            </div>
+            <div class="check-item">
+              <div class="check-num">5</div>
+              <div class="check-content">
+                <h4>Animações & skeletons</h4>
+                <p>Transições e estados de carregamento que comunicam o status da interface.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Sidebar nav: scroll + active state
+    const links = document.querySelectorAll('.sidebar-link');
+    const sections = document.querySelectorAll('.panel');
+    
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        const target = document.getElementById(link.dataset.target);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+    
+    // Active link on scroll
+    const spy = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          links.forEach(l => l.classList.remove('active'));
+          const active = document.querySelector('.sidebar-link[data-target="' + e.target.id + '"]');
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    
+    sections.forEach(s => spy.observe(s));
+    
+    // Reveal
+    const ro = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.rv').forEach(el => ro.observe(el));
+  </script>
+</body>
+</html>
