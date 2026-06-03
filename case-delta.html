@@ -924,68 +924,30 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
 
 <script>
 // Mockups Desktop + Mobile
-const desktopSvgData = `<svg width="1440" height="7349" viewBox="0 0 1440 7349" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect width="1440" height="7349" fill="black"/></svg>`;
-const mobileSvgData = `<svg width="360" height="7349" viewBox="0 0 360 7349" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><rect width="360" height="7349" fill="black"/></svg>`;
+function loadSvgFrame(frameId, hintId, svgPath) {
+  const frame = document.getElementById(frameId);
+  const hint = document.getElementById(hintId);
+  if (!frame) return;
 
-// Desktop frame
-const desktopFrame = document.getElementById('desktop-frame');
-const desktopHint = document.getElementById('desktop-hint');
-
-if (desktopFrame) {
-  desktopFrame.srcdoc = `
-    <html>
-      <head>
-        <style>
-          * { margin: 0; padding: 0; }
-          body { background: white; }
-          svg { display: block; width: 100%; height: auto; }
-        </style>
-      </head>
-      <body>${desktopSvgData}</body>
-    </html>
-  `;
-
-  setTimeout(() => {
-    try {
-      const body = desktopFrame.contentDocument?.body;
-      if (body) {
-        body.addEventListener('scroll', () => {
-          if (body.scrollTop > 10) desktopHint.classList.add('hidden');
-        });
-      }
-    } catch (e) {}
-  }, 500);
+  fetch(svgPath)
+    .then(r => r.text())
+    .then(svg => {
+      frame.srcdoc = `<html><head><style>* { margin: 0; padding: 0; } body { background: #fff; overflow-x: hidden; } svg { display: block; width: 100%; height: auto; }</style></head><body>${svg}</body></html>`;
+      setTimeout(() => {
+        try {
+          const doc = frame.contentDocument;
+          if (doc && hint) {
+            (doc.scrollingElement || doc.body).addEventListener('scroll', () => {
+              if ((doc.scrollingElement || doc.body).scrollTop > 10) hint.classList.add('hidden');
+            });
+          }
+        } catch (e) {}
+      }, 600);
+    });
 }
 
-// Mobile frame
-const mobileFrame = document.getElementById('mobile-frame');
-const mobileHint = document.getElementById('mobile-hint');
-
-if (mobileFrame) {
-  mobileFrame.srcdoc = `
-    <html>
-      <head>
-        <style>
-          * { margin: 0; padding: 0; }
-          body { background: white; }
-          svg { display: block; width: 100%; height: auto; }
-        </style>
-      </head>
-      <body>${mobileSvgData}</body>
-    </html>
-  `;
-
-  setTimeout(() => {
-    try {
-      const body = mobileFrame.contentDocument?.body;
-      if (body) {
-        body.addEventListener('scroll', () => {
-          if (body.scrollTop > 10) mobileHint.classList.add('hidden');
-        });
-      }
-    } catch (e) {}
-  }, 500);
-}
+loadSvgFrame('desktop-frame', 'desktop-hint', 'desktop-siteoficial.svg');
+loadSvgFrame('mobile-frame',  'mobile-hint',  'mobile-siteoficial.svg');
 </script>
 
 </main>
