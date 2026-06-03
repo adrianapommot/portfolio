@@ -48,28 +48,7 @@ p { text-wrap: pretty; }
 .btn--dark { background: var(--ink); color: #fff; border: 1px solid var(--ink); padding: 13px 24px; }
 .btn--dark:hover { box-shadow: 0 10px 26px rgba(17,17,17,.28); transform: translateY(-2px); }
 
-/* ═══════════════════════════════════ NAV ═══════════════════════ */
-.nav-name { position: fixed; top: 36px; left: var(--gut); z-index: 100; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink); background: var(--accent); padding: 9px 20px; border-radius: 999px; overflow: hidden; }
-.nav-name span { display: block; line-height: 1; white-space: nowrap; transition: transform .45s cubic-bezier(.19,1,.22,1); }
-.nav-name:hover span { transform: translateY(-100%); }
-.nav-roll { display: block; overflow: hidden; height: 1em; }
-.nav-float { position: fixed; top: 36px; right: var(--gut); z-index: 100; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
-.nav-toggle { width: 50px; height: 50px; border-radius: 50%; border: 1px solid var(--accent); cursor: pointer; background: var(--accent); display: flex; align-items: center; justify-content: center; transition: background .3s, border-color .3s; }
-.nav-toggle:hover { background: var(--ink); border-color: var(--ink); }
-.nav-toggle:hover svg { stroke: #fff; }
-.nav-toggle svg { width: 20px; height: 20px; stroke: var(--ink); stroke-width: 1.2; fill: none; }
-.nav-toggle .icon-x { display: none; }
-.nav-float.open .nav-toggle { background: var(--ink); border-color: var(--ink); }
-.nav-float.open .nav-toggle svg { stroke: #fff; }
-.nav-float.open .nav-toggle .icon-menu { display: none; }
-.nav-float.open .nav-toggle .icon-x { display: block; }
-.nav-menu { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; opacity: 0; transform: translateY(-8px); pointer-events: none; transition: opacity .3s, transform .3s; }
-.nav-float.open .nav-menu { opacity: 1; transform: none; pointer-events: auto; }
-.nav-menu a { font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; padding: 9px 18px; border-radius: 999px; white-space: nowrap; transition: background .25s, color .25s; }
-.nav-menu .nav-cta { color: #fff; background: var(--ink); display: inline-flex; align-items: center; gap: 8px; }
-.nav-menu .nav-cta:hover { background: var(--accent); color: var(--ink); }
-.nav-menu .nav-link { color: var(--ink-2); background: rgba(255,255,255,.6); backdrop-filter: blur(12px); }
-.nav-menu .nav-link:hover { background: var(--ink); color: #fff; }
+/* NAV (gerenciado por site-nav.js Web Component — remover estilos locais) */
 
 /* ═══════════════════════════════════ HERO (T1) ═════════════════ */
 .hero { background: var(--paper); min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; padding: clamp(84px, 9vh, 116px) 0 0; }
