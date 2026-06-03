@@ -20,6 +20,7 @@
   --dark: #111110;
   /* layout */
   --maxw: 1440px;
+  --m: clamp(24px, 5vw, 64px);
   --gut: clamp(24px, 5vw, 64px);
 }
 
