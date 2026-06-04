@@ -14,24 +14,19 @@
 
 <!-- NAV (componente compartilhado) -->
 <site-nav brand-href="#top" base="" contact="#contato" cv="#contato"></site-nav>
-<script src="site-nav.js"></script>
+<script src="site-nav.js?v=2"></script>
 
 <!-- HERO -->
 <header class="hero" id="top">
   <div class="wrap hero-grid">
-    <div class="hero-top">
-      <span class="loc">
-        <svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="4.5" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M14 0v9M14 19v9M0 14h9M19 14h9" stroke="currentColor" stroke-width="1.2"/></svg>
-        <span>São Paulo, BR · Remoto</span>
-      </span>
-      <span class="hero-tag">Designer Sênior · 15 anos</span>
-    </div>
     <h1 class="hero-title"><span>Design</span><span>Systems,</span><span>Product &amp;</span><span class="hl">Visual Design</span></h1>
     <div class="hero-foot">
-      <p class="lead">Designer sênior · 15 anos na interseção entre produto, interface e linguagem visual.</p>
+      <div class="hero-meta">
+        <span class="hero-meta-line">São Paulo, BR · Remoto · Designer Sênior · 15 anos</span>
+      </div>
       <div class="hero-ctas">
-        <a href="#work" class="btn btn--primary">Ver projetos <span>→</span></a>
-        <a href="#contato" class="btn btn--ghost">Download CV <span>↓</span></a>
+        <a href="https://www.linkedin.com/in/adriana-pommot/" target="_blank" rel="noopener" class="btn-sm btn-sm--primary">LinkedIn ↗</a>
+        <a href="#contato" class="btn-sm btn-sm--ghost">Download CV ↓</a>
       </div>
     </div>
   </div>
@@ -40,15 +35,17 @@
   </div>
 </header>
 
-<!-- DE PIXELS A SISTEMAS -->
-<section class="pixels">
-  <div class="wrap pixels-grid">
-    <div class="pixels-text">
-      <h2 class="pixels-title rv"><span>De pixels</span><span>a sistemas</span><span>De sistemas</span><span>a produtos.</span></h2>
-      <p class="lead rv d1" style="max-width:460px">Interfaces de alta fidelidade, Design System e Branding &amp; Identidade. Do token à experiência final.</p>
-      <a href="#work" class="pixels-cta rv d1"><span><b>[</b> Ver projetos <b>]</b></span><span class="ar">→</span></a>
+<!-- SERVIÇOS -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="svc-head rv">
+      <div>
+        <div class="eyebrow">Serviços</div>
+        <h2 class="sec-title" style="margin-top:18px">O que eu faço</h2>
+        <p class="lead rv d1" style="margin-top:20px; max-width:360px;">Design com propósito e método.<br>Transformo estratégia em produtos digitais inteligentes, acessíveis e memoráveis.</p>
+      </div>
     </div>
-    <div class="pixels-art rv d2"><img src="img/final.png" alt="Diagrama: pixels, sistemas e produtos" /></div>
+    <div class="svc-grid" id="svcGrid"></div>
   </div>
 </section>
 
@@ -66,50 +63,58 @@
   </div>
 </section>
 
-<!-- SERVIÇOS -->
-<section class="services" id="services">
-  <div class="wrap">
-    <div class="svc-head rv">
-      <div>
-        <div class="eyebrow">Serviços</div>
-        <h2 class="svc-headline" style="margin-top:20px"><span>O que</span><span>eu faço</span></h2>
-      </div>
-      <p class="lead">Design com propósito e método. Transformo estratégia em produtos digitais inteligentes, acessíveis e memoráveis.</p>
-    </div>
-    <div class="svc-grid" id="svcGrid"></div>
-  </div>
-</section>
-
 <!-- TRAJETÓRIA -->
 <section class="traj" id="trajectory">
   <div class="wrap">
     <div class="traj-head rv">
-      <div class="eyebrow">Trajetória · 2012 — Agora</div>
-      <a href="https://www.linkedin.com/in/adriana-pommot/" target="_blank" rel="noopener" class="traj-archive">Designer desde 2012 · Histórico completo no LinkedIn
+      <div class="traj-head-left">
+        <div class="eyebrow">Trajetória · 2012 — Agora</div>
+        <h2 class="sec-title" style="margin-top:16px">Onde trabalhei</h2>
+        <p class="lead rv d1" style="margin-top:16px;max-width:400px">15 anos entre estúdios, consultorias e scale-ups. Do print ao produto digital.</p>
+      </div>
+      <a href="https://www.linkedin.com/in/adriana-pommot/" target="_blank" rel="noopener" class="traj-archive">LinkedIn
         <svg viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 6h7M6 2.5L9.5 6L6 9.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
-    <div class="traj-list" id="trajList"></div>
+    <div class="traj-grid" id="trajList"></div>
   </div>
 </section>
 
 <!-- SOBRE MIM -->
 <section class="about" id="about">
-  <div class="wrap about-wrap">
-    <div class="about-grid rv">
-      <div class="about-rail">
-        <div class="about-railhead">
-          <div class="eyebrow">Perfil</div>
-          <h2 class="about-railtitle">Sobre mim</h2>
-          <p class="lead">15 anos na interseção entre produto, interface e linguagem visual. Navegue pelos temas.</p>
-        </div>
-      <nav class="about-nav" id="aboutNav" role="tablist" aria-label="Temas"></nav>
-      <div class="about-ctas">
-        <a href="https://www.linkedin.com/in/adriana-pommot/" target="_blank" rel="noopener" class="btn btn--primary">LinkedIn <span>↗</span></a>
-        <a href="#contato" class="btn btn--ghost">Currículo</a>
+  <div class="wrap">
+    <div class="about-head rv">
+      <div class="about-head-l">
+        <div class="eyebrow">Perfil</div>
+        <h2 class="about-title">Sobre mim</h2>
+        <p class="lead" style="margin-top:4px;max-width:480px;text-wrap:balance">15 anos na interseção entre produto, interface e linguagem visual.</p>
       </div>
     </div>
-      <div class="about-detail" id="aboutDetail"></div>
+    <div class="about-2col rv d1">
+      <div class="about-bio">
+        <p class="about-bio-text">Designer sênior com 15 anos em UI, Visual Design, Branding e Design Systems. Construí experiências digitais para Escale, Dasa, Ford, Accenture e MRV, de produto a grandes consultorias. Meu trabalho vive na <mark style="background:var(--accent);color:var(--ink);padding:0 3px">interseção entre estratégia, sistemas e craft visual.</mark></p>
+        <div class="about-ctas" style="margin-top:auto">
+          <a href="https://www.linkedin.com/in/adriana-pommot/" target="_blank" rel="noopener" class="btn btn--primary">LinkedIn <span>↗</span></a>
+          <a href="#" class="btn btn--ghost">Currículo <span>↓</span></a>
+        </div>
+      </div>
+      <div class="about-facets">
+        <div class="about-facet">
+          <span class="about-facet-label">01 · Atuação</span>
+          <div class="about-facet-title">UI, Produto e Design Systems</div>
+          <div class="about-facet-body">Interfaces de alta fidelidade, arquitetura de tokens e sistemas escaláveis para times de produto.</div>
+        </div>
+        <div class="about-facet">
+          <span class="about-facet-label">02 · Processo</span>
+          <div class="about-facet-title">Rigor suíço, entregas com precisão</div>
+          <div class="about-facet-body">Frameworks ágeis, documentação rigorosa e handoff sem ruído. Figma, Framer, HTML, IA.</div>
+        </div>
+        <div class="about-facet about-facet--last">
+          <span class="about-facet-label">03 · Craft</span>
+          <div class="about-facet-title">Meu lugar é no craft</div>
+          <div class="about-facet-body">Tipografia, espaçamento e hierarquia visual como linguagem. Cada detalhe é uma decisão consciente.</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -134,7 +139,7 @@
         <div class="footer-logo">Adriana Pommot</div>
         <div class="footer-links">
           <a href="https://www.linkedin.com/in/adriana-pommot/" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="mailto:adrianapommot@gmail.com">Email</a>
+          <a href="/cdn-cgi/l/email-protection#accdc8dec5cdc2cddcc3c1c1c3d8eccbc1cdc5c082cfc3c1">Email</a>
         </div>
       </div>
       <div>
@@ -147,7 +152,7 @@
       </div>
       <div>
         <div class="footer-col-title">Contato</div>
-        <div class="footer-links"><a href="mailto:adrianapommot@gmail.com">adrianapommot@gmail.com</a><a href="#">São Paulo, BR</a></div>
+        <div class="footer-links"><a href="/cdn-cgi/l/email-protection#39585d4b5058575849565454564d795e54585055175a5654"><span class="__cf_email__" data-cfemail="5b3a3f29323a353a2b343636342f1b3c363a323775383436">[email&#160;protected]</span></a><a href="#">São Paulo, BR</a></div>
       </div>
     </div>
     <div class="footer-bottom">
@@ -157,7 +162,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* Adriana Pommot — Home · data + render + interactions */
 (function () {
   "use strict";
@@ -169,16 +174,16 @@
   var SKILLS = ["UI Design", "Design System", "Branding & Identidade", "Motion", "Branding de Interface", "Figma", "Prototipação"];
 
   var PROJECTS = [
-    { num: "01", name: "MRV", sub: "Fluxo de Renegociação", img: "img/mrv/overview-grid.webp", pos: "center 50%", tags: ["Product Design", "Fintech", "Design System"], href: "case-mrv.html" },
-    { num: "02", name: "Ford", sub: "Immersion Room", img: "img/ford/hero-room.webp", pos: "center 48%", tags: ["Identidade Visual", "Design Espacial"], href: "case-ford.html" },
-    { num: "03", name: "Delta", sub: "Design System", img: "img/delta/hero-mockup.webp", pos: "center 50%", tags: ["Design System", "Tokens"], href: "case-delta.html" },
-    { num: "04", name: "Chorume", sub: "Tipografia", img: "img/chorume/alfabeto-chorume.png", pos: "center 42%", tags: ["Tipografia", "Branding"], href: "case-chorume.html" }
+    { num: "01", name: "Delta", sub: "Design System", img: "img/delta/thumbdelta.png", pos: "center 50%", tags: ["Design System", "Tokens"], href: "case-delta.html" },
+    { num: "02", name: "MRV", sub: "Fluxo de Renegociação", img: "img/mrv/thumb-mrv.png", pos: "center 50%", tags: ["Product Design", "Fintech", "Design System"], href: "case-mrv.html" },
+    { num: "03", name: "", sub: "", img: "img/ford/ford-hero-room.png", pos: "center 48%", tags: ["Identidade Visual", "Design Espacial"], href: "case-ford.html" },
+    { num: "04", name: "Chorume", sub: "Tipografia", img: "img/chorume/chorumeHero.png", pos: "center 42%", tags: ["Tipografia", "Branding"], href: "case-chorume.html" }
   ];
 
   var ICONS = {
-    ui: '<svg viewBox="0 0 32 32"><rect x="4" y="5" width="24" height="22" rx="2"/><path d="M4 12h24M11 12v15"/></svg>',
-    brand: '<svg viewBox="0 0 32 32"><path d="M20 5l7 7-15 15-7 1 1-7L20 5z"/><path d="M17 8l7 7"/></svg>',
-    ds: '<svg viewBox="0 0 32 32"><path d="M16 4 4 10.5l12 6.5 12-6.5L16 4z"/><path d="M4 16l12 6.5 12-6.5"/><path d="M4 21.5l12 6.5 12-6.5"/></svg>'
+    ui: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="24" height="22" rx="2" fill="none"/><path d="M4 12h24M11 12v15"/></svg>',
+    brand: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 5l7 7-15 15-7 1 1-7L20 5z"/><path d="M17 8l7 7"/></svg>',
+    ds: '<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4 4 10.5l12 6.5 12-6.5L16 4z"/><path d="M4 16l12 6.5 12-6.5"/><path d="M4 21.5l12 6.5 12-6.5"/></svg>'
   };
   var SERVICES = [
     { num: "01", ico: "ui", name: "UI & Produto", desc: "Interfaces de alta fidelidade, fluxos end-to-end, prototipação, motion de produto e handoff. Do discovery ao delivery, do wireframe ao pixel final.",
@@ -190,11 +195,11 @@
   ];
 
   var TRAJ = [
-    { period: "2021 — 23", org: "Escale", role: "Lead Designer · Delta Design System" },
-    { period: "2020 — 21", org: "Dasa", role: "Senior UI Designer · Health Tech" },
-    { period: "2019 — 20", org: "D3", role: "Design Lead · MRV Ecossistema Financeiro" },
-    { period: "2019", org: "Accenture", role: "Senior UI Designer · Vivo" },
-    { period: "2017 — 18", org: "QuesttoNó", role: "Senior Designer · Ford Immersion Room" }
+    { period: "2021 — 23", org: "Escale", role: "Lead Designer · Delta Design System", now: true, bar: 100 },
+    { period: "2020 — 21", org: "Dasa",   role: "Senior UI Designer · Health Tech", bar: 50 },
+    { period: "2019 — 20", org: "D3",     role: "Design Lead · MRV Ecossistema Financeiro", bar: 45 },
+    { period: "2019",      org: "Accenture", role: "Senior UI Designer · Vivo", bar: 25 },
+    { period: "2017 — 18", org: "QuesttoNó", role: "Senior Designer · Ford Immersion Room", bar: 70 }
   ];
 
   var ABOUT = [
@@ -231,20 +236,18 @@
   // posters
   var pc = $("#posters");
   if (pc) pc.innerHTML = PROJECTS.map(function (p) {
-    return '<a href="' + p.href + '" class="poster rv">' +
+    return '<a href="' + p.href + '" class="poster">' +
       '<img src="' + p.img + '" alt="' + esc(p.name) + " " + esc(p.sub) + '" loading="lazy" style="object-position:' + (p.pos || "center") + '" />' +
       '<span class="poster-scrim"></span>' +
-      '<span class="poster-top"><span class="poster-num">' + p.num + " / 04</span>" +
-      '<span class="poster-tags">' + p.tags.map(function (t) { return "<span>" + esc(t) + "</span>"; }).join("") + "</span></span>" +
-      '<span class="poster-bot"><span class="poster-name">' + esc(p.name) + "</span>" +
-      '<span class="poster-sub"><b>' + esc(p.sub) + '</b><span class="poster-cta">Ver case →</span></span></span></a>';
+      '<span class="poster-top"><span class="poster-cta">Ver case →</span></span>' +
+      '</a>';
   }).join("");
 
   // services
   var sg = $("#svcGrid");
   if (sg) sg.innerHTML = SERVICES.map(function (s, i) {
-    return '<article class="svc-card rv ' + (i ? "d" + i : "") + '"><span class="svc-bar"></span>' +
-      '<div class="svc-cardtop"><span class="svc-icoc">' + ICONS[s.ico] + '</span><span class="svc-num">' + s.num + "</span></div>" +
+    return '<article class="svc-card rv ' + (i ? "d" + i : "") + '"><span class="svc-ghost">' + s.num + '</span>' +
+      '<div class="svc-cardtop"><span class="svc-icoc">' + ICONS[s.ico] + '</span><span class="svc-bar-lime"></span></div>' +
       '<h3 class="svc-name">' + esc(s.name) + "</h3>" +
       '<p class="svc-desc">' + esc(s.desc) + "</p>" +
       '<div class="svc-ficha">' + s.ficha.map(function (f) { return '<div class="svc-frow"><span class="svc-fl">' + esc(f[0]) + '</span><span class="svc-fv">' + esc(f[1]) + "</span></div>"; }).join("") + "</div></article>";
@@ -252,12 +255,14 @@
 
   // trajectory
   var tl = $("#trajList");
-  if (tl) tl.innerHTML = TRAJ.map(function (t) {
-    var org = t.now ? '<span class="org-hl">' + esc(t.org) + "</span>" : esc(t.org);
-    var badge = t.now ? '<span class="now-badge">● Agora</span>' : "";
-    return '<a href="https://www.linkedin.com/in/adriana-pommot/" target="_blank" rel="noopener" class="traj-row rv">' +
-      '<div class="traj-meta"><span class="traj-period">' + esc(t.period) + '</span><span class="traj-role">' + esc(t.role) + "</span></div>" +
-      '<div class="traj-org-line"><h3 class="traj-org">' + org + badge + '</h3><span class="traj-arrow">→</span></div></a>';
+  if (tl) tl.innerHTML = TRAJ.map(function (t, i) {
+    var isNow = t.now;
+    return '<div class="traj-col' + (isNow ? ' traj-col--now' : '') + '">' +
+      '<div class="traj-bar-wrap"><div class="traj-bar" style="width:' + t.bar + '%"></div></div>' +
+      '<div class="traj-period">' + esc(t.period) + (isNow ? ' — AGORA' : '') + '</div>' +
+      '<div class="traj-org">' + esc(t.org) + '</div>' +
+      '<div class="traj-role">' + esc(t.role) + '</div>' +
+      '</div>';
   }).join("");
 
   // about navigator
