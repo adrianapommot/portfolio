@@ -130,8 +130,8 @@ p { text-wrap: pretty; }
 .sec-title { font-size: clamp(40px, 6vw, 80px); font-weight: 600; letter-spacing: -0.035em; line-height: 0.92; text-transform: uppercase; }
 .sec-note { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,.4); }
 .posters { display: flex; flex-direction: column; gap: clamp(20px, 2.5vw, 28px); }
-.poster { position: relative; display: block; border-radius: 6px; overflow: hidden; background: var(--ink); padding: 24px; }
-.poster img { display: block; width: 100%; height: auto; border-radius: 4px; }
+.poster { position: relative; display: block; border-radius: 4px; overflow: hidden; background: var(--ink); padding: 24px; }
+.poster img { display: block; width: 100%; height: auto; border-radius: 4px; border: 1px solid rgba(255,255,255,.1); }
 .poster-scrim { position: absolute; inset: 24px; z-index: 2; border-radius: 4px; background: linear-gradient(90deg, rgba(10,10,8,.35) 0%, rgba(10,10,8,.12) 50%, rgba(10,10,8,0) 80%); }
 .poster-scrim.placeholder { background: linear-gradient(135deg,#2a2925,#161512); }
 .poster-tags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
