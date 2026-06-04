@@ -272,17 +272,19 @@ p { text-wrap: pretty; }
 /* ═══════════════════════════════════ RESPONSIVE ══════════════ */
 @media (max-width: 1080px) {
   .svc-grid { grid-template-columns: 1fr; max-width: 520px; }
-  .about-grid { grid-template-columns: 1fr; }
-  .about-rail { border-right: 0; border-bottom: 1px solid var(--line); }
-  .about-detail { min-height: 0; }
 }
 @media (max-width: 860px) {
-  .pixels-grid { grid-template-columns: 1fr; gap: 32px; }
-  .pixels-art { order: 2; }
   .cta-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
-  .poster { aspect-ratio: 4/5; }
-  .poster-scrim { background: linear-gradient(0deg, rgba(10,10,8,.9) 0%, rgba(10,10,8,.35) 50%, rgba(10,10,8,.1) 100%); }
+  /* Sobre mim: empilha bio + facetas (HTML usa .about-2col, não .about-grid) */
+  .about-2col { grid-template-columns: 1fr; gap: var(--space-mid); }
+  /* Projetos: a poster mantém 16/7 e reduz na proporção (sem cropar).
+     A imagem (~2.29) preenche sem corte; não forçamos 4/5 que cortava. */
+}
+@media (max-width: 768px) {
+  /* Hero foot empilha: metadata em cima (podendo quebrar linha) e botões embaixo */
+  .hero-foot { flex-direction: column; align-items: flex-start; gap: var(--space-md); }
+  .hero-meta-line { white-space: normal; }
 }
 @media (max-width: 560px) {
   .footer-grid { grid-template-columns: 1fr; }
