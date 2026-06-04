@@ -18,6 +18,7 @@
   --font:'Plus Jakarta Sans',sans-serif; --font-display:'Plus Jakarta Sans',sans-serif;
   --m:clamp(24px,5vw,64px); --gut:24px; --max-w:1440px;
   --space-md:24px; --space-lg:36px; --space-title:72px; --space-section:112px;
+  --gap-after-title:72px; /* token universal: espaçamento título → conteúdo em todas as seções */
   --s1:8px; --s2:16px; --s3:24px; --s4:clamp(32px,3.4vw,40px); --s5:clamp(48px,5vw,64px); --s6:clamp(72px,8vw,104px);
   --ty-display:clamp(54px,5.6vw,74px); --ty-title:clamp(32px,3.4vw,48px); --ty-lead:clamp(16px,1.4vw,19px);
   --ty-copy:17px; --ty-small:14px; --ty-metric:32px; --ty-label:12px;
@@ -109,7 +110,7 @@ p{text-wrap:balance}
 @media(max-width:860px){.hero-meta{grid-template-columns:1fr 1fr;gap:0}.hm-item{border-bottom:1px solid var(--line);padding:20px 28px}.hm-item:first-child{padding-left:28px}.hm-item:nth-child(2n){border-right:none}}
 
 /* ═══ HEADER DE SEÇÃO ═══ */
-.sec-head{max-width:760px;margin-bottom:var(--space-title)}
+.sec-head{max-width:760px;margin-bottom:var(--gap-after-title)}
 .sec-head .s-title{margin-bottom:var(--space-md)}
 
 /* ═══ ABERTURA / STATEMENT (suíço, herda o grid do case) ═══ */
@@ -164,7 +165,7 @@ p{text-wrap:balance}
 @media(max-width:760px){.strat-step{grid-template-columns:1fr;column-gap:0;row-gap:10px}.strat-n{margin-bottom:4px}.strat-t{grid-row:2}.strat-d{grid-column:1;grid-row:3;margin-top:6px}.strat-step:hover{padding-left:0}}
 
 /* ═══ 03 O QUE CONSTRUÍ — pilares + atomic + insights ═══ */
-.built-lead{max-width:720px;margin-bottom:var(--s5)}
+.built-lead{max-width:720px;margin-bottom:var(--gap-after-title)}
 .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gut);margin-bottom:var(--space-title)}
 .pillar{position:relative;background:#fff;border:1px solid var(--line);border-radius:18px;padding:32px 28px;display:flex;flex-direction:column;gap:14px;overflow:hidden;box-shadow:0 1px 2px rgba(17,17,17,.04),0 10px 30px rgba(17,17,17,.03);transition:transform .28s cubic-bezier(.2,.7,.3,1),box-shadow .28s ease}
 .pillar::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--line);transition:background .25s}
@@ -351,6 +352,22 @@ p{text-wrap:balance}
 .wb-panel .white-label-sim{padding:0;border-top:none}
 @media(max-width:760px){.wb-items{grid-template-columns:1fr}}
 
+/* ═══ BIBLIOTECA DE COMPONENTES ═══ */
+.bib-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gut);margin-top:0}
+.bib-col{display:flex;flex-direction:column;gap:10px}
+.bib-num{font-size:var(--ty-label);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-4)}
+.bib-name{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--black)}
+.bib-desc{font-size:var(--ty-small);line-height:1.65;color:var(--gray-2);text-wrap:pretty}
+
+/* ═══ ARQUITETURA WHITE LABEL ═══ */
+.wl-split{display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(48px,6vw,88px);row-gap:var(--s3)}
+.wl-split > .s-index,.wl-split > .s-title,.wl-split > .wl-chips{grid-column:1;align-self:start}
+.wl-chips{display:flex;flex-wrap:wrap;gap:8px}
+.wl-right{grid-column:2;grid-row:3;display:flex;flex-direction:column;gap:18px;align-self:start}
+.wl-para{font-size:var(--ty-small);font-weight:400;line-height:1.72;color:var(--gray-2);text-wrap:balance}
+.wl-para strong{font-weight:600;color:var(--gray-1)}
+@media(max-width:760px){.wl-split{grid-template-columns:1fr}.wl-right{grid-column:1;grid-row:auto}}
+
 /* ═══ WHITE LABEL SIMULATION ═══ */
 .white-label-sim{padding:clamp(48px,5.5vw,80px) var(--m);border-top:1px solid var(--line)}
 .white-label-sim .sec-head{margin-bottom:var(--space-lg)}
@@ -375,7 +392,7 @@ p{text-wrap:balance}
 
 /* ═══ 05 BIBLIOTECA — claro, hairlines ═══ */
 .lib{margin-top:0}
-.lib-head{max-width:760px;margin-bottom:var(--space-title)}
+.lib-head{max-width:760px;margin-bottom:var(--gap-after-title)}
 .lib-head .s-title{margin-bottom:var(--space-md)}
 .lib-lead{font-size:var(--ty-lead);font-weight:500;line-height:1.5;color:var(--gray-1);max-width:62ch}
 .lib-stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:48px 0}
@@ -549,6 +566,7 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
 .sec.dark .s-lead{color:rgba(255,255,255,.82)}
 .sec.dark .s-lead strong{color:#fff}
 .sec.dark .s-label{color:rgba(255,255,255,.5)}
+.sec.dark .intro-role .s-label{color:var(--accent)}
 .sec.dark .prob-title{color:#fff}
 .sec.dark .prob-desc{color:rgba(255,255,255,.62)}
 .sec.dark .prob-desc strong{color:#fff}
@@ -558,7 +576,7 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
 .sec.dark .intro-micro{color:rgba(255,255,255,.62)}
 .sec.dark .intro-micro strong{color:#fff}
 @media(min-width:861px){
-  .sec.dark .intro-grid{grid-template-columns:calc(50% - clamp(24px,3vw,44px)) 1fr;column-gap:calc(clamp(48px,6vw,88px) + clamp(88px,9vw,116px) + clamp(18px,2vw,28px))}
+  .sec.dark .intro-grid{grid-template-columns:calc(50% - clamp(24px,3vw,44px)) 1fr;column-gap:clamp(48px,6vw,88px)}
   .sec.dark .intro-over{grid-column:1}
   .sec.dark .intro-idx{grid-column:2;justify-self:end}
   .sec.dark .intro-rule{grid-column:1 / -1}
@@ -728,13 +746,11 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
         </div>
 
         <div class="gallery active" id="gal-colors">
-          <div class="col-block">
-            <div class="col-grouplabel">Delta Brand Colors</div>
-            <div class="col-grid" id="brandColors"></div>
-          </div>
-          <div class="col-block">
-            <div class="col-grouplabel">Delta Feedback Colors</div>
-            <div class="col-grid" id="feedbackColors"></div>
+          <iframe src="color-tokens.html" style="width:100%;height:580px;border:1px solid var(--line);border-radius:12px;display:block" loading="lazy" title="Color Tokens interativo"></iframe>
+          <div style="margin-top:var(--s5)">
+            <h3 style="font-size:var(--ty-copy);font-weight:600;color:var(--black);letter-spacing:-.005em;line-height:1.3;margin-bottom:var(--s2)">Diagrama de contrastes</h3>
+            <p style="font-size:var(--ty-small);line-height:1.65;color:var(--gray-2);max-width:72ch;text-wrap:balance;margin-bottom:var(--s4)">Ferramenta criada para validar relações entre cores, orientar decisões de interface e incorporar acessibilidade à fundação do Design System desde a definição dos tokens.</p>
+            <iframe src="diagrama-de-contrastes.html" style="width:100%;height:680px;border:1px solid var(--line);border-radius:12px;display:block" loading="lazy" title="Diagrama de contrastes interativo"></iframe>
           </div>
         </div>
 
@@ -876,6 +892,52 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
         </ul>
       </div>
       <p class="wb-note micro">Essas iniciativas permitiram que o sistema continuasse evoluindo de forma sustentável, mesmo diante do crescimento da empresa.</p>
+    </div>
+  </section>
+
+  <!-- ═══ 03a · BIBLIOTECA DE COMPONENTES ═══ -->
+  <section class="sec" id="biblioteca">
+    <div style="margin-bottom:var(--s4)">
+      <div class="s-index"><b>03</b><em></em></div>
+      <h2 class="s-title" style="margin-bottom:0">Biblioteca de componentes</h2>
+    </div>
+    <div class="bib-cols">
+      <div class="bib-col">
+        <span class="bib-num">01</span>
+        <span class="bib-name">Referência</span>
+        <p class="bib-desc">Com a fundação estabelecida, desenvolvi a biblioteca de componentes que passou a servir como referência para designers e desenvolvedores.</p>
+      </div>
+      <div class="bib-col">
+        <span class="bib-num">02</span>
+        <span class="bib-name">Consistência</span>
+        <p class="bib-desc">O foco não era apenas criar elementos reutilizáveis, mas construir padrões consistentes capazes de acelerar entregas sem comprometer a experiência.</p>
+      </div>
+      <div class="bib-col">
+        <span class="bib-num">03</span>
+        <span class="bib-name">Documentação</span>
+        <p class="bib-desc">A biblioteca contemplava componentes documentados, variantes, estados e comportamentos preparados para diferentes cenários de produto.</p>
+      </div>
+    </div>
+    <div class="rv" style="margin-top:var(--s5);margin-left:calc(-1*var(--m));margin-right:calc(-1*var(--m));background:#131313;padding:var(--s4) var(--m)">
+      <img src="global-design-tokens.png" alt="Global Design Tokens — fundação visual do Delta Design System" loading="lazy" style="width:100%;display:block;border-radius:12px">
+    </div>
+
+  </section>
+
+  <!-- ═══ 03b · ARQUITETURA WHITE LABEL ═══ -->
+  <section class="sec" id="white-label">
+    <div class="wl-split">
+      <div class="s-index" style="margin-bottom:0"><b>03</b><em></em></div>
+      <h2 class="s-title" style="margin-bottom:0">Arquitetura White Label</h2>
+      <div class="wl-chips">
+        <span class="wb-chip">Telecomunicações</span>
+        <span class="wb-chip">Saúde</span>
+        <span class="wb-chip">Serviços financeiros</span>
+      </div>
+      <div class="wl-right">
+        <p class="wl-para">Um dos principais diferenciais do Delta foi sua capacidade de <strong>atender diferentes marcas a partir de uma única base.</strong></p>
+        <p class="wl-para">Através da combinação entre tokens e componentes compartilhados, foi possível adaptar rapidamente interfaces para segmentos como telecomunicações, saúde e serviços financeiros, mantendo consistência estrutural e reduzindo custos de manutenção.</p>
+      </div>
     </div>
   </section>
 
