@@ -26,6 +26,14 @@
   --m: clamp(24px, 5vw, 64px);
   --gut: clamp(24px, 5vw, 64px);
   --nav-name-left: calc(var(--gut) + 8px);
+  /* espaçamento */
+  --space-md: 24px;
+  --space-lg: 32px;
+  --space-mid: 40px;
+  --space-deck: 48px;
+  --space-title: 72px;
+  --space-loose: 96px;
+  --space-section: 112px;
 }
 
 * , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -56,7 +64,7 @@ p { text-wrap: pretty; }
 /* NAV (gerenciado por site-nav.js Web Component — remover estilos locais) */
 
 /* ═══════════════════════════════════ HERO (T1) ═════════════════ */
-.hero { background: var(--paper); min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(16px, 2vw, 24px) 0 clamp(20px,2.5vh,32px); }
+.hero { background: var(--paper); min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: space-between; padding: var(--space-title) 0 var(--space-loose); }
 /* hero ancorado à ESQUERDA (alinha o título com a cápsula fixa da marca em telas largas) */
 .hero > .wrap.hero-grid { margin-left: 0; margin-right: auto; }
 .hero-grid { display: flex; flex-direction: column; gap: clamp(20px,2.5vh,32px); }
