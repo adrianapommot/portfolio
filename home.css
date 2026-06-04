@@ -103,7 +103,7 @@ p { text-wrap: pretty; }
 }
 
 /* skills ticker */
-.ticker { margin-top: var(--space-section); margin-bottom: var(--space-section); background: var(--ink); height: 52px; display: flex; align-items: center; overflow: hidden; }
+.ticker { margin-top: var(--space-deck); margin-bottom: var(--space-deck); background: var(--ink); height: 52px; display: flex; align-items: center; overflow: hidden; }
 .ticker-track { display: inline-flex; align-items: center; white-space: nowrap; animation: ticker 45s linear infinite; }
 .ticker-track span.s { color: var(--accent); padding: 0 16px; font-size: 12px; }
 .ticker-track span.t { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-soft); }
