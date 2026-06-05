@@ -12,7 +12,7 @@
   const css = `
   :host{display:contents}
   a{text-decoration:none;font-family:var(--font,'Plus Jakarta Sans',sans-serif)}
-  .nav-name{position:absolute;top:40px;left:var(--m);z-index:30;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--black)}
+  .nav-name{position:absolute;top:40px;left:var(--nav-name-left, var(--m));z-index:30;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--black)}
   .nav-name span{display:block;line-height:1;white-space:nowrap;transition:transform .45s cubic-bezier(.19,1,.22,1)}
   .nav-name:hover span{transform:translateY(-100%)}
   .nav-roll{display:block;overflow:hidden;height:1em}

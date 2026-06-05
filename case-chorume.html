@@ -72,7 +72,7 @@ p{text-wrap:balance}
 /* ═══ HERO (dark) ═══ */
 .hero{position:relative;overflow:hidden;background:#111;padding-top:clamp(120px,14vh,168px);padding-bottom:0}
 .hero-inner{position:relative}
-.hero-back{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em;color:rgba(255,255,255,.4);margin-bottom:clamp(52px,8vh,92px);transition:color .25s}
+.hero-back{position:fixed;top:40px;left:var(--m);z-index:30;display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em;color:rgba(255,255,255,.5);transition:color .25s}
 .hero-back:hover{color:#fff}
 .hero-back svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .hero-top{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:clamp(16px,2vw,22px)}
@@ -216,7 +216,6 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 <!-- NAV (componente compartilhado) -->
 <site-nav></site-nav>
 <script src="site-nav.js"></script>
-</div>
 
 <main class="flow">
 
@@ -452,8 +451,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 </div></footer>
 
 <script>
-document.getElementById('navToggle').addEventListener('click',function(){document.getElementById('navFloat').classList.toggle('open')});
-document.querySelectorAll('.nav-menu a').forEach(function(a){a.addEventListener('click',function(){document.getElementById('navFloat').classList.remove('open')})});
+/* nav gerenciado por site-nav.js */
 
 /* Lightbox */
 var lightbox=document.createElement('div');lightbox.className='lightbox';lightbox.innerHTML='<div class="lightbox-content"><button class="lightbox-close">&times;</button><img class="lightbox-img" src="" alt=""><div class="lightbox-nav"><button class="lightbox-prev">&lsaquo;</button><button class="lightbox-next">&rsaquo;</button></div></div>';document.body.appendChild(lightbox);
