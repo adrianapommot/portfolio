@@ -52,7 +52,7 @@ p{text-wrap:balance}
 .nav-name span{display:block;line-height:1;white-space:nowrap;transition:transform .45s cubic-bezier(.19,1,.22,1)}
 .nav-name:hover span{transform:translateY(-100%)}
 .nav-roll{display:block;overflow:hidden;height:1em}
-.nav-float{position:fixed;top:24px;right:var(--m);z-index:30;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.nav-float{position:fixed;top:24px;right:var(--m);z-index:30;display:flex;flex-direction:column;align-items:flex-end;gap:8px;pointer-events:none}
 .nav-toggle{width:50px;height:50px;border-radius:50%;border:1px solid var(--accent);cursor:pointer;background:var(--accent);display:flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s}
 .nav-toggle:hover{background:var(--black);border-color:var(--black)}
 .nav-toggle:hover svg{stroke:#fff}
@@ -72,34 +72,36 @@ p{text-wrap:balance}
 .nav-menu .nav-link:hover{background:var(--black);color:#fff}
 
 /* ═══ HERO (type-forward claro, padrão de projeto) ═══ */
-.hero{position:relative;overflow:hidden;background:#FAFAF8;padding-top:clamp(120px,14vh,168px);padding-bottom:0}
-.hero-inner{position:relative;z-index:2}
+.hero{position:relative;overflow:hidden;background:#FAFAF8;padding-top:clamp(60px,7vh,84px);padding-bottom:0}
+.hero-inner{position:relative;z-index:2;padding-top:24px}
 .hero-illo{position:absolute;right:var(--m);width:min(52%,680px);height:auto;z-index:0;pointer-events:none;user-select:none;-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 44px),transparent 100%);mask-image:linear-gradient(to bottom,#000 calc(100% - 44px),transparent 100%);animation:heroUp 1s cubic-bezier(.2,.7,.3,1) backwards;animation-delay:.25s}
 @media(max-width:1080px){.hero-illo{display:none}}
-.hero-back{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em;color:var(--gray-4);margin-bottom:clamp(52px,8vh,92px);transition:color .25s}
+.hero-back{position:fixed;top:49px;right:calc(var(--m) + 66px);z-index:30;transform:translateY(-50%);display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--gray-4);transition:color .25s;margin:0}
 .hero-back:hover{color:var(--gray-1)}
+.hero-back svg{transition:transform .3s cubic-bezier(.19,1,.22,1)}
+.hero-back:hover svg{transform:translateX(-4px)}
 .hero-back svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.hero-top{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:clamp(16px,2vw,22px)}
+.hero-top{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:clamp(4px,.5vw,8px)}
 .hero-brand{display:inline-flex;align-items:center;gap:13px}
-.hero-brand img{height:24px;width:auto;display:block}
+.hero-brand img{width:clamp(140px,16vw,224px);height:auto;display:block}
 .hero .hero-title{font-size:clamp(38px,4.4vw,62px);font-weight:700;letter-spacing:-.04em;line-height:.94;text-transform:uppercase;color:var(--black)}
 .hero .hero-title>span{display:block;width:fit-content}
 .hero-hl{display:inline-block;background:linear-gradient(transparent 12%, var(--accent) 12%, var(--accent) 88%, transparent 88%)}
-.hero-foot{display:flex;flex-direction:row;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap;margin-top:clamp(32px,4vw,52px)}
+.hero-foot{display:flex;flex-direction:row;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap;margin-top:var(--s4)}
 .hero-foot-main{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(20px,2.4vw,30px)}
-.hero-intro{max-width:42ch;font-size:var(--ty-lead);font-weight:500;line-height:1.4;color:var(--gray-2);text-wrap:balance}
+.hero-intro{max-width:42ch;font-size:var(--ty-small);font-weight:500;line-height:1.6;color:var(--gray-2);text-wrap:balance}
 .hero-intro strong{font-weight:700;color:var(--black)}
-.hero-intro .hl{background:linear-gradient(transparent 10%, var(--accent) 10%, var(--accent) 88%, transparent 88%);-webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0 .04em}
+.hero-intro .hl{background:none;padding:0;font-weight:600;color:var(--gray-1)}
 .hero-result{text-align:left}
 .hero-result span{display:block;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-3);margin-bottom:9px}
-.hero-result b{display:block;font-size:15px;font-weight:700;letter-spacing:-.01em;color:var(--black)}
+.hero-result b{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--black)}
 .hero-tag{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--gray-3);white-space:nowrap;padding-bottom:3px}
-.hero-meta{position:relative;z-index:2;margin-top:clamp(44px,6vh,72px);border-top:1px solid var(--line);padding:32px 0 clamp(44px,6vh,72px);display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
-.hm-item{border-right:1px solid var(--line);padding:0 clamp(20px,2.4vw,40px)}
+.hero-meta{position:relative;z-index:2;margin-top:clamp(44px,6vh,72px);border-top:1px solid var(--line);padding:20px 0 20px;display:flex;align-items:center}
+.hm-item{display:flex;align-items:baseline;gap:8px;padding:0 20px;border-right:1px solid var(--line)}
 .hm-item:first-child{padding-left:0}
-.hm-item:last-child{border-right:none;padding-right:0}
-.hm-label{display:block;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-3);margin-bottom:8px}
-.hm-value{font-size:16px;font-weight:600;line-height:1.35;color:var(--black)}
+.hm-item:last-child{border-right:none}
+.hm-label{display:block;font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gray-4);white-space:nowrap}
+.hm-value{font-size:13px;font-weight:500;line-height:1;color:var(--gray-1);white-space:nowrap}
 @keyframes heroUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 .hero-top,.hero .hero-title>span,.hero-foot{animation:heroUp .85s cubic-bezier(.2,.7,.3,1) backwards}
 .hero-top{animation-delay:.05s}
@@ -107,7 +109,7 @@ p{text-wrap:balance}
 .hero .hero-title>span:nth-child(2){animation-delay:.19s}
 .hero-foot{animation-delay:.32s}
 @media(prefers-reduced-motion:reduce){.hero-top,.hero .hero-title>span,.hero-foot{animation:none}}
-@media(max-width:860px){.hero-meta{grid-template-columns:1fr 1fr;gap:0}.hm-item{border-bottom:1px solid var(--line);padding:20px 28px}.hm-item:first-child{padding-left:28px}.hm-item:nth-child(2n){border-right:none}}
+@media(max-width:860px){.hero-meta{flex-wrap:wrap;gap:0}.hm-item{border-right:none;border-bottom:1px solid var(--line);padding:12px 0;width:50%;white-space:normal}.hm-item:nth-child(odd){padding-right:16px}.hm-item:last-child{border-bottom:none}}
 
 /* ═══ HEADER DE SEÇÃO ═══ */
 .sec-head{max-width:760px;margin-bottom:var(--gap-after-title)}
@@ -165,7 +167,7 @@ p{text-wrap:balance}
 @media(max-width:760px){.strat-step{grid-template-columns:1fr;column-gap:0;row-gap:10px}.strat-n{margin-bottom:4px}.strat-t{grid-row:2}.strat-d{grid-column:1;grid-row:3;margin-top:6px}.strat-step:hover{padding-left:0}}
 
 /* ═══ 03 O QUE CONSTRUÍ — pilares + atomic + insights ═══ */
-.built-lead{max-width:720px;margin-bottom:var(--gap-after-title)}
+.built-lead{max-width:720px;margin-bottom:var(--s4)}
 .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gut);margin-bottom:var(--space-title)}
 .pillar{position:relative;background:#fff;border:1px solid var(--line);border-radius:18px;padding:32px 28px;display:flex;flex-direction:column;gap:14px;overflow:hidden;box-shadow:0 1px 2px rgba(17,17,17,.04),0 10px 30px rgba(17,17,17,.03);transition:transform .28s cubic-bezier(.2,.7,.3,1),box-shadow .28s ease}
 .pillar::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--line);transition:background .25s}
@@ -324,7 +326,7 @@ p{text-wrap:balance}
 .lb-close{position:absolute;top:24px;right:28px;color:rgba(255,255,255,.7);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
 
 /* ═══ 03 · O QUE CONSTRUÍ — abas (estrutura E) ═══ */
-.wb-tabs{display:flex;gap:clamp(20px,3vw,44px);border-bottom:1px solid var(--line);margin-bottom:var(--s4);flex-wrap:wrap}
+.wb-tabs{display:flex;gap:clamp(20px,3vw,44px);border-bottom:1px solid var(--line);margin-bottom:var(--s2);flex-wrap:wrap}
 .wb-tab{display:flex;align-items:baseline;gap:8px;text-align:left;background:none;border:none;cursor:pointer;padding:0 0 16px;border-bottom:2px solid transparent;margin-bottom:-1px;color:var(--gray-3);transition:color .2s,border-color .2s}
 .wb-tab .n{font-size:11px;font-weight:600;color:var(--gray-4);font-variant-numeric:tabular-nums;letter-spacing:.02em}
 .wb-tab .t{font-size:clamp(16px,1.5vw,19px);font-weight:600;letter-spacing:-.01em}
@@ -334,7 +336,7 @@ p{text-wrap:balance}
 .wb-panel{display:none}
 .wb-panel.on{display:block;animation:wbfade .35s ease}
 @keyframes wbfade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.wb-head{max-width:820px;margin-bottom:var(--s3)}
+.wb-head{max-width:820px;margin-bottom:var(--s2)}
 .wb-kicker{font-size:var(--ty-label);font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--gray-4);margin-bottom:14px}
 .wb-title{font-size:clamp(24px,2.6vw,36px);font-weight:400;line-height:1.16;letter-spacing:-.015em;color:var(--black);text-wrap:balance}
 .wb-intro{margin-top:0;max-width:64ch}
@@ -626,7 +628,7 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
       <div class="intro-idx"><span>Contexto</span></div>
       <div class="intro-rule"></div>
 
-      <h2 class="intro-statement">Uma plataforma de design capaz de escalar múltiplas marcas, produtos e equipes.</h2>
+      <h2 class="intro-statement" style="font-size: 28px">Uma plataforma de design capaz de escalar múltiplas marcas, produtos e equipes.</h2>
       <div class="intro-side">
         <p class="intro-micro">À medida que a Escale crescia, novas marcas e frentes de negócio surgiam em ritmos diferentes. Cada equipe decidia de forma independente, o que gerava inconsistências e retrabalho.</p>
         <p class="intro-micro">O desafio não era apenas criar componentes. Era estabelecer uma <strong>linguagem comum</strong> capaz de conectar pessoas, produtos e marcas em uma operação em expansão.</p>
@@ -648,7 +650,9 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
     <div class="sec-head">
       <div class="s-index"><b>01</b><em></em></div>
       <h2 class="s-title">Entendendo o desafio</h2>
-      <p class="s-lead">Antes de desenhar qualquer componente, era necessário compreender como os produtos eram construídos, onde estavam os pontos de atrito e quais decisões precisavam ser padronizadas. Mais do que um problema visual, era um <strong>problema de operação</strong>. Mapeamos então os principais desafios.</p>
+      <p class="s-lead">Antes de desenhar qualquer componente, era necessário compreender 
+como os produtos eram construídos, onde estavam os pontos de atrito e quais decisões precisavam ser padronizadas. Mais do que um problema 
+visual, era um problema de operação. Mapeamos então os principais desafios.</p>
     </div>
     <div class="prob-grid">
       <article class="prob-item">
@@ -689,7 +693,7 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
       <div class="intro-idx"><span>White label</span></div>
       <div class="intro-rule"></div>
 
-      <h2 class="intro-statement">Uma plataforma capaz de atender diferentes contextos, sem abrir mão de consistência, velocidade ou qualidade.</h2>
+      <h2 class="intro-statement" style="font-size: 28px; color: rgb(255, 255, 255)">Uma plataforma capaz de atender diferentes contextos, sem abrir mão de consistência, velocidade ou qualidade.</h2>
       <div class="intro-side">
         <p class="intro-micro">A estratégia partiu de uma <strong>arquitetura white label</strong>: múltiplas marcas compartilham a mesma fundação enquanto preservam suas identidades próprias.</p>
         <p class="intro-micro">Uma separação clara entre regras&nbsp;estruturais e características&nbsp;visuais, flexível o&nbsp;suficiente para evoluir junto com a empresa.</p>
@@ -707,7 +711,7 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
   </section>
 
   <!-- ═══ 03 · O QUE CONSTRUÍ ═══ -->
-  <section class="sec" id="construi">
+  <section class="sec" id="construi" style="background-color: rgb(250, 250, 246)">
     <div class="sec-head built-lead">
       <div class="s-index"><b>03</b><em></em></div>
       <h2 class="s-title">O que construí</h2>
@@ -716,101 +720,57 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
 
     <nav class="wb-tabs" data-group="c3">
       <button class="wb-tab on" data-group="c3" data-i="0"><span class="n">01</span><span class="t">Fundação</span></button>
-      <button class="wb-tab" data-group="c3" data-i="1"><span class="n">02</span><span class="t">Biblioteca</span></button>
-      <button class="wb-tab" data-group="c3" data-i="2"><span class="n">03</span><span class="t">White Label</span></button>
-      <button class="wb-tab" data-group="c3" data-i="3"><span class="n">04</span><span class="t">Governança</span></button>
+      <button class="wb-tab" data-group="c3" data-i="1"><span class="n">02</span><span class="t" style="color: rgb(170, 169, 168)">Biblioteca</span></button>
+      <button class="wb-tab" data-group="c3" data-i="2"><span class="n">03</span><span class="t" style="color: rgb(170, 169, 168)">White Label</span></button>
+      <button class="wb-tab" data-group="c3" data-i="3"><span class="n">04</span><span class="t" style="color: rgb(170, 169, 168)">Governança</span></button>
     </nav>
 
     <div class="wb-panel on" data-group="c3" data-i="0">
       <div class="wb-head">
         <p class="wb-intro intro-micro">Estruturei os fundamentos visuais que serviriam de base para todo o ecossistema de produtos, transformando decisões visuais em regras compartilhadas e escaláveis.</p>
       </div>
-      <div class="wb-chips"><span class="wb-chip">Tokens de cor</span><span class="wb-chip">Tipografia</span><span class="wb-chip">Espaçamentos</span><span class="wb-chip">Grids</span><span class="wb-chip">Elevação</span><span class="wb-chip">Iconografia</span><span class="wb-chip">Acessibilidade</span></div>
-      <div class="tkz" id="tkz">
+            <div class="tkz" id="tkz">
         <div class="tok-buttons" id="tokButtons">
           <button class="tok-btn active" data-tok="colors" onclick="showTok('colors')">
             <img src="icn_colors.png" alt="Cores">Cores
           </button>
-          <button class="tok-btn" data-tok="typography" onclick="showTok('typography')">
+          <button class="tok-btn" data-tok="typography" onclick="showTok('typography')" style="background-color: rgb(250, 250, 246)">
             <img src="icn_typography.png" alt="Tipografia">Tipografia
           </button>
-          <button class="tok-btn" data-tok="elevation" onclick="showTok('elevation')">
+          <button class="tok-btn" data-tok="elevation" onclick="showTok('elevation')" style="background-color: rgb(250, 250, 246)">
             <img src="icn_shadows.png" alt="Elevação">Elevação
           </button>
-          <button class="tok-btn" data-tok="opacity" onclick="showTok('opacity')">
+          <button class="tok-btn" data-tok="opacity" onclick="showTok('opacity')" style="background-color: rgb(250, 250, 246)">
             <img src="icn_opacity.png" alt="Opacidade">Opacidade
           </button>
-          <button class="tok-btn" data-tok="borders" onclick="showTok('borders')">
+          <button class="tok-btn" data-tok="borders" onclick="showTok('borders')" style="background-color: rgb(251, 251, 249)">
             <img src="icn_borders.png" alt="Bordas">Bordas
           </button>
         </div>
 
         <div class="gallery active" id="gal-colors">
-          <iframe src="color-tokens.html" style="width:100%;height:580px;border:1px solid var(--line);border-radius:12px;display:block" loading="lazy" title="Color Tokens interativo"></iframe>
-          <div style="margin-top:var(--s5)">
+          <iframe src="color-tokens.html" style="width:100%;height:580px;border:1px solid var(--line);border-radius:12px;display:block" loading="eager" title="Color Tokens interativo"></iframe>
+          <div style="margin-top:var(--s3)">
             <h3 style="font-size:var(--ty-copy);font-weight:600;color:var(--black);letter-spacing:-.005em;line-height:1.3;margin-bottom:var(--s2)">Diagrama de contrastes</h3>
             <p style="font-size:var(--ty-small);line-height:1.65;color:var(--gray-2);max-width:72ch;text-wrap:balance;margin-bottom:var(--s4)">Ferramenta criada para validar relações entre cores, orientar decisões de interface e incorporar acessibilidade à fundação do Design System desde a definição dos tokens.</p>
-            <iframe src="diagrama-de-contrastes.html" style="width:100%;height:680px;border:1px solid var(--line);border-radius:12px;display:block" loading="lazy" title="Diagrama de contrastes interativo"></iframe>
+            <iframe src="diagrama-de-contrastes.html" style="width:100%;height:680px;border:1px solid var(--line);border-radius:12px;display:block" loading="eager" title="Diagrama de contrastes interativo"></iframe>
           </div>
         </div>
 
         <div class="gallery" id="gal-typography">
-          <div class="col-block">
-            <div class="col-grouplabel">Font Family</div>
-            <div class="ty-fam-grid">
-              <div>
-                <div class="ty-fam-name">Din Ot</div>
-                <div class="tok-name">$font-family-primary</div>
-                <div class="tok-sub" style="margin-top:4px">Font Brand Primary</div>
-              </div>
-              <div>
-                <div class="ty-fam-name">Roboto</div>
-                <div class="tok-name">$font-family-secondary</div>
-                <div class="tok-sub" style="margin-top:4px">Font Brand Secondary</div>
-              </div>
-            </div>
-          </div>
-          <div class="col-block">
-            <div class="col-grouplabel">Line Height</div>
-            <div class="ty-lh-grid" id="lineHeights"></div>
-          </div>
-          <div class="col-block">
-            <div class="col-grouplabel">Font Weight</div>
-            <div class="ty-fw-grid" id="fontWeights"></div>
-          </div>
-          <div class="col-block">
-            <div class="col-grouplabel">Font Size</div>
-            <div class="ty-sizes" id="fontSizes"></div>
-          </div>
-          <div class="col-block">
-            <div class="col-grouplabel">Text Styles</div>
-            <div class="ts-list" id="textStyles"></div>
-          </div>
+          <iframe src="tipografia.html" style="width:100%;height:580px;border:1px solid var(--line);border-radius:16px;display:block" loading="lazy" title="Tipografia — Delta Design System"></iframe>
         </div>
 
         <div class="gallery" id="gal-elevation">
-          <div class="col-block">
-            <div class="col-grouplabel">Shadow Levels</div>
-            <div class="sh-grid" id="shadowLevels"></div>
-          </div>
+          <iframe src="elevacao.html" style="width:100%;height:580px;border:1px solid var(--line);border-radius:16px;display:block" loading="lazy" title="Elevação — Delta Design System"></iframe>
         </div>
 
         <div class="gallery" id="gal-opacity">
-          <div class="col-block">
-            <div class="col-grouplabel">Opacity Levels</div>
-            <div class="op-grid" id="opacityLevels"></div>
-          </div>
+          <iframe src="opacidade.html" style="width:100%;height:580px;border:1px solid var(--line);border-radius:16px;display:block" loading="lazy" title="Opacidade — Delta Design System"></iframe>
         </div>
 
         <div class="gallery" id="gal-borders">
-          <div class="col-block">
-            <div class="col-grouplabel">Border Radius</div>
-            <div class="bd-grid" id="borderRadius"></div>
-          </div>
-          <div class="col-block">
-            <div class="col-grouplabel">Border Widths</div>
-            <div class="bd-grid" id="borderWidths"></div>
-          </div>
+          <iframe src="bordas.html" style="width:100%;height:580px;border:1px solid var(--line);border-radius:16px;display:block" loading="lazy" title="Bordas — Delta Design System"></iframe>
         </div>
       </div>
     </div>
@@ -918,8 +878,11 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
         <p class="bib-desc">A biblioteca contemplava componentes documentados, variantes, estados e comportamentos preparados para diferentes cenários de produto.</p>
       </div>
     </div>
-    <div class="rv" style="margin-top:var(--s5);margin-left:calc(-1*var(--m));margin-right:calc(-1*var(--m));background:#131313;padding:var(--s4) var(--m)">
+    <div class="rv" style="margin-top:var(--s5);background:#131313;padding:var(--s4);border-radius:16px;overflow:hidden">
       <img src="global-design-tokens.png" alt="Global Design Tokens — fundação visual do Delta Design System" loading="lazy" style="width:100%;display:block;border-radius:12px">
+    </div>
+    <div style="margin-top:var(--s3)">
+      <iframe src="delta-atoms.html" style="width:100%;height:580px;border:1px solid var(--line);border-radius:16px;display:block;overflow:hidden" loading="eager" title="Delta Atoms interativo"></iframe>
     </div>
 
   </section>
@@ -928,11 +891,11 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
   <section class="sec" id="white-label">
     <div class="wl-split">
       <div class="s-index" style="margin-bottom:0"><b>03</b><em></em></div>
-      <h2 class="s-title" style="margin-bottom:0">Arquitetura White Label</h2>
+      <h2 class="s-title" style="margin-bottom: 0; margin: 0px 4px 0px 0px; padding: 0px">Arquitetura White Label</h2>
       <div class="wl-chips">
         <span class="wb-chip">Telecomunicações</span>
         <span class="wb-chip">Saúde</span>
-        <span class="wb-chip">Serviços financeiros</span>
+        <span class="wb-chip" style="border-color: rgb(227, 224, 218)">Serviços financeiros</span>
       </div>
       <div class="wl-right">
         <p class="wl-para">Um dos principais diferenciais do Delta foi sua capacidade de <strong>atender diferentes marcas a partir de uma única base.</strong></p>
@@ -1201,14 +1164,14 @@ function renderColorGroup(elId,families){
 function renderTokens(){
   renderColorGroup('brandColors',BRAND);
   renderColorGroup('feedbackColors',FEEDBACK);
-  document.getElementById('lineHeights').innerHTML=LINE_HEIGHTS.map(lh=>`<div class="ty-lh-item"><span class="tok-name">${lh.tok}</span><span class="tok-sub">${lh.lbl}</span><span class="ty-lh-val">${lh.val}</span></div>`).join('');
-  document.getElementById('fontWeights').innerHTML=FONT_WEIGHTS.map(fw=>`<div class="ty-fw-item"><span class="ty-fw-aa" style="font-weight:${fw.w}">Aa</span><span class="tok-name">${fw.tok}</span><span class="ty-fw-lbl">${fw.lbl}</span><span class="ty-fw-val">${fw.val}</span></div>`).join('');
-  document.getElementById('fontSizes').innerHTML=FONT_SIZES.map(fs=>{const d=Math.min(fs.px,44);return `<div class="ty-size-item"><span class="ty-size-aa" style="font-size:${d}px">Aa</span><div class="ty-size-info"><span class="tok-name">${fs.tok}</span><span class="ty-fw-lbl">${fs.lbl}</span><span class="ty-lh-val">${fs.px}px</span></div></div>`;}).join('');
-  document.getElementById('textStyles').innerHTML=TEXT_STYLES.map(ts=>{const d=Math.min(ts.px,40);const up=ts.upper?'text-transform:uppercase;letter-spacing:.08em;':'';return `<div class="ts-row"><div class="ts-sample" style="font-size:${d}px;font-weight:${ts.weight};${up}">${ts.sample}</div><div class="ts-spec"><span class="ts-spec-tok">${ts.tok}</span><span class="ts-spec-meta">${ts.font} · ${ts.px}px · ${ts.wlbl} · ${ts.lh}</span></div></div>`;}).join('');
-  document.getElementById('shadowLevels').innerHTML=SHADOWS.map(sh=>`<div class="sh-item"><div class="sh-box" style="box-shadow:${sh.x}px ${sh.y}px ${sh.b}px rgba(17,17,17,.16)"></div><span class="tok-name">${sh.tok}</span><div class="sh-level">${sh.level}</div><div class="sh-spec">B ${sh.b}<br>X ${sh.x}<br>Y ${sh.y}</div></div>`).join('');
-  document.getElementById('opacityLevels').innerHTML=OPACITIES.map(op=>`<div class="op-item"><div class="op-square" style="background:rgba(232,17,45,${op.o})"></div><div class="op-info"><span class="tok-name">${op.tok}</span><span class="tok-meta">${op.lbl}</span><span class="tok-sub">${op.val}</span></div></div>`).join('');
-  document.getElementById('borderRadius').innerHTML=BORDER_RADIUS.map(br=>{let s=`border-radius:${br.r}px;`;if(br.pill)s='border-radius:999px;width:160px;';if(br.circ)s='border-radius:50%;';return `<div class="bd-item"><div class="bd-radius" style="${s}"></div><div class="bd-info"><span class="tok-name">${br.tok}</span><span class="tok-meta">${br.lbl}</span><span class="tok-sub">${br.val}</span></div></div>`;}).join('');
-  document.getElementById('borderWidths').innerHTML=BORDER_WIDTHS.map(bw=>{const bg=bw.w===0?'background:var(--chip);':'';return `<div class="bd-item"><div class="bd-width" style="border-width:${bw.w}px;${bg}"></div><div class="bd-info"><span class="tok-name">${bw.tok}</span><span class="tok-meta">${bw.lbl}</span><span class="tok-sub">${bw.val}</span></div></div>`;}).join('');
+  (document.getElementById('lineHeights')||{}).innerHTML=LINE_HEIGHTS.map(lh=>`<div class="ty-lh-item"><span class="tok-name">${lh.tok}</span><span class="tok-sub">${lh.lbl}</span><span class="ty-lh-val">${lh.val}</span></div>`).join('');
+  (document.getElementById('fontWeights')||{}).innerHTML=FONT_WEIGHTS.map(fw=>`<div class="ty-fw-item"><span class="ty-fw-aa" style="font-weight:${fw.w}">Aa</span><span class="tok-name">${fw.tok}</span><span class="ty-fw-lbl">${fw.lbl}</span><span class="ty-fw-val">${fw.val}</span></div>`).join('');
+  (document.getElementById('fontSizes')||{}).innerHTML=FONT_SIZES.map(fs=>{const d=Math.min(fs.px,44);return `<div class="ty-size-item"><span class="ty-size-aa" style="font-size:${d}px">Aa</span><div class="ty-size-info"><span class="tok-name">${fs.tok}</span><span class="ty-fw-lbl">${fs.lbl}</span><span class="ty-lh-val">${fs.px}px</span></div></div>`;}).join('');
+  (document.getElementById('textStyles')||{}).innerHTML=TEXT_STYLES.map(ts=>{const d=Math.min(ts.px,40);const up=ts.upper?'text-transform:uppercase;letter-spacing:.08em;':'';return `<div class="ts-row"><div class="ts-sample" style="font-size:${d}px;font-weight:${ts.weight};${up}">${ts.sample}</div><div class="ts-spec"><span class="ts-spec-tok">${ts.tok}</span><span class="ts-spec-meta">${ts.font} · ${ts.px}px · ${ts.wlbl} · ${ts.lh}</span></div></div>`;}).join('');
+  (document.getElementById('shadowLevels')||{}).innerHTML=SHADOWS.map(sh=>`<div class="sh-item"><div class="sh-box" style="box-shadow:${sh.x}px ${sh.y}px ${sh.b}px rgba(17,17,17,.16)"></div><span class="tok-name">${sh.tok}</span><div class="sh-level">${sh.level}</div><div class="sh-spec">B ${sh.b}<br>X ${sh.x}<br>Y ${sh.y}</div></div>`).join('');
+  (document.getElementById('opacityLevels')||{}).innerHTML=OPACITIES.map(op=>`<div class="op-item"><div class="op-square" style="background:rgba(232,17,45,${op.o})"></div><div class="op-info"><span class="tok-name">${op.tok}</span><span class="tok-meta">${op.lbl}</span><span class="tok-sub">${op.val}</span></div></div>`).join('');
+  (document.getElementById('borderRadius')||{}).innerHTML=BORDER_RADIUS.map(br=>{let s=`border-radius:${br.r}px;`;if(br.pill)s='border-radius:999px;width:160px;';if(br.circ)s='border-radius:50%;';return `<div class="bd-item"><div class="bd-radius" style="${s}"></div><div class="bd-info"><span class="tok-name">${br.tok}</span><span class="tok-meta">${br.lbl}</span><span class="tok-sub">${br.val}</span></div></div>`;}).join('');
+  (document.getElementById('borderWidths')||{}).innerHTML=BORDER_WIDTHS.map(bw=>{const bg=bw.w===0?'background:var(--chip);':'';return `<div class="bd-item"><div class="bd-width" style="border-width:${bw.w}px;${bg}"></div><div class="bd-info"><span class="tok-name">${bw.tok}</span><span class="tok-meta">${bw.lbl}</span><span class="tok-sub">${bw.val}</span></div></div>`;}).join('');
 }
 window.showTok=function(tok){
   var btns=document.getElementById('tokButtons');
@@ -1309,5 +1272,21 @@ document.addEventListener('DOMContentLoaded', function() {
   setTimeout(alignHeroIllo,300);
 })();
 </script>
-</body>
+
+<!-- ═══ ALINHA NAV-NAME COM O FLOW ═══ -->
+<script>
+(function(){
+  function alignNavName(){
+    var flow=document.querySelector('main.flow');
+    if(!flow) return;
+    var fl=flow.getBoundingClientRect().left;
+    var m=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--m'))||64;
+    document.documentElement.style.setProperty('--nav-name-left',(fl+m)+'px');
+  }
+  window.addEventListener('load',alignNavName);
+  window.addEventListener('resize',alignNavName);
+  document.addEventListener('DOMContentLoaded',alignNavName);
+  setTimeout(alignNavName,100);
+})();
+</script>
 </html>
