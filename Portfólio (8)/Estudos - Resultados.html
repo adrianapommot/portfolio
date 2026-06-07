@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resultados · 3 estudos · Delta</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#111111; --white:#fff;
+  --gray-1:#37342F; --gray-2:#585550; --gray-3:#756F67; --gray-4:#B8B2A8; --gray-5:#EBE7E1;
+  --line:#E3E0DA; --chip:#F2F1EE;
+  --accent:#e0ff33; --accent-press:#d2f51c; --bone:#f4f3ef;
+  --gold:#D4A520;
+  --font:'Plus Jakarta Sans',sans-serif; --mono:'IBM Plex Mono',monospace;
+  --m:clamp(24px,5vw,64px); --max-w:1440px;
+  --ty-title:clamp(32px,3.4vw,48px); --ty-lead:clamp(16px,1.4vw,19px);
+  --ty-small:14px; --ty-label:12px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);color:var(--black);background:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+p{text-wrap:pretty}
+
+/* ───────── chrome de comparação ───────── */
+.cmp-top{padding:clamp(40px,6vw,72px) var(--m) 0;max-width:calc(var(--max-w) + 2*var(--m));margin:0 auto}
+.cmp-eyebrow{font-size:var(--ty-label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gray-4)}
+.cmp-h1{font-size:clamp(30px,4vw,52px);font-weight:700;letter-spacing:-.03em;line-height:1;text-transform:uppercase;color:var(--black);margin:14px 0 0}
+.cmp-sub{font-size:var(--ty-lead);color:var(--gray-2);max-width:64ch;margin-top:18px;line-height:1.5}
+.cmp-rule{height:1px;background:var(--line);margin:clamp(36px,5vw,56px) 0 0}
+
+.study{padding:clamp(48px,6vw,88px) var(--m);max-width:calc(var(--max-w) + 2*var(--m));margin:0 auto}
+.study+.study{border-top:1px solid var(--line)}
+.study-tag{display:inline-flex;align-items:center;gap:12px;margin-bottom:clamp(34px,4.2vw,52px)}
+.study-tag b{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--black);border-radius:999px;padding:7px 14px;white-space:nowrap}
+.study-tag span{font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--gray-3)}
+
+/* cabeçalho de seção (comum aos estudos) */
+.s-index{display:flex;align-items:center;gap:14px;margin-bottom:var(--s2,16px)}
+.s-index b{font-size:var(--ty-label);font-weight:600;letter-spacing:.04em;color:var(--black);font-variant-numeric:tabular-nums}
+.s-index em{width:28px;height:1.5px;background:var(--line);display:block;font-style:normal}
+.s-title{font-size:var(--ty-title);font-weight:600;line-height:1.06;letter-spacing:-.02em;text-transform:uppercase;color:var(--black)}
+.s-lead{font-size:var(--ty-lead);font-weight:500;line-height:1.5;color:var(--gray-1);max-width:74ch;margin-top:18px}
+.sec-head{margin-bottom:clamp(40px,5vw,64px)}
+
+/* ════════════════════════════════════════════════════════════
+   ESTUDO 01 — CARDS DE IMPACTO (ícone + número + delta)
+   ════════════════════════════════════════════════════════════ */
+.ra-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.4vw,20px)}
+.ra-card{background:var(--bone);border-radius:18px;padding:clamp(24px,2.4vw,32px);display:flex;flex-direction:column;min-height:240px}
+.ra-ico{width:44px;height:44px;border-radius:11px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;margin-bottom:0}
+.ra-ico svg{width:22px;height:22px;stroke:var(--black);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.ra-num{font-size:clamp(46px,4.6vw,62px);font-weight:700;letter-spacing:-.04em;line-height:.9;color:var(--black);font-variant-numeric:tabular-nums;margin-top:24px}
+.ra-num .u{font-size:.46em;font-weight:600;letter-spacing:-.02em;margin-left:2px}
+.ra-num .sgn{color:var(--gold)}
+.ra-label{font-size:13.5px;font-weight:500;line-height:1.4;color:var(--gray-2);margin-top:12px;text-wrap:pretty}
+.ra-bar{height:5px;border-radius:3px;background:var(--gray-5);margin-top:auto;overflow:hidden}
+.ra-bar i{display:block;height:100%;border-radius:3px;background:var(--gold)}
+.res-note{font-family:var(--mono);font-size:10.5px;line-height:1.45;color:var(--gray-4);letter-spacing:.01em;display:flex;gap:6px;text-wrap:pretty}
+.res-note::before{content:"";flex:0 0 5px;height:5px;border-radius:50%;background:var(--gold);margin-top:5px}
+.ra-card .res-note{margin-top:14px}
+.ra-bar+.res-note{margin-top:14px}
+
+/* ════════════════════════════════════════════════════════════
+   ESTUDO 02 — ANTES → DEPOIS (transformação)
+   ════════════════════════════════════════════════════════════ */
+.rb-wrap{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.rb-row{display:grid;grid-template-columns:1.1fr 1fr auto 1fr;gap:clamp(16px,2.4vw,40px);align-items:center;padding:clamp(22px,2.6vw,32px) 0;border-bottom:1px solid var(--line)}
+.rb-dim{font-size:var(--ty-label);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-3)}
+.rb-before{font-size:clamp(17px,1.6vw,21px);font-weight:500;color:var(--gray-4);text-decoration:line-through;text-decoration-color:var(--gray-5);text-underline-offset:2px}
+.rb-arrow{width:34px;height:34px;border-radius:50%;background:var(--black);display:flex;align-items:center;justify-content:center;flex:0 0 34px}
+.rb-arrow svg{width:17px;height:17px;stroke:var(--accent);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.rb-after{font-size:clamp(20px,2vw,27px);font-weight:700;letter-spacing:-.02em;color:var(--black)}
+.rb-after .hl{background:linear-gradient(transparent 58%, var(--accent) 58%)}
+.rb-foot{display:flex;flex-wrap:wrap;gap:clamp(24px,3vw,48px);margin-top:clamp(36px,4vw,52px)}
+.rb-kpi{display:flex;flex-direction:column;gap:4px}
+.rb-kpi b{font-size:clamp(34px,3.4vw,46px);font-weight:700;letter-spacing:-.03em;color:var(--black);font-variant-numeric:tabular-nums}
+.rb-kpi b .sgn{color:var(--gold)}.rb-kpi b .u{font-size:.5em;font-weight:600}
+.rb-kpi span{font-size:13px;color:var(--gray-2);max-width:22ch}
+
+/* ════════════════════════════════════════════════════════════
+   ESTUDO 03 — HERO STAT + SUPORTE
+   ════════════════════════════════════════════════════════════ */
+.rc-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(40px,5vw,80px);align-items:stretch}
+.rc-hero{background:var(--black);border-radius:22px;padding:clamp(36px,4vw,56px);color:#fff;display:flex;flex-direction:column;justify-content:space-between;min-height:380px}
+.rc-hero-tag{font-size:var(--ty-label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.rc-hero-num{font-size:clamp(96px,13vw,176px);font-weight:700;letter-spacing:-.05em;line-height:.82;color:#fff;font-variant-numeric:tabular-nums}
+.rc-hero-num .sgn{color:var(--accent)}
+.rc-hero-num .u{font-size:.32em;font-weight:600;vertical-align:top;margin-left:4px}
+.rc-hero-label{font-size:clamp(16px,1.5vw,19px);font-weight:500;line-height:1.45;color:rgba(255,255,255,.78);max-width:30ch}
+.rc-list{display:flex;flex-direction:column;justify-content:space-between;gap:clamp(14px,1.6vw,20px)}
+.rc-item{flex:1;background:var(--bone);border-radius:16px;padding:clamp(22px,2.2vw,30px);display:flex;align-items:center;gap:clamp(18px,2vw,28px)}
+.rc-item-num{font-size:clamp(34px,3.6vw,50px);font-weight:700;letter-spacing:-.03em;line-height:.9;color:var(--black);font-variant-numeric:tabular-nums;flex:0 0 auto;min-width:2.2ch}
+.rc-item-num .sgn{color:var(--gold)}.rc-item-num .u{font-size:.5em;font-weight:600}
+.rc-item-body{display:flex;flex-direction:column;gap:3px}
+.rc-item-t{font-size:14.5px;font-weight:700;color:var(--black);letter-spacing:-.01em}
+.rc-item-d{font-size:12.5px;color:var(--gray-2);line-height:1.4}
+
+/* responsivo */
+@media(max-width:920px){
+  .ra-grid{grid-template-columns:repeat(2,1fr)}
+  .rb-row{grid-template-columns:1fr;gap:8px;text-align:left}
+  .rb-arrow{transform:rotate(90deg);margin:2px 0}
+  .rc-grid{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+  .ra-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="cmp-top">
+  <p class="cmp-eyebrow">Adriana Pommot · Delta Design System · Seção 04</p>
+  <h1 class="cmp-h1">Resultados — 3 estudos</h1>
+  <p class="cmp-sub">Reformulando a seção de resultados para leitura imediata: números concretos, métricas claras no lugar de rótulos vagos (“A→T”, “Multi”) e apoio visual para bater o olho e entender o impacto.</p>
+  <div class="cmp-rule"></div>
+</header>
+
+<!-- ════════════════════ ESTUDO 01 ════════════════════ -->
+<section class="study">
+  <div class="study-tag"><b>Estudo 01</b><span>Cards de impacto · ícone, número grande e barra de magnitude</span></div>
+  <div class="sec-head">
+    <div class="s-index"><b>04</b><em></em></div>
+    <h2 class="s-title">Resultados</h2>
+    <p class="s-lead">Quatro métricas, quatro cartões. Cada número aparece grande, com um ícone que dá contexto imediato e uma barra que mostra a magnitude do ganho.</p>
+  </div>
+  <div class="ra-grid">
+    <div class="ra-card">
+      <div class="ra-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></div>
+      <div class="ra-num"><span class="sgn">−</span>47<span class="u">%</span></div>
+      <div class="ra-label">no tempo de criação de novas interfaces</div>
+      <div class="ra-bar"><i style="width:47%"></i></div>
+      <div class="res-note">Estimativa — feedback de prazos das squads (montagem de telas, antes vs. depois).</div>
+    </div>
+    <div class="ra-card">
+      <div class="ra-ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg></div>
+      <div class="ra-num">20<span class="u">+</span></div>
+      <div class="ra-label">marcas atendidas pela mesma base</div>
+      <div class="ra-bar"><i style="width:85%"></i></div>
+    </div>
+    <div class="ra-card">
+      <div class="ra-ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"></path><path d="M14 2v6h6"></path><path d="m9 14 2 2 4-4"></path></svg></div>
+      <div class="ra-num">100<span class="u">%</span></div>
+      <div class="ra-label">do handoff documentado entre design e engenharia</div>
+      <div class="ra-bar"><i style="width:100%"></i></div>
+    </div>
+    <div class="ra-card">
+      <div class="ra-ico"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.7 9.7 0 0 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path><path d="M21 12a9 9 0 0 1-9 9 9.7 9.7 0 0 1-6.74-2.74L3 16"></path><path d="M3 21v-5h5"></path></svg></div>
+      <div class="ra-num">0</div>
+      <div class="ra-label">redesenho na troca de marca — só swap de tokens</div>
+      <div class="ra-bar"><i style="width:8%"></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ ESTUDO 02 ════════════════════ -->
+<section class="study">
+  <div class="study-tag"><b>Estudo 02</b><span>Antes → Depois · a transformação como protagonista</span></div>
+  <div class="sec-head">
+    <div class="s-index"><b>04</b><em></em></div>
+    <h2 class="s-title">Resultados</h2>
+    <p class="s-lead">O que mudou, lado a lado. O estado anterior aparece riscado e apagado; o resultado, em destaque. A leitura é instantânea: de onde saímos, para onde chegamos.</p>
+  </div>
+  <div class="rb-wrap">
+    <div class="rb-row">
+      <div class="rb-dim">Componentes</div>
+      <div class="rb-before">Nenhum compartilhado</div>
+      <div class="rb-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></div>
+      <div class="rb-after"><span class="hl">Biblioteca completa</span></div>
+    </div>
+    <div class="rb-row">
+      <div class="rb-dim">Início de projeto</div>
+      <div class="rb-before">Tudo do zero</div>
+      <div class="rb-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></div>
+      <div class="rb-after"><span class="hl">Reaproveitamento</span></div>
+    </div>
+    <div class="rb-row">
+      <div class="rb-dim">Handoff</div>
+      <div class="rb-before">Inexistente</div>
+      <div class="rb-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></div>
+      <div class="rb-after"><span class="hl">100% documentado</span></div>
+    </div>
+    <div class="rb-row">
+      <div class="rb-dim">Troca de marca</div>
+      <div class="rb-before">Redesenho manual</div>
+      <div class="rb-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></div>
+      <div class="rb-after"><span class="hl">Swap de tokens</span></div>
+    </div>
+  </div>
+  <div class="rb-foot">
+    <div class="rb-kpi"><b><span class="sgn">−</span>47<span class="u">%</span></b><span>tempo de criação de interfaces</span></div>
+    <div class="rb-kpi"><b>20<span class="u">+</span></b><span>marcas na mesma base</span></div>
+    <div class="rb-kpi"><b>100<span class="u">%</span></b><span>handoff documentado</span></div>
+  </div>
+  <div class="res-note" style="margin-top:18px">O “−47%” é uma estimativa baseada em feedback de prazos das squads — tempo de montagem de telas antes vs. depois da biblioteca.</div>
+</section>
+
+<!-- ════════════════════ ESTUDO 03 ════════════════════ -->
+<section class="study">
+  <div class="study-tag"><b>Estudo 03</b><span>Hero stat · um número domina, os outros apoiam</span></div>
+  <div class="sec-head">
+    <div class="s-index"><b>04</b><em></em></div>
+    <h2 class="s-title">Resultados</h2>
+    <p class="s-lead">Hierarquia clara: o ganho mais forte ocupa o palco em escala dramática, enquanto as métricas de apoio ficam organizadas ao lado, fáceis de varrer.</p>
+  </div>
+  <div class="rc-grid">
+    <div class="rc-hero">
+      <div class="rc-hero-tag">Impacto principal</div>
+      <div class="rc-hero-num"><span class="sgn">−</span>47<span class="u">%</span></div>
+      <div class="rc-hero-label">no tempo de criação de novas interfaces — do briefing ao protótipo navegável.</div>
+      <div class="res-note" style="color:rgba(255,255,255,.5);margin-top:16px">Estimativa — feedback de prazos das squads (antes vs. depois).</div>
+    </div>
+    <div class="rc-list">
+      <div class="rc-item">
+        <div class="rc-item-num">20<span class="u">+</span></div>
+        <div class="rc-item-body"><div class="rc-item-t">Marcas na mesma base</div><div class="rc-item-d">Uma fundação, múltiplas identidades.</div></div>
+      </div>
+      <div class="rc-item">
+        <div class="rc-item-num">100<span class="u">%</span></div>
+        <div class="rc-item-body"><div class="rc-item-t">Handoff documentado</div><div class="rc-item-d">Sem ambiguidade entre design e engenharia.</div></div>
+      </div>
+      <div class="rc-item">
+        <div class="rc-item-num"><span class="sgn">0</span></div>
+        <div class="rc-item-body"><div class="rc-item-t">Redesenho na troca de marca</div><div class="rc-item-d">Troca via swap de tokens.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

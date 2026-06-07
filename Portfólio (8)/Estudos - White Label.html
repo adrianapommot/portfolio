@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arquitetura White Label · 3 estudos · Delta</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#111111; --white:#fff;
+  --gray-1:#37342F; --gray-2:#585550; --gray-3:#756F67; --gray-4:#B8B2A8; --gray-5:#EBE7E1;
+  --line:#E3E0DA; --chip:#F2F1EE;
+  --accent:#e0ff33; --accent-press:#d2f51c; --bone:#f4f3ef;
+  --font:'Plus Jakarta Sans',sans-serif;
+  --m:clamp(24px,5vw,64px); --gut:24px; --max-w:1440px;
+  --s1:8px; --s2:16px; --s3:24px; --s4:clamp(32px,3.4vw,40px); --s5:clamp(48px,5vw,64px);
+  --ty-title:clamp(32px,3.4vw,48px); --ty-lead:clamp(16px,1.4vw,19px);
+  --ty-copy:17px; --ty-small:14px; --ty-label:12px;
+  /* paleta da ilustração (eco discreto nas cápsulas de cor — estudo 03) */
+  --c-purple:#6B4EFF; --c-green:#1F8A5B; --c-orange:#D2802F; --c-blue:#2A6FDB;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);color:var(--black);background:var(--white);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+p{text-wrap:balance}
+
+/* ───────── tipografia padrão do case ───────── */
+.s-index{display:flex;align-items:center;gap:14px;margin-bottom:var(--s3)}
+.s-index b{font-size:var(--ty-label);font-weight:600;letter-spacing:.04em;color:var(--black);font-variant-numeric:tabular-nums}
+.s-index em{width:28px;height:1.5px;background:var(--line);display:block;font-style:normal}
+.s-kicker{font-size:var(--ty-label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gray-3);white-space:nowrap}
+.s-title{font-size:var(--ty-title);font-weight:600;line-height:1.04;letter-spacing:-.02em;text-transform:uppercase;color:var(--black);text-wrap:balance}
+
+/* ───────── chrome da página de comparação ───────── */
+.cmp-top{padding:clamp(40px,6vw,72px) var(--m) 0;max-width:calc(var(--max-w) + 2*var(--m));margin:0 auto}
+.cmp-eyebrow{font-size:var(--ty-label);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gray-4)}
+.cmp-h1{font-size:clamp(30px,4vw,52px);font-weight:700;letter-spacing:-.03em;line-height:1;text-transform:uppercase;color:var(--black);margin:14px 0 0}
+.cmp-sub{font-size:var(--ty-lead);color:var(--gray-2);max-width:64ch;margin-top:18px;line-height:1.5}
+.cmp-rule{height:1px;background:var(--line);margin:clamp(36px,5vw,56px) 0 0}
+
+.study{padding:clamp(48px,6vw,88px) var(--m);max-width:calc(var(--max-w) + 2*var(--m));margin:0 auto}
+.study+.study{border-top:1px solid var(--line)}
+.study-tag{display:inline-flex;align-items:center;gap:12px;margin-bottom:clamp(36px,4.5vw,56px)}
+.study-tag b{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--black);border-radius:999px;padding:7px 14px;white-space:nowrap}
+.study-tag span{font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--gray-3)}
+
+/* ───────── disposição base (fiel ao mockup) ───────── */
+.wl{display:grid;grid-template-columns:1fr 1.1fr;column-gap:clamp(40px,4.5vw,76px);align-items:stretch}
+.wl-left{display:flex;flex-direction:column;min-width:0}
+.wl-right{display:flex;flex-direction:column;min-width:0}
+
+.wl-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:clamp(26px,3vw,34px)}
+.chip{display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:500;color:var(--gray-1);border:1px solid var(--line);border-radius:999px;padding:9px 17px 9px 14px;background:#fff;white-space:nowrap}
+.chip svg{width:17px;height:17px;stroke:var(--gray-2);stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+/* destaques (4 ícones) — base */
+.feats{margin-top:auto;padding-top:clamp(40px,5vw,60px)}
+.feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,1.8vw,26px)}
+.feat{display:flex;flex-direction:column;gap:16px}
+.feat-ico{width:54px;height:54px;border-radius:15px;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.feat-ico svg{width:25px;height:25px;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.feat-t{font-size:13.5px;font-weight:600;line-height:1.28;color:var(--gray-1);letter-spacing:-.01em;text-wrap:balance}
+
+/* coluna direita: ilustração em cima, texto embaixo */
+.wl-illo{position:relative;display:flex;align-items:center;justify-content:center;padding:0}
+.wl-illo img{width:100%;height:auto;max-width:none}
+.wl-text{margin-top:clamp(28px,3.4vw,40px);display:flex;flex-direction:column;gap:18px}
+.wl-para{font-size:var(--ty-small);font-weight:400;line-height:1.74;color:var(--gray-2);text-wrap:pretty;max-width:54ch}
+.wl-para strong{font-weight:600;color:var(--gray-1)}
+
+/* ════════ ESTUDO 01 — cápsula clara ════════ */
+.st-a .feats{background:var(--bone);border-radius:20px;padding:clamp(28px,3vw,38px)}
+.st-a .feat-ico{background:#fff;border:1px solid var(--line);box-shadow:0 1px 2px rgba(17,17,17,.05),0 8px 20px rgba(17,17,17,.04)}
+.st-a .feat-ico svg{stroke:var(--gray-1)}
+
+/* ════════ ESTUDO 02 — layout final com ilustração hero ════════ */
+:root{--gold:#D4A520}
+.st-b .wl-b{display:grid;grid-template-columns:0.4fr 0.6fr;column-gap:clamp(32px,4vw,72px);align-items:start}
+.wl-b-left{display:flex;flex-direction:column}
+.wl-b-index{display:flex;align-items:center;gap:16px;margin-bottom:clamp(20px,2.4vw,28px)}
+.wl-b-index b{font-size:20px;font-weight:700;color:var(--gray-3)}
+.wl-b-index em{width:56px;height:0;border-top:2.5px dashed var(--gold);display:block;font-style:normal}
+.wl-b-title{font-size:clamp(36px,4vw,58px);font-weight:700;line-height:.98;letter-spacing:-.03em;text-transform:uppercase;color:var(--black)}
+.wl-b-text{display:flex;flex-direction:column;gap:18px}
+.wl-b-illo{display:flex;align-items:flex-start;justify-content:center}
+.wl-b-illo img{width:110%;max-width:none;height:auto}
+/* barra inferior de features */
+.wl-b-feats{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(18px,2.2vw,32px);background:var(--bone);border-radius:18px;padding:clamp(24px,3vw,36px);margin-top:clamp(32px,3.8vw,48px)}
+.wl-b-feat{display:flex;gap:14px;align-items:flex-start}
+.wl-b-feat-ico{width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex:0 0 36px}
+.wl-b-feat-ico svg{width:26px;height:26px;stroke:var(--gold);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.wl-b-feat-body{display:flex;flex-direction:column;gap:5px;min-width:0}
+.wl-b-feat-t{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--black);white-space:nowrap}
+.wl-b-feat-d{font-size:12.5px;font-weight:400;line-height:1.5;color:var(--gray-2);text-wrap:pretty}
+/* responsivo st-b */
+@media(max-width:920px){
+  .st-b .wl-b{grid-template-columns:1fr;row-gap:clamp(32px,5vw,44px)}
+  .wl-b-illo{order:-1}
+  .wl-b-illo img{width:100%}
+  .wl-b-feats{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:520px){
+  .wl-b-feats{grid-template-columns:1fr}
+}
+
+/* ════════ ESTUDO 03 — cor sutil / eco da ilustração ════════ */
+.st-c .feats{padding-top:clamp(40px,5vw,60px)}
+.st-c .feat-ico{border-radius:16px}
+.st-c .feat:nth-child(1) .feat-ico{background:color-mix(in srgb,var(--c-purple) 12%,#fff);border:1px solid color-mix(in srgb,var(--c-purple) 22%,#fff)}
+.st-c .feat:nth-child(1) .feat-ico svg{stroke:var(--c-purple)}
+.st-c .feat:nth-child(2) .feat-ico{background:color-mix(in srgb,var(--c-green) 12%,#fff);border:1px solid color-mix(in srgb,var(--c-green) 22%,#fff)}
+.st-c .feat:nth-child(2) .feat-ico svg{stroke:var(--c-green)}
+.st-c .feat:nth-child(3) .feat-ico{background:color-mix(in srgb,var(--c-orange) 14%,#fff);border:1px solid color-mix(in srgb,var(--c-orange) 24%,#fff)}
+.st-c .feat:nth-child(3) .feat-ico svg{stroke:var(--c-orange)}
+.st-c .feat:nth-child(4) .feat-ico{background:color-mix(in srgb,var(--c-blue) 12%,#fff);border:1px solid color-mix(in srgb,var(--c-blue) 22%,#fff)}
+.st-c .feat:nth-child(4) .feat-ico svg{stroke:var(--c-blue)}
+
+/* ───────── responsivo ───────── */
+@media(max-width:920px){
+  .wl{grid-template-columns:1fr;row-gap:clamp(36px,6vw,52px)}
+  .feats{margin-top:0}
+  .feat-grid{grid-template-columns:repeat(2,1fr);gap:28px}
+  .wl-illo{order:-1}
+}
+@media(max-width:480px){
+  .feat-grid{grid-template-columns:1fr 1fr;gap:22px}
+}
+</style>
+</head>
+<body>
+
+<header class="cmp-top">
+  <p class="cmp-eyebrow">Adriana Pommot · Delta Design System</p>
+  <h1 class="cmp-h1">Arquitetura White Label</h1>
+  <p class="cmp-sub">Três estudos da seção <strong>05</strong>, fiéis à disposição definida: título padrão, chips de segmento e quatro destaques à esquerda; ilustração das camadas sobre a coluna de texto à direita. Variam o acabamento dos ícones e das superfícies.</p>
+  <div class="cmp-rule"></div>
+</header>
+
+<!-- ════════════════════ ESTUDO 01 ════════════════════ -->
+<section class="study st-a">
+  <div class="study-tag"><b>Estudo 01</b><span>Cápsula clara · ícones monoline em cartões neutros</span></div>
+  <div class="wl">
+    <div class="wl-left">
+      <div class="s-index"><b>05</b><em></em><span class="s-kicker">Nossa diferença</span></div>
+      <h2 class="s-title">Arquitetura<br>White Label</h2>
+      <div class="feats">
+        <div class="feat-grid">
+          <div class="feat"><div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M19.4 7.85c-.05.32.06.65.29.88l1.57 1.57c.47.47.7 1.08.7 1.7s-.23 1.23-.7 1.7l-1.61 1.61a.98.98 0 0 1-.84.28c-.47-.07-.8-.48-.97-.93a2.5 2.5 0 1 0-3.21 3.22c.45.16.85.5.92.97a.98.98 0 0 1-.27.84l-1.61 1.6a2.4 2.4 0 0 1-3.41 0l-1.57-1.56a1.03 1.03 0 0 0-.88-.29c-.49.07-.84.5-1.02.97a2.5 2.5 0 1 1-3.24-3.24c.46-.18.9-.53.97-1.02a1.03 1.03 0 0 0-.29-.88l-1.57-1.57A2.4 2.4 0 0 1 2 12c0-.62.24-1.23.71-1.7L4.23 8.77c.24-.24.58-.35.92-.3.51.07.88.52 1.07 1a2.5 2.5 0 1 0 3.26-3.25c-.48-.2-.93-.56-1-1.08-.05-.33.06-.67.3-.91l1.52-1.53a2.4 2.4 0 0 1 3.41 0l1.57 1.57c.23.23.55.34.88.29.49-.08.84-.5 1.02-.97a2.5 2.5 0 1 1 3.24 3.24c-.47.18-.9.53-.97 1.02Z"/></svg></div><div class="feat-t">Componentes Compartilhados</div></div>
+          <div class="feat"><div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.7 9.7 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.7 9.7 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg></div><div class="feat-t">Adaptação Rápida</div></div>
+          <div class="feat"><div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z"/><path d="m9 12 2 2 4-4"/></svg></div><div class="feat-t">Consistência Estrutural</div></div>
+          <div class="feat"><div class="feat-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M15.5 8.8a3 3 0 0 0-2.9-1.6c-1.6 0-2.9.85-2.9 2.1 0 1.05.85 1.7 2.5 2 1.8.38 3.25.85 3.25 2.27 0 1.32-1.34 2.2-2.9 2.2a3.1 3.1 0 0 1-2.9-1.5"/><path d="M12 6v12"/></svg></div><div class="feat-t">Redução de Custos</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="wl-right">
+      <div class="wl-illo"><img src="img/delta/whitelabel-stack.png" alt="Camadas do Delta Design System: plataforma base, componentes, tokens e marcas (telecom, saúde, financeiro)"></div>
+      <div class="wl-text">
+        <p class="wl-para">Um dos principais diferenciais do Delta foi sua capacidade de <strong>atender diferentes marcas a partir de uma única base.</strong></p>
+        <p class="wl-para">Através da combinação entre tokens e componentes compartilhados, foi possível adaptar rapidamente interfaces para segmentos como telecomunicações, saúde e serviços financeiros, mantendo consistência estrutural e reduzindo custos de manutenção.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ ESTUDO 02 ════════════════════ -->
+<section class="study st-b">
+  <div class="study-tag"><b>Estudo 02</b><span>Layout final · ilustração hero 3D</span></div>
+
+  <div class="wl-b">
+    <div class="wl-b-left">
+      <div class="wl-b-index"><b>03</b><em></em></div>
+      <h2 class="wl-b-title">Arquitetura<br>White Label</h2>
+      <div class="wl-b-text" style="margin-top:clamp(20px,2.6vw,32px)">
+        <p class="wl-para">Um dos principais diferenciais do Delta foi sua capacidade de <strong>atender diferentes marcas a partir de uma única base.</strong></p>
+        <p class="wl-para">Através da combinação entre tokens e componentes compartilhados, foi possível adaptar rapidamente interfaces para segmentos como telecomunicações, saúde e serviços financeiros, mantendo consistência estrutural e reduzindo custos de manutenção.</p>
+      </div>
+    </div>
+    <div class="wl-b-illo">
+      <img src="img/delta/whitelabel-hero.png" alt="Delta Design System: cubo 3D com tokens, componentes e guidelines conectando-se a interfaces de Telecom, Saúde e Serviços Financeiros">
+    </div>
+  </div>
+
+  <div class="wl-b-feats">
+    <div class="wl-b-feat">
+      <div class="wl-b-feat-ico"><svg viewBox="0 0 24 24"><rect x="8" y="2" width="13" height="13" rx="2"></rect><rect x="3" y="7" width="13" height="13" rx="2"></rect></svg></div>
+      <div class="wl-b-feat-body">
+        <div class="wl-b-feat-t">Uma Única Base</div>
+        <div class="wl-b-feat-d">Consistência em todos os produtos e marcas.</div>
+      </div>
+    </div>
+    <div class="wl-b-feat">
+      <div class="wl-b-feat-ico"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"></path></svg></div>
+      <div class="wl-b-feat-body">
+        <div class="wl-b-feat-t">Adaptação Rápida</div>
+        <div class="wl-b-feat-d">Novas marcas e produtos com mais velocidade.</div>
+      </div>
+    </div>
+    <div class="wl-b-feat">
+      <div class="wl-b-feat-ico"><svg viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z"></path><path d="m9 12 2 2 4-4"></path></svg></div>
+      <div class="wl-b-feat-body">
+        <div class="wl-b-feat-t">Redução de Custos</div>
+        <div class="wl-b-feat-d">Menos manutenção, mais eficiência.</div>
+      </div>
+    </div>
+    <div class="wl-b-feat">
+      <div class="wl-b-feat-ico"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"></path><path d="M7 17v-4"></path><path d="M11 17V9"></path><path d="M15 17V5"></path><path d="M19 17V7"></path></svg></div>
+      <div class="wl-b-feat-body">
+        <div class="wl-b-feat-t">Escalabilidade</div>
+        <div class="wl-b-feat-d">Crescimento sustentável com padrões sólidos.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ ESTUDO 03 ════════════════════ -->
+<section class="study st-c">
+  <div class="study-tag"><b>Estudo 03</b><span>Cor sutil · cápsulas ecoando a paleta das camadas</span></div>
+  <div class="wl">
+    <div class="wl-left">
+      <div class="s-index"><b>05</b><em></em><span class="s-kicker">Nossa diferença</span></div>
+      <h2 class="s-title">Arquitetura<br>White Label</h2>
+      <div class="feats">
+        <div class="feat-grid">
+          <div class="feat"><div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M19.4 7.85c-.05.32.06.65.29.88l1.57 1.57c.47.47.7 1.08.7 1.7s-.23 1.23-.7 1.7l-1.61 1.61a.98.98 0 0 1-.84.28c-.47-.07-.8-.48-.97-.93a2.5 2.5 0 1 0-3.21 3.22c.45.16.85.5.92.97a.98.98 0 0 1-.27.84l-1.61 1.6a2.4 2.4 0 0 1-3.41 0l-1.57-1.56a1.03 1.03 0 0 0-.88-.29c-.49.07-.84.5-1.02.97a2.5 2.5 0 1 1-3.24-3.24c.46-.18.9-.53.97-1.02a1.03 1.03 0 0 0-.29-.88l-1.57-1.57A2.4 2.4 0 0 1 2 12c0-.62.24-1.23.71-1.7L4.23 8.77c.24-.24.58-.35.92-.3.51.07.88.52 1.07 1a2.5 2.5 0 1 0 3.26-3.25c-.48-.2-.93-.56-1-1.08-.05-.33.06-.67.3-.91l1.52-1.53a2.4 2.4 0 0 1 3.41 0l1.57 1.57c.23.23.55.34.88.29.49-.08.84-.5 1.02-.97a2.5 2.5 0 1 1 3.24 3.24c-.47.18-.9.53-.97 1.02Z"/></svg></div><div class="feat-t">Componentes Compartilhados</div></div>
+          <div class="feat"><div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.7 9.7 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.7 9.7 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg></div><div class="feat-t">Adaptação Rápida</div></div>
+          <div class="feat"><div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z"/><path d="m9 12 2 2 4-4"/></svg></div><div class="feat-t">Consistência Estrutural</div></div>
+          <div class="feat"><div class="feat-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M15.5 8.8a3 3 0 0 0-2.9-1.6c-1.6 0-2.9.85-2.9 2.1 0 1.05.85 1.7 2.5 2 1.8.38 3.25.85 3.25 2.27 0 1.32-1.34 2.2-2.9 2.2a3.1 3.1 0 0 1-2.9-1.5"/><path d="M12 6v12"/></svg></div><div class="feat-t">Redução de Custos</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="wl-right">
+      <div class="wl-illo"><img src="img/delta/whitelabel-stack.png" alt="Camadas do Delta Design System: plataforma base, componentes, tokens e marcas (telecom, saúde, financeiro)"></div>
+      <div class="wl-text">
+        <p class="wl-para">Um dos principais diferenciais do Delta foi sua capacidade de <strong>atender diferentes marcas a partir de uma única base.</strong></p>
+        <p class="wl-para">Através da combinação entre tokens e componentes compartilhados, foi possível adaptar rapidamente interfaces para segmentos como telecomunicações, saúde e serviços financeiros, mantendo consistência estrutural e reduzindo custos de manutenção.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
