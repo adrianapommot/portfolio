@@ -73,6 +73,23 @@
       const float = root.querySelector('.nav-float');
       root.querySelector('.nav-toggle').addEventListener('click', function () { float.classList.toggle('open'); });
       root.querySelectorAll('.nav-menu a').forEach(function (a) { a.addEventListener('click', function () { float.classList.remove('open'); }); });
+
+      // Alinha o nome "Adriana Pommot" com a borda esquerda do conteúdo
+      // (target.left + target.padding-left). target = primeiro container que
+      // define padding-left via tokens (.sec nos cases, .wrap na home).
+      const align = () => {
+        const target = document.querySelector('.sec, .wrap, .container');
+        if (!target) return;
+        const r = target.getBoundingClientRect();
+        const cs = getComputedStyle(target);
+        const pad = parseFloat(cs.paddingLeft) || 0;
+        const nudge = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-name-nudge')) || 0;
+        document.documentElement.style.setProperty('--nav-name-left', (r.left + pad + nudge) + 'px');
+      };
+      align();
+      window.addEventListener('load', align);
+      window.addEventListener('resize', align);
+      document.addEventListener('DOMContentLoaded', align);
     }
   }
   if (!customElements.get('site-nav')) customElements.define('site-nav', SiteNav);

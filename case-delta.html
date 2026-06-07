@@ -655,7 +655,7 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
 
 <!-- NAV (componente compartilhado) -->
 <site-nav back="index.html#work"></site-nav>
-<script src="site-nav.js?v=3"></script>
+<script src="site-nav.js?v=6"></script>
 
 <main class="flow">
 
@@ -1421,20 +1421,5 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 </script>
 
-<!-- ═══ ALINHA NAV-NAME COM O FLOW ═══ -->
-<script>
-(function(){
-  function alignNavName(){
-    var flow=document.querySelector('main.flow');
-    if(!flow) return;
-    var fl=flow.getBoundingClientRect().left;
-    var m=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--m'))||64;
-    document.documentElement.style.setProperty('--nav-name-left',(fl+m)+'px');
-  }
-  window.addEventListener('load',alignNavName);
-  window.addEventListener('resize',alignNavName);
-  document.addEventListener('DOMContentLoaded',alignNavName);
-  setTimeout(alignNavName,100);
-})();
-</script>
+<!-- nav-name alignment agora é feito pelo site-nav.js -->
 </html>

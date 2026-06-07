@@ -14,16 +14,21 @@ Este pacote contém o portfólio finalizado. **Substitua os arquivos no reposit�
 
 ## Cache busting
 
-O `site-nav.js` está referenciado como `site-nav.js?v=3` em todas as páginas (home + cases). Isso força os navegadores a baixarem a versão nova sem precisar de hard refresh. **Não mude o `?v=3`** ou o cache antigo vai voltar a aparecer.
+O `site-nav.js` está referenciado como `site-nav.js?v=6` em todas as páginas (home + cases). Isso força os navegadores a baixarem a versão nova sem precisar de hard refresh. **Não mude o `?v=6`** ou o cache antigo vai voltar a aparecer.
 
-## Arquivos modificados desde o último deploy
+## Resumo das mudanças desta rodada
 
-- `index.html` — seções com novo padrão `s-index` (NN · Label + linha)
-- `home.css` — adicionado estilo `.s-index`, removidos estilos antigos de eyebrow
-- `site-nav.js` — componente unificado com back link "Todos os projetos" via atributo `back="…"`, sem animação no hover do nome
-- `case-delta.html`, `case-mrv.html`, `case-ford.html`, `case-chorume.html` — adotam `<site-nav back="index.html#work">`, sem `.hero-back` standalone
-- `case-delta.html` — pequenos ajustes de copy/bold, imagens convertidas para WebP (`global-design-tokens.webp`, `whitelabel-hero.webp`), iframe do Delta Atoms com altura 700px
-- `delta-atoms.html` — layout responsivo (sem `min-width:900px`, sem `height:100vh`)
+- **`site-nav.js`** — componente unificado:
+  - "Adriana Pommot" sem animação de hover.
+  - "← Todos os projetos" embutido via atributo `back="…"` (renderizado dentro do shadow DOM, position:absolute — scrolla com a página, separado do menu fixo).
+  - Alinhamento automático do nome com a borda esquerda do conteúdo (mede o primeiro `.sec` / `.wrap` / `.container` da página, lê `padding-left` computado).
+  - Nudge óptico opcional via `--nav-name-nudge` (definido em `home.css` como `6px` pra compensar a borda chata das letras gigantes do hero).
+- **`home.css`** — novo estilo `.s-index` (NN · Label + linha), variante `on-dark`, override do CTA card.
+- **`index.html`** — todas as seções (Serviços, Projetos, Trajetória, Perfil, Contato) usando o padrão `s-index`.
+- **`case-delta.html`** — script inline de alinhamento removido (agora no site-nav.js), iframe do `delta-atoms.html` reativado em 700px de altura, copy em bold pontual nos parágrafos.
+- **`delta-atoms.html`** — layout responsivo (sem `min-width:900px` nem `height:100vh`), grid de cards que reorganiza em 3/2/1 colunas conforme a largura.
+- **Cases (chorume, mrv, ford, delta)** — todos usando `<site-nav back="index.html#work">`, sem `.hero-back` standalone.
+- **Imagens** — `global-design-tokens.png` e `whitelabel-hero.png` convertidas pra WebP (redução de ~95%).
 
 ## Estrutura
 

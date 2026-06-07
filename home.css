@@ -25,7 +25,8 @@
   --maxw: 1440px;
   --m: clamp(24px, 5vw, 64px);
   --gut: clamp(24px, 5vw, 64px);
-  --nav-name-left: calc(var(--gut) + 8px);
+  /* compensa a borda óptica das letras grandes do hero (D plana parece avançar à esquerda) */
+  --nav-name-nudge: 6px;
 }
 
 * , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
