@@ -14,11 +14,11 @@ Este pacote contém o portfólio finalizado. **Substitua os arquivos no reposit�
 
 ## Cache busting
 
-O `site-nav.js` está referenciado como `site-nav.js?v=6` em todas as páginas (home + cases). Isso força os navegadores a baixarem a versão nova sem precisar de hard refresh. **Não mude o `?v=6`** ou o cache antigo vai voltar a aparecer.
+O `site-nav.js` está referenciado como `site-nav.js?v=7` em todas as páginas (home + cases). Isso força os navegadores a baixarem a versão nova sem precisar de hard refresh. **Não mude o `?v=7`** ou o cache antigo vai voltar a aparecer.
 
 ## Resumo das mudanças desta rodada
 
-- **`site-nav.js`** — componente unificado:
+- **`home.css`** — `.hero` agora usa `padding-top: calc(52px + clamp(20px, 2.5vh, 32px))`. Isso amarra a distância do "Adriana Pommot" → título do hero ao **mesmo clamp** usado como `gap` entre o título e o bloco de "São Paulo / botões". Resultado: espaçamento simétrico em qualquer viewport, sem padding chumbado.
   - "Adriana Pommot" sem animação de hover.
   - "← Todos os projetos" embutido via atributo `back="…"` (renderizado dentro do shadow DOM, position:absolute — scrolla com a página, separado do menu fixo).
   - Alinhamento automático do nome com a borda esquerda do conteúdo (mede o primeiro `.sec` / `.wrap` / `.container` da página, lê `padding-left` computado).
