@@ -1,22 +1,25 @@
-/* site-nav.js — navegação compartilhada (nome estático + menu fixo).
+/* site-nav.js — navegação compartilhada (nome estático + menu fixo + back link opcional).
    Fonte única para todas as páginas. Uso:
-     <site-nav></site-nav>                              (cases, padrão)
+     <site-nav back="index.html#work"></site-nav>       (cases — com link "Todos os projetos")
      <site-nav brand-href="#top" base="" contact="#contato" cv="#contato"></site-nav>  (home)
    Atributos:
      brand-href  href do nome (default "index.html")
      base        prefixo dos links de seção (default "index.html"; home "")
      contact     href do "Contato" (default "#contact")
      cv          href do "Download CV" (default "cv-adriana-pommot.pdf"; .pdf vira download)
+     back        se presente, renderiza "← Todos os projetos" à esquerda do botão de menu
+     back-label  texto do back link (default "Todos os projetos")
    Herda os tokens de cor/espaçamento (var(--accent), --m, --black, --gray-1, --font) da página. */
 (function () {
   const css = `
   :host{display:contents}
   a{text-decoration:none;font-family:var(--font,'Plus Jakarta Sans',sans-serif)}
-  .nav-name{position:absolute;top:40px;left:var(--nav-name-left, var(--m));z-index:30;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--black)}
-  .nav-name span{display:block;line-height:1;white-space:nowrap;transition:transform .45s cubic-bezier(.19,1,.22,1)}
-  .nav-name:hover span{transform:translateY(-100%)}
-  .nav-roll{display:block;overflow:hidden;height:1em}
+  .nav-name{position:absolute;top:40px;left:var(--nav-name-left, var(--m));z-index:30;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--black);line-height:1;white-space:nowrap}
   .nav-float{position:fixed;top:24px;right:var(--m);z-index:30;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+  .nav-back{position:absolute;top:49px;right:calc(var(--m) + 66px);transform:translateY(-50%);white-space:nowrap;z-index:30;display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--gray-3,#756F67);transition:color .25s}
+  .nav-back:hover{color:var(--black,#111)}
+  .nav-back svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s cubic-bezier(.19,1,.22,1)}
+  .nav-back:hover svg{transform:translateX(-4px)}
   .nav-toggle{width:50px;height:50px;border-radius:50%;border:1px solid var(--accent);cursor:pointer;background:var(--accent);display:flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s;padding:0}
   .nav-toggle:hover{background:var(--black);border-color:var(--black)}
   .nav-toggle:hover svg{stroke:#fff}
@@ -44,11 +47,17 @@
       const base = attr('base', 'index.html');
       const contact = attr('contact', '#contact');
       const cv = attr('cv', 'cv-adriana-pommot.pdf');
+      const back = this.getAttribute('back');
+      const backLabel = attr('back-label', 'Todos os projetos');
       const dl = /\.pdf($|\?)/i.test(cv) ? ' download' : '';
+      const backHtml = back !== null
+        ? '<a class="nav-back" href="' + back + '"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/><path d="M5 8h7"/></svg>' + backLabel + '</a>'
+        : '';
       const root = this.attachShadow({ mode: 'open' });
       root.innerHTML =
         '<style>' + css + '</style>' +
-        '<a href="' + brand + '" class="nav-name"><span class="nav-roll"><span>Adriana Pommot</span><span>Adriana Pommot</span></span></a>' +
+        '<a href="' + brand + '" class="nav-name">Adriana Pommot</a>' +
+        backHtml +
         '<div class="nav-float">' +
         '<button class="nav-toggle" aria-label="Menu">' +
         '<svg class="icon-menu" viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>' +

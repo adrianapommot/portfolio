@@ -47,9 +47,6 @@ p{text-wrap:balance}
 
 /* ═══ NAV (idêntica à home) ═══ */
 .nav-name{position:absolute;top:40px;left:var(--m);z-index:30;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--black)}
-.nav-name span{display:block;line-height:1;white-space:nowrap;transition:transform .45s cubic-bezier(.19,1,.22,1)}
-.nav-name:hover span{transform:translateY(-100%)}
-.nav-roll{display:block;overflow:hidden;height:1em}
 .nav-float{position:fixed;top:36px;right:var(--m);z-index:100;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
 .nav-toggle{width:50px;height:50px;border-radius:50%;border:1px solid var(--accent);cursor:pointer;background:var(--accent);display:flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s}
 .nav-toggle:hover{background:var(--black);border-color:var(--black)}
@@ -72,9 +69,6 @@ p{text-wrap:balance}
 /* ═══ HERO (dark) ═══ */
 .hero{position:relative;overflow:hidden;background:#111;padding-top:clamp(120px,14vh,168px);padding-bottom:0}
 .hero-inner{position:relative}
-.hero-back{position:fixed;top:40px;left:var(--m);z-index:30;display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.04em;color:rgba(255,255,255,.5);transition:color .25s}
-.hero-back:hover{color:#fff}
-.hero-back svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .hero-top{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:clamp(16px,2vw,22px)}
 .hero-brand{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)}
 .hero .hero-title{font-size:clamp(38px,4.4vw,62px);font-weight:700;letter-spacing:-.04em;line-height:.94;text-transform:uppercase;color:#fff}
@@ -214,15 +208,14 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 <body>
 
 <!-- NAV (componente compartilhado) -->
-<site-nav></site-nav>
-<script src="site-nav.js"></script>
+<site-nav back="index.html#work"></site-nav>
+<script src="site-nav.js?v=3"></script>
 
 <main class="flow">
 
   <!-- ═══ HERO ═══ -->
   <section class="sec hero" id="top">
     <div class="hero-inner">
-      <a class="hero-back" href="index.html#work"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/><path d="M5 8h7"/></svg>Todos os projetos</a>
       <div class="hero-top">
         <span class="hero-brand">Projeto Autoral</span>
       </div>

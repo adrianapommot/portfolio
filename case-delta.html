@@ -49,9 +49,6 @@ p{text-wrap:balance}
 
 /* ═══ NAV (idêntica à home) ═══ */
 .nav-name{position:absolute;top:40px;left:var(--m);z-index:30;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--black)}
-.nav-name span{display:block;line-height:1;white-space:nowrap;transition:transform .45s cubic-bezier(.19,1,.22,1)}
-.nav-name:hover span{transform:translateY(-100%)}
-.nav-roll{display:block;overflow:hidden;height:1em}
 .nav-float{position:fixed;top:24px;right:var(--m);z-index:30;display:flex;flex-direction:column;align-items:flex-end;gap:8px;pointer-events:none}
 .nav-toggle{width:50px;height:50px;border-radius:50%;border:1px solid var(--accent);cursor:pointer;background:var(--accent);display:flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s}
 .nav-toggle:hover{background:var(--black);border-color:var(--black)}
@@ -76,11 +73,6 @@ p{text-wrap:balance}
 .hero-inner{position:relative;z-index:2;padding-top:24px}
 .hero-illo{position:absolute;right:var(--m);width:min(52%,680px);height:auto;z-index:0;pointer-events:none;user-select:none;-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 44px),transparent 100%);mask-image:linear-gradient(to bottom,#000 calc(100% - 44px),transparent 100%);animation:heroUp 1s cubic-bezier(.2,.7,.3,1) backwards;animation-delay:.25s}
 @media(max-width:1080px){.hero-illo{display:none}}
-.hero-back{position:fixed;top:40px;left:var(--m);z-index:30;display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--gray-4);transition:color .25s;margin:0}
-.hero-back:hover{color:var(--gray-1)}
-.hero-back svg{transition:transform .3s cubic-bezier(.19,1,.22,1)}
-.hero-back:hover svg{transform:translateX(-4px)}
-.hero-back svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .hero-top{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:clamp(4px,.5vw,8px)}
 .hero-brand{display:inline-flex;align-items:center;gap:13px}
 .hero-brand img{width:clamp(140px,16vw,224px);height:auto;display:block}
@@ -360,6 +352,7 @@ p{text-wrap:balance}
 .bib-num{font-size:var(--ty-label);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-4)}
 .bib-name{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--black)}
 .bib-desc{font-size:var(--ty-small);line-height:1.65;color:var(--gray-2);text-wrap:pretty}
+.bib-desc strong{font-weight:700;color:var(--black)}
 
 /* ═══ ARQUITETURA WHITE LABEL ═══ */
 .wl-split{display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(48px,6vw,88px);row-gap:var(--s3)}
@@ -369,6 +362,24 @@ p{text-wrap:balance}
 .wl-para{font-size:var(--ty-small);font-weight:400;line-height:1.72;color:var(--gray-2);text-wrap:balance}
 .wl-para strong{font-weight:600;color:var(--gray-1)}
 @media(max-width:760px){.wl-split{grid-template-columns:1fr}.wl-right{grid-column:1;grid-row:auto}}
+
+/* ═══ WHITE LABEL · hero (ilustração + features) ═══ */
+.wl-hero{display:grid;grid-template-columns:0.42fr 0.58fr;column-gap:clamp(32px,4vw,72px);align-items:start}
+.wl-hero-left{display:flex;flex-direction:column}
+.wl-hero-left .s-index{margin-bottom:clamp(18px,2.4vw,28px)}
+.wl-hero-left .s-title{text-transform:uppercase;margin-bottom:clamp(22px,2.8vw,34px)}
+.wl-hero-text{display:flex;flex-direction:column;gap:18px}
+.wl-hero-illo{display:flex;align-items:center;justify-content:center}
+.wl-hero-illo img{width:110%;max-width:none;height:auto}
+.wl-feats{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(18px,2.2vw,32px);background:var(--bone);border-radius:18px;padding:clamp(24px,3vw,36px);margin-top:clamp(32px,3.8vw,48px)}
+.wl-feat{display:flex;gap:14px;align-items:flex-start}
+.wl-feat-ico{width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex:0 0 36px}
+.wl-feat-ico svg{width:26px;height:26px;stroke:#D4A520;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.wl-feat-body{display:flex;flex-direction:column;gap:5px;min-width:0}
+.wl-feat-t{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--black)}
+.wl-feat-d{font-size:12.5px;font-weight:400;line-height:1.5;color:var(--gray-2);text-wrap:pretty}
+@media(max-width:920px){.wl-hero{grid-template-columns:1fr;row-gap:clamp(28px,4vw,40px)}.wl-hero-illo{order:-1}.wl-hero-illo img{width:100%}.wl-feats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.wl-feats{grid-template-columns:1fr}}
 
 /* ═══ WHITE LABEL SIMULATION ═══ */
 .white-label-sim{padding:clamp(48px,5.5vw,80px) var(--m);border-top:1px solid var(--line)}
@@ -417,6 +428,23 @@ p{text-wrap:balance}
 .res-stat:last-child{border-right:none;padding-right:0}
 .res-num{font-size:clamp(40px,4.6vw,56px);font-weight:600;line-height:1;letter-spacing:-.03em;color:var(--black);margin-bottom:16px;font-variant-numeric:tabular-nums}
 .res-stat-label{font-size:var(--ty-small);line-height:1.5;color:var(--gray-2);text-wrap:balance}
+/* Resultados — hero stat (estudo 03) */
+.res-hero{display:grid;grid-template-columns:1.12fr 1fr;gap:clamp(20px,2.4vw,32px);align-items:stretch;margin-bottom:var(--space-title)}
+.res-hero-card{background:var(--black);border-radius:22px;padding:clamp(32px,3.6vw,52px);color:#fff;display:flex;flex-direction:column;justify-content:space-between;gap:clamp(28px,4vw,44px)}
+.res-hero-tag{font-size:var(--ty-label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.res-hero-num{font-size:var(--ty-display);font-weight:700;letter-spacing:-.04em;line-height:.85;color:#fff;font-variant-numeric:tabular-nums}
+.res-hero-num .sgn{color:var(--accent)}
+.res-hero-num .u{font-size:.4em;font-weight:600;vertical-align:top;margin-left:3px}
+.res-hero-label{font-size:var(--ty-lead);font-weight:500;line-height:1.45;color:rgba(255,255,255,.78);max-width:34ch}
+.res-hero-note{font-family:'IBM Plex Mono',monospace;font-size:11px;line-height:1.5;color:rgba(255,255,255,.5);margin-top:12px}
+.res-side{display:flex;flex-direction:column;justify-content:space-between;gap:clamp(12px,1.4vw,18px)}
+.res-side-item{flex:1;background:var(--bone);border-radius:16px;padding:clamp(20px,2.2vw,28px);display:flex;align-items:center;gap:clamp(18px,2vw,26px)}
+.res-side-num{font-size:clamp(32px,3.4vw,46px);font-weight:700;letter-spacing:-.03em;line-height:.9;color:var(--black);font-variant-numeric:tabular-nums;flex:0 0 auto;min-width:2.4ch}
+.res-side-num .sgn{color:#D4A520}.res-side-num .u{font-size:.5em;font-weight:600}
+.res-side-body{display:flex;flex-direction:column;gap:3px}
+.res-side-t{font-size:14.5px;font-weight:700;color:var(--black);letter-spacing:-.01em}
+.res-side-d{font-size:12.5px;color:var(--gray-2);line-height:1.4;text-wrap:pretty}
+@media(max-width:760px){.res-hero{grid-template-columns:1fr}}
 .evidence{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:16px;overflow:hidden}
 .evidence-col{padding:clamp(32px,4vw,48px);display:flex;flex-direction:column}
 .evidence-col:first-child{border-right:1px solid var(--line)}
@@ -432,25 +460,60 @@ p{text-wrap:balance}
 @media(max-width:900px){.res-stats{grid-template-columns:1fr 1fr;gap:32px 0;padding:32px 0}.res-stat{padding:0 24px}.res-stat:nth-child(odd){padding-left:0}.res-stat:nth-child(2n){border-right:none;padding-right:0}.evidence{grid-template-columns:1fr}.evidence-col:first-child{border-right:none;border-bottom:1px solid var(--line)}}
 @media(max-width:560px){.res-stats{grid-template-columns:1fr}.res-stat{padding:0;border-right:none}}
 
-/* Antes e depois */
-.ba{margin-top:var(--space-title)}
-.ba-head{max-width:640px;margin-bottom:36px}
-.ba-head .s-label{display:block;margin-bottom:14px}
-.ba-note{font-size:var(--ty-copy);line-height:1.6;color:var(--gray-2);text-wrap:balance}
-.ba-table{border-top:1px solid var(--line)}
-.ba-row{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:24px;align-items:center;padding:20px 0;border-bottom:1px solid var(--line)}
-.ba-row--head span{font-size:var(--ty-label);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-3)}
-.ba-dim{font-size:var(--ty-copy);font-weight:600;color:var(--black)}
-.ba-before{font-size:var(--ty-small);color:var(--gray-3);text-decoration:line-through;text-decoration-color:var(--gray-4)}
-.ba-after{font-size:var(--ty-small);font-weight:600;color:var(--black);display:inline-flex;align-items:center;gap:10px}
-.ba-after::before{content:"";width:18px;height:2px;background:var(--accent);flex-shrink:0}
-@media(max-width:680px){.ba-row{grid-template-columns:1fr;gap:6px;padding:16px 0}.ba-row--head{display:none}}
+/* Antes e depois — comparativo em cards (rascunho) */
+.ba{display:grid;grid-template-columns:0.72fr 2.7fr;gap:clamp(28px,3.5vw,60px);align-items:start;margin-top:var(--space-title)}
+.ba-aside{position:sticky;top:40px}
+.ba-eyebrow{font-size:var(--ty-label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--black)}
+.ba-bar{width:44px;height:3px;border-radius:2px;background:var(--accent);margin:14px 0 26px}
+.ba-note{font-size:var(--ty-small);line-height:1.9;color:var(--gray-2);text-wrap:pretty}
+.ba-table{display:flex;flex-direction:column;gap:clamp(10px,1.1vw,14px)}
+.ba-thead{display:grid;grid-template-columns:1.32fr 1fr 1.12fr;gap:clamp(10px,1.1vw,14px)}
+.ba-thead span{font-size:var(--ty-label);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-3)}
+.ba-row{display:grid;grid-template-columns:1.32fr 1fr 1.12fr;gap:clamp(10px,1.1vw,14px);align-items:stretch}
+.ba-cell{border-radius:14px;padding:clamp(18px,1.9vw,26px) clamp(20px,2vw,28px);display:flex;align-items:center;gap:18px}
+.ba-dim{background:#fff;border:1px solid var(--line)}
+.ba-dim svg{width:28px;height:28px;flex:0 0 28px;stroke:var(--black);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.ba-dim b{font-size:15px;font-weight:700;line-height:1.25;color:var(--black);letter-spacing:-.01em}
+.ba-antes{background:var(--chip);color:var(--gray-2);font-size:var(--ty-small)}
+.ba-depois{background:color-mix(in srgb,var(--accent) 26%,#fff);gap:12px}
+.ba-depois svg{width:20px;height:20px;flex:0 0 20px;stroke:var(--black);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.ba-depois b{font-size:var(--ty-small);font-weight:700;color:var(--black)}
+@media(max-width:920px){
+  .ba{grid-template-columns:1fr;gap:28px}
+  .ba-aside{position:static}
+  .ba-thead{display:none}
+  .ba-row{grid-template-columns:1fr;gap:8px;padding:14px;border:1px solid var(--line);border-radius:16px}
+  .ba-cell{padding:14px 16px}
+  .ba-dim{border:none;padding-left:0;padding-top:0}
+}
 
 
 
-/* ═══ CASE CLOSER ═══ */
-.closer-img{border-radius:16px;overflow:hidden;border:1px solid var(--line)}
-.closer-img img{width:100%;display:block}
+/* ═══ CASE CLOSER · encerramento (split dark + mockup) ═══ */
+.closer{display:grid;grid-template-columns:0.82fr 1.18fr;align-items:stretch;border-top:1px solid var(--line);overflow:hidden}
+.closer-left{background:var(--black);color:#fff;padding:clamp(40px,5vw,76px) clamp(32px,4vw,60px)}
+.closer-left .s-index{margin-bottom:var(--space-md)}
+.closer-left .s-index b{color:#fff}
+.closer-left .s-index em{background:rgba(255,255,255,.28)}
+.closer-title{font-size:clamp(34px,3.6vw,52px);font-weight:700;line-height:1.12;letter-spacing:-.03em;text-transform:uppercase;color:#fff;margin-bottom:clamp(24px,2.8vw,34px)}
+.closer-title .hl{color:var(--accent)}
+.closer-text{display:flex;flex-direction:column;gap:18px;max-width:46ch}
+.closer-text p{font-size:var(--ty-small);line-height:1.65;color:rgba(255,255,255,.72)}
+.closer-text p strong{font-weight:700;color:#fff}
+.closer-divider{height:1px;background:rgba(255,255,255,.16);margin:clamp(32px,4vw,52px) 0 clamp(26px,3vw,38px)}
+.closer-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,28px)}
+.closer-stat{display:flex;flex-direction:column;gap:14px}
+.closer-stat svg{width:34px;height:34px;stroke:var(--accent);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.closer-stat b{font-size:clamp(30px,3vw,40px);font-weight:700;letter-spacing:-.03em;line-height:1;color:#fff;font-variant-numeric:tabular-nums}
+.closer-stat span{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55);line-height:1.4}
+.closer-right{background:#cecbc7;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(24px,3vw,48px) clamp(20px,2.6vw,44px) clamp(30px,3.6vw,52px);overflow:hidden}
+.closer-mock{width:100%;display:flex;justify-content:center}
+.closer-mock img{width:128%;max-width:none;display:block;margin-block:-6%}
+.closer-cap{text-align:center;margin-top:clamp(6px,1.2vw,14px)}
+.closer-cap-bar{display:block;width:54px;height:3px;border-radius:2px;background:var(--accent);margin:0 auto 18px}
+.closer-cap-t{font-size:clamp(16px,1.6vw,20px);font-weight:700;letter-spacing:.02em;text-transform:uppercase;color:var(--black)}
+.closer-cap-s{font-size:clamp(13px,1.3vw,16px);font-weight:600;letter-spacing:.02em;text-transform:uppercase;color:var(--gray-2);margin-top:6px}
+@media(max-width:860px){.closer{grid-template-columns:1fr}}
 
 /* ═══ OUTROS PROJETOS ═══ */
 .more-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gut);margin-top:48px}
@@ -491,11 +554,10 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
 @media(max-width:860px){.footer-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.footer-grid{grid-template-columns:1fr}}
 
-/* ═══ REVEAL ═══ */
-.rv{opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
-.rv.visible{opacity:1;transform:none}
-.d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s}
-@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+/* ═══ REVEAL — desativado, tudo estático ═══ */
+.rv,.rv.visible{opacity:1!important;transform:none!important;transition:none!important;animation:none!important}
+.hero-top,.hero .hero-title>span,.hero-foot{animation:none!important;opacity:1!important;transform:none!important}
+.scroll-hint span:first-child,.sim-button-glow{animation:none!important}
 
 /* ═══ FUNDAÇÃO DE TOKENS (escopado .tkz) ═══ */
 .tkz{--pink:#E6007A;--mono:'IBM Plex Mono',monospace;margin-top:0}
@@ -592,8 +654,8 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
 <body>
 
 <!-- NAV (componente compartilhado) -->
-<site-nav></site-nav>
-<script src="site-nav.js"></script>
+<site-nav back="index.html#work"></site-nav>
+<script src="site-nav.js?v=3"></script>
 
 <main class="flow">
 
@@ -601,7 +663,6 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
   <section class="sec hero" id="top">
     <img class="hero-illo" src="hero-delta.png" alt="Cena do Delta Design System: tokens de cor, tipografia, elevação, opacidade e bordas" loading="eager">
     <div class="hero-inner">
-      <a class="hero-back" href="index.html#work"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/><path d="M5 8h7"/></svg>Todos os projetos</a>
       <div class="hero-top">
         <span class="hero-brand"><img src="logo-delta.svg" alt="Delta Design System"></span>
       </div>
@@ -648,7 +709,7 @@ footer{background:#111110;color:#fff;padding:clamp(56px,7vw,72px) var(--m) 32px}
   <!-- ═══ 01 · CONTEXTO & PROBLEMA ═══ -->
   <section class="sec" id="contexto">
     <div class="sec-head">
-      <div class="s-index"><b>01</b><em></em></div>
+      <div class="s-index"><b>01 · Contexto</b><em></em></div>
       <h2 class="s-title">Entendendo o desafio</h2>
       <p class="s-lead">Antes de desenhar qualquer componente, era necessário compreender 
 como os produtos eram construídos, onde estavam os pontos de atrito e quais decisões precisavam ser padronizadas. Mais do que um problema 
@@ -713,7 +774,7 @@ visual, era um problema de operação. Mapeamos então os principais desafios.</
   <!-- ═══ 03 · O QUE CONSTRUÍ ═══ -->
   <section class="sec" id="construi" style="background-color: rgb(250, 250, 246)">
     <div class="sec-head built-lead">
-      <div class="s-index"><b>03</b><em></em></div>
+      <div class="s-index"><b>03 · Construção</b><em></em></div>
       <h2 class="s-title">O que construí</h2>
       <p class="s-lead">A construção do Delta aconteceu em diferentes camadas, cada uma responsável por <strong>sustentar a próxima</strong>.</p>
     </div>
@@ -858,48 +919,79 @@ visual, era um problema de operação. Mapeamos então os principais desafios.</
   <!-- ═══ 03a · BIBLIOTECA DE COMPONENTES ═══ -->
   <section class="sec" id="biblioteca">
     <div style="margin-bottom:var(--s4)">
-      <div class="s-index"><b>03</b><em></em></div>
+      <div class="s-index"><b>03 · Componentes</b><em></em></div>
       <h2 class="s-title" style="margin-bottom:0">Biblioteca de componentes</h2>
     </div>
     <div class="bib-cols">
       <div class="bib-col">
         <span class="bib-num">01</span>
         <span class="bib-name">Referência</span>
-        <p class="bib-desc">Com a fundação estabelecida, desenvolvi a biblioteca de componentes que passou a servir como referência para designers e desenvolvedores.</p>
+        <p class="bib-desc">Com a fundação estabelecida, desenvolvi a <strong>biblioteca de componentes</strong> que passou a servir como <strong>referência</strong> para designers e desenvolvedores.</p>
       </div>
       <div class="bib-col">
         <span class="bib-num">02</span>
         <span class="bib-name">Consistência</span>
-        <p class="bib-desc">O foco não era apenas criar elementos reutilizáveis, mas construir padrões consistentes capazes de acelerar entregas sem comprometer a experiência.</p>
+        <p class="bib-desc">O foco não era apenas criar elementos reutilizáveis, mas construir <strong>padrões consistentes</strong> capazes de acelerar entregas sem comprometer a experiência.</p>
       </div>
       <div class="bib-col">
         <span class="bib-num">03</span>
         <span class="bib-name">Documentação</span>
-        <p class="bib-desc">A biblioteca contemplava componentes documentados, variantes, estados e comportamentos preparados para diferentes cenários de produto.</p>
+        <p class="bib-desc">A biblioteca contemplava componentes documentados, <strong>variantes, estados e comportamentos</strong> preparados para diferentes cenários de produto.</p>
       </div>
     </div>
-    <div class="rv" style="margin-top:var(--s5);background:#131313;padding:var(--s4);border-radius:16px;overflow:hidden">
-      <img src="global-design-tokens.png" alt="Global Design Tokens — fundação visual do Delta Design System" loading="lazy" style="width:100%;display:block;border-radius:12px">
+    <div style="margin-top:var(--s5);background:#131313;padding:var(--s4);border-radius:16px;overflow:hidden">
+      <img src="global-design-tokens.webp" alt="Global Design Tokens — fundação visual do Delta Design System" decoding="async" style="width:100%;display:block;border-radius:12px">
     </div>
     <div style="margin-top:var(--s3)">
-      <iframe src="delta-atoms.html" style="width:100%;height:580px;border:1px solid var(--line);border-radius:16px;display:block;overflow:hidden" loading="eager" title="Delta Atoms interativo"></iframe>
+      <iframe src="delta-atoms.html" style="width:100%;height:700px;border:1px solid var(--line);border-radius:16px;display:block;background:#fff" loading="eager" title="Delta Atoms — biblioteca interativa de componentes do Delta Design System"></iframe>
     </div>
 
   </section>
 
   <!-- ═══ 03b · ARQUITETURA WHITE LABEL ═══ -->
   <section class="sec" id="white-label">
-    <div class="wl-split">
-      <div class="s-index" style="margin-bottom:0"><b>03</b><em></em></div>
-      <h2 class="s-title" style="margin-bottom: 0; margin: 0px 4px 0px 0px; padding: 0px">Arquitetura White Label</h2>
-      <div class="wl-chips">
-        <span class="wb-chip">Telecomunicações</span>
-        <span class="wb-chip">Saúde</span>
-        <span class="wb-chip" style="border-color: rgb(227, 224, 218)">Serviços financeiros</span>
+    <div class="wl-hero">
+      <div class="wl-hero-left">
+        <div class="s-index"><b>03 · White Label</b><em></em></div>
+        <h2 class="s-title">Arquitetura<br>White Label</h2>
+        <div class="wl-hero-text">
+          <p class="wl-para">Um dos principais diferenciais do Delta foi sua capacidade de <strong>atender diferentes marcas a partir de uma única base.</strong></p>
+          <p class="wl-para">Através da combinação entre tokens e componentes compartilhados, foi possível <strong>adaptar rapidamente</strong> interfaces para segmentos como <strong>telecomunicações, saúde e serviços financeiros</strong>, mantendo consistência estrutural e <strong>reduzindo custos de manutenção</strong>.</p>
+        </div>
       </div>
-      <div class="wl-right">
-        <p class="wl-para">Um dos principais diferenciais do Delta foi sua capacidade de <strong>atender diferentes marcas a partir de uma única base.</strong></p>
-        <p class="wl-para">Através da combinação entre tokens e componentes compartilhados, foi possível adaptar rapidamente interfaces para segmentos como telecomunicações, saúde e serviços financeiros, mantendo consistência estrutural e reduzindo custos de manutenção.</p>
+      <div class="wl-hero-illo">
+        <img src="img/delta/whitelabel-hero.webp" alt="Delta Design System: cubo 3D com tokens, componentes e guidelines conectando-se a interfaces de Telecom, Saúde e Serviços Financeiros" decoding="async">
+      </div>
+    </div>
+
+    <div class="wl-feats">
+      <div class="wl-feat">
+        <div class="wl-feat-ico"><svg viewBox="0 0 24 24"><rect x="8" y="2" width="13" height="13" rx="2"></rect><rect x="3" y="7" width="13" height="13" rx="2"></rect></svg></div>
+        <div class="wl-feat-body">
+          <div class="wl-feat-t">Uma Única Base</div>
+          <div class="wl-feat-d">Consistência em todos os produtos e marcas.</div>
+        </div>
+      </div>
+      <div class="wl-feat">
+        <div class="wl-feat-ico"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"></path></svg></div>
+        <div class="wl-feat-body">
+          <div class="wl-feat-t">Adaptação Rápida</div>
+          <div class="wl-feat-d">Novas marcas e produtos com mais velocidade.</div>
+        </div>
+      </div>
+      <div class="wl-feat">
+        <div class="wl-feat-ico"><svg viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z"></path><path d="m9 12 2 2 4-4"></path></svg></div>
+        <div class="wl-feat-body">
+          <div class="wl-feat-t">Redução de Custos</div>
+          <div class="wl-feat-d">Menos manutenção, mais eficiência.</div>
+        </div>
+      </div>
+      <div class="wl-feat">
+        <div class="wl-feat-ico"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"></path><path d="M7 17v-4"></path><path d="M11 17V9"></path><path d="M15 17V5"></path><path d="M19 17V7"></path></svg></div>
+        <div class="wl-feat-body">
+          <div class="wl-feat-t">Escalabilidade</div>
+          <div class="wl-feat-d">Crescimento sustentável com padrões sólidos.</div>
+        </div>
       </div>
     </div>
   </section>
@@ -907,34 +999,90 @@ visual, era um problema de operação. Mapeamos então os principais desafios.</
   <!-- ═══ 04 · RESULTADOS ═══ -->
   <section class="sec" id="resultados">
     <div class="sec-head">
-      <div class="s-index"><b>04</b><em></em></div>
+      <div class="s-index"><b>04 · Impacto</b><em></em></div>
       <h2 class="s-title">Resultados</h2>
-      <p class="s-lead" style="max-width:900px">Um sistema que mudou como o time constrói produto: retrabalho reduzido, padrão visual coerente entre as 20+ marcas e handoff sem ambiguidade entre design e engenharia.</p>
+      <p class="s-lead" style="max-width:900px">Um sistema que mudou como o time constrói produto: <strong>retrabalho reduzido</strong>, <strong>padrão visual</strong> coerente entre as 20+ marcas e handoff sem ambiguidade entre design e engenharia.</p>
     </div>
-    <div class="res-stats">
-      <div class="res-stat"><div class="res-num">~47<span style="font-size:.5em;font-weight:600">%</span></div><p class="res-stat-label">Redução no tempo de criação de novas interfaces.</p></div>
-      <div class="res-stat"><div class="res-num">20+</div><p class="res-stat-label">Produtos consumindo a mesma biblioteca.</p></div>
-      <div class="res-stat"><div class="res-num">A→T</div><p class="res-stat-label">Cobertura completa, de átomos a templates.</p></div>
-      <div class="res-stat"><div class="res-num">Multi</div><p class="res-stat-label">Troca de marca via tokens, sem redesenho.</p></div>
+    <div class="res-hero rv">
+      <div class="res-hero-card">
+        <div class="res-hero-tag">Impacto principal</div>
+        <div class="res-hero-num"><span class="sgn">−</span>47<span class="u">%</span></div>
+        <div>
+          <div class="res-hero-label">no tempo de criação de novas interfaces — do briefing ao protótipo navegável.</div>
+          <div class="res-hero-note">Estimativa — feedback de prazos das squads (montagem de telas, antes vs. depois).</div>
+        </div>
+      </div>
+      <div class="res-side">
+        <div class="res-side-item">
+          <div class="res-side-num">20<span class="u">+</span></div>
+          <div class="res-side-body"><div class="res-side-t">Marcas na mesma base</div><div class="res-side-d">Uma fundação, múltiplas identidades.</div></div>
+        </div>
+        <div class="res-side-item">
+          <div class="res-side-num">100<span class="u">%</span></div>
+          <div class="res-side-body"><div class="res-side-t">Handoff documentado</div><div class="res-side-d">Sem ambiguidade entre design e engenharia.</div></div>
+        </div>
+        <div class="res-side-item">
+          <div class="res-side-num"><span class="sgn">0</span></div>
+          <div class="res-side-body"><div class="res-side-t">Redesenho na troca de marca</div><div class="res-side-d">Troca via swap de tokens.</div></div>
+        </div>
+      </div>
     </div>
     <div class="ba rv">
-      <div class="ba-head">
-        <span class="s-label">Antes e depois</span>
+      <div class="ba-aside">
+        <div class="ba-eyebrow">Antes e depois</div>
+        <div class="ba-bar"></div>
         <p class="ba-note">A biblioteca virou referência interna: novos squads chegavam e encontravam uma fundação pronta, não um canvas em branco. O reaproveitamento virou o default.</p>
       </div>
       <div class="ba-table">
-        <div class="ba-row ba-row--head"><span>Dimensão</span><span>Antes</span><span>Depois</span></div>
-        <div class="ba-row"><span class="ba-dim">Componentes compartilhados</span><span class="ba-before">Nenhum</span><span class="ba-after">Biblioteca completa</span></div>
-        <div class="ba-row"><span class="ba-dim">Início de cada projeto</span><span class="ba-before">Tudo do zero</span><span class="ba-after">Reaproveitamento</span></div>
-        <div class="ba-row"><span class="ba-dim">Documentação de handoff</span><span class="ba-before">Inexistente</span><span class="ba-after">100% documentada</span></div>
-        <div class="ba-row"><span class="ba-dim">Troca de marca</span><span class="ba-before">Redesenho manual</span><span class="ba-after">Swap de tokens</span></div>
+        <div class="ba-thead"><span>Dimensão</span><span>Antes</span><span>Depois</span></div>
+        <div class="ba-row">
+          <div class="ba-cell ba-dim"><svg viewBox="0 0 24 24"><path d="m21 8-9-5-9 5v8l9 5 9-5Z"></path><path d="m3 8 9 5 9-5"></path><path d="M12 13v8"></path></svg><b>Componentes compartilhados</b></div>
+          <div class="ba-cell ba-antes">Nenhum</div>
+          <div class="ba-cell ba-depois"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"></path></svg><b>Biblioteca completa</b></div>
+        </div>
+        <div class="ba-row">
+          <div class="ba-cell ba-dim"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m10 8 6 4-6 4Z"></path></svg><b>Início de cada projeto</b></div>
+          <div class="ba-cell ba-antes">Tudo do zero</div>
+          <div class="ba-cell ba-depois"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"></path></svg><b>Reaproveitamento</b></div>
+        </div>
+        <div class="ba-row">
+          <div class="ba-cell ba-dim"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"></path><path d="M14 2v6h6"></path></svg><b>Documentação de handoff</b></div>
+          <div class="ba-cell ba-antes">Inexistente</div>
+          <div class="ba-cell ba-depois"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"></path></svg><b>100% documentada</b></div>
+        </div>
+        <div class="ba-row">
+          <div class="ba-cell ba-dim"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.7 9.7 0 0 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path><path d="M21 12a9 9 0 0 1-9 9 9.7 9.7 0 0 1-6.74-2.74L3 16"></path><path d="M3 21v-5h5"></path></svg><b>Troca de marca</b></div>
+          <div class="ba-cell ba-antes">Redesenho manual</div>
+          <div class="ba-cell ba-depois"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"></path></svg><b>Swap de tokens</b></div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ CASE CLOSER ═══ -->
-  <section class="sec">
-    <div class="closer-img"><img src="img/delta/hero-mockup.webp" alt="Delta Design System aplicado em desktop, notebook e tablet" loading="lazy"></div>
+  <!-- ═══ CASE CLOSER · encerramento ═══ -->
+  <section class="closer rv">
+    <div class="closer-left">
+      <div class="s-index"><b>05 · Encerramento</b><em></em></div>
+      <h2 class="closer-title">Uma base.<br><span class="hl">Múltiplas experiências.</span></h2>
+      <div class="closer-text">
+        <p>Ao consolidar tokens, componentes e diretrizes em um único sistema, o Delta tornou possível <strong>escalar produtos para diferentes contextos</strong> sem abrir mão da consistência.</p>
+        <p>O resultado foi um ecossistema mais eficiente, <strong>sustentável</strong> e preparado para evoluir.</p>
+      </div>
+      <div class="closer-divider"></div>
+      <div class="closer-stats">
+        <div class="closer-stat"><svg viewBox="0 0 24 24"><path d="M12 2.5 20.5 7.25v9.5L12 21.5 3.5 16.75v-9.5Z"></path><path d="M12 2.5v19"></path><path d="m3.5 7.25 8.5 4.75 8.5-4.75"></path></svg><b>600+</b><span>Componentes</span></div>
+        <div class="closer-stat"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"></circle><path d="M3.5 20a5.5 5.5 0 0 1 11 0"></path><path d="M16 6.2a3 3 0 0 1 0 5.6"></path><path d="M18.8 20a5.5 5.5 0 0 0-3-4.95"></path></svg><b>3</b><span>Segmentos atendidos</span></div>
+        <div class="closer-stat"><svg viewBox="0 0 24 24"><path d="m12 2 9 5-9 5-9-5Z"></path><path d="m3 12 9 5 9-5"></path><path d="m3 17 9 5 9-5"></path></svg><b>1</b><span>Base compartilhada</span></div>
+      </div>
+    </div>
+    <div class="closer-right">
+      <div class="closer-mock"><img src="img/delta/hero-mockup.webp" alt="Delta Design System aplicado em desktop, notebook e tablet" loading="lazy"></div>
+      <div class="closer-cap">
+        <span class="closer-cap-bar"></span>
+        <p class="closer-cap-t">O Delta é mais que padrão.</p>
+        <p class="closer-cap-s">É a estrutura que viabiliza crescimento.</p>
+      </div>
+    </div>
   </section>
 
   <!-- ═══ OUTROS PROJETOS ═══ -->
