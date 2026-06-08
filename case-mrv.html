@@ -44,6 +44,8 @@ img{display:block;max-width:100%}
 .flow{max-width:calc(1440px + 2*var(--m));margin:0 auto}
 .sec{padding:clamp(48px,5.5vw,80px) var(--m)}/* ritmo de seção alinhado à home (reduzido) */
 .sec+.sec{border-top:1px solid var(--line)}
+/* sem hairline entre seções escuras consecutivas + aproxima o título da próxima */
+.sec.dark+.sec--dark, .sec.dark+.sec.dark, .sec--dark+.sec.dark, .sec--dark+.sec--dark{border-top:none;padding-top:clamp(8px,1vw,16px)}
 
 /* grid mestre de 12 colunas (reutilizado por todas as seções) */
 .grid{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--gut);align-items:start}
@@ -224,13 +226,14 @@ img{display:block;max-width:100%}
    ancorada pela base atrás da faixa; topo sangra perto do topo da seção. */
 .hero-art{position:absolute;right:0;bottom:80px;width:74%;aspect-ratio:1536 / 1024;z-index:0;background:#FAFAFA url("img/mrv/hero-iso.png") center / cover no-repeat;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 6%,#000 74%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 6%,#000 74%,transparent 100%)}
 /* barra de metadados escura */
-.hero-meta{position:relative;z-index:1;margin-top:44px;margin-bottom:-44px;background:#fff;box-shadow:0 16px 40px rgba(40,40,60,0.10);border-radius:16px;display:grid;grid-template-columns:1fr 1.05fr 0.9fr 1.85fr;padding:24px 0}
-.hm-item{display:flex;align-items:flex-start;gap:18px;padding:0 36px;border-right:1px solid var(--accent)}
-.hm-item:last-child{border-right:none}
-.hm-chip{width:26px;height:26px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.hm-chip svg{width:100%;height:100%;fill:none;stroke:var(--gray-1);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.hm-label{color:var(--gray-3);margin-bottom:6px}
-.hm-value{color:var(--gray-1)}
+/* hero-meta · padrão Delta (inline tight, sem ícones) */
+.hero-meta{position:relative;z-index:2;margin-top:clamp(44px,6vh,72px);margin-bottom:0;background:transparent;box-shadow:none;border-radius:0;border-top:1px solid var(--line);padding:20px 0 20px;display:flex;align-items:center;flex-wrap:wrap}
+.hm-item{display:flex;align-items:baseline;gap:8px;padding:0 20px;border-right:1px solid var(--line);min-width:0}
+.hm-item:first-child{padding-left:0}
+.hm-item:last-child{border-right:none;padding-right:0}
+.hm-chip{display:none}
+.hm-label{display:block;font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gray-4);white-space:nowrap;margin-bottom:0;text-align:left}
+.hm-value{font-size:13px;font-weight:500;line-height:1;color:var(--gray-1);white-space:nowrap;text-align:left}
 /* ═══ FLUXO DESKTOP / FUNDAÇÃO VISUAL — master-detail viewer ═══ */
 .md-viewer{display:grid;grid-template-columns:236px 1fr;gap:40px;align-items:start;margin-top:44px}
 .md-thumbs{display:flex;flex-direction:column;gap:14px;position:sticky;top:32px}
@@ -353,32 +356,63 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 /* ═══════════ REDESIGN v2 · alinhado à home (01 Contexto · 02 Problema) ═══════════ */
 .ctx-head{max-width:760px}
 .ctx-head .s-title{margin-bottom:var(--space-md)}
+
+/* ═══ CONTEXTO · padrão dark intro-grid do Delta ═══ */
+.sec.dark{background:#111;color:#fff;border-top:none}
+.sec.dark .s-index b{color:#fff}
+.sec.dark .s-index em{background:rgba(255,255,255,.28)}
+.intro-grid{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--gut)}
+.intro-over{grid-column:1/8;align-self:end}
+.intro-over .s-index{margin-bottom:0}
+.intro-idx{grid-column:11/13;text-align:right;align-self:end}
+.intro-idx span{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.intro-rule{grid-column:1/-1;height:1px;background:rgba(255,255,255,.18);margin:20px 0 clamp(40px,4vw,56px)}
+.intro-statement{grid-column:1/8;font-size:clamp(26px,2.9vw,40px);font-weight:400;line-height:1.16;letter-spacing:-.016em;color:#fff;text-wrap:balance}
+.intro-side{grid-column:9/13;align-self:start;display:flex;flex-direction:column;gap:18px}
+.intro-micro{font-size:14px;font-weight:400;line-height:1.72;color:rgba(255,255,255,.62);text-wrap:balance}
+.intro-micro strong{font-weight:600;color:#fff}
+.intro-pivot{grid-column:1/8;margin-top:clamp(48px,5vw,72px);align-self:end}
+.intro-pivot .s-lead{margin-bottom:16px;color:#fff;font-size:var(--ty-lead);font-weight:500;line-height:1.5}
+.intro-mark{display:block;width:38px;height:3px;background:var(--accent)}
+.intro-role{grid-column:9/13;margin-top:clamp(48px,5vw,72px);display:flex;flex-direction:column;gap:12px}
+.intro-role .s-label{color:var(--accent)}
+.intro-role .intro-micro{color:rgba(255,255,255,.7)}
+@media(max-width:860px){
+  .intro-over,.intro-statement,.intro-pivot{grid-column:1/9}
+  .intro-idx{grid-column:1/13;text-align:left;margin-top:10px}
+  .intro-side,.intro-role{grid-column:1/13;margin-top:32px}
+}
+
+/* 3 stats com ícones — rodapé do bloco escuro */
+.ctx-stats{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,3.2vw,48px);margin-top:clamp(56px,6vw,80px);padding-top:0;border-top:none}
+.ctx-stat{display:grid;grid-template-columns:clamp(64px,5.6vw,80px) 1fr;column-gap:clamp(16px,1.6vw,22px);align-items:start}
+.ctx-stat-ico{width:100%;height:auto;aspect-ratio:1/1;grid-row:1/4}
+.ctx-stat-ico img{width:100%;height:100%;object-fit:contain;display:block}
+.ctx-stat-val{font-size:var(--ty-metric);font-weight:600;line-height:1;letter-spacing:-.02em;color:#fff;font-variant-numeric:tabular-nums;grid-column:2}
+.ctx-stat-label{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);grid-column:2;margin-top:12px}
+.ctx-stat-desc{font-size:13px;line-height:1.5;color:rgba(255,255,255,.7);text-wrap:balance;grid-column:2;margin-top:12px;max-width:38ch}
+@media(max-width:760px){.ctx-stats{grid-template-columns:1fr;gap:28px}}
 .ctx-lead{color:var(--gray-1)}
-.ctx-facts{margin-top:var(--space-title);border-top:1px solid var(--line)}
-.ctx-fact{display:grid;grid-template-columns:190px 1fr;gap:40px;padding:28px 0;border-bottom:1px solid var(--line);align-items:start}
-.ctx-val{font-size:28px;font-weight:600;letter-spacing:-.02em;line-height:1.1;color:var(--black);font-variant-numeric:tabular-nums}
-.ctx-fact-body{padding-top:6px}
-.ctx-name{display:block;font-size:var(--ty-label);font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-1);margin-bottom:12px}
-.ctx-desc{font-size:var(--ty-copy);line-height:1.6;color:var(--gray-2);max-width:48ch;text-wrap:pretty}
-@media(max-width:768px){.ctx-fact{grid-template-columns:1fr;gap:14px}}
+/* legacy ctx-facts — removido em favor do .ctx-stats no bloco dark */
 
 .prob-head{max-width:760px;margin-bottom:var(--space-title)}
 .prob-head .s-title{margin-bottom:var(--space-md)}
 .prob-lead{color:var(--gray-1)}
-.prob-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gut)}
-.prob-card{position:relative;background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px 26px 32px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(17,17,17,.04),0 10px 30px rgba(17,17,17,.03);transition:transform .28s cubic-bezier(.2,.7,.3,1),box-shadow .28s ease}
-.prob-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--line);transition:background .25s}
-.prob-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(17,17,17,.10),0 5px 14px rgba(17,17,17,.05)}
-.prob-card:hover::before{background:var(--accent)}
-.prob-num{font-size:34px;font-weight:600;letter-spacing:-.03em;color:var(--gray-4);font-variant-numeric:tabular-nums;margin-bottom:26px}
-.prob-title{font-size:var(--ty-copy);font-weight:600;letter-spacing:-.005em;line-height:1.25;color:var(--black);margin-bottom:12px;text-wrap:balance}
-.prob-desc{font-size:var(--ty-small);line-height:1.6;color:var(--gray-2);text-wrap:pretty}
-@media(max-width:1080px){.prob-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.prob-grid{grid-template-columns:1fr}}
+/* O Problema · padrão prob-item do Delta (2x2, ícone editorial + texto) */
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,4.5vw,56px) clamp(48px,6vw,88px);margin-top:8px}
+.prob-item{display:grid;grid-template-columns:auto 1fr;gap:clamp(18px,2vw,28px);align-items:start}
+.prob-ico{width:clamp(72px,7.5vw,96px);height:clamp(72px,7.5vw,96px);flex-shrink:0;display:flex;align-items:flex-start;justify-content:center;margin-top:0}
+.prob-ico img{width:100%;height:100%;object-fit:contain;display:block}
+.prob-txt{display:flex;flex-direction:column;gap:9px;padding-top:6px;min-width:0}
+.prob-num{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--gray-3);font-variant-numeric:tabular-nums;line-height:1;text-transform:uppercase;margin-bottom:0}
+.prob-title{font-size:17px;font-weight:600;letter-spacing:-.005em;line-height:1.3;color:var(--black);margin-bottom:0;text-wrap:balance}
+.prob-desc{font-size:14px;line-height:1.65;color:var(--gray-2);text-wrap:balance}
+.prob-desc strong{font-weight:700;color:var(--black)}
+@media(max-width:760px){.prob-grid{grid-template-columns:1fr;gap:32px}}
 
 /* HERO — type-forward claro (padrão de projeto, definido no hero-lab) */
-.hero{position:relative;overflow:hidden;background:#FAFAF8;padding-top:clamp(120px,14vh,168px);padding-bottom:0}
-.hero-inner{position:relative}
+.hero{position:relative;overflow:hidden;background:#FAFAF8;padding-top:clamp(60px,7vh,84px);padding-bottom:0}
+.hero-inner{position:relative;z-index:2;padding-top:24px}
 .hero-top{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:clamp(16px,2vw,22px)}
 .hero-brand{display:inline-flex;align-items:center;gap:13px}
 .hero-brand img{height:24px;width:auto;display:block}
@@ -395,14 +429,9 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 .hero-result{text-align:left}
 .hero-result span{display:block;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-3);margin-bottom:9px}
 .hero-result b{display:block;font-size:15px;font-weight:700;letter-spacing:-.01em;color:var(--black)}
-.hero-meta{margin-top:clamp(44px,6vh,72px);margin-bottom:0;background:transparent;box-shadow:none;border-radius:0;border-top:1px solid var(--line);padding:32px 0 clamp(44px,6vh,72px);grid-template-columns:repeat(4,minmax(0,1fr))}
-.hm-item{border-right:1px solid var(--line);padding:0 clamp(20px,2.4vw,40px);align-items:flex-start}
-.hm-item:first-child{padding-left:0}
-.hm-item:last-child{border-right:none;padding-right:0}
-.hm-chip svg{stroke:var(--gray-1)}
-.hm-label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-3);margin-bottom:8px}
-.hm-value{font-size:16px;font-weight:600;line-height:1.35;color:var(--black)}
-.hm-label,.hm-value{text-align:left}
+/* override do design-system consolidado: usa o mesmo do Delta */
+.hm-label{font-size:9px;font-weight:700;letter-spacing:.16em;color:var(--gray-4);margin-bottom:0}
+.hm-value{font-size:13px;font-weight:500;line-height:1;color:var(--gray-1)}
 @keyframes heroUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 .hero-top,.hero .hero-title>span,.hero-foot{animation:heroUp .85s cubic-bezier(.2,.7,.3,1) backwards}
 .hero-top{animation-delay:.05s}
@@ -410,7 +439,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 .hero .hero-title>span:nth-child(2){animation-delay:.19s}
 .hero-foot{animation-delay:.32s}
 @media(prefers-reduced-motion:reduce){.hero-top,.hero .hero-title>span,.hero-foot{animation:none}}
-@media(max-width:860px){.hero-meta{grid-template-columns:1fr 1fr!important;gap:0;row-gap:0}.hm-item{border-bottom:1px solid var(--line);padding:20px 28px}.hm-item:nth-child(2n){border-right:none}}
+@media(max-width:860px){.hero-meta{gap:0}.hm-item{border-right:none;border-bottom:1px solid var(--line);padding:12px 0;width:50%;white-space:normal}.hm-item:nth-child(odd){padding-right:16px}.hm-item:last-child{border-bottom:none}.hm-label,.hm-value{white-space:normal}}
 
 /* 10 Aprendizados — dark, premium numerado */
 .apr-head{max-width:680px;margin-bottom:clamp(48px,6vw,72px)}
@@ -423,59 +452,88 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 .apr-txt{font-size:var(--ty-copy);line-height:1.6;color:rgba(255,255,255,.55);max-width:62ch;text-wrap:balance}
 @media(max-width:768px){.apr-item{grid-template-columns:1fr;gap:14px}.apr-n{font-size:40px}}
 
-/* 06 Resultados — cards de métrica no padrão home */
+/* 06 Resultados — hero stat (padrão Delta) */
 .res-head{max-width:760px;margin-bottom:var(--space-title)}
 .res-head .s-title{margin-bottom:var(--space-md)}
 .res-lead{color:var(--gray-1)}
-.res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gut)}
-.res-card{position:relative;background:#fff;border:1px solid var(--line);border-radius:18px;padding:34px 30px 36px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 2px rgba(17,17,17,.04),0 10px 30px rgba(17,17,17,.03);transition:transform .28s cubic-bezier(.2,.7,.3,1),box-shadow .28s ease}
-.res-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--line);transition:background .25s}
-.res-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(17,17,17,.10),0 5px 14px rgba(17,17,17,.05)}
-.res-card:hover::before{background:var(--accent)}
-.res-num{font-size:clamp(48px,5.5vw,72px);font-weight:600;letter-spacing:-.04em;line-height:.9;color:var(--black);font-variant-numeric:tabular-nums;margin-bottom:24px}
-.res-num i{font-style:normal;font-size:.5em;font-weight:600;color:inherit;margin-left:2px}
-.res-title{font-size:var(--ty-copy);font-weight:600;letter-spacing:-.005em;line-height:1.25;color:var(--black);margin-bottom:12px;text-wrap:balance}
-.res-desc{font-size:var(--ty-small);line-height:1.6;color:var(--gray-2);text-wrap:balance}
-@media(max-width:900px){.res-grid{grid-template-columns:1fr}}
+.res-hero{display:grid;grid-template-columns:1.12fr 1fr;gap:clamp(20px,2.4vw,32px);align-items:stretch;margin-top:var(--space-md)}
+.res-hero-card{background:var(--black);border-radius:22px;padding:clamp(32px,3.6vw,52px);color:#fff;display:flex;flex-direction:column;justify-content:space-between;gap:clamp(28px,4vw,44px)}
+.res-hero-tag{font-size:var(--ty-label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.res-hero-num{font-size:var(--ty-display);font-weight:700;letter-spacing:-.04em;line-height:.85;color:#fff;font-variant-numeric:tabular-nums}
+.res-hero-num .sgn{color:var(--accent)}
+.res-hero-num .u{font-size:.4em;font-weight:600;vertical-align:top;margin-left:3px}
+.res-hero-label{font-size:var(--ty-lead);font-weight:500;line-height:1.45;color:rgba(255,255,255,.78);max-width:34ch}
+.res-hero-note{font-family:'IBM Plex Mono',monospace;font-size:11px;line-height:1.5;color:rgba(255,255,255,.5);margin-top:12px}
+.res-side{display:flex;flex-direction:column;justify-content:space-between;gap:clamp(12px,1.4vw,18px)}
+.res-side-item{flex:1;background:var(--bone);border-radius:16px;padding:clamp(20px,2.2vw,28px);display:flex;align-items:center;gap:clamp(18px,2vw,26px)}
+.res-side-num{font-size:clamp(32px,3.4vw,46px);font-weight:700;letter-spacing:-.03em;line-height:.9;color:var(--black);font-variant-numeric:tabular-nums;flex:0 0 auto;min-width:2.4ch}
+.res-side-num .sgn{color:var(--accent-dark)}.res-side-num .u{font-size:.5em;font-weight:600}
+.res-side-body{display:flex;flex-direction:column;gap:3px}
+.res-side-t{font-size:14.5px;font-weight:700;color:var(--black);letter-spacing:-.01em}
+.res-side-d{font-size:12.5px;color:var(--gray-2);line-height:1.4;text-wrap:pretty}
+@media(max-width:760px){.res-hero{grid-template-columns:1fr}}
 
-/* 07 Do piloto à escala — empilhado: header, 3 sprints, imagem full-width (padrão home) */
-.esc-head{max-width:760px;margin-bottom:var(--space-title)}
+/* 07 Do piloto à escala — 2-col: texto + ilustração */
+.esc-grid{display:flex;flex-direction:column;gap:clamp(32px,4vw,56px)}
+.esc-top{display:grid;grid-template-columns:1.05fr 0.95fr;gap:clamp(48px,5.5vw,88px);align-items:start}
+.esc-col-l{display:flex;flex-direction:column}
+.esc-head{margin-bottom:0}
 .esc-head .s-title{margin-bottom:var(--space-md)}
-.esc-lead{color:var(--gray-1)}
-.esc-sprints{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gut);border-top:1px solid var(--line);padding-top:30px;margin-bottom:var(--space-title)}
-.esc-n{display:block;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-3);margin-bottom:16px}
-.esc-title{font-size:var(--ty-copy);font-weight:600;letter-spacing:-.005em;line-height:1.25;color:var(--black);margin-bottom:10px;text-wrap:balance}
-.esc-desc{font-size:var(--ty-small);line-height:1.6;color:var(--gray-2);text-wrap:balance;max-width:36ch}
-.esc-art img{width:100%;display:block;border-radius:16px}
-@media(max-width:760px){.esc-sprints{grid-template-columns:1fr;gap:28px;margin-bottom:var(--space-lg)}}
+.esc-lead{color:var(--gray-1);max-width:42ch}
+.esc-sprints{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2vw,28px);border-top:1px solid var(--line);padding-top:clamp(20px,2.2vw,28px)}
+.esc-sprint{display:flex;flex-direction:column;gap:14px;padding:0;border:none;align-items:flex-start}
+.esc-sprint:first-of-type,.esc-sprint:last-of-type{border:none}
+.esc-ico{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:0}
+.esc-ico svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.esc-sprint.s1 .esc-ico{background:#EFE9FF;color:#6E4FE0}
+.esc-sprint.s2 .esc-ico{background:#E1F4E8;color:#1F8A5B}
+.esc-sprint.s3 .esc-ico{background:#FFF3E0;color:#D78A1F}
+.esc-sprint.s1 .esc-n{color:#6E4FE0}
+.esc-sprint.s2 .esc-n{color:#1F8A5B}
+.esc-sprint.s3 .esc-n{color:#D78A1F}
+.esc-n{display:block;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px;margin-top:4px}
+.esc-title{font-size:15px;font-weight:600;letter-spacing:-.005em;line-height:1.3;color:var(--black);margin-bottom:8px;text-wrap:balance}
+.esc-desc{font-size:13px;line-height:1.55;color:var(--gray-2);text-wrap:balance;max-width:none}
+.esc-sprint > div{display:flex;flex-direction:column}
+@media(max-width:760px){.esc-sprints{grid-template-columns:1fr;gap:24px}}
+.esc-art{display:flex;align-items:center;justify-content:center}
+.esc-art img{width:100%;max-width:560px;height:auto;display:block;border-radius:0}
+/* imagem hero da seção A solução (igual ao antigo .esc-art, sem max-width) */
+.sol-art{margin-top:48px}
+.sol-art img{width:100%;display:block;border-radius:16px}
+@media(max-width:900px){.esc-top{grid-template-columns:1fr;gap:48px}.esc-art{order:-1}.esc-art img{max-width:560px;margin:0 auto}}
 
 /* placeholder dos outros cases (mostra a capa do index quando existir; senão, letra) */
 .more-ph{background:linear-gradient(135deg,#2a2925,#161512)}
 .more-ph::after{content:attr(data-mono);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:clamp(56px,7vw,96px);font-weight:700;letter-spacing:-.04em;color:rgba(224,255,51,.16)}
 
-/* 03 Estratégia — refeita: título real + faixa de dados editorial (sem cards) */
-.estr-head{max-width:780px;margin-bottom:var(--space-title)}
-.estr-head .s-title{margin-bottom:var(--space-md)}
-.estr-lead{color:var(--gray-1)}
-.estr-main{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,5vw,80px);align-items:start}
-.estr-subtitle{margin-bottom:var(--space-lg)}
-.estr-main .showcase{grid-column:auto;margin-top:var(--space-md)}
-.estr-showlabel{display:block;color:var(--gray-3);margin-bottom:var(--space-md)}
-.estr-stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);margin-top:calc(var(--space-title) + 26px)}
-.estr-stat{padding:30px clamp(20px,2.4vw,40px) 0;border-right:1px solid var(--line)}
-.estr-stat:first-child{padding-left:0}
-.estr-stat:last-child{border-right:none;padding-right:0}
-.estr-stat .s-metric{margin-bottom:16px}
-.estr-stat .s-label{display:block;margin-bottom:10px}
-.estr-statdesc{color:var(--gray-2);max-width:36ch}
-@media(max-width:900px){.estr-main{grid-template-columns:1fr;gap:48px}.estr-stats{grid-template-columns:1fr}.estr-stat{border-right:none;border-bottom:1px solid var(--line);padding:24px 0}.estr-stat:first-child{padding-top:0}.estr-stat:last-child{border-bottom:none}}
+/* 03 Estratégia — padrão dark intro-grid (mesma identidade da 01 Renegociação) */
+.estr.dark{background:#111;color:#fff;border-top:none}
+.estr.dark .s-index b{color:#fff}
+.estr.dark .s-index em{background:rgba(255,255,255,.28)}
+.estr-principles-dark{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(20px,2.4vw,32px);margin-top:clamp(56px,6vw,80px);padding-top:clamp(40px,4vw,56px);border-top:1px solid rgba(255,255,255,.18)}
+.estr-principle{display:flex;flex-direction:column;gap:18px;align-items:flex-start}
+.estr-principle .ico{width:48px;height:48px;flex-shrink:0;background:rgba(232,233,77,.12);border:1px solid rgba(232,233,77,.5);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--accent)}
+.estr-principle .ico svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.estr-principle .estr-p-t{font-size:15px;font-weight:600;line-height:1.3;color:#fff;letter-spacing:-.005em;margin-bottom:6px;text-wrap:balance}
+.estr-principle .estr-p-d{font-size:13px;line-height:1.55;color:rgba(255,255,255,.62);text-wrap:balance}
+.estr-stats-dark{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,3.2vw,48px);margin-top:clamp(56px,6vw,80px);padding-top:clamp(40px,4vw,56px);border-top:1px solid rgba(255,255,255,.18)}
+.estr-stat-d{display:flex;flex-direction:column;gap:14px}
+.estr-stat-d .v{font-size:clamp(36px,3.8vw,48px);font-weight:600;line-height:1;letter-spacing:-.025em;color:#fff;font-variant-numeric:tabular-nums}
+.estr-stat-d .l{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-top:4px}
+.estr-stat-d .d{font-size:13px;line-height:1.55;color:rgba(255,255,255,.7);text-wrap:balance;max-width:36ch}
+@media(max-width:960px){.estr-principles-dark{grid-template-columns:repeat(2,1fr);gap:32px}}
+@media(max-width:560px){.estr-principles-dark{grid-template-columns:1fr;gap:28px}.estr-stats-dark{grid-template-columns:1fr;gap:32px}}
+
+/* ═══ REVEAL — desativado, tudo estático ═══ */
+.rv,.rv.visible{opacity:1!important;transform:none!important;transition:none!important;animation:none!important}
 </style>
 </head>
 <body>
 
 <!-- NAV (componente compartilhado) -->
 <site-nav back="index.html#work"></site-nav>
-<script src="site-nav.js?v=7"></script>
+<script src="site-nav.js?v=9"></script>
 </div>
 
 <main class="flow">
@@ -492,44 +550,56 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
           <p class="hero-intro">Redesenho do autoatendimento financeiro da maior construtora da América Latina, com autonomia real na renegociação de dívidas.</p>
           <div class="hero-result"><span>resultados do piloto</span><b>27% engajamento · 14% conversão</b></div>
         </div>
-        <span class="hero-tag">Case de Product Design · 2019</span>
       </div>
     </div>
     <div class="hero-meta">
-      <div class="hm-item"><div class="hm-chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.5 3-5.5 7-5.5s7 2 7 5.5"/></svg></div><div><div class="hm-label">Função</div><div class="hm-value">Design Lead</div></div></div>
-      <div class="hm-item"><div class="hm-chip"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/></svg></div><div><div class="hm-label">Empresa</div><div class="hm-value">D3 · cliente MRV</div></div></div>
-      <div class="hm-item"><div class="hm-chip"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 9h16M8 3v4M16 3v4"/></svg></div><div><div class="hm-label">Período</div><div class="hm-value">2019 a 2020</div></div></div>
-      <div class="hm-item"><div class="hm-chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.2"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3"/></svg></div><div><div class="hm-label">Foco</div><div class="hm-value">Product Design, Microinteração, Design System</div></div></div>
+      <div class="hm-item"><span class="hm-label">Função</span><div class="hm-value">Design Lead</div></div>
+      <div class="hm-item"><span class="hm-label">Empresa</span><div class="hm-value">D3 · cliente MRV</div></div>
+      <div class="hm-item"><span class="hm-label">Período</span><div class="hm-value">2019 a 2020</div></div>
+      <div class="hm-item"><span class="hm-label">Foco</span><div class="hm-value">Product Design, Microinteração, Design System</div></div>
     </div>
   </section>
 
-  <!-- ═══ 01 · CONTEXTO DO PRODUTO ═══ -->
-  <section class="sec ctx" id="contexto">
-    <div class="ctx-head">
-      <div class="s-index"><b>01</b><em></em></div>
-      <h2 class="s-title">Contexto<br>do produto</h2>
-      <p class="s-lead ctx-lead">Produto digital de pós-compra da MRV, responsável por <strong>cobranças, pagamentos e renegociação de dívidas</strong>. Atendia mais de 2,5 milhões de clientes com financiamentos de até 35 anos, com impacto direto em custo operacional e satisfação.</p>
-    </div>
-    <div class="ctx-facts">
-      <div class="ctx-fact">
-        <span class="ctx-val">2,5 milhões</span>
-        <div class="ctx-fact-body">
-          <span class="ctx-name">Clientes ativos</span>
-          <p class="ctx-desc">Cadastrados no app MRV, com financiamentos de longo prazo.</p>
-        </div>
+  <!-- ═══ 01 · CONTEXTO (padrão dark intro-grid do Delta) ═══ -->
+  <section class="sec dark" id="contexto">
+    <div class="intro-grid">
+      <div class="intro-over"><div class="s-index"><b>01 · Renegociação MRV</b><em></em></div></div>
+      <div class="intro-idx"><span>Contexto</span></div>
+      <div class="intro-rule"></div>
+
+      <h2 class="intro-statement">Um produto digital de<br>pós-compra responsável<br>por cobranças, pagamentos e renegociação de dívidas da maior construtora da América Latina.</h2>
+      <div class="intro-side">
+        <p class="intro-micro">A renegociação no autoatendimento já existia, mas a conversão era baixa e a maior parte dos clientes ainda terminava no <strong>call center</strong>.</p>
+        <p class="intro-micro">O desafio não era só de interface. Era reconstruir confiança em um momento financeiramente sensível, com clareza e autonomia real.</p>
       </div>
-      <div class="ctx-fact">
-        <span class="ctx-val">35 anos</span>
-        <div class="ctx-fact-body">
-          <span class="ctx-name">Tempo médio de contrato</span>
-          <p class="ctx-desc">Financiamentos longos, com alta complexidade jurídica e financeira.</p>
-        </div>
+
+      <div class="intro-pivot">
+        <p class="s-lead">Foi nesse contexto que entrei como Design Lead.</p>
+        <span class="intro-mark"></span>
       </div>
-      <div class="ctx-fact">
-        <span class="ctx-val">3 domínios</span>
-        <div class="ctx-fact-body">
-          <span class="ctx-name">Territórios de produto</span>
-          <p class="ctx-desc">Renegociação de dívidas, parcelas a vencer e status de obra.</p>
+      <div class="intro-role">
+        <span class="s-label">Meu papel</span>
+        <p class="intro-micro">Liderei o redesenho do fluxo de renegociação ponta a ponta, do diagnóstico de fricções à evolução do componente em escala no portal financeiro.</p>
+      </div>
+
+      <div class="ctx-stats">
+        <div class="ctx-stat">
+          <div class="ctx-stat-ico"><img src="img/mrv/icn-clientes-ativos.png" alt="Clientes ativos"></div>
+          <div class="ctx-stat-val">2,5 milhões</div>
+          <span class="ctx-stat-label">Clientes ativos</span>
+          <p class="ctx-stat-desc">Cadastrados no app MRV, com financiamentos de longo prazo.</p>
+        </div>
+        <div class="ctx-stat">
+          <div class="ctx-stat-ico"><img src="img/mrv/icn-35-anos.png" alt="Tempo médio de contrato"></div>
+          <div class="ctx-stat-val">35 anos</div>
+          <span class="ctx-stat-label">Tempo médio de contrato</span>
+          <p class="ctx-stat-desc">Financiamentos longos, com alta complexidade jurídica e financeira.</p>
+        </div>
+        <div class="ctx-stat">
+          <div class="ctx-stat-ico"><img src="img/mrv/icn-3-dominios.png" alt="Territórios de produto"></div>
+          <div class="ctx-stat-val">3 domínios</div>
+          <span class="ctx-stat-label">Territórios de produto</span>
+          <p class="ctx-stat-desc">Renegociação de dívidas, parcelas a vencer e status de obra.</p>
         </div>
       </div>
     </div>
@@ -538,63 +608,117 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
   <!-- ═══ 02 · O PROBLEMA ═══ -->
   <section class="sec prob" id="problema">
     <div class="prob-head">
-      <div class="s-index"><b>02</b><em></em></div>
-      <h2 class="s-title">O problema</h2>
+      <div class="s-index"><b>02 · Problema</b><em></em></div>
+      <h2 class="s-title">Entendendo o desafio</h2>
       <p class="s-lead prob-lead">A renegociação digital já existia, mas a conversão era baixa e o cliente quase sempre terminava no <strong>call center</strong>. Mapeei os pontos de fricção e os agrupei em quatro frentes.</p>
     </div>
     <div class="prob-grid">
-      <article class="prob-card">
-        <span class="prob-num">01</span>
-        <h3 class="prob-title">Abandono e fricção</h3>
-        <p class="prob-desc">Doze pontos críticos de desistência ao longo do fluxo. Sem indicadores de progresso, a incerteza fazia o cliente parar antes de fechar o acordo.</p>
+      <article class="prob-item">
+        <div class="prob-ico"><img src="img/mrv/icn-prob-friccao.png" alt="Fricção"></div>
+        <div class="prob-txt">
+          <span class="prob-num">Fricção</span>
+          <h3 class="prob-title">Abandono e fricção</h3>
+          <p class="prob-desc">Doze pontos críticos de desistência ao longo do fluxo. <strong>Sem indicadores de progresso</strong>, a incerteza fazia o cliente parar antes de fechar o acordo.</p>
+        </div>
       </article>
-      <article class="prob-card">
-        <span class="prob-num">02</span>
-        <h3 class="prob-title">Confiança fragilizada</h3>
-        <p class="prob-desc">A interface não transmitia segurança para uma decisão financeira de longo prazo. A comunicação fria e institucional afastava em vez de acolher.</p>
+      <article class="prob-item">
+        <div class="prob-ico"><img src="img/mrv/icn-prob-confianca.png" alt="Confiança"></div>
+        <div class="prob-txt">
+          <span class="prob-num">Confiança</span>
+          <h3 class="prob-title">Confiança fragilizada</h3>
+          <p class="prob-desc">A interface não transmitia segurança para uma decisão financeira de longo prazo. <strong>A comunicação fria e institucional</strong> afastava em vez de acolher.</p>
+        </div>
       </article>
-      <article class="prob-card">
-        <span class="prob-num">03</span>
-        <h3 class="prob-title">Barreira de linguagem</h3>
-        <p class="prob-desc">Mais de quarenta termos técnicos, como “encargo moratório”, bloqueavam a ação. A informação densa exigia esforço para entender o essencial.</p>
+      <article class="prob-item">
+        <div class="prob-ico"><img src="img/mrv/icn-prob-linguagem.png" alt="Linguagem"></div>
+        <div class="prob-txt">
+          <span class="prob-num">Linguagem</span>
+          <h3 class="prob-title">Barreira de linguagem</h3>
+          <p class="prob-desc">Mais de quarenta termos técnicos, como "encargo moratório", bloqueavam a ação. <strong>A informação densa</strong> exigia esforço para entender o essencial.</p>
+        </div>
       </article>
-      <article class="prob-card">
-        <span class="prob-num">04</span>
-        <h3 class="prob-title">Custo<br>operacional</h3>
-        <p class="prob-desc">Cada falha no autoatendimento virava uma ligação de oito minutos. A dependência do call center crescia, cara para a operação e lenta para o cliente.</p>
+      <article class="prob-item">
+        <div class="prob-ico"><img src="img/mrv/icn-prob-custo.png" alt="Operação"></div>
+        <div class="prob-txt">
+          <span class="prob-num">Operação</span>
+          <h3 class="prob-title">Custo operacional</h3>
+          <p class="prob-desc">Cada falha no autoatendimento virava uma ligação de oito minutos. <strong>A dependência do call center crescia</strong>, cara para a operação e lenta para o cliente.</p>
+        </div>
       </article>
     </div>
   </section>
 
-  <!-- ═══ 05 · ESTRATÉGIA DE DESIGN ═══ -->
-  <section class="sec estr" id="estrategia">
-    <div class="estr-head">
-      <div class="s-index"><b>03</b><em></em></div>
-      <h2 class="s-title">Estratégia<br>de design</h2>
-      <p class="s-lead estr-lead">A acessibilidade cognitiva orientou cada decisão. Combinei microinterações, copywriting de baixa carga cognitiva e hierarquia visual para criar sinais claros de oportunidade e de progresso dentro do fluxo financeiro.</p>
-    </div>
-    <div class="estr-main">
-      <div class="estr-principles">
-        <h3 class="estr-subtitle">A solução priorizou</h3>
-        <div class="sol-list">
-          <div class="sol-item"><div class="sol-chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M9 23 23 9M13 9h10v10"/></svg></div></div><div><div class="sol-t">Redução de complexidade</div><div class="sol-d">para destravar o primeiro passo da decisão</div></div></div>
-          <div class="sol-item"><div class="sol-chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M4 16s5-9 12-9 12 9 12 9-5 9-12 9S4 16 4 16z"/><circle cx="16" cy="16" r="3.5"/></svg></div></div><div><div class="sol-t">Visibilidade automatizada</div><div class="sol-d">das propostas dentro do ecossistema</div></div></div>
-          <div class="sol-item"><div class="sol-chip"><div class="ico"><svg viewBox="0 0 32 32"><path d="M16 5 4 11l12 6 12-6-12-6z"/><path d="M4 17l12 6 12-6"/></svg></div></div><div><div class="sol-t">Hierarquia visual</div><div class="sol-d">que comunica escala e consequências</div></div></div>
-          <div class="sol-item"><div class="sol-chip"><div class="ico"><svg viewBox="0 0 32 32"><circle cx="16" cy="8" r="3.5"/><circle cx="8" cy="23" r="3.5"/><circle cx="24" cy="23" r="3.5"/><path d="M16 11v6M16 17l-6 4M16 17l6 4"/></svg></div></div><div><div class="sol-t">Manutenção da estrutura existente</div><div class="sol-d">sem criar novas etapas no fluxo</div></div></div>
+  <!-- ═══ 03 · ESTRATÉGIA DE DESIGN ═══ -->
+  <section class="sec dark estr" id="estrategia">
+    <div class="intro-grid">
+      <div class="intro-over"><div class="s-index"><b>03 · Estratégia de design</b><em></em></div></div>
+      <div class="intro-idx"><span>Princípios</span></div>
+      <div class="intro-rule"></div>
+
+      <h2 class="intro-statement">Acessibilidade cognitiva  
+como princípio. Microinterações,  copy de baixa carga e hierarquia visual para criar sinais claros de oportunidade e progresso.</h2>
+      <div class="intro-side">
+        <p class="intro-micro">Cada decisão de design partiu de uma pergunta: <strong>esse sinal devolve autonomia ou cria nova dúvida?</strong></p>
+        <p class="intro-micro">A estratégia preservou a estrutura existente do app, sem novas etapas — a interface se reorganizou em torno da clareza, não da quantidade.</p>
+      </div>
+
+      <div class="intro-pivot">
+        <p class="s-lead">Quatro princípios orientaram o redesign.</p>
+        <span class="intro-mark"></span>
+      </div>
+      <div class="intro-role">
+        <span class="s-label">Ponto de partida</span>
+        <p class="intro-micro">Telas densas com mais de 40 termos técnicos e jornada linear sem indicadores de progresso.</p>
+      </div>
+
+      <div class="estr-principles-dark">
+        <div class="estr-principle">
+          <div class="ico"><svg viewBox="0 0 32 32"><path d="M9 23 23 9M13 9h10v10"/></svg></div>
+          <div>
+            <div class="estr-p-t">Redução de complexidade</div>
+            <p class="estr-p-d">Destravar o primeiro passo da decisão, removendo etapas que não agregam à escolha.</p>
+          </div>
+        </div>
+        <div class="estr-principle">
+          <div class="ico"><svg viewBox="0 0 32 32"><path d="M4 16s5-9 12-9 12 9 12 9-5 9-12 9S4 16 4 16z"/><circle cx="16" cy="16" r="3.5"/></svg></div>
+          <div>
+            <div class="estr-p-t">Visibilidade automatizada</div>
+            <p class="estr-p-d">Propostas elegíveis aparecem dentro do fluxo financeiro, sem o cliente precisar buscar.</p>
+          </div>
+        </div>
+        <div class="estr-principle">
+          <div class="ico"><svg viewBox="0 0 32 32"><path d="M16 5 4 11l12 6 12-6-12-6z"/><path d="M4 17l12 6 12-6"/></svg></div>
+          <div>
+            <div class="estr-p-t">Hierarquia visual</div>
+            <p class="estr-p-d">Tipografia, cor e densidade comunicam escala e consequência antes da leitura.</p>
+          </div>
+        </div>
+        <div class="estr-principle">
+          <div class="ico"><svg viewBox="0 0 32 32"><circle cx="16" cy="8" r="3.5"/><circle cx="8" cy="23" r="3.5"/><circle cx="24" cy="23" r="3.5"/><path d="M16 11v6M16 17l-6 4M16 17l6 4"/></svg></div>
+          <div>
+            <div class="estr-p-t">Estrutura existente preservada</div>
+            <p class="estr-p-d">Reaproveitamento da arquitetura do app, sem inflar o fluxo com novas etapas.</p>
+          </div>
         </div>
       </div>
-      <div class="estr-showcase">
-        <span class="estr-showlabel s-label">Ponto de partida</span>
-        <div class="showcase">
-          <div class="browser"><div class="browser-bar"><b></b><b></b><b></b></div><div class="browser-img"><img src="img/mrv/desktop-extrato-pagos.webp" alt="Tela original do produto MRV no desktop"></div></div>
-          <div class="phone"><img src="img/mrv/mobile-jornada-46.webp" alt="Tela original do produto MRV no mobile"></div>
+
+      <div class="estr-stats-dark">
+        <div class="estr-stat-d">
+          <div class="v">40+</div>
+          <span class="l">Termos reescritos</span>
+          <p class="d">Jargão financeiro traduzido em linguagem acessível e validada em testes.</p>
+        </div>
+        <div class="estr-stat-d">
+          <div class="v">47</div>
+          <span class="l">Estados mapeados</span>
+          <p class="d">Componentes documentados com cor, animação e copy contextual.</p>
+        </div>
+        <div class="estr-stat-d">
+          <div class="v">5</div>
+          <span class="l">Dashboards adaptativos</span>
+          <p class="d">Cada board sinalizado e orientado pelo estado financeiro do cliente.</p>
         </div>
       </div>
-    </div>
-    <div class="estr-stats">
-      <div class="estr-stat"><div class="s-metric">40+</div><span class="s-label">Termos reescritos</span><p class="s-desc estr-statdesc">Jargão financeiro traduzido em linguagem acessível e validada em testes.</p></div>
-      <div class="estr-stat"><div class="s-metric">47</div><span class="s-label">Estados mapeados</span><p class="s-desc estr-statdesc">Componentes documentados com cor, animação e copy contextual.</p></div>
-      <div class="estr-stat"><div class="s-metric">5</div><span class="s-label">Dashboards adaptativos</span><p class="s-desc estr-statdesc">Cada board sinalizado e orientado pelo estado financeiro do cliente.</p></div>
     </div>
   </section>
 
@@ -603,6 +727,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
     <div class="s-index"><b>04</b><em></em></div>
     <h2 class="s-title">A solução</h2>
     <p class="apr-intro" style="max-width:62ch;margin-top:var(--space-md)">A interface muda de tom conforme a situação financeira do cliente evolui. Cinco estados progressivos, dos 46% aos 100% da jornada, cada um com hierarquia, copy e microinterações próprias.</p>
+    <div class="sol-art"><img src="img/mrv/desdob-mockups.png" alt="Telas do app MRV com destaques: mensagem clara, transparência, confirmação e orientação"></div>
     <div class="sol-flow">
       <div class="sol-phone">
         <div class="data-val">46%</div><div class="s-label">Sem pendências</div><div class="s-desc sp-desc">Dashboard positivo, progresso em destaque</div>
@@ -646,62 +771,9 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
     </div>
   </section>
 
-  <!-- ═══ 06 · RESULTADOS ═══ -->
-  <section class="sec res" id="resultados">
-    <div class="res-head">
-      <div class="s-index"><b>06</b><em></em></div>
-      <h2 class="s-title">Resultados</h2>
-      <p class="s-lead res-lead">A meta do piloto era destravar a renegociação no autoatendimento <strong>sem criar novas etapas nem dependência humana</strong>. Em dois sprints, os sinais de progresso e a linguagem acessível reverteram o quadro.</p>
-    </div>
-    <div class="res-grid">
-      <article class="res-card">
-        <span class="res-num">+27<i>%</i></span>
-        <h3 class="res-title">Engajamento no fluxo</h3>
-        <p class="res-desc">Mais clientes visualizando e respondendo às propostas de acordo elegíveis dentro do app.</p>
-      </article>
-      <article class="res-card">
-        <span class="res-num">+14<i>%</i></span>
-        <h3 class="res-title">Conversão autônoma</h3>
-        <p class="res-desc">Acordos fechados sem passar pelo call center, com o cliente decidindo no próprio fluxo.</p>
-      </article>
-      <article class="res-card">
-        <span class="res-num">−34<i>%</i></span>
-        <h3 class="res-title">Dúvidas sobre elegibilidade</h3>
-        <p class="res-desc">Queda nos contatos do público elegível, efeito direto da clareza e da sinalização de progresso.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- ═══ 07 · DO PILOTO À ESCALA ═══ -->
-  <section class="sec esc" id="escala">
-    <div class="esc-head">
-      <div class="s-index"><b>07</b><em></em></div>
-      <h2 class="s-title">Do piloto<br>à escala</h2>
-      <p class="s-lead esc-lead">Validado o impacto no piloto, evoluí o fluxo e os componentes para ganhar segurança, consistência e eficiência em todo o ecossistema financeiro do portal.</p>
-    </div>
-    <div class="esc-sprints">
-      <article class="esc-sprint">
-        <span class="esc-n">Sprint 1</span>
-        <h3 class="esc-title">Comunicação e elegibilidade</h3>
-        <p class="esc-desc">Ajustes de comunicação no fluxo e regras de elegibilidade para reduzir insegurança, integrados à régua de comunicação e às propostas de acordo.</p>
-      </article>
-      <article class="esc-sprint">
-        <span class="esc-n">Sprint 2</span>
-        <h3 class="esc-title">Escalabilidade e padronização</h3>
-        <p class="esc-desc">Expansão do componente para outros pontos do portal e padronização da solução para reuso entre squads, com campanha de educação financeira.</p>
-      </article>
-      <article class="esc-sprint">
-        <span class="esc-n">Reuso</span>
-        <h3 class="esc-title">6 jornadas no portal</h3>
-        <p class="esc-desc">O componente foi reaproveitado em seis jornadas após a expansão, sustentando o ganho com consistência visual entre as squads.</p>
-      </article>
-    </div>
-    <div class="esc-art"><img src="img/mrv/desdob-mockups.png" alt="Telas do app MRV com destaques: mensagem clara, transparência, confirmação e orientação"></div>
-  </section>
-
-  <!-- ═══ 08 · FUNDAÇÃO VISUAL ═══ -->
+  <!-- ═══ 06 · FUNDAÇÃO VISUAL ═══ -->
   <section class="sec">
-    <div class="s-index"><b>08</b><em></em></div>
+    <div class="s-index"><b>06 · Fundação visual</b><em></em></div>
     <h2 class="s-title">Fundação visual</h2>
     <p class="s-text" style="max-width:62ch;margin-top:var(--space-md)">Cada padrão documentado como <strong>design tokens e componentes escaláveis</strong>: paleta semântica, escala tipográfica, sistema de espaçamento, shadow e opacidade. A base garantiu consistência entre os três domínios do produto.</p>
     <div class="md-viewer" data-viewer="foundation">
@@ -716,6 +788,78 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
         <div class="md-preview" role="tabpanel"><img class="md-img" src="img/mrv/tokens-brand-colors.webp" alt="Brand colors"></div>
       </div>
     </div>
+  </section>
+
+  <!-- ═══ 07 · RESULTADOS ═══ -->
+  <section class="sec res" id="resultados">
+    <div class="res-head">
+      <div class="s-index"><b>07 · Impacto</b><em></em></div>
+      <h2 class="s-title">Resultados</h2>
+      <p class="s-lead res-lead">A meta do piloto era destravar a renegociação no autoatendimento <strong>sem criar novas etapas nem dependência humana</strong>. Em dois sprints, os sinais de progresso e a linguagem acessível reverteram o quadro.</p>
+    </div>
+    <div class="res-hero">
+      <div class="res-hero-card">
+        <div class="res-hero-tag">Impacto principal</div>
+        <div class="res-hero-num"><span class="sgn">+</span>27<span class="u">%</span></div>
+        <div>
+          <div class="res-hero-label">no engajamento dentro do fluxo de<br>renegociação, com clientes respondendo<br>às propostas elegíveis no app.</div>
+          <div class="res-hero-note">Comparação piloto vs. baseline anterior<br>(clientes elegíveis, mesmo período).</div>
+        </div>
+      </div>
+      <div class="res-side">
+        <div class="res-side-item">
+          <div class="res-side-num"><span class="sgn" style="color: rgb(17, 17, 17)">+</span>14<span class="u">%</span></div>
+          <div class="res-side-body"><div class="res-side-t">Conversão autônoma</div><div class="res-side-d">Acordos fechados sem passar pelo call center.</div></div>
+        </div>
+        <div class="res-side-item">
+          <div class="res-side-num"><span class="sgn" style="color: rgb(17, 17, 17)">−34</span><span class="u">%</span></div>
+          <div class="res-side-body"><div class="res-side-t">Dúvidas sobre elegibilidade</div><div class="res-side-d">Queda nos contatos do público elegível.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 08 · DO PILOTO À ESCALA ═══ -->
+  <section class="sec esc" id="escala">
+    <div class="esc-grid">
+      <div class="esc-top">
+        <div class="esc-col-l">
+          <div class="esc-head">
+            <div class="s-index"><b>08 · Escala</b><em></em></div>
+            <h2 class="s-title">Do piloto<br>à escala</h2>
+            <p class="s-lead esc-lead">Validado o impacto no piloto, evoluí o fluxo e os componentes para ganhar <strong>segurança</strong>, <strong>consistência</strong> e <strong>eficiência</strong> em todo o ecossistema financeiro do portal.</p>
+          </div>
+        </div>
+        <div class="esc-art"><img src="img/mrv/ilustra-piloto.png" alt="Ilustração do piloto evoluindo para as três camadas: comunicação, escalabilidade e reuso, conectadas às jornadas do portal"></div>
+      </div>
+      <div class="esc-sprints">
+        <article class="esc-sprint s1">
+          <div class="esc-ico"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 21l1.8-5.5A8 8 0 1 1 21 12z"/></svg></div>
+          <div>
+            <span class="esc-n">Sprint 1</span>
+            <h3 class="esc-title">Comunicação e elegibilidade</h3>
+            <p class="esc-desc">Ajustes de comunicação no fluxo e regras de elegibilidade para reduzir insegurança, integrados à régua de comunicação e às propostas de acordo.</p>
+          </div>
+        </article>
+        <article class="esc-sprint s2">
+          <div class="esc-ico"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 8.4 8 9 4.6-.6 8-4.5 8-9V6l-8-3z"/></svg></div>
+          <div>
+            <span class="esc-n">Sprint 2</span>
+            <h3 class="esc-title">Escalabilidade e padronização</h3>
+            <p class="esc-desc">Expansão do componente para outros pontos do portal e padronização da solução para reuso entre squads, com campanha de educação financeira.</p>
+          </div>
+        </article>
+        <article class="esc-sprint s3">
+          <div class="esc-ico"><svg viewBox="0 0 24 24"><path d="M5 19V11M12 19V5M19 19v-9"/></svg></div>
+          <div>
+            <span class="esc-n">Reuso</span>
+            <h3 class="esc-title">6 jornadas no portal</h3>
+            <p class="esc-desc">O componente foi reaproveitado em seis jornadas após a expansão, sustentando o ganho com consistência visual entre as squads.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
   </section>
 
   <!-- ═══ 10 · APRENDIZADOS (dark) ═══ -->
@@ -758,15 +902,15 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 
     <div class="em-grid">
       <div class="em-item">
-        <div class="em-frame"><iframe src="https://www-ccv.adobe.io/v1/player/ccv/2-W_62Px7pH/embed?bgcolor=%23111111&lazyLoading=true&api_key=BehancePro2View" frameborder="0" allowfullscreen loading="lazy" title="Portal MRV, navegação"></iframe></div>
+        <div class="em-frame"><iframe src="https://www-ccv.adobe.io/v1/player/ccv/2-W_62Px7pH/embed?bgcolor=%23111111&lazyLoading=true&api_key=BehancePro2View" frameborder="0" allowfullscreen loading="eager" decoding="sync" title="Portal MRV, navegação"></iframe></div>
         <div class="em-body"><div class="em-title">Navegação</div><p class="em-desc">Percurso pelo portal financeiro e a estrutura de menus do ecossistema.</p></div>
       </div>
       <div class="em-item">
-        <div class="em-frame"><iframe src="https://www-ccv.adobe.io/v1/player/ccv/Qby9X5KnabB/embed?bgcolor=%23111111&lazyLoading=true&api_key=BehancePro2View" frameborder="0" allowfullscreen loading="lazy" title="Portal MRV, interface principal"></iframe></div>
+        <div class="em-frame"><iframe src="https://www-ccv.adobe.io/v1/player/ccv/Qby9X5KnabB/embed?bgcolor=%23111111&lazyLoading=true&api_key=BehancePro2View" frameborder="0" allowfullscreen loading="eager" decoding="sync" title="Portal MRV, interface principal"></iframe></div>
         <div class="em-body"><div class="em-title">Interface principal</div><p class="em-desc">A tela central do extrato e dos acordos em funcionamento.</p></div>
       </div>
       <div class="em-item">
-        <div class="em-frame"><iframe src="https://www-ccv.adobe.io/v1/player/ccv/BJt3xBeIut_/embed?bgcolor=%23111111&lazyLoading=true&api_key=BehancePro2View" frameborder="0" allowfullscreen loading="lazy" title="Portal MRV, identidade de acesso"></iframe></div>
+        <div class="em-frame"><iframe src="https://www-ccv.adobe.io/v1/player/ccv/BJt3xBeIut_/embed?bgcolor=%23111111&lazyLoading=true&api_key=BehancePro2View" frameborder="0" allowfullscreen loading="eager" decoding="sync" title="Portal MRV, identidade de acesso"></iframe></div>
         <div class="em-body"><div class="em-title">Identidade de acesso</div><p class="em-desc">Entrada e autenticação com a linguagem visual do produto.</p></div>
       </div>
     </div>
@@ -784,17 +928,17 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
     <h2 class="s-title">Outros projetos</h2>
     <div class="more-grid">
       <a class="more-card" href="case-ford.html">
-        <div class="more-card-img more-ph" data-mono="F"><img src="img/ford/hero-room.webp" alt="Ford Immersion Room" loading="lazy" style="object-position:center 48%"></div>
+        <div class="more-card-img more-ph" data-mono="F"><img src="img/ford/ford-hero-room.png" alt="Ford Immersion Room" loading="eager" decoding="sync" style="object-position:center 48%"></div>
         <span class="more-tag">Identidade visual · Design espacial</span>
         <div class="more-name">Ford Immersion Room</div>
       </a>
       <a class="more-card" href="case-delta.html">
-        <div class="more-card-img more-ph" data-mono="D"><img src="img/delta/hero-mockup.webp" alt="Delta Design System" loading="lazy" style="object-position:center 50%"></div>
+        <div class="more-card-img more-ph" data-mono="D"><img src="img/delta/thumbdelta.png" alt="Delta Design System" loading="eager" decoding="sync" style="object-position:center 50%"></div>
         <span class="more-tag">Design System</span>
         <div class="more-name">Delta Design System</div>
       </a>
       <a class="more-card" href="case-chorume.html">
-        <div class="more-card-img more-ph" data-mono="C"><img src="img/chorume/alfabeto-chorume.png" alt="Chorume Tipografia" loading="lazy" style="object-position:center 42%"></div>
+        <div class="more-card-img more-ph" data-mono="C"><img src="img/chorume/chorumeHero.png" alt="Chorume Tipografia" loading="eager" decoding="sync" style="object-position:center 42%"></div>
         <span class="more-tag">Tipografia · Identidade visual</span>
         <div class="more-name">Chorume Tipografia</div>
       </a>

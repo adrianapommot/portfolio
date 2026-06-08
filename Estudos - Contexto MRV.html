@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Estudo · Contexto do produto (MRV)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#111111; --gray-1:#3D3D3D; --gray-2:#6B6B6B; --gray-3:#9A9A9A; --gray-4:#B8B8B8;
+  --line:#E5E5E0; --paper:#FAFAF6; --chip:#F2F2EC; --accent:#E8E94D;
+  --ty-display:clamp(54px,5.6vw,74px); --ty-title:clamp(28px,3vw,40px); --ty-lead:clamp(16px,1.4vw,19px);
+  --ty-copy:17px; --ty-small:14px; --ty-label:12px;
+  --gut:clamp(20px,2.4vw,32px);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--paper);color:var(--black);font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+
+.stage{padding:48px clamp(24px,5vw,64px) 96px}
+.stage-head{max-width:760px;margin-bottom:48px}
+.stage-eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-4);margin-bottom:14px}
+.stage-title{font-size:clamp(28px,3.2vw,40px);font-weight:600;line-height:1.1;letter-spacing:-.02em;color:var(--black);margin-bottom:14px}
+.stage-sub{font-size:var(--ty-small);line-height:1.55;color:var(--gray-2);max-width:60ch}
+
+.variant{background:#fff;border:1px solid var(--line);border-radius:20px;padding:clamp(36px,4vw,56px);margin-bottom:32px;position:relative}
+.variant-tag{position:absolute;top:24px;right:28px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-4)}
+.variant-head{margin-bottom:36px;max-width:680px}
+.variant-h{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--black);margin-bottom:8px}
+.variant-d{font-size:13px;line-height:1.55;color:var(--gray-2)}
+
+/* ───────── seção compartilhada de header (igual no MRV) ───────── */
+.head{max-width:760px;margin-bottom:48px}
+.head .s-index{display:flex;align-items:baseline;gap:14px;margin-bottom:20px}
+.head .s-index b{font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--black);font-variant-numeric:tabular-nums}
+.head .s-index em{width:28px;height:1.5px;background:var(--line);display:block;font-style:normal}
+.head .s-title{font-size:clamp(32px,3.4vw,48px);font-weight:600;line-height:1.08;letter-spacing:-.015em;text-transform:uppercase;color:var(--black);margin-bottom:20px;text-wrap:balance}
+.head .s-lead{font-size:var(--ty-lead);font-weight:500;line-height:1.5;color:var(--gray-1);text-wrap:balance}
+.head .s-lead strong{font-weight:700;color:var(--black)}
+
+/* ════════════════════════════════════════════════
+   VARIANTE A — hairline stats (padrão lib-stats do Delta)
+   3 colunas, borders top/bottom, número grande, label small.
+   ════════════════════════════════════════════════ */
+.va-stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:48px 0}
+.va-stat{padding:0 clamp(20px,2.4vw,40px);border-right:1px solid var(--line)}
+.va-stat:first-child{padding-left:0}
+.va-stat:last-child{border-right:none;padding-right:0}
+.va-num{font-size:clamp(40px,4.6vw,56px);font-weight:600;letter-spacing:-.03em;line-height:1;color:var(--black);font-variant-numeric:tabular-nums;margin-bottom:18px}
+.va-label{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--black);margin-bottom:10px}
+.va-desc{font-size:var(--ty-small);line-height:1.55;color:var(--gray-2);text-wrap:balance;max-width:32ch}
+
+/* ════════════════════════════════════════════════
+   VARIANTE B — bib columns (padrão bib-cols do Delta)
+   sem nenhuma linha, 3 colunas com eyebrow + nome caps + descrição.
+   ════════════════════════════════════════════════ */
+.vb-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gut)}
+.vb-col{display:flex;flex-direction:column;gap:14px}
+.vb-num{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gray-4)}
+.vb-val{font-size:clamp(34px,3.6vw,44px);font-weight:600;letter-spacing:-.025em;line-height:1;color:var(--black);font-variant-numeric:tabular-nums}
+.vb-name{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--black)}
+.vb-desc{font-size:var(--ty-small);line-height:1.6;color:var(--gray-2);text-wrap:balance;max-width:34ch}
+
+/* ════════════════════════════════════════════════
+   VARIANTE C — hero stat (uma métrica em destaque)
+   card escuro com 2,5 milhões + 2 supporting stats em barra hairline.
+   ════════════════════════════════════════════════ */
+.vc-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(20px,2.4vw,32px)}
+.vc-card{background:var(--black);border-radius:18px;padding:clamp(28px,3.2vw,44px);color:#fff;display:flex;flex-direction:column;justify-content:space-between;gap:clamp(24px,3vw,36px)}
+.vc-card .vc-eyebrow{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.vc-card .vc-num{font-size:clamp(56px,7vw,96px);font-weight:600;line-height:.95;letter-spacing:-.04em;color:#fff;font-variant-numeric:tabular-nums;margin:14px 0 18px}
+.vc-card .vc-name{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.vc-card .vc-desc{font-size:var(--ty-small);line-height:1.6;color:rgba(255,255,255,.7);max-width:34ch}
+.vc-side{display:grid;grid-template-rows:1fr 1fr;gap:clamp(20px,2.4vw,32px)}
+.vc-sup{background:#fff;border:1px solid var(--line);border-radius:18px;padding:clamp(24px,3vw,36px);display:flex;flex-direction:column;justify-content:space-between;gap:14px}
+.vc-sup .vc-num-s{font-size:clamp(36px,3.8vw,48px);font-weight:600;line-height:1;letter-spacing:-.025em;color:var(--black);font-variant-numeric:tabular-nums}
+.vc-sup .vc-name-s{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--black)}
+.vc-sup .vc-desc-s{font-size:var(--ty-small);line-height:1.55;color:var(--gray-2);max-width:34ch}
+
+/* ════════════════════════════════════════════════
+   VARIANTE D — empilhado vertical (closer-stats invertido)
+   3 linhas com whitespace generoso, sem nenhuma linha.
+   Aproveita o contraste de tamanho entre o número (display) e o resto.
+   ════════════════════════════════════════════════ */
+.vd-list{display:flex;flex-direction:column;gap:clamp(32px,3.8vw,52px)}
+.vd-row{display:grid;grid-template-columns:minmax(280px,38%) 1fr;column-gap:clamp(32px,4vw,64px);align-items:baseline}
+.vd-val{font-size:clamp(48px,5.2vw,68px);font-weight:600;line-height:1;letter-spacing:-.035em;color:var(--black);font-variant-numeric:tabular-nums}
+.vd-body{display:flex;flex-direction:column;gap:10px}
+.vd-name{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--black)}
+.vd-desc{font-size:var(--ty-copy);line-height:1.55;color:var(--gray-2);text-wrap:balance;max-width:54ch}
+
+/* ════════════════════════════════════════════════
+   VARIANTE E — bonus: tile cards (estilo Delta wb-panel)
+   3 cards iguais com fundo de papel, mais escultórico.
+   ════════════════════════════════════════════════ */
+.ve-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,24px)}
+.ve-card{background:var(--chip);border-radius:18px;padding:clamp(28px,3vw,40px);display:flex;flex-direction:column;gap:24px;min-height:240px}
+.ve-card .ve-num{font-size:clamp(40px,4.6vw,56px);font-weight:600;line-height:1;letter-spacing:-.03em;color:var(--black);font-variant-numeric:tabular-nums;margin-bottom:auto}
+.ve-card .ve-name{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--black);margin-bottom:8px}
+.ve-card .ve-desc{font-size:var(--ty-small);line-height:1.55;color:var(--gray-2);text-wrap:balance}
+
+@media(max-width:860px){
+  .va-stats{grid-template-columns:1fr;padding:32px 0}
+  .va-stat{border-right:none;border-bottom:1px solid var(--line);padding:28px 0}
+  .va-stat:first-child{padding-top:0}
+  .va-stat:last-child{border-bottom:none;padding-bottom:0}
+  .vb-cols, .ve-grid{grid-template-columns:1fr;gap:32px}
+  .vc-grid{grid-template-columns:1fr}
+  .vc-side{grid-template-rows:auto auto}
+  .vd-row{grid-template-columns:1fr;gap:14px}
+}
+</style>
+</head>
+<body>
+
+<div class="stage">
+
+  <div class="stage-head">
+    <p class="stage-eyebrow">Estudo · Contexto do produto · MRV</p>
+    <h1 class="stage-title">5 caminhos para representar os fatos do contexto</h1>
+    <p class="stage-sub">Cada variante reaproveita um padrão consistente do Delta Design System, eliminando a sequência de linhas horizontais e dando mais peso visual ao bloco de dados (número + nome + descrição).</p>
+  </div>
+
+  <!-- ═══════════════ VARIANTE A — hairline ═══════════════ -->
+  <section class="variant">
+    <span class="variant-tag">Variante A</span>
+    <div class="variant-head">
+      <h2 class="variant-h">Hairline stats — 3 colunas, borders simétricos</h2>
+      <p class="variant-d">Padrão direto do Delta (seção "biblioteca de componentes"). Substitui a sequência de 3 linhas por uma única caixa com borda top/bottom. Os números ganham peso (56px), o label fica em caps e a descrição é opcional.</p>
+    </div>
+
+    <div class="head">
+      <div class="s-index"><b>01</b><em></em></div>
+      <h2 class="s-title">Contexto<br>do produto</h2>
+      <p class="s-lead">Produto digital de pós-compra da MRV, responsável por <strong>cobranças, pagamentos e renegociação de dívidas</strong>. Atendia mais de 2,5 milhões de clientes com financiamentos de até 35 anos, com impacto direto em custo operacional e satisfação.</p>
+    </div>
+
+    <div class="va-stats">
+      <div class="va-stat">
+        <div class="va-num">2,5 mi</div>
+        <div class="va-label">Clientes ativos</div>
+        <p class="va-desc">Cadastrados no app MRV, com financiamentos de longo prazo.</p>
+      </div>
+      <div class="va-stat">
+        <div class="va-num">35 anos</div>
+        <div class="va-label">Tempo médio de contrato</div>
+        <p class="va-desc">Financiamentos longos, com alta complexidade jurídica e financeira.</p>
+      </div>
+      <div class="va-stat">
+        <div class="va-num">3</div>
+        <div class="va-label">Territórios de produto</div>
+        <p class="va-desc">Renegociação de dívidas, parcelas a vencer e status de obra.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ VARIANTE B — bib cols ═══════════════ -->
+  <section class="variant">
+    <span class="variant-tag">Variante B</span>
+    <div class="variant-head">
+      <h2 class="variant-h">Bib columns — 3 colunas sem nenhuma linha</h2>
+      <p class="variant-d">Padrão "bib-cols" do Delta. Sem nenhuma régua: o respiro entre colunas faz a separação. Cada coluna lê de cima pra baixo: numeral pequeno (eyebrow) · valor grande · nome em caps · descrição. Mais leve e tipográfico.</p>
+    </div>
+
+    <div class="head">
+      <div class="s-index"><b>01</b><em></em></div>
+      <h2 class="s-title">Contexto<br>do produto</h2>
+      <p class="s-lead">Produto digital de pós-compra da MRV, responsável por <strong>cobranças, pagamentos e renegociação de dívidas</strong>. Atendia mais de 2,5 milhões de clientes com financiamentos de até 35 anos, com impacto direto em custo operacional e satisfação.</p>
+    </div>
+
+    <div class="vb-cols">
+      <div class="vb-col">
+        <span class="vb-num">01</span>
+        <div class="vb-val">2,5 mi</div>
+        <span class="vb-name">Clientes ativos</span>
+        <p class="vb-desc">Cadastrados no app MRV, com financiamentos de longo prazo.</p>
+      </div>
+      <div class="vb-col">
+        <span class="vb-num">02</span>
+        <div class="vb-val">35 anos</div>
+        <span class="vb-name">Tempo médio de contrato</span>
+        <p class="vb-desc">Financiamentos longos, com alta complexidade jurídica e financeira.</p>
+      </div>
+      <div class="vb-col">
+        <span class="vb-num">03</span>
+        <div class="vb-val">3</div>
+        <span class="vb-name">Territórios de produto</span>
+        <p class="vb-desc">Renegociação de dívidas, parcelas a vencer e status de obra.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ VARIANTE C — hero stat ═══════════════ -->
+  <section class="variant">
+    <span class="variant-tag">Variante C</span>
+    <div class="variant-head">
+      <h2 class="variant-h">Hero stat — uma métrica em destaque, duas supporting</h2>
+      <p class="variant-d">Padrão "res-hero" do Delta (resultados). Coloca o número mais expressivo (2,5 milhões) num card escuro em destaque, com os outros dois fatos em cards claros ao lado. Funciona quando uma métrica é claramente a mais importante do bloco.</p>
+    </div>
+
+    <div class="head">
+      <div class="s-index"><b>01</b><em></em></div>
+      <h2 class="s-title">Contexto<br>do produto</h2>
+      <p class="s-lead">Produto digital de pós-compra da MRV, responsável por <strong>cobranças, pagamentos e renegociação de dívidas</strong>. Atendia mais de 2,5 milhões de clientes com financiamentos de até 35 anos, com impacto direto em custo operacional e satisfação.</p>
+    </div>
+
+    <div class="vc-grid">
+      <div class="vc-card">
+        <div>
+          <span class="vc-eyebrow">Escala atendida</span>
+          <div class="vc-num">2,5 mi</div>
+        </div>
+        <div>
+          <div class="vc-name">Clientes ativos</div>
+          <p class="vc-desc">Cadastrados no app MRV, com financiamentos de longo prazo. Toda decisão de design precisava escalar para essa base.</p>
+        </div>
+      </div>
+      <div class="vc-side">
+        <div class="vc-sup">
+          <div class="vc-num-s">35 anos</div>
+          <div>
+            <div class="vc-name-s">Tempo médio de contrato</div>
+            <p class="vc-desc-s">Financiamentos longos, com alta complexidade jurídica e financeira.</p>
+          </div>
+        </div>
+        <div class="vc-sup">
+          <div class="vc-num-s">3</div>
+          <div>
+            <div class="vc-name-s">Territórios de produto</div>
+            <p class="vc-desc-s">Renegociação de dívidas, parcelas a vencer e status de obra.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ VARIANTE D — stack vertical ═══════════════ -->
+  <section class="variant">
+    <span class="variant-tag">Variante D</span>
+    <div class="variant-head">
+      <h2 class="variant-h">Stack vertical — número editorial gigante, sem linhas</h2>
+      <p class="variant-d">Reorganização vertical com o número em escala display (até 68px). Sem nenhum divisor — o espaço entre linhas faz o trabalho. Tom mais editorial, lembra os blocos de abertura de seções do Delta. Bom quando quer dar peso narrativo a cada fato.</p>
+    </div>
+
+    <div class="head">
+      <div class="s-index"><b>01</b><em></em></div>
+      <h2 class="s-title">Contexto<br>do produto</h2>
+      <p class="s-lead">Produto digital de pós-compra da MRV, responsável por <strong>cobranças, pagamentos e renegociação de dívidas</strong>. Atendia mais de 2,5 milhões de clientes com financiamentos de até 35 anos, com impacto direto em custo operacional e satisfação.</p>
+    </div>
+
+    <div class="vd-list">
+      <div class="vd-row">
+        <div class="vd-val">2,5 milhões</div>
+        <div class="vd-body">
+          <span class="vd-name">Clientes ativos</span>
+          <p class="vd-desc">Cadastrados no app MRV, com financiamentos de longo prazo.</p>
+        </div>
+      </div>
+      <div class="vd-row">
+        <div class="vd-val">35 anos</div>
+        <div class="vd-body">
+          <span class="vd-name">Tempo médio de contrato</span>
+          <p class="vd-desc">Financiamentos longos, com alta complexidade jurídica e financeira.</p>
+        </div>
+      </div>
+      <div class="vd-row">
+        <div class="vd-val">3 domínios</div>
+        <div class="vd-body">
+          <span class="vd-name">Territórios de produto</span>
+          <p class="vd-desc">Renegociação de dívidas, parcelas a vencer e status de obra.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ VARIANTE E — tile cards ═══════════════ -->
+  <section class="variant">
+    <span class="variant-tag">Variante E</span>
+    <div class="variant-head">
+      <h2 class="variant-h">Tile cards — 3 cards com fundo de papel</h2>
+      <p class="variant-d">Padrão "wb-panel" do Delta aplicado em escala menor. Cada fato vira um card com fundo cinza-claro (sem borda). Visual mais escultórico e arquitetado, ajuda a separar a seção do resto da página por contraste de fundo.</p>
+    </div>
+
+    <div class="head">
+      <div class="s-index"><b>01</b><em></em></div>
+      <h2 class="s-title">Contexto<br>do produto</h2>
+      <p class="s-lead">Produto digital de pós-compra da MRV, responsável por <strong>cobranças, pagamentos e renegociação de dívidas</strong>. Atendia mais de 2,5 milhões de clientes com financiamentos de até 35 anos, com impacto direto em custo operacional e satisfação.</p>
+    </div>
+
+    <div class="ve-grid">
+      <div class="ve-card">
+        <div class="ve-num">2,5 mi</div>
+        <div>
+          <div class="ve-name">Clientes ativos</div>
+          <p class="ve-desc">Cadastrados no app MRV, com financiamentos de longo prazo.</p>
+        </div>
+      </div>
+      <div class="ve-card">
+        <div class="ve-num">35 anos</div>
+        <div>
+          <div class="ve-name">Tempo médio de contrato</div>
+          <p class="ve-desc">Financiamentos longos, com alta complexidade jurídica e financeira.</p>
+        </div>
+      </div>
+      <div class="ve-card">
+        <div class="ve-num">3</div>
+        <div>
+          <div class="ve-name">Territórios de produto</div>
+          <p class="ve-desc">Renegociação de dívidas, parcelas a vencer e status de obra.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>

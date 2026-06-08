@@ -67,27 +67,28 @@ p{text-wrap:balance}
 .nav-menu .nav-link:hover{background:var(--black);color:#fff}
 
 /* ═══ HERO (type-forward claro, padrão de projeto) ═══ */
-.hero{position:relative;overflow:hidden;background:#FAFAF8;padding-top:clamp(120px,14vh,168px);padding-bottom:0}
-.hero-inner{position:relative}
+.hero{position:relative;overflow:hidden;background:#FAFAF8;padding-top:clamp(60px,7vh,84px);padding-bottom:0}
+.hero-inner{position:relative;z-index:2;padding-top:24px}
 .hero-top{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:clamp(16px,2vw,22px)}
 .hero-brand{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-3)}
 .hero .hero-title{font-size:clamp(38px,4.4vw,62px);font-weight:700;letter-spacing:-.04em;line-height:.94;text-transform:uppercase;color:var(--black)}
 .hero .hero-title>span{display:block;width:fit-content}
 .hero-hl{display:inline-block;background:linear-gradient(transparent 12%, var(--accent) 12%, var(--accent) 88%, transparent 88%)}
-.hero-foot{display:flex;flex-direction:row;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap;margin-top:clamp(32px,4vw,52px)}
+.hero-foot{display:flex;flex-direction:row;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap;margin-top:clamp(32px,3.4vw,40px)}
 .hero-foot-main{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(20px,2.4vw,30px)}
-.hero-intro{max-width:42ch;font-size:var(--ty-lead);font-weight:500;line-height:1.4;color:var(--gray-2);text-wrap:balance}
+.hero-intro{max-width:42ch;font-size:var(--ty-small);font-weight:500;line-height:1.6;color:var(--gray-2);text-wrap:balance}
 .hero-intro strong{font-weight:700;color:var(--black)}
 .hero-result{text-align:left}
 .hero-result span{display:block;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-3);margin-bottom:9px}
-.hero-result b{display:block;font-size:15px;font-weight:700;letter-spacing:-.01em;color:var(--black)}
+.hero-result b{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--black)}
 .hero-tag{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--gray-3);white-space:nowrap;padding-bottom:3px}
-.hero-meta{margin-top:clamp(44px,6vh,72px);border-top:1px solid var(--line);padding:32px 0 clamp(44px,6vh,72px);display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
-.hm-item{border-right:1px solid var(--line);padding:0 clamp(20px,2.4vw,40px)}
+/* hero-meta · padrão Delta (inline tight) */
+.hero-meta{position:relative;z-index:2;margin-top:clamp(44px,6vh,72px);border-top:1px solid var(--line);padding:20px 0 20px;display:flex;align-items:center}
+.hm-item{display:flex;align-items:baseline;gap:8px;padding:0 20px;border-right:1px solid var(--line)}
 .hm-item:first-child{padding-left:0}
 .hm-item:last-child{border-right:none;padding-right:0}
-.hm-label{display:block;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-3);margin-bottom:8px}
-.hm-value{font-size:16px;font-weight:600;line-height:1.35;color:var(--black)}
+.hm-label{display:block;font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gray-4);white-space:nowrap;margin-bottom:0}
+.hm-value{font-size:13px;font-weight:500;line-height:1;color:var(--gray-1);white-space:nowrap}
 @keyframes heroUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 .hero-top,.hero .hero-title>span,.hero-foot{animation:heroUp .85s cubic-bezier(.2,.7,.3,1) backwards}
 .hero-top{animation-delay:.05s}
@@ -95,7 +96,7 @@ p{text-wrap:balance}
 .hero .hero-title>span:nth-child(2){animation-delay:.19s}
 .hero-foot{animation-delay:.32s}
 @media(prefers-reduced-motion:reduce){.hero-top,.hero .hero-title>span,.hero-foot{animation:none}}
-@media(max-width:860px){.hero-meta{grid-template-columns:1fr 1fr;gap:0}.hm-item{border-bottom:1px solid var(--line);padding:20px 28px}.hm-item:first-child{padding-left:28px}.hm-item:nth-child(2n){border-right:none}}
+@media(max-width:860px){.hero-meta{gap:0}.hm-item{border-right:none;border-bottom:1px solid var(--line);padding:12px 0;width:50%;white-space:normal}.hm-item:nth-child(odd){padding-right:16px}.hm-item:last-child{border-bottom:none}.hm-label,.hm-value{white-space:normal}}
 
 /* ═══ HEADER DE SEÇÃO ═══ */
 .sec-head{max-width:760px;margin-bottom:var(--space-title)}
@@ -116,7 +117,7 @@ p{text-wrap:balance}
 .problem-statement{font-size:20px;font-weight:400;line-height:1.5;letter-spacing:-.005em;color:var(--black);max-width:780px;margin-bottom:var(--space-lg);text-wrap:balance}
 
 /* ═══ SUBSEÇÃO ═══ */
-.subsection{margin-top:var(--space-title);padding-top:var(--space-title);border-top:1px solid var(--line)}
+.subsection{margin-top:var(--space-title)}
 .sub-title{font-size:var(--ty-title);font-weight:600;line-height:1.08;letter-spacing:-.015em;text-transform:uppercase;color:var(--black);text-wrap:balance;margin-bottom:var(--space-md)}
 
 /* ═══ RESULTADOS — stats 4-up ═══ */
@@ -202,13 +203,17 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
   .res-stat{padding:24px 0;border-right:none!important}
   .res-stat:not(:last-child){border-bottom:1px solid var(--line)}
 }
+
+/* ═══ REVEAL — desativado, tudo estático ═══ */
+.rv,.rv.visible{opacity:1!important;transform:none!important;transition:none!important;animation:none!important}
 </style>
+<link rel="stylesheet" href="case-patterns.css?v=2">
 </head>
 <body>
 
 <!-- NAV (componente compartilhado) -->
 <site-nav back="index.html#work"></site-nav>
-<script src="site-nav.js?v=7"></script>
+<script src="site-nav.js?v=9"></script>
 </div>
 
 <main class="flow">
@@ -225,7 +230,6 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
           <p class="hero-intro">Direção de arte, identidade visual e design system espacial para uma <strong>sala de imersão que traduziu um ano de pesquisa cross-cultural em experiência tangível</strong> para os times de engenharia da Ford.</p>
           <div class="hero-result"><span>entrega final</span><b>Sala de imersão · 21 features · 3 países</b></div>
         </div>
-        <span class="hero-tag">Case de Product Design · 2017–2018</span>
       </div>
     </div>
     <div class="hero-meta">
@@ -238,35 +242,79 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 
 
   <!-- ═══ 01 · CONTEXTO ═══ -->
-  <section class="sec rv" id="contexto">
-    <div class="sec-head">
-      <div class="s-index"><b>01</b><em></em></div>
-      <h2 class="s-title">Contexto</h2>
-    </div>
-    <p class="s-body">A Ford precisava projetar experiências para dois novos modelos de utilitário voltados ao Brasil, Argentina e Índia. A Questto|Nó, consultoria de design onde eu atuava, foi contratada para conduzir um projeto de um ano que ia de pesquisa de campo com usuários reais até a entrega de conceitos refinados e prontos para desenvolvimento.</p>
-    <p class="s-body">Fui a <strong>designer responsável pela identidade visual de ponta a ponta:</strong> defini a linguagem visual do projeto, produzi os materiais gráficos que sustentaram cada fase da pesquisa, dirigi a estética das features que o time de produto desenhou, e projetei o design system da entrega final, uma Immersion Room montada dentro da fábrica da Ford.</p>
-    <div class="full-img rv d1">
-      <img src="img/ford/workshop-team.webp" alt="Equipe reunida no workshop de Camaçari, Ford e Questto|Nó" loading="lazy">
-      <p class="img-caption">Workshop criativo na fábrica de Camaçari com os times Ford e Questto|Nó.</p>
+  <section class="sec dark rv" id="contexto">
+    <div class="intro-grid">
+      <div class="intro-over"><div class="s-index"><b>01 · Immersion Room</b><em></em></div></div>
+      <div class="intro-idx"><span>Contexto</span></div>
+      <div class="intro-rule"></div>
+
+      <h2 class="intro-statement" style="font-size: 28px">Como traduzir um ano de pesquisa cross-cultural em uma experiência tangível para os times de engenharia da Ford.</h2>
+      <div class="intro-side">
+        <p class="intro-micro">A Ford precisava projetar experiências para dois novos modelos de utilitário voltados ao Brasil, Argentina e Índia. A Questto|Nó, consultoria de design onde eu atuava, foi contratada para conduzir um projeto de um ano: da pesquisa de campo com usuários reais até a entrega de conceitos refinados, prontos para desenvolvimento.</p>
+        <p class="intro-micro">Todo esse volume de pesquisa precisava chegar aos engenheiros não como um relatório, mas como uma <strong>experiência que provocasse empatia, compreensão e vontade de criar.</strong></p>
+      </div>
+
+      <div class="intro-pivot">
+        <p class="s-lead">Foi nesse contexto que nasceu a Immersion Room.</p>
+        <span class="intro-mark"></span>
+      </div>
+      <div class="intro-role">
+        <span class="s-label">Meu papel</span>
+        <p class="intro-micro">Fui a designer responsável pela <strong>identidade visual de ponta a ponta</strong>: defini a linguagem do projeto, produzi os materiais que sustentaram cada fase da pesquisa, dirigi a estética das 21 features e projetei o design system espacial da entrega final.</p>
+      </div>
+
+      <div class="full-img rv d1">
+        <img src="img/ford/workshop-team.webp" alt="Equipe reunida no workshop de Camaçari, Ford e Questto|Nó" loading="eager" decoding="sync">
+        <p class="img-caption">Workshop criativo na fábrica de Camaçari com os times Ford e Questto|Nó.</p>
+      </div>
     </div>
   </section>
 
 
   <!-- ═══ 02 · O PROBLEMA ═══ -->
   <section class="sec rv" id="problema">
-    <div class="sec-head">
-      <div class="s-index"><b>02</b><em></em></div>
-      <h2 class="s-title">O problema</h2>
+    <div class="prob-head">
+      <div class="s-index"><b>02 · Problema</b><em></em></div>
+      <h2 class="s-title">Entendendo o desafio</h2>
+      <p class="s-lead" style="font-weight: 400">Como fazer centenas de engenheiros, acostumados a pensar em especificações técnicas, <strong>mergulharem na realidade emocional e cultural</strong> de pessoas que dirigem em Nova Delhi, São Paulo e Buenos Aires? <span class="txt-hl">O projeto gerou um volume imenso de pesquisa que precisava chegar como experiência, não como relatório.</span></p>
     </div>
-    <p class="problem-statement">Como fazer centenas de engenheiros, acostumados a pensar em especificações técnicas, mergulharem na realidade emocional e cultural de pessoas que dirigem em Nova Delhi, São Paulo e Buenos Aires?</p>
-    <p class="s-body">O projeto gerou um volume imenso de pesquisa: entrevistas em três países, 118 participantes em sessões de co-criação, mais de 300 ideias organizadas em 27 clusters e 21 conceitos de features. Todo esse conteúdo precisava chegar aos times de engenharia não como um relatório, mas como uma experiência que provocasse empatia, compreensão e vontade de criar.</p>
+    <div class="prob-grid">
+      <article class="prob-item">
+        <div class="prob-ico"><img src="img/ford/icn-prob-volume.png" alt="Volume de pesquisa"></div>
+        <div class="prob-txt">
+          <h3 class="prob-title">Volume de pesquisa</h3>
+          <p class="prob-desc">Entrevistas em três países, 118 participantes em co-criação, 300+ ideias em 27 clusters e 21 conceitos de features. <strong>Denso demais para virar um relatório consumível.</strong></p>
+        </div>
+      </article>
+      <article class="prob-item">
+        <div class="prob-ico"><img src="img/ford/icn-prob-distancia.png" alt="Distância cultural"></div>
+        <div class="prob-txt">
+          <h3 class="prob-title">Distância cultural</h3>
+          <p class="prob-desc">Engenheiros locais nunca tinham dirigido em Delhi nem enfrentado uma rotina familiar argentina. <strong>A pesquisa precisava encurtar essa distância sem caber em um deck.</strong></p>
+        </div>
+      </article>
+      <article class="prob-item">
+        <div class="prob-ico"><img src="img/ford/icn-prob-material.png" alt="Material inerte"></div>
+        <div class="prob-txt">
+          <h3 class="prob-title">Material inerte</h3>
+          <p class="prob-desc">Relatórios técnicos não geravam empatia, e decks longos não escalavam para uma fábrica inteira. <strong>O conteúdo precisava virar ambiente, não documento.</strong></p>
+        </div>
+      </article>
+      <article class="prob-item">
+        <div class="prob-ico"><img src="img/ford/icn-prob-empatia.png" alt="Empatia em escala"></div>
+        <div class="prob-txt">
+          <h3 class="prob-title">Empatia em escala</h3>
+          <p class="prob-desc">A experiência precisava provocar empatia em centenas de engenheiros simultaneamente. <strong>Era preciso uma resposta espacial, navegável e tangível.</strong></p>
+        </div>
+      </article>
+    </div>
     <div class="img-grid img-grid-2 rv d1">
       <div>
-        <img src="img/ford/cities.webp" alt="Nova Delhi, São Paulo e Buenos Aires" loading="lazy">
+        <img src="img/ford/cities.webp" alt="Nova Delhi, São Paulo e Buenos Aires" loading="eager" decoding="sync">
         <p class="img-caption">Pesquisa conduzida em três mercados emergentes.</p>
       </div>
       <div>
-        <img src="img/ford/ideas-wall.webp" alt="Parede com mais de 300 ideias organizadas em clusters" loading="lazy">
+        <img src="img/ford/ideas-wall.webp" alt="Parede com mais de 300 ideias organizadas em clusters" loading="eager" decoding="sync">
         <p class="img-caption">300+ ideias, 27 clusters, 21 conceitos gerados.</p>
       </div>
     </div>
@@ -274,15 +322,31 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 
 
   <!-- ═══ 03 · OBJETIVO ═══ -->
-  <section class="sec rv" id="objetivo">
-    <div class="sec-head">
-      <div class="s-index"><b>03</b><em></em></div>
-      <h2 class="s-title">Objetivo</h2>
-    </div>
-    <p class="s-body">Construir um sistema visual e espacial que transformasse meses de pesquisa cross-cultural em algo navegável, tangível e inspirador. A entrega não podia ser um deck estático. Precisava ser um ambiente onde engenheiros pudessem tocar os conceitos, entender os usuários e usar tudo aquilo como ponto de partida para ideação.</p>
-    <div class="full-img rv d1">
-      <img src="img/ford/participants.webp" alt="Participantes das sessões de co-criação nos três países" loading="lazy">
-      <p class="img-caption">118 participantes nas sessões de co-criação: Nova Delhi (28), São Paulo (54), Buenos Aires (36).</p>
+  <section class="sec dark rv" id="objetivo">
+    <div class="intro-grid">
+      <div class="intro-over"><div class="s-index"><b>03 · Definindo a estratégia</b><em></em></div></div>
+      <div class="intro-idx"><span>Objetivo</span></div>
+      <div class="intro-rule"></div>
+
+      <h2 class="intro-statement" style="font-size: 28px">Transformar meses de pesquisa cross-cultural em um ambiente navegável, tangível e inspirador o suficiente para gerar ação.</h2>
+      <div class="intro-side">
+        <p class="intro-micro">A entrega não podia ser um deck estático nem um relatório técnico. Precisava ser um espaço habitado  onde engenheiros pudessem tocar os conceitos, entender os usuários e usar tudo como ponto de partida para ideação.</p>
+        <p class="intro-micro">Pesquisa, identidade visual e arquitetura espacial precisavam falar a mesma língua, do material gráfico até o piso da fábrica.</p>
+      </div>
+
+      <div class="intro-pivot">
+        <p class="s-lead">Pesquisa virou ambiente. Insight virou experiência.</p>
+        <span class="intro-mark"></span>
+      </div>
+      <div class="intro-role">
+        <span class="s-label">O princípio</span>
+        <p class="intro-micro">Tratar o design system como linguagem comum entre pesquisa, produto e espaço — para que cada engenheiro saísse do ambiente com vontade de criar.</p>
+      </div>
+
+      <div class="full-img rv d1">
+        <img src="img/ford/participants.webp" alt="Participantes das sessões de co-criação nos três países" loading="eager" decoding="sync">
+        <p class="img-caption">118 participantes nas sessões de co-criação: Nova Delhi (28), São Paulo (54), Buenos Aires (36).</p>
+      </div>
     </div>
   </section>
 
@@ -290,64 +354,72 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
   <!-- ═══ 04 · ESTRATÉGIA E SOLUÇÃO ═══ -->
   <section class="sec rv" id="estrategia">
     <div class="sec-head">
-      <div class="s-index"><b>04</b><em></em></div>
+      <div class="s-index"><b>04 · Estratégia</b><em></em></div>
       <h2 class="s-title">Estratégia<br>e solução</h2>
+      <p class="s-lead">Projetei um design system que cruzou a fronteira do papel para o espaço físico. A identidade visual precisava funcionar em apresentações digitais, materiais impressos de pesquisa e numa sala inteira de imersão, <strong>tudo com coerência</strong>.</p>
     </div>
-    <p class="s-body">Projetei um design system que cruzou a fronteira do papel para o espaço físico. A identidade visual precisava funcionar em apresentações digitais, materiais impressos de pesquisa e numa sala inteira de imersão, tudo com coerência.</p>
 
     <!-- Sub: Co-criação -->
     <div class="subsection rv">
-      <h3 class="sub-title">Co-criação com protótipo físico</h3>
-      <p class="s-body">Antes da sala, o processo passou por sessões de co-criação nos três países. A equipe construiu um carro em escala real usando tubos de PVC, uma estrutura que permitia aos participantes interagir com os conceitos de forma física. Defini a linguagem visual dos materiais usados nessas sessões, garantindo que a informação fosse clara e acessível independente do contexto cultural.</p>
+      <h3 class="sub-title">CO-CRIAÇÃO COM 
+PROTÓTIPO FÍSICO</h3>
+      <p class="s-body" style="font-size: 16px; font-weight: 400">Antes da sala, o processo passou por sessões de co-criação nos três países. 
+A equipe construiu um carro em escala real usando tubos de PVC, uma estrutura 
+que permitia aos participantes interagir com os conceitos de forma física. 
+Defini a linguagem visual dos materiais usados nessas sessões, garantindo que a informação fosse clara e acessível independente do contexto cultural.</p>
       <div class="img-grid img-grid-3 rv d1">
         <div>
-          <img src="img/ford/pvc-car-diagram.webp" alt="Diagrama técnico do PVC Car" loading="lazy">
+          <img src="img/ford/pvc-car-diagram.webp" alt="Diagrama técnico do PVC Car" loading="eager" decoding="sync">
           <p class="img-caption">Estrutura modular em PVC.</p>
         </div>
         <div>
-          <img src="img/ford/pvc-car-action.webp" alt="PVC Car em uso durante sessão de co-criação" loading="lazy">
+          <img src="img/ford/pvc-car-action.webp" alt="PVC Car em uso durante sessão de co-criação" loading="eager" decoding="sync">
           <p class="img-caption">Sessão de co-criação no Brasil.</p>
         </div>
         <div>
-          <img src="img/ford/pvc-car-photos.webp" alt="Participantes interagindo com o PVC Car na Índia" loading="lazy">
+          <img src="img/ford/pvc-car-photos.webp" alt="Participantes interagindo com o PVC Car na Índia" loading="eager" decoding="sync">
           <p class="img-caption">Workshops na Índia e Brasil.</p>
         </div>
       </div>
     </div>
 
     <!-- Sub: Features -->
-    <div class="subsection rv">
-      <h3 class="sub-title">Linguagem visual das features</h3>
-      <p class="s-body">Dirigi a linguagem visual que o time de produto usou para materializar 21 conceitos de UX em desenhos detalhados. Cada prancha seguia um sistema visual consistente: ilustração técnica com destaque em cor para os elementos interativos, acompanhada de descrição funcional. Contribuí diretamente com ilustrações para garantir coerência entre todas as pranchas.</p>
+    <div class="subsection rv" data-maximizable>
+      <h3 class="sub-title">LINGUAGEM VISUAL 
+DAS FEATURES</h3>
+      <p class="s-body" style="font-size: 6px">Dirigi a linguagem visual que o time de produto usou para materializar 
+21 conceitos de UX em desenhos detalhados. Cada prancha seguia um 
+sistema visual consistente: ilustração técnica com destaque em cor para 
+os elementos interativos, acompanhada de descrição funcional. Contribuí diretamente com ilustrações para garantir coerência entre todas as pranchas.</p>
       <div class="full-img rv">
-        <img src="img/ford/concepts-grid.webp" alt="Grid com os 21 conceitos de features desenhados" loading="lazy">
+        <img src="img/ford/concepts-grid.webp" alt="Grid com os 21 conceitos de features desenhados" loading="eager" decoding="sync">
         <p class="img-caption">Panorama dos 21 conceitos de features, cada um com linguagem visual unificada.</p>
       </div>
       <div class="img-grid img-grid-3 rv">
         <div>
-          <img src="img/ford/feature-carscan.webp" alt="Car Scan: diagnóstico via app e dashboard" loading="lazy">
+          <img src="img/ford/feature-carscan.webp" alt="Car Scan: diagnóstico via app e dashboard" loading="eager" decoding="sync">
           <p class="img-caption">Car Scan.</p>
         </div>
         <div>
-          <img src="img/ford/feature-console.webp" alt="Console ajustável modular" loading="lazy">
+          <img src="img/ford/feature-console.webp" alt="Console ajustável modular" loading="eager" decoding="sync">
           <p class="img-caption">Console ajustável.</p>
         </div>
         <div>
-          <img src="img/ford/feature-recognition.webp" alt="Reconhecimento pessoal por chave" loading="lazy">
+          <img src="img/ford/feature-recognition.webp" alt="Reconhecimento pessoal por chave" loading="eager" decoding="sync">
           <p class="img-caption">Reconhecimento pessoal.</p>
         </div>
       </div>
       <div class="img-grid img-grid-3 rv">
         <div>
-          <img src="img/ford/feature-weather.webp" alt="Sistema de resposta climática" loading="lazy">
+          <img src="img/ford/feature-weather.webp" alt="Sistema de resposta climática" loading="eager" decoding="sync">
           <p class="img-caption">Resposta climática.</p>
         </div>
         <div>
-          <img src="img/ford/feature-trunk.webp" alt="Divisória modular para porta-malas" loading="lazy">
+          <img src="img/ford/feature-trunk.webp" alt="Divisória modular para porta-malas" loading="eager" decoding="sync">
           <p class="img-caption">Divisória de porta-malas.</p>
         </div>
         <div>
-          <img src="img/ford/feature-security.webp" alt="Monitoramento de segurança" loading="lazy">
+          <img src="img/ford/feature-security.webp" alt="Monitoramento de segurança" loading="eager" decoding="sync">
           <p class="img-caption">Monitoramento de segurança.</p>
         </div>
       </div>
@@ -356,15 +428,23 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
     <!-- Sub: Design system -->
     <div class="subsection rv">
       <h3 class="sub-title">Design system da Immersion Room</h3>
-      <p class="s-body">A identidade visual do espaço usou materiais crus e industriais que remetiam a prototipagem contínua: compensado, cortiça, papelão e tubos de PVC. Os tubos tinham uma função conceitual: funcionavam como wireframes físicos, mantendo os primeiros protótipos vivos dentro do espaço.</p>
-      <p class="s-body">A tipografia combinou fontes anamórficas (que brincam com a perspectiva do espaço tridimensional) com famílias funcionais no estilo Swiss Typefaces, equilibrando impacto visual e clareza para um público de engenheiros. Para os materiais de consumo da pesquisa, trouxemos impressão em risograph, dando qualidade tátil e única ao material impresso.</p>
-      <p class="s-body">Defini um color code com paletas distintas para cada modelo de veículo, e desenhei um conjunto de ícones para facilitar a absorção da informação nas estações de conceito.</p>
+      <p class="s-body" style="font-size: 16px">A identidade visual do espaço usou materiais crus e industriais que remetiam 
+a prototipagem contínua: compensado, cortiça, papelão e tubos de PVC. 
+Os tubos tinham uma função conceitual: funcionavam como wireframes físicos,<br>mantendo os primeiros protótipos vivos dentro do espaço.</p>
+      <p class="s-body" style="font-size: 16px">A tipografia combinou fontes anamórficas (que brincam com a perspectiva 
+do espaço tridimensional) com famílias funcionais no estilo Swiss Typefaces, 
+equilibrando impacto visual e clareza para um público de engenheiros. 
+Para os materiais de consumo da pesquisa, trouxemos impressão em 
+risografia, dando qualidade tátil e única ao material impresso.</p>
+      <p class="s-body" style="font-size: 16px">Defini um color code com paletas distintas para cada modelo de 
+veículo, e desenhei um conjunto de ícones para facilitar a absorção 
+ informação nas estações de conceito.</p>
       <div class="full-img rv">
-        <img src="img/ford/room-references.webp" alt="Referências visuais: DIY, plywood, makerspace, tipografia bold" loading="lazy">
+        <img src="img/ford/room-references.webp" alt="Referências visuais: DIY, plywood, makerspace, tipografia bold" loading="eager" decoding="sync">
         <p class="img-caption">Referências visuais: materialidade DIY, compensado, tipografia contrastante, wayfinding industrial.</p>
       </div>
       <div class="full-img rv">
-        <img src="img/ford/room-floorplan.webp" alt="Planta baixa da Immersion Room com áreas demarcadas" loading="lazy">
+        <img src="img/ford/room-floorplan.webp" alt="Planta baixa da Immersion Room com áreas demarcadas" loading="eager" decoding="sync">
         <p class="img-caption">Planta da sala com entrada, sala principal e saída demarcadas.</p>
       </div>
     </div>
@@ -376,64 +456,65 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
     <div class="sec-head">
       <div class="s-index"><b>05</b><em></em></div>
       <h2 class="s-title">A sala</h2>
-      <p class="s-lead">A Immersion Room foi coreografada para guiar os times de produto por uma jornada completa. Intervenções gráficas no chão e no teto conectavam os códigos de cor aos modelos de veículo, conduzindo os participantes por estações temáticas: contexto cultural, momentos-chave dos usuários, conceitos detalhados e mesa de ideação para co-criação presencial.</p>
+      <p class="s-lead">A Immersion Room foi coreografada para guiar os times de produto por uma 
+jornada completa. Intervenções gráficas no chão e no teto conectavam os códigos de cor aos modelos de veículo, conduzindo os participantes por estações temáticas: contexto cultural, momentos-chave dos usuários, conceitos detalhados e mesa de ideação para co-criação presencial.</p>
     </div>
 
     <div class="full-img rv">
-      <img src="img/ford/room-entry.webp" alt="Entrada da sala com painéis de boas-vindas e toolkit" loading="lazy">
+      <img src="img/ford/room-entry.webp" alt="Entrada da sala com painéis de boas-vindas e toolkit" loading="eager" decoding="sync">
       <p class="img-caption">Entrada da sala com painel de boas-vindas e toolkit impresso para cada participante.</p>
     </div>
 
     <div class="img-grid img-grid-2 rv">
       <div>
-        <img src="img/ford/room-research-wall.webp" alt="Parede de pesquisa com fotos e insights dos três países" loading="lazy">
+        <img src="img/ford/room-research-wall.webp" alt="Parede de pesquisa com fotos e insights dos três países" loading="eager" decoding="sync">
         <p class="img-caption">Parede de pesquisa com fotos e insights culturais.</p>
       </div>
       <div>
-        <img src="img/ford/room-timeline.webp" alt="Painéis de timeline do projeto" loading="lazy">
+        <img src="img/ford/room-timeline.webp" alt="Painéis de timeline do projeto" loading="eager" decoding="sync">
         <p class="img-caption">Timeline do projeto de setembro a dezembro.</p>
       </div>
     </div>
 
     <div class="full-img rv">
-      <img src="img/ford/room-moments.webp" alt="Moment boards: Out with Friends, My Castle, Always Like New" loading="lazy">
+      <img src="img/ford/room-moments.webp" alt="Moment boards: Out with Friends, My Castle, Always Like New" loading="eager" decoding="sync">
       <p class="img-caption">Moment boards com jornadas dos usuários: saindo com amigos, meu espaço, sempre como novo.</p>
     </div>
 
     <div class="img-grid img-grid-2 rv">
       <div>
-        <img src="img/ford/room-users.webp" alt="Painel de personas com perfis dos usuários" loading="lazy">
+        <img src="img/ford/room-users.webp" alt="Painel de personas com perfis dos usuários" loading="eager" decoding="sync">
         <p class="img-caption">Painéis de personas com perfis dos três países.</p>
       </div>
       <div>
-        <img src="img/ford/room-concepts.webp" alt="Corredor de concept boards com todas as features" loading="lazy">
+        <img src="img/ford/room-concepts.webp" alt="Corredor de concept boards com todas as features" loading="eager" decoding="sync">
         <p class="img-caption">Corredor de concept boards com as features detalhadas.</p>
       </div>
     </div>
 
     <div class="full-img rv">
-      <img src="img/ford/room-boxcar.webp" alt="Box car simulador com tela e volante" loading="lazy">
+      <img src="img/ford/room-boxcar.webp" alt="Box car simulador com tela e volante" loading="eager" decoding="sync">
       <p class="img-caption">Box car: simulador interativo onde engenheiros exploravam os conceitos em contexto.</p>
     </div>
 
     <div class="img-grid img-grid-2 rv">
       <div>
-        <img src="img/ford/room-dashboard.webp" alt="Dashboard do box car com mapeamento de features" loading="lazy">
+        <img src="img/ford/room-dashboard.webp" alt="Dashboard do box car com mapeamento de features" loading="eager" decoding="sync">
         <p class="img-caption">Dashboard com mapeamento de features por momento e enabler.</p>
       </div>
       <div>
-        <img src="img/ford/room-boxcar-interior.webp" alt="Interior do box car com assentos reais" loading="lazy">
+        <img src="img/ford/room-boxcar-interior.webp" alt="Interior do box car com assentos reais" loading="eager" decoding="sync">
         <p class="img-caption">Interior com assentos reais e concept boards ao redor.</p>
       </div>
     </div>
 
     <div class="img-grid img-grid-2 rv">
       <div>
-        <img src="img/ford/room-fullview.webp" alt="Vista completa da sala com mesa de ideação" loading="lazy">
+        <img src="img/ford/room-fullview.webp" alt="Vista completa da sala com mesa de ideação" loading="eager" decoding="sync">
         <p class="img-caption">Vista completa com concept boards e simulador.</p>
       </div>
       <div>
-        <img src="img/ford/room-ideation.webp" alt="Mesa de ideação com banquetas" loading="lazy">
+        <img src="img/ford/room-ideation.webp" alt="Mesa de ideação com banquetas" loading="eager" decoding="sync">
         <p class="img-caption">Mesa de ideação para co-criação presencial.</p>
       </div>
     </div>
@@ -445,7 +526,8 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
     <div class="sec-head">
       <div class="s-index"><b>06</b><em></em></div>
       <h2 class="s-title">Resultados</h2>
-      <p class="s-lead">Os engenheiros da Ford receberam uma sala de imersão navegável dentro da fábrica de Camaçari, reunindo a pesquisa de três países, 21 features detalhadas e protótipos interativos.</p>
+      <p class="s-lead">Os engenheiros da Ford receberam uma sala de imersão navegável 
+dentro da fábrica de Camaçari, reunindo a pesquisa de três países, 21 features detalhadas e protótipos interativos.</p>
     </div>
     <div class="res-stats rv d1">
       <div class="res-stat">
@@ -478,21 +560,30 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
         <span class="apr-n">01</span>
         <div>
           <h3 class="apr-stmt">Material é mensagem</h3>
-          <p class="apr-txt">A escolha de compensado e risograph não foi estética, foi estratégica: comunicava ao público de engenheiros que aquilo era um espaço de trabalho em andamento, não uma apresentação finalizada. Esse enquadramento mudou como as pessoas interagiam com o conteúdo.</p>
+          <p class="apr-txt" style="font-size: 16px">A escolha de compensado e risograph não foi estética, 
+foi estratégica: comunicava ao público de engenheiros 
+que aquilo era um espaço de trabalho em andamento, 
+não uma apresentação finalizada. Esse enquadramento mudou como as pessoas interagiam com o conteúdo.</p>
         </div>
       </div>
       <div class="apr-item">
         <span class="apr-n">02</span>
         <div>
           <h3 class="apr-stmt">Documentar para escalar</h3>
-          <p class="apr-txt">Trabalhar com times distribuídos entre São Paulo e Nova York me forçou a documentar decisões visuais com rigor. Cada escolha de material, cor e tipografia precisava ser justificável e replicável por pessoas que não estavam na mesma sala.</p>
+          <p class="apr-txt" style="font-size: 16px">Trabalhar com times distribuídos entre São Paulo e 
+Nova York me forçou a documentar decisões visuais 
+com rigor. Cada escolha de material, cor e tipografia 
+precisava ser justificável e replicável por pessoas 
+que não estavam na mesma sala.</p>
         </div>
       </div>
       <div class="apr-item">
         <span class="apr-n">03</span>
         <div>
           <h3 class="apr-stmt">Design system além da tela</h3>
-          <p class="apr-txt">Um sistema visual que funciona no digital e no físico exige pensar em camadas: o que é estrutural (cor, tipo, grid), o que é contextual (materialidade, escala) e o que é efêmero (conteúdo rotativo). Essa separação guiou todas as decisões.</p>
+          <p class="apr-txt" style="font-size: 16px">Um sistema visual que funciona no digital e no físico 
+exige pensar em camadas: o que é estrutural (cor, tipo, grid), 
+o que é contextual (materialidade, escala) e o que é efêmero (conteúdo rotativo). Essa separação guiou todas as decisões.</p>
         </div>
       </div>
     </div>
@@ -505,17 +596,17 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
     <h2 class="s-title">Outros projetos</h2>
     <div class="more-grid">
       <a href="case-mrv.html" class="more-card rv">
-        <div class="more-card-img"><img src="img/mrv/mockup-pair.png" alt="MRV Ecossistema Financeiro" loading="lazy"></div>
+        <div class="more-card-img"><img src="img/mrv/thumb-mrv.png" alt="MRV Ecossistema Financeiro" loading="eager" decoding="sync"></div>
         <span class="more-tag">#ProductDesign #DesignSystem</span>
         <div class="more-name">MRV Ecossistema Financeiro</div>
       </a>
       <a href="case-delta.html" class="more-card rv d1">
-        <div class="more-card-img"><img src="img/delta/hero-mockup.webp" alt="Delta Design System" loading="lazy"></div>
+        <div class="more-card-img"><img src="img/delta/thumbdelta.png" alt="Delta Design System" loading="eager" decoding="sync"></div>
         <span class="more-tag">#DesignSystem</span>
         <div class="more-name">Delta Design System</div>
       </a>
       <a href="case-chorume.html" class="more-card rv d2">
-        <div class="more-card-img"><img src="img/chorume/garrafa-pantano-hero.jpg" alt="Chorume Tipografia" loading="lazy"></div>
+        <div class="more-card-img"><img src="img/chorume/chorumeHero.png" alt="Chorume Tipografia" loading="eager" decoding="sync"></div>
         <span class="more-tag">#Tipografia #IdentidadeVisual</span>
         <div class="more-name">Chorume Tipografia</div>
       </a>
@@ -552,8 +643,26 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 </div></footer>
 
 <script>
-document.getElementById('navToggle').addEventListener('click',function(){document.getElementById('navFloat').classList.toggle('open')});
-document.querySelectorAll('.nav-menu a').forEach(function(a){a.addEventListener('click',function(){document.getElementById('navFloat').classList.remove('open')})});
+/* Lightbox para imagens maximizáveis (containers com [data-maximizable]) */
+(function(){
+  var overlay,closeBtn,imgEl;
+  function build(){
+    overlay=document.createElement('div');overlay.className='lb-overlay';
+    imgEl=document.createElement('img');imgEl.className='lb-img';
+    closeBtn=document.createElement('button');closeBtn.className='lb-close';closeBtn.setAttribute('aria-label','Fechar');closeBtn.innerHTML='&times;';
+    overlay.appendChild(imgEl);overlay.appendChild(closeBtn);
+    document.body.appendChild(overlay);
+    overlay.addEventListener('click',function(e){if(e.target!==imgEl)close()});
+    closeBtn.addEventListener('click',close);
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+  }
+  function open(src,alt){if(!overlay)build();imgEl.src=src;imgEl.alt=alt||'';overlay.classList.add('open');document.body.style.overflow='hidden'}
+  function close(){if(!overlay)return;overlay.classList.remove('open');document.body.style.overflow=''}
+  document.addEventListener('click',function(e){
+    var img=e.target.closest('[data-maximizable] img');
+    if(img){e.preventDefault();open(img.currentSrc||img.src,img.alt)}
+  });
+})();
 /* Reveal */
 (function(){try{
   var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}})},{threshold:0.1});
@@ -562,3 +671,6 @@ document.querySelectorAll('.nav-menu a').forEach(function(a){a.addEventListener(
 </script>
 </body>
 </html>
+<style id="__om-edit-overrides">
+#estrategia .s-body >div:nth-child(1) { font-size: 6px !important }
+</style>

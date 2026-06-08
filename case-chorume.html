@@ -67,8 +67,8 @@ p{text-wrap:balance}
 .nav-menu .nav-link:hover{background:var(--black);color:#fff}
 
 /* ═══ HERO (dark) ═══ */
-.hero{position:relative;overflow:hidden;background:#111;padding-top:clamp(120px,14vh,168px);padding-bottom:0}
-.hero-inner{position:relative}
+.hero{position:relative;overflow:hidden;background:#111;padding-top:clamp(60px,7vh,84px);padding-bottom:0}
+.hero-inner{position:relative;z-index:2;padding-top:24px}
 .hero-top{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:clamp(16px,2vw,22px)}
 .hero-brand{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)}
 .hero .hero-title{font-size:clamp(38px,4.4vw,62px);font-weight:700;letter-spacing:-.04em;line-height:.94;text-transform:uppercase;color:#fff}
@@ -82,12 +82,13 @@ p{text-wrap:balance}
 .hero-result span{display:block;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:9px}
 .hero-result b{display:block;font-size:15px;font-weight:700;letter-spacing:-.01em;color:#fff}
 .hero-tag{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.4);white-space:nowrap;padding-bottom:3px}
-.hero-meta{margin-top:clamp(44px,6vh,72px);border-top:1px solid rgba(255,255,255,.14);padding:32px 0 clamp(44px,6vh,72px);display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
-.hm-item{border-right:1px solid rgba(255,255,255,.14);padding:0 clamp(20px,2.4vw,40px)}
+/* hero-meta · padrão Delta (inline tight, em modo dark) */
+.hero-meta{position:relative;z-index:2;margin-top:clamp(44px,6vh,72px);border-top:1px solid rgba(255,255,255,.14);padding:20px 0 20px;display:flex;align-items:center;flex-wrap:wrap}
+.hm-item{display:flex;align-items:baseline;gap:8px;padding:0 20px;border-right:1px solid rgba(255,255,255,.14);min-width:0}
 .hm-item:first-child{padding-left:0}
 .hm-item:last-child{border-right:none;padding-right:0}
-.hm-label{display:block;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:8px}
-.hm-value{font-size:16px;font-weight:600;line-height:1.35;color:#fff}
+.hm-label{display:block;font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4);white-space:nowrap;margin-bottom:0}
+.hm-value{font-size:13px;font-weight:500;line-height:1;color:rgba(255,255,255,.85);white-space:nowrap}
 @keyframes heroUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 .hero-top,.hero .hero-title>span,.hero-foot{animation:heroUp .85s cubic-bezier(.2,.7,.3,1) backwards}
 .hero-top{animation-delay:.05s}
@@ -95,7 +96,7 @@ p{text-wrap:balance}
 .hero . hero-title>span:nth-child(2){animation-delay:.19s}
 .hero-foot{animation-delay:.32s}
 @media(prefers-reduced-motion:reduce){.hero-top,.hero .hero-title>span,.hero-foot{animation:none}}
-@media(max-width:860px){.hero-meta{grid-template-columns:1fr 1fr;gap:0}.hm-item{border-bottom:1px solid var(--line);padding:20px 28px}.hm-item:first-child{padding-left:28px}.hm-item:nth-child(2n){border-right:none}}
+@media(max-width:860px){.hero-meta{gap:0}.hm-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.14);padding:12px 0;width:50%;white-space:normal}.hm-item:nth-child(odd){padding-right:16px}.hm-item:last-child{border-bottom:none}.hm-label,.hm-value{white-space:normal}}
 
 /* ═══ HEADER DE SEÇÃO ═══ */
 .sec-head{max-width:760px;margin-bottom:var(--space-title)}
@@ -197,6 +198,9 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 @media(max-width:640px){
   .img-grid-2,.img-grid-3,.img-grid-4{grid-template-columns:1fr}
 }
+
+/* ═══ REVEAL — desativado, tudo estático ═══ */
+.rv,.rv.visible{opacity:1!important;transform:none!important;transition:none!important;animation:none!important}
 </style>
 <template id="__bundler_thumbnail" data-bg-color="#111111">
   <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
@@ -209,7 +213,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 
 <!-- NAV (componente compartilhado) -->
 <site-nav back="index.html#work"></site-nav>
-<script src="site-nav.js?v=7"></script>
+<script src="site-nav.js?v=9"></script>
 
 <main class="flow">
 
@@ -225,7 +229,6 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
           <p class="hero-intro">Projeto autoral de tipografia vernacular que virou ecossistema gráfico. De um cartaz de rua à criação de uma <strong>cachaça fictícia com identidade visual completa</strong>, envolvendo fonte desenhada à mão, direção de arte, cenografia e fotografia.</p>
           <div class="hero-result"><span>reconhecimento</span><b>Best of Show · Miami Ad School</b></div>
         </div>
-        <span class="hero-tag">Case de Tipografia & Branding · 2015</span>
       </div>
     </div>
     <div class="hero-meta">
@@ -245,7 +248,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
     </div>
     <p class="s-body">Um cartaz colado num muro do bairro da Liberdade, em São Paulo. Pincel grosso, régua nenhuma, zero pretensão estética. Apenas urgência e funcionalidade. Esse traço irregular, essa imperfeição brutal que nasce do improviso, foi a centelha que acendeu todo o projeto.</p>
     <div class="full-img rv d1">
-      <img src="img/chorume/cartaz.webp" alt="Cartaz Proibido Jogar Lixo original do bairro da Liberdade" loading="lazy">
+      <img src="img/chorume/cartaz.webp" alt="Cartaz Proibido Jogar Lixo original do bairro da Liberdade" loading="eager" decoding="sync">
       <p class="img-caption">Cartaz original: pincel, improviso, urgência. Ponto zero do Chorume.</p>
     </div>
   </section>
@@ -261,7 +264,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
     <p class="s-body">A força daquele traço, sua irregularidade brutal e funcional, revelava uma identidade visual espontânea, nascida do improviso. Cada letra carregava ritmo próprio, peso inconsistente, alinhamento impreciso. Não era feio por falta de técnica. Era honesto. Era vivo.</p>
     <p class="s-body">Esse gesto gráfico foi a matéria-prima para o desenvolvimento da tipografia Chorume, que preservaria o ritmo, os erros e a urgência de sua origem. Nada deveria ser "corrigido" para parecer sofisticado. Tudo deveria soar como barro vermelho e chuva.</p>
     <div class="full-img rv d1">
-      <img src="img/chorume/moodboard.webp" alt="Moodboard de pesquisa: decomposição, terra úmida, permanência orgânica" loading="lazy">
+      <img src="img/chorume/moodboard.webp" alt="Moodboard de pesquisa: decomposição, terra úmida, permanência orgânica" loading="eager" decoding="sync">
       <p class="img-caption">Moodboard de pesquisa: atmosfera de decomposição, terra úmida, permanência orgânica. O conceito que sustentou todo o branding.</p>
     </div>
   </section>
@@ -277,11 +280,11 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
     <p class="s-body">A fonte explora irregularidades como ritmo, peso e alinhamento, reforçando o aspecto orgânico e marginal do seu ponto de origem. Cada letra preserva o pulso manual do gesto original, como se tivesse sido desenterrada de um sitio arqueológico.</p>
     <div class="img-grid img-grid-2 rv d1">
       <div>
-        <img src="img/chorume/alfabeto.webp" alt="Alfabeto Chorume completo" loading="lazy">
+        <img src="img/chorume/alfabeto.webp" alt="Alfabeto Chorume completo" loading="eager" decoding="sync">
         <p class="img-caption">Alfabeto Chorume: 26 letras com imperfeições preservadas.</p>
       </div>
       <div>
-        <img src="img/chorume/alfabeto-cenografia.webp" alt="Alfabeto Chorume em cenografia" loading="lazy">
+        <img src="img/chorume/alfabeto-cenografia.webp" alt="Alfabeto Chorume em cenografia" loading="eager" decoding="sync">
         <p class="img-caption">Ambiente imersivo: fonte em contexto pós-apocalíptico.</p>
       </div>
     </div>
@@ -297,7 +300,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
     </div>
     <p class="s-body">Imaginei uma garrafa escura, com rótulo que misturasse xilogravura e tipografia autoral, símbolos de morte e regeneração, sertão e pântano. A composição equilibra o grotesco e o lúdico, o artesanal e o especulativo. A parte inferior do rótulo, com padrões de insetos e vegetação, remete à fermentação, à decomposição, aos processos vivos que transformam matéria morta em algo novo.</p>
     <div class="full-img rv d1">
-      <img src="img/chorume/garrafa-pantano-hero.jpg" alt="Garrafa Chorume na cenografia do pântano" loading="lazy">
+      <img src="img/chorume/garrafa-pantano-hero.jpg" alt="Garrafa Chorume na cenografia do pântano" loading="eager" decoding="sync">
       <p class="img-caption">Garrafa Chorume: identidade visual completa de uma bebida fictícia que existe apenas em imaginação e fotografia.</p>
     </div>
   </section>
@@ -313,11 +316,11 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
     <p class="s-body">Aquário de vidro, terra úmida, musgo vivo, ossos reais (emprestados por um estudante de veterinária). A composição foi pensada como um relicário fúnebre da garrafa, como se tivesse sido desenterrada de um sítio arqueológico pós-apocalíptico. A iluminação reforça a sensação de profundidade e abandono.</p>
     <div class="img-grid img-grid-2 rv d1">
       <div>
-        <img src="img/chorume/garrafa-cenografia.png" alt="Detalhe da garrafa em cenografia" loading="lazy">
+        <img src="img/chorume/garrafa-cenografia.png" alt="Detalhe da garrafa em cenografia" loading="eager" decoding="sync">
         <p class="img-caption">Detalhe: garrafasob luz, rótulo em evidência, contexto sombrio.</p>
       </div>
       <div>
-        <img src="img/chorume/making-of-pantano.jpg" alt="Making-of do pântano cenográfico" loading="lazy">
+        <img src="img/chorume/making-of-pantano.jpg" alt="Making-of do pântano cenográfico" loading="eager" decoding="sync">
         <p class="img-caption">Making-of: construção do pântano em estúdio, processo físico e sensorial.</p>
       </div>
     </div>
@@ -334,11 +337,11 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
     <p class="s-body">A wordmark Chorume ganha vida em loop contínuo, e um pequeno mascote (a criatura do pântano) emerge da escuridão. A animação reforça o caráter vivo e orgânico da marca, transformando pixels em ritmo biológico.</p>
     <div class="img-grid img-grid-2 rv d1">
       <div>
-        <img src="img/chorume/wordmark-anim.gif" alt="Wordmark Chorume animada" loading="lazy">
+        <img src="img/chorume/wordmark-anim.gif" alt="Wordmark Chorume animada" loading="eager" decoding="sync">
         <p class="img-caption">Wordmark animada: tipografia ganha movimento fluido.</p>
       </div>
       <div>
-        <img src="img/chorume/mascote-anim.gif" alt="Mascote animado emergindo do pântano" loading="lazy">
+        <img src="img/chorume/mascote-anim.gif" alt="Mascote animado emergindo do pântano" loading="eager" decoding="sync">
         <p class="img-caption">Mascote: criatura do pântano em loop perpétuo.</p>
       </div>
     </div>
@@ -385,7 +388,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
     </div>
     <p class="s-body">O projeto foi reconhecido com o prêmio máximo da Miami Ad School, eleito entre todos os trabalhos da turma. Dez anos depois, o troféu ainda está na minha estante. Serve como lembrete de onde minha linguagem visual começou: olhando para coisas que ninguém olha, respeitando o improviso, acreditando no gesto.</p>
     <div class="full-img rv d1">
-      <img src="img/chorume/premio-fudge.webp" alt="Troféu The Fudge, Best of Show Miami Ad School" loading="lazy">
+      <img src="img/chorume/premio-fudge.webp" alt="Troféu The Fudge, Best of Show Miami Ad School" loading="eager" decoding="sync">
       <p class="img-caption">The Fudge: prêmio de melhor trabalho da turma, 2015.</p>
     </div>
   </section>
@@ -397,17 +400,17 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
     <h2 class="s-title">Outros projetos</h2>
     <div class="more-grid">
       <a href="case-mrv.html" class="more-card rv">
-        <div class="more-card-img"><img src="img/mrv/mockup-pair.png" alt="MRV Ecossistema Financeiro" loading="lazy"></div>
+        <div class="more-card-img"><img src="img/mrv/thumb-mrv.png" alt="MRV Ecossistema Financeiro" loading="eager" decoding="sync"></div>
         <span class="more-tag">#ProductDesign #Fintech</span>
         <div class="more-name">MRV Ecossistema Financeiro</div>
       </a>
       <a href="case-delta.html" class="more-card rv d1">
-        <div class="more-card-img"><img src="img/delta/hero-mockup.webp" alt="Delta Design System" loading="lazy"></div>
+        <div class="more-card-img"><img src="img/delta/thumbdelta.png" alt="Delta Design System" loading="eager" decoding="sync"></div>
         <span class="more-tag">#DesignSystem</span>
         <div class="more-name">Delta Design System</div>
       </a>
       <a href="case-ford.html" class="more-card rv d2">
-        <div class="more-card-img"><img src="img/ford/room-entry.webp" alt="Ford Immersion Room" loading="lazy"></div>
+        <div class="more-card-img"><img src="img/ford/ford-hero-room.png" alt="Ford Immersion Room" loading="eager" decoding="sync"></div>
         <span class="more-tag">#IdentidadeVisual #DesignEspacial</span>
         <div class="more-name">Ford Immersion Room</div>
       </a>
