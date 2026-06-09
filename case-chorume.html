@@ -11,27 +11,30 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --black:#111111;--white:#fff;
+  --black:#000000;--white:#fff;
+  --nav-name-color:#fff;
   --gray-1:#37342F;--gray-2:#585550;--gray-3:#756F67;--gray-4:#B8B2A8;--gray-5:#EBE7E1;
   --line:#E3E0DA;--chip:#F2F1EE;
   --accent:#e0ff33;--accent-press:#d2f51c;--bone:#f4f3ef;
+  --orange:#e8773a;
   --font:'Plus Jakarta Sans',sans-serif;--font-display:'Plus Jakarta Sans',sans-serif;
   --m:clamp(24px,5vw,64px);--gut:24px;--max-w:1440px;
-  --space-md:24px;--space-lg:36px;--space-title:72px;--space-section:112px;
+  --space-md:24px;--space-lg:36px;--space-title:44px;--space-section:112px;
   --ty-display:clamp(54px,5.6vw,74px);--ty-title:clamp(32px,3.4vw,48px);--ty-lead:clamp(16px,1.4vw,19px);
   --ty-copy:17px;--ty-small:14px;--ty-metric:32px;--ty-label:12px;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:var(--font);color:#fff;background:#111;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{font-family:var(--font);color:#fff;background:#000;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 ::selection{background:var(--accent);color:var(--black)}
 p{text-wrap:balance}
 
 .flow{max-width:calc(var(--max-w) + 2*var(--m));margin:0 auto}
-.sec{padding:clamp(48px,5.5vw,80px) var(--m);background:#111}
+.sec{padding:clamp(32px,3.5vw,48px) var(--m);background:#000}
 .sec+.sec{border-top:1px solid rgba(255,255,255,.14)}
+.sec+.intro-bg,.intro-bg+.sec{border-top:none}
 
 /* ───────── ESTILOS DE TEXTO ───────── */
 .s-index{display:flex;align-items:baseline;gap:14px;margin-bottom:var(--space-md)}
@@ -67,30 +70,42 @@ p{text-wrap:balance}
 .nav-menu .nav-link:hover{background:var(--black);color:#fff}
 
 /* ═══ HERO (dark) ═══ */
-.hero{position:relative;overflow:hidden;background:#111;padding-top:clamp(60px,7vh,84px);padding-bottom:0}
-.hero-inner{position:relative;z-index:2;padding-top:24px}
-.hero-top{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:clamp(16px,2vw,22px)}
+.hero{position:relative;overflow:hidden;background:#000;padding-top:clamp(60px,7vh,84px);padding-bottom:0}
+#reconhecimento.sec.dark{background:#000}
+.hero-inner-stack{position:relative;z-index:2;display:flex;flex-direction:column;max-width:980px;padding-top:clamp(24px,3vw,48px)}
+.hero-inner-stack .hero-title{margin-bottom:clamp(24px,2.6vw,32px)}
+.hero-inner-stack .hero-intro{margin-bottom:clamp(24px,2.6vw,32px)}
+.hero-header{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);column-gap:clamp(24px,3vw,48px);align-items:start}
+.hero-header .hero-inner-stack{max-width:none}
+.hero-header-r{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:clamp(20px,2.2vw,32px);padding-top:clamp(20px,2.5vw,36px)}
+.hero-header-r img{width:100%;height:auto;display:block;object-fit:cover;align-self:stretch}
+.hero-header-r .hero-result{text-align:left;align-self:stretch}
+.hero-header-r .hero-result b{font-size:var(--ty-small);font-weight:500;line-height:1.6;color:rgba(255,255,255,.7);letter-spacing:0}
+@media(max-width:860px){.hero-header{grid-template-columns:1fr;gap:32px}.hero-header-r img{max-height:220px}}
+.hero-showcase{margin-top:clamp(16px,2vw,28px);margin-left:calc(-1 * var(--m));margin-right:calc(-1 * var(--m));width:auto;overflow:hidden;background:#000}
+.hero-showcase img{width:100%;height:auto;display:block}
+.hero-top{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
 .hero-brand{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)}
 .hero .hero-title{font-size:clamp(38px,4.4vw,62px);font-weight:700;letter-spacing:-.04em;line-height:.94;text-transform:uppercase;color:#fff}
 .hero .hero-title>span{display:block;width:fit-content}
 .hero-hl{display:inline-block;background:linear-gradient(transparent 12%, #fff 12%, #fff 88%, transparent 88%)}
 .hero-foot{display:flex;flex-direction:row;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap;margin-top:clamp(32px,4vw,52px)}
 .hero-foot-main{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(20px,2.4vw,30px)}
-.hero-intro{max-width:42ch;font-size:var(--ty-lead);font-weight:500;line-height:1.4;color:rgba(255,255,255,.7);text-wrap:balance}
+.hero-intro{max-width:42ch;font-size:var(--ty-small);font-weight:500;line-height:1.6;color:rgba(255,255,255,.7);text-wrap:balance}
 .hero-intro strong{font-weight:700;color:#fff}
 .hero-result{text-align:left}
 .hero-result span{display:block;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:9px}
-.hero-result b{display:block;font-size:15px;font-weight:700;letter-spacing:-.01em;color:#fff}
+.hero-result b{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;color:#fff}
 .hero-tag{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.4);white-space:nowrap;padding-bottom:3px}
 /* hero-meta · padrão Delta (inline tight, em modo dark) */
-.hero-meta{position:relative;z-index:2;margin-top:clamp(44px,6vh,72px);border-top:1px solid rgba(255,255,255,.14);padding:20px 0 20px;display:flex;align-items:center;flex-wrap:wrap}
+.hero-meta{position:relative;z-index:2;margin-top:clamp(44px,6vh,72px);border-top:1px solid rgba(255,255,255,.14);border-bottom:1px solid rgba(255,255,255,.14);padding:20px 0 20px;display:flex;align-items:center;flex-wrap:wrap}
 .hm-item{display:flex;align-items:baseline;gap:8px;padding:0 20px;border-right:1px solid rgba(255,255,255,.14);min-width:0}
 .hm-item:first-child{padding-left:0}
 .hm-item:last-child{border-right:none;padding-right:0}
 .hm-label{display:block;font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4);white-space:nowrap;margin-bottom:0}
 .hm-value{font-size:13px;font-weight:500;line-height:1;color:rgba(255,255,255,.85);white-space:nowrap}
 @keyframes heroUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
-.hero-top,.hero .hero-title>span,.hero-foot{animation:heroUp .85s cubic-bezier(.2,.7,.3,1) backwards}
+.hero-top,.hero .hero-title>span,.hero-foot{animation:none}
 .hero-top{animation-delay:.05s}
 .hero .hero-title>span:nth-child(1){animation-delay:.12s}
 .hero . hero-title>span:nth-child(2){animation-delay:.19s}
@@ -131,10 +146,64 @@ p{text-wrap:balance}
 .animated-img{width:100%;border-radius:8px;overflow:hidden}
 
 /* ═══ APRENDIZADOS (dark já padrão) ═══ */
-.sec--dark{background:#111;color:#fff;border-top:1px solid rgba(255,255,255,.14)}
+.sec--dark{background:#000;color:#fff;border-top:1px solid rgba(255,255,255,.14)}
 .sec--dark .s-index b{color:var(--accent)}
 .sec--dark .s-index em{background:rgba(255,255,255,.28)}
 .sec--dark .s-title{color:#fff}
+
+/* ═══ INTRO-BG (cartaz como fundo, conteúdo na coluna esquerda) ═══ */
+.intro-bg{position:relative;background:#000 center/cover no-repeat;padding:0;aspect-ratio:1536/1024;color:#fff}
+.intro-bg-inner{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,38%) 1fr;grid-template-rows:auto 1fr;column-gap:0;padding:clamp(40px,5vw,72px) clamp(40px,5vw,72px)}
+.intro-bg-eyebrow{grid-column:1;grid-row:1;display:flex;align-items:center;gap:14px;font-size:14px;font-weight:600;letter-spacing:.06em;color:#fff;text-transform:none;align-self:start}
+.intro-bg-eyebrow span{font-variant-numeric:tabular-nums}
+.intro-bg-eyebrow em{flex:0 0 56px;height:1.5px;background:rgba(255,255,255,.5)}
+.intro-bg-title{grid-column:1;grid-row:2;align-self:start;margin-top:clamp(40px,5vw,72px);font-size:var(--ty-title);font-weight:600;line-height:1.08;letter-spacing:-.015em;text-transform:uppercase;color:#fff;text-wrap:balance}
+.intro-bg-body{grid-column:1;grid-row:2;align-self:end;font-size:clamp(13px,.95vw,15px);line-height:1.6;color:rgba(255,255,255,.78);max-width:42ch;text-wrap:pretty;margin:0;display:none}
+.intro-bg-body:nth-of-type(1){display:block}
+.intro-bg-body strong{color:#fff;font-weight:600}
+
+/* Versão expandida: empilha título + 3 parágrafos no left col */
+.intro-bg-inner-stack{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,46%) 1fr;padding:clamp(40px,5vw,72px) clamp(40px,5vw,72px)}
+.intro-bg-content{grid-column:1;display:flex;flex-direction:column;justify-content:flex-start;height:100%;gap:clamp(22px,2.6vw,36px);max-width:480px}
+.intro-bg-content .intro-bg-eyebrow{align-self:flex-start;margin:0}
+.intro-bg-content .intro-bg-title{margin:0}
+.intro-bg-content .intro-bg-body-group{display:block;max-width:400px}
+.intro-bg-content .intro-bg-body{display:block;margin:0 0 14px;max-width:400px;white-space:pre-line}
+.intro-bg-content .intro-bg-body:last-child{margin-bottom:0}
+#vernacular .intro-bg-content{padding-top:2%}
+#cartaz .intro-bg-content{padding-top:13%}
+
+/* ═══ SECTION 03 · TIPOGRAFIA (alfabeto full-width + 4 recorrências) ═══ */
+#fonte{padding:0;background:#000}
+#fonte .fnt-hero{width:100%;background:#000;display:block;line-height:0;overflow:hidden}
+#fonte .fnt-hero img{width:100%;height:auto;display:block;margin-top:-6%}
+#fonte .fnt-body{padding:clamp(28px,3vw,44px) var(--m) clamp(48px,5.5vw,76px)}
+#fonte .fnt-head{margin-bottom:0;display:grid;grid-template-columns:minmax(280px,auto) 1fr;column-gap:clamp(40px,5vw,80px);align-items:start;justify-content:space-between}
+#fonte .fnt-head-l{min-width:280px}
+#fonte .fnt-head-l .s-index{margin-bottom:24px}
+#fonte .fnt-head-l h2{font-size:clamp(28px,3vw,42px);font-weight:600;line-height:1.05;letter-spacing:-.015em;text-transform:uppercase;color:#fff}
+#fonte .fnt-head-sub{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-top:clamp(20px,2.2vw,30px)}
+#fonte .fnt-head-r{font-size:15px;line-height:1.65;color:rgba(255,255,255,.7);text-wrap:pretty;max-width:46ch;margin-top:-5px;justify-self:end}
+#fonte .fnt-head-r strong{color:#fff;font-weight:600}
+#fonte .fnt-head-r p+p{margin-top:14px}
+#fonte .fnt-process-eyebrow{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:28px}
+#fonte .fnt-process{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid rgba(255,255,255,.18)}
+#fonte .fnt-step{padding:32px 32px 0 0;border-right:1px solid rgba(255,255,255,.14);display:flex;flex-direction:column;gap:14px}
+#fonte .fnt-step:last-child{border-right:none;padding-right:0}
+#fonte .fnt-step:not(:first-child){padding-left:32px}
+#fonte .fnt-step-n{font-size:11px;font-weight:600;letter-spacing:.16em;color:var(--orange)}
+#fonte .fnt-step-title{font-size:16px;font-weight:600;line-height:1.18;color:#fff;letter-spacing:.04em;text-transform:uppercase}
+@media(max-width:860px){
+  #fonte .fnt-head{grid-template-columns:1fr}
+  #fonte .fnt-head-r{justify-self:start;margin-top:24px}
+  #fonte .fnt-process{grid-template-columns:1fr 1fr}
+  #fonte .fnt-step{border-right:none;padding-left:0!important;padding-right:0;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.14)}
+}
+
+@media(max-width:860px){
+  .intro-bg{aspect-ratio:auto;background-position:right top;background-size:cover;min-height:auto}
+  .intro-bg-inner-stack{position:relative;inset:auto;grid-template-columns:1fr;padding:clamp(32px,6vw,56px);background:linear-gradient(180deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.7) 60%,rgba(0,0,0,.85) 100%)}
+}
 .apr-lead{font-size:var(--ty-lead);font-weight:500;line-height:1.4;color:rgba(255,255,255,.55);max-width:46ch;text-wrap:balance;margin-bottom:clamp(48px,6vw,72px)}
 .apr-list{display:flex;flex-direction:column;border-top:1px solid rgba(255,255,255,.14)}
 .apr-item{display:grid;grid-template-columns:120px 1fr;gap:clamp(24px,4vw,56px);padding:clamp(32px,4vw,48px) 0;border-bottom:1px solid rgba(255,255,255,.14);align-items:start}
@@ -154,19 +223,27 @@ p{text-wrap:balance}
 
 /* ═══ CTA + FOOTER ═══ */
 .container{max-width:calc(var(--max-w) + 2*var(--m));margin:0 auto;padding:0 var(--m)}
-.cta{background:var(--accent);padding:clamp(56px,6vw,84px) 0}
-.cta-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(32px,5vw,56px);align-items:end}
-.cta-eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(17,17,17,.55);margin-bottom:22px}
-.cta-title{font-size:clamp(48px,7vw,72px);font-weight:700;letter-spacing:-.04em;line-height:.88;text-transform:uppercase;color:var(--black)}
-.cta-sub{margin-top:22px;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(17,17,17,.6)}
-.cta-menu{border-top:1px solid rgba(17,17,17,.2)}
-.cta-row{display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:baseline;padding:clamp(16px,2vw,20px) 8px;border-bottom:1px solid rgba(17,17,17,.2);color:var(--black);transition:padding-left .25s ease}
-.cta-row:hover{padding-left:18px}
-.cta-row .cl{font-size:clamp(26px,3vw,34px);font-weight:600;letter-spacing:-.02em;text-transform:uppercase}
-.cta-row .cv{font-size:15px;font-weight:500;color:rgba(17,17,17,.6)}
-.cta-row .car{font-size:22px;transition:transform .25s ease}
+.cta{background:#fff;padding:clamp(8px,1.5vw,20px) 0 clamp(48px,6vw,88px)}
+.cta-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:stretch}
+.cta-card{background:var(--accent);padding:clamp(36px,4.5vw,56px);border-radius:4px;display:flex;flex-direction:column;min-height:clamp(420px,52vw,560px)}
+.cta-card .s-index{margin-bottom:clamp(48px,8vw,96px)}
+.cta-card .s-index b{color:var(--black)}
+.cta-card .s-index em{background:rgba(17,17,17,.18)}
+.cta-title{font-size:clamp(40px,5vw,64px);font-weight:700;letter-spacing:-.04em;line-height:.92;text-transform:uppercase;color:var(--black);overflow-wrap:break-word}
+.cta-sub{margin-top:clamp(28px,3vw,40px);font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(17,17,17,.65);line-height:1.5;max-width:22ch}
+.cta-menu{display:flex;flex-direction:column}
+.cta-row{display:grid;grid-template-columns:48px 1fr auto;gap:20px;align-items:center;padding:clamp(18px,2vw,24px) 0;border-bottom:1px solid rgba(17,17,17,.1);color:var(--black);text-decoration:none;transition:padding .25s ease}
+.cta-row:first-child{border-top:0}
+.cta-row:last-child{border-bottom:0}
+.cta-row:hover{padding-left:6px}
+.cta-ico{width:48px;height:48px;display:flex;align-items:center;justify-content:center;flex:0 0 48px}
+.cta-ico svg{width:28px;height:28px;stroke:var(--black);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.cta-body{display:flex;flex-direction:column;gap:4px;min-width:0}
+.cta-row .cl{font-size:15px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--black)}
+.cta-row .cv{font-size:14px;font-weight:400;color:rgba(17,17,17,.55);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cta-row .car{font-size:20px;color:var(--black);transition:transform .25s ease;line-height:1}
 .cta-row:hover .car{transform:translate(4px,-4px)}
-@media(max-width:760px){.cta-grid{grid-template-columns:1fr}}
+@media(max-width:760px){.cta-grid{grid-template-columns:1fr}.cta-card{min-height:auto}}
 footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top:1px solid rgba(255,255,255,.08)}
 .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px}
 .footer-logo{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:20px}
@@ -181,8 +258,49 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:32px;border-top:1px solid rgba(255,255,255,.08)}
 .footer-copy{font-size:12px;color:rgba(255,255,255,.25)}
 
-/* ═══ REVEAL ═══ */
-.rv{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+/* ═══ 04 · BASTIDORES ═══ */
+#bastidores .sec-head{margin-bottom:clamp(40px,4.5vw,64px)}
+#bastidores{padding-left:0;padding-right:0}
+#bastidores .sec-head,#bastidores .bst-cap,#bastidores .bst-grid{padding-left:var(--m);padding-right:var(--m)}
+.bst-photo{width:100%;overflow:hidden}
+.bst-photo img{width:100%;height:auto;display:block}
+.bst-cap{font-size:var(--ty-label);font-weight:400;line-height:1.5;letter-spacing:.03em;color:rgba(255,255,255,.5);margin-top:14px}
+.bst-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(40px,5vw,72px);align-items:start;margin-top:clamp(56px,6vw,80px);max-width:1320px;margin-left:auto;margin-right:auto}
+.bst-pull{font-family:var(--font);font-style:normal;font-weight:400;font-size:clamp(26px,2.9vw,40px);line-height:1.16;letter-spacing:-.016em;color:#fff;text-wrap:balance;padding-left:24px;border-left:2px solid var(--orange);margin:0}
+.bst-pull em{display:block;margin-top:18px;font-family:var(--font);font-style:normal;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.bst-body{display:flex;flex-direction:column;gap:clamp(18px,1.8vw,24px)}
+.bst-body p{font-size:var(--ty-copy);line-height:1.65;color:rgba(255,255,255,.72);text-wrap:pretty;margin:0}
+.bst-body p strong{color:#fff;font-weight:600}
+@media(max-width:860px){
+  .bst-grid{grid-template-columns:1fr;gap:32px}
+}
+#reconhecimento .sec-head{margin-bottom:clamp(24px,2.6vw,32px)}
+.enc-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:clamp(40px,5vw,80px);margin-bottom:clamp(28px,3vw,44px);max-width:none}
+.enc-body{font-size:var(--ty-small);font-weight:500;line-height:1.65;color:rgba(255,255,255,.72);text-wrap:pretty;margin:0}
+.enc-body strong{color:#fff;font-weight:600}
+.enc-body+.enc-body{margin-top:clamp(20px,2vw,28px)}
+.enc-coda{grid-column:2;font-style:italic;color:rgba(255,255,255,.85);max-width:32ch}
+.enc-coda:first-of-type{align-self:end}
+.enc-grid > .enc-body:not(.enc-coda){grid-column:1;grid-row:1/span 3}
+.enc-img{margin-left:calc(-1*var(--m));margin-right:calc(-1*var(--m));width:auto;overflow:hidden;border-radius:0}
+.enc-img img{width:100%;height:auto;display:block}
+@media(max-width:860px){
+  .enc-grid{grid-template-columns:1fr}
+  .enc-coda,.enc-grid > .enc-body:not(.enc-coda){grid-column:1;grid-row:auto}
+}
+
+/* ═══ 05 · UNIVERSO DA MARCA ═══ */
+#universo .sec-head{margin-bottom:clamp(28px,3vw,40px)}
+#aprendizados .sec-head{margin-bottom:clamp(24px,2.6vw,36px)}
+.uni-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,4vw,64px);max-width:1100px;margin-bottom:clamp(48px,5vw,72px)}
+.uni-body p{font-size:var(--ty-small);font-weight:500;line-height:1.65;color:rgba(255,255,255,.6);text-wrap:pretty;margin:0}
+.uni-body p strong{color:#fff;font-weight:600}
+.uni-img{margin-left:calc(-1*var(--m));margin-right:calc(-1*var(--m));width:auto;overflow:hidden;border-radius:0}
+.uni-img img{width:100%;height:auto;display:block}
+@media(max-width:768px){.uni-body{grid-template-columns:1fr;gap:18px}}
+
+/* ═══ REVEAL (desativado — tudo fixo, sem animação de entrada) ═══ */
+.rv{opacity:1;transform:none;transition:none}
 .rv.visible{opacity:1;transform:none}
 .d1{transition-delay:.12s}.d2{transition-delay:.22s}.d3{transition-delay:.34s}.d4{transition-delay:.46s}
 
@@ -213,22 +331,24 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 
 <!-- NAV (componente compartilhado) -->
 <site-nav back="index.html#work"></site-nav>
-<script src="site-nav.js?v=9"></script>
+<script src="site-nav.js?v=12"></script>
+<link rel="stylesheet" href="case-patterns.css?v=12">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lacquer&display=swap" rel="stylesheet">
 
 <main class="flow">
 
   <!-- ═══ HERO ═══ -->
   <section class="sec hero" id="top">
-    <div class="hero-inner">
-      <div class="hero-top">
-        <span class="hero-brand">Projeto Autoral</span>
+    <div class="hero-header">
+      <div class="hero-inner-stack">
+      <h1 class="hero-title"><span>Chorume</span><span>Tipografia</span></h1>
+      <p class="hero-intro">Projeto autoral de <strong>tipografia vernacular</strong> que  virou 
+ecossistema gráfico. De um cartaz de rua à criação de uma cachaça fictícia com identidade visual completa, envolvendo <strong>fonte desenhada à mão</strong>, <strong>direção de arte</strong>, <strong>cenografia</strong> e <strong>fotografia</strong>.</p>
+      <div class="hero-result"><span>reconhecimento</span><b>Best of Show · Miami Ad School</b></div>
       </div>
-      <h1 class="hero-title"><span><span class="hero-hl">Chorume</span></span><span>Tipografia</span></h1>
-      <div class="hero-foot">
-        <div class="hero-foot-main">
-          <p class="hero-intro">Projeto autoral de tipografia vernacular que virou ecossistema gráfico. De um cartaz de rua à criação de uma <strong>cachaça fictícia com identidade visual completa</strong>, envolvendo fonte desenhada à mão, direção de arte, cenografia e fotografia.</p>
-          <div class="hero-result"><span>reconhecimento</span><b>Best of Show · Miami Ad School</b></div>
-        </div>
+      <div class="hero-header-r">
+        <img src="img/chorume/fudge-hero.webp" alt="Troféu The Fudge — Best of Show, Miami Ad School / ESPM" loading="eager" decoding="sync">
       </div>
     </div>
     <div class="hero-meta">
@@ -237,77 +357,131 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
       <div class="hm-item"><span class="hm-label">Período</span><div class="hm-value">2015</div></div>
       <div class="hm-item"><span class="hm-label">Prêmio</span><div class="hm-value">Best of Show</div></div>
     </div>
-  </section>
-
-
-  <!-- ═══ 01 · O PONTO DE PARTIDA ═══ -->
-  <section class="sec rv" id="cartaz">
-    <div class="sec-head">
-      <div class="s-index"><b>01</b><em></em></div>
-      <h2 class="s-title">O ponto de partida</h2>
-    </div>
-    <p class="s-body">Um cartaz colado num muro do bairro da Liberdade, em São Paulo. Pincel grosso, régua nenhuma, zero pretensão estética. Apenas urgência e funcionalidade. Esse traço irregular, essa imperfeição brutal que nasce do improviso, foi a centelha que acendeu todo o projeto.</p>
-    <div class="full-img rv d1">
-      <img src="img/chorume/cartaz.webp" alt="Cartaz Proibido Jogar Lixo original do bairro da Liberdade" loading="eager" decoding="sync">
-      <p class="img-caption">Cartaz original: pincel, improviso, urgência. Ponto zero do Chorume.</p>
+    <div class="hero-showcase">
+      <img src="img/chorume/Chorumehero1.webp" alt="Composição editorial Chorume: garrafa de cachaça artesanal fictícia em cenografia ilustrada de pântano sertanejo, com cactos, ossos, lua e fauna" loading="eager" decoding="sync">
     </div>
   </section>
 
 
-  <!-- ═══ 02 · VERNACULAR COMO MATÉRIA-PRIMA ═══ -->
-  <section class="sec rv" id="vernacular">
-    <div class="sec-head">
-      <div class="s-index"><b>02</b><em></em></div>
-      <h2 class="s-title">Vernacular como matéria-prima</h2>
-      <p class="s-lead">O vernacular brasileiro de rua é um tipo de design que ninguém assina. Ele existe porque precisa existir, e é essa urgência que o torna honesto.</p>
-    </div>
-    <p class="s-body">A força daquele traço, sua irregularidade brutal e funcional, revelava uma identidade visual espontânea, nascida do improviso. Cada letra carregava ritmo próprio, peso inconsistente, alinhamento impreciso. Não era feio por falta de técnica. Era honesto. Era vivo.</p>
-    <p class="s-body">Esse gesto gráfico foi a matéria-prima para o desenvolvimento da tipografia Chorume, que preservaria o ritmo, os erros e a urgência de sua origem. Nada deveria ser "corrigido" para parecer sofisticado. Tudo deveria soar como barro vermelho e chuva.</p>
-    <div class="full-img rv d1">
-      <img src="img/chorume/moodboard.webp" alt="Moodboard de pesquisa: decomposição, terra úmida, permanência orgânica" loading="eager" decoding="sync">
-      <p class="img-caption">Moodboard de pesquisa: atmosfera de decomposição, terra úmida, permanência orgânica. O conceito que sustentou todo o branding.</p>
+  <!-- ═══ 01 · CONTEXTO ═══ -->
+  <section class="sec intro-bg rv" id="cartaz" style="background-image:url('img/chorume/intro-bg-cartaz.png')">
+    <div class="intro-bg-inner-stack" style="font-weight: 400">
+      <div class="intro-bg-content">
+        <div class="intro-bg-eyebrow">
+          <span>01 · Contexto</span><em></em>
+        </div>
+        <h2 class="intro-bg-title">Tipografia<br>Vernacular</h2>
+        <div class="intro-bg-body-group" style="align-items: flex-start; text-align: left">
+          <p class="intro-bg-body" style="text-align: left; font-size: 14px; font-weight: 400">Chorume nasceu da observação de algo que 
+normalmente  passa despercebido: <strong>a forma 
+como as pessoas desenham  letras quando 
+não estão tentando fazer design.</strong>  Placas 
+pintadas à mão, avisos improvisados, muros,  
+fachadas e inscrições espalhadas pela cidade  
+revelam soluções gráficas espontâneas.</p>
+          <p class="intro-bg-body" style="font-size: 14px">O que me interessava não era reproduzir essa 
+estética literalmente, mas entender o que 
+tornava essas manifestações  tão autênticas. 
+
+Havia uma força visual difícil de ignorar.</p>
+          <p class="intro-bg-body" style="font-size: 14px">A partir dessa pesquisa, desenvolvi uma marca
+fictícia de bebida artesanal que transformou
+<strong>referências vernaculares</strong> em uma linguagem 
+visual própria, explorando tipografia, direção 
+de arte, fotografia e narrativa de marca.</p>
+        </div>
+      </div>
     </div>
   </section>
 
 
-  <!-- ═══ 03 · A FONTE ═══ -->
+  <!-- ═══ 02 · MOODBOARD ═══ -->
+  <section class="sec intro-bg rv" id="vernacular" style="background-image:url('img/chorume/moodboard-bg.png')">
+    <div class="intro-bg-inner-stack">
+      <div class="intro-bg-content">
+        <div class="intro-bg-eyebrow">
+          <span>02 · Moodboard</span><em></em>
+        </div>
+        <h2 class="intro-bg-title" style="font-size: 32px">DIREÇÃO DE ARTE</h2>
+        <div class="intro-bg-body-group">
+          <p class="intro-bg-body" style="font-size: 6px"><strong style="font-size: 14px">Se a tipografia nasceu da rua,
+a direção de arte nasceu da terra.</strong></p>
+          <p class="intro-bg-body" style="font-size: 14px">A palavra Chorume evocava um imaginário 
+específico: matéria orgânica em decomposição, 
+solo úmido, vegetação tomando conta do 
+que foi abandonado e o tempo agindo 
+lentamente sobre tudo.</p>
+          <p class="intro-bg-body" style="font-size: 14px">As referências reunidas para o projeto exploram 
+exatamente essa tensão. Há algo de sombrio 
+nessas paisagens, mas também algo 
+profundamente vivo. Musgos, raízes, água 
+corrente, troncos em decomposição e 
+vestígios orgânicos compõem um 
+ambiente onde decadência e renovação
+fazem parte do mesmo processo.</p>
+          <p class="intro-bg-body" style="font-size: 14px">Esse repertório visual orientou toda a construção 
+estética do projeto, servindo como base para a 
+cenografia, a fotografia e a atmosfera da marca.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ 03 · TIPOGRAFIA ═══ -->
   <section class="sec rv" id="fonte">
-    <div class="sec-head">
-      <div class="s-index"><b>03</b><em></em></div>
-      <h2 class="s-title">A fonte</h2>
-      <p class="s-lead">A partir das letras do cartaz, desenhei um alfabeto completo mantendo as imperfeições como parte da identidade.</p>
+    <div class="fnt-body">
+      <header class="fnt-head">
+        <div class="fnt-head-l">
+          <div class="s-index"><b>03 · Tipografia</b><em></em></div>
+          <h2>Da observação<br>ao sistema</h2>
+          <p class="fnt-head-sub">Construção da linguagem</p>
+        </div>
+        <div class="fnt-head-r">
+          <p>A partir das recorrências visuais observadas foi desenvolvida uma tipografia proprietária capaz de <strong> preservar o caráter vernacular</strong> observado durante a pesquisa sem abrir mão da consistência necessária para a construção de uma identidade visual completa.</p>
+          <p><strong>A fonte tornou-se o elemento estrutural do projeto</strong>, servindo como base para todas as aplicações posteriores.</p>
+        </div>
+      </header>
     </div>
-    <p class="s-body">A fonte explora irregularidades como ritmo, peso e alinhamento, reforçando o aspecto orgânico e marginal do seu ponto de origem. Cada letra preserva o pulso manual do gesto original, como se tivesse sido desenterrada de um sitio arqueológico.</p>
-    <div class="img-grid img-grid-2 rv d1">
-      <div>
-        <img src="img/chorume/alfabeto.webp" alt="Alfabeto Chorume completo" loading="eager" decoding="sync">
-        <p class="img-caption">Alfabeto Chorume: 26 letras com imperfeições preservadas.</p>
-      </div>
-      <div>
-        <img src="img/chorume/alfabeto-cenografia.webp" alt="Alfabeto Chorume em cenografia" loading="eager" decoding="sync">
-        <p class="img-caption">Ambiente imersivo: fonte em contexto pós-apocalíptico.</p>
-      </div>
+    <div class="fnt-hero">
+      <img src="img/chorume/alfabeto-cenografia2.webp" alt="Alfabeto Chorume dentro da cenografia ilustrada: cactos, nuvens e o quadro tipográfico ABCDE FGHIJL MNOPQ RSTUV XYZK" loading="eager" decoding="sync">
     </div>
   </section>
 
 
-  <!-- ═══ 04 · INVENTAR O CHORUME ═══ -->
-  <section class="sec rv" id="conceito">
+  <!-- ═══ 04 · BASTIDORES ═══ -->
+  <section class="sec dark rv" id="bastidores">
     <div class="sec-head">
-      <div class="s-index"><b>04</b><em></em></div>
-      <h2 class="s-title">Inventar o Chorume</h2>
-      <p class="s-lead">O nome surgiu naturalmente: Chorume. Cachaça artesanal fictícia, água da chuva, decomposição orgânica, fermentação.</p>
+      <div class="s-index"><b>04 · Bastidores</b><em></em></div>
+      <h2 class="s-title">Bastidores do pântano,<br>camada por camada.</h2>
+      <p class="s-lead">Se a tipografia nasceu observando a rua, <strong>o cenário nasceu colocando a mão na terra.</strong></p>
     </div>
-    <p class="s-body">Imaginei uma garrafa escura, com rótulo que misturasse xilogravura e tipografia autoral, símbolos de morte e regeneração, sertão e pântano. A composição equilibra o grotesco e o lúdico, o artesanal e o especulativo. A parte inferior do rótulo, com padrões de insetos e vegetação, remete à fermentação, à decomposição, aos processos vivos que transformam matéria morta em algo novo.</p>
-    <div class="full-img rv d1">
-      <img src="img/chorume/garrafa-pantano-hero.jpg" alt="Garrafa Chorume na cenografia do pântano" loading="eager" decoding="sync">
-      <p class="img-caption">Garrafa Chorume: identidade visual completa de uma bebida fictícia que existe apenas em imaginação e fotografia.</p>
+
+    <div class="bst-photo rv d1">
+      <img src="img/chorume/euproduzindo.png" alt="Tríptico dos bastidores da produção fotográfica do Chorume" loading="eager" decoding="sync">
+    </div>
+    <p class="bst-cap"> Estúdio, 2015. Foto: arquivo pessoal.</p>
+
+    <div class="bst-grid">
+      <blockquote class="bst-pull">
+        <span style="font-size: 22px; line-height: 1.2; font-weight: 500; letter-spacing: 0px">Em vez de descobrir algo enterrado, eu estava construindo aquele ambiente camada por camada.</span>
+        <em>Sobre a montagem</em>
+      </blockquote>
+      <div class="bst-body">
+        <p style="font-size: 14px">O cenário foi montado manualmente em estúdio.   
+Terra, pedras, galhos, musgos e tudo o que pudesse <br> 
+ajudar a construir a atmosfera que eu procurava.</p>
+        <p style="font-size: 14px">Uma das histórias mais improváveis veio dos ossos. 
+O irmão de uma amiga estudava medicina veterinária  e colecionava esqueletos para estudo. Topou emprestar  parte da coleção  foi assim que jacarés, macacos e  outros animais entraram na produção.</p>
+        <p style="font-size: 14px">No final, a fotografia se tornou uma continuação da 
+própria<br>pesquisa. Se a tipografia nasceu observando a rua, o cenário<br>nasceu colocando a mão na terra.</p>
+      </div>
     </div>
   </section>
 
 
   <!-- ═══ 05 · DIREÇÃO DE ARTE ═══ -->
-  <section class="sec rv" id="direcao">
+  <section class="sec rv" id="direcao" hidden>
     <div class="sec-head">
       <div class="s-index"><b>05</b><em></em></div>
       <h2 class="s-title">Direção de arte</h2>
@@ -327,69 +501,36 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
   </section>
 
 
-  <!-- ═══ 06 · ANIMAÇÃO E MOVIMENTO ═══ -->
-  <section class="sec rv" id="movimento">
+  <!-- ═══ 05 · UNIVERSO DA MARCA ═══ -->
+  <section class="sec dark rv" id="universo">
     <div class="sec-head">
-      <div class="s-index"><b>06</b><em></em></div>
-      <h2 class="s-title">Animação e movimento</h2>
-      <p class="s-lead">O projeto também explorou o movimento: tipografia e mascote animados em GIF.</p>
+      <div class="s-index"><b>05 · Universo da marca</b><em></em></div>
+      <h2 class="s-title">Universo da marca</h2>
+      <p class="s-lead">Toda a fotografia foi produzida para reforçar a<br><strong>ambiguidade presente na marca.</strong></p>
     </div>
-    <p class="s-body">A wordmark Chorume ganha vida em loop contínuo, e um pequeno mascote (a criatura do pântano) emerge da escuridão. A animação reforça o caráter vivo e orgânico da marca, transformando pixels em ritmo biológico.</p>
-    <div class="img-grid img-grid-2 rv d1">
-      <div>
-        <img src="img/chorume/wordmark-anim.gif" alt="Wordmark Chorume animada" loading="eager" decoding="sync">
-        <p class="img-caption">Wordmark animada: tipografia ganha movimento fluido.</p>
-      </div>
-      <div>
-        <img src="img/chorume/mascote-anim.gif" alt="Mascote animado emergindo do pântano" loading="eager" decoding="sync">
-        <p class="img-caption">Mascote: criatura do pântano em loop perpétuo.</p>
-      </div>
+    <div class="uni-body">
+      <p>A iluminação baixa, a paleta contida e os elementos orgânicos foram utilizados para criar imagens que transitam entre <strong>o editorial, o fantástico e o vernacular.</strong></p>
+      <p>Mais do que registrar um produto, as imagens atuam como extensão da narrativa visual construída ao longo do projeto.</p>
+    </div>
+    <div class="uni-img rv d1">
+      <img src="img/chorume/universo-marca.webp" alt="Universo visual da marca Chorume: garrafas em cenografia de pântano com ilustrações vernaculares à mão sobre fundo escuro" loading="eager" decoding="sync">
     </div>
   </section>
 
 
-  <!-- ═══ 07 · RESÍDUO (APRENDIZADOS) ═══ -->
-  <section class="sec sec--dark rv" id="aprendizados">
-    <div class="s-index"><b>07</b><em></em></div>
-    <h2 class="s-title">Resíduo</h2>
-    <p class="apr-lead">Chorume é, ao mesmo tempo, uma crítica e uma celebração: do lixo nasce linguagem, da decomposição nasce um novo design.</p>
-    <div class="apr-list">
-      <div class="apr-item">
-        <span class="apr-n">01</span>
-        <div>
-          <h3 class="apr-stmt">Vernacular tem ofício próprio</h3>
-          <p class="apr-txt">Aprendi a olhar para coisas que ninguém olha, a respeitar a urgência do improviso e a confiar que o craft existe em todo lugar, não só nos lugares premiados. O vernacular não é falta de design. É design de verdade.</p>
-        </div>
-      </div>
-      <div class="apr-item">
-        <span class="apr-n">02</span>
-        <div>
-          <h3 class="apr-stmt">Imperfeição é assinatura</h3>
-          <p class="apr-txt">Aprendi que imperfeição não diminui, expande. Cada traço irregular carrega a mão de quem desenhou, a urgência de quem criou, a verdade de quem não fingiu sofisticação. Isso é memória visual.</p>
-        </div>
-      </div>
-      <div class="apr-item">
-        <span class="apr-n">03</span>
-        <div>
-          <h3 class="apr-stmt">O olho que desenhou resiste</h3>
-          <p class="apr-txt">O olho que desenhou essas letras em 2015 ainda mora em cada interface que eu construo hoje. O Chorume não é um projeto encerrado. É um lugar que revisito sempre que preciso lembrar que design é gesto, e gesto é honestidade.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══ 08 · O FUDGE ═══ -->
-  <section class="sec rv" id="reconhecimento">
+  <!-- ═══ 08 · ENCERRAMENTO ═══ -->
+  <section class="sec dark rv" id="reconhecimento">
     <div class="sec-head">
-      <div class="s-index"><b>08</b><em></em></div>
-      <h2 class="s-title">O Fudge</h2>
-      <p class="s-lead">Best of Show da Miami Ad School. Um troféu de bronze com uma palavra gravada: "Fudge".</p>
+      <div class="s-index"><b>08 · Encerramento</b><em></em></div>
+      <h2 class="s-title">Olhar para o<br>que ninguém vê</h2>
     </div>
-    <p class="s-body">O projeto foi reconhecido com o prêmio máximo da Miami Ad School, eleito entre todos os trabalhos da turma. Dez anos depois, o troféu ainda está na minha estante. Serve como lembrete de onde minha linguagem visual começou: olhando para coisas que ninguém olha, respeitando o improviso, acreditando no gesto.</p>
-    <div class="full-img rv d1">
-      <img src="img/chorume/premio-fudge.webp" alt="Troféu The Fudge, Best of Show Miami Ad School" loading="eager" decoding="sync">
-      <p class="img-caption">The Fudge: prêmio de melhor trabalho da turma, 2015.</p>
+    <div class="enc-grid">
+      <p class="enc-body" style="line-height: 1.8">No fim do projeto, Chorume foi reconhecido com o prêmio Best of Show da Miami Ad School.<br><br>Dez anos depois, continua na mesma estante.<br>Não como lembrança de uma conquista específica,<br>mas como um lembrete do processo que deu origem<br>a este projeto: observar aquilo que normalmente<br>passa despercebido, encontrar valor no improviso<br>e construir linguagem a partir de referências que<br>raramente ocupam o centro da atenção.</p>
+      <p class="enc-body enc-coda">Chorume nasceu dessa forma de olhar.</p>
+      <p class="enc-body enc-coda">E, de certa maneira, tudo o que veio depois também.</p>
+    </div>
+    <div class="enc-img rv d1">
+      <img src="img/chorume/the-fudge.png" alt="Troféu The Fudge — Best of Show Miami Ad School — cenografia chorumiana com cactos, garça, ossos e lua" loading="eager" decoding="sync">
     </div>
   </section>
 
@@ -422,16 +563,12 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 <!-- ═══ CTA ═══ -->
 <section class="cta" id="contact"><div class="container">
 <div class="cta-grid">
-  <div>
-    <p class="cta-eyebrow">Disponível para projetos</p>
-    <h2 class="cta-title">Vamos<br>conversar?</h2>
-    <p class="cta-sub">Visual & Interface Design</p>
+  <div class="cta-card">
+    <div class="s-index"><b>05 · Contato</b><em></em></div>
+    <h2 class="cta-title">Vamos<br>Conversar?</h2>
+    <p class="cta-sub">Disponível para projetos remotos</p>
   </div>
-  <nav class="cta-menu">
-    <a href="mailto:adrianapommot@gmail.com" class="cta-row"><span class="cl">E-mail</span><span class="cv">adrianapommot@gmail.com</span><span class="car">↗</span></a>
-    <a href="https://linkedin.com/in/adriana-pommot" target="_blank" class="cta-row"><span class="cl">LinkedIn</span><span class="cv">adriana-pommot</span><span class="car">↗</span></a>
-    <a href="https://instagram.com/ultraviolenta.ink" target="_blank" class="cta-row"><span class="cl">Instagram</span><span class="cv">@ultraviolenta.ink</span><span class="car">↗</span></a>
-  </nav>
+  <div class="cta-menu" id="ctaMenu"></div>
 </div>
 </div></section>
 
@@ -450,7 +587,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 /* nav gerenciado por site-nav.js */
 
 /* Lightbox */
-var lightbox=document.createElement('div');lightbox.className='lightbox';lightbox.innerHTML='<div class="lightbox-content"><button class="lightbox-close">&times;</button><img class="lightbox-img" src="" alt=""><div class="lightbox-nav"><button class="lightbox-prev">&lsaquo;</button><button class="lightbox-next">&rsaquo;</button></div></div>';document.body.appendChild(lightbox);
+var lightbox=document.createElement('div');lightbox.className='lightbox';lightbox.innerHTML='<div class="lightbox-content"><button class="lightbox-close">&times;</button><img class="lightbox-img" alt=""><div class="lightbox-nav"><button class="lightbox-prev">&lsaquo;</button><button class="lightbox-next">&rsaquo;</button></div></div>';document.body.appendChild(lightbox);
 var images=[];var currentIdx=0;
 function openLightbox(img){currentIdx=images.indexOf(img);lightbox.querySelector('.lightbox-img').src=img.src;lightbox.classList.add('active')}
 function closeLightbox(){lightbox.classList.remove('active')}
@@ -461,6 +598,27 @@ lightbox.querySelector('.lightbox-prev').addEventListener('click',function(){sho
 lightbox.querySelector('.lightbox-next').addEventListener('click',function(){showImage(currentIdx+1)});
 lightbox.addEventListener('click',function(e){if(e.target===lightbox)closeLightbox()});
 document.addEventListener('keydown',function(e){if(!lightbox.classList.contains('active'))return;if(e.key==='Escape')closeLightbox();if(e.key==='ArrowLeft')showImage(currentIdx-1);if(e.key==='ArrowRight')showImage(currentIdx+1)});
+
+/* CTA contatos (idêntico à home) */
+(function(){
+  var CONTACT_ICONS={
+    mail:'<svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"></rect><polyline points="2,4 12,13 22,4"></polyline></svg>',
+    linkedin:'<svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6Z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>',
+    whatsapp:'<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347Z"></path><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.959 9.959 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2Z"></path></svg>',
+    file:'<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>'
+  };
+  var CONTACTS=[
+    {l:"Email",v:"adrianapommot@gmail.com",a:"mailto:adrianapommot@gmail.com",ar:"→",ico:"mail"},
+    {l:"LinkedIn",v:"/in/adriana-pommot",a:"https://www.linkedin.com/in/adriana-pommot/",ar:"→",ico:"linkedin"},
+    {l:"WhatsApp",v:"+55 11 96272-4879",a:"https://wa.me/5511962724879",ar:"→",ico:"whatsapp"},
+    {l:"Currículo",v:"PDF · 2026",a:"#",ar:"↓",ico:"file"}
+  ];
+  var cm=document.getElementById('ctaMenu');
+  if(cm)cm.innerHTML=CONTACTS.map(function(c){
+    var ext=c.a.indexOf('http')===0?' target="_blank" rel="noopener"':'';
+    return '<a href="'+c.a+'" class="cta-row"'+ext+'><span class="cta-ico">'+CONTACT_ICONS[c.ico]+'</span><span class="cta-body"><span class="cl">'+c.l+'</span><span class="cv">'+c.v+'</span></span><span class="car">'+c.ar+'</span></a>';
+  }).join('');
+})();
 
 /* Reveal */
 (function(){try{

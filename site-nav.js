@@ -14,7 +14,7 @@
   const css = `
   :host{display:contents}
   a{text-decoration:none;font-family:var(--font,'Plus Jakarta Sans',sans-serif)}
-  .nav-name{position:absolute;top:40px;left:var(--nav-name-left, var(--m));z-index:30;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--black);line-height:1;white-space:nowrap}
+  .nav-name{position:absolute;top:40px;left:var(--nav-name-left, var(--m));z-index:30;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--nav-name-color, var(--black));line-height:1;white-space:nowrap}
   .nav-float{position:fixed;top:24px;right:var(--m);z-index:30;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
   .nav-back{position:absolute;top:49px;right:calc(var(--m) + 66px);transform:translateY(-50%);white-space:nowrap;z-index:30;display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--gray-3,#756F67);transition:color .25s}
   .nav-back:hover{color:var(--black,#111)}

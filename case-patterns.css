@@ -68,7 +68,74 @@
    ────────────────────────────────────────────────────────────────────── */
 .sec.dark .intro-grid > .full-img{grid-column:1 / -1;margin-top:clamp(48px,5vw,72px);overflow:hidden;border-radius:8px}
 .sec.dark .intro-grid > .full-img img{width:100%;height:auto;display:block}
-.sec.dark .img-caption{color:rgba(255,255,255,.5)}
+.sec.dark .img-caption{color:rgba(255,255,255,.5);font-size:12px;line-height:1.5;margin-top:10px}
+
+/* INLINE IMAGE BLOCK (imagem dentro de uma coluna do intro-grid, ex: .intro-side) */
+.sec.dark .intro-art{margin-top:clamp(20px,2vw,28px);overflow:hidden;border-radius:8px}
+.sec.dark .intro-art img{width:100%;height:auto;display:block}
+
+/* ──────────────────────────────────────────────────────────────────────
+   5. FONTE GRID (Chorume): 2-col com texto à esquerda + visual à direita.
+   Intro no topo (título grande + paragrafo no left, imagem big no right),
+   depois N linhas numeradas (label+texto à esq / visual à dir).
+   ────────────────────────────────────────────────────────────────────── */
+.fonte-grid{display:grid;grid-template-columns:minmax(220px,1fr) 2.2fr;column-gap:clamp(40px,5vw,80px);row-gap:clamp(40px,5vw,72px)}
+.fonte-intro-l{display:flex;flex-direction:column;gap:clamp(20px,2vw,28px);padding-top:8px}
+.fonte-intro-l .s-title{margin:0}
+.fonte-intro-l p{font-size:14px;line-height:1.7;color:rgba(255,255,255,.7);text-wrap:pretty;max-width:32ch}
+.fonte-intro-r{display:flex;align-items:flex-start;justify-content:center}
+.fonte-intro-r img{width:100%;height:auto;display:block;border-radius:4px}
+.fonte-row{display:contents}
+.fonte-row-l{display:flex;flex-direction:column;gap:14px;padding-top:8px;border-top:1px solid rgba(255,255,255,.14)}
+.fonte-row-r{display:flex;align-items:center;justify-content:center;border-top:1px solid rgba(255,255,255,.14);padding-top:24px;padding-bottom:8px}
+.fonte-row-r img{width:100%;max-width:560px;height:auto;display:block}
+.fonte-row-r--full img{max-width:none}
+.fonte-rn{display:flex;align-items:baseline;gap:14px;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff}
+.fonte-rn b{color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums;min-width:24px}
+.fonte-rn span{color:#fff}
+.fonte-row-l p{font-size:13px;line-height:1.65;color:rgba(255,255,255,.62);text-wrap:pretty;max-width:30ch;margin-left:38px}
+@media(max-width:860px){.fonte-grid{grid-template-columns:1fr;gap:32px}.fonte-row-r{order:1;border-top:none;padding-top:0}.fonte-row-l{order:0}.fonte-row-l p{margin-left:0}}
+
+/* ──────────────────────────────────────────────────────────────────────
+   6. CH04 — Inventar o Chorume + Direção de arte + Cenografia
+   Editorial spread sobre fundo escuro (.sec.dark)
+   ────────────────────────────────────────────────────────────────────── */
+.ch4-wordmark{display:block;width:100%;max-width:520px;height:auto;margin-top:8px}
+.ch4-rule{width:120px;height:2px;background:#E27A2B;margin:18px 0 28px}
+.ch4-sub{font-size:clamp(22px,2vw,28px);font-weight:700;letter-spacing:.02em;line-height:1.15;color:#fff;margin:0 0 18px;text-transform:uppercase}
+.ch4-eyebrow{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#E27A2B;margin:0 0 14px}
+.ch4 p{font-size:14px;line-height:1.7;color:rgba(255,255,255,.72);text-wrap:pretty;max-width:38ch;margin-bottom:14px}
+.ch4 p:last-child{margin-bottom:0}
+
+/* TOP — inventar */
+.ch4-top{display:grid;grid-template-columns:minmax(280px,42%) 1fr;column-gap:clamp(32px,4vw,72px);align-items:start}
+.ch4-top-r{position:relative;border-radius:4px;overflow:hidden}
+.ch4-top-r img{width:100%;height:auto;display:block}
+
+/* MID — direção */
+.ch4-mid{margin-top:clamp(72px,7vw,120px);display:grid;grid-template-columns:minmax(220px,28%) 1fr;column-gap:clamp(32px,4vw,72px);align-items:start;padding-top:clamp(40px,4vw,56px);border-top:1px solid rgba(255,255,255,.14)}
+.ch4-makings{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,1vw,16px)}
+.ch4-mof-wrap{display:flex;flex-direction:column;gap:14px}
+.ch4-mof-label{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#fff}
+.ch4-mof-label b{color:#E27A2B;font-weight:700;font-variant-numeric:tabular-nums}
+.ch4-mof-arrow{flex:1;height:1px;background:rgba(255,255,255,.2);position:relative}
+.ch4-mof-arrow::after{content:"";position:absolute;right:0;top:50%;transform:translateY(-50%);width:0;height:0;border-left:5px solid rgba(255,255,255,.4);border-top:3px solid transparent;border-bottom:3px solid transparent}
+.ch4-mof{aspect-ratio:636/873;background-image:url('img/chorume/making-of-pantano.jpg');background-size:300% 100%;background-repeat:no-repeat;border-radius:2px}
+.ch4-mof.p1{background-position:0% 50%}
+.ch4-mof.p2{background-position:50% 50%}
+.ch4-mof.p3{background-position:100% 50%}
+
+/* BOT — cenografia */
+.ch4-bot{margin-top:clamp(64px,6vw,96px);display:grid;grid-template-columns:1.5fr 1fr;column-gap:clamp(40px,5vw,80px);align-items:center}
+.ch4-bot-l{border-radius:4px;overflow:hidden}
+.ch4-bot-l img{width:100%;height:auto;display:block}
+.ch4-bot-r{padding-right:clamp(0px,2vw,24px)}
+
+@media(max-width:900px){
+  .ch4-top,.ch4-mid,.ch4-bot{grid-template-columns:1fr;gap:32px}
+  .ch4-makings{grid-template-columns:1fr}
+  .ch4-mof{aspect-ratio:16/9}
+}
 
 /* ──────────────────────────────────────────────────────────────────────
    3. PROB-GRID (padrão "Entendendo o desafio" — 2×2 com ícone + texto)
