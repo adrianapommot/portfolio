@@ -10,7 +10,7 @@ Este pacote (`deploy/`) contém o portfólio finalizado. Sua única tarefa é **
 
 1. Substitua TODOS os arquivos do repositório pelos arquivos deste pacote, preservando a estrutura de pastas.
 2. `git add -A`
-3. `git commit -m "Atualiza portfólio: thumbs, footers, CTA, botões e seção Outros Projetos"`
+3. `git commit -m "CV: adiciona PDF real e conserta todos os links Download CV"`
 4. `git push`
 5. Aguarde o deploy do GitHub Pages concluir.
 
@@ -26,6 +26,7 @@ Não altere essas versões — elas evitam que o cache antigo reapareça.
 
 ```
 index.html                      home
+cv-adriana-pommot.pdf           currículo (PDF — NOVO, obrigatório na raiz do repo)
 case-delta.html                 case Delta Design System
 case-mrv.html                   case MRV
 case-ford.html                  case Ford
@@ -46,13 +47,13 @@ img/                            todas as imagens (delta, mrv, ford, chorume)
 
 ## O que mudou nesta rodada
 
-- **Thumbs novos** (Delta, MRV, Ford) em WebP otimizado, na home e na seção "Outros projetos" dos cases.
-- **Seção "Outros projetos"** (todos os cases): proporção corrigida para 2:1 — sem mais corte.
-- **Home · thumbs de projeto**: arte limpa, com título + tag à esquerda e botão "Ver case →" à direita, abaixo da imagem (toda a área clicável).
-- **Botões padronizados** retangulares (border-radius 4px) em todo o projeto.
-- **CTA "Vamos conversar?"** em tarja lime full-width na home e no Chorume (igual Ford/MRV).
-- **Footers padronizados** em index, delta, mrv e chorume.
-- **Case Chorume**: hero, seções 01–05, bastidores e encerramento revisados; imagens pesadas convertidas para WebP.
-- **Case Delta**: subtítulos das seções 03 e 04 ajustados.
+**Correção crítica do Download CV.** Antes, os links de currículo apontavam para `#contato` ou `#` e o arquivo PDF nem existia no repo.
+
+1. **`cv-adriana-pommot.pdf` — ARQUIVO NOVO.** Deve ficar na **raiz do repo**, junto do `index.html`, com exatamente esse nome. Sem ele, todos os botões de CV dão 404.
+2. **`index.html`** — links de CV consertados (menu, hero "Download CV ↓", seção Sobre "Currículo ↓", seção Contato "Currículo PDF · 2026") → todos apontam para `cv-adriana-pommot.pdf` com atributo `download`. Também inclui o ajuste anterior: subtítulo de Serviços com `font-size: 14px`.
+3. **`case-delta.html`, `case-mrv.html`, `case-chorume.html`** — link "Currículo" do rodapé/contato consertado (`#` → `cv-adriana-pommot.pdf` com `download`).
+4. `case-ford.html` e demais arquivos: **sem mudanças**.
+
+**NÃO altere nada além de copiar os arquivos.** Não renomeie o PDF, não mova de pasta, não mude links, não toque nas versões de cache.
 
 Tudo já está aplicado nos arquivos deste pacote. É só subir.

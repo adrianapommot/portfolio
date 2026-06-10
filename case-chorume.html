@@ -603,11 +603,11 @@ document.addEventListener('keydown',function(e){if(!lightbox.classList.contains(
     {l:"Email",v:"adrianapommot@gmail.com",a:"mailto:adrianapommot@gmail.com",ar:"→",ico:"mail"},
     {l:"LinkedIn",v:"/in/adriana-pommot",a:"https://www.linkedin.com/in/adriana-pommot/",ar:"→",ico:"linkedin"},
     {l:"WhatsApp",v:"+55 11 96272-4879",a:"https://wa.me/5511962724879",ar:"→",ico:"whatsapp"},
-    {l:"Currículo",v:"PDF · 2026",a:"#",ar:"↓",ico:"file"}
+    {l:"Currículo",v:"PDF · 2026",a:"Adriana Pommot — Currículo_atualizadoJun2026.pdf",ar:"↓",ico:"file"}
   ];
   var cm=document.getElementById('ctaMenu');
   if(cm)cm.innerHTML=CONTACTS.map(function(c){
-    var ext=c.a.indexOf('http')===0?' target="_blank" rel="noopener"':'';
+    var ext=c.a.indexOf('http')===0?' target="_blank" rel="noopener"':(/\.pdf($|\?)/i.test(c.a)?' download':'');
     return '<a href="'+c.a+'" class="cta-row"'+ext+'><span class="cl">'+c.l+'</span><span class="cv">'+c.v+'</span><span class="car">'+c.ar+'</span></a>';
   }).join('');
 })();
