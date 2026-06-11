@@ -15,12 +15,12 @@
   :host{display:contents}
   a{text-decoration:none;font-family:var(--font,'Plus Jakarta Sans',sans-serif)}
   .nav-name{position:absolute;top:40px;left:var(--nav-name-left, var(--m));z-index:30;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--nav-name-color, var(--black));line-height:1;white-space:nowrap}
-  .nav-float{position:fixed;top:24px;right:var(--m);z-index:30;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
-  .nav-back{position:absolute;top:49px;right:calc(var(--m) + 66px);transform:translateY(-50%);white-space:nowrap;z-index:30;display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--gray-3,#756F67);transition:color .25s}
+  .nav-float{position:fixed;top:24px;right:var(--m);z-index:30;display:flex;flex-direction:column;align-items:flex-end;gap:8px;pointer-events:none}
+  .nav-back{position:absolute;top:49px;right:calc(var(--m) + 66px - 14px);transform:translateY(-50%);white-space:nowrap;z-index:31;display:inline-flex;align-items:center;gap:5px;padding:14px;font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--gray-3,#756F67);transition:color .25s}
   .nav-back:hover{color:var(--black,#111)}
   .nav-back svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s cubic-bezier(.19,1,.22,1)}
   .nav-back:hover svg{transform:translateX(-4px)}
-  .nav-toggle{width:50px;height:50px;border-radius:50%;border:1px solid var(--accent);cursor:pointer;background:var(--accent);display:flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s;padding:0}
+  .nav-toggle{width:50px;height:50px;border-radius:50%;border:1px solid var(--accent);cursor:pointer;background:var(--accent);display:flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s;padding:0;pointer-events:auto}
   .nav-toggle:hover{background:var(--black);border-color:var(--black)}
   .nav-toggle:hover svg{stroke:#fff}
   .nav-toggle svg{width:20px;height:20px;stroke:var(--black);stroke-width:1.2;fill:none}
@@ -65,8 +65,8 @@
         '</button>' +
         '<nav class="nav-menu">' +
         '<a href="' + cv + '"' + dl + ' class="nav-cta">Download CV<svg viewBox="0 0 16 16"><path d="M8 3v8M4 8l4 4 4-4"/><path d="M3 13h10"/></svg></a>' +
-        '<a href="' + base + '#work" class="nav-link">Projetos</a>' +
         '<a href="' + base + '#services" class="nav-link">Serviços</a>' +
+        '<a href="' + base + '#work" class="nav-link">Projetos</a>' +
         '<a href="' + base + '#about" class="nav-link">Sobre Mim</a>' +
         '<a href="' + contact + '" class="nav-link">Contato</a>' +
         '</nav></div>';

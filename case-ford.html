@@ -213,7 +213,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 
 <!-- NAV (componente compartilhado) -->
 <site-nav back="index.html#work"></site-nav>
-<script src="site-nav.js?v=13"></script>
+<script src="site-nav.js?v=14"></script>
 </div>
 
 <main class="flow">
@@ -652,7 +652,7 @@ o que é contextual (materialidade, escala) e o que é efêmero (conteúdo rotat
     closeBtn=document.createElement('button');closeBtn.className='lb-close';closeBtn.setAttribute('aria-label','Fechar');closeBtn.innerHTML='&times;';
     overlay.appendChild(imgEl);overlay.appendChild(closeBtn);
     document.body.appendChild(overlay);
-    overlay.addEventListener('click',function(e){if(e.target!==imgEl)close()});
+    overlay.addEventListener('click',function(){close()});
     closeBtn.addEventListener('click',close);
     document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
   }
