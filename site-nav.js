@@ -6,7 +6,7 @@
      brand-href  href do nome (default "index.html")
      base        prefixo dos links de seção (default "index.html"; home "")
      contact     href do "Contato" (default "#contact")
-     cv          href do "Download CV" (default "AdrianaPommot_2026D.pdf"; .pdf vira download)
+     cv          href do "Download CV" (default "AdrianaPommot_2026updated.pdf"; .pdf vira download)
      back        se presente, renderiza "← Todos os projetos" à esquerda do botão de menu
      back-label  texto do back link (default "Todos os projetos")
    Herda os tokens de cor/espaçamento (var(--accent), --m, --black, --gray-1, --font) da página. */
@@ -46,7 +46,7 @@
       const brand = attr('brand-href', 'index.html');
       const base = attr('base', 'index.html');
       const contact = attr('contact', '#contact');
-      const cv = attr('cv', 'AdrianaPommot_2026D.pdf');
+      const cv = attr('cv', 'AdrianaPommot_2026updated.pdf');
       const back = this.getAttribute('back');
       const backLabel = attr('back-label', 'Todos os projetos');
       const dl = /\.pdf($|\?)/i.test(cv) ? ' download' : '';
