@@ -21,7 +21,7 @@ Documentação completa do sistema visual usado em todo o portfólio: home (inde
 | `--gray-1` | `#37342F` | Títulos, texto forte, labels em contextos claros |
 | `--gray-2` | `#585550` | Corpo de texto, descrições |
 | `--gray-3` | `#756F67` | Labels, eyebrows, text subdued |
-| `--gray-4` | `#B8B2A8` | Texto muito leve, placeholders |
+| `--gray-4` | `#AEA89D` | Cinza mais claro — labels do header de case, texto muito leve |
 | `--gray-5` | `#EBE7E1` | (Reservado para backgrounds muito claros) |
 
 ### Cores Funcionais
@@ -33,6 +33,7 @@ Documentação completa do sistema visual usado em todo o portfólio: home (inde
 | `--accent` | `#e0ff33` | Lime — destaque principal, nav pill, CTA buttons, highlights |
 | `--accent-press` | `#d2f51c` | Lime escuro — hover state do accent |
 | `--accent-dark` | `#8A8A20` | Lime muito escuro — ícones/bordas legíveis em fundo claro |
+| `--paper-case` | `#FAFAF8` | Fundo off-white do hero dos cases (claros) |
 
 ### Dark Mode (Aprendizados, Footer)
 
@@ -67,6 +68,24 @@ Todos os tamanhos usam `clamp()` para fluidez responsiva.
 | `--ty-metric` | `32px` | 32px | 32px | Números grandes (stats) |
 | `--ty-label` | `12px` | 12px | 12px | Labels, eyebrows uppercase (700) |
 
+### Escala Tipográfica dos Cases
+
+Os cases (case-*.html) usam tokens próprios, distintos da home. NUNCA inventar tamanho fora desta lista.
+
+| Token | Fórmula | Uso |
+|-------|---------|-----|
+| `--ty-hero` | `clamp(38px, 4.4vw, 62px)` | Display do título de case (700, uppercase) |
+| `--ty-title` | `clamp(44px, 4.8vw, 60px)` | Título de seção do case |
+| `--ty-lead` | `24px / 500` | Lead (frase após o título) e subtítulo de bloco |
+| `--ty-copy` | `17px` | Corpo; **17px/600** = título de card/item (.sol-t, .prob-title, .res-title, .esc-title) |
+| `--ty-small` | `14px` | Descrição de card, legenda |
+| `--ty-metric` | `32px` | Métrica média; números grandes via clamp |
+| `--ty-label` | `12px` | Labels uppercase 12–13px / 700, cor `--gray-3` |
+
+**Hierarquia por PESO, não por tamanho.** Proibido criar tamanho novo (ex.: 21px). Pesos: apenas 400 / 500 / 600 / 700.
+
+Cinzas de texto: `--black` títulos · `--gray-1` lead/forte · `--gray-2` corpo · `--gray-3` labels.
+
 ### Hierarquia de Peso
 
 | Função | Weight | Line-height | Letter-spacing |
@@ -92,23 +111,46 @@ Todos os tamanhos usam `clamp()` para fluidez responsiva.
 
 ## 3. Espaçamento (Spacing Scale)
 
-Hierarquia de 4 níveis + tokens de seção:
+### Escala base-8 (fonte única)
 
-| Token | Valor | Uso |
-|-------|-------|-----|
-| `--space-md` | `24px` | Piso: eyebrow→título, ícone→label, componentes tight |
-| `--space-lg` | `36px` | Separação de blocos dentro de uma seção |
-| `--space-title` | `72px` | Título de seção → conteúdo |
-| `--space-section` | `112px` | Seção → seção (via `.sec+.sec` padding) |
-| `--m` | `clamp(24px, 5vw, 64px)` | Margem lateral (padding left/right) |
-| `--gut` | `24px` | Gutter de grid (gap entre colunas) |
+Múltiplos inteiros de 8, SEM clamp. Nenhum espaçamento fora da grade de 8 — proibido 14, 18, 19, 36, 104.
 
-### Padrões
+```
+--space-8  --space-16  --space-24  --space-32  --space-40  --space-48
+--space-56 --space-64  --space-72  --space-80  --space-96  --space-112
+```
 
-- **Títulos + conteúdo**: `.s-title { margin-bottom: var(--space-md) }` + `.s-lead { margin-bottom: var(--space-lg) }`
-- **Entre paragrafos**: `.s-body + .s-body { margin-top: var(--space-md) }`
-- **Entre seções**: `.sec + .sec { border-top: 1px solid var(--line); padding: clamp(48px, 5.5vw, 80px) }`
-- **Dentro de cards**: `padding: 22px 22px 26px` (tight)
+| Token de layout | Valor | Uso |
+|-----------------|-------|-----|
+| `--m` | `clamp(24px, 5vw, 64px)` | Margem lateral (padding left/right das seções) |
+| `--gut` | `24px` | Gutter de grid (= `--space-24`) |
+
+Espaçamento de seção: `clamp(48px, 5.5vw, 80px)` (ritmo reduzido, alinhado entre index e cases).
+
+### Padrão de cabeçalho de seção (`.section-head`)
+
+O grupo eyebrow → título → lead de QUALQUER seção (index + cases) usa uma classe única. Proibido `margin-top` inline ou `gap` ad-hoc nos heads.
+
+```css
+--head-pt:        var(--space-56)   /* topo do grupo */
+--head-gap-title: var(--space-16)   /* eyebrow → título */
+--head-gap-lead:  var(--space-24)   /* título → lead */
+--head-pb:        var(--space-32)   /* base do grupo — sempre < topo */
+
+.section-head          { padding: var(--head-pt) 0 var(--head-pb); }
+.section-head .s-title { margin-top: var(--head-gap-title); }
+.section-head .s-lead  { margin-top: var(--head-gap-lead); }
+```
+
+### Tokens APOSENTADOS (não usar — migrar para a escala base-8)
+
+```
+--space-md (24)       → --space-24
+--space-lg (36)       → --space-32 / --space-40   (36 era off-grid)
+--space-title (72)    → --space-72
+--space-section (112) → --space-112
+--gap-after-title(72) → --head-pb (agora 32)
+```
 
 ---
 
@@ -328,6 +370,45 @@ Hierarquia de 4 níveis + tokens de seção:
   text-wrap: pretty;
 }
 ```
+
+---
+
+## 5b. Botões retangulares — TAMANHO ÚNICO
+
+Um só tamanho de botão retangular em todo o projeto (modelo compacto):
+
+```css
+display:inline-flex; align-items:center; gap:8px;
+font-size:12px; font-weight:500; letter-spacing:.04em;
+text-transform:none;            /* caixa normal — nada de CAIXA ALTA */
+border:1px solid;               /* SEMPRE 1px — cheios usam a cor do fundo */
+border-radius:4px;
+padding:8px 16px;               /* 1×8 / 2×8 (grade base-8) */
+```
+
+Variantes: **primary** (accent/ink) · **ghost** (borda ink) · **dark** (ink/#fff).
+Aplicado: `.btn` · `.btn-sm` · `.poster-cta` · `.traj-archive` (home) · `.lib-cta` · `.proc-zoom` (delta).
+As **pills** do menu (`.nav-cta` / `.nav-link`, radius 999) são família à parte — não mexer.
+
+**Copy do LinkedIn:** todo *botão* de LinkedIn usa o texto "Perfil no LinkedIn" (hero, sobre, trajetória). Links de rodapé e do menu de contato seguem "LinkedIn" curto.
+
+---
+
+## 5c. Header / Hero do case — PADRÃO APROVADO
+
+Replicar em todos os cases. Ritmo todo em ×8, tipo reduzido a poucos tamanhos/pesos/cores.
+
+- Fundo off-white `--paper-case` (#FAFAF8), nunca escuro (exceto a variante dark do Chorume).
+- **Back-link** "← Todos os projetos": renderizado pelo `site-nav.js` no lugar da marca (topo-esquerda), texto simples em `--gray-4`, seta pendurada na margem, SEM borda/pílula. Cor via `--nav-back-color` (default `--gray-3`; chorume usa `rgba(255,255,255,.55)`).
+- **Linha de marca:** só o logo (sem subtítulo), colado ao título (gap pequeno).
+- **Título:** `--ty-hero` clamp(38,4.4vw,62) / 700 / uppercase, 2 linhas, palavra-chave marcada com bloco lime (`.hero-hl`). NUNCA gigante.
+- **Foot:** coluna esquerda = intro (lead) + bloco de resultado (rótulo uppercase em cima, valor embaixo, alinhado à esquerda); à direita, alinhada à base do resultado, a tag "Case de Product Design · ANO".
+- **Barra de metadados:** 4 colunas à esquerda, divisórias finas, rótulo 11px/700/uppercase/gray-3 + valor 16px/600/black.
+- **Nav** (pílula + toggle + menu) IDÊNTICA à home: lime sólido, roll no hover.
+
+Espaçamento do hero (×8): `.hero` padding-top clamp(56,7vh,80) · `.hero-top` margin-bottom 8 · `.hero-foot` margin-top 24 · `.hero-foot-main` gap 24 · `.hero-result span` margin-bottom 8 · `.hero-meta` margin-top clamp(48,6vh,72), padding 24 0 · `.hm-item` padding 0 24, gap 8.
+
+**Variante DARK (chorume):** mesmas medidas e tamanhos; cores brancas/rgba (não usar `--gray-4`); estrutura usa `.hero-inner-stack`.
 
 ---
 
@@ -559,6 +640,8 @@ footer {
 
 ### Reveal on Scroll (`.rv` class)
 
+> Nota: o reveal-on-scroll está **desativado nos cases** (páginas estáticas, render instantâneo — `.rv,.rv.visible{opacity:1;transform:none;transition:none;animation:none}`). Permanece ativo apenas na home.
+
 ```css
 .rv {
   opacity: 0;
@@ -662,7 +745,7 @@ transition: background 0.25s,
 
 ### Performance
 
-- **Imagens**: `loading="lazy"` em todas as `<img>` fora do fold
+- **Imagens**: `loading="eager" decoding="sync"` (sem pop-in de lazy; render previsível)
 - **Formatos**: webp otimizado, fallback PNG/JPG
 - **Fonts**: Google Fonts pré-carregada (1 request)
 - **CSS**: inline (sem separate stylesheet) ou concatenado
@@ -680,16 +763,18 @@ transition: background 0.25s,
 
 ```
 portfolio/
-├── index.html           (Home)
-├── home.css             (Estilos globais da home)
-├── case-mrv.html        (Case MRV completo, CSS inline)
-├── case-delta.html      (Case Delta completo, CSS inline)
-├── case-ford.html       (Case Ford completo, CSS inline)
-└── img/
-    ├── mrv/             (18 imagens)
-    ├── delta/           (15 imagens)
-    ├── ford/            (20 imagens)
-    └── chorume/         (17 imagens)
+├── index.html              (Home — usa home.css)
+├── home.css                (Estilos da home)
+├── site-nav.js             (Web component <site-nav>, nav compartilhada)
+├── case-patterns.css       (Padrões compartilhados entre cases: intro-grid, prob-grid, lightbox)
+├── case-mrv.html           (CSS inline)
+├── case-delta.html         (CSS inline — case principal)
+├── case-ford.html          (CSS inline)
+├── case-chorume.html       (CSS inline — variante dark)
+├── color-tokens.html · delta-atoms.html · diagrama-de-contrastes.html
+├── tipografia.html · elevacao.html · opacidade.html · bordas.html   (sub-páginas do Delta, em iframe)
+├── AdrianaPommot_2026updated.pdf   (CV)
+└── img/  (delta · mrv · ford · chorume)
 ```
 
 ---
@@ -737,6 +822,6 @@ portfolio/
 
 ---
 
-**Versão**: 1.0  
-**Última atualização**: 2026-01-XX  
+**Versão**: 2.0
+**Última atualização**: 2026-06-18
 **Responsável**: Adriana Pommot
