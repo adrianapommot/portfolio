@@ -16,7 +16,7 @@
   a{text-decoration:none;font-family:var(--font,'Plus Jakarta Sans',sans-serif)}
   .nav-name{position:absolute;top:40px;left:var(--nav-name-left, var(--m));z-index:30;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--nav-name-color, var(--black));line-height:1;white-space:nowrap}
   .nav-float{position:fixed;top:24px;right:var(--m);z-index:30;display:flex;flex-direction:column;align-items:flex-end;gap:8px;pointer-events:none}
-  .nav-back{position:absolute;top:49px;right:calc(var(--m) + 66px - 14px);transform:translateY(-50%);white-space:nowrap;z-index:31;display:inline-flex;align-items:center;gap:5px;padding:14px;font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--gray-3,#756F67);transition:color .25s}
+  .nav-back{position:absolute;top:40px;left:calc(var(--nav-name-left, var(--m)) - 18px);white-space:nowrap;z-index:31;display:inline-flex;align-items:center;gap:5px;padding:8px 0;font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--nav-back-color, var(--gray-3,#756F67));transition:color .25s}
   .nav-back:hover{color:var(--black,#111)}
   .nav-back svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s cubic-bezier(.19,1,.22,1)}
   .nav-back:hover svg{transform:translateX(-4px)}
@@ -56,7 +56,7 @@
       const root = this.attachShadow({ mode: 'open' });
       root.innerHTML =
         '<style>' + css + '</style>' +
-        '<a href="' + brand + '" class="nav-name">Adriana Pommot</a>' +
+        (back !== null ? '' : '<a href="' + brand + '" class="nav-name">Adriana Pommot</a>') +
         backHtml +
         '<div class="nav-float">' +
         '<button class="nav-toggle" aria-label="Menu">' +

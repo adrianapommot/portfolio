@@ -441,6 +441,23 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 @media(prefers-reduced-motion:reduce){.hero-top,.hero .hero-title>span,.hero-foot{animation:none}}
 @media(max-width:860px){.hero-meta{gap:0}.hm-item{border-right:none;border-bottom:1px solid var(--line);padding:12px 0;width:50%;white-space:normal}.hm-item:nth-child(odd){padding-right:16px}.hm-item:last-child{border-bottom:none}.hm-label,.hm-value{white-space:normal}}
 
+/* ═══ HEADER DE CASE · padrão unificado base-8 (ver PROMPT-CLAUDE.md) ═══ */
+:root{--gray-4:#AEA89D;--paper-case:#FAFAF8;--ty-hero:clamp(38px,4.4vw,62px)}
+.hero{background:var(--paper-case);padding-top:clamp(56px,7vh,80px)}
+.hero-inner{padding-top:40px}
+.hero-top{margin-bottom:8px}
+.hero .hero-title{font-size:var(--ty-hero)}
+.hero-foot{margin-top:24px}
+.hero-foot-main{gap:24px}
+.hero-intro{font-weight:400;color:var(--gray-2)}
+.hero-intro .hl{font-weight:700}
+.hero-result span{font-size:11px;font-weight:600;line-height:1.4;color:var(--gray-4);margin-bottom:8px}
+.hero-result b{font-size:14px;font-weight:600;color:var(--gray-1)}
+.hero-meta{margin-top:clamp(48px,6vh,72px);padding:24px 0}
+.hm-item{padding:0 24px;gap:8px}
+.hm-label{font-size:11px;font-weight:600;color:var(--gray-4)}
+.hm-value{font-size:14px;color:var(--gray-2)}
+
 /* 10 Aprendizados — dark, premium numerado */
 .apr-head{max-width:680px;margin-bottom:clamp(48px,6vw,72px)}
 .apr-head .s-title{margin-bottom:var(--space-md)}
@@ -533,7 +550,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 
 <!-- NAV (componente compartilhado) -->
 <site-nav back="index.html#work"></site-nav>
-<script src="site-nav.js?v=15"></script>
+<script src="site-nav.js?v=16"></script>
 </div>
 
 <main class="flow">
