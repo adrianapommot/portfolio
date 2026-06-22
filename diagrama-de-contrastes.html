@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<title>Diagrama de Contrastes — Delta Design System</title>
+<title>Diagrama de Contrastes · Delta Design System</title>
 <style>
 :root{
   --black:#111; --bg:#FAFAF8; --line:#E8E5DF; --line-soft:#F2F0EC;
@@ -110,7 +110,7 @@ ROWS.forEach((row,i)=>{
   const sep=GROUP_STARTS.has(i)?' class="g-sep"':'';
   tb+=`<tr${sep}><td class="td-rh"><div class="rh-inner"><div class="rh-swatch" style="background:${row.h}"></div><span class="rh-token">${row.t}</span></div></td>`;
   COLS.forEach(col=>{
-    if(row.h.toLowerCase()===col.toLowerCase()){tb+='<td class="td-d"><span class="c-same">—</span></td>';return;}
+    if(row.h.toLowerCase()===col.toLowerCase()){tb+='<td class="td-d"><span class="c-same">·</span></td>';return;}
     const r=cr(row.h,col);
     tb+=`<td class="td-d"><span class="c-num">${r.toFixed(2)}</span>${badge(r)}</td>`;
   });
