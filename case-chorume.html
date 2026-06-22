@@ -11,17 +11,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --black:#000000;--white:#fff;
+  --black:#1A1A1A;--white:#fff;
   --nav-name-color:#fff;
-  --gray-1:#37342F;--gray-2:#585550;--gray-3:#756F67;--gray-4:#B8B2A8;--gray-5:#EBE7E1;
-  --line:#E3E0DA;--chip:#F2F1EE;
-  --accent:#e0ff33;--accent-press:#d2f51c;--bone:#f4f3ef;
+  --gray-1:#383838;--gray-2:#565656;--gray-3:#707070;--gray-4:#AFAFAF;--gray-5:#F4F4F4;
+  --line:#EBEBEB;--chip:#F4F4F4;
+  --accent:#e0ff33;--accent-press:#d2f51c;--bone:#FAFAFA;
   --orange:#e8773a;
   --font:'Plus Jakarta Sans',sans-serif;--font-display:'Plus Jakarta Sans',sans-serif;
   --m:clamp(24px,5vw,64px);--gut:24px;--max-w:1440px;
-  --space-md:24px;--space-lg:36px;--space-title:44px;--space-section:112px;
+  --space-8:8px;--space-16:16px;--space-24:24px;--space-32:32px;--space-40:40px;--space-48:48px;--space-56:56px;--space-64:64px;--space-72:72px;--space-80:80px;--space-96:96px;--space-112:112px;
+  --space-md:var(--space-24);--space-lg:var(--space-32);--space-title:var(--space-72);--space-section:var(--space-112);
   --ty-display:clamp(54px,5.6vw,74px);--ty-title:clamp(32px,3.4vw,48px);--ty-lead:clamp(16px,1.4vw,19px);
-  --ty-copy:17px;--ty-small:14px;--ty-metric:32px;--ty-label:12px;
+  --ty-copy:17px;--ty-small:14px;--ty-metric:32px;--ty-label:12px;--ty-statement:clamp(22px,2.4vw,28px);
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -41,9 +42,9 @@ p{text-wrap:balance}
 .s-index b{font-size:var(--ty-label);font-weight:600;letter-spacing:.04em;color:#fff;font-variant-numeric:tabular-nums}
 .s-index em{width:28px;height:1.5px;background:rgba(255,255,255,.14);display:block;font-style:normal}
 .s-title{font-size:var(--ty-title);font-weight:600;line-height:1.08;letter-spacing:-.015em;text-transform:uppercase;color:#fff;text-wrap:balance;margin-bottom:var(--space-md)}
-.s-lead{font-size:var(--ty-lead);font-weight:500;line-height:1.5;letter-spacing:0;color:rgba(255,255,255,.7);text-wrap:balance;margin-bottom:var(--space-lg)}
+.s-lead{font-size:var(--ty-small);font-weight:500;line-height:1.6;letter-spacing:0;color:rgba(255,255,255,.7);text-wrap:balance;margin-bottom:var(--space-lg)}
 .s-lead strong{font-weight:700;color:#fff}
-.s-body{font-size:var(--ty-copy);font-weight:400;line-height:1.6;color:rgba(255,255,255,.7);text-wrap:balance}
+.s-body{font-size:var(--ty-small);font-weight:400;line-height:1.6;color:rgba(255,255,255,.7);text-wrap:balance}
 .s-body strong{font-weight:700;color:#fff}
 .s-body+.s-body{margin-top:var(--space-md)}
 .s-label{font-size:var(--ty-label);font-weight:700;line-height:1.3;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5)}
@@ -70,8 +71,8 @@ p{text-wrap:balance}
 .nav-menu .nav-link:hover{background:var(--black);color:#fff}
 
 /* ═══ HERO (dark) ═══ */
-.hero{position:relative;overflow:hidden;background:#000;padding-top:clamp(60px,7vh,84px);padding-bottom:0}
-#reconhecimento.sec.dark{background:#000}
+.hero{position:relative;overflow:hidden;background:#1A1A1A;padding-top:clamp(60px,7vh,84px);padding-bottom:0}
+#reconhecimento.sec.dark{background:#1A1A1A}
 .hero-inner-stack{position:relative;z-index:2;display:flex;flex-direction:column;max-width:980px;padding-top:clamp(24px,3vw,48px)}
 .hero-inner-stack .hero-title{margin-bottom:clamp(24px,2.6vw,32px)}
 .hero-inner-stack .hero-intro{margin-bottom:clamp(24px,2.6vw,32px)}
@@ -162,7 +163,7 @@ p{text-wrap:balance}
 .animated-img{width:100%;border-radius:8px;overflow:hidden}
 
 /* ═══ APRENDIZADOS (dark já padrão) ═══ */
-.sec--dark{background:#000;color:#fff;border-top:1px solid rgba(255,255,255,.14)}
+.sec--dark{background:#1A1A1A;color:#fff;border-top:1px solid rgba(255,255,255,.14)}
 .sec--dark .s-index b{color:var(--accent)}
 .sec--dark .s-index em{background:rgba(255,255,255,.28)}
 .sec--dark .s-title{color:#fff}
@@ -340,7 +341,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 <!-- NAV (componente compartilhado) -->
 <site-nav back="index.html#work"></site-nav>
 <script src="site-nav.js?v=16"></script>
-<link rel="stylesheet" href="case-patterns.css?v=12">
+<link rel="stylesheet" href="case-patterns.css?v=13">
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lacquer&display=swap" rel="stylesheet">
 

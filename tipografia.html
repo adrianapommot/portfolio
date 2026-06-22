@@ -3,147 +3,121 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tipografia — Delta Design System</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Tipografia — Delta Design System</title>
 <style>
+:root{
+  --black:#111; --bg:#FAFAF8; --line:#E8E5DF; --line-soft:#F2F0EC;
+  --text:#111; --text-2:#555; --text-3:#888;
+  --accent:#F9B500; --accent-dark:#CE9A23; --tok:#E6007A;
+  --font:'Plus Jakarta Sans',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
-body{font-family:'Plus Jakarta Sans',sans-serif;background:#fff;color:#111;-webkit-font-smoothing:antialiased}
-.page{display:grid;grid-template-columns:300px 1fr;height:100vh;overflow:hidden}
+body{font-family:var(--font);background:#fff;color:var(--text);-webkit-font-smoothing:antialiased;display:flex;flex-direction:column;overflow:hidden}
+.band{display:grid;grid-template-columns:auto 1fr auto;gap:clamp(28px,3vw,48px);align-items:end;padding:24px clamp(28px,3vw,40px) 22px;border-bottom:1px solid var(--line);background:var(--bg);flex-shrink:0}
+.band-title-block{display:flex;flex-direction:column;gap:16px}
+.band-eyebrow{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-dark)}
+.band-title{font-size:clamp(38px,4.2vw,52px);font-weight:800;line-height:.94;letter-spacing:-.04em;color:var(--text);text-wrap:balance}
+.band-desc{font-size:12.5px;line-height:1.6;color:var(--text-2);max-width:48ch;text-wrap:pretty}
+.band-callout{display:flex;flex-direction:column;justify-content:flex-end;gap:3px;padding:16px;border-left:2px solid var(--accent);background:#fff;align-self:stretch}
+.band-callout b{font-size:11.5px;font-weight:700;color:var(--text);line-height:1.3}
+.band-callout span{font-size:10.5px;color:var(--text-3);line-height:1.35}
+@media(max-width:1080px){.band{grid-template-columns:1fr;align-items:flex-start;gap:14px}.band-callout{align-self:flex-start}}
+.body{flex:1;display:flex;flex-direction:column;overflow:hidden;background:#fff;min-height:0}
+.spec-toggle{position:fixed;top:14px;right:14px;z-index:50;display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:#fff;font-family:var(--font);font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-2);cursor:pointer;transition:.2s}
+.spec-toggle:hover{background:var(--text);color:#fff;border-color:var(--text)}
+.spec-toggle::before{content:"";width:6px;height:6px;background:var(--accent);display:block;border-radius:1px}
+.spec-panel{position:fixed;top:54px;right:14px;z-index:50;width:300px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px 16px 16px;box-shadow:0 12px 40px -16px rgba(0,0,0,.25);font-family:var(--font)}
+.spec-panel[hidden]{display:none}
+.spec-panel h4{font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.spec-panel dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:11.5px;line-height:1.5}
+.spec-panel dt{font-family:var(--mono);font-weight:500;color:var(--text);white-space:nowrap}
+.spec-panel dd{color:var(--text-2);font-family:var(--mono);font-size:10.5px}
+.spec-panel dd em{font-style:normal;display:block;color:var(--text-3);font-family:var(--font);font-size:10px;letter-spacing:.02em}
 
-/* SIDEBAR */
-.sidebar{border-right:1px solid #E8E5DF;display:flex;flex-direction:column;padding:28px 20px 24px;overflow-y:auto}
-.s-title{font-size:42px;font-weight:800;line-height:1.0;letter-spacing:-.04em;color:#111;margin-bottom:16px;padding-top:4px}
-.s-gold-rule{position:relative;height:2px;background:#F9B500;max-width:140px;margin:16px 0 18px}.s-gold-rule::after{content:"";position:absolute;right:-3px;top:-4px;width:10px;height:10px;border-radius:50%;background:#F9B500}
-.s-desc{font-size:11.5px;line-height:1.65;color:#555;margin-bottom:18px}
-.feat-list{display:flex;flex-direction:column}
-.feat{display:flex;gap:9px;align-items:flex-start;padding:10px 0}
-.feat:last-child{border-bottom:none}
-.feat-ico{width:26px;height:26px;border-radius:50%;background:#E8F5ED;flex-shrink:0;display:flex;align-items:center;justify-content:center}
-.feat-txt strong{display:block;font-size:11px;font-weight:700;color:#111;margin-bottom:1px}
-.feat-txt span{font-size:10px;color:#666;line-height:1.5}
-
-/* MAIN */
-.main{display:flex;flex-direction:column;overflow:hidden;background:#fff;padding:0;gap:0}
-.tok{font-family:'IBM Plex Mono',monospace;font-size:8.5px;font-weight:500;color:#E6007A;white-space:nowrap;display:block}
-
-/* Card base */
-.card{padding:20px 24px;border-right:1px solid #E8E5DF}
-.card-h{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#888;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #E8E5DF}
-
-/* ROW 1: Font Family + Line Height */
-.row1{display:grid;grid-template-columns:1fr 1fr;gap:0;flex-shrink:0;border-bottom:1px solid #E8E5DF}
-
-/* Font Family */
-.fam-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;padding-top:8px}
-.fam-item{padding-right:10px}
-.fam-item:last-child{border-right:none;padding-right:0;padding-left:10px}
-.fam-name{font-size:13px;font-weight:700;color:#111;margin-top:5px;white-space:nowrap}
-.fam-sub{font-size:9px;color:#aaa;margin-top:1px}
-
-/* Line Height */
-.lh-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;padding-top:8px}
-.lh-item{padding-right:8px}
-.lh-item:last-child{border-right:none}
-.lh-lbl{font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#bbb;margin:5px 0 2px;display:block}
-.lh-val{font-size:17px;font-weight:700;color:#111}
-
-/* ROW 2: Font Weight — full width */
-.fw-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;padding-top:8px}
-.fw-item{padding-right:10px;min-width:0}
-.fw-item:last-child{border-right:none}
-.fw-lbl{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#bbb;margin:5px 0 2px;display:block;white-space:nowrap}
-.fw-val{font-size:20px;color:#111}
-
-/* ROW 3: Font Size Scale */
-.scale-card{flex:1;padding:20px 24px 0;display:flex;flex-direction:column;min-height:0;overflow:hidden}
-.scale-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:12px 0;align-content:start}
-.sz{display:flex;flex-direction:column;padding:0 10px 0 0;min-width:0;overflow:hidden}
-.sz:nth-child(7n){padding-right:0}
-.sz-aa{font-weight:700;color:#111;line-height:1;letter-spacing:-.02em;margin-bottom:6px}
-.sz-tok{font-family:'IBM Plex Mono',monospace;font-size:7px;font-weight:500;color:#E6007A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.tok{font-family:var(--mono);font-size:8.5px;font-weight:500;color:var(--tok);white-space:nowrap;display:block}
+.row{padding:18px clamp(20px,2.4vw,28px);border-bottom:1px solid var(--line);flex-shrink:0}
+.row-2col{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,2.4vw,32px);padding:0;flex-shrink:0;border-bottom:1px solid var(--line)}
+.row-2col > div{padding:18px clamp(20px,2.4vw,28px)}
+.row-2col > div:first-child{border-right:1px solid var(--line)}
+.row-h{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.fam-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.fam-item .fam-name{font-size:14px;font-weight:700;color:var(--text);margin-top:5px}
+.fam-item .fam-sub{font-size:9px;color:#aaa;margin-top:1px}
+.lh-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.lh-item .lh-lbl{font-size:8.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#bbb;margin:5px 0 2px;display:block}
+.lh-item .lh-val{font-size:18px;font-weight:700;color:var(--text)}
+.fw-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.fw-item .fw-lbl{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#bbb;margin:5px 0 2px;display:block;white-space:nowrap}
+.fw-item .fw-val{font-size:22px;color:var(--text)}
+.scale{flex:1;padding:18px clamp(20px,2.4vw,28px);display:flex;flex-direction:column;min-height:0;overflow:hidden}
+.scale-grid{flex:1;display:grid;grid-template-columns:repeat(7,1fr);gap:10px;align-content:start;min-height:0}
+.sz{display:flex;flex-direction:column;min-width:0;overflow:hidden}
+.sz-aa{font-weight:700;color:var(--text);line-height:1;letter-spacing:-.02em;margin-bottom:6px}
+.sz-tok{font-family:var(--mono);font-size:7px;font-weight:500;color:var(--tok);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
 .sz-lbl{font-size:7px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#ccc;margin-bottom:1px;display:block}
-.sz-px{font-size:11px;font-weight:700;color:#111}
-
-/* FOOTER */
-.footer-bar{flex-shrink:0;padding:9px 0;display:flex;align-items:center;gap:8px}
-.fi-txt{font-size:10.5px;color:#888;line-height:1.5}
+.sz-px{font-size:11px;font-weight:700;color:var(--text)}
 </style>
 </head>
 <body>
-<div class="page">
-
-  <aside class="sidebar">
-    <h1 class="s-title">Tipografia</h1>
-        <p class="s-desc">Sistema tipográfico construído para maximizar legibilidade, hierarquia visual e consistência em todos os produtos e marcas do ecossistema Delta.</p>
-    <div class="s-gold-rule"></div>
-    <div class="feat-list">
-      <div class="feat">
-        <div class="feat-ico"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><text x="1" y="10" font-family="serif" font-size="9" font-weight="700" fill="#1F7A3C">Aa</text></svg></div>
-        <div class="feat-txt"><strong>Clareza</strong><span>Tipografia pensada para facilitar a leitura em qualquer contexto.</span></div>
-      </div>
-      <div class="feat">
-        <div class="feat-ico"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M1 3H12M1 6.5H9M1 10H6.5" stroke="#1F7A3C" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-        <div class="feat-txt"><strong>Hierarquia</strong><span>Escalas e pesos que orientam a informação com consistência.</span></div>
-      </div>
-      <div class="feat">
-        <div class="feat-ico"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="3" r="1.2" fill="#1F7A3C"/><path d="M5 5.5H6.5V10M5 10H8" stroke="#1F7A3C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="feat-txt"><strong>Acessibilidade</strong><span>Tamanhos e espaçamentos alinhados às melhores práticas.</span></div>
-      </div>
-      <div class="feat">
-        <div class="feat-ico"><svg width="13" height="13" viewBox="0 0 13 13" fill="none"><rect x="1" y="1" width="11" height="11" rx="2" stroke="#1F7A3C" stroke-width="1.4"/><path d="M3.5 4H9.5M3.5 6.5H9.5M3.5 9H6.5" stroke="#1F7A3C" stroke-width="1.1" stroke-linecap="round"/></svg></div>
-        <div class="feat-txt"><strong>Escalabilidade</strong><span>Tokens globais que garantem flexibilidade e manutenção.</span></div>
-      </div>
+<button class="spec-toggle" type="button" onclick="document.getElementById('specPanel').hidden = !document.getElementById('specPanel').hidden">Espaços</button>
+<aside class="spec-panel" id="specPanel" hidden>
+  <h4>Espaçamentos do header</h4>
+  <dl>
+    <dt>padding</dt><dd>24 · clamp(28-40) · 22<em>topo / lateral / fundo</em></dd>
+    <dt>gap</dt><dd>clamp(28 → 48)<em>entre as 3 colunas</em></dd>
+    <dt>title gap</dt><dd>16<em>eyebrow → título</em></dd>
+    <dt>callout pad</dt><dd>16 · 16<em>interno do bloco lateral</em></dd>
+    <dt>callout gap</dt><dd>3<em>entre as 2 linhas</em></dd>
+  </dl>
+</aside>
+<header class="band">
+  <div class="band-title-block">
+    <span class="band-eyebrow">Type System</span>
+    <h1 class="band-title">Tipografia</h1>
+  </div>
+  <p class="band-desc">Sistema tipográfico construído para maximizar legibilidade, hierarquia visual e consistência em todos os produtos e marcas do ecossistema Delta.</p>
+  <div class="band-callout">
+    <b>Escala modular em múltiplos de 4px.</b>
+    <span>Ritmo visual consistente em todos os produtos.</span>
+  </div>
+</header>
+<main class="body">
+<div class="row-2col">
+  <div>
+    <div class="row-h">Font Family</div>
+    <div class="fam-grid">
+      <div class="fam-item"><span class="tok">$font-family-primary</span><div class="fam-name">Din Ot</div><div class="fam-sub">Font Brand Primary</div></div>
+      <div class="fam-item"><span class="tok">$font-family-secondary</span><div class="fam-name">Roboto</div><div class="fam-sub">Font Brand Secondary</div></div>
     </div>
-  </aside>
-
-  <div class="main">
-
-    <!-- ROW 1: Font Family + Line Height -->
-    <div class="row1">
-      <div class="card">
-        <div class="card-h">Font Family</div>
-                <div class="fam-grid">
-          <div class="fam-item"><span class="tok">$font-family-primary</span><div class="fam-name">Din Ot</div><div class="fam-sub">Font Brand Primary</div></div>
-          <div class="fam-item"><span class="tok">$font-family-secondary</span><div class="fam-name">Roboto</div><div class="fam-sub">Font Brand Secondary</div></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-h">Line Height</div>
-                <div class="lh-grid">
-          <div class="lh-item"><span class="tok">$line-height-tight</span><span class="lh-lbl">Tight</span><div class="lh-val">100%</div></div>
-          <div class="lh-item"><span class="tok">$line-height-xs</span><span class="lh-lbl">Medium</span><div class="lh-val">120%</div></div>
-          <div class="lh-item"><span class="tok">$line-height-distant</span><span class="lh-lbl">Relaxed</span><div class="lh-val">150%</div></div>
-          <div class="lh-item"><span class="tok">$line-height-superdistant</span><span class="lh-lbl">Spaced</span><div class="lh-val">200%</div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ROW 2: Font Weight full width -->
-    <div class="card" style="flex-shrink:0">
-      <div class="card-h">Font Weight</div>
-      <div class="fw-grid">
-        <div class="fw-item"><span class="tok">$font-weight-bold</span><span class="fw-lbl">Bold</span><div class="fw-val" style="font-weight:700">700</div></div>
-        <div class="fw-item"><span class="tok">$font-weight-semibold</span><span class="fw-lbl">Semi Bold</span><div class="fw-val" style="font-weight:600">600</div></div>
-        <div class="fw-item"><span class="tok">$font-weight-medium</span><span class="fw-lbl">Medium</span><div class="fw-val" style="font-weight:500">500</div></div>
-        <div class="fw-item"><span class="tok">$font-weight-regular</span><span class="fw-lbl">Regular</span><div class="fw-val" style="font-weight:400">400</div></div>
-        <div class="fw-item"><span class="tok">$font-weight-light</span><span class="fw-lbl">Light</span><div class="fw-val" style="font-weight:300">300</div></div>
-      </div>
-    </div>
-
-    <!-- ROW 3: Font Size Scale -->
-    <div class="scale-card">
-      <div class="card-h">Font Size Scale</div>
-      <div class="scale-grid" id="sizeGrid"></div>
-    </div>
-
-    <div class="footer-bar">
-      <svg style="width:14px;height:14px;flex-shrink:0" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="#1F7A3C" stroke-width="1.3"/><path d="M7 6.5V10" stroke="#1F7A3C" stroke-width="1.3" stroke-linecap="round"/><circle cx="7" cy="5" r=".6" fill="#1F7A3C"/></svg>
-      <p class="fi-txt">Escala modular baseada em múltiplos de 4px — ritmo visual consistente em todos os produtos Delta.</p>
+  </div>
+  <div>
+    <div class="row-h">Line Height</div>
+    <div class="lh-grid">
+      <div class="lh-item"><span class="tok">$line-height-tight</span><span class="lh-lbl">Tight</span><div class="lh-val">100%</div></div>
+      <div class="lh-item"><span class="tok">$line-height-xs</span><span class="lh-lbl">Medium</span><div class="lh-val">120%</div></div>
+      <div class="lh-item"><span class="tok">$line-height-distant</span><span class="lh-lbl">Relaxed</span><div class="lh-val">150%</div></div>
+      <div class="lh-item"><span class="tok">$line-height-superdistant</span><span class="lh-lbl">Spaced</span><div class="lh-val">200%</div></div>
     </div>
   </div>
 </div>
-
+<div class="row">
+  <div class="row-h">Font Weight</div>
+  <div class="fw-grid">
+    <div class="fw-item"><span class="tok">$font-weight-bold</span><span class="fw-lbl">Bold</span><div class="fw-val" style="font-weight:700">700</div></div>
+    <div class="fw-item"><span class="tok">$font-weight-semibold</span><span class="fw-lbl">Semi Bold</span><div class="fw-val" style="font-weight:600">600</div></div>
+    <div class="fw-item"><span class="tok">$font-weight-medium</span><span class="fw-lbl">Medium</span><div class="fw-val" style="font-weight:500">500</div></div>
+    <div class="fw-item"><span class="tok">$font-weight-regular</span><span class="fw-lbl">Regular</span><div class="fw-val" style="font-weight:400">400</div></div>
+    <div class="fw-item"><span class="tok">$font-weight-light</span><span class="fw-lbl">Light</span><div class="fw-val" style="font-weight:300">300</div></div>
+  </div>
+</div>
+<div class="scale">
+  <div class="row-h">Font Size Scale</div>
+  <div class="scale-grid" id="sizeGrid"></div>
+</div>
+</main>
 <script>
 const SIZES=[
   {tok:'$font-size-xxxxs',lbl:'XXXXS',px:12},
@@ -160,12 +134,8 @@ const SIZES=[
   {tok:'$font-size-display',lbl:'DISPLAY',px:80},
   {tok:'$font-size-giant',lbl:'GIANT',px:96},
 ];
-// Row 1: items 1-7 aligned to bottom; Row 2: items 8-13 aligned to top
-const grid=document.getElementById('sizeGrid');
-// Add empty slot for item 14 so last row fills the grid
-const all=SIZES;
-grid.innerHTML=all.map(s=>{
-  const vis=Math.min(s.px,44);
+document.getElementById('sizeGrid').innerHTML=SIZES.map(s=>{
+  const vis=Math.min(s.px,40);
   return `<div class="sz"><div class="sz-aa" style="font-size:${vis}px">Aa</div><span class="sz-tok">${s.tok}</span><span class="sz-lbl">${s.lbl}</span><span class="sz-px">${s.px}px</span></div>`;
 }).join('');
 </script>

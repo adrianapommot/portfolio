@@ -3,382 +3,215 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Delta Atoms — Delta Design System</title>
+<title>Delta Atoms — Biblioteca interativa</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Plus Jakarta Sans',sans-serif;background:#fff;color:#111;-webkit-font-smoothing:antialiased}
-.page{display:grid;grid-template-columns:minmax(240px,280px) 1fr;width:100%}
+  :root{
+    /* tokens do produto Delta */
+    --primary:#F9B500; --primary-dark:#F0A60D; --primary-darkest:#CE9A23;
+    --secondary:#474B51; --sec-2:#6C7077; --sec-light:#9498A0;
+    --ink:#16181B; --body:#5C5C5C; --muted:#9C9C9C; --line:#E8E5DF; --surface:#F7F6F3;
+    --tertiary:#8C5A84;
+    --critical:#D43C56; --success:#1CC6A0; --warning:#F5841A; --info:#1E6FC6;
+    --crit-bg:#FBE7EB; --succ-bg:#DFF6F0; --warn-bg:#FDEAD7; --info-bg:#D6E8F7;
+    --font:'Plus Jakarta Sans',sans-serif; --mono:'IBM Plex Mono',monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:var(--font);color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased}
+  .shell{display:flex;height:100%;min-height:0}
 
-/* ── SIDEBAR ── */
-.sidebar{border-right:1px solid #E8E5DF;display:flex;flex-direction:column;padding:32px 22px 24px}
-.s-title{font-size:44px;font-weight:800;line-height:.92;letter-spacing:-.04em;color:#111;margin-bottom:12px}
-.s-rule{position:relative;height:2px;background:#F9B500;max-width:130px;margin-bottom:16px}
-.s-desc{font-size:12px;line-height:1.65;color:#555;margin-bottom:24px}
-.feat-list{display:flex;flex-direction:column;gap:4px;margin-bottom:24px}
-.feat{display:flex;gap:9px;align-items:flex-start;padding:9px 0}
-.feat-ico{width:26px;height:26px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
-.feat-txt strong{display:block;font-size:11px;font-weight:700;color:#111;margin-bottom:1px}
-.feat-txt span{font-size:10px;color:#666;line-height:1.5}
-.legend{display:flex;gap:14px;padding:10px 12px;border:1px solid #E8E5DF;border-radius:8px}
-.leg-item{display:flex;align-items:center;gap:6px;font-size:11px;color:#555;font-weight:500}
-.leg-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.d-prod{background:#1F7A3C}
-.d-evol{background:#F5841A}
+  /* ── sidebar ── */
+  .sidebar{width:268px;flex:0 0 268px;border-right:1px solid var(--line);display:flex;flex-direction:column;padding:30px 24px 24px;background:#fff}
+  .eyebrow{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .s-title{font-size:44px;font-weight:800;line-height:.92;letter-spacing:-.04em;color:var(--ink);margin-top:14px}
+  .s-rule{height:3px;width:120px;background:var(--primary);margin:16px 0}
+  .s-desc{font-size:12.5px;line-height:1.65;color:var(--body);text-wrap:pretty}
+  .legend{margin-top:auto;display:flex;flex-direction:column;gap:9px;padding-top:24px}
+  .legend-row{display:flex;align-items:center;gap:9px;font-size:11px;color:var(--body)}
+  .legend-row span:first-child{width:11px;height:11px;border-radius:3px;flex:0 0 auto}
+  .legend-row b{font-weight:600;color:var(--ink)}
+  .sb-foot{margin-top:20px;padding-top:16px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.02em}
 
-/* ── MAIN GRID ── */
-.main{display:flex;flex-direction:column}
-.comp-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:minmax(190px,auto)}
-.card{border-right:1px solid #E8E5DF;border-bottom:1px solid #E8E5DF;padding:18px 20px;display:flex;flex-direction:column;gap:10px}
-.card:nth-child(3n){border-right:none}
-.card:nth-last-child(-n+3){border-bottom:none}
+  /* ── main ── */
+  .main{flex:1;min-width:0;overflow-y:auto;padding:26px 28px 34px}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .atom{border:1px solid var(--line);border-radius:12px;padding:18px 18px 20px;background:#fff;display:flex;flex-direction:column;gap:14px}
+  .atom-hd{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+  .atom-name{font-size:13px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+  .atom-tok{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.02em}
+  .row{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+  .stack{display:flex;flex-direction:column;gap:10px}
+  .caption{font-size:10.5px;color:var(--muted);font-family:var(--mono);letter-spacing:.02em}
 
-@media (max-width:920px){
-  .page{grid-template-columns:1fr}
-  .sidebar{border-right:none;border-bottom:1px solid #E8E5DF}
-  .comp-grid{grid-template-columns:repeat(2,1fr)}
-  .card:nth-child(3n){border-right:1px solid #E8E5DF}
-  .card:nth-child(2n){border-right:none}
-  .card:nth-last-child(-n+3){border-bottom:1px solid #E8E5DF}
-  .card:nth-last-child(-n+2){border-bottom:none}
-}
-@media (max-width:580px){
-  .comp-grid{grid-template-columns:1fr}
-  .card{border-right:none!important;border-bottom:1px solid #E8E5DF!important}
-  .card:last-child{border-bottom:none!important}
-}
+  /* botões */
+  .btn{font-family:var(--font);font-size:12.5px;font-weight:600;letter-spacing:.01em;border-radius:8px;padding:9px 16px;cursor:pointer;border:1px solid transparent;transition:background .18s,box-shadow .18s,color .18s,border-color .18s;white-space:nowrap}
+  .btn-primary{background:var(--primary);color:#1C1300;border-color:var(--primary)}
+  .btn-primary:hover{background:var(--primary-dark);box-shadow:0 6px 16px rgba(249,181,0,.32)}
+  .btn-secondary{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .btn-secondary:hover{background:var(--secondary)}
+  .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  .btn-ghost:hover{border-color:var(--ink);background:var(--surface)}
+  .btn-sm{padding:6px 12px;font-size:11.5px}
+  .btn-lg{padding:12px 22px;font-size:14px}
+  .btn:disabled,.btn[disabled]{opacity:.4;cursor:not-allowed;box-shadow:none}
 
-/* Card header */
-.card-head{display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-.card-left{display:flex;align-items:center;gap:8px}
-.card-ico{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.card-name{font-size:13px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:#6F6F6F}
-.card-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.card-desc{font-size:11px;color:#888;line-height:1.45;flex-shrink:0}
+  /* campos */
+  .field{display:flex;flex-direction:column;gap:6px}
+  .field label{font-size:11px;font-weight:600;color:var(--body)}
+  .input{font-family:var(--font);font-size:13px;color:var(--ink);padding:10px 12px;border:1.5px solid var(--line);border-radius:8px;background:#fff;outline:none;transition:border-color .18s,box-shadow .18s}
+  .input::placeholder{color:var(--muted)}
+  .input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(249,181,0,.28)}
+  .input.is-error{border-color:var(--critical);box-shadow:0 0 0 3px rgba(212,60,86,.16)}
+  .help{font-size:10.5px;color:var(--critical);font-weight:500}
 
-/* BUTTON */
-.btn-row{display:flex;gap:7px;flex-shrink:0}
-.db-primary{background:#F9B500;color:#111;font-size:12px;font-weight:600;padding:7px 14px;border-radius:6px;border:none;cursor:default;font-family:inherit}
-.db-secondary{background:#fff;color:#111;font-size:12px;font-weight:600;padding:7px 14px;border-radius:6px;border:1.5px solid #CCC;cursor:default;font-family:inherit}
-.btn-states{display:flex;gap:8px;align-items:flex-end;margin-top:auto}
-.bs-item{display:flex;flex-direction:column;align-items:center;gap:3px}
-.bs-swatch{height:22px;border-radius:4px}
-.bs-label{font-size:9.5px;color:#aaa}
+  /* seleção */
+  .opt{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--ink);cursor:pointer;user-select:none}
+  .opt input{position:absolute;opacity:0;pointer-events:none}
+  .box{width:18px;height:18px;border:1.5px solid var(--sec-light);border-radius:5px;display:grid;place-items:center;transition:.18s}
+  .box.round{border-radius:50%}
+  .opt input:checked + .box{background:var(--primary);border-color:var(--primary)}
+  .box svg{width:11px;height:11px;stroke:#1C1300;stroke-width:2.6;fill:none;opacity:0;transition:opacity .15s}
+  .opt input:checked + .box svg{opacity:1}
+  .box.round::after{content:"";width:7px;height:7px;border-radius:50%;background:#1C1300;opacity:0;transition:opacity .15s}
+  .opt input:checked + .box.round::after{opacity:1}
+  .box.round svg{display:none}
+  /* toggle */
+  .switch{width:40px;height:23px;border-radius:999px;background:var(--neutral-light,#C9C9C9);position:relative;transition:background .2s;flex:0 0 auto}
+  .switch::after{content:"";position:absolute;top:2.5px;left:2.5px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s}
+  .opt input:checked + .switch{background:var(--primary)}
+  .opt input:checked + .switch::after{transform:translateX(17px)}
 
-/* FAB */
-.fab-row{display:flex;gap:10px;align-items:center;flex:1}
-.fab-main{width:44px;height:44px;border-radius:50%;background:#F9B500;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.fab-sm{width:34px;height:34px;border-radius:50%;background:#fff;border:1px solid #E0E0E0;box-shadow:0 2px 6px rgba(0,0,0,.09);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  /* status / badges */
+  .badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;padding:5px 11px;border-radius:999px;letter-spacing:.01em}
+  .badge::before{content:"";width:7px;height:7px;border-radius:50%}
+  .badge.success{background:var(--succ-bg);color:#0E7A5F}.badge.success::before{background:var(--success)}
+  .badge.warning{background:var(--warn-bg);color:#C2590E}.badge.warning::before{background:var(--warning)}
+  .badge.critical{background:var(--crit-bg);color:#B23048}.badge.critical::before{background:var(--critical)}
+  .badge.info{background:var(--info-bg);color:#15549C}.badge.info::before{background:var(--info)}
 
-/* LOADER */
-.loader-row{display:flex;align-items:center;gap:14px;flex:1}
-.loader-dots{display:flex;gap:5px;align-items:center}
-.ld{width:8px;height:8px;border-radius:50%}
-.loader-bar-wrap{flex:1;display:flex;flex-direction:column;gap:3px}
-.loader-bar-bg{height:5px;background:#E8E5DF;border-radius:3px;overflow:hidden}
-.loader-bar-fill{height:100%;background:#1F7A3C;width:60%;border-radius:3px}
-.loader-pct{font-size:9.5px;color:#888;text-align:right}
+  /* chips */
+  .chip{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:500;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 8px 6px 13px}
+  .chip b{font-weight:600}
+  .chip .x{width:16px;height:16px;border-radius:50%;display:grid;place-items:center;background:#fff;border:1px solid var(--line);font-size:10px;color:var(--body);cursor:pointer;line-height:1}
+  .chip .x:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
 
-/* LINKS */
-.links-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px 6px;flex:1;align-content:center}
-.lk{font-size:12px;font-weight:500;display:flex;align-items:center;gap:3px;cursor:default}
-.lk-primary{color:#1E6FC6}
-.lk-hover{color:#1E6FC6;text-decoration:underline}
-.lk-visited{color:#7B3FA0}
-.lk-disabled{color:#C0C0C0}
+  /* avatar */
+  .av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;color:#1C1300}
+  .av-stack{display:flex}
+  .av-stack .av{margin-left:-9px;border:2px solid #fff}
+  .av-stack .av:first-child{margin-left:0}
 
-/* TABS */
-.tabs-top{display:flex;gap:0;border-bottom:1.5px solid #E0E0E0;margin-bottom:6px;flex-shrink:0}
-.tab{font-size:11px;font-weight:500;padding:5px 10px;color:#aaa;border-bottom:2px solid transparent;margin-bottom:-1.5px;cursor:default}
-.tab.active{color:#1F7A3C;border-bottom-color:#1F7A3C;font-weight:700}
-.tabs-bottom{display:flex;justify-content:space-around;padding:6px 0 0}
-.tab-ico{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:9px;color:#aaa}
-.tab-ico.active{color:#1F7A3C}
-.tab-ico svg{width:16px;height:16px}
+  /* inline alert */
+  .alert{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;border-radius:9px;font-size:12px;line-height:1.5;border:1px solid}
+  .alert.info{background:var(--info-bg);border-color:#9FC1E8;color:#15549C}
+  .alert .dot{width:8px;height:8px;border-radius:50%;background:var(--info);margin-top:5px;flex:0 0 auto}
+  .alert b{font-weight:700}
 
-/* CHIPS */
-.chips-col{display:flex;flex-direction:column;gap:6px;flex:1;justify-content:center}
-.chips-row{display:flex;gap:5px;flex-wrap:wrap}
-.chip{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:500;padding:4px 9px;border-radius:999px;border:1.5px solid transparent;cursor:default}
-.chip-active{background:#E8F5ED;color:#1F7A3C;border-color:#A8D5B5}
-.chip-info{background:#EBF3FC;color:#1E6FC6;border-color:#A8C8EF}
-.chip-warning{background:#FEF0E3;color:#C2590E;border-color:#F8C49A}
-.chip-removable{background:#F5F5F5;color:#444;border-color:#DDD}
-.chip-new{background:#F3EDFB;color:#7C3AED;border-color:#C9A8F0}
-
-/* PROGRESS */
-.prog-bar-wrap{display:flex;align-items:center;gap:7px;flex-shrink:0}
-.prog-bg{flex:1;height:6px;background:#E8E5DF;border-radius:3px;overflow:hidden}
-.prog-fill{height:100%;background:#1F7A3C;width:72%;border-radius:3px}
-.prog-pct{font-size:10.5px;color:#555;font-weight:600;flex-shrink:0}
-.steps{display:flex;align-items:center;gap:0;flex:1;margin-top:auto}
-.step-node{display:flex;flex-direction:column;align-items:center;gap:2px;position:relative;z-index:1}
-.step-circle{width:21px;height:21px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:700;border:2px solid;flex-shrink:0}
-.step-done{background:#1F7A3C;border-color:#1F7A3C;color:#fff}
-.step-active{background:#1F7A3C;border-color:#1F7A3C;color:#fff}
-.step-todo{background:#fff;border-color:#CCC;color:#aaa}
-.step-label{font-size:9px;color:#aaa;white-space:nowrap}
-.step-line{flex:1;height:1.5px;background:#E0E0E0;margin-top:-13px}
-.step-line.done{background:#1F7A3C}
-
-/* INPUT */
-.input-col{display:flex;flex-direction:column;gap:7px;flex:1;justify-content:center}
-.inp-wrap{display:flex;flex-direction:column;gap:2px}
-.inp-label{font-size:9.5px;font-weight:600;color:#555}
-.inp{height:30px;border-radius:6px;padding:0 10px;font-family:inherit;font-size:12px;outline:none;width:100%}
-.inp-default{border:1.5px solid #CCC;background:#fff;color:#111}
-.inp-focus{border:1.5px solid #1F7A3C;background:#fff;color:#111;box-shadow:0 0 0 3px rgba(31,122,60,.12)}
-.inp-error{border:1.5px solid #D43C56;background:#fff;color:#111}
-.inp-hint{font-size:9.5px;color:#D43C56;margin-top:1px}
-
-/* ALERT */
-.alerts{display:flex;flex-direction:column;gap:4px;flex:1;justify-content:center}
-.alert{display:flex;align-items:center;padding:5px 9px;border-radius:6px;font-size:10.5px;font-weight:500;gap:6px}
-.alert-ico{width:14px;height:14px;flex-shrink:0}
-.alert-txt{flex:1;line-height:1.4}
-.alert-close{font-size:12px;color:#aaa;cursor:default;flex-shrink:0}
-.al-success{background:#E8F5ED;color:#1A5C2A}
-.al-warning{background:#FEF0E3;color:#8C3E0A}
-.al-error{background:#FDECEA;color:#8B1A1A}
-.al-info{background:#EBF3FC;color:#0D3A6A}
+  @media(max-width:760px){.shell{flex-direction:column;height:auto}.sidebar{width:100%;flex:none;border-right:none;border-bottom:1px solid var(--line)}.grid{grid-template-columns:1fr}.legend{margin-top:20px}}
 </style>
 </head>
 <body>
-<div class="page">
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="eyebrow">Delta Design System</div>
+      <h1 class="s-title">Atoms</h1>
+      <div class="s-rule"></div>
+      <p class="s-desc">Os elementos atômicos da interface: botões, campos, seleção, status e marcadores. Cada átomo carrega os tokens da fundação, garantindo consistência entre todos os produtos do ecossistema.</p>
+      <div class="legend">
+        <div class="legend-row"><span style="background:#F9B500"></span><b>Primary</b> ação principal</div>
+        <div class="legend-row"><span style="background:#16181B"></span><b>Neutral</b> estrutura e texto</div>
+        <div class="legend-row"><span style="background:#1CC6A0"></span><b>Feedback</b> estados do sistema</div>
+      </div>
+      <div class="sb-foot">6 grupos · 24 variantes</div>
+    </aside>
 
-  <aside class="sidebar">
-    <h1 class="s-title">Delta<br>Atoms</h1>
-    <div class="s-rule"></div>
-    <p class="s-desc">Os blocos fundamentais do Design System Delta. Pequenos, poderosos e reutilizáveis, construídos para garantir consistência, acessibilidade e escala em todos os produtos.</p>
-    <div class="feat-list">
-      <div class="feat">
-        <div class="feat-ico" style="background:#E8F5ED"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7 A5 5 0 1 1 7 12" stroke="#1F7A3C" stroke-width="1.6" stroke-linecap="round"/><path d="M4.5 4.5 L2 7 L4.5 9.5" stroke="#1F7A3C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="feat-txt"><strong>Reutilizáveis</strong><span>Átomos compostos para acelerar entregas com qualidade.</span></div>
-      </div>
-      <div class="feat">
-        <div class="feat-ico" style="background:#EBF3FC"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" stroke="#1E6FC6" stroke-width="1.6"/><path d="M4.5 7.5 L6 9 L9.5 5.5" stroke="#1E6FC6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="feat-txt"><strong>Acessíveis</strong><span>Conformidade WCAG em todos os componentes.</span></div>
-      </div>
-      <div class="feat">
-        <div class="feat-ico" style="background:#F3EDFB"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1 L12 4 L12 10 L7 13 L2 10 L2 4 Z" stroke="#7C3AED" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
-        <div class="feat-txt"><strong>Escaláveis</strong><span>Flexíveis para diferentes produtos e marcas.</span></div>
-      </div>
-      <div class="feat">
-        <div class="feat-ico" style="background:#FEF0E3"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="2" width="10" height="10" rx="2" stroke="#C2590E" stroke-width="1.5"/><path d="M5 2 V12 M9 2 V12" stroke="#C2590E" stroke-width="1" opacity=".5"/></svg></div>
-        <div class="feat-txt"><strong>White Label Ready</strong><span>Personalizáveis sem perder consistência.</span></div>
-      </div>
-    </div>
-    <div class="legend">
-      <div class="leg-item"><div class="leg-dot d-prod"></div>Produção</div>
-      <div class="leg-item"><div class="leg-dot d-evol"></div>Em evolução</div>
-    </div>
-  </aside>
+    <main class="main">
+      <div class="grid">
 
-  <div class="main">
-    <div class="comp-grid">
-
-      <!-- 1. BUTTON -->
-      <div class="card">
-        <div class="card-head">
-          <div class="card-left">
-            <div class="card-ico" style="background:#E8F5ED"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="5" width="12" height="6" rx="1.5" stroke="#1F7A3C" stroke-width="1.5"/></svg></div>
-            <span class="card-name">Button</span>
+        <!-- Botões -->
+        <section class="atom">
+          <div class="atom-hd"><span class="atom-name">Botões</span><span class="atom-tok">$button</span></div>
+          <div class="row">
+            <button class="btn btn-primary">Primary</button>
+            <button class="btn btn-secondary">Secondary</button>
+            <button class="btn btn-ghost">Ghost</button>
           </div>
-          <div class="card-dot d-prod"></div>
-        </div>
-        <p class="card-desc">Ação principal com estados claros e acessíveis.</p>
-        <div class="btn-row">
-          <button class="db-primary">Principal</button>
-          <button class="db-secondary">Secundária</button>
-        </div>
-        <div class="btn-states">
-          <div class="bs-item"><div class="bs-swatch" style="width:52px;background:#FCE08F"></div><span class="bs-label">Default</span></div>
-          <div class="bs-item"><div class="bs-swatch" style="width:52px;background:#F0A60D"></div><span class="bs-label">Hover</span></div>
-          <div class="bs-item"><div class="bs-swatch" style="width:52px;background:#E0E0E0"></div><span class="bs-label">Disabled</span></div>
-        </div>
+          <div class="row">
+            <button class="btn btn-primary btn-sm">Small</button>
+            <button class="btn btn-primary">Medium</button>
+            <button class="btn btn-primary btn-lg">Large</button>
+            <button class="btn btn-primary" disabled>Disabled</button>
+          </div>
+        </section>
+
+        <!-- Campos -->
+        <section class="atom">
+          <div class="atom-hd"><span class="atom-name">Campos</span><span class="atom-tok">$input</span></div>
+          <div class="field">
+            <label>Default</label>
+            <input class="input" type="text" placeholder="seu@email.com">
+          </div>
+          <div class="field">
+            <label>Foco</label>
+            <input class="input" type="text" value="adriana.pommot" style="border-color:var(--primary);box-shadow:0 0 0 3px rgba(249,181,0,.28)">
+          </div>
+          <div class="field">
+            <label>Erro</label>
+            <input class="input is-error" type="text" value="email-invalido">
+            <span class="help">Informe um e-mail válido.</span>
+          </div>
+        </section>
+
+        <!-- Seleção -->
+        <section class="atom">
+          <div class="atom-hd"><span class="atom-name">Seleção</span><span class="atom-tok">$control</span></div>
+          <div class="stack">
+            <label class="opt"><input type="checkbox" checked><span class="box"><svg viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3.5"/></svg></span>Checkbox marcado</label>
+            <label class="opt"><input type="checkbox"><span class="box"><svg viewBox="0 0 14 14"><path d="M2 7.5L5.5 11L12 3.5"/></svg></span>Checkbox vazio</label>
+            <label class="opt"><input type="radio" name="r" checked><span class="box round"></span>Radio selecionado</label>
+            <label class="opt"><input type="checkbox" checked><span class="switch"></span>Toggle ligado</label>
+          </div>
+        </section>
+
+        <!-- Status -->
+        <section class="atom">
+          <div class="atom-hd"><span class="atom-name">Status</span><span class="atom-tok">$feedback</span></div>
+          <div class="row">
+            <span class="badge success">Sucesso</span>
+            <span class="badge warning">Atenção</span>
+            <span class="badge critical">Crítico</span>
+            <span class="badge info">Informação</span>
+          </div>
+          <span class="caption">Cores de feedback com par de texto acessível.</span>
+        </section>
+
+        <!-- Tags / Chips -->
+        <section class="atom">
+          <div class="atom-hd"><span class="atom-name">Tags</span><span class="atom-tok">$chip</span></div>
+          <div class="row">
+            <span class="chip"><b>Tokens</b><span class="x">×</span></span>
+            <span class="chip"><b>Componentes</b><span class="x">×</span></span>
+            <span class="chip"><b>White label</b><span class="x">×</span></span>
+          </div>
+          <div class="row">
+            <span class="av-stack">
+              <span class="av" style="background:#F9B500">AP</span>
+              <span class="av" style="background:#8C5A84;color:#fff">RM</span>
+              <span class="av" style="background:#1CC6A0;color:#073A2E">JD</span>
+            </span>
+            <span class="caption">Avatares · grupo</span>
+          </div>
+        </section>
+
+        <!-- Alert inline -->
+        <section class="atom">
+          <div class="atom-hd"><span class="atom-name">Mensagem inline</span><span class="atom-tok">$notice</span></div>
+          <div class="alert info"><span class="dot"></span><div><b>Componente versionado.</b> Variantes e estados ficam documentados na biblioteca, prontos para diferentes cenários de produto.</div></div>
+        </section>
+
       </div>
-
-      <!-- 2. FAB -->
-      <div class="card">
-        <div class="card-head">
-          <div class="card-left">
-            <div class="card-ico" style="background:#E8F5ED"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5.5" stroke="#1F7A3C" stroke-width="1.5"/><path d="M8 5.5 V10.5 M5.5 8 H10.5" stroke="#1F7A3C" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-            <span class="card-name">Botões flutuantes</span>
-          </div>
-          <div class="card-dot d-prod"></div>
-        </div>
-        <p class="card-desc">Ações rápidas sempre acessíveis na interface.</p>
-        <div class="fab-row">
-          <div class="fab-main"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3V13M3 8H13" stroke="#111" stroke-width="2" stroke-linecap="round"/></svg></div>
-          <div class="fab-sm"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 10 L4 7 L10 3.5 L6.5 10 L4.5 8 Z" stroke="#555" stroke-width="1.3" stroke-linejoin="round"/></svg></div>
-          <div class="fab-sm"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="3.5" r="1.1" fill="#555"/><circle cx="7" cy="7" r="1.1" fill="#555"/><circle cx="7" cy="10.5" r="1.1" fill="#555"/></svg></div>
-        </div>
-      </div>
-
-      <!-- 3. LOADER -->
-      <div class="card">
-        <div class="card-head">
-          <div class="card-left">
-            <div class="card-ico" style="background:#EBF3FC"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5.5" stroke="#E0E0E0" stroke-width="1.8"/><path d="M8 2.5 A5.5 5.5 0 0 1 13.5 8" stroke="#1E6FC6" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-            <span class="card-name">Loader</span>
-          </div>
-          <div class="card-dot d-prod"></div>
-        </div>
-        <p class="card-desc">Feedback visual do estado do sistema.</p>
-        <div class="loader-row">
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="14" fill="none" stroke="#E8E5DF" stroke-width="3"/><path d="M18 4 A14 14 0 0 1 32 18" fill="none" stroke="#1E6FC6" stroke-width="3" stroke-linecap="round"/></svg>
-          <div class="loader-dots">
-            <div class="ld" style="background:#1F7A3C"></div>
-            <div class="ld" style="background:#1F7A3C;opacity:.5"></div>
-            <div class="ld" style="background:#E0E0E0"></div>
-          </div>
-          <div class="loader-bar-wrap">
-            <div class="loader-bar-bg"><div class="loader-bar-fill"></div></div>
-            <div class="loader-pct">60%</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 4. LINKS -->
-      <div class="card">
-        <div class="card-head">
-          <div class="card-left">
-            <div class="card-ico" style="background:#EBF3FC"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6.5 9 A3.5 3.5 0 0 0 9.5 12.5 L11 12.5 A3.5 3.5 0 0 0 11 5.5 L9.5 5.5" stroke="#1E6FC6" stroke-width="1.5" stroke-linecap="round"/><path d="M9.5 7 A3.5 3.5 0 0 0 6.5 3.5 L5 3.5 A3.5 3.5 0 0 0 5 10.5 L6.5 10.5" stroke="#1E6FC6" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-            <span class="card-name">Links</span>
-          </div>
-          <div class="card-dot d-prod"></div>
-        </div>
-        <p class="card-desc">Navegação com estados de interação claros.</p>
-        <div class="links-grid">
-          <span class="lk lk-primary">Link primário →</span>
-          <span class="lk lk-hover" style="text-decoration:underline">Link hover →</span>
-          <span class="lk lk-visited">Link visitado →</span>
-          <span class="lk lk-disabled">Link desabilitado →</span>
-        </div>
-      </div>
-
-      <!-- 5. TABS -->
-      <div class="card">
-        <div class="card-head">
-          <div class="card-left">
-            <div class="card-ico" style="background:#FEF0E3"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="4.5" width="13" height="9" rx="1.5" stroke="#C2590E" stroke-width="1.5"/><path d="M1.5 7.5H14.5" stroke="#C2590E" stroke-width="1.3"/><path d="M5 4.5V3" stroke="#C2590E" stroke-width="1.5" stroke-linecap="round"/><path d="M11 4.5V3" stroke="#C2590E" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-            <span class="card-name">Tabs</span>
-          </div>
-          <div class="card-dot d-evol"></div>
-        </div>
-        <p class="card-desc">Organização de conteúdo em seções navegáveis.</p>
-        <div style="flex:1;display:flex;flex-direction:column;justify-content:center">
-          <div class="tabs-top">
-            <div class="tab active">Ativa</div>
-            <div class="tab">Inativa</div>
-            <div class="tab">Inativa</div>
-          </div>
-          <div class="tabs-bottom">
-            <div class="tab-ico active"><svg viewBox="0 0 16 16" fill="none"><path d="M2 8L8 3L14 8V14H10.5V10H5.5V14H2Z" stroke="#1F7A3C" stroke-width="1.4" stroke-linejoin="round" fill="#E8F5ED"/></svg>Início</div>
-            <div class="tab-ico"><svg viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="10" height="12" rx="1.5" stroke="#aaa" stroke-width="1.4"/><path d="M5.5 5.5H10.5M5.5 8H10.5M5.5 10.5H8" stroke="#aaa" stroke-width="1.2" stroke-linecap="round"/></svg>Docs</div>
-            <div class="tab-ico"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="6" r="2.5" stroke="#aaa" stroke-width="1.4"/><path d="M3 14c0-2.5 2.2-4.5 5-4.5s5 2 5 4.5" stroke="#aaa" stroke-width="1.4" stroke-linecap="round"/></svg>Usuários</div>
-            <div class="tab-ico"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2.5" stroke="#aaa" stroke-width="1.4"/><path d="M8 2V3.5M8 12.5V14M2 8H3.5M12.5 8H14" stroke="#aaa" stroke-width="1.3" stroke-linecap="round"/></svg>Config</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 6. CHIPS -->
-      <div class="card">
-        <div class="card-head">
-          <div class="card-left">
-            <div class="card-ico" style="background:#FEF0E3"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2.5 6.5 L6 3 H13.5 L13.5 10 L10 13.5 H2.5 Z" stroke="#C2590E" stroke-width="1.5" stroke-linejoin="round"/><circle cx="5" cy="5.5" r="1" fill="#C2590E"/></svg></div>
-            <span class="card-name">Chips</span>
-          </div>
-          <div class="card-dot d-evol"></div>
-        </div>
-        <p class="card-desc">Elementos informativos compactos e flexíveis.</p>
-        <div class="chips-col">
-          <div class="chips-row">
-            <div class="chip chip-active">Ativo</div>
-            <div class="chip chip-info">Info</div>
-            <div class="chip chip-warning">Aviso</div>
-          </div>
-          <div class="chips-row">
-            <div class="chip chip-removable">Removível ×</div>
-            <div class="chip chip-new">Novo</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 7. INPUT -->
-      <div class="card">
-        <div class="card-head">
-          <div class="card-left">
-            <div class="card-ico" style="background:#E8F5ED"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="5" width="12" height="6" rx="1.5" stroke="#1F7A3C" stroke-width="1.5"/><path d="M4.5 8H5.5" stroke="#1F7A3C" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-            <span class="card-name">Input</span>
-          </div>
-          <div class="card-dot d-prod"></div>
-        </div>
-        <p class="card-desc">Campo de texto com estados completos e validação.</p>
-        <div class="input-col">
-          <div class="inp-wrap">
-            <span class="inp-label">Default</span>
-            <input class="inp inp-default" value="Texto de exemplo" readonly>
-          </div>
-          <div class="inp-wrap">
-            <span class="inp-label">Focus</span>
-            <input class="inp inp-focus" value="Com foco ativo" readonly>
-          </div>
-          <div class="inp-wrap">
-            <span class="inp-label">Error</span>
-            <input class="inp inp-error" value="Valor inválido" readonly>
-            <span class="inp-hint">Campo obrigatório</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 8. PROGRESS -->
-      <div class="card">
-        <div class="card-head">
-          <div class="card-left">
-            <div class="card-ico" style="background:#FEF0E3"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2 A6 6 0 0 1 14 8" stroke="#C2590E" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="8" r="6" stroke="#E8E5DF" stroke-width="1.8"/></svg></div>
-            <span class="card-name">Progress</span>
-          </div>
-          <div class="card-dot d-evol"></div>
-        </div>
-        <p class="card-desc">Indica progresso de etapas ou processos.</p>
-        <div style="display:flex;flex-direction:column;gap:10px;flex:1;justify-content:center">
-          <div class="prog-bar-wrap">
-            <div class="prog-bg"><div class="prog-fill"></div></div>
-            <span class="prog-pct">72%</span>
-          </div>
-          <div class="steps">
-            <div class="step-node"><div class="step-circle step-done">1</div><span class="step-label">Etapa 1</span></div>
-            <div class="step-line done"></div>
-            <div class="step-node"><div class="step-circle step-active">2</div><span class="step-label">Etapa 2</span></div>
-            <div class="step-line"></div>
-            <div class="step-node"><div class="step-circle step-todo">3</div><span class="step-label">Etapa 3</span></div>
-            <div class="step-line"></div>
-            <div class="step-node"><div class="step-circle step-todo">4</div><span class="step-label">Etapa 4</span></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 9. ALERT -->
-      <div class="card">
-        <div class="card-head">
-          <div class="card-left">
-            <div class="card-ico" style="background:#FEF0E3"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2 L14.5 13.5 H1.5 Z" stroke="#C2590E" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 7V10" stroke="#C2590E" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="12" r=".7" fill="#C2590E"/></svg></div>
-            <span class="card-name">Alert</span>
-          </div>
-          <div class="card-dot d-evol"></div>
-        </div>
-        <p class="card-desc">Mensagens com hierarquia visual de urgência.</p>
-        <div class="alerts">
-          <div class="alert al-success"><svg class="alert-ico" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" fill="#1F7A3C"/><path d="M4.5 7 L6 8.5 L9.5 5" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/></svg><span class="alert-txt">Operação realizada com sucesso!</span><span class="alert-close">×</span></div>
-          <div class="alert al-warning"><svg class="alert-ico" viewBox="0 0 14 14" fill="none"><path d="M7 1.5 L12.5 12 H1.5 Z" fill="#F5841A"/><path d="M7 6 V8.5" stroke="#fff" stroke-width="1.3" stroke-linecap="round"/><circle cx="7" cy="10.2" r=".55" fill="#fff"/></svg><span class="alert-txt">Atenção: verifique as informações.</span><span class="alert-close">×</span></div>
-          <div class="alert al-error"><svg class="alert-ico" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" fill="#D43C56"/><path d="M5 5 L9 9 M9 5 L5 9" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/></svg><span class="alert-txt">Erro ao salvar. Tente novamente.</span><span class="alert-close">×</span></div>
-          <div class="alert al-info"><svg class="alert-ico" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5" fill="#1E6FC6"/><path d="M7 6.5 V10" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/><circle cx="7" cy="5" r=".6" fill="#fff"/></svg><span class="alert-txt">Informação atualizada com sucesso.</span><span class="alert-close">×</span></div>
-        </div>
-      </div>
-
-    </div>
+    </main>
   </div>
-</div>
 </body>
 </html>
