@@ -181,5 +181,19 @@
 .lb-overlay.open{opacity:1;visibility:visible}
 .lb-img{max-width:100%;max-height:100%;width:auto;height:auto;display:block;box-shadow:0 30px 80px rgba(0,0,0,.45);border-radius:6px;transform:scale(.96);transition:transform .25s cubic-bezier(.2,.7,.3,1)}
 .lb-overlay.open .lb-img{transform:scale(1)}
+
+/* ──────────────────────────────────────────────────────────────────────
+   6. TIPOGRAFIA — sem viúvas, sem quebra pela metade (regra global)
+   Blocos curtos equilibram as linhas (balance); parágrafos longos usam
+   pretty. ATENÇÃO: quebra manual (<br>/newline no meio da frase) NÃO é
+   corrigida por CSS — nunca usar <br> dentro de texto corrido.
+   ────────────────────────────────────────────────────────────────────── */
+p,li,dd,blockquote,figcaption{text-wrap:pretty}
+.s-title,.intro-statement,.s-lead,.s-text,.s-desc,.intro-micro,
+.prob-title,.prob-desc,.sol-t,.sol-d,.sprint-title,.sprint-desc,
+.apr-stmt,.apr-txt,.apr-d,.esc-title,.esc-desc,.mdesc,.md-desc,
+.card-desc,.feat-desc,.kr-txt,.co-d,.hero-intro,.apr-intro,
+.wl-para,.wlsim-p,.res-statement,.bib-desc,.bib-hero-sub,
+.ctx-stat-desc,.estr-p-t,.estr-p-d,.more-name{text-wrap:balance}
 .lb-close{position:fixed;top:24px;right:24px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:22px;line-height:1;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:background .2s,border-color .2s}
 .lb-close:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.32)}

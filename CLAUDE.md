@@ -43,5 +43,5 @@ Métricas aparecem UMA vez (sem duplicar entre Resultados e Piloto).
 ## Deploy & cache-busting
 - **Hospedagem:** GitHub Pages (repo `adrianapommot/portfolio`, branch `main`) → adrianapommot.com.
 - **CV:** o arquivo correto é `AdrianaPommot_2026updated.pdf`. Nunca referenciar nomes antigos.
-- **Cache-busting:** ao mudar QUALQUER `.css`/`.js`, subir o `?v=N` em TODAS as páginas que carregam o arquivo. Versões atuais: `home.css?v=4`, `site-nav.js?v=16`, `case-patterns.css?v=14`. Sempre incrementar acima do que está no ar — nunca reverter.
+- **Cache-busting:** ao mudar QUALQUER `.css`/`.js`, subir o `?v=N` em TODAS as páginas que carregam o arquivo. Versões atuais: `home.css?v=5`, `site-nav.js?v=16`, `case-patterns.css?v=15`. Sempre incrementar acima do que está no ar — nunca reverter.
 - **Origem das mudanças de design:** o trabalho de design é feito no projeto do Claude (claude.ai) e chega ao repo via export. O Claude design espelha o `main` antes de exportar para não regredir CV nem versões de cache. O repo é a fonte da verdade do que está no ar.
