@@ -47,9 +47,9 @@
 .intro-role{grid-column:9/13;margin-top:72px;display:flex;flex-direction:column;gap:12px}
 
 @media(min-width:861px){
-  /* Layout 2-col ~50/50 · topo aprovado (título à esq / marca à dir alinhada ao início da col 2) */
-  .sec.dark .intro-grid{grid-template-columns:calc(50% - clamp(24px,3vw,44px)) 1fr;column-gap:64px}
-  .sec.dark .intro-over{grid-column:2;grid-row:1;justify-self:end;align-self:end;width:100%;max-width:430px;text-align:left}
+  /* Layout 2-col alinhado ao .prob-grid (1fr 1fr, mesmo gap) · topo: rótulo seção à esq / marca à dir, ambos no início da col 2 */
+  .sec.dark .intro-grid{grid-template-columns:1fr 1fr;column-gap:clamp(48px,6vw,88px)}
+  .sec.dark .intro-over{grid-column:2;grid-row:1;justify-self:start;align-self:end;width:100%;max-width:430px;text-align:left}
   .sec.dark .intro-idx{grid-column:1;grid-row:1;justify-self:start;align-self:end;text-align:left}
   .sec.dark .intro-over .s-index b{line-height:1;color:rgba(255,255,255,.45)}
   .sec.dark .intro-idx span{line-height:1}
@@ -58,7 +58,7 @@
   .sec.dark .intro-side{grid-column:2}
   .sec.dark .intro-pivot{grid-column:1}
   .sec.dark .intro-role{grid-column:2}
-  .sec.dark .intro-side,.sec.dark .intro-role{width:100%;max-width:430px;justify-self:end}
+  .sec.dark .intro-side,.sec.dark .intro-role{width:100%;max-width:430px;justify-self:start}
 }
 @media(max-width:860px){
   .intro-over,.intro-statement,.intro-pivot{grid-column:1/9}

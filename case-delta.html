@@ -665,8 +665,8 @@ p,li,dd,blockquote,figcaption{text-wrap:pretty}
 .sec.dark .intro-micro{color:rgba(255,255,255,.62)}
 .sec.dark .intro-micro strong{color:#fff}
 @media(min-width:861px){
-  .sec.dark .intro-grid{grid-template-columns:calc(50% - clamp(24px,3vw,44px)) 1fr;column-gap:64px}
-  .sec.dark .intro-over{grid-column:2;grid-row:1;justify-self:end;align-self:end;width:100%;max-width:430px;text-align:left}
+  .sec.dark .intro-grid{grid-template-columns:1fr 1fr;column-gap:clamp(48px,6vw,88px)}
+  .sec.dark .intro-over{grid-column:2;grid-row:1;justify-self:start;align-self:end;width:100%;max-width:430px;text-align:left}
   .sec.dark .intro-idx{grid-column:1;grid-row:1;justify-self:start;align-self:end;text-align:left}
   .sec.dark .intro-over .s-index b{line-height:1;color:rgba(255,255,255,.45)}
   .sec.dark .intro-idx span{line-height:1}
@@ -675,8 +675,8 @@ p,li,dd,blockquote,figcaption{text-wrap:pretty}
   .sec.dark .intro-side{grid-column:2}
   .sec.dark .intro-pivot{grid-column:1}
   .sec.dark .intro-role{grid-column:2}
-  /* trava a coluna de leitura: em telas largas ela não estica além da medida boa */
-  .sec.dark .intro-side,.sec.dark .intro-role{width:100%;max-width:430px;justify-self:end}
+  /* coluna direita alinha o INÍCIO à 2ª coluna dos ícones (.prob-grid), capada na medida de leitura */
+  .sec.dark .intro-side,.sec.dark .intro-role{width:100%;max-width:430px;justify-self:start}
 }
 </style>
 </head>
@@ -807,7 +807,8 @@ estabelecer uma linguagem comum capaz de conectar pessoas, produtos e marcas em 
     <div class="section-head built-lead">
       <div class="s-index"><b>03 · Construção</b><em></em></div>
       <h2 class="s-title">O que construí</h2>
-      <p class="s-lead" style="color: var(--gray-2); line-height: 1.7">A construção do Delta aconteceu em diferentes camadas, cada uma responsável por <strong>sustentar a próxima</strong>.</p>
+      <p class="s-lead" style="color: var(--gray-2); line-height: 1.7">A construção do Delta aconteceu em diferentes camadas, 
+cada uma responsável por sustentar a próxima.</p>
     </div>
 
     <!-- camada 01 · Fundação -->
@@ -1127,7 +1128,8 @@ sem comprometer a experiência.</p>
       <div class="wlsim-head">
         <div class="s-index"><b>03.04 · Simulação</b><em></em></div>
         <h2 class="s-title">Mesma base.<br>Marcas diferentes.</h2>
-        <p class="s-lead">Simulação de troca de marca sobre o mesmo componente. <strong>Os tokens mudam</strong> (cor, raio, CTA); a estrutura, não. Clique nos botões para alternar entre os três conjuntos.</p>
+        <p class="s-lead">Simulação de troca de marca sobre o mesmo componente.
+Os tokens mudam (cor, raio, CTA); a estrutura, não. Clique nos botões para alternar entre os três conjuntos.</p>
       </div>
 
       <div class="wlsim-switch" role="tablist" aria-label="Trocar marca simulada">
@@ -1241,7 +1243,7 @@ sem comprometer a experiência.</p>
 
         <div class="wlsim-copy">
           <h3 class="wlsim-h" style="line-height:1.35">Personalização sem reconstrução.<br>White label na prática.</h3>
-          <p class="wlsim-p" style="font-size: 14px; font-weight: 700">O Delta foi estruturado para suportar múltiplas  marcas a partir da mesma fundação de componentes.</p>
+          <p class="wlsim-p" style="font-size: 14px; font-weight: 700">O Delta foi estruturado para suportar múltiplas marcas a partir da mesma fundação de componentes.</p>
           <p class="wlsim-p" style="font-size: 14px">Por meio de temas e tokens de design, características 
 visuais como cores, tipografia e elementos de interface podem ser adaptadas sem alterar a lógica ou a
 estrutura dos componentes.</p>
@@ -1336,7 +1338,8 @@ saúde e serviços financeiros, mantendo consistência estrutural e reduzindo cu
     <div class="section-head">
       <div class="s-index"><b>04 · Impacto</b><em></em></div>
       <h2 class="s-title">Resultados</h2>
-      <p class="s-lead" style="max-width:900px"><strong>Um sistema que mudou como o time constrói produto:</strong> retrabalho reduzido, padrão visual coerente entre as 20+ marcas e handoff sem ambiguidade entre design e engenharia.</p>
+      <p class="s-lead" style="max-width:900px">Um sistema que mudou como o time constrói produto: 
+retrabalho reduzido, padrão visual coerente entre as 20+ marcas e handoff sem ambiguidade entre design e engenharia.</p>
     </div>
     <div class="res-hero rv">
       <div class="res-hero-card">
@@ -1365,7 +1368,9 @@ saúde e serviços financeiros, mantendo consistência estrutural e reduzindo cu
     <div class="ba rv">
       <div class="ba-head">
         <h2 class="s-title">Antes e depois</h2>
-        <p class="s-lead">A biblioteca virou referência interna: novos squads chegavam e encontravam uma fundação pronta, não um canvas em branco. O reaproveitamento virou o default.</p>
+        <p class="s-lead">A biblioteca virou referência interna: novos squads 
+chegavam e encontravam uma fundação pronta, 
+não um canvas em branco. O reaproveitamento virou o default.</p>
       </div>
       <div class="ba-table">
         <div class="ba-thead"><span>Dimensão</span><span>Antes</span><span>Depois</span></div>
@@ -1399,7 +1404,9 @@ saúde e serviços financeiros, mantendo consistência estrutural e reduzindo cu
       <div class="s-index"><b>05 · Encerramento</b><em></em></div>
       <h2 class="closer-title">Uma base.<br><span class="hl">Múltiplas experiências.</span></h2>
       <div class="closer-text">
-        <p>Ao consolidar tokens, componentes e diretrizes em um único sistema, o Delta tornou possível <strong>escalar produtos para diferentes contextos</strong> sem abrir mão da consistência.</p>
+        <p>Ao consolidar tokens, componentes e diretrizes 
+em um único sistema, o Delta tornou possível 
+escalar produtos para diferentes contextos sem abrir mão da consistência.</p>
         <p>O resultado foi um ecossistema mais eficiente, <strong>sustentável</strong> e preparado para evoluir.</p>
       </div>
       <div class="closer-divider"></div>
