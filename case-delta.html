@@ -478,12 +478,11 @@ p{text-wrap:balance}
 @media(max-width:900px){.res-stats{grid-template-columns:1fr 1fr;gap:32px 0;padding:32px 0}.res-stat{padding:0 24px}.res-stat:nth-child(odd){padding-left:0}.res-stat:nth-child(2n){border-right:none;padding-right:0}.evidence{grid-template-columns:1fr}.evidence-col:first-child{border-right:none;border-bottom:1px solid var(--line)}}
 @media(max-width:560px){.res-stats{grid-template-columns:1fr}.res-stat{padding:0;border-right:none}}
 
-/* Antes e depois — comparativo em cards (rascunho) */
-.ba{display:grid;grid-template-columns:0.72fr 2.7fr;gap:clamp(28px,3.5vw,60px);align-items:start;margin-top:var(--space-title)}
-.ba-aside{position:sticky;top:40px}
-.ba-eyebrow{font-size:var(--ty-label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--black)}
-.ba-bar{width:44px;height:3px;border-radius:2px;background:var(--accent);margin:14px 0 26px}
-.ba-note{font-size:var(--ty-small);line-height:1.9;color:var(--gray-2);text-wrap:pretty}
+/* Antes e depois — header no topo + comparativo abaixo */
+.ba{display:flex;flex-direction:column;margin-top:var(--space-title)}
+.ba-head{margin-bottom:clamp(28px,3.4vw,40px)}
+.ba-head .s-title{margin-bottom:var(--space-md)}
+.ba-head .s-lead{max-width:760px}
 .ba-table{display:flex;flex-direction:column;gap:clamp(10px,1.1vw,14px)}
 .ba-thead{display:grid;grid-template-columns:1.32fr 1fr 1.12fr;gap:clamp(10px,1.1vw,14px)}
 .ba-thead span{font-size:var(--ty-label);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-3)}
@@ -513,7 +512,7 @@ p{text-wrap:balance}
 .closer-left .s-index{margin-bottom:var(--space-md)}
 .closer-left .s-index b{color:#fff}
 .closer-left .s-index em{background:rgba(255,255,255,.28)}
-.closer-title{font-size:clamp(34px,3.6vw,52px);font-weight:700;line-height:1.12;letter-spacing:-.03em;text-transform:uppercase;color:#fff;margin-bottom:clamp(24px,2.8vw,34px)}
+.closer-title{font-size:var(--ty-title);font-weight:600;line-height:1.12;letter-spacing:-.015em;text-transform:uppercase;color:#fff;margin-bottom:clamp(24px,2.8vw,34px)}
 .closer-title .hl{color:var(--accent)}
 .closer-text{display:flex;flex-direction:column;gap:18px;max-width:46ch}
 .closer-text p{font-size:var(--ty-small);line-height:1.65;color:rgba(255,255,255,.72)}
@@ -851,19 +850,19 @@ para todo o ecossistema de produtos, transformando decisões visuais em regras c
         </div>
 
         <div class="gallery" id="gal-typography">
-          <iframe src="tipografia.html" style="width:100%;height:580px;border:1px solid var(--line);border-radius:16px;display:block" loading="lazy" title="Tipografia — Delta Design System"></iframe>
+          <iframe src="tipografia.html" style="width:100%;height:580px;border:1px solid var(--line);border-radius:16px;display:block" loading="lazy" title="Tipografia · Delta Design System"></iframe>
         </div>
 
         <div class="gallery" id="gal-elevation">
-          <iframe src="elevacao.html" style="width:100%;height:580px;border:1px solid var(--line);border-radius:16px;display:block" loading="lazy" title="Elevação — Delta Design System"></iframe>
+          <iframe src="elevacao.html" style="width:100%;height:580px;border:1px solid var(--line);border-radius:16px;display:block" loading="lazy" title="Elevação · Delta Design System"></iframe>
         </div>
 
         <div class="gallery" id="gal-opacity">
-          <iframe src="opacidade.html" style="width:100%;height:580px;border:1px solid var(--line);border-radius:16px;display:block" loading="lazy" title="Opacidade — Delta Design System"></iframe>
+          <iframe src="opacidade.html" style="width:100%;height:580px;border:1px solid var(--line);border-radius:16px;display:block" loading="lazy" title="Opacidade · Delta Design System"></iframe>
         </div>
 
         <div class="gallery" id="gal-borders">
-          <iframe src="bordas.html" style="width:100%;height:580px;border:1px solid var(--line);border-radius:16px;display:block" loading="lazy" title="Bordas — Delta Design System"></iframe>
+          <iframe src="bordas.html" style="width:100%;height:580px;border:1px solid var(--line);border-radius:16px;display:block" loading="lazy" title="Bordas · Delta Design System"></iframe>
         </div>
       </div>
     </div>
@@ -917,8 +916,7 @@ para todo o ecossistema de produtos, transformando decisões visuais em regras c
         <img src="img/delta/biblioteca-hero.webp" alt="Biblioteca de componentes Delta, visualização 3D de elementos da biblioteca" loading="lazy" decoding="async">
         <div class="bib-hero-text">
           <h2 class="bib-hero-title">Biblioteca de componentes</h2>
-          <p class="bib-hero-sub" style="font-size: 14px; color: rgba(255, 255, 255, 0.62)">Componentes reutilizáveis, acessíveis e 
-consistentes para acelerar o design e garantir produtos digitais de alta qualidade.</p>
+          <p class="bib-hero-sub" style="font-size: 14px; color: rgba(255, 255, 255, 0.62); text-wrap: normal">Componentes reutilizáveis, acessíveis e<br>consistentes para acelerar o design e<br>garantir produtos digitais de alta qualidade.</p>
         </div>
       </div>
     </div>
@@ -1005,10 +1003,10 @@ sem comprometer a experiência.</p>
       </div>
     </div>
     <div style="margin-top:var(--s5);background:#131313;padding:var(--s4);border-radius:16px;overflow:hidden">
-      <img loading="lazy" src="global-design-tokens.webp" alt="Global Design Tokens — fundação visual do Delta Design System" decoding="async" style="width:100%;display:block;border-radius:12px">
+      <img loading="lazy" src="global-design-tokens.webp" alt="Global Design Tokens, fundação visual do Delta Design System" decoding="async" style="width:100%;display:block;border-radius:12px">
     </div>
     <div style="margin-top:var(--s3)">
-      <iframe src="delta-atoms.html" style="width:100%;height:700px;border:1px solid var(--line);border-radius:16px;display:block;background:#fff" loading="eager" title="Delta Atoms — biblioteca interativa de componentes do Delta Design System"></iframe>
+      <iframe src="delta-atoms.html" style="width:100%;height:700px;border:1px solid var(--line);border-radius:16px;display:block;background:#fff" loading="eager" title="Delta Atoms · biblioteca interativa de componentes do Delta Design System"></iframe>
     </div>
 
   </section>
@@ -1282,8 +1280,9 @@ saúde e serviços financeiros, mantendo consistência estrutural e reduzindo cu
     <style>
       #cm-gov .gov-top{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,72px);align-items:center;margin-bottom:var(--s5)}
       @media(max-width:880px){#cm-gov .gov-top{grid-template-columns:1fr;gap:var(--s4)}}
-      #cm-gov .gov-head{display:flex;flex-direction:column;gap:var(--s3)}
+      #cm-gov .gov-head{display:flex;flex-direction:column;gap:var(--s3);margin-bottom:var(--s5)}
       #cm-gov .gov-head .s-index{margin-bottom:0}
+      #cm-gov .gov-head .s-lead{max-width:760px}
       #cm-gov .gov-illo img{width:100%;height:auto;display:block}
       @media(max-width:880px){#cm-gov .gov-illo{order:-1;max-width:440px;margin:0 auto}}
       #cm-gov .gov-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
@@ -1291,50 +1290,44 @@ saúde e serviços financeiros, mantendo consistência estrutural e reduzindo cu
       #cm-gov .gov-item{display:flex;align-items:center;gap:16px;padding:14px 18px;border:1px solid var(--line);border-radius:12px;background:#fff}
       #cm-gov .gov-ico{width:42px;height:42px;border-radius:10px;background:color-mix(in srgb,var(--accent) 26%,#fff);display:flex;align-items:center;justify-content:center;flex-shrink:0}
       #cm-gov .gov-ico svg{width:20px;height:20px;fill:none;stroke:var(--black);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-      #cm-gov .gov-item-t{font-size:var(--ty-copy);font-weight:500;color:var(--gray-1);letter-spacing:-.005em;line-height:1.3;text-wrap:balance}
+      #cm-gov .gov-item-t{font-size:var(--ty-small);font-weight:500;color:var(--gray-1);letter-spacing:-.005em;line-height:1.4;text-wrap:balance}
       #cm-gov .wb-note{margin-top:clamp(28px,3.4vw,40px)}
     </style>
     <div id="cm-gov">
-      <div class="gov-top">
-        <div class="gov-head">
-          <div class="s-index"><b>03.05 · Governança</b><em></em></div>
-          <h2 class="s-title">Além da biblioteca</h2>
-          <p class="s-lead">A construção do sistema não terminava na biblioteca. Para garantir consistência ao longo do tempo, estruturei processos de governança que ajudaram o Delta a se tornar parte da cultura da organização.</p>
-        </div>
-        <div class="gov-illo">
-          <img src="img/delta/governanca-diagrama-crop.webp" alt="Diagrama de governança do Delta: equipe ao centro conectada a diretrizes e padrões, processos e contribuições, documentação e evolução, alinhamento e colaboração, disseminação e cultura" loading="lazy" decoding="async">
-        </div>
+      <div class="gov-head">
+        <div class="s-index"><b>03.05 · Governança</b><em></em></div>
+        <h2 class="s-title">Além da biblioteca</h2>
+        <p class="s-lead">A construção do sistema não terminava na biblioteca. Para garantir consistência ao longo do tempo, estruturei processos de governança que ajudaram o Delta a se tornar parte da cultura da organização. Essas iniciativas permitiram que o sistema continuasse evoluindo de forma sustentável, mesmo diante do crescimento da empresa.</p>
       </div>
       <div class="wb-gov">
         <span class="s-label">Iniciativas que conduzi</span>
         <div class="gov-grid">
           <div class="gov-item">
             <span class="gov-ico"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.87"/></svg></span>
-            <span class="gov-item-t">Criação da Guilda de Design</span>
+            <span class="gov-item-t" style="font-weight: 700">Criação da Guilda de Design</span>
           </div>
           <div class="gov-item">
             <span class="gov-ico"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>
-            <span class="gov-item-t">Processos de contribuição</span>
+            <span class="gov-item-t" style="font-weight: 700">Processos de contribuição</span>
           </div>
           <div class="gov-item">
             <span class="gov-ico"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
-            <span class="gov-item-t">Manuais de uso do sistema</span>
+            <span class="gov-item-t" style="font-weight: 700">Manuais de uso do sistema</span>
           </div>
           <div class="gov-item">
             <span class="gov-ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
-            <span class="gov-item-t">Documentação de criação e evolução de componentes</span>
+            <span class="gov-item-t" style="font-weight: 700">Documentação de criação e evolução de componentes</span>
           </div>
           <div class="gov-item">
             <span class="gov-ico"><svg viewBox="0 0 24 24"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="m16 21 4-4-4-4"/><path d="M20 17H4"/></svg></span>
-            <span class="gov-item-t">Alinhamento entre design e desenvolvimento</span>
+            <span class="gov-item-t" style="font-weight: 700">Alinhamento entre design e desenvolvimento</span>
           </div>
           <div class="gov-item">
             <span class="gov-ico"><svg viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></span>
-            <span class="gov-item-t">Disseminação de boas práticas entre equipes</span>
+            <span class="gov-item-t" style="font-weight: 700">Disseminação de boas práticas entre equipes</span>
           </div>
         </div>
       </div>
-      <p class="wb-note micro">Essas iniciativas permitiram que o sistema continuasse evoluindo de forma sustentável, mesmo diante do crescimento da empresa.</p>
     </div>
   </section>
 
@@ -1351,7 +1344,7 @@ saúde e serviços financeiros, mantendo consistência estrutural e reduzindo cu
         <div class="res-hero-num"><span class="sgn">−</span>47<span class="u">%</span></div>
         <div>
           <div class="res-hero-label">no tempo de criação de novas interfaces,<br>do briefing ao protótipo navegável.</div>
-          <div class="res-hero-note">Estimativa — feedback de prazos das squads (montagem de telas, antes vs. depois).</div>
+          <div class="res-hero-note">Estimativa: feedback de prazos das squads (montagem de telas, antes vs. depois).</div>
         </div>
       </div>
       <div class="res-side">
@@ -1370,10 +1363,9 @@ saúde e serviços financeiros, mantendo consistência estrutural e reduzindo cu
       </div>
     </div>
     <div class="ba rv">
-      <div class="ba-aside">
-        <div class="ba-eyebrow">Antes e depois</div>
-        <div class="ba-bar"></div>
-        <p class="ba-note">A biblioteca virou referência interna: novos squads chegavam e encontravam uma fundação pronta, não um canvas em branco. O reaproveitamento virou o default.</p>
+      <div class="ba-head">
+        <h2 class="s-title">Antes e depois</h2>
+        <p class="s-lead">A biblioteca virou referência interna: novos squads chegavam e encontravam uma fundação pronta, não um canvas em branco. O reaproveitamento virou o default.</p>
       </div>
       <div class="ba-table">
         <div class="ba-thead"><span>Dimensão</span><span>Antes</span><span>Depois</span></div>
