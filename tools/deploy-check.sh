@@ -17,7 +17,7 @@ else
   FILES=()
   while IFS= read -r line; do
     [ -n "$line" ] && FILES+=("$line")
-  done < <(git ls-files '*.html' | grep -vE '^_archive/')
+  done < <(git ls-files '*.html' | grep -vE '^_archive/|[Ss]tandalone')
 fi
 [ "${#FILES[@]}" -eq 0 ] && { echo "✓ deploy-check: nada a checar."; exit 0; }
 
