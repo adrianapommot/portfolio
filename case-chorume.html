@@ -341,7 +341,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 <!-- NAV (componente compartilhado) -->
 <site-nav back="index.html#work"></site-nav>
 <script src="site-nav.js?v=16"></script>
-<link rel="stylesheet" href="case-patterns.css?v=13">
+<link rel="stylesheet" href="case-patterns.css?v=14">
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lacquer&display=swap" rel="stylesheet">
 
@@ -373,7 +373,7 @@ ecossistema gráfico. De um cartaz de rua à criação de uma cachaça fictícia
 
 
   <!-- ═══ 01 · CONTEXTO ═══ -->
-  <section class="sec intro-bg rv" id="cartaz" style="background-image:url('img/chorume/intro-bg-cartaz.png')">
+  <section class="sec intro-bg rv" id="cartaz" style="background-image:url('img/chorume/intro-bg-cartaz.webp')">
     <div class="intro-bg-inner-stack" style="font-weight: 400">
       <div class="intro-bg-content">
         <div class="intro-bg-eyebrow">
@@ -405,7 +405,7 @@ de arte, fotografia e narrativa de marca.</p>
 
 
   <!-- ═══ 02 · MOODBOARD ═══ -->
-  <section class="sec intro-bg rv" id="vernacular" style="background-image:url('img/chorume/moodboard-bg.png')">
+  <section class="sec intro-bg rv" id="vernacular" style="background-image:url('img/chorume/moodboard-bg.webp')">
     <div class="intro-bg-inner-stack">
       <div class="intro-bg-content">
         <div class="intro-bg-eyebrow">
@@ -467,7 +467,7 @@ cenografia, a fotografia e a atmosfera da marca.</p>
     </div>
 
     <div class="bst-photo rv d1">
-      <img src="img/chorume/euproduzindo.png" alt="Tríptico dos bastidores da produção fotográfica do Chorume" loading="eager" decoding="sync">
+      <img src="img/chorume/euproduzindo.webp" alt="Tríptico dos bastidores da produção fotográfica do Chorume" loading="eager" decoding="sync">
     </div>
     <p class="bst-cap"> Estúdio, 2015. Foto: arquivo pessoal.</p>
 
@@ -499,11 +499,11 @@ própria<br>pesquisa. Se a tipografia nasceu observando a rua, o cenário<br>nas
     <p class="s-body">Aquário de vidro, terra úmida, musgo vivo, ossos reais (emprestados por um estudante de veterinária). A composição foi pensada como um relicário fúnebre da garrafa, como se tivesse sido desenterrada de um sítio arqueológico pós-apocalíptico. A iluminação reforça a sensação de profundidade e abandono.</p>
     <div class="img-grid img-grid-2 rv d1">
       <div>
-        <img src="img/chorume/garrafa-cenografia.png" alt="Detalhe da garrafa em cenografia" loading="eager" decoding="sync">
+        <img src="img/chorume/garrafa-cenografia.webp" alt="Detalhe da garrafa em cenografia" loading="eager" decoding="sync">
         <p class="img-caption">Detalhe: garrafasob luz, rótulo em evidência, contexto sombrio.</p>
       </div>
       <div>
-        <img src="img/chorume/making-of-pantano.jpg" alt="Making-of do pântano cenográfico" loading="eager" decoding="sync">
+        <img src="img/chorume/making-of-pantano.webp" alt="Making-of do pântano cenográfico" loading="eager" decoding="sync">
         <p class="img-caption">Making-of: construção do pântano em estúdio, processo físico e sensorial.</p>
       </div>
     </div>
@@ -539,7 +539,7 @@ própria<br>pesquisa. Se a tipografia nasceu observando a rua, o cenário<br>nas
       <p class="enc-body enc-coda">E, de certa maneira, tudo o que veio depois também.</p>
     </div>
     <div class="enc-img rv d1">
-      <img src="img/chorume/the-fudge.png" alt="Troféu The Fudge — Best of Show Miami Ad School — cenografia chorumiana com cactos, garça, ossos e lua" loading="eager" decoding="sync">
+      <img src="img/chorume/the-fudge.webp" alt="Troféu The Fudge — Best of Show Miami Ad School — cenografia chorumiana com cactos, garça, ossos e lua" loading="eager" decoding="sync">
     </div>
   </section>
 
@@ -596,7 +596,7 @@ própria<br>pesquisa. Se a tipografia nasceu observando a rua, o cenário<br>nas
 /* nav gerenciado por site-nav.js */
 
 /* Lightbox */
-var lightbox=document.createElement('div');lightbox.className='lightbox';lightbox.innerHTML='<div class="lightbox-content"><button class="lightbox-close">&times;</button><img class="lightbox-img" alt=""><div class="lightbox-nav"><button class="lightbox-prev">&lsaquo;</button><button class="lightbox-next">&rsaquo;</button></div></div>';document.body.appendChild(lightbox);
+var lightbox=document.createElement('div');lightbox.className='lightbox';lightbox.innerHTML='<div class="lightbox-content"><button class="lightbox-close">&times;</button><img loading="lazy" class="lightbox-img" alt=""><div class="lightbox-nav"><button class="lightbox-prev">&lsaquo;</button><button class="lightbox-next">&rsaquo;</button></div></div>';document.body.appendChild(lightbox);
 var images=[];var currentIdx=0;
 function openLightbox(img){currentIdx=images.indexOf(img);lightbox.querySelector('.lightbox-img').src=img.src;lightbox.classList.add('active')}
 function closeLightbox(){lightbox.classList.remove('active')}

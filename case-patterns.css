@@ -126,7 +126,7 @@
 .ch4-mof-label b{color:#E27A2B;font-weight:700;font-variant-numeric:tabular-nums}
 .ch4-mof-arrow{flex:1;height:1px;background:rgba(255,255,255,.2);position:relative}
 .ch4-mof-arrow::after{content:"";position:absolute;right:0;top:50%;transform:translateY(-50%);width:0;height:0;border-left:5px solid rgba(255,255,255,.4);border-top:3px solid transparent;border-bottom:3px solid transparent}
-.ch4-mof{aspect-ratio:636/873;background-image:url('img/chorume/making-of-pantano.jpg');background-size:300% 100%;background-repeat:no-repeat;border-radius:2px}
+.ch4-mof{aspect-ratio:636/873;background-image:url('img/chorume/making-of-pantano.webp');background-size:300% 100%;background-repeat:no-repeat;border-radius:2px}
 .ch4-mof.p1{background-position:0% 50%}
 .ch4-mof.p2{background-position:50% 50%}
 .ch4-mof.p3{background-position:100% 50%}

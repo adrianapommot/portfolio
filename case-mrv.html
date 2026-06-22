@@ -172,7 +172,7 @@ img{display:block;max-width:100%}
 /* painel showcase — bg cinza estende até o traço (borda esquerda do painel) */
 /* painel recebe a composição como imagem (background); se faltar o arquivo, fica só o cinza limpo (sem ícone quebrado).
    align-self:stretch → o retângulo acompanha a altura da coluna esquerda (topo e base alinhados, sem flutuar). */
-.s07-panel{align-self:stretch;border-radius:16px;min-height:560px;background:var(--chip) url("img/mrv/desdob-mockups.png") center/contain no-repeat}
+.s07-panel{align-self:stretch;border-radius:16px;min-height:560px;background:var(--chip) url("img/mrv/desdob-mockups.webp") center/contain no-repeat}
 .s07-phones{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2}
 .s07-phone{width:208px;border:8px solid #1A1A1A;border-radius:36px;overflow:hidden;background:#fff;box-shadow:0 18px 40px rgba(0,0,0,.15)}
 .s07-phone img{width:100%;height:448px;object-fit:cover;object-position:top center;display:block}
@@ -222,7 +222,7 @@ img{display:block;max-width:100%}
 /* ilustração maior, SEM caixa — direto sobre o fundo, alinhada à direita (fiel à referência) */
 /* área com a MESMA proporção da imagem (1536x1024) → cover não corta nada (curva inteira).
    ancorada pela base atrás da faixa; topo sangra perto do topo da seção. */
-.hero-art{position:absolute;right:0;bottom:80px;width:74%;aspect-ratio:1536 / 1024;z-index:0;background:#FAFAFA url("img/mrv/hero-iso.png") center / cover no-repeat;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 6%,#000 74%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 6%,#000 74%,transparent 100%)}
+.hero-art{position:absolute;right:0;bottom:80px;width:74%;aspect-ratio:1536 / 1024;z-index:0;background:#FAFAFA url("img/mrv/hero-iso.webp") center / cover no-repeat;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 6%,#000 74%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 6%,#000 74%,transparent 100%)}
 /* barra de metadados escura */
 /* hero-meta · padrão Delta (inline tight, sem ícones) */
 .hero-meta{position:relative;z-index:2;margin-top:clamp(44px,6vh,72px);margin-bottom:0;background:transparent;box-shadow:none;border-radius:0;border-top:1px solid var(--line);padding:20px 0 20px;display:flex;align-items:center;flex-wrap:wrap}
@@ -573,7 +573,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
   <section class="sec hero" id="top">
     <div class="hero-inner">
       <div class="hero-top">
-        <span class="hero-brand"><img src="img/mrv/logo-mrv.png" alt="MRV"></span>
+        <span class="hero-brand"><img loading="lazy" src="img/mrv/logo-mrv.png" alt="MRV"></span>
       </div>
       <h1 class="hero-title"><span>Fluxo de</span><span><span class="hero-hl">Renegociação</span> MRV</span></h1>
       <div class="hero-foot">
@@ -618,19 +618,19 @@ e renegociação de dívidas da maior construtora da América Latina.</h2>
 
       <div class="ctx-stats">
         <div class="ctx-stat">
-          <div class="ctx-stat-ico"><img src="img/mrv/icn-clientes-ativos.png" alt="Clientes ativos"></div>
+          <div class="ctx-stat-ico"><img loading="lazy" src="img/mrv/icn-clientes-ativos.webp" alt="Clientes ativos"></div>
           <div class="ctx-stat-val">2,5 milhões</div>
           <span class="ctx-stat-label">Clientes ativos</span>
           <p class="ctx-stat-desc">Cadastrados no app MRV, com financiamentos de longo prazo.</p>
         </div>
         <div class="ctx-stat">
-          <div class="ctx-stat-ico"><img src="img/mrv/icn-35-anos.png" alt="Tempo médio de contrato"></div>
+          <div class="ctx-stat-ico"><img loading="lazy" src="img/mrv/icn-35-anos.webp" alt="Tempo médio de contrato"></div>
           <div class="ctx-stat-val">35 anos</div>
           <span class="ctx-stat-label">Tempo médio de contrato</span>
           <p class="ctx-stat-desc">Financiamentos longos, com alta complexidade jurídica e financeira.</p>
         </div>
         <div class="ctx-stat">
-          <div class="ctx-stat-ico"><img src="img/mrv/icn-3-dominios.png" alt="Territórios de produto"></div>
+          <div class="ctx-stat-ico"><img loading="lazy" src="img/mrv/icn-3-dominios.webp" alt="Territórios de produto"></div>
           <div class="ctx-stat-val">3 domínios</div>
           <span class="ctx-stat-label">Territórios de produto</span>
           <p class="ctx-stat-desc">Renegociação de dívidas, parcelas a vencer e status de obra.</p>
@@ -648,7 +648,7 @@ e renegociação de dívidas da maior construtora da América Latina.</h2>
     </div>
     <div class="prob-grid">
       <article class="prob-item">
-        <div class="prob-ico"><img src="img/mrv/icn-prob-friccao.png" alt="Fricção"></div>
+        <div class="prob-ico"><img loading="lazy" src="img/mrv/icn-prob-friccao.webp" alt="Fricção"></div>
         <div class="prob-txt">
           <span class="prob-num">Fricção</span>
           <h3 class="prob-title">Abandono e fricção</h3>
@@ -656,7 +656,7 @@ e renegociação de dívidas da maior construtora da América Latina.</h2>
         </div>
       </article>
       <article class="prob-item">
-        <div class="prob-ico"><img src="img/mrv/icn-prob-confianca.png" alt="Confiança"></div>
+        <div class="prob-ico"><img loading="lazy" src="img/mrv/icn-prob-confianca.webp" alt="Confiança"></div>
         <div class="prob-txt">
           <span class="prob-num">Confiança</span>
           <h3 class="prob-title">Confiança fragilizada</h3>
@@ -664,7 +664,7 @@ e renegociação de dívidas da maior construtora da América Latina.</h2>
         </div>
       </article>
       <article class="prob-item">
-        <div class="prob-ico"><img src="img/mrv/icn-prob-linguagem.png" alt="Linguagem"></div>
+        <div class="prob-ico"><img loading="lazy" src="img/mrv/icn-prob-linguagem.webp" alt="Linguagem"></div>
         <div class="prob-txt">
           <span class="prob-num">Linguagem</span>
           <h3 class="prob-title">Barreira de linguagem</h3>
@@ -672,7 +672,7 @@ e renegociação de dívidas da maior construtora da América Latina.</h2>
         </div>
       </article>
       <article class="prob-item">
-        <div class="prob-ico"><img src="img/mrv/icn-prob-custo.png" alt="Operação"></div>
+        <div class="prob-ico"><img loading="lazy" src="img/mrv/icn-prob-custo.webp" alt="Operação"></div>
         <div class="prob-txt">
           <span class="prob-num">Operação</span>
           <h3 class="prob-title">Custo operacional</h3>
@@ -760,27 +760,27 @@ e renegociação de dívidas da maior construtora da América Latina.</h2>
     <div class="s-index"><b>04</b><em></em></div>
     <h2 class="s-title">A solução</h2>
     <p class="apr-intro" style="max-width:62ch;margin-top:var(--space-md)">A interface muda de tom conforme a situação financeira do cliente evolui. Cinco estados progressivos, dos 46% aos 100% da jornada, cada um com hierarquia, copy e microinterações próprias.</p>
-    <div class="sol-art"><img src="img/mrv/desdob-mockups.png" alt="Telas do app MRV com destaques: mensagem clara, transparência, confirmação e orientação"></div>
+    <div class="sol-art"><img loading="lazy" src="img/mrv/desdob-mockups.webp" alt="Telas do app MRV com destaques: mensagem clara, transparência, confirmação e orientação"></div>
     <div class="sol-flow">
       <div class="sol-phone">
         <div class="data-val">46%</div><div class="s-label">Sem pendências</div><div class="s-desc sp-desc">Dashboard positivo, progresso em destaque</div>
-        <div class="sp-frame"><img src="img/mrv/mobile-jornada-46.webp" alt="Estado 46%"></div>
+        <div class="sp-frame"><img loading="lazy" src="img/mrv/mobile-jornada-46.webp" alt="Estado 46%"></div>
       </div>
       <div class="sol-phone">
         <div class="data-val">50%</div><div class="s-label">Parcelas crescendo</div><div class="s-desc sp-desc">Alertas gentis, tom de suporte</div>
-        <div class="sp-frame"><img src="img/mrv/mobile-jornada-50.webp" alt="Estado 50%"></div>
+        <div class="sp-frame"><img loading="lazy" src="img/mrv/mobile-jornada-50.webp" alt="Estado 50%"></div>
       </div>
       <div class="sol-phone">
         <div class="data-val">70%</div><div class="s-label">Juros acumulados</div><div class="s-desc sp-desc">Transparência, proposta visível</div>
-        <div class="sp-frame"><img src="img/mrv/mobile-jornada-70.webp" alt="Estado 70%"></div>
+        <div class="sp-frame"><img loading="lazy" src="img/mrv/mobile-jornada-70.webp" alt="Estado 70%"></div>
       </div>
       <div class="sol-phone">
         <div class="data-val">70%+</div><div class="s-label">Gatilho ativo</div><div class="s-desc sp-desc">3 cenários de acordo, cliente escolhe</div>
-        <div class="sp-frame is-hero"><img src="img/mrv/mobile-jornada-70-atraso.webp" alt="Estado 70%+"></div>
+        <div class="sp-frame is-hero"><img loading="lazy" src="img/mrv/mobile-jornada-70-atraso.webp" alt="Estado 70%+"></div>
       </div>
       <div class="sol-phone">
         <div class="data-val">100%</div><div class="s-label">Quitação</div><div class="s-desc sp-desc">Celebração, extrato de conquista</div>
-        <div class="sp-frame"><img src="img/mrv/mobile-jornada-100.webp" alt="Estado 100%"></div>
+        <div class="sp-frame"><img loading="lazy" src="img/mrv/mobile-jornada-100.webp" alt="Estado 100%"></div>
       </div>
     </div>
   </section>
@@ -792,14 +792,14 @@ e renegociação de dívidas da maior construtora da América Latina.</h2>
     <p class="s-text" style="max-width:62ch;margin-top:var(--space-md)">O extrato financeiro foi redesenhado com filtros por categoria (MRV, Cartório, Banco), estados claros para boletos pagos e pendentes, e <strong>ações diretas que eliminam ambiguidade</strong>. O percurso devolve a confiança e fecha o acordo com autonomia.</p>
     <div class="md-viewer" data-viewer="fluxo">
       <div class="md-thumbs" role="tablist" aria-label="Telas do fluxo desktop">
-        <button class="md-thumb" data-id="0" aria-selected="true" role="tab" aria-label="Boletos pagos"><img src="img/mrv/desktop-extrato-pagos.webp" alt="Extrato de parcelas pagas no app MRV"></button>
-        <button class="md-thumb" data-id="1" role="tab" aria-label="Extrato cartório"><img src="img/mrv/desktop-extrato-cartorio.webp" alt="Extrato de parcelas em cartório no app MRV"></button>
-        <button class="md-thumb" data-id="2" role="tab" aria-label="Boletos pendentes"><img src="img/mrv/desktop-extrato-boletos.webp" alt="Extrato de boletos a vencer no app MRV"></button>
-        <button class="md-thumb" data-id="3" role="tab" aria-label="Detalhamento bancário"><img src="img/mrv/desktop-extrato-banco.webp" alt="Extrato bancário consolidado no app MRV"></button>
+        <button class="md-thumb" data-id="0" aria-selected="true" role="tab" aria-label="Boletos pagos"><img loading="lazy" src="img/mrv/desktop-extrato-pagos.webp" alt="Extrato de parcelas pagas no app MRV"></button>
+        <button class="md-thumb" data-id="1" role="tab" aria-label="Extrato cartório"><img loading="lazy" src="img/mrv/desktop-extrato-cartorio.webp" alt="Extrato de parcelas em cartório no app MRV"></button>
+        <button class="md-thumb" data-id="2" role="tab" aria-label="Boletos pendentes"><img loading="lazy" src="img/mrv/desktop-extrato-boletos.webp" alt="Extrato de boletos a vencer no app MRV"></button>
+        <button class="md-thumb" data-id="3" role="tab" aria-label="Detalhamento bancário"><img loading="lazy" src="img/mrv/desktop-extrato-banco.webp" alt="Extrato bancário consolidado no app MRV"></button>
       </div>
       <div class="md-stage">
         <div class="md-caption"><span class="md-num">01</span><div class="md-title">Boletos pagos</div><p class="md-desc">Filtro por categoria com estados visuais claros para pagamentos já confirmados. Hierarquia reduzida para não competir com ações pendentes.</p></div>
-        <div class="md-preview" role="tabpanel"><img class="md-img" src="img/mrv/desktop-extrato-pagos.webp" alt="Extrato: boletos pagos"></div>
+        <div class="md-preview" role="tabpanel"><img loading="lazy" class="md-img" src="img/mrv/desktop-extrato-pagos.webp" alt="Extrato: boletos pagos"></div>
       </div>
     </div>
   </section>
@@ -811,14 +811,14 @@ e renegociação de dívidas da maior construtora da América Latina.</h2>
     <p class="s-text" style="max-width:62ch;margin-top:var(--space-md)">Cada padrão documentado como <strong>design tokens e componentes escaláveis</strong>: paleta semântica, escala tipográfica, sistema de espaçamento, shadow e opacidade. A base garantiu consistência entre os três domínios do produto.</p>
     <div class="md-viewer" data-viewer="foundation">
       <div class="md-thumbs" role="tablist" aria-label="Fundação visual: tokens">
-        <button class="md-thumb" data-id="0" aria-selected="true" role="tab" aria-label="Brand colors"><img src="img/mrv/tokens-brand-colors.webp" alt="Tokens de cores de marca do design system MRV"></button>
-        <button class="md-thumb" data-id="1" role="tab" aria-label="Support colors"><img src="img/mrv/tokens-support.webp" alt="Tokens de cores de suporte do design system MRV"></button>
-        <button class="md-thumb" data-id="2" role="tab" aria-label="Typography"><img src="img/mrv/tokens-typography.webp" alt="Tokens de tipografia do design system MRV"></button>
-        <button class="md-thumb" data-id="3" role="tab" aria-label="Spacing"><img src="img/mrv/tokens-spacing.webp" alt="Tokens de espaçamento do design system MRV"></button>
+        <button class="md-thumb" data-id="0" aria-selected="true" role="tab" aria-label="Brand colors"><img loading="lazy" src="img/mrv/tokens-brand-colors.webp" alt="Tokens de cores de marca do design system MRV"></button>
+        <button class="md-thumb" data-id="1" role="tab" aria-label="Support colors"><img loading="lazy" src="img/mrv/tokens-support.webp" alt="Tokens de cores de suporte do design system MRV"></button>
+        <button class="md-thumb" data-id="2" role="tab" aria-label="Typography"><img loading="lazy" src="img/mrv/tokens-typography.webp" alt="Tokens de tipografia do design system MRV"></button>
+        <button class="md-thumb" data-id="3" role="tab" aria-label="Spacing"><img loading="lazy" src="img/mrv/tokens-spacing.webp" alt="Tokens de espaçamento do design system MRV"></button>
       </div>
       <div class="md-stage">
         <div class="md-caption"><span class="md-num">01</span><div class="md-title">Brand colors</div><p class="md-desc">Paleta principal com cores semânticas e tons de marca aplicados por estado e hierarquia.</p></div>
-        <div class="md-preview" role="tabpanel"><img class="md-img" src="img/mrv/tokens-brand-colors.webp" alt="Brand colors"></div>
+        <div class="md-preview" role="tabpanel"><img loading="lazy" class="md-img" src="img/mrv/tokens-brand-colors.webp" alt="Brand colors"></div>
       </div>
     </div>
   </section>
@@ -863,7 +863,7 @@ e renegociação de dívidas da maior construtora da América Latina.</h2>
             <p class="s-lead esc-lead">Validado o impacto no piloto, evoluí o fluxo e os componentes para ganhar <strong>segurança</strong>, <strong>consistência</strong> e <strong>eficiência</strong> em todo o ecossistema financeiro do portal.</p>
           </div>
         </div>
-        <div class="esc-art"><img src="img/mrv/ilustra-piloto.png" alt="Ilustração do piloto evoluindo para as três camadas: comunicação, escalabilidade e reuso, conectadas às jornadas do portal"></div>
+        <div class="esc-art"><img loading="lazy" src="img/mrv/ilustra-piloto.webp" alt="Ilustração do piloto evoluindo para as três camadas: comunicação, escalabilidade e reuso, conectadas às jornadas do portal"></div>
       </div>
       <div class="esc-sprints">
         <article class="esc-sprint s1">
@@ -953,7 +953,7 @@ e renegociação de dívidas da maior construtora da América Latina.</h2>
   <section class="sec">
     <div class="s-index"><b>11</b><em></em></div>
     <h2 class="s-title">Visão geral</h2>
-    <div class="fw-img" style="margin-top:var(--space-lg)"><img src="img/mrv/overview-grid.webp" alt="Visão geral do ecossistema financeiro MRV"></div>
+    <div class="fw-img" style="margin-top:var(--space-lg)"><img loading="lazy" src="img/mrv/overview-grid.webp" alt="Visão geral do ecossistema financeiro MRV"></div>
   </section>
 
   <!-- ═══ OUTROS PROJETOS ═══ -->
@@ -971,7 +971,7 @@ e renegociação de dívidas da maior construtora da América Latina.</h2>
         <div class="more-name">Delta Design System</div>
       </a>
       <a class="more-card" href="case-chorume.html">
-        <div class="more-card-img more-ph" data-mono="C"><img src="img/chorume/chorumeHero.png" alt="Chorume Tipografia" loading="eager" decoding="sync" style="object-position:center 42%"></div>
+        <div class="more-card-img more-ph" data-mono="C"><img src="img/chorume/chorumeHero.webp" alt="Chorume Tipografia" loading="eager" decoding="sync" style="object-position:center 42%"></div>
         <span class="more-tag">Tipografia · Identidade visual</span>
         <div class="more-name">Chorume Tipografia</div>
       </a>
