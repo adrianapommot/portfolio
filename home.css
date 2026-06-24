@@ -259,6 +259,7 @@ li, dd, blockquote, figcaption { text-wrap: pretty; }
 .about-head2-l{display:flex;flex-direction:column;align-items:flex-start}
 .about-head2-l .sec-title{margin-top:0}
 .about-head2-ctas{display:flex;gap:10px;flex-wrap:wrap;margin-top:clamp(24px,2.6vw,32px)}
+.about-head2-l .about-head2-r{margin-top:clamp(28px,3vw,40px)}
 .about-sub{font-size:14px;font-weight:400;line-height:1.6;color:var(--ink-2);max-width:52ch;text-wrap:balance}
 .about-sub strong{font-weight:700;color:var(--ink)}
 .about-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
