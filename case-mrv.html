@@ -222,7 +222,7 @@ img{display:block;max-width:100%}
 /* ilustração maior, SEM caixa — direto sobre o fundo, alinhada à direita (fiel à referência) */
 /* área com a MESMA proporção da imagem (1536x1024) → cover não corta nada (curva inteira).
    ancorada pela base atrás da faixa; topo sangra perto do topo da seção. */
-.hero-art{position:absolute;right:0;bottom:80px;width:74%;aspect-ratio:1536 / 1024;z-index:0;background:#FAFAFA url("img/mrv/hero-iso.webp") center / cover no-repeat;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 6%,#000 74%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 6%,#000 74%,transparent 100%)}
+.hero-art{position:absolute;right:4%;bottom:64px;width:40%;aspect-ratio:899 / 902;z-index:0;background:#FAFAFA url("img/mrv/hero-iso-crop.webp") center / contain no-repeat;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 6%,#000 78%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 6%,#000 78%,transparent 100%)}
 /* barra de metadados escura */
 /* hero-meta · padrão Delta (inline tight, sem ícones) */
 .hero-meta{position:relative;z-index:2;margin-top:clamp(44px,6vh,72px);margin-bottom:0;background:transparent;box-shadow:none;border-radius:0;border-top:1px solid var(--line);padding:20px 0 20px;display:flex;align-items:center;flex-wrap:wrap}
@@ -387,7 +387,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
   .sec.dark .intro-side{grid-column:2}
   .sec.dark .intro-pivot{grid-column:1}
   .sec.dark .intro-role{grid-column:2}
-  .sec.dark .intro-side,.sec.dark .intro-role{width:100%;max-width:430px;justify-self:start}
+  .sec.dark .intro-side,.sec.dark .intro-role{width:100%;max-width:340px;justify-self:start}
 }
 @media(max-width:860px){
   .intro-over,.intro-statement,.intro-pivot{grid-column:1/9}
@@ -397,15 +397,18 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
   .intro-rule{margin-bottom:32px}
 }
 
-/* 3 stats com ícones — rodapé do bloco escuro */
-.ctx-stats{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,3.2vw,48px);margin-top:clamp(48px,5vw,72px);padding-top:clamp(40px,4vw,56px);border-top:1px solid rgba(255,255,255,.18)}
-.ctx-stat{display:grid;grid-template-columns:clamp(64px,5.6vw,80px) 1fr;column-gap:clamp(16px,1.6vw,22px);align-items:start}
-.ctx-stat-ico{width:100%;height:auto;aspect-ratio:1/1;grid-row:1/4}
-.ctx-stat-ico img{width:100%;height:100%;object-fit:contain;display:block}
-.ctx-stat-val{font-size:var(--ty-metric);font-weight:600;line-height:1;letter-spacing:-.02em;color:#fff;font-variant-numeric:tabular-nums;grid-column:2}
-.ctx-stat-label{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);grid-column:2;margin-top:12px}
-.ctx-stat-desc{font-size:14px;line-height:1.5;color:rgba(255,255,255,.7);text-wrap:balance;grid-column:2;margin-top:12px;max-width:38ch}
-@media(max-width:760px){.ctx-stats{grid-template-columns:1fr;gap:28px}}
+/* Contexto · "Três forças" — número lidera, sequência 01·02·03 (sem ícone) */
+.ctx-stats{grid-column:1/-1;margin-top:clamp(48px,5vw,72px)}
+.ctx-forcas-eyebrow{font-size:var(--ty-label);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:13px}
+.ctx-forcas-line{font-size:var(--ty-statement);font-weight:400;line-height:1.16;letter-spacing:-.016em;color:#fff;max-width:540px;margin-bottom:34px;text-wrap:balance}
+.ctx-forcas-grid{display:grid;grid-template-columns:repeat(3,1fr);column-gap:clamp(28px,3.2vw,48px);border-top:1px solid rgba(255,255,255,.24);padding-top:26px}
+.ctx-force{position:relative;padding-top:14px}
+.ctx-force::before{content:"";position:absolute;top:-27px;left:0;width:32px;height:2px;background:var(--accent)}
+.ctx-force-idx{font-size:var(--ty-label);font-weight:700;line-height:1;color:rgba(255,255,255,.4);margin-bottom:16px;font-variant-numeric:tabular-nums}
+.ctx-force-val{font-size:var(--ty-metric);font-weight:600;line-height:1;letter-spacing:-.02em;color:#fff;font-variant-numeric:tabular-nums}
+.ctx-force-label{font-size:var(--ty-label);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-top:14px}
+.ctx-force-desc{font-size:var(--ty-small);line-height:1.55;color:rgba(255,255,255,.7);margin-top:10px;max-width:30ch;text-wrap:balance}
+@media(max-width:760px){.ctx-forcas-grid{grid-template-columns:1fr;gap:36px}}
 .ctx-lead{color:var(--gray-1)}
 /* legacy ctx-facts — removido em favor do .ctx-stats no bloco dark */
 
@@ -506,7 +509,7 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 
 /* 07 Do piloto à escala — 2-col: texto + ilustração */
 .esc-grid{display:flex;flex-direction:column;gap:clamp(32px,4vw,56px)}
-.esc-top{display:grid;grid-template-columns:1.05fr 0.95fr;gap:clamp(48px,5.5vw,88px);align-items:start}
+.esc-top{display:grid;grid-template-columns:1.05fr 0.95fr;gap:clamp(48px,5.5vw,88px);align-items:center}
 .esc-col-l{display:flex;flex-direction:column}
 .esc-head{margin-bottom:0}
 .esc-head .s-title{margin-bottom:var(--space-md)}
@@ -530,8 +533,47 @@ footer{background:var(--black);color:var(--white);padding:64px 0 32px;border-top
 .esc-art{display:flex;align-items:center;justify-content:center}
 .esc-art img{width:100%;max-width:560px;height:auto;display:block;border-radius:0}
 /* imagem hero da seção A solução (igual ao antigo .esc-art, sem max-width) */
-.sol-art{margin-top:48px}
-.sol-art img{width:100%;display:block;border-radius:16px}
+.sol-art{margin-top:48px;display:flex;justify-content:flex-start}
+.sol-art img{width:100%;max-width:760px;height:auto;display:block;border-radius:16px}
+/* seção 04 A Solução com fundo claro */
+.sec--sol{background:var(--gray-5)}
+.sec--sol .data-val{color:var(--black)}
+.sec--sol .s-label{color:var(--gray-1)}
+.sec--sol .s-desc{color:var(--gray-2)}
+.sec--sol .sp-frame{border-color:var(--line);background:#fff;box-shadow:none}
+.sec--sol .sp-frame.is-hero{border-color:var(--black);box-shadow:0 0 0 1px var(--black)}
+/* primeira imagem da seção A Solução */
+.sol-hero-img{margin-top:clamp(28px,3vw,40px)}
+/* princípios da solução — 5 ícones recortados + legenda */
+.sol-princ{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(20px,2.4vw,40px);margin-top:clamp(36px,3.6vw,52px);background:#fff;border:1px solid var(--line);border-radius:16px;padding:clamp(32px,3.4vw,48px)}
+.sol-princ-item{display:flex;flex-direction:column;align-items:flex-start}
+.sol-princ-ico{height:64px;width:auto;display:block;margin-bottom:20px}
+.sol-princ-t{font-size:var(--ty-copy);font-weight:600;line-height:1.25;letter-spacing:-.005em;color:var(--black);margin:0 0 6px;text-wrap:balance}
+.sol-princ-d{font-size:var(--ty-small);font-weight:400;line-height:1.5;color:var(--gray-2);margin:0;text-wrap:pretty}
+@media(max-width:900px){.sol-princ{grid-template-columns:repeat(2,1fr);row-gap:36px}}
+@media(max-width:520px){.sol-princ{grid-template-columns:1fr}}
+.sol-hero-img img{width:100%;height:auto;display:block;border-radius:12px}
+/* fluxo de 5 telas — MESMO padrão do .sol-flow: linhas de grid compartilhadas + .sp-frame */
+.sol-screens{display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:auto auto auto 1fr;column-gap:16px;margin-top:clamp(28px,3vw,40px)}
+.solscr{display:contents}
+.solscr-n{grid-row:1;align-self:end;display:block;font-size:var(--ty-label);font-weight:600;letter-spacing:.04em;color:var(--gray-3);font-variant-numeric:tabular-nums;margin-bottom:10px}
+.solscr-t{grid-row:2;font-size:var(--ty-copy);font-weight:600;line-height:1.25;letter-spacing:-.005em;color:var(--black);margin:0 0 6px;text-wrap:balance}
+.solscr-d{grid-row:3;font-size:var(--ty-small);font-weight:400;line-height:1.5;color:var(--gray-2);margin:0 0 18px;text-wrap:pretty}
+.sol-screens .sp-frame{grid-row:4}
+/* spread do inventário de componentes (artefato do design system) */
+.inv-spread{margin-top:clamp(28px,3vw,40px);width:min(1821px,94vw);margin-left:50%;transform:translateX(-50%)}
+.inv-spread figure{margin:0}
+.inv-fig{position:relative;cursor:zoom-in;border-radius:12px;border:1px solid var(--line);overflow:hidden}
+.inv-fig img{width:100%;height:auto;display:block}
+.inv-zoom{position:absolute;right:14px;bottom:14px;display:inline-flex;align-items:center;gap:7px;background:rgba(26,26,26,.82);color:#fff;font-size:12px;font-weight:600;letter-spacing:.04em;padding:8px 13px;border-radius:999px;backdrop-filter:blur(4px);pointer-events:none}
+.inv-cap{margin-top:14px;font-size:var(--ty-small);color:var(--gray-3);max-width:62ch;text-wrap:pretty}
+.inv-spread--fund{width:min(1672px,94vw)}
+/* lightbox */
+.inv-lb{position:fixed;inset:0;z-index:1000;background:rgba(26,26,26,.92);display:none;align-items:center;justify-content:center;padding:clamp(16px,3vw,48px);cursor:zoom-out;overflow:auto}
+.inv-lb.open{display:flex}
+.inv-lb img{max-width:none;width:min(1821px,calc(100% - 0px));height:auto;border-radius:8px;box-shadow:0 24px 80px rgba(0,0,0,.5)}
+.inv-lb-close{position:fixed;top:20px;right:24px;width:42px;height:42px;border:none;border-radius:999px;background:rgba(255,255,255,.14);color:#fff;font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.inv-lb-close:hover{background:rgba(255,255,255,.24)}
 @media(max-width:900px){.esc-top{grid-template-columns:1fr;gap:48px}.esc-art{order:-1}.esc-art img{max-width:560px;margin:0 auto}}
 
 /* placeholder dos outros cases (mostra a capa do index quando existir; senão, letra) */
@@ -564,7 +606,7 @@ p,li,dd,blockquote,figcaption{text-wrap:pretty}
 .prob-title,.prob-desc,.sol-t,.sol-d,.sprint-title,.sprint-desc,
 .apr-stmt,.apr-txt,.apr-d,.esc-title,.esc-desc,.mdesc,.md-desc,
 .card-desc,.feat-desc,.kr-txt,.co-d,.hero-intro,.apr-intro,
-.res-statement,.ctx-stat-desc,.estr-p-t,.estr-p-d,.more-name{text-wrap:balance}
+.res-statement,.ctx-force-desc,.estr-p-t,.estr-p-d,.more-name{text-wrap:balance}
 </style>
 </head>
 <body>
@@ -578,14 +620,15 @@ p,li,dd,blockquote,figcaption{text-wrap:pretty}
 
   <!-- ═══ HEADER / HERO ═══ -->
   <section class="sec hero" id="top">
+    <div class="hero-art"></div>
     <div class="hero-inner">
       <div class="hero-top">
         <span class="hero-brand"><img loading="lazy" src="img/mrv/logo-mrv.png" alt="MRV"></span>
       </div>
-      <h1 class="hero-title"><span>Fluxo de</span><span><span class="hero-hl">Renegociação</span> MRV</span></h1>
+      <h1 class="hero-title"><span>Fluxo de</span><span>RENEGOCIAÇÃO</span></h1>
       <div class="hero-foot">
         <div class="hero-foot-main">
-          <p class="hero-intro">Redesenho do autoatendimento financeiro da maior construtora da América Latina, com autonomia real na renegociação de dívidas.</p>
+          <p class="hero-intro" style="font-weight: 500">Redesenho do autoatendimento financeiro da maior construtora da América Latina, com autonomia real na renegociação de dívidas.</p>
           <div class="hero-result"><span>resultados do piloto</span><b>27% engajamento · 14% conversão</b></div>
         </div>
       </div>
@@ -624,23 +667,27 @@ e renegociação de dívidas da maior construtora da América Latina.</h2>
       </div>
 
       <div class="ctx-stats">
-        <div class="ctx-stat">
-          <div class="ctx-stat-ico"><img loading="lazy" src="img/mrv/icn-clientes-ativos.webp" alt="Clientes ativos"></div>
-          <div class="ctx-stat-val">2,5 milhões</div>
-          <span class="ctx-stat-label">Clientes ativos</span>
-          <p class="ctx-stat-desc">Cadastrados no app MRV, com financiamentos de longo prazo.</p>
-        </div>
-        <div class="ctx-stat">
-          <div class="ctx-stat-ico"><img loading="lazy" src="img/mrv/icn-35-anos.webp" alt="Tempo médio de contrato"></div>
-          <div class="ctx-stat-val">35 anos</div>
-          <span class="ctx-stat-label">Tempo médio de contrato</span>
-          <p class="ctx-stat-desc">Financiamentos longos, com alta complexidade jurídica e financeira.</p>
-        </div>
-        <div class="ctx-stat">
-          <div class="ctx-stat-ico"><img loading="lazy" src="img/mrv/icn-3-dominios.webp" alt="Territórios de produto"></div>
-          <div class="ctx-stat-val">3 domínios</div>
-          <span class="ctx-stat-label">Territórios de produto</span>
-          <p class="ctx-stat-desc">Renegociação de dívidas, parcelas a vencer e status de obra.</p>
+        <div class="ctx-forcas-eyebrow">A escala do desafio</div>
+        <p class="ctx-forcas-line">Três forças tornavam essa renegociação difícil de resolver sozinho.</p>
+        <div class="ctx-forcas-grid">
+          <div class="ctx-force">
+            <div class="ctx-force-idx">01</div>
+            <div class="ctx-force-val">2,5 milhões</div>
+            <div class="ctx-force-label">Clientes ativos</div>
+            <p class="ctx-force-desc">Cadastrados no app MRV, com financiamentos de longo prazo.</p>
+          </div>
+          <div class="ctx-force">
+            <div class="ctx-force-idx">02</div>
+            <div class="ctx-force-val">35 anos</div>
+            <div class="ctx-force-label">Tempo médio de contrato</div>
+            <p class="ctx-force-desc">Financiamentos longos, com alta complexidade jurídica e financeira.</p>
+          </div>
+          <div class="ctx-force">
+            <div class="ctx-force-idx">03</div>
+            <div class="ctx-force-val">3 domínios</div>
+            <div class="ctx-force-label">Territórios de produto</div>
+            <p class="ctx-force-desc">Renegociação de dívidas, parcelas a vencer e status de obra.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -650,8 +697,10 @@ e renegociação de dívidas da maior construtora da América Latina.</h2>
   <section class="sec prob" id="problema">
     <div class="prob-head">
       <div class="s-index"><b>02 · Problema</b><em></em></div>
-      <h2 class="s-title">Entendendo o desafio</h2>
-      <p class="s-lead prob-lead">A renegociação digital já existia, mas a conversão era baixa e o cliente quase sempre terminava no <strong>call center</strong>. Mapeei os pontos de fricção e os agrupei em quatro frentes.</p>
+      <h2 class="s-title">ENTENDENDO 
+O DESAFIO</h2>
+      <p class="s-lead prob-lead">A renegociação digital já existia, mas a conversão era 
+baixa e o cliente quase sempre terminava no <strong>call center</strong>. Mapeei os pontos de fricção e os agrupei em quatro frentes.</p>
     </div>
     <div class="prob-grid">
       <article class="prob-item">
@@ -763,32 +812,96 @@ e renegociação de dívidas da maior construtora da América Latina.</h2>
   </section>
 
   <!-- ═══ 06 · A SOLUÇÃO ═══ -->
-  <section class="sec sec--dark">
+  <section class="sec sec--sol">
     <div class="s-index"><b>04</b><em></em></div>
-    <h2 class="s-title">A solução</h2>
-    <p class="apr-intro" style="max-width:62ch;margin-top:var(--space-md)">A interface muda de tom conforme a situação financeira do cliente evolui. Cinco estados progressivos, dos 46% aos 100% da jornada, cada um com hierarquia, copy e microinterações próprias.</p>
-    <div class="sol-art"><img loading="lazy" src="img/mrv/desdob-mockups.webp" alt="Telas do app MRV com destaques: mensagem clara, transparência, confirmação e orientação"></div>
+    <h2 class="s-title">A SOLUÇÃO
+EM INTERFACE</h2>
+    <p class="s-text" style="max-width: 62ch; margin-top: var(--space-md); font-weight: 500">Desenhamos uma experiência completa, clara e confiável para que o cliente identificasse oportunidades, entendesse as condições e concluísse o pagamento com segurança.</p>
+    <p class="s-text" style="max-width: 62ch; margin-top: 14px; font-weight: 500">Cada tela foi pensada para reduzir atrito, aumentar a compreensão e incentivar a ação.</p>
+    <div class="sol-princ">
+      <div class="sol-princ-item"><img loading="lazy" class="sol-princ-ico" src="img/mrv/principio-clareza.webp" alt=""><h3 class="sol-princ-t">Clareza</h3><p class="sol-princ-d">Hierarquia visual que facilita a compreensão das informações financeiras.</p></div>
+      <div class="sol-princ-item"><img loading="lazy" class="sol-princ-ico" src="img/mrv/principio-confianca.webp" alt=""><h3 class="sol-princ-t">Confiança</h3><p class="sol-princ-d">Transparência sobre valores, descontos e condições de negociação.</p></div>
+      <div class="sol-princ-item"><img loading="lazy" class="sol-princ-ico" src="img/mrv/principio-agilidade.webp" alt=""><h3 class="sol-princ-t">Agilidade</h3><p class="sol-princ-d">Fluxos simplificados para acelerar decisões e reduzir esforço.</p></div>
+      <div class="sol-princ-item"><img loading="lazy" class="sol-princ-ico" src="img/mrv/principio-acolhimento.webp" alt=""><h3 class="sol-princ-t">Acolhimento</h3><p class="sol-princ-d">Linguagem humana e ilustrações que aproximam a experiência do cliente.</p></div>
+      <div class="sol-princ-item"><img loading="lazy" class="sol-princ-ico" src="img/mrv/principio-seguranca.webp" alt=""><h3 class="sol-princ-t">Segurança</h3><p class="sol-princ-d">Processos e pagamentos apresentados de forma confiável e previsível.</p></div>
+    </div>
+    <div class="sol-hero-img"><img loading="lazy" src="img/mrv/solucao-componente.webp" alt="Tela inicial do app MRV com o componente de oportunidade em destaque, zoom no componente e o impacto na jornada do cliente: navega, percebe a oportunidade, acessa a proposta e inicia a negociação."></div>
+    <h2 class="s-title" style="margin-top: clamp(56px,6vw,88px); margin-bottom: 0">Sistema aplicado à experiência</h2>
+    <div class="sol-screens">
+      <article class="solscr">
+        <span class="solscr-n" style="font-size: 20px">01</span>
+        <h3 class="solscr-t" style="font-size: 14px">Dashboard 
+financeiro</h3>
+        <p class="solscr-d" style="font-size: 11px; font-weight: 500">Visão geral da jornada e identificação de oportunidades.</p>
+        <div class="sp-frame"><img loading="lazy" src="img/mrv/sol-screen-1.webp" alt="Dashboard financeiro do app MRV com a jornada em 45% e o card de oportunidade."></div>
+      </article>
+      <article class="solscr">
+        <span class="solscr-n" style="font-size: 20px">02</span>
+        <h3 class="solscr-t" style="font-size: 14px">Oferta de 
+negociação</h3>
+        <p class="solscr-d" style="font-size: 11px">Condições especiais apresentadas de forma clara e comparável.</p>
+        <div class="sp-frame"><img loading="lazy" src="img/mrv/sol-screen-2.webp" alt="Tela de oferta de negociação com situação atual e proposta à vista com desconto."></div>
+      </article>
+      <article class="solscr">
+        <span class="solscr-n" style="font-size: 20px">03</span>
+        <h3 class="solscr-t" style="font-size: 14px">Detalhamento 
+da proposta</h3>
+        <p class="solscr-d" style="font-size: 11px; font-weight: 500">Transparência sobre desconto, prazo e condições.</p>
+        <div class="sp-frame"><img loading="lazy" src="img/mrv/sol-screen-3.webp" alt="Resumo da proposta com valor à vista, desconto e validade."></div>
+      </article>
+      <article class="solscr">
+        <span class="solscr-n" style="font-size: 20px">04</span>
+        <h3 class="solscr-t" style="font-size: 14px">Geração 
+do boleto</h3>
+        <p class="solscr-d" style="font-size: 11px; font-weight: 500">Conversão da proposta 
+em ação imediata.</p>
+        <div class="sp-frame"><img loading="lazy" src="img/mrv/sol-screen-4.webp" alt="Tela de geração do boleto de entrada da negociação."></div>
+      </article>
+      <article class="solscr">
+        <span class="solscr-n" style="font-size: 20px">05</span>
+        <h3 class="solscr-t" style="font-size: 14px">Detalhamento do pagamento</h3>
+        <p class="solscr-d" style="font-size: 11px; font-weight: 500">Acesso rápido às informações necessárias para conclusão.</p>
+        <div class="sp-frame"><img loading="lazy" src="img/mrv/sol-screen-5.webp" alt="Detalhamento do pagamento com valor, código de barras e ações."></div>
+      </article>
+    </div>
     <div class="sol-flow">
       <div class="sol-phone">
-        <div class="data-val">46%</div><div class="s-label">Sem pendências</div><div class="s-desc sp-desc">Dashboard positivo, progresso em destaque</div>
+        <div class="data-val" style="font-size: 20px">46%</div><div class="s-label" style="font-size: 14px">Sem pendências</div><div class="s-desc sp-desc" style="font-size: 11px; font-weight: 500">Dashboard positivo, progresso em destaque</div>
         <div class="sp-frame"><img loading="lazy" src="img/mrv/mobile-jornada-46.webp" alt="Estado 46%"></div>
       </div>
       <div class="sol-phone">
-        <div class="data-val">50%</div><div class="s-label">Parcelas crescendo</div><div class="s-desc sp-desc">Alertas gentis, tom de suporte</div>
+        <div class="data-val" style="font-size: 20px">50%</div><div class="s-label" style="font-size: 14px">Parcelas crescendo</div><div class="s-desc sp-desc" style="font-size: 11px; font-weight: 500">Alertas gentis, tom de suporte</div>
         <div class="sp-frame"><img loading="lazy" src="img/mrv/mobile-jornada-50.webp" alt="Estado 50%"></div>
       </div>
       <div class="sol-phone">
-        <div class="data-val">70%</div><div class="s-label">Juros acumulados</div><div class="s-desc sp-desc">Transparência, proposta visível</div>
+        <div class="data-val" style="font-size: 20px">70%</div><div class="s-label" style="font-size: 14px">Juros acumulados</div><div class="s-desc sp-desc" style="font-size: 11px; font-weight: 500">Transparência, proposta visível</div>
         <div class="sp-frame"><img loading="lazy" src="img/mrv/mobile-jornada-70.webp" alt="Estado 70%"></div>
       </div>
       <div class="sol-phone">
-        <div class="data-val">70%+</div><div class="s-label">Gatilho ativo</div><div class="s-desc sp-desc">3 cenários de acordo, cliente escolhe</div>
+        <div class="data-val" style="font-size: 20px">70%+</div><div class="s-label" style="font-size: 14px">Gatilho ativo</div><div class="s-desc sp-desc" style="font-size: 11px; font-weight: 500">3 cenários de acordo, cliente escolhe</div>
         <div class="sp-frame is-hero"><img loading="lazy" src="img/mrv/mobile-jornada-70-atraso.webp" alt="Estado 70%+"></div>
       </div>
       <div class="sol-phone">
-        <div class="data-val">100%</div><div class="s-label">Quitação</div><div class="s-desc sp-desc">Celebração, extrato de conquista</div>
+        <div class="data-val" style="font-size: 20px">100%</div><div class="s-label" style="font-size: 14px">Quitação</div><div class="s-desc sp-desc" style="font-size: 11px; font-weight: 500">Celebração, extrato de conquista</div>
         <div class="sp-frame"><img loading="lazy" src="img/mrv/mobile-jornada-100.webp" alt="Estado 100%"></div>
       </div>
+    </div>
+  </section>
+
+  <!-- ═══ SISTEMA DE COMPONENTES (inventário, antes do fluxo desktop) ═══ -->
+  <section class="sec">
+    <div class="s-index"><b>Sistema de componentes</b><em></em></div>
+    <h2 class="s-title">BASE COMPARTILHADA 
+ENTRE DESIGN E ENGENHARIA</h2>
+    <p class="s-text" style="max-width:62ch;margin-top:var(--space-md)">Antes de escalar o fluxo, documentei a fundação que conecta as duas pontas: nomenclatura, inventário e os estados de cada componente.</p>
+    <div class="inv-spread">
+      <figure>
+        <button class="inv-fig" type="button" id="invOpen" aria-label="Ampliar inventário de componentes">
+          <img loading="lazy" src="img/mrv/inventario-componentes.webp" alt="Inventário de componentes: convenção de nomenclatura, catálogo de componentes, estados do botão primário, especificações e regras de uso, conectando design e tecnologia.">
+          <span class="inv-zoom">Clique para ampliar</span>
+        </button>
+        <figcaption class="inv-cap">Linguagem comum entre design e tech: nomenclatura, inventário, estados e regras de uso documentados à mão, a base que sustentou a evolução do fluxo em escala.</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -816,17 +929,14 @@ e renegociação de dívidas da maior construtora da América Latina.</h2>
     <div class="s-index"><b>06 · Fundação visual</b><em></em></div>
     <h2 class="s-title">Fundação visual</h2>
     <p class="s-text" style="max-width:62ch;margin-top:var(--space-md)">Cada padrão documentado como <strong>design tokens e componentes escaláveis</strong>: paleta semântica, escala tipográfica, sistema de espaçamento, shadow e opacidade. A base garantiu consistência entre os três domínios do produto.</p>
-    <div class="md-viewer" data-viewer="foundation">
-      <div class="md-thumbs" role="tablist" aria-label="Fundação visual: tokens">
-        <button class="md-thumb" data-id="0" aria-selected="true" role="tab" aria-label="Brand colors"><img loading="lazy" src="img/mrv/tokens-brand-colors.webp" alt="Tokens de cores de marca do design system MRV"></button>
-        <button class="md-thumb" data-id="1" role="tab" aria-label="Support colors"><img loading="lazy" src="img/mrv/tokens-support.webp" alt="Tokens de cores de suporte do design system MRV"></button>
-        <button class="md-thumb" data-id="2" role="tab" aria-label="Typography"><img loading="lazy" src="img/mrv/tokens-typography.webp" alt="Tokens de tipografia do design system MRV"></button>
-        <button class="md-thumb" data-id="3" role="tab" aria-label="Spacing"><img loading="lazy" src="img/mrv/tokens-spacing.webp" alt="Tokens de espaçamento do design system MRV"></button>
-      </div>
-      <div class="md-stage">
-        <div class="md-caption"><span class="md-num">01</span><div class="md-title">Brand colors</div><p class="md-desc">Paleta principal com cores semânticas e tons de marca aplicados por estado e hierarquia.</p></div>
-        <div class="md-preview" role="tabpanel"><img loading="lazy" class="md-img" src="img/mrv/tokens-brand-colors.webp" alt="Brand colors"></div>
-      </div>
+    <div class="inv-spread inv-spread--fund">
+      <figure>
+        <button class="inv-fig" type="button" id="fundOpen" aria-label="Ampliar fundação visual">
+          <img loading="lazy" src="img/mrv/foundation-visual.webp" alt="Fundação visual: cores primárias e neutras, tipografia, espaçamento, raios e sombras, ícones, bordas e estados, ilustrações, componentes, tokens e princípios.">
+          <span class="inv-zoom">Clique para ampliar</span>
+        </button>
+        <figcaption class="inv-cap">Design system do produto: paleta semântica, escala tipográfica, espaçamento, raios e sombras, ícones, componentes e tokens, com os princípios que guiam cada decisão.</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -1073,6 +1183,33 @@ if(t&&f)t.addEventListener('click',function(){f.classList.toggle('open');});})()
 document.querySelectorAll('.nav-menu a').forEach(function(a){
   a.addEventListener('click',function(){var f=document.getElementById('navFloat');if(f)f.classList.remove('open');});
 });
+</script>
+
+<!-- lightbox do inventário de componentes -->
+<div class="inv-lb" id="invLb" role="dialog" aria-modal="true" aria-label="Inventário de componentes ampliado">
+  <button class="inv-lb-close" type="button" id="invClose" aria-label="Fechar">×</button>
+  <img src="img/mrv/inventario-componentes.webp" alt="Inventário de componentes ampliado">
+</div>
+<!-- lightbox da fundação visual -->
+<div class="inv-lb" id="fundLb" role="dialog" aria-modal="true" aria-label="Fundação visual ampliada">
+  <button class="inv-lb-close" type="button" id="fundClose" aria-label="Fechar">×</button>
+  <img src="img/mrv/foundation-visual.webp" alt="Fundação visual ampliada">
+</div>
+<script>
+(function(){
+  function wire(openId, lbId, closeId){
+    var open=document.getElementById(openId),lb=document.getElementById(lbId),close=document.getElementById(closeId);
+    if(!open||!lb)return;
+    function show(){lb.classList.add('open');document.body.style.overflow='hidden';}
+    function hide(){lb.classList.remove('open');document.body.style.overflow='';}
+    open.addEventListener('click',show);
+    close.addEventListener('click',hide);
+    lb.addEventListener('click',function(e){if(e.target===lb)hide();});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&lb.classList.contains('open'))hide();});
+  }
+  wire('invOpen','invLb','invClose');
+  wire('fundOpen','fundLb','fundClose');
+})();
 </script>
 </body>
 </html>
